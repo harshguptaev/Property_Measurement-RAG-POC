@@ -215,3 +215,27 @@ For issues or questions:
 ## 📄 **License**
 
 This project is for internal use. All rights reserved.
+
+
+### RUN IT LOCALLY USING DOCKERFILE
+-   export credentials
+-   run docker build
+ ```
+ docker build -t property-retrieval-poc:latest .
+ ```
+ -  docker run 
+ ```
+ docker run --rm -it \
+    -p 7860:7860 \
+    -v "$(pwd)/input_files:/app/input_files" \
+    -v "$(pwd)/input_data:/app/input_data" \
+    -v "$(pwd)/vectorstore_faiss:/app/vectorstore_faiss" \
+    -v "$(pwd)/extracted_images:/app/extracted_images" \
+    -v "$(pwd)/config.yaml:/app/config.yaml" \
+    -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
+    -e AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" \
+    -e AWS_SESSION_TOKEN="$AWS_SESSION_TOKEN" \
+    -e AWS_DEFAULT_REGION="us-east-1" \
+    --name property-retrieval-app \
+    property-retrieval
+ ```
