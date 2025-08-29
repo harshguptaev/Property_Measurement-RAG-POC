@@ -1,0 +1,44 @@
+# Configuration file for Property Data RAG System
+
+# Model Configuration
+model:
+  text_generation: "anthropic.claude-3-sonnet-20240229-v1:0"
+  text_embedding: "amazon.titan-embed-text-v1"
+  temperature: 0.1
+  max_tokens: 4096
+
+# AWS Configuration
+aws:
+  region: "us-east-1"
+  bedrock_runtime_endpoint: null  # Use default endpoint
+
+# Database Configuration
+database:
+  vector_store_type: "faiss"  # Options: faiss, chroma
+  collection_name: "property_documents"
+  chunk_size: 1000
+  chunk_overlap: 200
+
+# Retrieval Configuration
+retrieval:
+  k: 10  # Number of documents to retrieve
+  score_threshold: 0.7  # Minimum similarity score
+
+# Processing Configuration
+processing:
+  batch_size: 10
+  max_workers: 4
+  extract_images: true  # Extract images from PDFs
+  supported_extensions: [".pdf", ".txt", ".md", ".docx", ".doc"]
+
+# UI Configuration
+ui:
+  port: 7860
+  share: false  # Set to true to create public link
+  theme: "soft"
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null  # Set to file path to log to file
