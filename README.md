@@ -22,7 +22,7 @@
     -e AWS_SESSION_TOKEN="$AWS_SESSION_TOKEN" \
     -e AWS_DEFAULT_REGION="us-east-1" \
     --name property-retrieval-app \
-    property-retrieval
+    property-retrieval-poc
  ```
 
  
