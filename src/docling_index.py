@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional, Union, Tuple
 from pathlib import Path
 from io import BytesIO
 import hashlib
+import json
 
 # Docling imports for advanced document processing
 try:
@@ -184,6 +185,47 @@ class DoclingProcessor:
             
             # Extract main document text
             main_text = converted_doc.export_to_markdown()
+            # Persist Docling exports (Markdown and JSON)
+            try:
+                out_dir = Path("docling_exports")
+                out_dir.mkdir(parents=True, exist_ok=True)
+                stem = Path(file_path).stem
+                out_report_dir = out_dir / stem
+                out_report_dir.mkdir(parents=True, exist_ok=True)
+                # Save Markdown
+                (out_report_dir / f"{stem}.md").write_text(main_text or "", encoding="utf-8")
+                # Build JSON using Docling's model if available; otherwise fallback
+                try:
+                    doc_json = converted_doc.model_dump()
+                except Exception:
+                    try:
+                        doc_json = converted_doc.to_dict()
+                    except Exception:
+                        tables_md: List[Union[str, Dict[str, Any]]] = []
+                        if hasattr(converted_doc, "tables") and converted_doc.tables:
+                            for t in converted_doc.tables:
+                                try:
+                                    if hasattr(t, "export_to_markdown"):
+                                        tables_md.append(t.export_to_markdown())
+                                    elif hasattr(t, "to_dict"):
+                                        tables_md.append(t.to_dict())
+                                    else:
+                                        tables_md.append(str(t))
+                                except Exception:
+                                    tables_md.append(str(t))
+                        doc_json = {
+                            "markdown": main_text,
+                            "tables": tables_md,
+                            "pictures_count": len(getattr(converted_doc, "pictures", []) or []),
+                            "meta": {"file_name": Path(file_path).name},
+                        }
+                (out_report_dir / f"{stem}.json").write_text(
+                    json.dumps(doc_json, ensure_ascii=False, indent=2),
+                    encoding="utf-8",
+                )
+            except Exception as save_err:
+                logging.warning(f"Error saving Docling exports: {save_err}")
+            
             if main_text.strip():
                 text_doc = Document(
                     page_content=main_text,
