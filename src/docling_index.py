@@ -298,6 +298,7 @@ class DoclingProcessor:
             for page_num in range(len(pdf_document)):
                 page = pdf_document.load_page(page_num)
                 image_list = page.get_images()
+                num_images_on_page = len(image_list)
                 
                 for img_index, img in enumerate(image_list):
                     try:
@@ -314,8 +315,35 @@ class DoclingProcessor:
                                 report_dir = images_dir / file_path.stem
                             report_dir.mkdir(parents=True, exist_ok=True)
                             
-                            # Generate image filename
-                            image_filename = f"page_{page_num + 1}_image_{img_index}.png"
+                            def _label_for(p, i, n):
+                                if p == 0:
+                                    return "Cover_Image" if i == 0 else f"Cover_Image_{i + 1}"
+                                if p == 1:
+                                    return "Lengthsimage" if n == 1 else f"Lengthsimage_{i + 1}"
+                                if p == 2:
+                                    return "Pitch_Degrees" if i == 0 else f"Pitch_Degrees_{i + 1}"
+                                if p == 3:
+                                    return "Pitch_on_12" if i == 0 else f"Pitch_on_12_{i + 1}"
+                                if p == 4:
+                                    return "Rafters" if i == 0 else f"Rafters_{i + 1}"
+                                if p == 5:
+                                    return "Azimuth" if i == 0 else f"Azimuth_{i + 1}"
+                                if p == 6:
+                                    return "Area" if i == 0 else f"Area_{i + 1}"
+                                if p == 7:
+                                    return "Roof_Penetrations" if i == 0 else f"Roof_Penetrations_{i + 1}"
+                                if p == 8:
+                                    return "Top_View" if i == 0 else ("North_Side" if i == 1 else f"Page_8_Image_{i + 1}")
+                                if p == 9:
+                                    return "South_Side" if i == 0 else ("East_Side" if i == 1 else f"Page_9_Image_{i + 1}")
+                                if p == 10:
+                                    return "West_Side" if i == 0 else f"West_Side_{i + 1}"
+                                if p == 11:
+                                    return "Structure_Summary" if i == 0 else f"Structure_Summary_{i + 1}"
+                                return f"Page_{p}_Image_{i + 1}"
+
+                            image_label = _label_for(page_num, img_index, num_images_on_page)
+                            image_filename = f"{image_label}.png"
                             image_file_path = report_dir / image_filename
                             
                             # Save image to file
@@ -345,9 +373,10 @@ class DoclingProcessor:
                                 location_keywords.extend(["east", "side", "east side"])
                             elif page_num % 4 == 0:
                                 location_keywords.extend(["west", "side", "west side"])
+                            location_keywords.append(image_label.replace("_", " ").lower())
                             
                             # Create enhanced image content
-                            image_content = f"Image {img_index + 1} from page {page_num + 1} of {file_path.name}"
+                            image_content = f"{image_label} from page {page_num + 1} of {file_path.name}"
                             if report_id:
                                 image_content += f" Report ID: {report_id}"
                             image_content += f" Keywords: {', '.join(location_keywords)}"
@@ -363,12 +392,13 @@ class DoclingProcessor:
                                     'source_file': file_path.name,
                                     'report_id': report_id,
                                     'extraction_method': 'pymupdf_fallback',
-                                    'image_description': f"Image {img_index + 1} from page {page_num + 1}",
+                                    'image_description': image_label,
                                     'searchable_keywords': location_keywords,
                                     'image_type': 'roof_page_image',
                                     'has_raw_data': True,
                                     'image_file_path': str(image_file_path),
                                     'image_filename': image_filename,
+                                    'image_label': image_label,
                                     'image_size': image.size
                                 }
                             )
