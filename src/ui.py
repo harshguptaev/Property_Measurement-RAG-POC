@@ -3,10 +3,14 @@ Gradio-based web user interface for the multimodal RAG system.
 """
 import logging
 import re
+import os
+import base64
 from typing import Any, Dict, List, Optional, Tuple
 from pathlib import Path
 import gradio as gr
 from langchain.schema import BaseMessage, HumanMessage, AIMessage
+from PIL import Image
+import numpy as np
 
 from .agent import AgenticRAG
 from .vector_store import VectorStoreManager
@@ -36,6 +40,8 @@ class GradioUI:
         self.config = config_instance or config
         self.rag_agent = rag_agent
         self.chat_history = []
+        self.selected_images = []  # Store selected images for chat
+        self.extracted_images_path = Path("extracted_images")  # Path to extracted images
         
         # UI components
         self.interface = None
@@ -61,6 +67,39 @@ class GradioUI:
                 border-radius: 5px;
                 margin: 10px 0;
             }
+            .image-gallery {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                max-height: 400px;
+                overflow-y: auto;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .image-item {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border: 2px solid transparent;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: border-color 0.3s;
+            }
+            .image-item:hover {
+                border-color: #007bff;
+            }
+            .image-item.selected {
+                border-color: #28a745;
+                box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            }
+            .image-upload-area {
+                border: 2px dashed #ddd;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+                background-color: #f9f9f9;
+            }
             """
         ) as interface:
             
@@ -82,7 +121,10 @@ class GradioUI:
             with gr.Tab("💬 Chat"):
                 self._setup_chat_tab()
             
-            with gr.Tab("📚 Document Management"):
+            with gr.Tab("�️ Image Gallery"):
+                self._setup_image_gallery_tab()
+            
+            with gr.Tab("�📚 Document Management"):
                 self._setup_document_tab()
             
             with gr.Tab("⚙️ Settings"):
@@ -93,7 +135,7 @@ class GradioUI:
     def _setup_chat_tab(self):
         """Setup chat interface tab."""
         with gr.Row():
-            with gr.Column(scale=4):
+            with gr.Column(scale=3):
                 chatbot = gr.Chatbot(
                     label="Conversation",
                     height=500,
@@ -112,17 +154,51 @@ class GradioUI:
                     )
                     send_btn = gr.Button("Send", variant="primary", scale=1)
                 
+                # Image input section
+                with gr.Row():
+                    with gr.Column(scale=1):
+                        image_input = gr.Image(
+                            label="Upload Image (Optional)",
+                            type="pil",
+                            height=200,
+                            sources=["upload", "webcam", "clipboard"],
+                            interactive=True
+                        )
+                        clear_image_btn = gr.Button("Clear Image", variant="secondary", size="sm")
+                    
+                    with gr.Column(scale=1):
+                        gr.Markdown("### 🖼️ Selected from Gallery")
+                        selected_images_display = gr.Gallery(
+                            label="Selected Images",
+                            show_label=False,
+                            columns=2,
+                            rows=2,
+                            height=200,
+                            object_fit="cover"
+                        )
+                        clear_selected_btn = gr.Button("Clear Selected", variant="secondary", size="sm")
+                
                 clear_btn = gr.Button("Clear Chat", variant="secondary")
             
             with gr.Column(scale=1):
                 status_display = gr.Markdown("### System Status\n*Ready*")
+                
+                # Model capability info
+                gr.Markdown("""
+                ### 🤖 Current Model
+                Check **Settings** tab to select:
+                - **Claude 3.5 Sonnet v2**: Best for image analysis
+                - **Claude 3 Opus**: Most capable reasoning
+                - **Claude 3 Haiku**: Fast & economical
+                """)
                 
                 gr.Markdown("### Quick Examples")
                 example_questions = [
                     "What is the condition of the roof?",
                     "Are there any structural issues?",
                     "What repairs are recommended?",
-                    "Summarize the key findings",
+                    "Analyze this image for damage",
+                    "Compare the roof images",
                     "What are the main concerns?"
                 ]
                 
@@ -138,28 +214,94 @@ class GradioUI:
                     )
         
         # Event handlers
-        def respond(message, history):
-            """Handle chat response."""
-            if not message.strip():
+        def respond(message, history, uploaded_image):
+            """Handle chat response with image support."""
+            if not message.strip() and uploaded_image is None and not self.selected_images:
                 return history, ""
+            
+            # Process images
+            image_context = ""
+            processed_images = []
+            
+            # Handle uploaded image
+            if uploaded_image is not None:
+                try:
+                    # Convert PIL image to base64 for context
+                    import io
+                    buffered = io.BytesIO()
+                    uploaded_image.save(buffered, format="PNG")
+                    img_str = base64.b64encode(buffered.getvalue()).decode()
+                    
+                    processed_images.append({
+                        "type": "uploaded",
+                        "data": img_str,
+                        "name": "uploaded_image.png"
+                    })
+                    image_context += "\n\n[User uploaded an image for analysis]"
+                except Exception as e:
+                    logging.error(f"Error processing uploaded image: {e}")
+            
+            # Handle selected images from gallery
+            if self.selected_images:
+                for img_path in self.selected_images:
+                    try:
+                        # Ensure img_path is a string
+                        if isinstance(img_path, dict):
+                            # If it's a dict, try to get path from it
+                            img_path = img_path.get('path') or img_path.get('name') or str(img_path)
+                        
+                        img_path = str(img_path)  # Convert to string
+                        
+                        if os.path.exists(img_path):
+                            with open(img_path, "rb") as img_file:
+                                img_str = base64.b64encode(img_file.read()).decode()
+                                processed_images.append({
+                                    "type": "gallery",
+                                    "data": img_str,
+                                    "name": Path(img_path).name,
+                                    "path": img_path
+                                })
+                        else:
+                            logging.warning(f"Image path does not exist: {img_path}")
+                    except Exception as e:
+                        logging.error(f"Error processing selected image {img_path}: {e}")
+                
+                if self.selected_images:
+                    # Safely get image names
+                    image_names = []
+                    for p in self.selected_images:
+                        try:
+                            if isinstance(p, dict):
+                                name = p.get('name') or Path(str(p.get('path', ''))).name
+                            else:
+                                name = Path(str(p)).name
+                            image_names.append(name)
+                        except:
+                            image_names.append(str(p))
+                    
+                    image_context += f"\n\n[User selected {len(self.selected_images)} image(s) from gallery: {', '.join(image_names)}]"
+            
+            # Combine message with image context
+            full_message = message + image_context if message.strip() else image_context
             
             if self.rag_agent is None:
                 bot_response = "⚠️ No documents loaded. Please upload documents in the Document Management tab first."
             else:
                 try:
-                    result = self.rag_agent.run(message)
+                    # Enhanced query with image information
+                    enhanced_query = full_message
+                    if processed_images:
+                        enhanced_query += f"\n\nNote: This query includes {len(processed_images)} image(s) for analysis."
                     
-                    # Handle new response format and check for images
+                    result = self.rag_agent.run(enhanced_query)
+                    
+                    # Handle response format
                     if isinstance(result, dict):
                         bot_response = self._format_response(result.get("response", ""))
                         
-                        # Check if response contains image references
-                        response_text = result.get("response", "")
-                        if "image" in message.lower() or "picture" in message.lower():
-                            # Search for documents with images
-                            image_docs = self._find_image_documents(message)
-                            if image_docs:
-                                bot_response += self._format_image_response(image_docs)
+                        # Add image analysis if images were provided
+                        if processed_images:
+                            bot_response += self._format_image_analysis(processed_images)
                         
                         retrieved_images = result.get("images", [])
                         if retrieved_images:
@@ -169,7 +311,6 @@ class GradioUI:
                                 source = img.get('source', 'unknown')
                                 size = img.get('size', 'unknown')
                                 
-                                # Format size info
                                 if isinstance(size, (list, tuple)) and len(size) == 2:
                                     size_str = f"{size[0]}x{size[1]} pixels"
                                 else:
@@ -177,7 +318,6 @@ class GradioUI:
                                 
                                 bot_response += f"• **Image {i+1}:** Page {page} of {Path(str(source)).name} ({size_str})\n"
                     else:
-                        # Fallback for old string format
                         bot_response = self._format_response(str(result))
                         
                 except Exception as e:
@@ -185,7 +325,7 @@ class GradioUI:
                     bot_response = f"❌ Error: {str(e)}"
             
             # Format for messages API
-            history.append({"role": "user", "content": message})
+            history.append({"role": "user", "content": full_message})
             history.append({"role": "assistant", "content": bot_response})
             return history, ""
         
@@ -194,10 +334,204 @@ class GradioUI:
             self.chat_history = []
             return []
         
+        def clear_uploaded_image():
+            """Clear uploaded image."""
+            return None
+        
+        def clear_selected_images():
+            """Clear selected images from gallery."""
+            self.selected_images = []
+            return []
+        
+        def update_selected_images_display():
+            """Update display of selected images."""
+            if not self.selected_images:
+                return []
+            
+            image_list = []
+            for img_path in self.selected_images:
+                try:
+                    # Handle both string paths and dict objects
+                    if isinstance(img_path, dict):
+                        path_str = img_path.get('path') or str(img_path)
+                    else:
+                        path_str = str(img_path)
+                    
+                    if os.path.exists(path_str):
+                        image_list.append(path_str)
+                except Exception as e:
+                    logging.warning(f"Error processing image path {img_path}: {e}")
+            
+            return image_list
+        
         # Connect events
-        send_btn.click(respond, [msg_input, chatbot], [chatbot, msg_input])
-        msg_input.submit(respond, [msg_input, chatbot], [chatbot, msg_input])
+        send_btn.click(
+            respond, 
+            [msg_input, chatbot, image_input], 
+            [chatbot, msg_input]
+        )
+        msg_input.submit(
+            respond, 
+            [msg_input, chatbot, image_input], 
+            [chatbot, msg_input]
+        )
         clear_btn.click(clear_chat, outputs=chatbot)
+        clear_image_btn.click(clear_uploaded_image, outputs=image_input)
+        clear_selected_btn.click(clear_selected_images, outputs=selected_images_display)
+        
+        # Auto-update selected images display
+        clear_selected_btn.click(update_selected_images_display, outputs=selected_images_display)
+    
+    def _setup_image_gallery_tab(self):
+        """Setup image gallery tab for viewing and selecting extracted images."""
+        with gr.Row():
+            with gr.Column(scale=2):
+                gr.Markdown("### 🖼️ Extracted Images")
+                gr.Markdown("Browse and select images extracted from property documents. Selected images can be used in chat for analysis.")
+                
+                # Report selector
+                report_selector = gr.Dropdown(
+                    label="Select Report",
+                    choices=self._get_available_reports(),
+                    value=None,
+                    interactive=True
+                )
+                
+                refresh_btn = gr.Button("🔄 Refresh", variant="secondary", size="sm")
+                
+                # Image gallery
+                image_gallery = gr.Gallery(
+                    label="Available Images",
+                    show_label=True,
+                    columns=4,
+                    rows=3,
+                    height=600,
+                    object_fit="cover",
+                    allow_preview=True,
+                    interactive=True
+                )
+                
+                # Selection controls
+                with gr.Row():
+                    select_all_btn = gr.Button("Select All", variant="outline", size="sm")
+                    clear_selection_btn = gr.Button("Clear Selection", variant="outline", size="sm")
+                    add_to_chat_btn = gr.Button("Add to Chat", variant="primary", size="sm")
+            
+            with gr.Column(scale=1):
+                # Selected images info
+                gr.Markdown("### 📋 Selection Info")
+                selection_info = gr.Markdown("*No images selected*")
+                
+                # Image details
+                gr.Markdown("### 🔍 Image Details")
+                image_details = gr.Markdown("*Select an image to view details*")
+                
+                # Bulk operations
+                gr.Markdown("### 🔧 Bulk Operations")
+                with gr.Column():
+                    export_btn = gr.Button("📤 Export Selected", variant="outline")
+                    analyze_btn = gr.Button("🔍 Analyze Selected", variant="outline")
+        
+        # Event handlers
+        def load_images_for_report(report_id):
+            """Load images for selected report."""
+            if not report_id:
+                return [], "*No report selected*"
+            
+            report_path = self.extracted_images_path / report_id
+            if not report_path.exists():
+                return [], f"*Report {report_id} not found*"
+            
+            image_files = []
+            supported_formats = {'.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'}
+            
+            for img_file in report_path.iterdir():
+                if img_file.suffix.lower() in supported_formats:
+                    image_files.append(str(img_file))
+            
+            image_files.sort()  # Sort alphabetically
+            
+            info_text = f"*Found {len(image_files)} images in {report_id}*"
+            return image_files, info_text
+        
+        def refresh_reports():
+            """Refresh available reports."""
+            reports = self._get_available_reports()
+            return gr.Dropdown(choices=reports, value=None)
+        
+        def select_all_images(gallery_value):
+            """Select all visible images."""
+            if gallery_value:
+                # Ensure all paths are strings
+                self.selected_images = [str(path) for path in gallery_value]
+                return self._update_selection_info()
+            return "*No images to select*"
+        
+        def clear_all_selection():
+            """Clear all selected images."""
+            self.selected_images = []
+            return "*No images selected*"
+        
+        def add_selected_to_chat():
+            """Add selected images to chat context."""
+            if not self.selected_images:
+                return "*No images selected to add*"
+            
+            count = len(self.selected_images)
+            return f"*✅ {count} image(s) added to chat context*"
+        
+        def show_image_details(evt: gr.SelectData):
+            """Show details for selected image."""
+            if evt.index is not None and evt.value:
+                try:
+                    img_path = Path(str(evt.value))  # Ensure it's a string path
+                    if img_path.exists():
+                        # Get image info
+                        img = Image.open(img_path)
+                        size = img.size
+                        mode = img.mode
+                        file_size = img_path.stat().st_size
+                        
+                        details = f"""**Filename:** {img_path.name}
+**Report:** {img_path.parent.name}
+**Dimensions:** {size[0]} x {size[1]} pixels
+**Color Mode:** {mode}
+**File Size:** {file_size:,} bytes
+**Path:** `{str(img_path)}`"""
+                        
+                        return details
+                    else:
+                        return f"*Image file not found: {evt.value}*"
+                except Exception as e:
+                    logging.error(f"Error loading image details: {e}")
+                    return f"*Error loading image details: {e}*"
+            
+            return "*Select an image to view details*"
+        
+        def on_gallery_select(evt: gr.SelectData):
+            """Handle image selection in gallery."""
+            if evt.index is not None and evt.value:
+                img_path = str(evt.value)  # Ensure it's a string
+                
+                if img_path in self.selected_images:
+                    # Deselect
+                    self.selected_images.remove(img_path)
+                else:
+                    # Select
+                    self.selected_images.append(img_path)
+                
+                return self._update_selection_info()
+            
+            return self._update_selection_info()
+        
+        # Connect events
+        report_selector.change(load_images_for_report, inputs=report_selector, outputs=[image_gallery, selection_info])
+        refresh_btn.click(refresh_reports, outputs=report_selector)
+        select_all_btn.click(select_all_images, inputs=image_gallery, outputs=selection_info)
+        clear_selection_btn.click(clear_all_selection, outputs=selection_info)
+        add_to_chat_btn.click(add_selected_to_chat, outputs=selection_info)
+        image_gallery.select(show_image_details, outputs=image_details)
+        image_gallery.select(on_gallery_select, outputs=selection_info)
     
     def _setup_document_tab(self):
         """Setup document management tab."""
@@ -351,15 +685,29 @@ class GradioUI:
             with gr.Group():
                 gr.Markdown("#### 🤖 Model Settings")
                 
+                gr.Markdown("""
+                **Model Capabilities:**
+                - **Claude 3.5 Sonnet v2** (Latest): Best image analysis + text reasoning
+                - **Claude 3 Opus**: Most capable reasoning, slower but thorough
+                - **Claude 3 Sonnet**: Good balance of speed and capability
+                - **Claude 3 Haiku**: Fastest and most economical with vision
+                - **Titan models**: Text-only, no image analysis
+                """)
+                
                 model_dropdown = gr.Dropdown(
                     choices=[
-                        "anthropic.claude-3-sonnet-20240229-v1:0",
-                        "anthropic.claude-3-haiku-20240307-v1:0",
+                        # Vision-capable Claude 3 models (recommended for image analysis)
+                        "anthropic.claude-3-5-sonnet-20241022-v2:0",  # Latest Claude 3.5 Sonnet (Best)
+                        "anthropic.claude-3-5-sonnet-20240620-v1:0",   # Previous Claude 3.5 Sonnet
+                        "anthropic.claude-3-opus-20240229-v1:0",       # Claude 3 Opus (Most capable)
+                        "anthropic.claude-3-sonnet-20240229-v1:0",     # Claude 3 Sonnet (Balanced)
+                        "anthropic.claude-3-haiku-20240307-v1:0",      # Claude 3 Haiku (Fast & economical)
+                        # Text-only models
                         "amazon.titan-text-express-v1",
                         "amazon.titan-text-lite-v1"
                     ],
-                    value=self.config.get("model", "text_generation"),
-                    label="Text Generation Model"
+                    value="anthropic.claude-3-5-sonnet-20241022-v2:0",  # Default to latest vision model
+                    label="🤖 AI Model (Vision models support image analysis)"
                 )
                 
                 temperature_slider = gr.Slider(
@@ -492,6 +840,68 @@ class GradioUI:
         response = response.strip()
         
         return response
+    
+    def _get_available_reports(self) -> List[str]:
+        """Get list of available report directories."""
+        if not self.extracted_images_path.exists():
+            return []
+        
+        reports = []
+        for item in self.extracted_images_path.iterdir():
+            if item.is_dir():
+                reports.append(item.name)
+        
+        return sorted(reports)
+    
+    def _update_selection_info(self) -> str:
+        """Update selection information display."""
+        if not self.selected_images:
+            return "*No images selected*"
+        
+        count = len(self.selected_images)
+        
+        # Safely get image names
+        image_names = []
+        for img in self.selected_images[-3:]:  # Show last 3
+            try:
+                if isinstance(img, dict):
+                    name = img.get('name') or Path(str(img.get('path', ''))).name
+                else:
+                    name = Path(str(img)).name
+                image_names.append(name)
+            except Exception as e:
+                logging.warning(f"Error getting image name: {e}")
+                image_names.append(str(img)[:20])  # Fallback to truncated string
+        
+        info = f"**Selected:** {count} image(s)\n"
+        if count <= 3:
+            info += f"**Files:** {', '.join(image_names)}"
+        else:
+            info += f"**Latest:** {', '.join(image_names)}... (+{count-3} more)"
+        
+        return info
+    
+    def _format_image_analysis(self, processed_images: List[Dict]) -> str:
+        """Format image analysis information."""
+        if not processed_images:
+            return ""
+        
+        analysis = f"\n\n🖼️ **Image Analysis Context:**\n"
+        
+        for i, img_info in enumerate(processed_images):
+            img_type = img_info.get("type", "unknown")
+            img_name = img_info.get("name", f"image_{i+1}")
+            
+            if img_type == "uploaded":
+                analysis += f"• **Uploaded Image:** {img_name}\n"
+            elif img_type == "gallery":
+                img_path = img_info.get("path", "")
+                report_name = Path(img_path).parent.name if img_path else "unknown"
+                analysis += f"• **Gallery Image:** {img_name} (from {report_name})\n"
+        
+        analysis += "\n💡 **Note:** The AI can analyze these images for damage, measurements, structural issues, and other property-related insights.\n"
+        
+        return analysis
     
     def launch(
         self,
