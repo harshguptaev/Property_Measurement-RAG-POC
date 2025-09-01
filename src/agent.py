@@ -23,6 +23,7 @@ from pydantic import BaseModel, Field
 from .config import config
 from .vector_store import VectorStoreManager
 from .bedrock_client import create_bedrock_llm, create_bedrock_embeddings
+from .image_utils import ImageManager
 
 
 class AgentState(BaseModel):
@@ -265,6 +266,9 @@ class AgenticRAG:
         # Prepare context with enhanced image handling
         context_parts = []
         retrieved_images = []  # Store images for UI display
+        extracted_conditions = []
+        extracted_roof_types = []
+        extracted_materials = []
         
         for i, doc in enumerate(documents, 1):
             content = doc.page_content
@@ -274,18 +278,71 @@ class AgenticRAG:
             if doc.metadata.get('type') == 'image':
                 image_info = {
                     'page': metadata.get('page_number', 'unknown'),
-                    'source': metadata.get('source', 'unknown source'),
+                    'source': metadata.get('source', metadata.get('source_file', 'unknown source')),
                     'size': metadata.get('image_size', 'unknown'),
                     'index': metadata.get('image_index', i),
-                    'image_data': doc.metadata.get('image_data')  # Include for UI
+                    'image_data': doc.metadata.get('image_data'),
+                    'label': metadata.get('image_label') or metadata.get('image_description'),
+                    'filename': metadata.get('image_filename'),
+                    'path': metadata.get('image_file_path'),
+                    'report_id': metadata.get('report_id'),
+                    'gemini_analysis': metadata.get('gemini_analysis')
                 }
                 retrieved_images.append(image_info)
-                
                 # Enhanced description for LLM
                 size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
                 content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
+                gemini = metadata.get('gemini_analysis')
+                if not isinstance(gemini, dict):
+                    try:
+                        manager = ImageManager()
+                        analysis = manager.analyze_image_with_gemini(doc.metadata)
+                        if isinstance(analysis, dict) and 'error' not in analysis:
+                            metadata['gemini_analysis'] = analysis
+                            doc.metadata['gemini_analysis'] = analysis
+                            gemini = analysis
+                    except Exception:
+                        gemini = metadata.get('gemini_analysis')
+                if isinstance(gemini, dict):
+                    summary = gemini.get('full_analysis') or gemini.get('caption') or gemini.get('measurements_analysis')
+                    if summary:
+                        content = f"{content}\nGemini: {summary}"
+                    roof_type = gemini.get('roof_type')
+                    material = gemini.get('material')
+                    condition = gemini.get('condition')
+                    issues = gemini.get('issues')
+                    orientation = gemini.get('orientation')
+                    if condition and condition != 'Not specified':
+                        extracted_conditions.append(condition)
+                    if roof_type and roof_type != 'Not specified':
+                        extracted_roof_types.append(roof_type)
+                    if material and material != 'Not specified':
+                        extracted_materials.append(material)
+                    fields = []
+                    if roof_type and roof_type != 'Not specified':
+                        fields.append(f"Roof Type: {roof_type}")
+                    if material and material != 'Not specified':
+                        fields.append(f"Material: {material}")
+                    if condition and condition != 'Not specified':
+                        fields.append(f"Condition: {condition}")
+                    if issues and issues != 'Not specified':
+                        fields.append(f"Issues: {issues}")
+                    if orientation and orientation != 'Not specified':
+                        fields.append(f"Orientation: {orientation}")
+                    if fields:
+                        content = f"{content}\n" + " | ".join(fields)
             
             context_parts.append(f"Document {i}:\n{content}\nSource: {metadata.get('source', 'Unknown')}\n")
+
+        if extracted_conditions or extracted_roof_types or extracted_materials:
+            summary_bits = []
+            if extracted_conditions:
+                summary_bits.append(f"Condition: {', '.join(dict.fromkeys(extracted_conditions))}")
+            if extracted_roof_types:
+                summary_bits.append(f"Roof Type: {', '.join(dict.fromkeys(extracted_roof_types))}")
+            if extracted_materials:
+                summary_bits.append(f"Material: {', '.join(dict.fromkeys(extracted_materials))}")
+            context_parts.insert(0, f"Structured Findings:\n" + " | ".join(summary_bits) + "\n")
         
         # Store retrieved images in state for UI access
         state.retrieved_images = retrieved_images
@@ -300,7 +357,7 @@ Guidelines:
 2. If information is not in the context, clearly state that
 3. Cite relevant documents when making claims
 4. For DIAGRAM/IMAGE references, acknowledge them as potentially containing relevant visual information like charts, photos, technical diagrams, or illustrations
-5. When diagrams/images are mentioned, suggest that the user should "view the referenced diagrams/images" for visual details
+5. If the user asks about a specific diagram/image, provide the relevant information from the Gemini analysis
 6. Be concise but comprehensive
 7. If multiple documents provide different information, synthesize appropriately
 8. Pay special attention to visual elements that may contain important technical details, measurements, or visual evidence"""
@@ -389,16 +446,55 @@ Please provide a comprehensive answer based on the available information."""
                 if doc.metadata.get('type') == 'image':
                     image_info = {
                         'page': doc.metadata.get('page_number', 'unknown'),
-                        'source': doc.metadata.get('source', 'unknown source'),
+                        'source': doc.metadata.get('source', doc.metadata.get('source_file', 'unknown source')),
                         'size': doc.metadata.get('image_size', 'unknown'),
                         'index': doc.metadata.get('image_index', i),
-                        'image_data': doc.metadata.get('image_data')
+                        'image_data': doc.metadata.get('image_data'),
+                        'label': doc.metadata.get('image_label') or doc.metadata.get('image_description'),
+                        'filename': doc.metadata.get('image_filename'),
+                        'path': doc.metadata.get('image_file_path'),
+                        'report_id': doc.metadata.get('report_id'),
+                        'gemini_analysis': doc.metadata.get('gemini_analysis')
                     }
                     retrieved_images.append(image_info)
                     
                     # Enhanced description for LLM
                     size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
                     content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
+                    gemini = doc.metadata.get('gemini_analysis')
+                    if not isinstance(gemini, dict):
+                        try:
+                            manager = ImageManager()
+                            analysis = manager.analyze_image_with_gemini(doc.metadata)
+                            if isinstance(analysis, dict) and 'error' not in analysis:
+                                doc.metadata['gemini_analysis'] = analysis
+                                gemini = analysis
+                        except Exception:
+                            gemini = doc.metadata.get('gemini_analysis')
+                    if isinstance(gemini, dict):
+                        summary = gemini.get('full_analysis') or gemini.get('caption') or gemini.get('measurements_analysis')
+                        if summary:
+                            content = f"{content}\nGemini: {summary}"
+                        roof_type = gemini.get('roof_type')
+                        material = gemini.get('material')
+                        condition = gemini.get('condition')
+                        issues = gemini.get('issues')
+                        orientation = gemini.get('orientation')
+                        if condition and condition != 'Not specified':
+                            context_parts.insert(0, f"Structured Findings:\nCondition: {condition}\n")
+                        fields = []
+                        if roof_type and roof_type != 'Not specified':
+                            fields.append(f"Roof Type: {roof_type}")
+                        if material and material != 'Not specified':
+                            fields.append(f"Material: {material}")
+                        if condition and condition != 'Not specified':
+                            fields.append(f"Condition: {condition}")
+                        if issues and issues != 'Not specified':
+                            fields.append(f"Issues: {issues}")
+                        if orientation and orientation != 'Not specified':
+                            fields.append(f"Orientation: {orientation}")
+                        if fields:
+                            content = f"{content}\n" + " | ".join(fields)
                 
                 context_parts.append(f"{i+1}. {content}")
             
