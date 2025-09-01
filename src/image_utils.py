@@ -1,5 +1,6 @@
 """
 Utility functions for handling extracted images stored in separate files.
+Enhanced with Gemini Vision integration for image analysis and captioning.
 """
 import os
 import base64
@@ -8,18 +9,42 @@ from typing import Optional, List, Dict, Any
 from PIL import Image
 import logging
 
+# Import Gemini client with fallback
+try:
+    from .gemini_client import GeminiVisionClient, create_gemini_client, is_gemini_available
+    GEMINI_INTEGRATION = True
+except ImportError:
+    GEMINI_INTEGRATION = False
+    GeminiVisionClient = None
+
 logger = logging.getLogger(__name__)
 
 
 class ImageManager:
     """
     Manages extracted images stored in the file system.
+    Enhanced with Gemini Vision capabilities for image analysis.
     """
     
-    def __init__(self, images_base_dir: str = "extracted_images"):
-        """Initialize image manager with base directory."""
+    def __init__(self, images_base_dir: str = "extracted_images", enable_gemini: bool = True):
+        """Initialize image manager with base directory and optional Gemini integration."""
         self.images_base_dir = Path(images_base_dir)
         self.images_base_dir.mkdir(exist_ok=True)
+        
+        # Initialize Gemini client if available and enabled
+        self.gemini_client = None
+        if enable_gemini and GEMINI_INTEGRATION and is_gemini_available():
+            try:
+                from .config import config
+                gemini_config = config.get_gemini_config()
+                if gemini_config.get("enable_image_captioning", True):
+                    self.gemini_client = create_gemini_client(gemini_config)
+                    logger.info("Gemini Vision integration enabled")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Gemini client: {e}")
+        
+        if self.gemini_client is None:
+            logger.info("Gemini Vision integration disabled or unavailable")
     
     def get_image_path(self, image_metadata: Dict[str, Any]) -> Optional[Path]:
         """Get the file path for an image from its metadata."""
@@ -109,6 +134,149 @@ class ImageManager:
                     logger.error(f"Error removing orphaned image {image_file}: {e}")
         
         return removed_count
+    
+    def analyze_image_with_gemini(self, image_metadata: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Analyze an image using Gemini Vision API.
+        
+        Args:
+            image_metadata: Image metadata containing file path
+            
+        Returns:
+            Analysis results from Gemini
+        """
+        if not self.gemini_client:
+            return {"error": "Gemini Vision not available"}
+        
+        image_path = self.get_image_path(image_metadata)
+        if not image_path or not image_path.exists():
+            return {"error": "Image file not found"}
+        
+        try:
+            # Determine analysis type based on image metadata
+            image_label = image_metadata.get('image_label', '').lower()
+            
+            if any(keyword in image_label for keyword in ['roof', 'side', 'aerial', 'top']):
+                # Use specialized roof analysis
+                analysis = self.gemini_client.analyze_roof_image(image_path)
+            elif any(keyword in image_label for keyword in ['length', 'pitch', 'area', 'azimuth']):
+                # Use measurement extraction
+                analysis = self.gemini_client.extract_measurements(image_path)
+            else:
+                # Use general caption
+                caption = self.gemini_client.caption_image(image_path, detailed=True)
+                analysis = {"caption": caption, "analysis_type": "general"}
+            
+            analysis["gemini_analysis"] = True
+            analysis["image_path"] = str(image_path)
+            return analysis
+            
+        except Exception as e:
+            logger.error(f"Error analyzing image with Gemini: {e}")
+            return {"error": str(e)}
+    
+    def batch_analyze_report_images(self, report_id: str) -> Dict[str, Any]:
+        """
+        Analyze all images for a specific report using Gemini Vision.
+        
+        Args:
+            report_id: Report ID to analyze
+            
+        Returns:
+            Batch analysis results
+        """
+        if not self.gemini_client:
+            return {"error": "Gemini Vision not available"}
+        
+        image_paths = self.list_images_for_report(report_id)
+        if not image_paths:
+            return {"error": f"No images found for report {report_id}"}
+        
+        try:
+            # Analyze roof-specific images
+            roof_images = [p for p in image_paths if any(keyword in p.name.lower() 
+                          for keyword in ['roof', 'side', 'aerial', 'top', 'north', 'south', 'east', 'west'])]
+            
+            measurement_images = [p for p in image_paths if any(keyword in p.name.lower()
+                                for keyword in ['length', 'pitch', 'area', 'azimuth', 'rafter'])]
+            
+            results = {
+                "report_id": report_id,
+                "total_images": len(image_paths),
+                "roof_analysis": [],
+                "measurement_analysis": [],
+                "general_analysis": []
+            }
+            
+            # Process roof images
+            if roof_images:
+                roof_results = self.gemini_client.batch_process_images(roof_images, "roof")
+                results["roof_analysis"] = roof_results
+            
+            # Process measurement images
+            if measurement_images:
+                measurement_results = self.gemini_client.batch_process_images(measurement_images, "measurements")
+                results["measurement_analysis"] = measurement_results
+            
+            # Process remaining images
+            other_images = [p for p in image_paths if p not in roof_images and p not in measurement_images]
+            if other_images:
+                general_results = self.gemini_client.batch_process_images(other_images, "caption")
+                results["general_analysis"] = general_results
+            
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error in batch analysis for report {report_id}: {e}")
+            return {"error": str(e), "report_id": report_id}
+    
+    def enhance_image_metadata_with_gemini(self, image_metadata: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Enhance existing image metadata with Gemini Vision analysis.
+        
+        Args:
+            image_metadata: Existing image metadata
+            
+        Returns:
+            Enhanced metadata with Gemini analysis
+        """
+        enhanced_metadata = image_metadata.copy()
+        
+        if self.gemini_client:
+            try:
+                analysis = self.analyze_image_with_gemini(image_metadata)
+                if "error" not in analysis:
+                    enhanced_metadata["gemini_analysis"] = analysis
+                    
+                    # Add searchable text from analysis
+                    searchable_text = enhanced_metadata.get("searchable_keywords", [])
+                    
+                    if "full_analysis" in analysis:
+                        # Extract keywords from roof analysis
+                        text = analysis["full_analysis"].lower()
+                        searchable_text.extend([
+                            analysis.get("roof_type", ""),
+                            analysis.get("material", ""),
+                            analysis.get("condition", ""),
+                            analysis.get("orientation", "")
+                        ])
+                    elif "caption" in analysis:
+                        # Extract keywords from caption
+                        text = analysis["caption"].lower()
+                    elif "measurements_analysis" in analysis:
+                        # Extract measurement-related keywords
+                        text = analysis["measurements_analysis"].lower()
+                        if analysis.get("has_measurements"):
+                            searchable_text.append("measurements")
+                    
+                    # Filter out empty strings and update metadata
+                    enhanced_metadata["searchable_keywords"] = [k for k in searchable_text if k]
+                    enhanced_metadata["gemini_enhanced"] = True
+                    
+            except Exception as e:
+                logger.warning(f"Failed to enhance metadata with Gemini: {e}")
+        
+        return enhanced_metadata
 
 
 def create_image_serving_url(image_metadata: Dict[str, Any], base_url: str = "") -> Optional[str]:

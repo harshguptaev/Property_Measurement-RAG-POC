@@ -41,6 +41,7 @@ import json
 from .config import config
 from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
 from .bedrock_client import create_bedrock_embeddings
+from .image_utils import ImageManager
 
 
 class DoclingProcessor:
@@ -52,6 +53,7 @@ class DoclingProcessor:
         self,
         vector_store_manager: Optional[VectorStoreManager] = None,
         config_instance: Optional[Any] = None,
+        enable_gemini: bool = True,
         **kwargs
     ):
         """
@@ -60,6 +62,7 @@ class DoclingProcessor:
         Args:
             vector_store_manager: Vector store manager instance
             config_instance: Configuration instance
+            enable_gemini: Whether to enable Gemini Vision for image analysis
             **kwargs: Additional arguments
         """
         if not DOCLING_AVAILABLE:
@@ -70,6 +73,9 @@ class DoclingProcessor:
         self.text_splitter = None
         self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
+        
+        # Initialize image manager with Gemini support
+        self.image_manager = ImageManager(enable_gemini=enable_gemini)
         
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
@@ -405,6 +411,25 @@ class DoclingProcessor:
                                     'image_size': image.size
                                 }
                             )
+                            
+                            # Enhance with Gemini analysis if available
+                            if self.image_manager.gemini_client:
+                                try:
+                                    enhanced_metadata = self.image_manager.enhance_image_metadata_with_gemini(img_doc.metadata)
+                                    img_doc.metadata.update(enhanced_metadata)
+                                    
+                                    # Update page content with Gemini analysis
+                                    if "gemini_analysis" in enhanced_metadata:
+                                        analysis = enhanced_metadata["gemini_analysis"]
+                                        if "full_analysis" in analysis:
+                                            img_doc.page_content += f"\n\nGemini Analysis: {analysis['full_analysis']}"
+                                        elif "caption" in analysis:
+                                            img_doc.page_content += f"\n\nGemini Caption: {analysis['caption']}"
+                                        elif "measurements_analysis" in analysis:
+                                            img_doc.page_content += f"\n\nMeasurement Analysis: {analysis['measurements_analysis']}"
+                                except Exception as e:
+                                    logging.warning(f"Failed to enhance image with Gemini: {e}")
+                            print("Enhanced image metadata with Gemini.", img_doc.metadata)
                             documents.append(img_doc)
                         
                         pix = None  # Cleanup

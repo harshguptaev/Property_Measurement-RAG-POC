@@ -51,6 +51,13 @@ class ConfigLoader:
                 "temperature": 0.1,
                 "max_tokens": 4096
             },
+            "gemini": {
+                "model_name": "gemini-2.5-flash",
+                "api_key_env": "GEMINI_API_KEY",
+                "temperature": 0.1,
+                "max_tokens": 4096,
+                "enable_image_captioning": True
+            },
             "database": {
                 "vector_store_type": "faiss",
                 "collection_name": "property_documents",
@@ -153,6 +160,16 @@ class ConfigLoader:
         return {
             "k": self.get("retrieval", "k"),
             "score_threshold": self.get("retrieval", "score_threshold")
+        }
+    
+    def get_gemini_config(self) -> Dict[str, Any]:
+        """Get Gemini API configuration."""
+        return {
+            "model_name": self.get("gemini", "model_name"),
+            "api_key": os.getenv(self.get("gemini", "api_key_env", "GEMINI_API_KEY")),
+            "temperature": self.get("gemini", "temperature"),
+            "max_tokens": self.get("gemini", "max_tokens"),
+            "enable_image_captioning": self.get("gemini", "enable_image_captioning")
         }
     
     def save_config(self):
