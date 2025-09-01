@@ -515,6 +515,7 @@ class DoclingProcessor:
             out_report_table_dir.mkdir(parents=True, exist_ok=True)
             # Save individual table HTML
             (out_report_table_dir / f"Table_{idx+1}.html").write_text(html or "", encoding="utf-8")
+            (out_report_table_dir / f"Table_{idx+1}.csv").write_text(df.to_csv(index=False) or "", encoding="utf-8")
         return out_docs
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
