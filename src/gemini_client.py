@@ -10,6 +10,7 @@ from pathlib import Path
 from PIL import Image
 import base64
 from io import BytesIO
+from functools import lru_cache
 
 try:
     import google.generativeai as genai
@@ -255,6 +256,56 @@ class GeminiVisionClient:
                     "error": str(e)
                 })
         
+        return results
+
+    # --- Specialized Roof Report Captioning / Extraction ---
+    @lru_cache(maxsize=1)
+    def _load_roof_prompt(self) -> str:
+        """Load the comprehensive roof report captioning prompt from prompts directory."""
+        candidate_paths = [
+            Path(__file__).parent / "prompts" / "roof_report_captioning.md",
+            Path(__file__).parent.parent / "prompts" / "roof_report_captioning.md",
+        ]
+        for p in candidate_paths:
+            if p.exists():
+                try:
+                    return p.read_text(encoding="utf-8")
+                except Exception:
+                    continue
+        return (
+            "You are an AI data extraction specialist. If the image appears to be a roof report diagram, "
+            "identify its type (lengths, area, pitch, azimuth, aerial/elevation) and extract measurements, "
+            "areas, pitches, azimuths, penetrations, and conditions. Return JSON only."  # fallback
+        )
+
+    def analyze_roof_report_image(self, image: Union[str, Path, Image.Image, bytes]) -> Dict[str, Any]:
+        """Apply the comprehensive roof report prompt to a single image and parse JSON if possible."""
+        prompt = self._load_roof_prompt()
+        raw_response = self.caption_image(image, prompt, detailed=True)
+        # Attempt to isolate JSON (Gemini may wrap text)
+        import json, re
+        json_text = raw_response
+        match = re.search(r"\{[\s\S]*\}$", raw_response.strip())
+        if match:
+            json_text = match.group(0)
+        try:
+            data = json.loads(json_text)
+            data.setdefault("_raw_text", raw_response)
+            return data
+        except Exception:
+            return {"image_analysis": None, "_raw_text": raw_response, "parse_error": True}
+
+    def batch_analyze_roof_report(self, image_paths: List[Union[str, Path]]) -> List[Dict[str, Any]]:
+        """Batch analyze images with the comprehensive roof report prompt."""
+        results = []
+        for i, path in enumerate(image_paths):
+            try:
+                res = self.analyze_roof_report_image(path)
+                res["image_path"] = str(path)
+                res["image_index"] = i
+                results.append(res)
+            except Exception as e:
+                results.append({"image_path": str(path), "image_index": i, "error": str(e)})
         return results
     
     def _load_image(self, image: Union[str, Path, Image.Image, bytes]) -> Image.Image:
