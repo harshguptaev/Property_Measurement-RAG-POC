@@ -38,7 +38,7 @@ RUN pip install --upgrade pip \
 COPY . .
 
 # Create necessary directories
-RUN mkdir -p input_files extracted_images vectorstore_faiss temp_docling
+RUN mkdir -p input_files extracted_images vectorstore_faiss vectorstore_milvus temp_docling
 
 # Add a non-root user for security
 RUN useradd -m appuser && chown -R appuser /app

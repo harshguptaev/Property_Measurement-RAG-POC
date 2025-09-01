@@ -92,8 +92,14 @@ def main():
         force_reprocess = '--reprocess' in sys.argv
         
         # Check if vector store already exists
-        vector_store_path = Path("vectorstore_faiss")
-        has_existing_index = vector_store_path.exists() and any(vector_store_path.glob("*.faiss"))
+        vector_config = config.get_vector_store_config()
+        if (vector_config.get("store_type") or "").lower() == "milvus":
+            # Milvus Lite persists as a single local DB file
+            vector_store_path = Path(f"vectorstore_milvus/{vector_config.get('collection_name', 'property_documents')}.db")
+            has_existing_index = vector_store_path.exists()
+        else:
+            vector_store_path = Path("vectorstore_faiss")
+            has_existing_index = vector_store_path.exists() and any(vector_store_path.glob("*.faiss"))
         
         # Process documents if needed
         rag_agent = None
@@ -149,7 +155,7 @@ def main():
                     embeddings=embeddings
                 )
                 
-                # Vector store is automatically loaded in _setup_faiss if it exists
+                # Vector store is automatically loaded in setup based on type
                 
                 # Create RAG agent with existing vector store
                 llm = create_bedrock_llm(bedrock_config)
@@ -184,7 +190,7 @@ def main():
                     embeddings=embeddings
                 )
                 
-                if vector_store_manager.vector_store is not None:
+                if (vector_config.get("store_type") == "milvus" and vector_store_manager is not None) or vector_store_manager.vector_store is not None:
                     llm = create_bedrock_llm(bedrock_config)
                     rag_agent = AgenticRAG(
                         vector_store_manager=vector_store_manager,
@@ -253,7 +259,7 @@ def test_setup():
         return False
     
     # Test required packages
-    required_packages = ['langchain', 'gradio', 'faiss', 'PyPDF2']
+    required_packages = ['langchain', 'gradio', 'pymilvus', 'PyPDF2']
     for package in required_packages:
         try:
             __import__(package)

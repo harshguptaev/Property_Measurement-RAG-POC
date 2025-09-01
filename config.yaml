@@ -14,7 +14,7 @@ aws:
 
 # Database Configuration
 database:
-  vector_store_type: "faiss"  # Options: faiss, chroma
+  vector_store_type: "milvus"  # Options: milvus, faiss
   collection_name: "property_documents"
   chunk_size: 1000
   chunk_overlap: 200

@@ -50,7 +50,7 @@ class ConfigLoader:
                 "max_tokens": 4096
             },
             "database": {
-                "vector_store_type": "faiss",
+                "vector_store_type": "milvus",
                 "collection_name": "property_documents",
                 "chunk_size": 1000,
                 "chunk_overlap": 200

@@ -5,8 +5,10 @@ boto3>=1.34.0
 botocore>=1.34.0
 
 # Vector stores
+# Milvus Lite is included via pymilvus (>=2.4.2) and stores locally
+pymilvus>=2.4.2
+# Optional: keep FAISS for backward compatibility (can be removed if not needed)
 faiss-cpu>=1.7.4
-chromadb>=0.4.0
 
 # Document processing
 PyPDF2>=3.0.1

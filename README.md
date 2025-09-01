@@ -37,7 +37,7 @@ A multimodal Retrieval-Augmented Generation (RAG) system that processes property
 - **📄 PDF Processing**: Extract text and images from property reports
 - **🖼️ Diagram Retrieval**: Find and reference diagrams, charts, and photos
 - **🧠 AI-Powered Q&A**: Claude 3 Sonnet for intelligent responses
-- **🔍 Vector Search**: FAISS-based semantic search
+- **🔍 Vector Search**: Milvus Lite-based semantic search (local DB). FAISS optional.
 - **🌐 Web Interface**: User-friendly Gradio interface
 - **☁️ AWS Integration**: Bedrock for LLMs and embeddings
 
@@ -48,7 +48,7 @@ A multimodal Retrieval-Augmented Generation (RAG) system that processes property
 | Component | Technology |
 |-----------|------------|
 | **PDF Processing** | PyPDFLoader, PyMuPDF (fitz) |
-| **Vector Store** | FAISS |
+| **Vector Store** | Milvus Lite (local via pymilvus) |
 | **Embeddings** | AWS Bedrock Titan Embeddings |
 | **LLM** | AWS Bedrock Claude 3 Sonnet |
 | **Web Interface** | Gradio |
@@ -124,7 +124,7 @@ property-retrieval/
 │   ├── __init__.py          # Package initialization
 │   ├── config.py            # Configuration management
 │   ├── bedrock_client.py    # AWS Bedrock integration
-│   ├── vector_store.py      # FAISS vector store management
+│   ├── vector_store.py      # Milvus Lite + FAISS vector store management
 │   ├── index.py             # Document processing & indexing
 │   ├── agent.py             # RAG agent with image retrieval
 │   └── ui.py                # Gradio web interface
@@ -148,7 +148,7 @@ bedrock:
   embedding_model_id: "amazon.titan-embed-text-v1"
 
 retrieval:
-  vector_store_type: "faiss"
+  vector_store_type: "milvus"
   collection_name: "property_documents"
   k: 10
 
