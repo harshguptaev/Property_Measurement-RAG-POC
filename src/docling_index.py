@@ -38,7 +38,7 @@ except ImportError as e:
 # LangChain imports
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
+from langchain_text_splitters.html import HTMLSemanticPreservingSplitter
 # Image processing
 try:
     from PIL import Image
@@ -49,6 +49,7 @@ except ImportError:
     VISION_AVAILABLE = False
     logging.warning("Vision processing dependencies not available. Install with: pip install pillow opencv-python")
 
+import json
 from .config import config
 from .vector_store import VectorStoreManager, create_text_splitter
 from .bedrock_client import create_bedrock_embeddings
@@ -79,12 +80,14 @@ class DoclingProcessor:
         self.config = config_instance or config
         self.vector_store_manager = vector_store_manager
         self.text_splitter = None
+        self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
         
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
         self._setup_text_splitter()
-        
+        self._setup_table_splitter()
+
         # Setup directories
         self.temp_dir = Path("temp_docling")
         self.temp_dir.mkdir(exist_ok=True)
@@ -114,6 +117,31 @@ class DoclingProcessor:
             chunk_size=vector_config.get("chunk_size", 1000),
             chunk_overlap=vector_config.get("chunk_overlap", 200)
         )
+    
+    def _setup_table_splitter(self):
+        """Setup table splitter for chunking tables."""
+        vector_config = self.config.get_vector_store_config()
+        # Minimal headers ensure API requirements are met even if the input HTML has no headers
+        headers_to_split_on = [("h1", "Header 1"), ("h2", "Header 2")]
+        try:
+            # Prefer preserving table/list elements for better context
+            self.table_splitter = HTMLSemanticPreservingSplitter(
+                headers_to_split_on=headers_to_split_on,
+                max_chunk_size=vector_config.get("chunk_size", 1000),
+                elements_to_preserve=["table", "ul", "ol"],
+            )
+        except TypeError:
+            # Older/newer versions may have slightly different signatures; fall back to the minimal required args
+            try:
+                self.table_splitter = HTMLSemanticPreservingSplitter(
+                    headers_to_split_on=headers_to_split_on
+                )
+            except Exception:
+                self.table_splitter = None
+                logging.warning(
+                    "Failed to initialize HTMLSemanticPreservingSplitter; table HTML will not be split."
+                )
+
     
     def process_file(self, file_path: str, extract_images: bool = True) -> List[Document]:
         """
@@ -224,7 +252,11 @@ class DoclingProcessor:
             # Convert document with Docling
             result = self.converter.convert(str(file_path))
             converted_doc = result.document  # Remove type hint to avoid import issues
-            
+            try:
+                tables_list = list(getattr(converted_doc, "tables", []) or [])
+            except Exception:
+            logging.info(f"Docling tables count: {len(tables_list)}")
+
             # Extract main document text
             main_text = converted_doc.export_to_markdown()
             self.save_docling_exports(main_text, converted_doc, file_path)
@@ -247,7 +279,7 @@ class DoclingProcessor:
                 documents.extend(page_documents)
             
             # Extract tables if present
-            table_documents = self._extract_tables(converted_doc)
+            table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
             
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
@@ -504,43 +536,109 @@ class DoclingProcessor:
         except Exception as e:
             logging.warning(f"Error extracting text from image: {e}")
             return ""
-    
-    def _extract_tables(self, converted_doc: Any) -> List[Document]:
-        """Extract tables from the converted document."""
-        documents = []
         
-        try:
-            # Check if document has tables
-            if hasattr(converted_doc, 'tables') and converted_doc.tables:
-                for table_idx, table in enumerate(converted_doc.tables):
+    def _extract_tables(self, converted_doc, tables_list, file_path: Path) -> List[Document]:
+        """
+        For each Docling table:
+        - Export to DataFrame for analytic correctness and downstream SQL/DF pipelines.
+        - Export to HTML and Markdown for human-readable embeddings.
+        - Create LangChain Documents:
+            a) One doc with Markdown table (single chunk).
+            b) One or more docs from HTML split with an element-preserving splitter.
+        """
+        out_docs: List[Document] = []
+        # Ensure we can iterate all tables reliably across versions
+        for idx, table in enumerate(tables_list):
+            # 1) DataFrame export (safe structure)
+            df = None
+            try:
+                df = table.export_to_dataframe()
+            except Exception as e:
+                logging.warning(f"Error exporting table {idx} to dataframe: {e}")
+                df = None
+
+            # 2) HTML and Markdown renderings for embeddings/view
+            try:
+                try:
+                    html = table.export_to_html(doc=converted_doc)
+                except TypeError:
+                    html = table.export_to_html()
+                try:
+                    md = table.export_to_markdown(doc=converted_doc)
+                except TypeError:
+                    md = table.export_to_markdown()
+            except Exception as e:
+                logging.warning(f"Error exporting table {idx} to HTML/Markdown: {e}")
+                html = ""
+                md = ""
+
+            # Common metadata with schema hints
+            headers: List[str] = []
+            try:
+                header_cells = [c for c in table.data.table_cells if getattr(c, "column_header", False)]
+                if not header_cells and getattr(table.data, "num_rows", 0) > 0:
                     try:
-                        # Convert table to markdown or text format
-                        if hasattr(table, 'export_to_markdown'):
-                            table_content = table.export_to_markdown()
-                        elif hasattr(table, 'to_dict'):
-                            table_dict = table.to_dict()
-                            table_content = str(table_dict)
-                        else:
-                            table_content = str(table)
-                        
-                        if table_content.strip():
-                            table_doc = Document(
-                                page_content=table_content,
-                                metadata={
-                                    'type': 'table',
-                                    'table_index': table_idx,
-                                    'extraction_method': 'docling_table'
-                                }
-                            )
-                            documents.append(table_doc)
-                    
-                    except Exception as e:
-                        logging.warning(f"Error processing table {table_idx}: {e}")
-        
-        except Exception as e:
-            logging.error(f"Error extracting tables: {e}")
-        
-        return documents
+                        first_row = table.data.grid[0]
+                        headers = [cell.text for cell in first_row]
+                    except Exception:
+                        headers = []
+                else:
+                    headers = [c.text for c in header_cells]
+            except Exception:
+                headers = []
+
+            common_meta: Dict[str, Any] = {
+                "type": "table",
+                "extraction_method": "docling_table",
+                "table_index": idx,
+                "source_path": str(file_path),
+                "headers": headers,
+                "table_label": getattr(table, "label", None),
+            }
+
+            # 3a) Single-doc Markdown table
+            if md:
+                out_docs.append(
+                    Document(
+                        page_content=md,
+                        metadata={**common_meta, "format": "markdown"},
+                    )
+                )
+
+            # 3b) HTML-preserving split to avoid breaking <table>
+            try:
+                html_parts = self.table_splitter.split_text(html) if self.table_splitter else [html]
+            except Exception:
+                html_parts = [html]
+            for i, part in enumerate([p for p in html_parts if p]):
+                # HTMLSemanticPreservingSplitter returns LangChain Documents; handle both Document and str
+                if hasattr(part, "page_content"):
+                    part_content = getattr(part, "page_content", "")
+                    part_meta = getattr(part, "metadata", {}) or {}
+                else:
+                    part_content = str(part)
+                    part_meta = {}
+                out_docs.append(
+                    Document(
+                        page_content=part_content,
+                        metadata={
+                            **common_meta,
+                            **part_meta,
+                            "format": "html",
+                            "html_chunk_index": i,
+                        },
+                    )
+                )
+
+            out_dir = Path("docling_exports")
+            out_dir.mkdir(parents=True, exist_ok=True)
+            stem = Path(file_path).stem
+            out_report_dir = out_dir / stem
+            out_report_dir.mkdir(parents=True, exist_ok=True)
+            out_report_table_dir = out_report_dir / "tables"
+            out_report_table_dir.mkdir(parents=True, exist_ok=True)
+            (out_report_table_dir / f"{"Table_"+str(idx+1)+".html"}").write_text(html or "", encoding="utf-8")
+        return out_docs
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process Office documents (DOCX, PPTX) using Docling."""
