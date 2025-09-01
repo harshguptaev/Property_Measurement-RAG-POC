@@ -167,7 +167,32 @@ class VectorStoreManager:
             logging.error(f"Error performing similarity search: {e}")
             raise
     
-    # Removed unused helper methods similarity_search_with_score and as_retriever (not referenced externally)
+    def similarity_search_with_score(
+        self,
+        query: str,
+        k: int = 5,
+        **kwargs
+    ) -> List[tuple]:
+        """
+        Perform similarity search with scores.
+        
+        Args:
+            query: Query string
+            k: Number of results to return
+            **kwargs: Additional search arguments
+            
+        Returns:
+            List of (document, score) tuples
+        """
+        if self.vector_store is None:
+            logging.warning("Vector store is empty")
+            return []
+        
+        try:
+            return self.vector_store.similarity_search_with_score(query, k=k, **kwargs)
+        except Exception as e:
+            logging.error(f"Error performing similarity search with score: {e}")
+            raise
     
     def save(self):
         """Save the vector store to disk."""
