@@ -8,7 +8,7 @@ import logging
 from typing import Any, Dict, List, Optional, Union
 from pathlib import Path
 
-from langchain_community.vectorstores import FAISS, Chroma
+from langchain_community.vectorstores import FAISS
 from langchain.vectorstores.base import VectorStore
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -59,8 +59,6 @@ class VectorStoreManager:
         try:
             if self.store_type == "faiss":
                 self._setup_faiss()
-            elif self.store_type == "chroma":
-                self._setup_chroma()
             else:
                 raise ValueError(f"Unsupported vector store type: {self.store_type}")
                 
@@ -92,22 +90,6 @@ class VectorStoreManager:
             # Will be created when documents are added
             self.vector_store = None
     
-    def _setup_chroma(self):
-        """Setup Chroma vector store."""
-        chroma_path = os.path.join(self.persist_directory, self.collection_name)
-        
-        try:
-            self.vector_store = Chroma(
-                collection_name=self.collection_name,
-                embedding_function=self.embeddings,
-                persist_directory=chroma_path,
-                **self.kwargs
-            )
-            logging.info(f"Chroma vector store initialized: {self.collection_name}")
-        except Exception as e:
-            logging.error(f"Error initializing Chroma: {e}")
-            raise
-    
     def add_documents(self, documents: List[Document], **kwargs) -> List[str]:
         """
         Add documents to the vector store.
@@ -126,8 +108,6 @@ class VectorStoreManager:
         try:
             if self.store_type == "faiss":
                 return self._add_documents_faiss(documents, **kwargs)
-            elif self.store_type == "chroma":
-                return self._add_documents_chroma(documents, **kwargs)
             else:
                 raise ValueError(f"Unsupported vector store type: {self.store_type}")
                 
@@ -149,10 +129,6 @@ class VectorStoreManager:
         
         # Return dummy IDs (FAISS doesn't return actual IDs)
         return [f"doc_{i}" for i in range(len(documents))]
-    
-    def _add_documents_chroma(self, documents: List[Document], **kwargs) -> List[str]:
-        """Add documents to Chroma vector store."""
-        return self.vector_store.add_documents(documents, **kwargs)
     
     def similarity_search(
         self,
@@ -245,73 +221,12 @@ class VectorStoreManager:
                     self.persist_directory,
                     index_name=self.collection_name
                 )
-            elif self.store_type == "chroma":
-                # Chroma auto-persists, but we can explicitly persist
-                if hasattr(self.vector_store, 'persist'):
-                    self.vector_store.persist()
             
             logging.info(f"Vector store saved to {self.persist_directory}")
             
         except Exception as e:
             logging.error(f"Error saving vector store: {e}")
             raise
-    
-    def delete_collection(self):
-        """Delete the entire collection."""
-        try:
-            if self.store_type == "faiss":
-                # Remove FAISS files
-                faiss_index_path = os.path.join(self.persist_directory, f"{self.collection_name}.faiss")
-                faiss_pkl_path = os.path.join(self.persist_directory, f"{self.collection_name}.pkl")
-                
-                if os.path.exists(faiss_index_path):
-                    os.remove(faiss_index_path)
-                if os.path.exists(faiss_pkl_path):
-                    os.remove(faiss_pkl_path)
-                    
-            elif self.store_type == "chroma":
-                if hasattr(self.vector_store, 'delete_collection'):
-                    self.vector_store.delete_collection()
-                else:
-                    # Remove directory
-                    import shutil
-                    chroma_path = os.path.join(self.persist_directory, self.collection_name)
-                    if os.path.exists(chroma_path):
-                        shutil.rmtree(chroma_path)
-            
-            self.vector_store = None
-            logging.info(f"Collection {self.collection_name} deleted")
-            
-        except Exception as e:
-            logging.error(f"Error deleting collection: {e}")
-            raise
-    
-    def get_count(self) -> int:
-        """Get the number of documents in the vector store."""
-        if self.vector_store is None:
-            return 0
-        
-        try:
-            if self.store_type == "faiss":
-                return self.vector_store.index.ntotal if hasattr(self.vector_store, 'index') else 0
-            elif self.store_type == "chroma":
-                return self.vector_store._collection.count() if hasattr(self.vector_store, '_collection') else 0
-            else:
-                return 0
-        except Exception as e:
-            logging.warning(f"Error getting document count: {e}")
-            return 0
-    
-    def get_info(self) -> Dict[str, Any]:
-        """Get information about the vector store."""
-        return {
-            "store_type": self.store_type,
-            "collection_name": self.collection_name,
-            "persist_directory": self.persist_directory,
-            "document_count": self.get_count(),
-            "is_initialized": self.vector_store is not None
-        }
-
 
 def create_text_splitter(chunk_size: int = 1000, chunk_overlap: int = 200) -> RecursiveCharacterTextSplitter:
     """

@@ -86,10 +86,6 @@ class DoclingProcessor:
         self._setup_docling_converter()
         self._setup_text_splitter()
         self._setup_table_splitter()
-
-        # Setup directories
-        self.temp_dir = Path("temp_docling")
-        self.temp_dir.mkdir(exist_ok=True)
     
     def _setup_docling_converter(self):
         """Setup Docling converter with simplified PDF processing options."""
