@@ -5,7 +5,7 @@ Supports FAISS and Chroma vector stores.
 import os
 import pickle
 import logging
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 from pathlib import Path
 
 from langchain_community.vectorstores import FAISS
@@ -167,47 +167,7 @@ class VectorStoreManager:
             logging.error(f"Error performing similarity search: {e}")
             raise
     
-    def similarity_search_with_score(
-        self,
-        query: str,
-        k: int = 5,
-        **kwargs
-    ) -> List[tuple]:
-        """
-        Perform similarity search with scores.
-        
-        Args:
-            query: Query string
-            k: Number of results to return
-            **kwargs: Additional search arguments
-            
-        Returns:
-            List of (document, score) tuples
-        """
-        if self.vector_store is None:
-            logging.warning("Vector store is empty")
-            return []
-        
-        try:
-            return self.vector_store.similarity_search_with_score(query, k=k, **kwargs)
-        except Exception as e:
-            logging.error(f"Error performing similarity search with score: {e}")
-            raise
-    
-    def as_retriever(self, **kwargs) -> Any:
-        """
-        Get vector store as a retriever.
-        
-        Args:
-            **kwargs: Arguments for the retriever
-            
-        Returns:
-            Vector store retriever
-        """
-        if self.vector_store is None:
-            raise ValueError("Vector store is not initialized or empty")
-        
-        return self.vector_store.as_retriever(**kwargs)
+    # Removed unused helper methods similarity_search_with_score and as_retriever (not referenced externally)
     
     def save(self):
         """Save the vector store to disk."""
@@ -227,6 +187,41 @@ class VectorStoreManager:
         except Exception as e:
             logging.error(f"Error saving vector store: {e}")
             raise
+
+    # Added public utility methods used elsewhere in the codebase
+    def get_count(self) -> int:
+        """Return number of vectors/documents in the store."""
+        if self.vector_store is None:
+            return 0
+        try:
+            # FAISS specific
+            return getattr(self.vector_store.index, 'ntotal', 0)
+        except Exception:
+            return 0
+
+    def get_info(self) -> Dict[str, Any]:
+        """Return basic info about the vector store."""
+        return {
+            'store_type': self.store_type,
+            'collection_name': self.collection_name,
+            'persist_directory': self.persist_directory,
+            'count': self.get_count(),
+            'initialized': self.vector_store is not None
+        }
+
+    def delete_collection(self):
+        """Delete the persisted collection (FAISS files)."""
+        if self.store_type == 'faiss':
+            try:
+                faiss_index_path = os.path.join(self.persist_directory, f"{self.collection_name}.faiss")
+                faiss_pkl_path = os.path.join(self.persist_directory, f"{self.collection_name}.pkl")
+                for p in [faiss_index_path, faiss_pkl_path]:
+                    if os.path.exists(p):
+                        os.remove(p)
+                        logging.info(f"Removed {p}")
+            except Exception as e:
+                logging.error(f"Error deleting FAISS collection: {e}")
+        self.vector_store = None
 
 def create_text_splitter(chunk_size: int = 1000, chunk_overlap: int = 200) -> RecursiveCharacterTextSplitter:
     """

@@ -335,27 +335,4 @@ def process_and_index_directory(
     return vector_store_manager
 
 
-def get_document_processor(config_instance: Optional[Any] = None) -> DocumentProcessor:
-    """
-    Get a document processor instance.
-    
-    Args:
-        config_instance: Configuration instance
-        
-    Returns:
-        Document processor instance
-    """
-    return DocumentProcessor(config_instance=config_instance)
-
-
-# Set up logging for this module
-def set_log_level(level: int = logging.INFO, log_file: Optional[str] = None):
-    """Set logging level for this module."""
-    logger = logging.getLogger(__name__)
-    logger.setLevel(level)
-    
-    if log_file:
-        handler = logging.FileHandler(log_file)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
+## Removed unused helper functions get_document_processor and set_log_level (not referenced elsewhere)

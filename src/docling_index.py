@@ -5,12 +5,9 @@ Based on the reference implementation with improved PDF and image parsing.
 """
 import os
 import logging
-import base64
 from typing import Any, Dict, List, Optional, Union, Tuple
 from pathlib import Path
 from io import BytesIO
-import hashlib
-import json
 
 # Docling imports for advanced document processing
 try:
@@ -38,15 +35,7 @@ except ImportError as e:
 # LangChain imports
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-# Image processing
-try:
-    from PIL import Image
-    import cv2
-    import numpy as np
-    VISION_AVAILABLE = True
-except ImportError:
-    VISION_AVAILABLE = False
-    logging.warning("Vision processing dependencies not available. Install with: pip install pillow opencv-python")
+from PIL import Image  # still required for PyMuPDF image size handling
 
 import json
 from .config import config
@@ -430,121 +419,7 @@ class DoclingProcessor:
             
         return documents
     
-    def _process_page_image(self, image_info: Any, page_num: int, img_idx: int, file_path: Path) -> Optional[Document]:
-        """Process an image from a page."""
-        if not VISION_AVAILABLE:
-            return None
-        
-        try:
-            # Get image data
-            if hasattr(image_info, 'image') and image_info.image:
-                # Convert to PIL Image
-                if isinstance(image_info.image, np.ndarray):
-                    image = Image.fromarray(image_info.image)
-                else:
-                    image = image_info.image
-                
-                # Convert to base64
-                buffered = BytesIO()
-                image.save(buffered, format="PNG")
-                img_base64 = base64.b64encode(buffered.getvalue()).decode()
-                
-                # Create image hash for deduplication
-                img_hash = hashlib.md5(buffered.getvalue()).hexdigest()
-                
-                # Extract text from image if possible (OCR)
-                image_text = self._extract_text_from_image(image)
-                
-                # Create document
-                content = f"Image from page {page_num}"
-                if image_text:
-                    content += f"\nExtracted text: {image_text}"
-                
-                return Document(
-                    page_content=content,
-                    metadata={
-                        'type': 'image',
-                        'page_number': page_num,
-                        'image_index': img_idx,
-                        'image_data': img_base64,
-                        'image_format': 'png',
-                        'image_size': image.size,
-                        'image_hash': img_hash,
-                        'extraction_method': 'docling_page_image',
-                        'has_text': bool(image_text)
-                    }
-                )
-        
-        except Exception as e:
-            logging.warning(f"Error processing page image: {e}")
-        
-        return None
-    
-    def _process_standalone_image(self, picture: Any, img_idx: int, file_path: Path) -> Optional[Document]:
-        """Process a standalone image from the document."""
-        if not VISION_AVAILABLE:
-            return None
-        
-        try:
-            # Similar processing as page images
-            if hasattr(picture, 'image') and picture.image:
-                if isinstance(picture.image, np.ndarray):
-                    image = Image.fromarray(picture.image)
-                else:
-                    image = picture.image
-                
-                buffered = BytesIO()
-                image.save(buffered, format="PNG")
-                img_base64 = base64.b64encode(buffered.getvalue()).decode()
-                img_hash = hashlib.md5(buffered.getvalue()).hexdigest()
-                
-                image_text = self._extract_text_from_image(image)
-                
-                content = f"Standalone image {img_idx + 1}"
-                if image_text:
-                    content += f"\nExtracted text: {image_text}"
-                
-                return Document(
-                    page_content=content,
-                    metadata={
-                        'type': 'image',
-                        'image_index': img_idx,
-                        'image_data': img_base64,
-                        'image_format': 'png',
-                        'image_size': image.size,
-                        'image_hash': img_hash,
-                        'extraction_method': 'docling_standalone_image',
-                        'has_text': bool(image_text)
-                    }
-                )
-        
-        except Exception as e:
-            logging.warning(f"Error processing standalone image: {e}")
-        
-        return None
-    
-    def _extract_text_from_image(self, image: Image.Image) -> str:
-        """Extract text from image using OCR."""
-        try:
-            # Convert PIL to OpenCV format
-            img_array = np.array(image)
-            
-            # Basic image preprocessing for better OCR
-            if len(img_array.shape) == 3:
-                gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
-            else:
-                gray = img_array
-            
-            # Apply threshold to get better OCR results
-            _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-            
-            # Note: For production, you might want to use pytesseract or AWS Textract
-            # For now, we'll return empty string as OCR is not implemented
-            return ""
-            
-        except Exception as e:
-            logging.warning(f"Error extracting text from image: {e}")
-            return ""
+    # Removed unused image OCR helper methods (_process_page_image, _process_standalone_image, _extract_text_from_image)
         
     def _extract_tables(self, converted_doc, tables_list, file_path: Path) -> List[Document]:
         """
@@ -638,7 +513,8 @@ class DoclingProcessor:
             out_report_dir.mkdir(parents=True, exist_ok=True)
             out_report_table_dir = out_report_dir / "tables"
             out_report_table_dir.mkdir(parents=True, exist_ok=True)
-            (out_report_table_dir / f"{"Table_"+str(idx+1)+".html"}").write_text(html or "", encoding="utf-8")
+            # Save individual table HTML
+            (out_report_table_dir / f"Table_{idx+1}.html").write_text(html or "", encoding="utf-8")
         return out_docs
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
@@ -814,34 +690,4 @@ def process_and_index_directory_with_docling(
     return vector_store_manager
 
 
-def get_docling_processor(config_instance: Optional[Any] = None) -> DoclingProcessor:
-    """
-    Get a Docling document processor instance.
-    
-    Args:
-        config_instance: Configuration instance
-        
-    Returns:
-        Docling document processor instance
-    """
-    return DoclingProcessor(config_instance=config_instance)
-
-
-# Compatibility function to replace the original index processor
-def create_enhanced_index_processor(use_docling: bool = True, config_instance: Optional[Any] = None):
-    """
-    Create an enhanced document processor.
-    
-    Args:
-        use_docling: Whether to use Docling (recommended)
-        config_instance: Configuration instance
-        
-    Returns:
-        Document processor instance
-    """
-    if use_docling and DOCLING_AVAILABLE:
-        return DoclingProcessor(config_instance=config_instance)
-    else:
-        # Fallback to original processor
-        from .index import DocumentProcessor
-        return DocumentProcessor(config_instance=config_instance)
+## Removed unused public helper functions get_docling_processor and create_enhanced_index_processor (not referenced in codebase)
