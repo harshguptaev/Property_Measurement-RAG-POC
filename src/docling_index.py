@@ -255,6 +255,7 @@ class DoclingProcessor:
             try:
                 tables_list = list(getattr(converted_doc, "tables", []) or [])
             except Exception:
+                tables_list = getattr(converted_doc, "tables", []) or []
             logging.info(f"Docling tables count: {len(tables_list)}")
 
             # Extract main document text
