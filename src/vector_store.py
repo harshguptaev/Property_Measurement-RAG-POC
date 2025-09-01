@@ -12,6 +12,7 @@ from langchain_community.vectorstores import FAISS, Chroma
 from langchain.vectorstores.base import VectorStore
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters.html import HTMLSemanticPreservingSplitter
 from langchain.embeddings.base import Embeddings
 
 
@@ -328,4 +329,26 @@ def create_text_splitter(chunk_size: int = 1000, chunk_overlap: int = 200) -> Re
         chunk_overlap=chunk_overlap,
         length_function=len,
         separators=["\n\n", "\n", " ", ""]
+    )
+
+def create_table_splitter(chunk_size: int = 1000, chunk_overlap: int = 200) -> HTMLSemanticPreservingSplitter:
+    """
+    Create a HTMLSemanticPreservingSplitter for chunking tables.
+
+    Args:
+        chunk_size: Size of each chunk
+        chunk_overlap: Overlap between chunks
+
+    Returns:
+        HTMLSemanticPreservingSplitter instance
+    """
+    
+    headers_to_split_on = [("h1", "Header 1"), ("h2", "Header 2")]
+    elements_to_preserve = ["table", "ul", "ol"]
+
+    return HTMLSemanticPreservingSplitter(
+        headers_to_split_on=headers_to_split_on,
+        max_chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        elements_to_preserve=elements_to_preserve,
     )

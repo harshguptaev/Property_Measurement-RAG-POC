@@ -38,7 +38,6 @@ except ImportError as e:
 # LangChain imports
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_text_splitters.html import HTMLSemanticPreservingSplitter
 # Image processing
 try:
     from PIL import Image
@@ -51,7 +50,7 @@ except ImportError:
 
 import json
 from .config import config
-from .vector_store import VectorStoreManager, create_text_splitter
+from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
 from .bedrock_client import create_bedrock_embeddings
 
 
@@ -121,28 +120,11 @@ class DoclingProcessor:
     def _setup_table_splitter(self):
         """Setup table splitter for chunking tables."""
         vector_config = self.config.get_vector_store_config()
-        # Minimal headers ensure API requirements are met even if the input HTML has no headers
-        headers_to_split_on = [("h1", "Header 1"), ("h2", "Header 2")]
-        try:
-            # Prefer preserving table/list elements for better context
-            self.table_splitter = HTMLSemanticPreservingSplitter(
-                headers_to_split_on=headers_to_split_on,
-                max_chunk_size=vector_config.get("chunk_size", 1000),
-                elements_to_preserve=["table", "ul", "ol"],
-            )
-        except TypeError:
-            # Older/newer versions may have slightly different signatures; fall back to the minimal required args
-            try:
-                self.table_splitter = HTMLSemanticPreservingSplitter(
-                    headers_to_split_on=headers_to_split_on
-                )
-            except Exception:
-                self.table_splitter = None
-                logging.warning(
-                    "Failed to initialize HTMLSemanticPreservingSplitter; table HTML will not be split."
-                )
-
-    
+        self.table_splitter = create_table_splitter(
+            chunk_size=vector_config.get("chunk_size", 1000),
+            chunk_overlap=vector_config.get("chunk_overlap", 200)
+        )
+        
     def process_file(self, file_path: str, extract_images: bool = True) -> List[Document]:
         """
         Process a single file using Docling and return documents.
@@ -591,22 +573,14 @@ class DoclingProcessor:
             common_meta: Dict[str, Any] = {
                 "type": "table",
                 "extraction_method": "docling_table",
+                "report_id": file_path.stem.split('RoofReport-')[1].split('.')[0],
                 "table_index": idx,
                 "source_path": str(file_path),
                 "headers": headers,
                 "table_label": getattr(table, "label", None),
             }
 
-            # 3a) Single-doc Markdown table
-            if md:
-                out_docs.append(
-                    Document(
-                        page_content=md,
-                        metadata={**common_meta, "format": "markdown"},
-                    )
-                )
-
-            # 3b) HTML-preserving split to avoid breaking <table>
+            # 3) HTML-preserving split to avoid breaking <table>
             try:
                 html_parts = self.table_splitter.split_text(html) if self.table_splitter else [html]
             except Exception:
