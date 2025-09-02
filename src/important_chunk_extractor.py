@@ -204,18 +204,168 @@ def extract_lengths_from_last_page(all_pages_text: List[str]) -> Dict:
     return {"type": "lengths", "data": data}
 
 
+def extract_roof_materials(all_pages_text: List[str]) -> Dict:
+    """Extract roof material information from the document."""
+    materials_data = {}
+    
+    for page_text in all_pages_text:
+        lines = normalize_lines(page_text)
+        text_lower = page_text.lower()
+        
+        # Look for common roofing materials
+        materials = []
+        if any(term in text_lower for term in ["asphalt", "shingle", "composition"]):
+            materials.append("Asphalt Shingles")
+        if any(term in text_lower for term in ["metal", "steel", "aluminum"]):
+            materials.append("Metal Roofing")
+        if any(term in text_lower for term in ["tile", "clay", "concrete tile"]):
+            materials.append("Tile")
+        if any(term in text_lower for term in ["slate"]):
+            materials.append("Slate")
+        if any(term in text_lower for term in ["wood", "cedar", "shake"]):
+            materials.append("Wood")
+        if any(term in text_lower for term in ["membrane", "tpo", "epdm", "modified bitumen"]):
+            materials.append("Membrane")
+        
+        if materials:
+            materials_data["detected_materials"] = list(set(materials))
+            break
+    
+    return {"type": "materials", "data": materials_data} if materials_data else {}
+
+
+def extract_roof_condition(all_pages_text: List[str]) -> Dict:
+    """Extract roof condition information from the document."""
+    condition_data = {}
+    
+    for page_text in all_pages_text:
+        text_lower = page_text.lower()
+        
+        # Look for condition indicators
+        conditions = []
+        issues = []
+        
+        if any(term in text_lower for term in ["excellent", "good condition", "well maintained"]):
+            conditions.append("Good")
+        if any(term in text_lower for term in ["fair", "moderate", "some wear"]):
+            conditions.append("Fair")
+        if any(term in text_lower for term in ["poor", "damaged", "needs replacement"]):
+            conditions.append("Poor")
+        
+        # Look for specific issues
+        if any(term in text_lower for term in ["missing shingle", "loose shingle", "damaged shingle"]):
+            issues.append("Shingle Issues")
+        if any(term in text_lower for term in ["leak", "water damage", "moisture"]):
+            issues.append("Water Damage")
+        if any(term in text_lower for term in ["flashing", "damaged flashing"]):
+            issues.append("Flashing Issues")
+        if any(term in text_lower for term in ["gutter", "damaged gutter", "clogged"]):
+            issues.append("Gutter Issues")
+        if any(term in text_lower for term in ["penetration", "roof penetration"]):
+            issues.append("Penetrations")
+        
+        if conditions or issues:
+            condition_data["overall_condition"] = conditions
+            condition_data["identified_issues"] = issues
+            break
+    
+    return {"type": "condition", "data": condition_data} if condition_data else {}
+
+
+def extract_inspection_details(all_pages_text: List[str]) -> Dict:
+    """Extract inspection date and other details."""
+    inspection_data = {}
+    
+    for page_text in all_pages_text:
+        lines = normalize_lines(page_text)
+        
+        for line in lines:
+            line_lower = line.lower()
+            
+            # Look for inspection date
+            if "inspection date" in line_lower:
+                # Try to extract date from the line or next few lines
+                date_match = re.search(r'(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})', line)
+                if date_match:
+                    inspection_data["inspection_date"] = date_match.group(1)
+            
+            # Look for report ID
+            if "report id" in line_lower or "report number" in line_lower:
+                # Extract ID from the line
+                id_match = re.search(r'(\d+)', line)
+                if id_match:
+                    inspection_data["report_id"] = id_match.group(1)
+            
+            # Look for number of stories
+            if "number of stories" in line_lower or "stories" in line_lower:
+                stories_match = re.search(r'(\d+)', line)
+                if stories_match:
+                    inspection_data["number_of_stories"] = stories_match.group(1)
+    
+    return {"type": "inspection_details", "data": inspection_data} if inspection_data else {}
+
+
+def extract_roof_geometry(all_pages_text: List[str]) -> Dict:
+    """Extract detailed roof geometry information."""
+    geometry_data = {}
+    
+    for page_text in all_pages_text:
+        lines = normalize_lines(page_text)
+        text_lower = page_text.lower()
+        
+        # Look for roof facets
+        facets_match = re.search(r'roof facets[:\s]*(\d+)', text_lower)
+        if facets_match:
+            geometry_data["roof_facets"] = facets_match.group(1)
+        
+        # Look for roof complexity indicators
+        if any(term in text_lower for term in ["complex", "multiple levels", "irregular"]):
+            geometry_data["complexity"] = "Complex"
+        elif any(term in text_lower for term in ["simple", "single level", "regular"]):
+            geometry_data["complexity"] = "Simple"
+        
+        # Extract pitch variations
+        pitch_matches = re.findall(r'(\d+/\d+)', page_text)
+        if pitch_matches:
+            geometry_data["pitch_variations"] = list(set(pitch_matches))
+    
+    return {"type": "geometry", "data": geometry_data} if geometry_data else {}
+
+
 def extract_important_chunks(pdf_path: str) -> List[Dict]:
     pages = read_pdf_text_by_page(pdf_path)
     chunks: List[Dict] = []
+    
+    # Extract existing chunks
     address = extract_property_address(pages)
     if address:
         chunks.append(address)
+    
     prepared = extract_prepared_for(pages)
     if prepared:
         chunks.append(prepared)
+    
     lengths = extract_lengths_from_last_page(pages)
     if lengths:
         chunks.append(lengths)
+    
+    # Extract new enhanced chunks
+    materials = extract_roof_materials(pages)
+    if materials:
+        chunks.append(materials)
+    
+    condition = extract_roof_condition(pages)
+    if condition:
+        chunks.append(condition)
+    
+    inspection = extract_inspection_details(pages)
+    if inspection:
+        chunks.append(inspection)
+    
+    geometry = extract_roof_geometry(pages)
+    if geometry:
+        chunks.append(geometry)
+    
     return chunks
 
 

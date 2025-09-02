@@ -24,6 +24,7 @@ from .config import config
 from .vector_store import VectorStoreManager
 from .bedrock_client import create_bedrock_llm, create_bedrock_embeddings
 from .image_utils import ImageManager
+from .context_manager import ContextManager
 
 
 class AgentState(BaseModel):
@@ -92,6 +93,7 @@ class AgenticRAG:
         vector_stores: Optional[List[Dict[str, Any]]] = None,
         llm: Optional[Any] = None,
         config_instance: Optional[Any] = None,
+        context_manager: Optional[ContextManager] = None,
         **kwargs
     ):
         """
@@ -102,6 +104,7 @@ class AgenticRAG:
             vector_stores: List of vector store configurations
             llm: Language model instance
             config_instance: Configuration instance
+            context_manager: Context manager for structured data integration
             **kwargs: Additional arguments for LLM
         """
         self.config = config_instance or config
@@ -109,6 +112,9 @@ class AgenticRAG:
         self.vector_stores = []
         self.tools = []
         self.graph = None
+        
+        # Initialize context manager
+        self.context_manager = context_manager or ContextManager()
         
         # Setup vector stores
         if vector_stores:
@@ -210,7 +216,7 @@ class AgenticRAG:
         return state
     
     def _search_documents(self, state: AgentState) -> AgentState:
-        """Search for relevant documents."""
+        """Search for relevant documents with context enhancement."""
         query = state.query
         all_documents = []
         
@@ -246,10 +252,21 @@ class AgenticRAG:
         
         # Limit to top results
         max_docs = self.config.get("retrieval", "k", 10)
-        state.documents = unique_documents[:max_docs]
+        limited_documents = unique_documents[:max_docs]
+        
+        # Enhance documents with structured context
+        try:
+            enriched_documents = self.context_manager.enrich_documents_with_context(
+                limited_documents, query
+            )
+            state.documents = enriched_documents
+        except Exception as e:
+            logging.warning(f"Error enriching documents with context: {e}")
+            state.documents = limited_documents
+        
         state.step = "documents_retrieved"
         
-        logging.info(f"Retrieved {len(state.documents)} relevant documents")
+        logging.info(f"Retrieved and enriched {len(state.documents)} relevant documents")
         
         return state
     
@@ -263,12 +280,30 @@ class AgenticRAG:
             state.step = "completed"
             return state
         
-        # Prepare context with enhanced image handling
+        # Prepare context with enhanced image handling and structured data
         context_parts = []
         retrieved_images = []  # Store images for UI display
         extracted_conditions = []
         extracted_roof_types = []
         extracted_materials = []
+        report_ids = set()
+        
+        # Collect report IDs for context summary
+        for doc in documents:
+            report_id = doc.metadata.get("report_id")
+            if report_id:
+                report_ids.add(report_id)
+        
+        # Add structured context summary if we have report IDs
+        if report_ids:
+            try:
+                context_summary = self.context_manager.create_context_summary(
+                    list(report_ids), query
+                )
+                if context_summary:
+                    context_parts.append(f"=== STRUCTURED REPORT CONTEXT ===\n{context_summary}\n")
+            except Exception as e:
+                logging.warning(f"Error creating context summary: {e}")
         
         for i, doc in enumerate(documents, 1):
             content = doc.page_content
@@ -350,17 +385,24 @@ class AgenticRAG:
         context = "\n".join(context_parts)
         
         # Create prompt
-        system_prompt = """You are a helpful AI assistant that answers questions based on the provided context documents. 
+        system_prompt = """You are a helpful AI assistant specialized in property inspection and roof report analysis. You answer questions based on the provided context documents and structured data.
 
 Guidelines:
-1. Answer questions accurately based on the provided context
-2. If information is not in the context, clearly state that
-3. Cite relevant documents when making claims
-4. For DIAGRAM/IMAGE references, acknowledge them as potentially containing relevant visual information like charts, photos, technical diagrams, or illustrations
-5. If the user asks about a specific diagram/image, provide the relevant information from the Gemini analysis
-6. Be concise but comprehensive
-7. If multiple documents provide different information, synthesize appropriately
-8. Pay special attention to visual elements that may contain important technical details, measurements, or visual evidence"""
+1. Answer questions accurately based on the provided context and structured report data
+2. Use the STRUCTURED REPORT CONTEXT section for key property details, measurements, and client information
+3. If information is not in the context, clearly state that
+4. Cite relevant documents and report IDs when making claims
+5. For DIAGRAM/IMAGE references, acknowledge them as containing visual information and use any Gemini analysis provided
+6. When discussing measurements, always reference the structured data when available
+7. Be concise but comprehensive, prioritizing accuracy
+8. If multiple reports provide different information, clearly distinguish between them
+9. Pay special attention to:
+   - Property addresses and report IDs for context
+   - Measurements and roof specifications
+   - Material types and conditions
+   - Visual evidence from images and diagrams
+   - Client information when relevant to the query
+10. Format numerical data clearly (e.g., areas in SQ, pitches as ratios, lengths with units)"""
 
         user_prompt = f"""Based on the following context documents, please answer this question: {query}
 
@@ -435,11 +477,37 @@ Please provide a comprehensive answer based on the available information."""
             if not all_documents:
                 return {"response": "No relevant documents found.", "images": []}
             
+            # Enhance documents with structured context
+            try:
+                enriched_documents = self.context_manager.enrich_documents_with_context(
+                    all_documents[:5], query
+                )
+            except Exception as e:
+                logging.warning(f"Error enriching documents with context: {e}")
+                enriched_documents = all_documents[:5]
+            
             # Process images similar to the LangGraph version
             retrieved_images = []
             context_parts = []
+            report_ids = set()
             
-            for i, doc in enumerate(all_documents[:5]):
+            # Collect report IDs and add structured context
+            for doc in enriched_documents:
+                report_id = doc.metadata.get("report_id")
+                if report_id:
+                    report_ids.add(report_id)
+            
+            if report_ids:
+                try:
+                    context_summary = self.context_manager.create_context_summary(
+                        list(report_ids), query
+                    )
+                    if context_summary:
+                        context_parts.append(f"=== STRUCTURED REPORT CONTEXT ===\n{context_summary}\n")
+                except Exception as e:
+                    logging.warning(f"Error creating context summary: {e}")
+            
+            for i, doc in enumerate(enriched_documents):
                 content = doc.page_content[:300] + "..."
                 
                 # Handle image documents
