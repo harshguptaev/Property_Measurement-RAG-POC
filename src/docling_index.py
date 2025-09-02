@@ -11,9 +11,11 @@ from io import BytesIO
 
 # Docling imports for advanced document processing
 try:
-    from docling.document_converter import DocumentConverter
+    from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions
+    from docling_core.types.doc import TableItem
+    from docling.datamodel.document import ConversionResult
     # Try different import paths for ConvertedDocument
     try:
         from docling.datamodel.document import ConvertedDocument
@@ -82,10 +84,19 @@ class DoclingProcessor:
             # Configure pipeline options for better PDF processing
             pipeline_options = PdfPipelineOptions()
             pipeline_options.do_ocr = True  # Enable OCR for scanned PDFs
-            pipeline_options.do_table_structure = True  # Extract table structure
-            
+            pipeline_options.do_table_structure = True
+            pipeline_options.table_structure_options.do_cell_matching = True
+            pipeline_options.images_scale = 1
+            pipeline_options.generate_page_images = True
+            pipeline_options.generate_picture_images = True
+
             # Initialize converter with simplified options
-            self.converter = DocumentConverter()
+
+            self.converter = DocumentConverter(
+                format_options={
+                    InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+                }
+            )
             
             logging.info("Docling converter initialized with simplified PDF processing")
         except Exception as e:
@@ -169,7 +180,7 @@ class DoclingProcessor:
             logging.error(f"Error processing file {file_path}: {e}")
             raise
     
-    def save_docling_exports(self, main_text: str, converted_doc: Any, file_path: Path):
+    def save_docling_exports(self, main_text: str, converted_doc: ConversionResult, file_path: Path):
         """Persist Docling exports (Markdown and JSON)"""
         try:
             out_dir = Path("docling_exports")
@@ -184,7 +195,7 @@ class DoclingProcessor:
                 doc_json = converted_doc.model_dump()
             except Exception:
                 try:
-                    doc_json = converted_doc.to_dict()
+                    doc_json = converted_doc.export_to_dict()
                 except Exception:
                     tables_md: List[Union[str, Dict[str, Any]]] = []
                     if hasattr(converted_doc, "tables") and converted_doc.tables:
@@ -205,7 +216,7 @@ class DoclingProcessor:
                         "meta": {"file_name": Path(file_path).name},
                     }
             (out_report_dir / f"{stem}.json").write_text(
-                json.dumps(doc_json, ensure_ascii=False, indent=2),
+                json.dumps(doc_json, ensure_ascii=False, indent=2, default=str),
                 encoding="utf-8",
             )
         except Exception as save_err:
@@ -430,6 +441,7 @@ class DoclingProcessor:
             a) One doc with Markdown table (single chunk).
             b) One or more docs from HTML split with an element-preserving splitter.
         """
+        
         out_docs: List[Document] = []
         # Ensure we can iterate all tables reliably across versions
         for idx, table in enumerate(tables_list):
@@ -447,14 +459,9 @@ class DoclingProcessor:
                     html = table.export_to_html(doc=converted_doc)
                 except TypeError:
                     html = table.export_to_html()
-                try:
-                    md = table.export_to_markdown(doc=converted_doc)
-                except TypeError:
-                    md = table.export_to_markdown()
             except Exception as e:
-                logging.warning(f"Error exporting table {idx} to HTML/Markdown: {e}")
+                logging.warning(f"Error exporting table {idx} to HTML: {e}")
                 html = ""
-                md = ""
 
             # Common metadata with schema hints
             headers: List[str] = []
@@ -506,17 +513,59 @@ class DoclingProcessor:
                     )
                 )
 
-            out_dir = Path("docling_exports")
-            out_dir.mkdir(parents=True, exist_ok=True)
-            stem = Path(file_path).stem
-            out_report_dir = out_dir / stem
-            out_report_dir.mkdir(parents=True, exist_ok=True)
-            out_report_table_dir = out_report_dir / "tables"
-            out_report_table_dir.mkdir(parents=True, exist_ok=True)
-            # Save individual table HTML
-            (out_report_table_dir / f"Table_{idx+1}.html").write_text(html or "", encoding="utf-8")
-            (out_report_table_dir / f"Table_{idx+1}.csv").write_text(df.to_csv(index=False) or "", encoding="utf-8")
+            self.export_table_data(df, html, file_path, idx)
+
+        self.export_table_images(converted_doc, file_path)
+
         return out_docs
+    
+    def export_table_data(self, df, html, file_path, idx):
+
+        """Export table data to HTML, CSV, and Markdown files."""
+        
+        name = "Index"
+        if idx==1:
+            name = "Areas_per_Pitch"
+        if idx==2:
+            name = "Waste_Calculation"
+
+
+        out_dir = Path("docling_exports")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_dir.mkdir(parents=True, exist_ok=True)
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_dir.mkdir(parents=True, exist_ok=True)
+        # Save individual table HTML
+        (out_report_table_dir / f"{name}.html").write_text(html or "", encoding="utf-8")
+        (out_report_table_dir / f"{name}.csv").write_text(df.to_csv(index=False) or "", encoding="utf-8")
+        (out_report_table_dir / f"{name}.md").write_text(df.to_markdown() or "", encoding="utf-8")
+
+    def export_table_images(self, converted_doc, file_path):
+
+        """Export table images to PNG files."""
+        table_counter = 0
+        out_dir = Path("docling_exports")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_dir.mkdir(parents=True, exist_ok=True)
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_dir.mkdir(parents=True, exist_ok=True)
+        for element, _level in converted_doc.iterate_items():
+            if isinstance(element, TableItem):
+                name = "Index"
+                if table_counter==1:
+                    name = "Areas_per_Pitch"
+                if table_counter==2:
+                    name = "Waste_Calculation"
+                table_counter += 1
+                element_image_filename = (
+                    out_report_table_dir / f"{name}.png"
+                )
+                with element_image_filename.open("wb") as fp:
+                    element.get_image(converted_doc).save(fp, "PNG")
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process Office documents (DOCX, PPTX) using Docling."""
