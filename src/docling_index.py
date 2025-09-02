@@ -537,10 +537,18 @@ class DoclingProcessor:
         out_report_dir.mkdir(parents=True, exist_ok=True)
         out_report_table_dir = out_report_dir / "tables"
         out_report_table_dir.mkdir(parents=True, exist_ok=True)
-        # Save individual table HTML
-        (out_report_table_dir / f"{name}.html").write_text(html or "", encoding="utf-8")
-        (out_report_table_dir / f"{name}.csv").write_text(df.to_csv(index=False) or "", encoding="utf-8")
-        (out_report_table_dir / f"{name}.md").write_text(df.to_markdown() or "", encoding="utf-8")
+
+        out_html_report_table_dir = out_report_table_dir / "html"
+        out_html_report_table_dir.mkdir(parents=True, exist_ok=True)
+        out_csv_report_table_dir = out_report_table_dir / "csv"
+        out_csv_report_table_dir.mkdir(parents=True, exist_ok=True)
+        out_md_report_table_dir = out_report_table_dir / "md"
+        out_md_report_table_dir.mkdir(parents=True, exist_ok=True)
+
+        # Save individual table Data
+        (out_html_report_table_dir / f"{name}.html").write_text(html or "", encoding="utf-8")
+        (out_csv_report_table_dir / f"{name}.csv").write_text(df.to_csv(index=False) or "", encoding="utf-8")
+        (out_md_report_table_dir / f"{name}.md").write_text(df.to_markdown() or "", encoding="utf-8")
 
     def export_table_images(self, converted_doc, file_path):
 
@@ -553,7 +561,10 @@ class DoclingProcessor:
         out_report_dir.mkdir(parents=True, exist_ok=True)
         out_report_table_dir = out_report_dir / "tables"
         out_report_table_dir.mkdir(parents=True, exist_ok=True)
-        for element, _level in converted_doc.iterate_items():
+        out_report_table_images_dir = out_report_table_dir / "images"
+        out_report_table_images_dir.mkdir(parents=True, exist_ok=True)
+
+        for element, _ in converted_doc.iterate_items():
             if isinstance(element, TableItem):
                 name = "Index"
                 if table_counter==1:
@@ -562,7 +573,7 @@ class DoclingProcessor:
                     name = "Waste_Calculation"
                 table_counter += 1
                 element_image_filename = (
-                    out_report_table_dir / f"{name}.png"
+                    out_report_table_images_dir / f"{name}.png"
                 )
                 with element_image_filename.open("wb") as fp:
                     element.get_image(converted_doc).save(fp, "PNG")
