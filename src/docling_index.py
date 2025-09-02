@@ -256,6 +256,9 @@ class DoclingProcessor:
             table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
             
+            # Extract important chunks and save them
+            self._extract_and_save_important_chunks(file_path)
+            
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
             return documents
             
@@ -593,6 +596,59 @@ class DoclingProcessor:
         except Exception as e:
             logging.error(f"Error processing text file {file_path}: {e}")
             raise
+    
+    def _extract_and_save_important_chunks(self, file_path: Path) -> None:
+        """Extract important chunks and save them organized by report ID."""
+        try:
+            logging.info(f"Starting important chunk extraction for {file_path.name}")
+            
+            # Try to import the extractor
+            try:
+                from .important_chunk_extractor import extract_important_chunks
+                logging.info("Successfully imported important_chunk_extractor")
+            except ImportError as ie:
+                logging.error(f"Failed to import important_chunk_extractor: {ie}")
+                return
+            
+            # Extract report ID from filename
+            report_id = None
+            if 'RoofReport-' in file_path.name:
+                try:
+                    report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+                except:
+                    pass
+            
+            if not report_id:
+                report_id = file_path.stem
+            
+            logging.info(f"Extracting chunks for report ID: {report_id}")
+            
+            # Extract important chunks
+            chunks = extract_important_chunks(str(file_path))
+            
+            if chunks:
+                # Create output directory structure
+                chunks_dir = Path("important_chunks") / f"report_{report_id}"
+                chunks_dir.mkdir(parents=True, exist_ok=True)
+                
+                # Save chunks as JSON
+                chunks_file = chunks_dir / "important_chunks.json"
+                with open(chunks_file, 'w', encoding='utf-8') as f:
+                    import json
+                    json.dump(chunks, f, ensure_ascii=False, indent=2)
+                
+                logging.info(f"✓ Saved {len(chunks)} important chunks to {chunks_file}")
+                
+                # Log chunk types for verification
+                chunk_types = [chunk.get('type', 'unknown') for chunk in chunks]
+                logging.info(f"✓ Chunk types extracted: {', '.join(chunk_types)}")
+            else:
+                logging.warning(f"No important chunks extracted from {file_path.name}")
+                
+        except Exception as e:
+            logging.error(f"Error extracting important chunks from {file_path}: {e}")
+            import traceback
+            logging.error(f"Full traceback: {traceback.format_exc()}")
     
     def process_directory(
         self,
