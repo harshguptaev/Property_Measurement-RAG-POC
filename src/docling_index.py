@@ -54,6 +54,8 @@ class DoclingProcessor:
         vector_store_manager: Optional[VectorStoreManager] = None,
         config_instance: Optional[Any] = None,
         enable_gemini: bool = True,
+    skip_cover_images: bool = True,
+    skip_cover_gemini: bool = True,
         **kwargs
     ):
         """
@@ -67,16 +69,19 @@ class DoclingProcessor:
         """
         if not DOCLING_AVAILABLE:
             raise ImportError("Docling is required for this processor. Install with: pip install docling")
-            
+
         self.config = config_instance or config
         self.vector_store_manager = vector_store_manager
+        # Control behavior for cover page images (page 1 / index 0)
+        self.skip_cover_images = skip_cover_images
+        self.skip_cover_gemini = skip_cover_gemini
         self.text_splitter = None
         self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
-        
+
         # Initialize image manager with Gemini support
         self.image_manager = ImageManager(enable_gemini=enable_gemini)
-        
+
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
         self._setup_text_splitter()
@@ -311,6 +316,7 @@ class DoclingProcessor:
                 page = pdf_document.load_page(page_num)
                 image_list = page.get_images()
                 num_images_on_page = len(image_list)
+                is_cover_page = (page_num == 0)
                 
                 for img_index, img in enumerate(image_list):
                     try:
@@ -373,18 +379,21 @@ class DoclingProcessor:
                             location_keywords = ["roof", "inspection", f"page{page_num + 1}"]
                             if report_id:
                                 location_keywords.extend([report_id, f"report{report_id}"])
+                            if is_cover_page:
+                                location_keywords.extend(["cover", "front", "title"])
                             
                             # Infer location from page position
-                            if page_num <= 2:
-                                location_keywords.extend(["overview", "aerial", "top"])
-                            elif page_num % 4 == 1:
-                                location_keywords.extend(["north", "side", "north side"])
-                            elif page_num % 4 == 2:
-                                location_keywords.extend(["south", "side", "south side"])
-                            elif page_num % 4 == 3:
-                                location_keywords.extend(["east", "side", "east side"])
-                            elif page_num % 4 == 0:
-                                location_keywords.extend(["west", "side", "west side"])
+                            if not is_cover_page:
+                                if page_num <= 2:
+                                    location_keywords.extend(["overview", "aerial", "top"])
+                                elif page_num % 4 == 1:
+                                    location_keywords.extend(["north", "side", "north side"])
+                                elif page_num % 4 == 2:
+                                    location_keywords.extend(["south", "side", "south side"])
+                                elif page_num % 4 == 3:
+                                    location_keywords.extend(["east", "side", "east side"])
+                                elif page_num % 4 == 0:
+                                    location_keywords.extend(["west", "side", "west side"])
                             location_keywords.append(image_label.replace("_", " ").lower())
                             
                             # Create enhanced image content
@@ -406,33 +415,53 @@ class DoclingProcessor:
                                     'extraction_method': 'pymupdf_fallback',
                                     'image_description': image_label,
                                     'searchable_keywords': location_keywords,
-                                    'image_type': 'roof_page_image',
+                                    'image_type': 'cover_image' if is_cover_page else 'roof_page_image',
                                     'has_raw_data': True,
                                     'image_file_path': str(image_file_path),
                                     'image_filename': image_filename,
                                     'image_label': image_label,
-                                    'image_size': image.size
+                                    'image_size': image.size,
+                                    'gemini_enriched': False,
+                                    'gemini_skipped_reason': None
                                 }
                             )
                             
-                            # Enhance with Gemini analysis if available
-                            if self.image_manager.gemini_client:
+                            # Decide whether to index cover image
+                            if is_cover_page and self.skip_cover_images:
+                                img_doc.metadata['gemini_skipped_reason'] = 'cover_image_not_indexed'
+                                logging.info(f"Skipping cover image indexing: {image_filename}")
+                                pix = None
+                                continue  # Skip adding this doc
+
+                            # Gemini enrichment logic
+                            run_gemini = (
+                                self.image_manager.gemini_client is not None and
+                                not (is_cover_page and self.skip_cover_gemini)
+                            )
+                            if run_gemini:
                                 try:
-                                    enhanced_metadata = self.image_manager.enhance_image_metadata_with_gemini(img_doc.metadata)
-                                    img_doc.metadata.update(enhanced_metadata)
-                                    
-                                    # Update page content with Gemini analysis
-                                    if "gemini_analysis" in enhanced_metadata:
-                                        analysis = enhanced_metadata["gemini_analysis"]
-                                        if "full_analysis" in analysis:
-                                            img_doc.page_content += f"\n\nGemini Analysis: {analysis['full_analysis']}"
-                                        elif "caption" in analysis:
-                                            img_doc.page_content += f"\n\nGemini Caption: {analysis['caption']}"
-                                        elif "measurements_analysis" in analysis:
-                                            img_doc.page_content += f"\n\nMeasurement Analysis: {analysis['measurements_analysis']}"
-                                except Exception as e:
-                                    logging.warning(f"Failed to enhance image with Gemini: {e}")
-                            print("Enhanced image metadata with Gemini.", img_doc.metadata)
+                                    enriched = self.image_manager.enhance_image_metadata_with_gemini(
+                                        metadata=img_doc.metadata,
+                                        image_path=str(image_file_path)
+                                    )
+                                    if enriched:
+                                        img_doc.metadata.update(enriched)
+                                        caption = enriched.get('gemini_caption') or enriched.get('caption')
+                                        analysis = enriched.get('gemini_analysis')
+                                        measurements = enriched.get('measurements_analysis')
+                                        added_text_parts = [p for p in [caption, analysis, measurements] if p]
+                                        if added_text_parts:
+                                            img_doc.page_content += " " + " ".join(added_text_parts)
+                                        img_doc.metadata['gemini_enriched'] = True
+                                except Exception as ge:
+                                    img_doc.metadata['gemini_skipped_reason'] = f"error:{ge}"
+                                    logging.warning(f"Gemini enrichment failed for {image_filename}: {ge}")
+                            else:
+                                if is_cover_page and self.skip_cover_gemini:
+                                    img_doc.metadata['gemini_skipped_reason'] = 'cover_image_gemini_disabled'
+                                elif not self.image_manager.gemini_client:
+                                    img_doc.metadata['gemini_skipped_reason'] = 'no_gemini_client'
+
                             documents.append(img_doc)
                         
                         pix = None  # Cleanup
@@ -708,7 +737,9 @@ def process_and_index_directory_with_docling(
     drop_existing: bool = False,
     file_extensions: Optional[List[str]] = None,
     extract_images: bool = True,
-    config_instance: Optional[Any] = None
+    config_instance: Optional[Any] = None,
+    skip_cover_images: bool = True,
+    skip_cover_gemini: bool = True
 ) -> VectorStoreManager:
     """
     Process and index all documents in a directory using Docling.
@@ -747,7 +778,9 @@ def process_and_index_directory_with_docling(
     # Process documents with Docling
     processor = DoclingProcessor(
         vector_store_manager=vector_store_manager,
-        config_instance=config_instance
+        config_instance=config_instance,
+        skip_cover_images=skip_cover_images,
+        skip_cover_gemini=skip_cover_gemini
     )
     
     documents = processor.process_directory(
