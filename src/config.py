@@ -47,7 +47,7 @@ class ConfigLoader:
         defaults = {
             "model": {
                 "text_generation": "anthropic.claude-3-sonnet-20240229-v1:0",
-                "text_embedding": "amazon.titan-embed-text-v1",
+                "text_embedding": "amazon.titan-embed-image-v1",
                 "temperature": 0.1,
                 "max_tokens": 4096
             },

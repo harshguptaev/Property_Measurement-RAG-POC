@@ -129,7 +129,7 @@ class BedrockEmbeddings(Embeddings):
     
     def __init__(
         self,
-        model_id: str = "amazon.titan-embed-text-v1",
+        model_id: str = "amazon.titan-embed-image-v1",
         region_name: str = "us-east-1",
         **kwargs
     ):
@@ -226,6 +226,6 @@ def create_bedrock_llm(config: Dict[str, Any]) -> BedrockLLM:
 def create_bedrock_embeddings(config: Dict[str, Any]) -> BedrockEmbeddings:
     """Create Bedrock embeddings instance from configuration."""
     return BedrockEmbeddings(
-        model_id=config.get("embedding_model_id", "amazon.titan-embed-text-v1"),
+        model_id=config.get("embedding_model_id", "amazon.titan-embed-image-v1"),
         region_name=config.get("region_name", "us-east-1")
     )
