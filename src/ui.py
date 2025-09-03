@@ -170,7 +170,6 @@ class GradioUI:
                                 size = img.get('size', 'unknown')
                                 filename = img.get('filename', '')
                                 label = img.get('label', '')
-                                gemini_analysis = img.get('gemini_analysis', {})
                                 report_id = img.get('report_id', 'unknown')
                                 
                                 # Format size info
@@ -492,18 +491,7 @@ class GradioUI:
             if image_filename:
                 response += f"• � Filename: `{image_filename}`\n"
             
-            # Add Gemini analysis if available
-            gemini_analysis = metadata.get('gemini_analysis')
-            if isinstance(gemini_analysis, dict) and gemini_analysis:
-                analysis_text = (
-                    gemini_analysis.get('full_analysis') or 
-                    gemini_analysis.get('caption') or 
-                    gemini_analysis.get('measurements_analysis', '')
-                )
-                if analysis_text:
-                    # Truncate analysis for display
-                    truncated_analysis = analysis_text[:200] + "..." if len(analysis_text) > 200 else analysis_text
-                    response += f"• � **Analysis:** *{truncated_analysis}*\n"
+            # Gemini analysis disabled
             
             response += "\n"
         

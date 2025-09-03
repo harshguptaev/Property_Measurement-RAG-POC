@@ -320,52 +320,12 @@ class AgenticRAG:
                     'label': metadata.get('image_label') or metadata.get('image_description'),
                     'filename': metadata.get('image_filename'),
                     'path': metadata.get('image_file_path'),
-                    'report_id': metadata.get('report_id'),
-                    'gemini_analysis': metadata.get('gemini_analysis')
+                    'report_id': metadata.get('report_id')
                 }
                 retrieved_images.append(image_info)
                 # Enhanced description for LLM
                 size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
-                content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
-                gemini = metadata.get('gemini_analysis')
-                if not isinstance(gemini, dict):
-                    try:
-                        manager = ImageManager()
-                        analysis = manager.analyze_image_with_gemini(doc.metadata)
-                        if isinstance(analysis, dict) and 'error' not in analysis:
-                            metadata['gemini_analysis'] = analysis
-                            doc.metadata['gemini_analysis'] = analysis
-                            gemini = analysis
-                    except Exception:
-                        gemini = metadata.get('gemini_analysis')
-                if isinstance(gemini, dict):
-                    summary = gemini.get('full_analysis') or gemini.get('caption') or gemini.get('measurements_analysis')
-                    if summary:
-                        content = f"{content}\nGemini: {summary}"
-                    roof_type = gemini.get('roof_type')
-                    material = gemini.get('material')
-                    condition = gemini.get('condition')
-                    issues = gemini.get('issues')
-                    orientation = gemini.get('orientation')
-                    if condition and condition != 'Not specified':
-                        extracted_conditions.append(condition)
-                    if roof_type and roof_type != 'Not specified':
-                        extracted_roof_types.append(roof_type)
-                    if material and material != 'Not specified':
-                        extracted_materials.append(material)
-                    fields = []
-                    if roof_type and roof_type != 'Not specified':
-                        fields.append(f"Roof Type: {roof_type}")
-                    if material and material != 'Not specified':
-                        fields.append(f"Material: {material}")
-                    if condition and condition != 'Not specified':
-                        fields.append(f"Condition: {condition}")
-                    if issues and issues != 'Not specified':
-                        fields.append(f"Issues: {issues}")
-                    if orientation and orientation != 'Not specified':
-                        fields.append(f"Orientation: {orientation}")
-                    if fields:
-                        content = f"{content}\n" + " | ".join(fields)
+                content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This is a roof report image (captioning disabled).]"
             
             context_parts.append(f"Document {i}:\n{content}\nSource: {metadata.get('source', 'Unknown')}\n")
 
@@ -392,7 +352,7 @@ Guidelines:
 2. Use the STRUCTURED REPORT CONTEXT section for key property details, measurements, and client information
 3. If information is not in the context, clearly state that
 4. Cite relevant documents and report IDs when making claims
-5. For DIAGRAM/IMAGE references, acknowledge them as containing visual information and use any Gemini analysis provided
+5. For DIAGRAM/IMAGE references, acknowledge them as containing visual information (no external captioning used)
 6. When discussing measurements, always reference the structured data when available
 7. Be concise but comprehensive, prioritizing accuracy
 8. If multiple reports provide different information, clearly distinguish between them
@@ -521,48 +481,13 @@ Please provide a comprehensive answer based on the available information."""
                         'label': doc.metadata.get('image_label') or doc.metadata.get('image_description'),
                         'filename': doc.metadata.get('image_filename'),
                         'path': doc.metadata.get('image_file_path'),
-                        'report_id': doc.metadata.get('report_id'),
-                        'gemini_analysis': doc.metadata.get('gemini_analysis')
+                        'report_id': doc.metadata.get('report_id')
                     }
                     retrieved_images.append(image_info)
                     
                     # Enhanced description for LLM
                     size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
-                    content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
-                    gemini = doc.metadata.get('gemini_analysis')
-                    if not isinstance(gemini, dict):
-                        try:
-                            manager = ImageManager()
-                            analysis = manager.analyze_image_with_gemini(doc.metadata)
-                            if isinstance(analysis, dict) and 'error' not in analysis:
-                                doc.metadata['gemini_analysis'] = analysis
-                                gemini = analysis
-                        except Exception:
-                            gemini = doc.metadata.get('gemini_analysis')
-                    if isinstance(gemini, dict):
-                        summary = gemini.get('full_analysis') or gemini.get('caption') or gemini.get('measurements_analysis')
-                        if summary:
-                            content = f"{content}\nGemini: {summary}"
-                        roof_type = gemini.get('roof_type')
-                        material = gemini.get('material')
-                        condition = gemini.get('condition')
-                        issues = gemini.get('issues')
-                        orientation = gemini.get('orientation')
-                        if condition and condition != 'Not specified':
-                            context_parts.insert(0, f"Structured Findings:\nCondition: {condition}\n")
-                        fields = []
-                        if roof_type and roof_type != 'Not specified':
-                            fields.append(f"Roof Type: {roof_type}")
-                        if material and material != 'Not specified':
-                            fields.append(f"Material: {material}")
-                        if condition and condition != 'Not specified':
-                            fields.append(f"Condition: {condition}")
-                        if issues and issues != 'Not specified':
-                            fields.append(f"Issues: {issues}")
-                        if orientation and orientation != 'Not specified':
-                            fields.append(f"Orientation: {orientation}")
-                        if fields:
-                            content = f"{content}\n" + " | ".join(fields)
+                    content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This is a roof report image (captioning disabled).]"
                 
                 context_parts.append(f"{i+1}. {content}")
             
