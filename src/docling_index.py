@@ -8,13 +8,15 @@ import logging
 from typing import Any, Dict, List, Optional, Union, Tuple
 from pathlib import Path
 from io import BytesIO
+from PIL import Image
+
 
 # Docling imports for advanced document processing
 try:
     from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions
-    from docling_core.types.doc import TableItem
+    from docling_core.types.doc import TableItem, TextItem
     from docling.datamodel.document import ConversionResult
     # Try different import paths for ConvertedDocument
     try:
@@ -86,9 +88,8 @@ class DoclingProcessor:
             pipeline_options.do_ocr = True  # Enable OCR for scanned PDFs
             pipeline_options.do_table_structure = True
             pipeline_options.table_structure_options.do_cell_matching = True
-            pipeline_options.images_scale = 1
+            pipeline_options.images_scale = 4
             pipeline_options.generate_page_images = True
-            pipeline_options.generate_picture_images = True
 
             # Initialize converter with simplified options
 
@@ -240,17 +241,19 @@ class DoclingProcessor:
             main_text = converted_doc.export_to_markdown()
             self.save_docling_exports(main_text, converted_doc, file_path)
             
-            if main_text.strip():
-                text_doc = Document(
-                    page_content=main_text,
-                    metadata={
-                        'type': 'text',
-                        'extraction_method': 'docling_markdown'
-                    }
-                )
-                # Split into chunks
-                text_chunks = self.text_splitter.split_documents([text_doc])
-                documents.extend(text_chunks)
+            for text_doc in converted_doc.iterate_items():
+                if isinstance(text_doc, TextItem):  
+                    text_doc = Document(
+                        page_content=text_doc.text,
+                        metadata={
+                            'type': 'text',
+                            'extraction_method': 'docling_markdown'
+                        }
+                    )
+                    # Split into chunks
+                    text_chunks = self.text_splitter.split_documents([text_doc])
+                    documents.extend(text_chunks)
+                
             
             # Extract page-level content with images
             if extract_images:
@@ -478,6 +481,14 @@ class DoclingProcessor:
             except Exception:
                 headers = []
 
+            table_name = ""
+            if idx%2==1:
+                table_name = "Areas_per_Pitch_Structure_" + str(idx//2 + 1)
+            if idx%2==0 and idx>0:
+                table_name = "Waste_Calculation_Structure_" + str(idx//2 + 1)
+            if len(tables_list)>2 and idx == len(tables_list)-1:
+                table_name = "Areas_per_Pitch_AllStructures"
+
             common_meta: Dict[str, Any] = {
                 "type": "table",
                 "extraction_method": "docling_table",
@@ -486,6 +497,7 @@ class DoclingProcessor:
                 "source_path": str(file_path),
                 "headers": headers,
                 "table_label": getattr(table, "label", None),
+                "page_number": getattr(table, "page_number", None),
             }
 
             # 3) HTML-preserving split to avoid breaking <table>
@@ -507,28 +519,22 @@ class DoclingProcessor:
                         metadata={
                             **common_meta,
                             **part_meta,
-                            "format": "html",
-                            "html_chunk_index": i,
                         },
                     )
                 )
 
-            self.export_table_data(df, html, file_path, idx)
+            self.export_table_data(df, html, file_path, idx, table_name)
 
         self.export_table_images(converted_doc, file_path)
 
         return out_docs
     
-    def export_table_data(self, df, html, file_path, idx):
+    def export_table_data(self, df, html, file_path, idx, table_name):
 
         """Export table data to HTML, CSV, and Markdown files."""
-        
-        name = "Index"
-        if idx==1:
-            name = "Areas_per_Pitch"
-        if idx==2:
-            name = "Waste_Calculation"
-
+        if idx%2==0:
+            return
+        name = table_name
 
         out_dir = Path("docling_exports")
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -537,46 +543,45 @@ class DoclingProcessor:
         out_report_dir.mkdir(parents=True, exist_ok=True)
         out_report_table_dir = out_report_dir / "tables"
         out_report_table_dir.mkdir(parents=True, exist_ok=True)
-
-        out_html_report_table_dir = out_report_table_dir / "html"
-        out_html_report_table_dir.mkdir(parents=True, exist_ok=True)
-        out_csv_report_table_dir = out_report_table_dir / "csv"
-        out_csv_report_table_dir.mkdir(parents=True, exist_ok=True)
-        out_md_report_table_dir = out_report_table_dir / "md"
-        out_md_report_table_dir.mkdir(parents=True, exist_ok=True)
-
-        # Save individual table Data
-        (out_html_report_table_dir / f"{name}.html").write_text(html or "", encoding="utf-8")
-        (out_csv_report_table_dir / f"{name}.csv").write_text(df.to_csv(index=False) or "", encoding="utf-8")
-        (out_md_report_table_dir / f"{name}.md").write_text(df.to_markdown() or "", encoding="utf-8")
+        out_json_report_table_dir = out_report_table_dir / "json"
+        out_json_report_table_dir.mkdir(parents=True, exist_ok=True)
+        df = df.T
+        df.columns = df.iloc[0]   # first row becomes column names
+        df = df.drop(0)           # drop the old header row
+        (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(df.to_dict(orient="records"), ensure_ascii=False, indent=4),encoding="utf-8")
 
     def export_table_images(self, converted_doc, file_path):
 
         """Export table images to PNG files."""
         table_counter = 0
         out_dir = Path("docling_exports")
-        out_dir.mkdir(parents=True, exist_ok=True)
         stem = Path(file_path).stem
         out_report_dir = out_dir / stem
-        out_report_dir.mkdir(parents=True, exist_ok=True)
         out_report_table_dir = out_report_dir / "tables"
-        out_report_table_dir.mkdir(parents=True, exist_ok=True)
         out_report_table_images_dir = out_report_table_dir / "images"
         out_report_table_images_dir.mkdir(parents=True, exist_ok=True)
 
         for element, _ in converted_doc.iterate_items():
             if isinstance(element, TableItem):
-                name = "Index"
-                if table_counter==1:
-                    name = "Areas_per_Pitch"
-                if table_counter==2:
-                    name = "Waste_Calculation"
                 table_counter += 1
-                element_image_filename = (
-                    out_report_table_images_dir / f"{name}.png"
-                )
-                with element_image_filename.open("wb") as fp:
-                    element.get_image(converted_doc).save(fp, "PNG")
+                if table_counter == 1 or table_counter%2==0:
+                    continue
+
+                img = element.get_image(converted_doc)
+                width, height = img.size
+                # Y positions in pixels
+                y26 = int(height * 0.26)
+                y28 = int(height * 0.28)
+                # Top part (0% → 26%)
+                top_img = img.crop((0, 0, width, y26))
+
+                # Bottom part (28% → 100%)
+                bottom_img = img.crop((0, y28, width, height))
+
+                # Save results
+                top_img.save(f"{out_report_table_images_dir}/Structure_Complexity_{table_counter//2}.png")
+                bottom_img.save(f"{out_report_table_images_dir}/Waste_Calculation_{table_counter//2}.png")
+
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process Office documents (DOCX, PPTX) using Docling."""

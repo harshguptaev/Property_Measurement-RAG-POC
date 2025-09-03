@@ -285,6 +285,22 @@ class AgenticRAG:
                 size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
                 content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
             
+            elif doc.metadata.get('type') == 'table':
+                table_info = {
+                    'report_id': metadata.get('report_id', 'unknown'),
+                    'table_index': metadata.get('table_index', 'unknown'),
+                    'headers': metadata.get('headers', 'unknown'),
+                    'format': metadata.get('format', 'unknown'),
+                    'content_type': metadata.get('content_type', 'unknown'),
+                    'searchable_text': metadata.get('searchable_text', 'unknown'),
+                    'table_name': metadata.get('table_name', 'unknown'),
+                    'page': metadata.get('page_number', 'unknown'),
+                    'source': metadata.get('source_path', 'unknown'),
+                }
+                print("table_info", table_info)
+                # Enhanced description for LLM
+                content += f"[TABLE: Located on page {table_info['page']} of {Path(table_info['source']).name}. Format: {table_info['format']}. Additional information: {table_info}. This appears to be a table that may contain important technical details, measurements, or visual evidence relevant to the roof report.]"
+
             context_parts.append(f"Document {i}:\n{content}\nSource: {metadata.get('source', 'Unknown')}\n")
         
         # Store retrieved images in state for UI access
