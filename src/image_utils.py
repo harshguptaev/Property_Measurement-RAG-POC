@@ -135,6 +135,7 @@ class ImageManager:
         
         return removed_count
     
+    """ So this is important function taht help us to determine which type of analysis to perform based on image metadata """
     def analyze_image_with_gemini(self, image_metadata: Dict[str, Any]) -> Dict[str, Any]:
         """
         Analyze an image using Gemini Vision API.
@@ -156,7 +157,7 @@ class ImageManager:
             # Determine analysis type based on image metadata
             image_label = image_metadata.get('image_label', '').lower()
             
-            if any(keyword in image_label for keyword in ['roof', 'side', 'aerial', 'top']):
+            if any(keyword in image_label for keyword in ['roof', 'side', 'aerial', 'top', 'north', 'south', 'east', 'west']):
                 # Use specialized roof analysis
                 analysis = self.gemini_client.analyze_roof_image(image_path)
             elif any(keyword in image_label for keyword in ['length', 'pitch', 'area', 'azimuth']):

@@ -416,7 +416,7 @@ class DoclingProcessor:
                             )
                             
                             # Enhance with Gemini analysis if available
-                            if self.image_manager.gemini_client:
+                            if self.image_manager.gemini_client and image_doc.image_filename != "Cover_Image_2" and image_doc.image_filename != "Cover_Image_1":
                                 try:
                                     enhanced_metadata = self.image_manager.enhance_image_metadata_with_gemini(img_doc.metadata)
                                     img_doc.metadata.update(enhanced_metadata)

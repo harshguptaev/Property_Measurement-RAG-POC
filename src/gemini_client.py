@@ -137,16 +137,15 @@ class GeminiVisionClient:
             Analysis results with structured data
         """
         prompt = """
-        Analyze this roof inspection image. Provide a detailed analysis including:
-        
-        1. Roof Type: (gable, hip, shed, flat, etc.)
-        2. Roofing Material: (asphalt shingles, metal, tile, etc.)
-        3. Condition Assessment: (excellent, good, fair, poor)
-        4. Visible Issues: (any damage, wear, or concerns)
-        5. Structural Elements: (gutters, vents, chimneys, etc.)
-        6. Measurements or Dimensions: (if visible)
-        7. Orientation: (if determinable - north, south, east, west side)
-        8. Overall Description: (comprehensive summary)
+        Analyze the provided roof inspection image and provide a detailed analysis. Present the information in a consistent format using the following headings. If any information is not visible in the image, state 'Not visible'.
+        Roof Type: (gable, hip, shed, flat, etc.)
+        Roofing Material: (asphalt shingles, metal, tile, etc.)
+        Condition Assessment: (excellent, good, fair, poor)
+        Visible Issues: (any damage, wear, or concerns, e.g., 'missing shingles', 'cracks', 'moss buildup')
+        Structural Elements: (gutters, vents, chimneys, etc.)
+        Measurements or Dimensions: (if visible)
+        Orientation: (if determinable - north, south, east, west side or top view)
+        Overall Description: (a comprehensive summary)      
         
         Format your response as a detailed analysis suitable for a property inspection report.
         """
@@ -176,28 +175,22 @@ class GeminiVisionClient:
     
     def extract_measurements(self, image: Union[str, Path, Image.Image, bytes]) -> Dict[str, Any]:
         """
-        Extract measurements and dimensions from property images.
-        
-        Args:
-            image: Image to analyze
-            
-        Returns:
-            Extracted measurements and dimensions
-        """
-        prompt = """
-        Analyze this property inspection image and extract any visible measurements, 
-        dimensions, or numerical data. Look for:
-        
-        1. Length measurements
-        2. Width measurements  
-        3. Area calculations
-        4. Angles or pitch measurements
-        5. Heights or elevations
-        6. Any scale indicators
-        7. Coordinate or grid references
-        
-        List all visible numbers, measurements, and their units clearly.
-        If no measurements are visible, state that clearly.
+       Analyze the provided property diagram and extract all visible measurements. Return the data in a valid JSON object format with the following keys. If a value is not visible, use 'Not visible' as the string value.
+        {
+            "total_area": "Total roof area in SQ, as found in the measurements section",
+            "roof_facets": "Total number of roof facets",
+            "predominant_pitch": "The predominant pitch, in pitch/12 format",
+            "ridges": "Total length of ridges in feet and inches",
+            "hips": "Total length of hips in feet and inches",
+            "valleys": "Total length of valleys in feet and inches",
+            "rakes": "Total length of rakes in feet and inches",
+            "eaves": "Total length of eaves in feet and inches",
+            "flashing": "Total length of flashing in feet and inches",
+            "step_flashing": "Total length of step flashing in feet and inches",
+            "roof_penetrations_count": "The total number of roof penetrations",
+            "roof_penetrations_perimeter": "The total perimeter of roof penetrations in feet and inches",
+            "roof_penetrations_area": "The total area of roof penetrations in SQ"
+        }
         """
         
         try:
