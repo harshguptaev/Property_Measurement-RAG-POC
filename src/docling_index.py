@@ -263,7 +263,18 @@ class DoclingProcessor:
             # Extract tables if present
             table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
-            
+            out_table_documents_dir = Path("docling_exports") / file_path.stem / "tables" / "documents"
+            out_table_documents_dir.mkdir(parents=True, exist_ok=True)
+            for i, doc in enumerate(table_documents, 1):
+                out_file = out_table_documents_dir / f"table_doc_{i}.json"
+                out_file.write_text(
+                    json.dumps({
+                        "page_content": doc.page_content,
+                        "metadata": doc.metadata
+                    }, indent=2, default=str),
+                    encoding="utf-8"
+    )
+
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
             return documents
             
@@ -439,10 +450,9 @@ class DoclingProcessor:
         """
         For each Docling table:
         - Export to DataFrame for analytic correctness and downstream SQL/DF pipelines.
-        - Export to HTML and Markdown for human-readable embeddings.
-        - Create LangChain Documents:
-            a) One doc with Markdown table (single chunk).
-            b) One or more docs from HTML split with an element-preserving splitter.
+        - Export Areas per pitch to json.
+        - Export Waste Calculation to images.
+        - Chunk tables.
         """
         
         out_docs: List[Document] = []
@@ -456,85 +466,70 @@ class DoclingProcessor:
                 logging.warning(f"Error exporting table {idx} to dataframe: {e}")
                 df = None
 
-            # 2) HTML and Markdown renderings for embeddings/view
-            try:
-                try:
-                    html = table.export_to_html(doc=converted_doc)
-                except TypeError:
-                    html = table.export_to_html()
-            except Exception as e:
-                logging.warning(f"Error exporting table {idx} to HTML: {e}")
-                html = ""
-
-            # Common metadata with schema hints
-            headers: List[str] = []
-            try:
-                header_cells = [c for c in table.data.table_cells if getattr(c, "column_header", False)]
-                if not header_cells and getattr(table.data, "num_rows", 0) > 0:
-                    try:
-                        first_row = table.data.grid[0]
-                        headers = [cell.text for cell in first_row]
-                    except Exception:
-                        headers = []
-                else:
-                    headers = [c.text for c in header_cells]
-            except Exception:
-                headers = []
-
-            table_name = ""
-            if idx%2==1:
-                table_name = "Areas_per_Pitch_Structure_" + str(idx//2 + 1)
-            if idx%2==0 and idx>0:
-                table_name = "Waste_Calculation_Structure_" + str(idx//2 + 1)
-            if len(tables_list)>2 and idx == len(tables_list)-1:
-                table_name = "Areas_per_Pitch_AllStructures"
-
-            common_meta: Dict[str, Any] = {
-                "type": "table",
-                "extraction_method": "docling_table",
-                "report_id": file_path.stem.split('RoofReport-')[1].split('.')[0],
-                "table_index": idx,
-                "source_path": str(file_path),
-                "headers": headers,
-                "table_label": getattr(table, "label", None),
-                "page_number": getattr(table, "page_number", None),
-            }
-
-            # 3) HTML-preserving split to avoid breaking <table>
-            try:
-                html_parts = self.table_splitter.split_text(html) if self.table_splitter else [html]
-            except Exception:
-                html_parts = [html]
-            for i, part in enumerate([p for p in html_parts if p]):
-                # HTMLSemanticPreservingSplitter returns LangChain Documents; handle both Document and str
-                if hasattr(part, "page_content"):
-                    part_content = getattr(part, "page_content", "")
-                    part_meta = getattr(part, "metadata", {}) or {}
-                else:
-                    part_content = str(part)
-                    part_meta = {}
-                out_docs.append(
-                    Document(
-                        page_content=part_content,
-                        metadata={
-                            **common_meta,
-                            **part_meta,
-                        },
-                    )
-                )
-
-            self.export_table_data(df, html, file_path, idx, table_name)
+            self.export_table_data(df, file_path, idx, tables_list)
 
         self.export_table_images(converted_doc, file_path)
 
+        areas_per_pitch_path = Path("docling_exports") / file_path.stem / "tables" / "json"
+        waste_calculation_path = Path("docling_exports") / file_path.stem / "tables" / "images"
+        report_id = file_path.stem.split('RoofReport-')[1].split('.')[0]
+        for area_per_pitch_file in areas_per_pitch_path.glob("*.json"):
+            print("area_per_pitch_file", area_per_pitch_file)
+            table_doc = Document(
+                page_content=f"Report ID: {report_id}\n{area_per_pitch_file.read_text()}",
+                metadata={
+                    'type': 'table',
+                    'file_name': area_per_pitch_file.name,
+                    'source_path': str(area_per_pitch_file),
+                    'file_type': 'json',
+                    'report_id': report_id,
+                    'name': 'Areas Per Pitch',
+                    'description': 'This table comes under ROOFING REPORT SUMMARY in pdf. The table lists each pitch on this roof and the total area and percent of the roof with that pitch. and the suffix of the file name tells which structure it belongs to. If suffix is AllStructures, then it is the total of the roofs for all structures.',
+                    'extraction_method': 'docling_table'
+                }
+            )
+            # Chunk tables
+            chunks = self.text_splitter.split_documents([table_doc])
+            out_docs.extend(chunks)
+
+        for waste_calculation_file in waste_calculation_path.glob("*.png"):
+            print("waste_calculation_file", waste_calculation_file.name)
+            if waste_calculation_file.name.startswith("Structure_Complexity"):
+                name = "Structure_Complexity"
+            else:
+                name = "Waste_Calculation"
+            table_doc = Document(
+                page_content=f"Report ID: {report_id}\n{waste_calculation_file}",
+                metadata={
+                    'type': 'image',
+                    'file_name': waste_calculation_file.name,
+                    'file_type': 'png',
+                    'report_id': file_path.stem.split('RoofReport-')[1].split('.')[0],
+                    'name': name,
+                    'description':'''These are basically the Structure Complexity and Waste Calculation tables in the pdf and we are storing them as images. 
+                                    This Table comes under ROOFING REPORT SUMMARY in pdf. *Squares are rounded up to the 1/3 of a square
+                                    Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
+                                    factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
+                                    control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
+                                    shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
+                                    EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
+                                    replacement or repair work''',
+                    'extraction_method': 'docling_image'
+                }
+            )
+            out_docs.append(table_doc)
         return out_docs
     
-    def export_table_data(self, df, html, file_path, idx, table_name):
+    def export_table_data(self, df, file_path, idx, tables_list):
 
         """Export table data to HTML, CSV, and Markdown files."""
         if idx%2==0:
             return
-        name = table_name
+        name = ""
+        if idx%2==1:
+            name = "Areas_per_Pitch_Structure_" + str(idx//2 + 1)
+        if len(tables_list)>2 and idx == len(tables_list)-1:
+            name = "Areas_per_Pitch_AllStructures"
 
         out_dir = Path("docling_exports")
         out_dir.mkdir(parents=True, exist_ok=True)

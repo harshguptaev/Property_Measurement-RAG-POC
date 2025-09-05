@@ -287,19 +287,21 @@ class AgenticRAG:
             
             elif doc.metadata.get('type') == 'table':
                 table_info = {
+                    'type': metadata.get('type', 'unknown'),
+                    'file_name': metadata.get('file_name', 'unknown'),
+                    'file_type': metadata.get('file_type', 'unknown'),
                     'report_id': metadata.get('report_id', 'unknown'),
-                    'table_index': metadata.get('table_index', 'unknown'),
-                    'headers': metadata.get('headers', 'unknown'),
-                    'format': metadata.get('format', 'unknown'),
-                    'content_type': metadata.get('content_type', 'unknown'),
-                    'searchable_text': metadata.get('searchable_text', 'unknown'),
-                    'table_name': metadata.get('table_name', 'unknown'),
-                    'page': metadata.get('page_number', 'unknown'),
+                    'table_name': metadata.get('name', 'unknown'),
                     'source': metadata.get('source_path', 'unknown'),
+                    'description': metadata.get('description', 'unknown'),
                 }
                 print("table_info", table_info)
                 # Enhanced description for LLM
-                content += f"[TABLE: Located on page {table_info['page']} of {Path(table_info['source']).name}. Format: {table_info['format']}. Additional information: {table_info}. This appears to be a table that may contain important technical details, measurements, or visual evidence relevant to the roof report.]"
+                content += (
+                    f"\n[This table belongs to report {table_info['report_id']}. "
+                    f"The table is named '{table_info['table_name']}' and is described as "
+                    f"'{table_info['description']}'. It was extracted from {Path(table_info['source']).name}.]"
+    )
 
             context_parts.append(f"Document {i}:\n{content}\nSource: {metadata.get('source', 'Unknown')}\n")
         
