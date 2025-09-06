@@ -624,9 +624,30 @@ class DoclingProcessor:
             logging.info(f"Extracting chunks for report ID: {report_id}")
             
             # Extract important chunks
-            chunks = extract_important_chunks(str(file_path))
+            chunks_data = extract_important_chunks(str(file_path))
             
-            if chunks:
+            # Debug logging
+            logging.info(f"Chunks data type: {type(chunks_data)}")
+            logging.info(f"Chunks data truthy: {bool(chunks_data)}")
+            if isinstance(chunks_data, dict):
+                logging.info(f"Chunks data keys: {list(chunks_data.keys())}")
+                for key, value in chunks_data.items():
+                    if isinstance(value, list):
+                        logging.info(f"  {key}: {len(value)} items")
+                    else:
+                        logging.info(f"  {key}: {type(value)}")
+            
+            if chunks_data and isinstance(chunks_data, dict):
+                # Check if there's any actual content
+                has_content = False
+                for chunk_type in ['text', 'table', 'image', 'extracted']:
+                    if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list) and chunks_data[chunk_type]:
+                        has_content = True
+                        break
+                
+                if not has_content:
+                    logging.warning(f"No content found in chunks for {file_path.name}")
+                    return
                 # Create output directory structure
                 chunks_dir = Path("important_chunks") / f"report_{report_id}"
                 chunks_dir.mkdir(parents=True, exist_ok=True)
@@ -635,12 +656,24 @@ class DoclingProcessor:
                 chunks_file = chunks_dir / "important_chunks.json"
                 with open(chunks_file, 'w', encoding='utf-8') as f:
                     import json
-                    json.dump(chunks, f, ensure_ascii=False, indent=2)
+                    json.dump(chunks_data, f, ensure_ascii=False, indent=2)
                 
-                logging.info(f"✓ Saved {len(chunks)} important chunks to {chunks_file}")
+                # Get all chunks for counting and type logging
+                all_chunks = []
+                if isinstance(chunks_data, dict):
+                    for chunk_type in ['text', 'table', 'image', 'extracted']:
+                        if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list):
+                            all_chunks.extend(chunks_data[chunk_type])
+                
+                logging.info(f"✓ Saved {len(all_chunks)} important chunks to {chunks_file}")
                 
                 # Log chunk types for verification
-                chunk_types = [chunk.get('type', 'unknown') for chunk in chunks]
+                chunk_types = []
+                for chunk in all_chunks:
+                    if isinstance(chunk, dict):
+                        chunk_types.append(chunk.get('type', 'unknown'))
+                    else:
+                        chunk_types.append('unknown')
                 logging.info(f"✓ Chunk types extracted: {', '.join(chunk_types)}")
             else:
                 logging.warning(f"No important chunks extracted from {file_path.name}")
