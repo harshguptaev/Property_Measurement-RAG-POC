@@ -1,0 +1,198 @@
+[
+  {
+    "section": "AreasPerPitch",
+    "raw_text": [
+      {
+        "Roof Pitches": "4.8°",
+        "Area (SQ)": "1.7",
+        "%of Selected Facets": "6.9%"
+      },
+      {
+        "Roof Pitches": "9.5°",
+        "Area (SQ)": "1.9",
+        "%of Selected Facets": "7.8%"
+      },
+      {
+        "Roof Pitches": "14°",
+        "Area (SQ)": "0",
+        "%of Selected Facets": "0.1%"
+      },
+      {
+        "Roof Pitches": "22.6°",
+        "Area (SQ)": "20.2",
+        "%of Selected Facets": "84.2%"
+      },
+      {
+        "Roof Pitches": "26.6°",
+        "Area (SQ)": "0.3",
+        "%of Selected Facets": "1%"
+      }
+    ],
+    "id": "chunk1",
+    "metadata": {},
+    "src_image_path": "docling_exports/RoofReport-45001628_custom/tables/images/Areas_per_Pitch_AllStructures.png"
+  },
+  {
+    "section": "AreasPerPitch",
+    "raw_text": [
+      {
+        "Roof Pitches": "4.8°",
+        "Area (SQ)": "1.7",
+        "%of Selected Facets": "7.5%"
+      },
+      {
+        "Roof Pitches": "7.1°",
+        "Area (SQ)": "0",
+        "%of Selected Facets": "0.2%"
+      },
+      {
+        "Roof Pitches": "14°",
+        "Area (SQ)": "0",
+        "%of Selected Facets": "0.1%"
+      },
+      {
+        "Roof Pitches": "22.6°",
+        "Area (SQ)": "20.2",
+        "%of Selected Facets": "91.1%"
+      },
+      {
+        "Roof Pitches": "26.6°",
+        "Area (SQ)": "0.3",
+        "%of Selected Facets": "1.1%"
+      }
+    ],
+    "id": "chunk2",
+    "metadata": {},
+    "src_image_path": "docling_exports/RoofReport-45001628_custom/tables/images/Areas_per_Pitch_Structure_1.png"
+  },
+  {
+    "section": "AreasPerPitch",
+    "raw_text": [
+      {
+        "Areas per Pitch": "Areas per Pitch",
+        "Roof Pitches": "9.5°",
+        "Area (SQ)": "1.8",
+        "%of Selected Facets": "102.5%"
+      }
+    ],
+    "id": "chunk3",
+    "metadata": {},
+    "src_image_path": "docling_exports/RoofReport-45001628_custom/tables/images/Areas_per_Pitch_Structure_2.png"
+  },
+  {
+    "section": "Waste",
+    "raw_text": {
+      "columns": [
+        "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below."
+      ],
+      "data": [
+        [
+          "Waste%",
+          "0%",
+          "4%",
+          "9%",
+          "12%",
+          "14%",
+          "16%",
+          "19%",
+          "24%",
+          "29%"
+        ],
+        [
+          "Area (m²)",
+          "190",
+          "198",
+          "207",
+          "213",
+          "217",
+          "220",
+          "226",
+          "236",
+          "245"
+        ],
+        [
+          "Squares *",
+          "20.66",
+          "21.33",
+          "22.66",
+          "23.00",
+          "23.66",
+          "24.00",
+          "24.66",
+          "25.66",
+          "26.66"
+        ],
+        [
+          "Measured",
+          "Measured",
+          "Measured",
+          "Measured",
+          "Measured",
+          "Suggested",
+          "Suggested",
+          "Suggested",
+          "Suggested",
+          "Suggested"
+        ]
+      ]
+    },
+    "id": "chunk4",
+    "metadata": {},
+    "src_image_path": "docling_exports/RoofReport-45001628_custom/tables/images/Waste_Calculation_1.png"
+  },
+  {
+    "section": "Waste",
+    "raw_text": {
+      "columns": [
+        "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..Waste%",
+        "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..0%",
+        "Structure Complexity..Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..5%",
+        "Structure Complexity..Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..10%",
+        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..13%",
+        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..15%",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..17%",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..20%",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..25%",
+        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below..30%"
+      ],
+      "data": [
+        [
+          "Area (m²)",
+          "17",
+          "17",
+          "18",
+          "19",
+          "19",
+          "20",
+          "20",
+          "21",
+          "22"
+        ],
+        [
+          "Squares *",
+          "2.00",
+          "2.00",
+          "2.33",
+          "2.33",
+          "2.33",
+          "2.33",
+          "2.33",
+          "2.33",
+          "2.66"
+        ]
+      ]
+    },
+    "id": "chunk5",
+    "metadata": {},
+    "src_image_path": "docling_exports/RoofReport-45001628_custom/tables/images/Waste_Calculation_2.png"
+  }
+]
