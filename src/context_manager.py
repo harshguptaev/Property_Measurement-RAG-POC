@@ -293,3 +293,4 @@ class ContextManager:
         """Reload all chunks from disk."""
         self.loaded_chunks.clear()
         self._load_all_chunks()
+

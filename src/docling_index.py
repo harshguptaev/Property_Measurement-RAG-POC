@@ -257,7 +257,8 @@ class DoclingProcessor:
             documents.extend(table_documents)
             
             # Extract important chunks and save them
-            self._extract_and_save_important_chunks(file_path)
+            important_chunks = self._extract_and_save_important_chunks(file_path)
+            documents.extend(important_chunks)
             
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
             return documents
@@ -599,6 +600,8 @@ class DoclingProcessor:
     
     def _extract_and_save_important_chunks(self, file_path: Path) -> None:
         """Extract important chunks and save them organized by report ID."""
+
+        documents = []
         try:
             logging.info(f"Starting important chunk extraction for {file_path.name}")
             
@@ -658,20 +661,52 @@ class DoclingProcessor:
                     import json
                     json.dump(chunks_data, f, ensure_ascii=False, indent=2)
                 
-                # Get all chunks for counting and type logging
+                # Convert dictionary chunks to Document objects
                 all_chunks = []
                 if isinstance(chunks_data, dict):
                     for chunk_type in ['text', 'table', 'image', 'extracted']:
                         if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list):
-                            all_chunks.extend(chunks_data[chunk_type])
+                            for chunk_dict in chunks_data[chunk_type]:
+                                if isinstance(chunk_dict, dict):
+                                    # Convert dictionary to Document object
+                                    page_content = chunk_dict.get('raw_text', '') or chunk_dict.get('content', '') or str(chunk_dict)
+                                    
+                                    # Create metadata from the chunk dictionary
+                                    metadata = {
+                                        'type': chunk_dict.get('type', chunk_type),
+                                        'extraction_method': 'important_chunks',
+                                        'report_id': report_id,
+                                        'chunk_id': chunk_dict.get('id', ''),
+                                        'source_file': file_path.name
+                                    }
+                                    
+                                    # Add any existing metadata from the chunk
+                                    if 'metadata' in chunk_dict and isinstance(chunk_dict['metadata'], dict):
+                                        metadata.update(chunk_dict['metadata'])
+                                    
+                                    # Add any additional fields from the chunk as metadata
+                                    for key, value in chunk_dict.items():
+                                        if key not in ['raw_text', 'content', 'type', 'id', 'metadata']:
+                                            metadata[key] = value
+                                    
+                                    # Create Document object
+                                    doc = Document(
+                                        page_content=page_content,
+                                        metadata=metadata
+                                    )
+                                    all_chunks.append(doc)
+                                else:
+                                    # If it's already a Document object, keep it as is
+                                    all_chunks.append(chunk_dict)
                 
+                documents.extend(all_chunks)
                 logging.info(f"✓ Saved {len(all_chunks)} important chunks to {chunks_file}")
                 
                 # Log chunk types for verification
                 chunk_types = []
                 for chunk in all_chunks:
-                    if isinstance(chunk, dict):
-                        chunk_types.append(chunk.get('type', 'unknown'))
+                    if hasattr(chunk, 'metadata') and isinstance(chunk.metadata, dict):
+                        chunk_types.append(chunk.metadata.get('type', 'unknown'))
                     else:
                         chunk_types.append('unknown')
                 logging.info(f"✓ Chunk types extracted: {', '.join(chunk_types)}")
@@ -682,7 +717,8 @@ class DoclingProcessor:
             logging.error(f"Error extracting important chunks from {file_path}: {e}")
             import traceback
             logging.error(f"Full traceback: {traceback.format_exc()}")
-    
+        return documents
+
     def process_directory(
         self,
         directory_path: str,
