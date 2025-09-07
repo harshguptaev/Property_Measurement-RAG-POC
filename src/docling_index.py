@@ -541,7 +541,8 @@ class DoclingProcessor:
                 "columns": df.columns.tolist(),
                 "data": df.values.tolist()
             }
-            json_str = json.dumps(df_dict, ensure_ascii=False, indent=4)
+            data = self.df_to_waste_json(df)
+            json_str = json.dumps(data, ensure_ascii=False, indent=4)
             json_file.write_text(json_str, encoding="utf-8")
             return
 
@@ -550,6 +551,59 @@ class DoclingProcessor:
         df = df.drop(0)           # drop the old header row
         (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(df.to_dict(orient="records"), ensure_ascii=False, indent=4),encoding="utf-8")
 
+    def df_to_waste_json(self, df):
+
+        # Initialize indices
+        waste_row_idx = None
+        area_row_idx = None
+        squares_row_idx = None
+        
+        # Search for rows starting with specific labels (case-insensitive)
+        for idx in range(len(df)):
+            first_cell = str(df.iloc[idx, 0]).strip().lower()
+            if 'waste%' in first_cell:
+                waste_row_idx = idx
+            elif 'area' in first_cell:
+                area_row_idx = idx
+            elif 'squares' in first_cell:
+                squares_row_idx = idx
+        
+        # Extract lists
+        if waste_row_idx is not None:
+            waste_list = df.iloc[waste_row_idx, 1:].astype(str).tolist()
+        else:
+            # Parse waste from columns (last part after '.')
+            waste_list = []
+            for col in df.columns[1:]:
+                parts = str(col).split('.')
+                last_part = parts[-1].strip() if parts else ''
+                waste_list.append(last_part)
+        
+        if area_row_idx is not None:
+            area_list = df.iloc[area_row_idx, 1:].astype(str).tolist()
+        else:
+            # Assume first row is area if not found
+            area_list = df.iloc[0, 1:].astype(str).tolist()
+        
+        if squares_row_idx is not None:
+            squares_list = df.iloc[squares_row_idx, 1:].astype(str).tolist()
+        else:
+            # Assume second row is squares if not found
+            squares_list = df.iloc[1, 1:].astype(str).tolist()
+        
+        # Determine the minimum length to align lists
+        min_len = min(len(waste_list), len(area_list), len(squares_list))
+        
+        # Build the result list
+        result = []
+        for i in range(min_len):
+            result.append({
+                "waste": waste_list[i],
+                "area": area_list[i],
+                "squares": squares_list[i]
+            })
+        
+        return result
     def export_table_images(self, converted_doc, file_path):
 
         """Export table images to PNG files."""
@@ -614,13 +668,24 @@ class DoclingProcessor:
         for json_file in sorted(out_report_table_json_dir.glob("*.json")):
             try:
                 json_content = json.loads(json_file.read_text(encoding="utf-8"))
+                raw_text_str = json.dumps(json_content, ensure_ascii=False, indent=2)
             except Exception as e:
                 logging.warning(f"Skipping {json_file.name}, failed to read JSON: {e}")
                 continue
 
             # Determine section
-            section = "Waste" if "Waste" in json_file.name else "AreasPerPitch"
-
+            section = ""
+            if "Areas_per_Pitch" in json_file.name:
+                section = f"This table named {json_file.name} lists each pitch on this roof and the total area and percent of the roof with that pitch."
+            elif "Waste_Calculation" in json_file.name:
+                section = f"""NOTE: This waste calculation table named {json_file.name} is for asphalt shingle roofing applications. All values in the table below 
+                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square
+                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
+                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
+                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
+                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
+                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
+                            replacement or repair work."""
             # Corresponding image path (same filename but .png)
             image_name = json_file.stem + ".png"
             image_path = out_report_table_images_dir / image_name
@@ -633,16 +698,29 @@ class DoclingProcessor:
             # Append chunk
             table_chunks.append({
                 "section": section,
-                "raw_text": json_content,
+                "raw_text": raw_text_str,
                 "id": f"chunk{chunk_counter}",
                 "metadata": {},
                 "src_image_path": image_path_str
             })
             chunk_counter += 1
 
+        for png_file in sorted(out_report_table_images_dir.glob("*.png")):
+            if "Structure_Complexity" in png_file.name:
+                section = f"This table named {png_file.name} lists the structure complexity of the roof."
+                table_chunks.append({
+                    "section": section,
+                    "raw_text": "Dummy Text for now.",
+                    "id": f"chunk{chunk_counter}",
+                    "metadata": {},
+                    "src_image_path": str(png_file)
+                })
+                chunk_counter += 1
+
         # Save consolidated table_chunks.json
         chunks_file = out_report_dir / "table_chunks.json"
-        chunks_file.write_text(json.dumps(table_chunks, ensure_ascii=False, indent=2), encoding="utf-8")
+        chunks_data = {"tables": table_chunks}
+        chunks_file.write_text(json.dumps(chunks_data, ensure_ascii=False, indent=2), encoding="utf-8")
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process Office documents (DOCX, PPTX) using Docling."""

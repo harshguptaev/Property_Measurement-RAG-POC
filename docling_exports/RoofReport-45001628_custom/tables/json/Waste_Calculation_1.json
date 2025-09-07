@@ -1,64 +1,47 @@
-{
-    "columns": [
-        "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
-        "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below."
-    ],
-    "data": [
-        [
-            "Waste%",
-            "0%",
-            "4%",
-            "9%",
-            "12%",
-            "14%",
-            "16%",
-            "19%",
-            "24%",
-            "29%"
-        ],
-        [
-            "Area (m²)",
-            "190",
-            "198",
-            "207",
-            "213",
-            "217",
-            "220",
-            "226",
-            "236",
-            "245"
-        ],
-        [
-            "Squares *",
-            "20.66",
-            "21.33",
-            "22.66",
-            "23.00",
-            "23.66",
-            "24.00",
-            "24.66",
-            "25.66",
-            "26.66"
-        ],
-        [
-            "Measured",
-            "Measured",
-            "Measured",
-            "Measured",
-            "Measured",
-            "Suggested",
-            "Suggested",
-            "Suggested",
-            "Suggested",
-            "Suggested"
-        ]
-    ]
-}
+[
+    {
+        "waste": "0%",
+        "area": "190",
+        "squares": "20.66"
+    },
+    {
+        "waste": "4%",
+        "area": "198",
+        "squares": "21.33"
+    },
+    {
+        "waste": "9%",
+        "area": "207",
+        "squares": "22.66"
+    },
+    {
+        "waste": "12%",
+        "area": "213",
+        "squares": "23.00"
+    },
+    {
+        "waste": "14%",
+        "area": "217",
+        "squares": "23.66"
+    },
+    {
+        "waste": "16%",
+        "area": "220",
+        "squares": "24.00"
+    },
+    {
+        "waste": "19%",
+        "area": "226",
+        "squares": "24.66"
+    },
+    {
+        "waste": "24%",
+        "area": "236",
+        "squares": "25.66"
+    },
+    {
+        "waste": "29%",
+        "area": "245",
+        "squares": "26.66"
+    }
+]
