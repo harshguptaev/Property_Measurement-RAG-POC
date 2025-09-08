@@ -22,7 +22,8 @@ docling-ibm-models>=1.0.0
 # Multimodal processing (optional)
 pillow>=10.0.0
 pymupdf>=1.23.0
-opencv-python>=4.8.0
+opencv-python-headless>=4.8.0
+easyocr>=1.7.1
 
 # LangGraph for agentic workflows (optional)
 langgraph>=0.0.30
@@ -51,3 +52,5 @@ sentence-transformers>=2.2.0
 #black>=23.0.0
 #flake8>=6.0.0
 #mypy>=1.0.0
+
+

@@ -5,17 +5,19 @@ Based on the reference implementation with improved PDF and image parsing.
 """
 import os
 import logging
-import base64
 from typing import Any, Dict, List, Optional, Union, Tuple
 from pathlib import Path
 from io import BytesIO
-import hashlib
+from PIL import Image
+import pandas as pd
 
 # Docling imports for advanced document processing
 try:
-    from docling.document_converter import DocumentConverter
+    from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions
+    from docling_core.types.doc import TableItem, TextItem
+    from docling.datamodel.document import ConversionResult
     # Try different import paths for ConvertedDocument
     try:
         from docling.datamodel.document import ConvertedDocument
@@ -37,19 +39,11 @@ except ImportError as e:
 # LangChain imports
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from PIL import Image  # still required for PyMuPDF image size handling
 
-# Image processing
-try:
-    from PIL import Image
-    import cv2
-    import numpy as np
-    VISION_AVAILABLE = True
-except ImportError:
-    VISION_AVAILABLE = False
-    logging.warning("Vision processing dependencies not available. Install with: pip install pillow opencv-python")
-
+import json
 from .config import config
-from .vector_store import VectorStoreManager, create_text_splitter
+from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
 from .bedrock_client import create_bedrock_embeddings
 
 
@@ -78,15 +72,13 @@ class DoclingProcessor:
         self.config = config_instance or config
         self.vector_store_manager = vector_store_manager
         self.text_splitter = None
+        self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
         
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
         self._setup_text_splitter()
-        
-        # Setup directories
-        self.temp_dir = Path("temp_docling")
-        self.temp_dir.mkdir(exist_ok=True)
+        self._setup_table_splitter()
     
     def _setup_docling_converter(self):
         """Setup Docling converter with simplified PDF processing options."""
@@ -94,10 +86,18 @@ class DoclingProcessor:
             # Configure pipeline options for better PDF processing
             pipeline_options = PdfPipelineOptions()
             pipeline_options.do_ocr = True  # Enable OCR for scanned PDFs
-            pipeline_options.do_table_structure = True  # Extract table structure
-            
+            pipeline_options.do_table_structure = True
+            pipeline_options.table_structure_options.do_cell_matching = True
+            pipeline_options.images_scale = 4
+            pipeline_options.generate_page_images = True
+
             # Initialize converter with simplified options
-            self.converter = DocumentConverter()
+
+            self.converter = DocumentConverter(
+                format_options={
+                    InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+                }
+            )
             
             logging.info("Docling converter initialized with simplified PDF processing")
         except Exception as e:
@@ -114,6 +114,14 @@ class DoclingProcessor:
             chunk_overlap=vector_config.get("chunk_overlap", 200)
         )
     
+    def _setup_table_splitter(self):
+        """Setup table splitter for chunking tables."""
+        vector_config = self.config.get_vector_store_config()
+        self.table_splitter = create_table_splitter(
+            chunk_size=vector_config.get("chunk_size", 1000),
+            chunk_overlap=vector_config.get("chunk_overlap", 200)
+        )
+        
     def process_file(self, file_path: str, extract_images: bool = True) -> List[Document]:
         """
         Process a single file using Docling and return documents.
@@ -173,6 +181,48 @@ class DoclingProcessor:
             logging.error(f"Error processing file {file_path}: {e}")
             raise
     
+    def save_docling_exports(self, main_text: str, converted_doc: ConversionResult, file_path: Path):
+        """Persist Docling exports (Markdown and JSON)"""
+        try:
+            out_dir = Path("docling_exports")
+            out_dir.mkdir(parents=True, exist_ok=True)
+            stem = Path(file_path).stem
+            out_report_dir = out_dir / stem
+            out_report_dir.mkdir(parents=True, exist_ok=True)
+            # Save Markdown
+            (out_report_dir / f"{stem}.md").write_text(main_text or "", encoding="utf-8")
+            # Build JSON using Docling's model if available; otherwise fallback
+            try:
+                doc_json = converted_doc.model_dump()
+            except Exception:
+                try:
+                    doc_json = converted_doc.export_to_dict()
+                except Exception:
+                    tables_md: List[Union[str, Dict[str, Any]]] = []
+                    if hasattr(converted_doc, "tables") and converted_doc.tables:
+                        for t in converted_doc.tables:
+                            try:
+                                if hasattr(t, "export_to_markdown"):
+                                    tables_md.append(t.export_to_markdown())
+                                elif hasattr(t, "to_dict"):
+                                    tables_md.append(t.to_dict())
+                                else:
+                                    tables_md.append(str(t))
+                            except Exception:
+                                tables_md.append(str(t))
+                    doc_json = {
+                        "markdown": main_text,
+                        "tables": tables_md,
+                        "pictures_count": len(getattr(converted_doc, "pictures", []) or []),
+                        "meta": {"file_name": Path(file_path).name},
+                    }
+            (out_report_dir / f"{stem}.json").write_text(
+                json.dumps(doc_json, ensure_ascii=False, indent=2, default=str),
+                encoding="utf-8",
+            )
+        except Exception as save_err:
+            logging.warning(f"Error saving Docling exports: {save_err}")
+
     def _process_pdf_with_docling(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process PDF using Docling's advanced capabilities."""
         documents = []
@@ -181,20 +231,29 @@ class DoclingProcessor:
             # Convert document with Docling
             result = self.converter.convert(str(file_path))
             converted_doc = result.document  # Remove type hint to avoid import issues
-            
+            try:
+                tables_list = list(getattr(converted_doc, "tables", []) or [])
+            except Exception:
+                tables_list = getattr(converted_doc, "tables", []) or []
+            logging.info(f"Docling tables count: {len(tables_list)}")
+
             # Extract main document text
             main_text = converted_doc.export_to_markdown()
-            if main_text.strip():
-                text_doc = Document(
-                    page_content=main_text,
-                    metadata={
-                        'type': 'text',
-                        'extraction_method': 'docling_markdown'
-                    }
-                )
-                # Split into chunks
-                text_chunks = self.text_splitter.split_documents([text_doc])
-                documents.extend(text_chunks)
+            self.save_docling_exports(main_text, converted_doc, file_path)
+            
+            for text_doc in converted_doc.iterate_items():
+                if isinstance(text_doc, TextItem):  
+                    text_doc = Document(
+                        page_content=text_doc.text,
+                        metadata={
+                            'type': 'text',
+                            'extraction_method': 'docling_markdown'
+                        }
+                    )
+                    # Split into chunks
+                    text_chunks = self.text_splitter.split_documents([text_doc])
+                    documents.extend(text_chunks)
+                
             
             # Extract page-level content with images
             if extract_images:
@@ -202,9 +261,9 @@ class DoclingProcessor:
                 documents.extend(page_documents)
             
             # Extract tables if present
-            table_documents = self._extract_tables(converted_doc)
+            table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
-            
+
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
             return documents
             
@@ -256,6 +315,7 @@ class DoclingProcessor:
             for page_num in range(len(pdf_document)):
                 page = pdf_document.load_page(page_num)
                 image_list = page.get_images()
+                num_images_on_page = len(image_list)
                 
                 for img_index, img in enumerate(image_list):
                     try:
@@ -272,8 +332,35 @@ class DoclingProcessor:
                                 report_dir = images_dir / file_path.stem
                             report_dir.mkdir(parents=True, exist_ok=True)
                             
-                            # Generate image filename
-                            image_filename = f"page_{page_num + 1}_image_{img_index}.png"
+                            def _label_for(p, i, n):
+                                if p == 0:
+                                    return "Cover_Image" if i == 0 else f"Cover_Image_{i + 1}"
+                                if p == 1:
+                                    return "Lengthsimage" if n == 1 else f"Lengthsimage_{i + 1}"
+                                if p == 2:
+                                    return "Pitch_Degrees" if i == 0 else f"Pitch_Degrees_{i + 1}"
+                                if p == 3:
+                                    return "Pitch_on_12" if i == 0 else f"Pitch_on_12_{i + 1}"
+                                if p == 4:
+                                    return "Rafters" if i == 0 else f"Rafters_{i + 1}"
+                                if p == 5:
+                                    return "Azimuth" if i == 0 else f"Azimuth_{i + 1}"
+                                if p == 6:
+                                    return "Area" if i == 0 else f"Area_{i + 1}"
+                                if p == 7:
+                                    return "Roof_Penetrations" if i == 0 else f"Roof_Penetrations_{i + 1}"
+                                if p == 8:
+                                    return "Top_View" if i == 0 else ("North_Side" if i == 1 else f"Page_8_Image_{i + 1}")
+                                if p == 9:
+                                    return "South_Side" if i == 0 else ("East_Side" if i == 1 else f"Page_9_Image_{i + 1}")
+                                if p == 10:
+                                    return "West_Side" if i == 0 else f"West_Side_{i + 1}"
+                                if p == 11:
+                                    return "Structure_Summary" if i == 0 else f"Structure_Summary_{i + 1}"
+                                return f"Page_{p}_Image_{i + 1}"
+
+                            image_label = _label_for(page_num, img_index, num_images_on_page)
+                            image_filename = f"{image_label}.png"
                             image_file_path = report_dir / image_filename
                             
                             # Save image to file
@@ -303,9 +390,10 @@ class DoclingProcessor:
                                 location_keywords.extend(["east", "side", "east side"])
                             elif page_num % 4 == 0:
                                 location_keywords.extend(["west", "side", "west side"])
+                            location_keywords.append(image_label.replace("_", " ").lower())
                             
                             # Create enhanced image content
-                            image_content = f"Image {img_index + 1} from page {page_num + 1} of {file_path.name}"
+                            image_content = f"{image_label} from page {page_num + 1} of {file_path.name}"
                             if report_id:
                                 image_content += f" Report ID: {report_id}"
                             image_content += f" Keywords: {', '.join(location_keywords)}"
@@ -321,12 +409,13 @@ class DoclingProcessor:
                                     'source_file': file_path.name,
                                     'report_id': report_id,
                                     'extraction_method': 'pymupdf_fallback',
-                                    'image_description': f"Image {img_index + 1} from page {page_num + 1}",
+                                    'image_description': image_label,
                                     'searchable_keywords': location_keywords,
                                     'image_type': 'roof_page_image',
                                     'has_raw_data': True,
                                     'image_file_path': str(image_file_path),
                                     'image_filename': image_filename,
+                                    'image_label': image_label,
                                     'image_size': image.size
                                 }
                             )
@@ -344,158 +433,294 @@ class DoclingProcessor:
             
         return documents
     
-    def _process_page_image(self, image_info: Any, page_num: int, img_idx: int, file_path: Path) -> Optional[Document]:
-        """Process an image from a page."""
-        if not VISION_AVAILABLE:
-            return None
+    # Removed unused image OCR helper methods (_process_page_image, _process_standalone_image, _extract_text_from_image)
         
-        try:
-            # Get image data
-            if hasattr(image_info, 'image') and image_info.image:
-                # Convert to PIL Image
-                if isinstance(image_info.image, np.ndarray):
-                    image = Image.fromarray(image_info.image)
-                else:
-                    image = image_info.image
-                
-                # Convert to base64
-                buffered = BytesIO()
-                image.save(buffered, format="PNG")
-                img_base64 = base64.b64encode(buffered.getvalue()).decode()
-                
-                # Create image hash for deduplication
-                img_hash = hashlib.md5(buffered.getvalue()).hexdigest()
-                
-                # Extract text from image if possible (OCR)
-                image_text = self._extract_text_from_image(image)
-                
-                # Create document
-                content = f"Image from page {page_num}"
-                if image_text:
-                    content += f"\nExtracted text: {image_text}"
-                
-                return Document(
-                    page_content=content,
-                    metadata={
-                        'type': 'image',
-                        'page_number': page_num,
-                        'image_index': img_idx,
-                        'image_data': img_base64,
-                        'image_format': 'png',
-                        'image_size': image.size,
-                        'image_hash': img_hash,
-                        'extraction_method': 'docling_page_image',
-                        'has_text': bool(image_text)
-                    }
-                )
+    def _extract_tables(self, converted_doc, tables_list, file_path: Path) -> List[Document]:
+        """
+        For each Docling table:
+        - Export to DataFrame for analytic correctness and downstream SQL/DF pipelines.
+        - Export Areas per pitch to json.
+        - Export Waste Calculation to images.
+        - Chunk tables.
+        """
         
-        except Exception as e:
-            logging.warning(f"Error processing page image: {e}")
-        
-        return None
-    
-    def _process_standalone_image(self, picture: Any, img_idx: int, file_path: Path) -> Optional[Document]:
-        """Process a standalone image from the document."""
-        if not VISION_AVAILABLE:
-            return None
-        
-        try:
-            # Similar processing as page images
-            if hasattr(picture, 'image') and picture.image:
-                if isinstance(picture.image, np.ndarray):
-                    image = Image.fromarray(picture.image)
-                else:
-                    image = picture.image
-                
-                buffered = BytesIO()
-                image.save(buffered, format="PNG")
-                img_base64 = base64.b64encode(buffered.getvalue()).decode()
-                img_hash = hashlib.md5(buffered.getvalue()).hexdigest()
-                
-                image_text = self._extract_text_from_image(image)
-                
-                content = f"Standalone image {img_idx + 1}"
-                if image_text:
-                    content += f"\nExtracted text: {image_text}"
-                
-                return Document(
-                    page_content=content,
-                    metadata={
-                        'type': 'image',
-                        'image_index': img_idx,
-                        'image_data': img_base64,
-                        'image_format': 'png',
-                        'image_size': image.size,
-                        'image_hash': img_hash,
-                        'extraction_method': 'docling_standalone_image',
-                        'has_text': bool(image_text)
-                    }
-                )
-        
-        except Exception as e:
-            logging.warning(f"Error processing standalone image: {e}")
-        
-        return None
-    
-    def _extract_text_from_image(self, image: Image.Image) -> str:
-        """Extract text from image using OCR."""
-        try:
-            # Convert PIL to OpenCV format
-            img_array = np.array(image)
-            
-            # Basic image preprocessing for better OCR
-            if len(img_array.shape) == 3:
-                gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
+        out_docs: List[Document] = []
+        # Ensure we can iterate all tables reliably across versions
+        for idx, table in enumerate(tables_list):
+            # 1) DataFrame export (safe structure)
+            df = None
+            try:
+                df = table.export_to_dataframe()
+            except Exception as e:
+                logging.warning(f"Error exporting table {idx} to dataframe: {e}")
+                df = None
+
+            self.export_table_data(df, file_path, idx, tables_list)
+
+        self.export_table_images(converted_doc, file_path)
+        self.export_table_data_chunks(file_path)
+
+        areas_per_pitch_path = Path("docling_exports") / file_path.stem / "tables" / "json"
+        waste_calculation_path = Path("docling_exports") / file_path.stem / "tables" / "images"
+        report_id = file_path.stem.split('RoofReport-')[1].split('.')[0]
+        for area_per_pitch_file in areas_per_pitch_path.glob("*.json"):
+            print("area_per_pitch_file", area_per_pitch_file)
+            table_doc = Document(
+                page_content=f"Report ID: {report_id}\n{area_per_pitch_file.read_text()}",
+                metadata={
+                    'type': 'table',
+                    'file_name': area_per_pitch_file.name,
+                    'source_path': str(area_per_pitch_file),
+                    'file_type': 'json',
+                    'report_id': report_id,
+                    'name': 'Areas Per Pitch',
+                    'description': 'This table comes under ROOFING REPORT SUMMARY in pdf. The table lists each pitch on this roof and the total area and percent of the roof with that pitch. and the suffix of the file name tells which structure it belongs to. If suffix is AllStructures, then it is the total of the roofs for all structures.',
+                    'extraction_method': 'docling_table'
+                }
+            )
+            # Chunk tables
+            chunks = self.text_splitter.split_documents([table_doc])
+            out_docs.extend(chunks)
+
+        for waste_calculation_file in waste_calculation_path.glob("*.png"):
+            print("waste_calculation_file", waste_calculation_file.name)
+            if waste_calculation_file.name.startswith("Structure_Complexity"):
+                name = "Structure_Complexity"
             else:
-                gray = img_array
-            
-            # Apply threshold to get better OCR results
-            _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-            
-            # Note: For production, you might want to use pytesseract or AWS Textract
-            # For now, we'll return empty string as OCR is not implemented
-            return ""
-            
-        except Exception as e:
-            logging.warning(f"Error extracting text from image: {e}")
-            return ""
+                name = "Waste_Calculation"
+            table_doc = Document(
+                page_content=f"Report ID: {report_id}\n{waste_calculation_file}",
+                metadata={
+                    'type': 'image',
+                    'file_name': waste_calculation_file.name,
+                    'file_type': 'png',
+                    'report_id': file_path.stem.split('RoofReport-')[1].split('.')[0],
+                    'name': name,
+                    'description':'''These are basically the Structure Complexity and Waste Calculation tables in the pdf and we are storing them as images. 
+                                    This Table comes under ROOFING REPORT SUMMARY in pdf. *Squares are rounded up to the 1/3 of a square
+                                    Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
+                                    factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
+                                    control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
+                                    shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
+                                    EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
+                                    replacement or repair work''',
+                    'extraction_method': 'docling_image'
+                }
+            )
+            out_docs.append(table_doc)
+        return out_docs
     
-    def _extract_tables(self, converted_doc: Any) -> List[Document]:
-        """Extract tables from the converted document."""
-        documents = []
+    def export_table_data(self, df, file_path, idx, tables_list):
+
+        """Export table data to JSON files."""
+        if idx==0:
+            return
+        name = ""
+
+        if idx%2==0:
+            name = "Waste_Calculation_" + str(idx//2)
+        if idx%2==1:
+            name = "Areas_per_Pitch_Structure_" + str(idx//2 + 1)
+        if len(tables_list)>3 and idx == len(tables_list)-1:
+            name = "Areas_per_Pitch_AllStructures"
+
+        out_dir = Path("docling_exports")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_dir.mkdir(parents=True, exist_ok=True)
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_dir.mkdir(parents=True, exist_ok=True)
+        out_json_report_table_dir = out_report_table_dir / "json"
+        out_json_report_table_dir.mkdir(parents=True, exist_ok=True)
+
+        if idx%2==0:
+            json_file = out_json_report_table_dir / f"{name}.json"
+            # data = self.df_to_waste_json(df)
+            df_dict = {
+                "columns": df.columns.tolist(),
+                "data": df.values.tolist()
+            }
+            data = self.df_to_waste_json(df)
+            json_str = json.dumps(data, ensure_ascii=False, indent=4)
+            json_file.write_text(json_str, encoding="utf-8")
+            return
+
+        df = df.T
+        df.columns = df.iloc[0]   # first row becomes column names
+        df = df.drop(0)           # drop the old header row
+        (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(df.to_dict(orient="records"), ensure_ascii=False, indent=4),encoding="utf-8")
+
+    def df_to_waste_json(self, df):
+
+        # Initialize indices
+        waste_row_idx = None
+        area_row_idx = None
+        squares_row_idx = None
         
-        try:
-            # Check if document has tables
-            if hasattr(converted_doc, 'tables') and converted_doc.tables:
-                for table_idx, table in enumerate(converted_doc.tables):
-                    try:
-                        # Convert table to markdown or text format
-                        if hasattr(table, 'export_to_markdown'):
-                            table_content = table.export_to_markdown()
-                        elif hasattr(table, 'to_dict'):
-                            table_dict = table.to_dict()
-                            table_content = str(table_dict)
-                        else:
-                            table_content = str(table)
-                        
-                        if table_content.strip():
-                            table_doc = Document(
-                                page_content=table_content,
-                                metadata={
-                                    'type': 'table',
-                                    'table_index': table_idx,
-                                    'extraction_method': 'docling_table'
-                                }
-                            )
-                            documents.append(table_doc)
-                    
-                    except Exception as e:
-                        logging.warning(f"Error processing table {table_idx}: {e}")
+        # Search for rows starting with specific labels (case-insensitive)
+        for idx in range(len(df)):
+            first_cell = str(df.iloc[idx, 0]).strip().lower()
+            if 'waste%' in first_cell:
+                waste_row_idx = idx
+            elif 'area' in first_cell:
+                area_row_idx = idx
+            elif 'squares' in first_cell:
+                squares_row_idx = idx
         
-        except Exception as e:
-            logging.error(f"Error extracting tables: {e}")
+        # Extract lists
+        if waste_row_idx is not None:
+            waste_list = df.iloc[waste_row_idx, 1:].astype(str).tolist()
+        else:
+            # Parse waste from columns (last part after '.')
+            waste_list = []
+            for col in df.columns[1:]:
+                parts = str(col).split('.')
+                last_part = parts[-1].strip() if parts else ''
+                waste_list.append(last_part)
         
-        return documents
+        if area_row_idx is not None:
+            area_list = df.iloc[area_row_idx, 1:].astype(str).tolist()
+        else:
+            # Assume first row is area if not found
+            area_list = df.iloc[0, 1:].astype(str).tolist()
+        
+        if squares_row_idx is not None:
+            squares_list = df.iloc[squares_row_idx, 1:].astype(str).tolist()
+        else:
+            # Assume second row is squares if not found
+            squares_list = df.iloc[1, 1:].astype(str).tolist()
+        
+        # Determine the minimum length to align lists
+        min_len = min(len(waste_list), len(area_list), len(squares_list))
+        
+        # Build the result list
+        result = []
+        for i in range(min_len):
+            result.append({
+                "waste": waste_list[i],
+                "area": area_list[i],
+                "squares": squares_list[i]
+            })
+        
+        return result
+    def export_table_images(self, converted_doc, file_path):
+
+        """Export table images to PNG files."""
+        table_counter = 0
+        out_dir = Path("docling_exports")
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_images_dir = out_report_table_dir / "images"
+        out_report_table_images_dir.mkdir(parents=True, exist_ok=True)
+
+        for element, _ in converted_doc.iterate_items():
+            if isinstance(element, TableItem):
+                table_counter += 1
+                if table_counter == 1:
+                    continue
+                
+                # Even tables -> Areas_per_Pitch_Structure
+                if table_counter % 2 == 0:
+                    name = f"Areas_per_Pitch_Structure_{table_counter // 2}.png"
+                    if table_counter == len(converted_doc.tables):
+                        name = "Areas_per_Pitch_AllStructures.png"
+                    img = element.get_image(converted_doc)
+                    img.save(out_report_table_images_dir / name)
+                    continue
+
+                img = element.get_image(converted_doc)
+                width, height = img.size
+                # Y positions in pixels
+                y26 = int(height * 0.26)
+                y28 = int(height * 0.28)
+                # Top part (0% → 26%)
+                top_img = img.crop((0, 0, width, y26))
+
+                # Bottom part (28% → 100%)
+                bottom_img = img.crop((0, y28, width, height))
+
+                # Save results
+                top_img.save(f"{out_report_table_images_dir}/Structure_Complexity_{table_counter//2}.png")
+                bottom_img.save(f"{out_report_table_images_dir}/Waste_Calculation_{table_counter//2}.png")
+
+    def export_table_data_chunks(self, file_path):
+        """Export table data chunks to JSON files.
+          "table":[{
+                "section":"Hardcoded",
+                "raw_text":"JSON or CSV",
+                "id":"autogenerated",
+                "metadata":{},
+                "src_image_path":"reference path to the image"
+        }}]"""
+        out_dir = Path("docling_exports")
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_json_dir = out_report_table_dir / "json"
+        out_report_table_images_dir = out_report_table_dir / "images"
+
+        table_chunks = []
+        chunk_counter = 1
+
+        # Iterate over all JSON files
+        for json_file in sorted(out_report_table_json_dir.glob("*.json")):
+            try:
+                json_content = json.loads(json_file.read_text(encoding="utf-8"))
+                raw_text_str = json.dumps(json_content, ensure_ascii=False, indent=2)
+            except Exception as e:
+                logging.warning(f"Skipping {json_file.name}, failed to read JSON: {e}")
+                continue
+
+            # Determine section
+            section = ""
+            if "Areas_per_Pitch" in json_file.name:
+                section = f"This table named {json_file.name} lists each pitch on this roof and the total area and percent of the roof with that pitch."
+            elif "Waste_Calculation" in json_file.name:
+                section = f"""NOTE: This waste calculation table named {json_file.name} is for asphalt shingle roofing applications. All values in the table below 
+                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square
+                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
+                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
+                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
+                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
+                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
+                            replacement or repair work."""
+            # Corresponding image path (same filename but .png)
+            image_name = json_file.stem + ".png"
+            image_path = out_report_table_images_dir / image_name
+            if not image_path.exists():
+                logging.warning(f"Image not found for {json_file.name}: {image_path}")
+                image_path_str = ""
+            else:
+                image_path_str = str(image_path)
+
+            # Append chunk
+            table_chunks.append({
+                "section": section,
+                "raw_text": raw_text_str,
+                "id": f"chunk{chunk_counter}",
+                "metadata": {},
+                "src_image_path": image_path_str
+            })
+            chunk_counter += 1
+
+        for png_file in sorted(out_report_table_images_dir.glob("*.png")):
+            if "Structure_Complexity" in png_file.name:
+                section = f"This table named {png_file.name} lists the structure complexity of the roof."
+                table_chunks.append({
+                    "section": section,
+                    "raw_text": "Dummy Text for now.",
+                    "id": f"chunk{chunk_counter}",
+                    "metadata": {},
+                    "src_image_path": str(png_file)
+                })
+                chunk_counter += 1
+
+        # Save consolidated table_chunks.json
+        chunks_file = out_report_dir / "table_chunks.json"
+        chunks_data = {"tables": table_chunks}
+        chunks_file.write_text(json.dumps(chunks_data, ensure_ascii=False, indent=2), encoding="utf-8")
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process Office documents (DOCX, PPTX) using Docling."""
@@ -670,34 +895,4 @@ def process_and_index_directory_with_docling(
     return vector_store_manager
 
 
-def get_docling_processor(config_instance: Optional[Any] = None) -> DoclingProcessor:
-    """
-    Get a Docling document processor instance.
-    
-    Args:
-        config_instance: Configuration instance
-        
-    Returns:
-        Docling document processor instance
-    """
-    return DoclingProcessor(config_instance=config_instance)
-
-
-# Compatibility function to replace the original index processor
-def create_enhanced_index_processor(use_docling: bool = True, config_instance: Optional[Any] = None):
-    """
-    Create an enhanced document processor.
-    
-    Args:
-        use_docling: Whether to use Docling (recommended)
-        config_instance: Configuration instance
-        
-    Returns:
-        Document processor instance
-    """
-    if use_docling and DOCLING_AVAILABLE:
-        return DoclingProcessor(config_instance=config_instance)
-    else:
-        # Fallback to original processor
-        from .index import DocumentProcessor
-        return DocumentProcessor(config_instance=config_instance)
+## Removed unused public helper functions get_docling_processor and create_enhanced_index_processor (not referenced in codebase)

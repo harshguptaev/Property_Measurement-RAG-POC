@@ -285,6 +285,24 @@ class AgenticRAG:
                 size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
                 content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
             
+            elif doc.metadata.get('type') == 'table':
+                table_info = {
+                    'type': metadata.get('type', 'unknown'),
+                    'file_name': metadata.get('file_name', 'unknown'),
+                    'file_type': metadata.get('file_type', 'unknown'),
+                    'report_id': metadata.get('report_id', 'unknown'),
+                    'table_name': metadata.get('name', 'unknown'),
+                    'source': metadata.get('source_path', 'unknown'),
+                    'description': metadata.get('description', 'unknown'),
+                }
+                print("table_info", table_info)
+                # Enhanced description for LLM
+                content += (
+                    f"\n[This table belongs to report {table_info['report_id']}. "
+                    f"The table is named '{table_info['table_name']}' and is described as "
+                    f"'{table_info['description']}'. It was extracted from {Path(table_info['source']).name}.]"
+    )
+
             context_parts.append(f"Document {i}:\n{content}\nSource: {metadata.get('source', 'Unknown')}\n")
         
         # Store retrieved images in state for UI access

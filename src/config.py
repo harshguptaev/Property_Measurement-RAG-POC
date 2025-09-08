@@ -4,9 +4,7 @@ Configuration management system with safety features and flexible access pattern
 import os
 import yaml
 import logging
-from typing import Any, Dict, Optional, Union
-from pathlib import Path
-
+from typing import Any, Dict
 
 class ConfigLoader:
     """
