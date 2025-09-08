@@ -1,21 +1,21 @@
 {
   "tables": [
     {
-      "section": "This table named Areas_per_Pitch_Structure_1.json lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
       "raw_text": "[\n  {\n    \"Roof Pitches\": \"1/12\",\n    \"Area (SQ)\": \"1\",\n    \"%of Roof\": \"5.3%\"\n  },\n  {\n    \"Roof Pitches\": \"3/12\",\n    \"Area (SQ)\": \"9.4\",\n    \"%of Roof\": \"48.1%\"\n  },\n  {\n    \"Roof Pitches\": \"5/12\",\n    \"Area (SQ)\": \"9.1\",\n    \"%of Roof\": \"46.6%\"\n  }\n]",
       "id": "chunk1",
       "metadata": {},
       "src_image_path": "docling_exports/RoofReport-44995431/tables/images/Areas_per_Pitch_Structure_1.png"
     },
     {
-      "section": "NOTE: This waste calculation table named Waste_Calculation_1.json is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
+      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
       "raw_text": "[\n  {\n    \"waste\": \"0%\",\n    \"area\": \"172\",\n    \"squares\": \"18.66\"\n  },\n  {\n    \"waste\": \"5%\",\n    \"area\": \"180\",\n    \"squares\": \"19.66\"\n  },\n  {\n    \"waste\": \"8%\",\n    \"area\": \"185\",\n    \"squares\": \"20.33\"\n  },\n  {\n    \"waste\": \"10%\",\n    \"area\": \"189\",\n    \"squares\": \"20.66\"\n  },\n  {\n    \"waste\": \"12%\",\n    \"area\": \"192\",\n    \"squares\": \"21.00\"\n  },\n  {\n    \"waste\": \"15%\",\n    \"area\": \"197\",\n    \"squares\": \"21.33\"\n  },\n  {\n    \"waste\": \"20%\",\n    \"area\": \"206\",\n    \"squares\": \"22.33\"\n  },\n  {\n    \"waste\": \"25%\",\n    \"area\": \"215\",\n    \"squares\": \"23.33\"\n  },\n  {\n    \"waste\": \"30%\",\n    \"area\": \"223\",\n    \"squares\": \"24.33\"\n  }\n]",
       "id": "chunk2",
       "metadata": {},
       "src_image_path": "docling_exports/RoofReport-44995431/tables/images/Waste_Calculation_1.png"
     },
     {
-      "section": "This table named Structure_Complexity_1.png lists the structure complexity of the roof.",
+      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
       "raw_text": "Dummy Text for now.",
       "id": "chunk3",
       "metadata": {},
