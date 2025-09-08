@@ -21,6 +21,7 @@ from src.agent import AgenticRAG
 from src.ui import create_ui
 from src.bedrock_client import create_bedrock_llm, create_bedrock_embeddings
 from src.pictometry_client import saveimagesfrompictometry
+from src.poc_image_similarity import stitch_all_pictometry_directories
 
 def setup_logging():
     """Setup logging configuration."""
@@ -55,7 +56,9 @@ def main():
     
     # save pictometry images
     # saved = saveimagesfrompictometry(29.482943, -98.456349)
-    
+    # stich pictometry images and convert to base64
+    # stitch_all_pictometry_directories()
+
     # Setup AWS credentials
     setup_aws_credentials()
     
