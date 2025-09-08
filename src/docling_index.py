@@ -846,76 +846,52 @@ class DoclingProcessor:
                     else:
                         logging.info(f"  {key}: {type(value)}")
             
-            if chunks_data and isinstance(chunks_data, dict):
-                # Check if there's any actual content
-                has_content = False
-                for chunk_type in ['text', 'table', 'image', 'extracted']:
-                    if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list) and chunks_data[chunk_type]:
-                        has_content = True
-                        break
-                
-                if not has_content:
-                    logging.warning(f"No content found in chunks for {file_path.name}")
-                    return
-                # Create output directory structure
-                chunks_dir = Path("docling_exports") / file_path.stem
-                chunks_dir.mkdir(parents=True, exist_ok=True)
-                
-                # Save chunks as JSON
-                chunks_file = chunks_dir / "important_chunks.json"
-                with open(chunks_file, 'w', encoding='utf-8') as f:
-                    import json
-                    json.dump(chunks_data, f, ensure_ascii=False, indent=2)
-                
-                # Convert dictionary chunks to Document objects
-                all_chunks = []
-                if isinstance(chunks_data, dict):
-                    for chunk_type in ['text', 'table', 'image', 'extracted']:
-                        if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list):
-                            for chunk_dict in chunks_data[chunk_type]:
-                                if isinstance(chunk_dict, dict):
-                                    # Convert dictionary to Document object
-                                    page_content = chunk_dict.get('raw_text', '') or chunk_dict.get('content', '') or str(chunk_dict)
-                                    
-                                    # Create metadata from the chunk dictionary
-                                    metadata = {
-                                        'type': chunk_dict.get('type', chunk_type),
-                                        'extraction_method': 'important_chunks',
-                                        'report_id': report_id,
-                                        'chunk_id': chunk_dict.get('id', ''),
-                                        'source_file': file_path.name
-                                    }
-                                    
-                                    # Add any existing metadata from the chunk
-                                    if 'metadata' in chunk_dict and isinstance(chunk_dict['metadata'], dict):
-                                        metadata.update(chunk_dict['metadata'])
-                                    
-                                    # Add any additional fields from the chunk as metadata
-                                    for key, value in chunk_dict.items():
-                                        if key not in ['raw_text', 'content', 'type', 'id', 'metadata']:
-                                            metadata[key] = value
-                                    
-                                    # Create Document object
-                                    doc = Document(
-                                        page_content=page_content,
-                                        metadata=metadata
-                                    )
-                                    all_chunks.append(doc)
-                                else:
-                                    # If it's already a Document object, keep it as is
-                                    all_chunks.append(chunk_dict)
-                
-                documents.extend(all_chunks)
-                logging.info(f"✓ Saved {len(all_chunks)} important chunks to {chunks_file}")
-                
-                # Log chunk types for verification
-                chunk_types = []
-                for chunk in all_chunks:
-                    if hasattr(chunk, 'metadata') and isinstance(chunk.metadata, dict):
-                        chunk_types.append(chunk.metadata.get('type', 'unknown'))
-                    else:
-                        chunk_types.append('unknown')
-                logging.info(f"✓ Chunk types extracted: {', '.join(chunk_types)}")
+            if chunks_data:
+                # New flattened format: list of chunk dicts
+                if isinstance(chunks_data, list):
+                    if not chunks_data:
+                        logging.warning(f"No content found in chunks for {file_path.name}")
+                        return
+                    chunks_dir = Path("docling_exports") / file_path.stem
+                    chunks_dir.mkdir(parents=True, exist_ok=True)
+                    chunks_file = chunks_dir / "important_chunks.json"
+                    with open(chunks_file, 'w', encoding='utf-8') as f:
+                        json.dump(chunks_data, f, ensure_ascii=False, indent=2)
+
+                    all_chunks = []
+                    for chunk_dict in chunks_data:
+                        if not isinstance(chunk_dict, dict):
+                            continue
+                        # Build a textual representation for vector index (for text chunks) or minimal for others
+                        if chunk_dict.get('type') == 'text':
+                            page_content = json.dumps({"section": chunk_dict.get('section'), **chunk_dict.get('data', {})}, ensure_ascii=False)
+                        elif chunk_dict.get('type') == 'table':
+                            page_content = f"Table Section: {chunk_dict.get('section')}"
+                        else:  # image
+                            page_content = f"Image Section: {chunk_dict.get('section')} {chunk_dict.get('data', {}).get('description','')}"
+
+                        metadata = {
+                            'type': chunk_dict.get('type'),
+                            'extraction_method': 'important_chunks_flat',
+                            'report_id': report_id,
+                            'chunk_id': chunk_dict.get('chunk_id'),
+                            'section': chunk_dict.get('section'),
+                            'source_file': file_path.name
+                        }
+                        metadata.update(chunk_dict.get('data', {}))
+                        if chunk_dict.get('image_placeholder'):
+                            metadata['image_placeholder'] = chunk_dict['image_placeholder']
+                        if 'image_file' in chunk_dict.get('data', {}):
+                            metadata['image_file'] = chunk_dict['data']['image_file']
+                        if 'images' in chunk_dict.get('data', {}):
+                            metadata['images'] = chunk_dict['data']['images']
+                        doc = Document(page_content=page_content, metadata=metadata)
+                        all_chunks.append(doc)
+
+                    documents.extend(all_chunks)
+                    logging.info(f"✓ Saved {len(all_chunks)} important flattened chunks to {chunks_file}")
+                else:
+                    logging.warning("Unexpected chunks_data format (expected list). Skipping save.")
             else:
                 logging.warning(f"No important chunks extracted from {file_path.name}")
                 

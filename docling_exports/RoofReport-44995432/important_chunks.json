@@ -1,452 +1,170 @@
-{
-  "reportId": "44995432",
-  "text": [
-    {
-      "type": "report_and_property",
-      "raw_text": "REPORT ID 44995432\nAugust 21, 2025",
-      "src_image_path": "",
-      "id": "0c5fca09-d772-4b6a-bc27-f5b2af9ef84a",
-      "metadata": {
-        "chunk_number": 1
-      }
+[
+  {
+    "chunk_id": "44995432_chunk_1",
+    "section": "Report Header",
+    "type": "text",
+    "data": {
+      "report_id": "44995432",
+      "date": "August 21, 2025",
+      "property_address": "44995432 PROPERTY 1014 Mohican Round Rock, TX 78665"
     },
-    {
-      "type": "prepared_for",
-      "raw_text": "Prepared For Divya Devadas 10900 NE 4th St Suite 80123 Bellevue,WA 98004 (855) 984-6590",
-      "src_image_path": "",
-      "id": "fd7730e7-2d2f-47d3-b4a4-1e75116f2dfa",
-      "metadata": {
-        "chunk_number": 2
-      }
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995432_chunk_2",
+    "section": "Measurements",
+    "type": "text",
+    "data": {
+      "area": "15.9 SQ",
+      "ridges_hips": "",
+      "valleys": "",
+      "rakes": "",
+      "eaves": "",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "15.9 SQ"
     },
-    {
-      "type": "measurements",
-      "raw_text": "Lengths, Areas and Pitches\nRidges = 14' 7\" (2 Ridges)\nHips = 116' 8\" (6 Hips)\nValleys = 23' 2\" (1 Valleys)\nRakes† = 0' (0 Rakes)\nEaves/Starters‡ = 155' 11\" (6 Eaves)\nDrip Edge (Eaves + Rakes) = 155' 11\" (6 Lengths)\nParapet Walls = 0' (0 Lengths)\nFlashing = 0' (0 Lengths)\nStep Flashing = 0' (0 Lengths)\nTotal Roof Penetrations Area = 0.1 SQ\nTotal Roof Area Less Roof Penetrations = 15.8 SQ\nTotal Roof Penetrations Perimeter = 28'\nPredominant Pitch = 5/12\nTotal Area (All Pitches) = 15.9 SQ",
-      "src_image_path": "",
-      "id": "47fb9bd3-1e6a-4c4c-af85-7173e45a9dbe",
-      "metadata": {
-        "chunk_number": 3
-      }
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995432_chunk_3",
+    "section": "Prepared For",
+    "type": "text",
+    "data": {
+      "name": "Prepared For",
+      "address": "Divya Devadas 10900 NE 4th St Suite 80123 Bellevue,WA 98004, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx",
+      "phone": "(855) 984-6590"
     },
-    {
-      "type": "property_location",
-      "raw_text": "Property Location\nLongitude = -97.6686620 Latitude = 30.5528010",
-      "src_image_path": "",
-      "id": "2b91ddbe-e5cf-405f-a8dd-9da9715df30b",
-      "metadata": {
-        "chunk_number": 4
-      }
-    }
-  ],
-  "table": [],
-  "image": [
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "f3d7503f-34c9-4cad-9a44-d27892ec957d",
-      "metadata": {
-        "page": 1,
-        "image_index": 0,
-        "xref": "#/pictures/0"
-      },
-      "src_image_path": "extracted_images/report_44995432/Area.png"
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995432_chunk_4",
+    "section": "Lengths Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
+      "image_file": "extracted_images/report_44995432/Lengthsimage.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "9c31f35f-9d60-423f-9e77-bdf22c28f967",
-      "metadata": {
-        "page": 1,
-        "image_index": 1,
-        "xref": "#/pictures/1"
-      },
-      "src_image_path": "extracted_images/report_44995432/Azimuth.png"
+    "image_placeholder": "[IMAGE_LENGTHS_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_5",
+    "section": "Pitch (Degrees) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in degrees for different facets",
+      "image_file": "extracted_images/report_44995432/Pitch_Degrees.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "d0ea5c5f-084f-4886-85f2-b4b2b4298301",
-      "metadata": {
-        "page": 1,
-        "image_index": 2,
-        "xref": "#/pictures/2"
-      },
-      "src_image_path": "extracted_images/report_44995432/Cover_Image.png"
+    "image_placeholder": "[IMAGE_PITCH_DEGREES_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_6",
+    "section": "Pitch (on 12) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in x/12 format for different facets",
+      "image_file": "extracted_images/report_44995432/Pitch_on_12.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "9d255d78-3f02-4e3f-b1be-c65cc297b06e",
-      "metadata": {
-        "page": 1,
-        "image_index": 3,
-        "xref": "#/pictures/3"
-      },
-      "src_image_path": "extracted_images/report_44995432/Cover_Image_2.png"
+    "image_placeholder": "[IMAGE_PITCH_ON_12_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_7",
+    "section": "Rafters Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing rafter lengths for different roof sections",
+      "image_file": "extracted_images/report_44995432/Rafters.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "0382016c-a639-4c2b-8361-5cc7f9bc31fd",
-      "metadata": {
-        "page": 1,
-        "image_index": 4,
-        "xref": "#/pictures/4"
-      },
-      "src_image_path": "extracted_images/report_44995432/Cover_Image_3.png"
+    "image_placeholder": "[IMAGE_RAFTERS_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_8",
+    "section": "Azimuth Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof facet orientations in degrees relative to true north",
+      "image_file": "extracted_images/report_44995432/Azimuth.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "204faef7-fdce-42e9-93e5-29fe7e6e824b",
-      "metadata": {
-        "page": 2,
-        "image_index": 5,
-        "xref": "#/pictures/5"
-      },
-      "src_image_path": "extracted_images/report_44995432/East_Side.png"
+    "image_placeholder": "[IMAGE_AZIMUTH_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_9",
+    "section": "Area Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof area measurements for different facets in square feet",
+      "image_file": "extracted_images/report_44995432/Area.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "a4c400c6-7f0d-43c7-8286-4e1eb0f57419",
-      "metadata": {
-        "page": 2,
-        "image_index": 6,
-        "xref": "#/pictures/6"
-      },
-      "src_image_path": "extracted_images/report_44995432/Lengthsimage.png"
+    "image_placeholder": "[IMAGE_AREA_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_10",
+    "section": "Roof Obstructions Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing locations of roof obstructions",
+      "image_file": "extracted_images/report_44995432/Roof_Penetrations.png"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "bd5a21c5-5bf3-4cca-aaf4-42ea79a841e6",
-      "metadata": {
-        "page": 2,
-        "image_index": 7,
-        "xref": "#/pictures/7"
-      },
-      "src_image_path": "extracted_images/report_44995432/North_Side.png"
+    "image_placeholder": "[IMAGE_ROOF_OBSTRUCTIONS_DIAGRAM]"
+  },
+  {
+    "chunk_id": "44995432_chunk_11",
+    "section": "Property Imagery",
+    "type": "image",
+    "data": {
+      "description": "Aerial images of the property from top, north, south, east, and west views",
+      "images": [
+        "extracted_images/report_44995432/Top_View.png",
+        "extracted_images/report_44995432/North_Side.png",
+        "extracted_images/report_44995432/South_Side.png",
+        "extracted_images/report_44995432/East_Side.png",
+        "extracted_images/report_44995432/West_Side.png"
+      ]
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "07419059-f265-471d-a737-544f9d13d537",
-      "metadata": {
-        "page": 3,
-        "image_index": 8,
-        "xref": "#/pictures/8"
-      },
-      "src_image_path": "extracted_images/report_44995432/Pitch_Degrees.png"
+    "image_placeholder": "[IMAGE_PROPERTY_AERIAL_VIEWS]"
+  },
+  {
+    "chunk_id": "44995432_chunk_12",
+    "section": "Roofing Report Summary",
+    "type": "table",
+    "data": {},
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995432_chunk_13",
+    "section": "Property Details",
+    "type": "text",
+    "data": {
+      "total_roof_facets": "6",
+      "total_roof_obstructions": "7",
+      "ridges": "14' 7\" Hips",
+      "hips": "116' 8\"",
+      "valleys": "23' 2\"",
+      "rakes": "0' Eaves",
+      "eaves_starters": "155' 11\" (6 Eaves)",
+      "drip_edge": "155' 11\" (6 Lengths)",
+      "parapet_walls": "0' (0 Lengths)",
+      "flashing": "0'",
+      "step_flashing": "0' Parapets",
+      "total_roof_obstructions_area": "0.1 SQ",
+      "total_roof_area_less_obstructions": "15.8 SQ",
+      "total_roof_obstructions_perimeter": "28' Predominant Pitch",
+      "predominant_pitch": "5/12",
+      "total_area_all_pitches": "15.9 SQ",
+      "longitude": "-97.6686620",
+      "latitude": "30.5528010"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "0e250393-f204-4869-a40a-2da2eb912021",
-      "metadata": {
-        "page": 3,
-        "image_index": 9,
-        "xref": "#/pictures/9"
-      },
-      "src_image_path": "extracted_images/report_44995432/Pitch_on_12.png"
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995432_chunk_14",
+    "section": "Legal Notice and Disclaimer",
+    "type": "text",
+    "data": {
+      "report_id": "44995432",
+      "property_address": "44995432 PROPERTY 1014 Mohican Round Rock, TX 78665",
+      "date": "August 21, 2025",
+      "excerpt": "IMPORTANT LEGAL NOTICE AND DISCLAIMER Notice and Disclaimer No Warranty: The Copyrighted Materials are provided to you \"as is,\" and you agree to use it at your own risk. EagleView Technologies makes no guarantees, representations or warranties of any kind, express or implied, arising by law or otherwise, including but not limited to, content, quality, accuracy, completeness, effectiveness, reliability, fitness for a particular purpose, usefulness, use or results to be obtained from the Copyrighted Materials. Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report. ' August 21, 2025 Property Address: 1014 Mohican, Round Rock, TX 78665 Report: 44995432 Copyright © 2008-2024 EagleView Technologies, Inc. - All Rights Reserved - Covered by U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125. Other Patents Pending Page 12"
     },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "24ac6ead-241d-48fe-8064-8ffe71a85a74",
-      "metadata": {
-        "page": 3,
-        "image_index": 10,
-        "xref": "#/pictures/10"
-      },
-      "src_image_path": "extracted_images/report_44995432/Rafters.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "5dee4543-6574-4391-9847-3927288ba328",
-      "metadata": {
-        "page": 4,
-        "image_index": 11,
-        "xref": "#/pictures/11"
-      },
-      "src_image_path": "extracted_images/report_44995432/Roof_Penetrations.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "f49b6954-05cc-42a9-a244-c9af97b72732",
-      "metadata": {
-        "page": 4,
-        "image_index": 12,
-        "xref": "#/pictures/12"
-      },
-      "src_image_path": "extracted_images/report_44995432/South_Side.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "222e0d0b-d5f1-43a6-876e-1a40ae66347d",
-      "metadata": {
-        "page": 4,
-        "image_index": 13,
-        "xref": "#/pictures/13"
-      },
-      "src_image_path": "extracted_images/report_44995432/Structure_Summary.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "faa68487-c8fe-413c-825d-015a1019533b",
-      "metadata": {
-        "page": 5,
-        "image_index": 14,
-        "xref": "#/pictures/14"
-      },
-      "src_image_path": "extracted_images/report_44995432/Top_View.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "54eec406-ecd6-4796-93d0-fad2bb9b5c3d",
-      "metadata": {
-        "page": 5,
-        "image_index": 15,
-        "xref": "#/pictures/15"
-      },
-      "src_image_path": "extracted_images/report_44995432/West_Side.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "da800678-c6cb-4ca6-a934-38801618db08",
-      "metadata": {
-        "page": 6,
-        "image_index": 16,
-        "xref": "#/pictures/16"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_17.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "f6d1832b-9c83-4fe9-8d28-cbbf30c21bbc",
-      "metadata": {
-        "page": 6,
-        "image_index": 17,
-        "xref": "#/pictures/17"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_18.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "e49ebe9f-11f7-4756-a5f4-5dc345949f36",
-      "metadata": {
-        "page": 6,
-        "image_index": 18,
-        "xref": "#/pictures/18"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_19.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "1a598150-aa0f-4ad3-8196-7983498e6833",
-      "metadata": {
-        "page": 7,
-        "image_index": 19,
-        "xref": "#/pictures/19"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_20.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "7f9534bc-fc5b-4cec-b6f3-ba6be2bfa46b",
-      "metadata": {
-        "page": 7,
-        "image_index": 20,
-        "xref": "#/pictures/20"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_21.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "99929cfe-4571-486c-907c-065bd973af9d",
-      "metadata": {
-        "page": 7,
-        "image_index": 21,
-        "xref": "#/pictures/21"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_22.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "b2877881-f1c7-48a9-a171-7251e5706d12",
-      "metadata": {
-        "page": 8,
-        "image_index": 22,
-        "xref": "#/pictures/22"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_23.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "39485a0d-6037-477b-babd-d6467a910355",
-      "metadata": {
-        "page": 8,
-        "image_index": 23,
-        "xref": "#/pictures/23"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_24.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "8402a8fb-246e-410e-99ff-7264b9e0f8bd",
-      "metadata": {
-        "page": 8,
-        "image_index": 24,
-        "xref": "#/pictures/24"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_25.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "4ba97743-0a7e-4418-a233-9284946d55e3",
-      "metadata": {
-        "page": 9,
-        "image_index": 25,
-        "xref": "#/pictures/25"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_26.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "822c4099-3109-4499-b8f3-5d27105affe3",
-      "metadata": {
-        "page": 9,
-        "image_index": 26,
-        "xref": "#/pictures/26"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_27.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "bf378ffc-df5f-41f8-9163-91b4f1b539d8",
-      "metadata": {
-        "page": 9,
-        "image_index": 27,
-        "xref": "#/pictures/27"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_28.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "cdb5c2f2-782c-496c-bdba-e1e2b0e5d772",
-      "metadata": {
-        "page": 10,
-        "image_index": 28,
-        "xref": "#/pictures/28"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_29.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "f7b6e630-c64e-4dec-a372-f9e61d2e1b29",
-      "metadata": {
-        "page": 10,
-        "image_index": 29,
-        "xref": "#/pictures/29"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_30.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "1d60716b-1b5d-45d5-b912-d8f98422bb5a",
-      "metadata": {
-        "page": 10,
-        "image_index": 30,
-        "xref": "#/pictures/30"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_31.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "ba9ce9ef-ebe0-4dd7-a480-698c90796f81",
-      "metadata": {
-        "page": 11,
-        "image_index": 31,
-        "xref": "#/pictures/31"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_32.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "29789ee3-3194-4946-82bc-73da33ed736c",
-      "metadata": {
-        "page": 11,
-        "image_index": 32,
-        "xref": "#/pictures/32"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_33.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "80797175-785d-41a7-abc2-3fea7661ee2a",
-      "metadata": {
-        "page": 12,
-        "image_index": 33,
-        "xref": "#/pictures/33"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_34.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "52771331-1167-4b41-9a57-dda9f72aa1e7",
-      "metadata": {
-        "page": 12,
-        "image_index": 34,
-        "xref": "#/pictures/34"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_35.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "d76dbf21-a697-4fb7-8a23-c4eafe72ed6e",
-      "metadata": {
-        "page": 13,
-        "image_index": 35,
-        "xref": "#/pictures/35"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_36.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "87f548d5-5f5e-4a12-995b-c105da2200f2",
-      "metadata": {
-        "page": 13,
-        "image_index": 36,
-        "xref": "#/pictures/36"
-      },
-      "src_image_path": "extracted_images/report_44995432/image_37.png"
-    }
-  ],
-  "extracted": []
-}
+    "image_placeholder": ""
+  }
+]

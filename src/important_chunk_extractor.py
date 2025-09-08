@@ -6,6 +6,100 @@ import uuid
 from pathlib import Path
 from typing import List, Tuple, Optional, Dict, Any
 
+# -------------------- New Helper Parsers For Flattened Format (defined early for usage) --------------------
+def _extract_measurements_structured(text: str) -> Dict[str, Any]:
+    import re
+    patterns = {
+        "area": r"Area:\s*([\d\.]+\s*SQ|[\d,]+\s*sq\s*ft)",
+        "roof_facets": r"Roof Facets:\s*(\d+)",
+        "predominant_pitch": r"Predominant Pitch:\s*([0-9/]+)",
+        "number_of_stories": r"Number of Stories:\s*([<>]=?\d+)",
+        "ridges_hips": r"Ridges/Hips:\s*([0-9' \"/]+)",
+        "valleys": r"Valleys:\s*([0-9' \"/]+)",
+        "rakes": r"Rakes:\s*([0-9' \"/]+)",
+        "eaves": r"Eaves:\s*([0-9' \"/]+)",
+        "estimated_attic": r"Estimated Attic:\s*([\d\.]+\s*SQ)",
+        "roof_obstructions": r"Roof (?:Penetrations|Obstructions):\s*(\d+)",
+        "roof_obstructions_perimeter": r"Roof (?:Penetrations|Obstructions) Perimeter:\s*([\d' \"/]+)",
+        "roof_obstructions_area": r"Roof (?:Penetrations|Obstructions) Area:\s*([\d\.]+\s*SQ)"
+    }
+    data = {}
+    for key, pat in patterns.items():
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            val = m.group(1).strip()
+            if val:
+                data[key] = val
+    return data
+
+def _extract_prepared_for_structured(text: str) -> Optional[Dict[str, Any]]:
+    import re
+    match = re.search(r"Prepared For\s*([\s\S]{0,200})", text, re.IGNORECASE)
+    if not match:
+        return None
+    segment = match.group(0).split('\n')[:5]
+    lines = [l.strip() for l in segment if l.strip() and not l.lower().startswith('open in eagleview')]
+    if not lines:
+        return None
+    name = None
+    phone = None
+    phone_re = re.compile(r"(\(\d{3}\)\s*\d{3}-?\d{4})")
+    cleaned_lines = []
+    for l in lines:
+        ph = phone_re.search(l)
+        if ph:
+            phone = ph.group(1)
+            l = phone_re.sub("", l).strip()
+        if not name:
+            name = l
+        else:
+            cleaned_lines.append(l)
+    return {"name": name, "address": ", ".join(cleaned_lines), "phone": phone}
+
+def _extract_property_details_structured(text: str) -> Dict[str, Any]:
+    import re
+    patterns = {
+        "total_roof_facets": r"Total Roof Facets\s*=\s*(\d+)",
+        "total_roof_obstructions": r"Total Roof (?:Penetrations|Obstructions)\s*=\s*(\d+)",
+        "ridges": r"Ridges\s*=\s*([0-9' \"()A-Za-z]+)",
+        "hips": r"Hips\s*=\s*([0-9' \"()A-Za-z]+)",
+        "valleys": r"Valleys\s*=\s*([0-9' \"()A-Za-z]+)",
+        "rakes": r"Rakes[†]?\s*=\s*([0-9' \"()A-Za-z]+)",
+        "eaves_starters": r"Eaves/Starters[‡]?\s*=\s*([0-9' \"()A-Za-z]+)",
+        "drip_edge": r"Drip Edge .*?=\s*([0-9' \"()A-Za-z]+)",
+        "parapet_walls": r"Parapet Walls\s*=\s*([0-9' \"()A-Za-z]+)",
+        "flashing": r"Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
+        "step_flashing": r"Step Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
+        "total_roof_obstructions_area": r"Total Roof (?:Penetrations|Obstructions) Area\s*=\s*([0-9\.]+\s*SQ)",
+        "total_roof_area_less_obstructions": r"Total Roof Area Less Roof (?:Penetrations|Obstructions)\s*=\s*([0-9\.]+\s*SQ)",
+        "total_roof_obstructions_perimeter": r"Total Roof (?:Penetrations|Obstructions) Perimeter\s*=\s*([0-9' \"()A-Za-z]+)",
+        "predominant_pitch": r"Predominant Pitch\s*=\s*([0-9/]+)",
+        "total_area_all_pitches": r"Total Area \(All Pitches\)\s*=\s*([0-9\.]+\s*SQ)",
+        "longitude": r"Longitude\s*=\s*([-0-9\.]+)",
+        "latitude": r"Latitude\s*=\s*([-0-9\.]+)"
+    }
+    data = {}
+    for key, pat in patterns.items():
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            data[key] = m.group(1).strip()
+    return data
+
+def _extract_legal_notice(text: str, report_id: str, property_address: str, date_val: str) -> Optional[Dict[str, Any]]:
+    import re
+    m = re.search(r"(IMPORTANT LEGAL NOTICE AND DISCLAIMER[\s\S]{0,1500})", text, re.IGNORECASE)
+    if not m:
+        m = re.search(r"(Legal Notice and Disclaimer[\s\S]{0,1500})", text, re.IGNORECASE)
+    if not m:
+        return None
+    snippet = re.sub(r"\s+", " ", m.group(1)).strip()
+    return {
+        "report_id": report_id,
+        "property_address": property_address,
+        "date": date_val,
+        "excerpt": snippet[:1000]
+    }
+
 
 def read_pdf_text_by_page(pdf_path: str) -> List[str]:
     import fitz
@@ -61,128 +155,124 @@ def extract_section_lines(all_pages_text: List[str], header: str, stop_headers: 
     return []
 
 
-def extract_important_chunks(pdf_path: str) -> Dict[str, Any]:
-    """Extract important chunks in the new JSON format."""
-    
+def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
+    """Extract important chunks in the NEW flattened JSON format.
+
+    Output Example (list):
+    [
+      {
+        "chunk_id": "<report>_chunk_1",
+        "section": "Report Header",
+        "type": "text",
+        "data": { ... },
+        "image_placeholder": ""
+      }, ...]
+    """
+
     # Extract report ID from filename
-    report_id = None
     if 'RoofReport-' in Path(pdf_path).name:
         try:
             report_id = Path(pdf_path).name.split('RoofReport-')[1].split('.')[0]
-        except:
+        except Exception:
             report_id = Path(pdf_path).stem
     else:
         report_id = Path(pdf_path).stem
-    
-    # Load Docling export for structured data
+
     docling_data = load_docling_export(pdf_path)
-    
-    # Initialize the result structure
-    result = {
-        "reportId": report_id,
-        "text": [],
-        "table": [],
-        "image": [],
-        "extracted": []
-    }
-    
-    # If we have Docling data, use it; otherwise fall back to text processing
-    if docling_data:
-        result = extract_from_docling(docling_data, pdf_path)
+
+    # Combine all text (best-effort) for regex parsing
+    all_text = ""
+    if docling_data and "texts" in docling_data:
+        all_text = " \n".join([t.get("text", "") for t in docling_data["texts"]])
     else:
-        result = extract_from_text(pdf_path, report_id)
-    
-    return result
+        # Fallback to PyMuPDF text extraction
+        try:
+            pages = read_pdf_text_by_page(pdf_path)
+            all_text = "\n".join(pages)
+        except Exception:
+            all_text = ""
+
+    chunks: List[Dict[str, Any]] = []
+
+    def _add(section: str, _type: str, data: Dict[str, Any], placeholder: str = ""):
+        chunk_id = f"{report_id}_chunk_{len(chunks)+1}"
+        chunks.append({
+            "chunk_id": chunk_id,
+            "section": section,
+            "type": _type,  # one of text|image|table
+            "data": data,
+            "image_placeholder": placeholder
+        })
+
+    # ---------------- Report Header ----------------
+    date_match = re.search(r'([A-Z][a-z]+\s+\d{1,2},\s*20\d{2})', all_text)
+    date_val = date_match.group(1) if date_match else ""
+    # Address: look for first occurrence of pattern with city, state zip
+    # Prefer a clean address line: number street city, ST ZIP
+    addr_match = re.search(r'(\d+\s+[A-Za-z0-9 .]+?,\s*[A-Za-z .]+?,?\s*[A-Z]{2}\s*\d{5})', all_text)
+    property_address = ""
+    if addr_match:
+        property_address = re.sub(r'\s+', ' ', addr_match.group(1)).strip()
+    _add("Report Header", "text", {
+        "report_id": report_id,
+        "date": date_val,
+        "property_address": property_address
+    })
+
+    # ---------------- Measurements ----------------
+    measurements_data = _extract_measurements_structured(all_text)
+    if measurements_data:
+        _add("Measurements", "text", measurements_data)
+
+    # ---------------- Prepared For ----------------
+    prepared_for = _extract_prepared_for_structured(all_text)
+    if prepared_for:
+        _add("Prepared For", "text", prepared_for)
+
+    # ---------------- Diagrams (Images) ----------------
+    # Map section name -> (expected filename, placeholder, description)
+    image_mappings = [
+        ("Lengths Diagram", "Lengthsimage.png", "[IMAGE_LENGTHS_DIAGRAM]", "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets"),
+        ("Pitch (Degrees) Diagram", "Pitch_Degrees.png", "[IMAGE_PITCH_DEGREES_DIAGRAM]", "Diagram showing roof pitch in degrees for different facets"),
+        ("Pitch (on 12) Diagram", "Pitch_on_12.png", "[IMAGE_PITCH_ON_12_DIAGRAM]", "Diagram showing roof pitch in x/12 format for different facets"),
+        ("Rafters Diagram", "Rafters.png", "[IMAGE_RAFTERS_DIAGRAM]", "Diagram showing rafter lengths for different roof sections"),
+        ("Azimuth Diagram", "Azimuth.png", "[IMAGE_AZIMUTH_DIAGRAM]", "Diagram showing roof facet orientations in degrees relative to true north"),
+        ("Area Diagram", "Area.png", "[IMAGE_AREA_DIAGRAM]", "Diagram showing roof area measurements for different facets in square feet"),
+        ("Roof Obstructions Diagram", "Roof_Penetrations.png", "[IMAGE_ROOF_OBSTRUCTIONS_DIAGRAM]", "Diagram showing locations of roof obstructions")
+    ]
+    images_dir = Path("extracted_images") / f"report_{report_id}"
+    for section, filename, placeholder, desc in image_mappings:
+        if (images_dir / filename).exists():
+            _add(section, "image", {"description": desc, "image_file": str(images_dir / filename)}, placeholder)
+
+    # Property Imagery (aggregate) – use Top_View as representative if exists
+    property_images = ["Top_View.png", "North_Side.png", "South_Side.png", "East_Side.png", "West_Side.png"]
+    have_any = any((images_dir / f).exists() for f in property_images)
+    if have_any:
+        _add("Property Imagery", "image", {
+            "description": "Aerial images of the property from top, north, south, east, and west views",
+            "images": [str(images_dir / f) for f in property_images if (images_dir / f).exists()]
+        }, "[IMAGE_PROPERTY_AERIAL_VIEWS]")
+
+    # ---------------- Roofing Report Summary (table placeholder) ----------------
+    _add("Roofing Report Summary", "table", {}, "")  # table intentionally left empty
+
+    # ---------------- Property Details ----------------
+    prop_details = _extract_property_details_structured(all_text)
+    if prop_details:
+        _add("Property Details", "text", prop_details)
+
+    # ---------------- Legal Notice and Disclaimer ----------------
+    legal = _extract_legal_notice(all_text, report_id, property_address, date_val)
+    if legal:
+        _add("Legal Notice and Disclaimer", "text", legal)
+
+    return chunks
 
 
 def extract_from_docling(docling_data: Dict[str, Any], pdf_path: str) -> Dict[str, Any]:
-    """Extract chunks from Docling JSON export."""
-    
-    report_id = None
-    if 'RoofReport-' in Path(pdf_path).name:
-        try:
-            report_id = Path(pdf_path).name.split('RoofReport-')[1].split('.')[0]
-        except:
-            report_id = Path(pdf_path).stem
-    else:
-        report_id = Path(pdf_path).stem
-    
-    result = {
-        "reportId": report_id,
-        "text": [],
-        "table": [],
-        "image": [],
-        "extracted": []
-    }
-    
-    # Combine all text content for pattern matching
-    all_text = ""
-    if "texts" in docling_data:
-        all_text = " ".join([text_elem.get("text", "") for text_elem in docling_data["texts"]])
-    
-    # Extract only the 4 specific text chunks
-    chunk_number = 1
-    
-    # 1. Extract Report ID and Property Address
-    report_property_chunk = extract_report_and_property_info(all_text)
-    if report_property_chunk:
-        report_property_chunk["id"] = str(uuid.uuid4())
-        report_property_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(report_property_chunk)
-        chunk_number += 1
-    
-    # 2. Extract Prepared For
-    prepared_for_chunk = extract_prepared_for_chunk(all_text)
-    if prepared_for_chunk:
-        prepared_for_chunk["id"] = str(uuid.uuid4())
-        prepared_for_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(prepared_for_chunk)
-        chunk_number += 1
-    
-    # 3. Extract Lengths, Areas and Pitches
-    measurements_chunk = extract_measurements_chunk(all_text)
-    if measurements_chunk:
-        measurements_chunk["id"] = str(uuid.uuid4())
-        measurements_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(measurements_chunk)
-        chunk_number += 1
-    
-    # 4. Extract Property Location
-    location_chunk = extract_property_location_chunk(all_text)
-    if location_chunk:
-        location_chunk["id"] = str(uuid.uuid4())
-        location_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(location_chunk)
-        chunk_number += 1
-    
-    # Extract image elements - create separate chunk for each image
-    if "pictures" in docling_data:
-        for i, picture_elem in enumerate(docling_data["pictures"]):
-            # Get page number from provenance
-            page_no = 1
-            if "prov" in picture_elem and picture_elem["prov"]:
-                page_no = picture_elem["prov"][0].get("page_no", 1)
-            
-            # Generate image path based on report structure
-            image_path = f"extracted_images/report_{report_id}/{get_image_name_by_index(i)}.png"
-            
-            image_chunk = {
-                "type": "image",
-                "raw_text": "",
-                "id": str(uuid.uuid4()),
-                "metadata": {
-                    "page": page_no,
-                    "image_index": i,
-                    "xref": picture_elem.get("self_ref", f"#/pictures/{i}")
-                },
-                "src_image_path": image_path
-            }
-            result["image"].append(image_chunk)
-    
-    # Leave tables empty as requested
-    result["table"] = []
-    
-    return result
+    """(Legacy) kept for backward compatibility if needed elsewhere (no longer used)."""
+    return {}
 
 
 def get_image_name_by_index(index: int) -> str:
@@ -439,62 +529,8 @@ def extract_prepared_for_from_text(text: str) -> Optional[Dict[str, Any]]:
 
 
 def extract_from_text(pdf_path: str, report_id: str) -> Dict[str, Any]:
-    """Fallback extraction from plain text when Docling data is not available."""
-    pages = read_pdf_text_by_page(pdf_path)
-    
-    result = {
-        "reportId": report_id,
-        "text": [],
-        "table": [],
-        "image": [],
-        "extracted": []
-    }
-    
-    # Combine all pages
-    all_text = "\n".join(pages)
-    
-    # Extract only the 4 specific text chunks
-    chunk_number = 1
-    
-    # 1. Extract Report ID and Property Address
-    report_property_chunk = extract_report_and_property_info(all_text)
-    if report_property_chunk:
-        report_property_chunk["id"] = str(uuid.uuid4())
-        report_property_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(report_property_chunk)
-        chunk_number += 1
-    
-    # 2. Extract Prepared For
-    prepared_for_chunk = extract_prepared_for_chunk(all_text)
-    if prepared_for_chunk:
-        prepared_for_chunk["id"] = str(uuid.uuid4())
-        prepared_for_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(prepared_for_chunk)
-        chunk_number += 1
-    
-    # 3. Extract Lengths, Areas and Pitches
-    measurements_chunk = extract_measurements_chunk(all_text)
-    if measurements_chunk:
-        measurements_chunk["id"] = str(uuid.uuid4())
-        measurements_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(measurements_chunk)
-        chunk_number += 1
-    
-    # 4. Extract Property Location
-    location_chunk = extract_property_location_chunk(all_text)
-    if location_chunk:
-        location_chunk["id"] = str(uuid.uuid4())
-        location_chunk["metadata"] = {"chunk_number": chunk_number}
-        result["text"].append(location_chunk)
-        chunk_number += 1
-    
-    # Leave tables empty as requested
-    result["table"] = []
-    
-    # No images in text-only extraction
-    result["image"] = []
-    
-    return result
+    """(Legacy) no longer used with new flattened format."""
+    return {}
 
 
 def split_text_into_chunks(text: str, chunk_size: int = 500) -> List[str]:
@@ -519,7 +555,7 @@ def split_text_into_chunks(text: str, chunk_size: int = 500) -> List[str]:
     return chunks
 
 
-def write_chunks_output(pdf_path: str, chunks: Dict[str, Any]) -> Path:
+def write_chunks_output(pdf_path: str, chunks: List[Dict[str, Any]]) -> Path:
     stem = Path(pdf_path).stem
     out_dir = Path("docling_exports") / stem
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -544,5 +580,95 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# -------------------- New Helper Parsers For Flattened Format --------------------
+
+def _extract_measurements_structured(text: str) -> Dict[str, Any]:
+    patterns = {
+        "area": r"Area:\s*([\d\.]+\s*SQ|[\d,]+\s*sq\s*ft)",
+        "roof_facets": r"Roof Facets:\s*(\d+)",
+        "predominant_pitch": r"Predominant Pitch:\s*([0-9/]+)",
+        "number_of_stories": r"Number of Stories:\s*([<>]=?\d+)",
+        "ridges_hips": r"Ridges/Hips:\s*([\d' \"/]+)",
+        "valleys": r"Valleys:\s*([\d' \"/]+)",
+        "rakes": r"Rakes:\s*([\d' \"/]+)",
+        "eaves": r"Eaves:\s*([\d' \"/]+)",
+        "estimated_attic": r"Estimated Attic:\s*([\d\.]+\s*SQ)",
+        "roof_obstructions": r"Roof (?:Penetrations|Obstructions):\s*(\d+)",
+        "roof_obstructions_perimeter": r"Roof (?:Penetrations|Obstructions) Perimeter:\s*([\d' \"/]+)",
+        "roof_obstructions_area": r"Roof (?:Penetrations|Obstructions) Area:\s*([\d\.]+\s*SQ)"
+    }
+    data = {}
+    for key, pat in patterns.items():
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            data[key] = m.group(1).strip()
+    return data
+
+def _extract_prepared_for_structured(text: str) -> Optional[Dict[str, Any]]:
+    match = re.search(r"Prepared For\s*([\s\S]{0,200})", text, re.IGNORECASE)
+    if not match:
+        return None
+    segment = match.group(0).split('\n')[:5]
+    lines = [l.strip() for l in segment if l.strip() and not l.lower().startswith('open in eagleview')]
+    if not lines:
+        return None
+    name = None
+    phone = None
+    phone_re = re.compile(r"(\(\d{3}\)\s*\d{3}-?\d{4})")
+    cleaned_lines = []
+    for l in lines:
+        ph = phone_re.search(l)
+        if ph:
+            phone = ph.group(1)
+            l = phone_re.sub("", l).strip()
+        if not name:
+            name = l
+        else:
+            cleaned_lines.append(l)
+    return {"name": name, "address": ", ".join(cleaned_lines), "phone": phone}
+
+def _extract_property_details_structured(text: str) -> Dict[str, Any]:
+    patterns = {
+        "total_roof_facets": r"Total Roof Facets\s*=\s*(\d+)",
+        "total_roof_obstructions": r"Total Roof (?:Penetrations|Obstructions)\s*=\s*(\d+)",
+        "ridges": r"Ridges\s*=\s*([0-9' \"()A-Za-z]+)",
+        "hips": r"Hips\s*=\s*([0-9' \"()A-Za-z]+)",
+        "valleys": r"Valleys\s*=\s*([0-9' \"()A-Za-z]+)",
+        "rakes": r"Rakes[†]?\s*=\s*([0-9' \"()A-Za-z]+)",
+        "eaves_starters": r"Eaves/Starters[‡]?\s*=\s*([0-9' \"()A-Za-z]+)",
+        "drip_edge": r"Drip Edge .*?=\s*([0-9' \"()A-Za-z]+)",
+        "parapet_walls": r"Parapet Walls\s*=\s*([0-9' \"()A-Za-z]+)",
+        "flashing": r"Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
+        "step_flashing": r"Step Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
+        "total_roof_obstructions_area": r"Total Roof (?:Penetrations|Obstructions) Area\s*=\s*([0-9\.]+\s*SQ)",
+        "total_roof_area_less_obstructions": r"Total Roof Area Less Roof (?:Penetrations|Obstructions)\s*=\s*([0-9\.]+\s*SQ)",
+        "total_roof_obstructions_perimeter": r"Total Roof (?:Penetrations|Obstructions) Perimeter\s*=\s*([0-9' \"()A-Za-z]+)",
+        "predominant_pitch": r"Predominant Pitch\s*=\s*([0-9/]+)",
+        "total_area_all_pitches": r"Total Area \(All Pitches\)\s*=\s*([0-9\.]+\s*SQ)",
+        "longitude": r"Longitude\s*=\s*([-0-9\.]+)",
+        "latitude": r"Latitude\s*=\s*([-0-9\.]+)"
+    }
+    data = {}
+    for key, pat in patterns.items():
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            data[key] = m.group(1).strip()
+    return data
+
+def _extract_legal_notice(text: str, report_id: str, property_address: str, date_val: str) -> Optional[Dict[str, Any]]:
+    # Find a block starting with IMPORTANT LEGAL NOTICE OR Legal Notice and Disclaimer
+    m = re.search(r"(IMPORTANT LEGAL NOTICE AND DISCLAIMER[\s\S]{0,1500})", text, re.IGNORECASE)
+    if not m:
+        m = re.search(r"(Legal Notice and Disclaimer[\s\S]{0,1500})", text, re.IGNORECASE)
+    if not m:
+        return None
+    snippet = re.sub(r"\s+", " ", m.group(1)).strip()
+    return {
+        "report_id": report_id,
+        "property_address": property_address,
+        "date": date_val,
+        "excerpt": snippet[:1000]  # truncate for brevity
+    }
 
 
