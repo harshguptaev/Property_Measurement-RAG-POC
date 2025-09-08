@@ -1,0 +1,17 @@
+# Pinned versions to stabilize dependency resolver and avoid slow backtracking / source builds
+# Apple Silicon (arm64) friendly wheels
+langchain==0.3.27
+langchain-community==0.3.29
+langgraph==0.6.7
+# Pin gradio to a version before it required urllib3~=2.0 to stay compatible with boto3/botocore (urllib3<1.27)
+gradio==4.19.2
+scipy==1.13.1
+torch==2.3.1
+torchvision==0.18.1
+pydantic==2.11.7
+pydantic-core==2.33.2
+tiktoken==0.11.0
+# Ensure tokenizers modern enough for langchain/chromadb
+tokenizers==0.21.4
+# Force urllib3 1.26.x compatible with botocore
+urllib3==1.26.20

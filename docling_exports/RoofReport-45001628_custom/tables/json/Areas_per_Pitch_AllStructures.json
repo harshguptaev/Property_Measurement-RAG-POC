@@ -1,27 +1,27 @@
 [
     {
-        "Roof Pitches": "4.8°",
-        "Area (SQ)": "1.7",
-        "%of Selected Facets": "6.9%"
+        "waste": "1",
+        "area": "1.7",
+        "squares": "4.8°"
     },
     {
-        "Roof Pitches": "9.5°",
-        "Area (SQ)": "1.9",
-        "%of Selected Facets": "7.8%"
+        "waste": "2",
+        "area": "1.9",
+        "squares": "9.5°"
     },
     {
-        "Roof Pitches": "14°",
-        "Area (SQ)": "0",
-        "%of Selected Facets": "0.1%"
+        "waste": "3",
+        "area": "0",
+        "squares": "14°"
     },
     {
-        "Roof Pitches": "22.6°",
-        "Area (SQ)": "20.2",
-        "%of Selected Facets": "84.2%"
+        "waste": "4",
+        "area": "20.2",
+        "squares": "22.6°"
     },
     {
-        "Roof Pitches": "26.6°",
-        "Area (SQ)": "0.3",
-        "%of Selected Facets": "1%"
+        "waste": "5",
+        "area": "0.3",
+        "squares": "26.6°"
     }
 ]

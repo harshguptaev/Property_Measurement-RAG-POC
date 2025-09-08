@@ -5,7 +5,7 @@
       "type": "report_and_property",
       "raw_text": "REPORT ID 45001628",
       "src_image_path": "",
-      "id": "640310bb-722e-484d-8df6-5a77cfb31575",
+      "id": "cb6918ca-aaa6-4683-b922-2ded00a6f2a4",
       "metadata": {
         "chunk_number": 1
       }
@@ -14,7 +14,7 @@
       "type": "measurements",
       "raw_text": "Lengths, Areas and Pitches\nRidges = 108' (6 Ridges)\nHips = 16' (8 Hips)\nValleys = 52' (6 Valleys)\nRakes† = 134' (14 Rakes)\nEaves/Starters‡ = 168' (20 Eaves)\nDrip Edge (Eaves + Rakes) = 302' (34 Lengths)\nParapet Walls = 0' (0 Lengths)\nFlashing = 33' (5 Lengths)\nStep Flashing = 66' (16 Lengths)\nPredominant Pitch = 22.6°\nTotal Area (All Pitches) = 22.2 SQ",
       "src_image_path": "",
-      "id": "403e93fc-95b1-4c28-80b6-e86be1f57352",
+      "id": "045e2ebd-432a-47e3-8840-69aa5ff6ce12",
       "metadata": {
         "chunk_number": 2
       }
@@ -23,7 +23,7 @@
       "type": "property_location",
       "raw_text": "Property Location\nLongitude = -71.2812050 Latitude = 41.6840180",
       "src_image_path": "",
-      "id": "75847e2d-af26-44a0-8762-fb21c91c463e",
+      "id": "17298af4-a1ce-4365-92a6-678c827db1ca",
       "metadata": {
         "chunk_number": 3
       }
@@ -34,7 +34,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "f9beabe2-90f5-433f-8b08-9e7ecbb0e9b9",
+      "id": "1c84ce5e-36cb-4544-83db-041222ea15f7",
       "metadata": {
         "page": 1,
         "image_index": 0,
@@ -45,7 +45,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "ca44f8ee-0ac6-4f21-ac94-93923cd0b949",
+      "id": "5c9f55e9-8429-478f-aafa-c8e634749a1c",
       "metadata": {
         "page": 1,
         "image_index": 1,
@@ -56,7 +56,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "07e2bc99-89cd-4fac-9898-f65adf0fb9b7",
+      "id": "8baa28bd-3b17-42b0-9e68-6c4ad07abfd7",
       "metadata": {
         "page": 1,
         "image_index": 2,
@@ -67,7 +67,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "c315e4a6-90a6-4fc0-83d1-1f09c3f40c42",
+      "id": "c6b9003a-7355-42b7-8973-94dec58d36c1",
       "metadata": {
         "page": 1,
         "image_index": 3,
@@ -78,7 +78,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "2dc85ed7-e3b6-44b2-bac3-10578af25024",
+      "id": "f7c1ef73-9d8f-401c-a0cf-4b689686d170",
       "metadata": {
         "page": 1,
         "image_index": 4,
@@ -89,9 +89,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "2868b057-81a9-475c-8974-c7ae82b77124",
+      "id": "28582e26-8d53-4678-b1a3-5c0ca2be45fd",
       "metadata": {
-        "page": 1,
+        "page": 2,
         "image_index": 5,
         "xref": "#/pictures/5"
       },
@@ -100,7 +100,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "34960895-c96a-4c87-854b-689e79102fa5",
+      "id": "76d42162-b096-408e-bf2d-cf6f4c9c6a56",
       "metadata": {
         "page": 2,
         "image_index": 6,
@@ -111,9 +111,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "ed585575-04dd-4fe7-91ea-d7eacb75de83",
+      "id": "105a6e9a-65af-4b65-a217-cadd7930daaa",
       "metadata": {
-        "page": 2,
+        "page": 3,
         "image_index": 7,
         "xref": "#/pictures/7"
       },
@@ -122,7 +122,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "97379ac2-5b3b-44ee-8ba3-c0954f47b17b",
+      "id": "d97c4a07-c689-426b-96a5-23d0b73ca578",
       "metadata": {
         "page": 3,
         "image_index": 8,
@@ -133,7 +133,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "029fe3be-c889-4423-b132-7e5a3c6ee11d",
+      "id": "6f3a20d4-bd80-4672-bcef-733cb403ae37",
       "metadata": {
         "page": 3,
         "image_index": 9,
@@ -144,9 +144,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "f2d8c767-92f4-48d6-b2bb-361d74ce3cd2",
+      "id": "ba97ecfe-db9a-4f37-9eb0-03bd7da9e82f",
       "metadata": {
-        "page": 3,
+        "page": 4,
         "image_index": 10,
         "xref": "#/pictures/10"
       },
@@ -155,9 +155,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "15932ee5-d0b4-43ee-a3c3-e14d1cf7647e",
+      "id": "0bbc8283-d6de-4739-87a8-b15a6a1fe01d",
       "metadata": {
-        "page": 3,
+        "page": 4,
         "image_index": 11,
         "xref": "#/pictures/11"
       },
@@ -166,7 +166,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "c525e1b8-43cb-45b9-a42d-bb6e9aa19b71",
+      "id": "cd143c00-608b-405f-8447-61b014919a0b",
       "metadata": {
         "page": 4,
         "image_index": 12,
@@ -177,9 +177,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "5c4bca2d-9a75-4fd2-900b-ed0e02ab3800",
+      "id": "e203019f-0107-4faf-b4ea-51ace2ac9dba",
       "metadata": {
-        "page": 4,
+        "page": 5,
         "image_index": 13,
         "xref": "#/pictures/13"
       },
@@ -188,9 +188,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "f39c6d79-fb44-42fe-ab13-e93302376f61",
+      "id": "75ea41dc-04c0-41e9-8676-fcec0b3ae6b9",
       "metadata": {
-        "page": 4,
+        "page": 5,
         "image_index": 14,
         "xref": "#/pictures/14"
       },
@@ -199,9 +199,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "49a6db8c-7807-4301-9dfb-6c5e4c4380f6",
+      "id": "df54564f-7051-44df-8cb1-654fec713513",
       "metadata": {
-        "page": 4,
+        "page": 5,
         "image_index": 15,
         "xref": "#/pictures/15"
       },
@@ -210,9 +210,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "3c147c75-834f-4507-9f2b-74ff20c979bb",
+      "id": "2a89d577-0705-466f-8340-2b5f82ef86d2",
       "metadata": {
-        "page": 5,
+        "page": 6,
         "image_index": 16,
         "xref": "#/pictures/16"
       },
@@ -221,9 +221,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "ad321844-25c4-461e-809c-f95a31739be1",
+      "id": "8e48e2bc-bb1a-4510-af96-107168828b95",
       "metadata": {
-        "page": 5,
+        "page": 6,
         "image_index": 17,
         "xref": "#/pictures/17"
       },
@@ -232,9 +232,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "03d84d49-9adc-4640-bd4e-ef35dd811288",
+      "id": "7cfb0abf-ed13-4e84-bf65-6b8d8520bebd",
       "metadata": {
-        "page": 5,
+        "page": 6,
         "image_index": 18,
         "xref": "#/pictures/18"
       },
@@ -243,9 +243,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "01cce666-90b7-48b3-b874-f5a9f30bdb3a",
+      "id": "5f8be036-b92d-4773-ae3a-7b68e11a827b",
       "metadata": {
-        "page": 5,
+        "page": 7,
         "image_index": 19,
         "xref": "#/pictures/19"
       },
@@ -254,9 +254,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "5bb45aea-2022-4842-941c-a409e39a31a2",
+      "id": "b84a49b2-14f9-4a90-a003-b481f2021228",
       "metadata": {
-        "page": 6,
+        "page": 7,
         "image_index": 20,
         "xref": "#/pictures/20"
       },
@@ -265,9 +265,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "3552677c-3056-452e-887c-88ac2ca6f57f",
+      "id": "7db2a053-c9a3-4574-8e23-4b80063fe001",
       "metadata": {
-        "page": 6,
+        "page": 7,
         "image_index": 21,
         "xref": "#/pictures/21"
       },
@@ -276,9 +276,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "e83b79ca-acce-4a6e-99ba-ec65773fbf74",
+      "id": "7c3d0c59-4971-471a-9cf4-3ff8f9735517",
       "metadata": {
-        "page": 6,
+        "page": 8,
         "image_index": 22,
         "xref": "#/pictures/22"
       },
@@ -287,9 +287,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "f8849abb-f492-477b-a9b5-6a294e90c44a",
+      "id": "535aa58f-5088-44ea-b3c3-f93bcca69e8f",
       "metadata": {
-        "page": 6,
+        "page": 8,
         "image_index": 23,
         "xref": "#/pictures/23"
       },
@@ -298,9 +298,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "efccaceb-548f-46f3-bec6-a80f3f4f9b3b",
+      "id": "35c5911b-eabc-4c0f-9870-69e91336fe47",
       "metadata": {
-        "page": 7,
+        "page": 8,
         "image_index": 24,
         "xref": "#/pictures/24"
       },
@@ -309,9 +309,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "92725edc-5dce-4252-937b-01c63b4e59f5",
+      "id": "a146037e-3c9f-4833-a4ca-fc95f079c132",
       "metadata": {
-        "page": 7,
+        "page": 9,
         "image_index": 25,
         "xref": "#/pictures/25"
       },
@@ -320,9 +320,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "e04e6869-8c4a-4587-8d2d-43d0a81f055b",
+      "id": "c0de5fcd-ba74-46ca-9219-abaf0d805678",
       "metadata": {
-        "page": 7,
+        "page": 9,
         "image_index": 26,
         "xref": "#/pictures/26"
       },
@@ -331,9 +331,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "3a954e7f-3f34-4a97-986c-beb6a88c2eed",
+      "id": "8e8c9683-044b-47d5-b4ee-e83ec3b7dbd4",
       "metadata": {
-        "page": 7,
+        "page": 9,
         "image_index": 27,
         "xref": "#/pictures/27"
       },
@@ -342,9 +342,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "4d66704a-b210-422b-8534-0b11c72b743d",
+      "id": "6080f5cc-ec18-401e-a1f2-419d82b926cf",
       "metadata": {
-        "page": 8,
+        "page": 10,
         "image_index": 28,
         "xref": "#/pictures/28"
       },
@@ -353,9 +353,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "3bd98b52-b28e-44d5-874c-a020d0e39009",
+      "id": "2c25fc7e-ba1f-422f-a703-8d18c2b65f44",
       "metadata": {
-        "page": 8,
+        "page": 10,
         "image_index": 29,
         "xref": "#/pictures/29"
       },
@@ -364,9 +364,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "8c992c07-c847-4c64-9c9a-8bdb859722af",
+      "id": "b9037a75-dbfc-4606-9044-92d2768efe7b",
       "metadata": {
-        "page": 8,
+        "page": 10,
         "image_index": 30,
         "xref": "#/pictures/30"
       },
@@ -375,9 +375,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "c172d2a9-5b0c-4f96-ae31-e121d048eaa0",
+      "id": "5de9a234-30ac-4deb-ba69-c9e7f59b28ad",
       "metadata": {
-        "page": 9,
+        "page": 11,
         "image_index": 31,
         "xref": "#/pictures/31"
       },
@@ -386,9 +386,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "adf9ffa8-ad8e-4cbc-8dcf-d342019ce68f",
+      "id": "2e612f1e-a3b7-4807-80b7-1ea8a06639bd",
       "metadata": {
-        "page": 9,
+        "page": 11,
         "image_index": 32,
         "xref": "#/pictures/32"
       },
@@ -397,9 +397,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "dd26ff8f-186c-4835-98d8-e26c2c4720f1",
+      "id": "cef99b76-45d7-4bd6-9620-1df47747cbe3",
       "metadata": {
-        "page": 9,
+        "page": 12,
         "image_index": 33,
         "xref": "#/pictures/33"
       },
@@ -408,9 +408,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "6f333b4d-8d55-4357-80da-052bf1bd1a26",
+      "id": "f51a61da-8c63-4abb-9703-c69e31eca9a4",
       "metadata": {
-        "page": 10,
+        "page": 12,
         "image_index": 34,
         "xref": "#/pictures/34"
       },
@@ -419,9 +419,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "7a202284-87ad-4440-9957-3d817d0f32e4",
+      "id": "206bcec1-a4b9-4497-97e4-5c74c6228876",
       "metadata": {
-        "page": 10,
+        "page": 13,
         "image_index": 35,
         "xref": "#/pictures/35"
       },
@@ -430,9 +430,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "11d191f3-158e-487a-8aee-50d7f81e6c8f",
+      "id": "6937d8d3-b310-4628-a0d7-181b954aeaa8",
       "metadata": {
-        "page": 10,
+        "page": 13,
         "image_index": 36,
         "xref": "#/pictures/36"
       },
@@ -441,9 +441,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "8726a0dc-92ad-40e5-abf3-41222f84c698",
+      "id": "68cc6f1b-8634-4d07-8fcc-51a42ef66c7e",
       "metadata": {
-        "page": 11,
+        "page": 14,
         "image_index": 37,
         "xref": "#/pictures/37"
       },
@@ -452,9 +452,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "de18c692-773d-4e1a-8371-fc556674e14f",
+      "id": "adeab56c-9d8b-4b9e-9415-0effb691f784",
       "metadata": {
-        "page": 11,
+        "page": 14,
         "image_index": 38,
         "xref": "#/pictures/38"
       },
@@ -463,9 +463,9 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "00e5d185-b4b5-4b3d-b0f0-d3f0340075d1",
+      "id": "3937c985-9e92-4c8f-961b-2501da525feb",
       "metadata": {
-        "page": 12,
+        "page": 15,
         "image_index": 39,
         "xref": "#/pictures/39"
       },
@@ -474,79 +474,13 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "7a8f5bbf-318a-4889-964e-611b989fc1f0",
+      "id": "a002f7ac-cbde-4b1e-b901-0c4220004349",
       "metadata": {
-        "page": 12,
+        "page": 15,
         "image_index": 40,
         "xref": "#/pictures/40"
       },
       "src_image_path": "extracted_images/report_45001628_custom/image_41.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "8ba02f9e-778d-43db-8307-3081b4bfe2fc",
-      "metadata": {
-        "page": 13,
-        "image_index": 41,
-        "xref": "#/pictures/41"
-      },
-      "src_image_path": "extracted_images/report_45001628_custom/image_42.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "3e5f9824-b26c-45eb-82c0-7694ceac0ff1",
-      "metadata": {
-        "page": 13,
-        "image_index": 42,
-        "xref": "#/pictures/42"
-      },
-      "src_image_path": "extracted_images/report_45001628_custom/image_43.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "14eb115c-d309-4083-97b4-1a2af5e86179",
-      "metadata": {
-        "page": 14,
-        "image_index": 43,
-        "xref": "#/pictures/43"
-      },
-      "src_image_path": "extracted_images/report_45001628_custom/image_44.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "b58ecd14-cc88-4e23-9d7d-ba830c127a14",
-      "metadata": {
-        "page": 14,
-        "image_index": 44,
-        "xref": "#/pictures/44"
-      },
-      "src_image_path": "extracted_images/report_45001628_custom/image_45.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "f990fd3c-21e8-4528-b64b-f7d9ce8ef85b",
-      "metadata": {
-        "page": 15,
-        "image_index": 45,
-        "xref": "#/pictures/45"
-      },
-      "src_image_path": "extracted_images/report_45001628_custom/image_46.png"
-    },
-    {
-      "type": "image",
-      "raw_text": "",
-      "id": "b2d74f95-a832-4d82-97b8-84120f4cce6f",
-      "metadata": {
-        "page": 15,
-        "image_index": 46,
-        "xref": "#/pictures/46"
-      },
-      "src_image_path": "extracted_images/report_45001628_custom/image_47.png"
     }
   ],
   "extracted": []
