@@ -5,7 +5,7 @@
       "type": "report_and_property",
       "raw_text": "REPORT ID 44995432\nAugust 21, 2025",
       "src_image_path": "",
-      "id": "f64fcfdc-b036-4bb4-aa8e-cd707a91c99c",
+      "id": "0e201a42-f041-413e-8c15-7489df297a36",
       "metadata": {
         "chunk_number": 1
       }
@@ -14,7 +14,7 @@
       "type": "prepared_for",
       "raw_text": "Prepared For Divya Devadas 10900 NE 4th St Suite 80123 Bellevue,WA 98004 (855) 984-6590",
       "src_image_path": "",
-      "id": "9fabea74-4c62-4d51-9b01-a4541da1318e",
+      "id": "9b634468-685a-4821-bc81-6fb60b1cb8b7",
       "metadata": {
         "chunk_number": 2
       }
@@ -23,7 +23,7 @@
       "type": "measurements",
       "raw_text": "Lengths, Areas and Pitches\nRidges = 14' 7\" (2 Ridges)\nHips = 116' 8\" (6 Hips)\nValleys = 23' 2\" (1 Valleys)\nRakes† = 0' (0 Rakes)\nEaves/Starters‡ = 155' 11\" (6 Eaves)\nDrip Edge (Eaves + Rakes) = 155' 11\" (6 Lengths)\nParapet Walls = 0' (0 Lengths)\nFlashing = 0' (0 Lengths)\nStep Flashing = 0' (0 Lengths)\nTotal Roof Penetrations Area = 0.1 SQ\nTotal Roof Area Less Roof Penetrations = 15.8 SQ\nTotal Roof Penetrations Perimeter = 28'\nPredominant Pitch = 5/12\nTotal Area (All Pitches) = 15.9 SQ",
       "src_image_path": "",
-      "id": "0b6f1a43-a905-476d-bd5a-7f79d05c4659",
+      "id": "5fea93e9-e330-4a8f-8db9-da031c0b209f",
       "metadata": {
         "chunk_number": 3
       }
@@ -32,7 +32,7 @@
       "type": "property_location",
       "raw_text": "Property Location\nLongitude = -97.6686620 Latitude = 30.5528010",
       "src_image_path": "",
-      "id": "c2bc110c-baac-4653-adf0-c1464ea4cd97",
+      "id": "7706afd6-c3ee-4e9f-88a1-f914c37a8a4d",
       "metadata": {
         "chunk_number": 4
       }
@@ -43,7 +43,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "a3236323-2b2c-4c18-8113-6029466ca4ff",
+      "id": "403b6d0f-1dbf-496d-868d-c229b3a29ab3",
       "metadata": {
         "page": 1,
         "image_index": 0,
@@ -54,7 +54,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "46dfcfcf-e858-4b97-b16d-b7cbdeca8d78",
+      "id": "89b18830-b334-473d-a02e-5f130993b737",
       "metadata": {
         "page": 1,
         "image_index": 1,
@@ -65,7 +65,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "6d762388-8c75-4cc2-a196-5a97baf09b3a",
+      "id": "42937d47-ba11-4d00-b98f-e06bb4e92a6c",
       "metadata": {
         "page": 1,
         "image_index": 2,
@@ -76,7 +76,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "4b34c9dc-ce60-4a21-bb99-a3fc2761f1b8",
+      "id": "97f52ea6-f1d4-4d76-8dff-531ce652287d",
       "metadata": {
         "page": 1,
         "image_index": 3,
@@ -87,7 +87,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "c1a2f85b-8c01-4776-8816-fcab4a37c8cd",
+      "id": "599a9f05-decd-49c2-adfd-e71c7329911c",
       "metadata": {
         "page": 1,
         "image_index": 4,
@@ -98,7 +98,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "79199169-d29a-4a36-9838-0838f50cd072",
+      "id": "78277bac-ac15-42d6-9b01-270815c872c5",
       "metadata": {
         "page": 1,
         "image_index": 5,
@@ -109,7 +109,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "1431677f-e540-442f-89b3-6e47aebefc2a",
+      "id": "77faaef2-3296-484f-95dd-203e8f4cd6a0",
       "metadata": {
         "page": 2,
         "image_index": 6,
@@ -120,7 +120,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "5fcc141a-f72a-4584-b564-51511fe76116",
+      "id": "97598c61-38d5-4173-b4fe-b7b9beeae90f",
       "metadata": {
         "page": 2,
         "image_index": 7,
@@ -131,7 +131,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "5524d93e-ad1a-4b46-89bc-83226442cb35",
+      "id": "5c3652ff-6b0a-4a44-8b10-22ddd3459dc5",
       "metadata": {
         "page": 2,
         "image_index": 8,
@@ -142,7 +142,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "2bf9b98b-89b4-4d49-9fce-ca617c1f1376",
+      "id": "9253ec69-ff48-4cdb-9dd4-4f2aa7361d21",
       "metadata": {
         "page": 2,
         "image_index": 9,
@@ -153,7 +153,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "8175c7d6-3416-4f67-abc8-dfb47bd3ed89",
+      "id": "6370adb7-a8b2-4da8-b9a1-11d3e0734d52",
       "metadata": {
         "page": 3,
         "image_index": 10,
@@ -164,7 +164,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "7f205fac-563c-471b-a222-70a598fea2de",
+      "id": "af11ba3a-8f5d-44b5-97f9-3fbe3cc338c3",
       "metadata": {
         "page": 3,
         "image_index": 11,
@@ -175,7 +175,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "7ad29a7d-3f30-4231-b236-4bde8ce80e06",
+      "id": "7112f0f6-043a-4550-86d6-0f2ecffc039e",
       "metadata": {
         "page": 3,
         "image_index": 12,
@@ -186,7 +186,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "785e467d-6d54-4838-ba17-b166bc884e89",
+      "id": "ecdf7d0d-f417-4500-be0c-3547896ed68b",
       "metadata": {
         "page": 4,
         "image_index": 13,
@@ -197,7 +197,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "5a7d1fed-7bfe-4552-ba5a-2f7741077380",
+      "id": "f73adcda-4eed-47a0-8e29-53a62f7627f2",
       "metadata": {
         "page": 4,
         "image_index": 14,
@@ -208,7 +208,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "cc873467-a2a7-4a31-bf80-7949141076aa",
+      "id": "8d8e4fd7-d956-4a9f-8818-22ea1f399201",
       "metadata": {
         "page": 4,
         "image_index": 15,
@@ -219,7 +219,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "d1b0acd8-a125-42c0-bff0-1a6596a1719a",
+      "id": "2956902a-cf82-47ff-a708-9235e43948de",
       "metadata": {
         "page": 5,
         "image_index": 16,
@@ -230,7 +230,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "6026e357-4bfc-4155-9e88-8cf6c0c3c07f",
+      "id": "a0a0f535-6060-4d7d-bddd-e834e78d1a16",
       "metadata": {
         "page": 5,
         "image_index": 17,
@@ -241,7 +241,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "08e66373-afde-4f68-a813-72c68f719500",
+      "id": "5534a529-a3f7-4c92-ba47-3ca8c562bb74",
       "metadata": {
         "page": 6,
         "image_index": 18,
@@ -252,7 +252,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "320b0ef4-9508-4a0d-bfaa-bb527b2f1276",
+      "id": "f85ad2c9-cfc6-42bd-8139-2bffff5ba468",
       "metadata": {
         "page": 6,
         "image_index": 19,
@@ -263,7 +263,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "4db549bf-bf61-4eb1-b88c-814ed0289d15",
+      "id": "53cd6136-e47b-4c2e-821c-39ba76a33fd3",
       "metadata": {
         "page": 6,
         "image_index": 20,
@@ -274,7 +274,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "4c9539ab-35fb-411c-ab49-b1b4bb981fd2",
+      "id": "1bc23f35-b28e-4029-a1ce-4fd701e6e4ff",
       "metadata": {
         "page": 7,
         "image_index": 21,
@@ -285,7 +285,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "9ee1a8e9-1d6a-4379-9eb6-403e842bccef",
+      "id": "a268403f-276b-420b-9b0a-9baf45381115",
       "metadata": {
         "page": 7,
         "image_index": 22,
@@ -296,7 +296,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "18de414b-6be7-4685-9417-b5e7dd54fa81",
+      "id": "2f1381ef-c567-4459-997d-28dd7c5413ce",
       "metadata": {
         "page": 7,
         "image_index": 23,
@@ -307,7 +307,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "f32149da-c6fe-4c65-be81-e00d758e13ea",
+      "id": "c3364bc9-0265-4df0-82e0-0cfe299cd0dd",
       "metadata": {
         "page": 8,
         "image_index": 24,
@@ -318,7 +318,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "a8e099c7-2bad-45a1-9fc1-d1ece5330fe7",
+      "id": "4726c2cd-833b-450c-a0f8-3ede4393b529",
       "metadata": {
         "page": 8,
         "image_index": 25,
@@ -329,7 +329,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "7400cd3b-d9b1-4d94-802c-b910696f4734",
+      "id": "fc32e5be-d00f-429c-8126-db681ba02e0a",
       "metadata": {
         "page": 8,
         "image_index": 26,
@@ -340,7 +340,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "f7f30305-4725-4768-aa2a-428dba7980f0",
+      "id": "05aaaaae-fd45-40a8-a1ef-620e200a3b38",
       "metadata": {
         "page": 9,
         "image_index": 27,
@@ -351,7 +351,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "4dcbea58-7055-4c9a-8222-6766a1f7b190",
+      "id": "5cf89e93-2558-4a91-bc1a-abe18bacb251",
       "metadata": {
         "page": 9,
         "image_index": 28,
@@ -362,7 +362,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "2ae6eb3a-0e6b-418e-b9fa-2bb77133317f",
+      "id": "77b10e34-daec-4879-9941-7f6fbddd8ece",
       "metadata": {
         "page": 9,
         "image_index": 29,
@@ -373,7 +373,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "73bf93c2-5b97-4820-afc9-b8e2ec9fef60",
+      "id": "e837fbc3-b661-4568-9c7c-cf2ebc1459a9",
       "metadata": {
         "page": 10,
         "image_index": 30,
@@ -384,7 +384,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "ef1ca946-76df-4941-ad08-cc5166a209ac",
+      "id": "6da2d4a4-eef1-41b2-a78d-cc957b82dd39",
       "metadata": {
         "page": 10,
         "image_index": 31,
@@ -395,7 +395,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "1f6ca57d-5219-446c-acba-12b8c109b5b0",
+      "id": "dbe16a3f-7c73-44c3-9e76-8892f8051488",
       "metadata": {
         "page": 10,
         "image_index": 32,
@@ -406,7 +406,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "025aed6b-e202-4512-8dbc-7f145e41911a",
+      "id": "8fbef021-e2ee-4700-9914-c9ff08193686",
       "metadata": {
         "page": 11,
         "image_index": 33,
@@ -417,7 +417,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "368aeda1-46d8-4fde-bb9d-1976172a0bed",
+      "id": "f0e55d00-e5af-48a2-9cb1-516de583eadc",
       "metadata": {
         "page": 11,
         "image_index": 34,
@@ -428,7 +428,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "499ec5c2-905b-43ab-a93b-f0ae7d41bcdd",
+      "id": "b3796203-a59f-4bde-a669-54af56ed1f43",
       "metadata": {
         "page": 12,
         "image_index": 35,
@@ -439,7 +439,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "acb5e313-452a-4c95-be47-f4fd19bf2803",
+      "id": "d8f20be1-234a-4c76-a3a4-42bd0daa45de",
       "metadata": {
         "page": 12,
         "image_index": 36,
@@ -450,7 +450,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "51f9b682-f2ae-4e9a-9024-943214158670",
+      "id": "d3e368eb-dbfc-458f-913f-a8c27902a520",
       "metadata": {
         "page": 13,
         "image_index": 37,
@@ -461,7 +461,7 @@
     {
       "type": "image",
       "raw_text": "",
-      "id": "e1ce603e-fa15-4cf6-a705-64abda1edbd6",
+      "id": "18b1063a-d05f-4cf5-80de-22349d57fb38",
       "metadata": {
         "page": 13,
         "image_index": 38,

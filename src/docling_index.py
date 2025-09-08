@@ -858,7 +858,7 @@ class DoclingProcessor:
                     logging.warning(f"No content found in chunks for {file_path.name}")
                     return
                 # Create output directory structure
-                chunks_dir = Path("important_chunks") / f"report_{report_id}"
+                chunks_dir = Path("docling_exports") / file_path.stem
                 chunks_dir.mkdir(parents=True, exist_ok=True)
                 
                 # Save chunks as JSON
