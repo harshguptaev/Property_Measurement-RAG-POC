@@ -8,12 +8,16 @@ import logging
 from typing import Any, Dict, List, Optional, Union, Tuple
 from pathlib import Path
 from io import BytesIO
+from PIL import Image
+import pandas as pd
 
 # Docling imports for advanced document processing
 try:
-    from docling.document_converter import DocumentConverter
+    from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions
+    from docling_core.types.doc import TableItem, TextItem
+    from docling.datamodel.document import ConversionResult
     # Try different import paths for ConvertedDocument
     try:
         from docling.datamodel.document import ConvertedDocument
@@ -88,10 +92,18 @@ class DoclingProcessor:
             # Configure pipeline options for better PDF processing
             pipeline_options = PdfPipelineOptions()
             pipeline_options.do_ocr = True  # Enable OCR for scanned PDFs
-            pipeline_options.do_table_structure = True  # Extract table structure
-            
+            pipeline_options.do_table_structure = True
+            pipeline_options.table_structure_options.do_cell_matching = True
+            pipeline_options.images_scale = 4
+            pipeline_options.generate_page_images = True
+
             # Initialize converter with simplified options
-            self.converter = DocumentConverter()
+
+            self.converter = DocumentConverter(
+                format_options={
+                    InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+                }
+            )
             
             logging.info("Docling converter initialized with simplified PDF processing")
         except Exception as e:
@@ -175,7 +187,7 @@ class DoclingProcessor:
             logging.error(f"Error processing file {file_path}: {e}")
             raise
     
-    def save_docling_exports(self, main_text: str, converted_doc: Any, file_path: Path):
+    def save_docling_exports(self, main_text: str, converted_doc: ConversionResult, file_path: Path):
         """Persist Docling exports (Markdown and JSON)"""
         try:
             out_dir = Path("docling_exports")
@@ -190,7 +202,7 @@ class DoclingProcessor:
                 doc_json = converted_doc.model_dump()
             except Exception:
                 try:
-                    doc_json = converted_doc.to_dict()
+                    doc_json = converted_doc.export_to_dict()
                 except Exception:
                     tables_md: List[Union[str, Dict[str, Any]]] = []
                     if hasattr(converted_doc, "tables") and converted_doc.tables:
@@ -211,7 +223,7 @@ class DoclingProcessor:
                         "meta": {"file_name": Path(file_path).name},
                     }
             (out_report_dir / f"{stem}.json").write_text(
-                json.dumps(doc_json, ensure_ascii=False, indent=2),
+                json.dumps(doc_json, ensure_ascii=False, indent=2, default=str),
                 encoding="utf-8",
             )
         except Exception as save_err:
@@ -235,17 +247,19 @@ class DoclingProcessor:
             main_text = converted_doc.export_to_markdown()
             self.save_docling_exports(main_text, converted_doc, file_path)
             
-            if main_text.strip():
-                text_doc = Document(
-                    page_content=main_text,
-                    metadata={
-                        'type': 'text',
-                        'extraction_method': 'docling_markdown'
-                    }
-                )
-                # Split into chunks
-                text_chunks = self.text_splitter.split_documents([text_doc])
-                documents.extend(text_chunks)
+            for text_doc in converted_doc.iterate_items():
+                if isinstance(text_doc, TextItem):  
+                    text_doc = Document(
+                        page_content=text_doc.text,
+                        metadata={
+                            'type': 'text',
+                            'extraction_method': 'docling_markdown'
+                        }
+                    )
+                    # Split into chunks
+                    text_chunks = self.text_splitter.split_documents([text_doc])
+                    documents.extend(text_chunks)
+                
             
             # Extract page-level content with images
             if extract_images:
@@ -260,6 +274,7 @@ class DoclingProcessor:
             important_chunks = self._extract_and_save_important_chunks(file_path)
             documents.extend(important_chunks)
             
+
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
             return documents
             
@@ -454,11 +469,11 @@ class DoclingProcessor:
         """
         For each Docling table:
         - Export to DataFrame for analytic correctness and downstream SQL/DF pipelines.
-        - Export to HTML and Markdown for human-readable embeddings.
-        - Create LangChain Documents:
-            a) One doc with Markdown table (single chunk).
-            b) One or more docs from HTML split with an element-preserving splitter.
+        - Export Areas per pitch to json.
+        - Export Waste Calculation to images.
+        - Chunk tables.
         """
+        
         out_docs: List[Document] = []
         # Ensure we can iterate all tables reliably across versions
         for idx, table in enumerate(tables_list):
@@ -470,81 +485,272 @@ class DoclingProcessor:
                 logging.warning(f"Error exporting table {idx} to dataframe: {e}")
                 df = None
 
-            # 2) HTML and Markdown renderings for embeddings/view
-            try:
-                try:
-                    html = table.export_to_html(doc=converted_doc)
-                except TypeError:
-                    html = table.export_to_html()
-                try:
-                    md = table.export_to_markdown(doc=converted_doc)
-                except TypeError:
-                    md = table.export_to_markdown()
-            except Exception as e:
-                logging.warning(f"Error exporting table {idx} to HTML/Markdown: {e}")
-                html = ""
-                md = ""
+            self.export_table_data(df, file_path, idx, tables_list)
 
-            # Common metadata with schema hints
-            headers: List[str] = []
-            try:
-                header_cells = [c for c in table.data.table_cells if getattr(c, "column_header", False)]
-                if not header_cells and getattr(table.data, "num_rows", 0) > 0:
-                    try:
-                        first_row = table.data.grid[0]
-                        headers = [cell.text for cell in first_row]
-                    except Exception:
-                        headers = []
-                else:
-                    headers = [c.text for c in header_cells]
-            except Exception:
-                headers = []
+        self.export_table_images(converted_doc, file_path)
+        self.export_table_data_chunks(file_path)
 
-            common_meta: Dict[str, Any] = {
-                "type": "table",
-                "extraction_method": "docling_table",
-                "report_id": file_path.stem.split('RoofReport-')[1].split('.')[0],
-                "table_index": idx,
-                "source_path": str(file_path),
-                "headers": headers,
-                "table_label": getattr(table, "label", None),
-            }
+        areas_per_pitch_path = Path("docling_exports") / file_path.stem / "tables" / "json"
+        waste_calculation_path = Path("docling_exports") / file_path.stem / "tables" / "images"
+        report_id = file_path.stem.split('RoofReport-')[1].split('.')[0]
+        for area_per_pitch_file in areas_per_pitch_path.glob("*.json"):
+            print("area_per_pitch_file", area_per_pitch_file)
+            table_doc = Document(
+                page_content=f"Report ID: {report_id}\n{area_per_pitch_file.read_text()}",
+                metadata={
+                    'type': 'table',
+                    'file_name': area_per_pitch_file.name,
+                    'source_path': str(area_per_pitch_file),
+                    'file_type': 'json',
+                    'report_id': report_id,
+                    'name': 'Areas Per Pitch',
+                    'description': 'This table comes under ROOFING REPORT SUMMARY in pdf. The table lists each pitch on this roof and the total area and percent of the roof with that pitch. and the suffix of the file name tells which structure it belongs to. If suffix is AllStructures, then it is the total of the roofs for all structures.',
+                    'extraction_method': 'docling_table'
+                }
+            )
+            # Chunk tables
+            chunks = self.text_splitter.split_documents([table_doc])
+            out_docs.extend(chunks)
 
-            # 3) HTML-preserving split to avoid breaking <table>
-            try:
-                html_parts = self.table_splitter.split_text(html) if self.table_splitter else [html]
-            except Exception:
-                html_parts = [html]
-            for i, part in enumerate([p for p in html_parts if p]):
-                # HTMLSemanticPreservingSplitter returns LangChain Documents; handle both Document and str
-                if hasattr(part, "page_content"):
-                    part_content = getattr(part, "page_content", "")
-                    part_meta = getattr(part, "metadata", {}) or {}
-                else:
-                    part_content = str(part)
-                    part_meta = {}
-                out_docs.append(
-                    Document(
-                        page_content=part_content,
-                        metadata={
-                            **common_meta,
-                            **part_meta,
-                            "format": "html",
-                            "html_chunk_index": i,
-                        },
-                    )
-                )
-
-            out_dir = Path("docling_exports")
-            out_dir.mkdir(parents=True, exist_ok=True)
-            stem = Path(file_path).stem
-            out_report_dir = out_dir / stem
-            out_report_dir.mkdir(parents=True, exist_ok=True)
-            out_report_table_dir = out_report_dir / "tables"
-            out_report_table_dir.mkdir(parents=True, exist_ok=True)
-            # Save individual table HTML
-            (out_report_table_dir / f"Table_{idx+1}.html").write_text(html or "", encoding="utf-8")
+        for waste_calculation_file in waste_calculation_path.glob("*.png"):
+            print("waste_calculation_file", waste_calculation_file.name)
+            if waste_calculation_file.name.startswith("Structure_Complexity"):
+                name = "Structure_Complexity"
+            else:
+                name = "Waste_Calculation"
+            table_doc = Document(
+                page_content=f"Report ID: {report_id}\n{waste_calculation_file}",
+                metadata={
+                    'type': 'image',
+                    'file_name': waste_calculation_file.name,
+                    'file_type': 'png',
+                    'report_id': file_path.stem.split('RoofReport-')[1].split('.')[0],
+                    'name': name,
+                    'description':'''These are basically the Structure Complexity and Waste Calculation tables in the pdf and we are storing them as images. 
+                                    This Table comes under ROOFING REPORT SUMMARY in pdf. *Squares are rounded up to the 1/3 of a square
+                                    Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
+                                    factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
+                                    control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
+                                    shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
+                                    EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
+                                    replacement or repair work''',
+                    'extraction_method': 'docling_image'
+                }
+            )
+            out_docs.append(table_doc)
         return out_docs
+    
+    def export_table_data(self, df, file_path, idx, tables_list):
+
+        """Export table data to JSON files."""
+        if idx==0:
+            return
+        name = ""
+
+        if idx%2==0:
+            name = "Waste_Calculation_" + str(idx//2)
+        if idx%2==1:
+            name = "Areas_per_Pitch_Structure_" + str(idx//2 + 1)
+        if len(tables_list)>3 and idx == len(tables_list)-1:
+            name = "Areas_per_Pitch_AllStructures"
+
+        out_dir = Path("docling_exports")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_dir.mkdir(parents=True, exist_ok=True)
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_dir.mkdir(parents=True, exist_ok=True)
+        out_json_report_table_dir = out_report_table_dir / "json"
+        out_json_report_table_dir.mkdir(parents=True, exist_ok=True)
+
+        if idx%2==0:
+            json_file = out_json_report_table_dir / f"{name}.json"
+            # data = self.df_to_waste_json(df)
+            df_dict = {
+                "columns": df.columns.tolist(),
+                "data": df.values.tolist()
+            }
+            data = self.df_to_waste_json(df)
+            json_str = json.dumps(data, ensure_ascii=False, indent=4)
+            json_file.write_text(json_str, encoding="utf-8")
+            return
+
+        df = df.T
+        df.columns = df.iloc[0]   # first row becomes column names
+        df = df.drop(0)           # drop the old header row
+        (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(df.to_dict(orient="records"), ensure_ascii=False, indent=4),encoding="utf-8")
+
+    def df_to_waste_json(self, df):
+
+        # Initialize indices
+        waste_row_idx = None
+        area_row_idx = None
+        squares_row_idx = None
+        
+        # Search for rows starting with specific labels (case-insensitive)
+        for idx in range(len(df)):
+            first_cell = str(df.iloc[idx, 0]).strip().lower()
+            if 'waste%' in first_cell:
+                waste_row_idx = idx
+            elif 'area' in first_cell:
+                area_row_idx = idx
+            elif 'squares' in first_cell:
+                squares_row_idx = idx
+        
+        # Extract lists
+        if waste_row_idx is not None:
+            waste_list = df.iloc[waste_row_idx, 1:].astype(str).tolist()
+        else:
+            # Parse waste from columns (last part after '.')
+            waste_list = []
+            for col in df.columns[1:]:
+                parts = str(col).split('.')
+                last_part = parts[-1].strip() if parts else ''
+                waste_list.append(last_part)
+        
+        if area_row_idx is not None:
+            area_list = df.iloc[area_row_idx, 1:].astype(str).tolist()
+        else:
+            # Assume first row is area if not found
+            area_list = df.iloc[0, 1:].astype(str).tolist()
+        
+        if squares_row_idx is not None:
+            squares_list = df.iloc[squares_row_idx, 1:].astype(str).tolist()
+        else:
+            # Assume second row is squares if not found
+            squares_list = df.iloc[1, 1:].astype(str).tolist()
+        
+        # Determine the minimum length to align lists
+        min_len = min(len(waste_list), len(area_list), len(squares_list))
+        
+        # Build the result list
+        result = []
+        for i in range(min_len):
+            result.append({
+                "waste": waste_list[i],
+                "area": area_list[i],
+                "squares": squares_list[i]
+            })
+        
+        return result
+    def export_table_images(self, converted_doc, file_path):
+
+        """Export table images to PNG files."""
+        table_counter = 0
+        out_dir = Path("docling_exports")
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_images_dir = out_report_table_dir / "images"
+        out_report_table_images_dir.mkdir(parents=True, exist_ok=True)
+
+        for element, _ in converted_doc.iterate_items():
+            if isinstance(element, TableItem):
+                table_counter += 1
+                if table_counter == 1:
+                    continue
+                
+                # Even tables -> Areas_per_Pitch_Structure
+                if table_counter % 2 == 0:
+                    name = f"Areas_per_Pitch_Structure_{table_counter // 2}.png"
+                    if table_counter == len(converted_doc.tables):
+                        name = "Areas_per_Pitch_AllStructures.png"
+                    img = element.get_image(converted_doc)
+                    img.save(out_report_table_images_dir / name)
+                    continue
+
+                img = element.get_image(converted_doc)
+                width, height = img.size
+                # Y positions in pixels
+                y26 = int(height * 0.26)
+                y28 = int(height * 0.28)
+                # Top part (0% → 26%)
+                top_img = img.crop((0, 0, width, y26))
+
+                # Bottom part (28% → 100%)
+                bottom_img = img.crop((0, y28, width, height))
+
+                # Save results
+                top_img.save(f"{out_report_table_images_dir}/Structure_Complexity_{table_counter//2}.png")
+                bottom_img.save(f"{out_report_table_images_dir}/Waste_Calculation_{table_counter//2}.png")
+
+    def export_table_data_chunks(self, file_path):
+        """Export table data chunks to JSON files.
+          "table":[{
+                "section":"Hardcoded",
+                "raw_text":"JSON or CSV",
+                "id":"autogenerated",
+                "metadata":{},
+                "src_image_path":"reference path to the image"
+        }}]"""
+        out_dir = Path("docling_exports")
+        stem = Path(file_path).stem
+        out_report_dir = out_dir / stem
+        out_report_table_dir = out_report_dir / "tables"
+        out_report_table_json_dir = out_report_table_dir / "json"
+        out_report_table_images_dir = out_report_table_dir / "images"
+
+        table_chunks = []
+        chunk_counter = 1
+
+        # Iterate over all JSON files
+        for json_file in sorted(out_report_table_json_dir.glob("*.json")):
+            try:
+                json_content = json.loads(json_file.read_text(encoding="utf-8"))
+                raw_text_str = json.dumps(json_content, ensure_ascii=False, indent=2)
+            except Exception as e:
+                logging.warning(f"Skipping {json_file.name}, failed to read JSON: {e}")
+                continue
+
+            # Determine section
+            section = ""
+            if "Areas_per_Pitch" in json_file.name:
+                section = f"This table named {json_file.name} lists each pitch on this roof and the total area and percent of the roof with that pitch."
+            elif "Waste_Calculation" in json_file.name:
+                section = f"""NOTE: This waste calculation table named {json_file.name} is for asphalt shingle roofing applications. All values in the table below 
+                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square
+                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
+                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
+                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
+                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
+                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
+                            replacement or repair work."""
+            # Corresponding image path (same filename but .png)
+            image_name = json_file.stem + ".png"
+            image_path = out_report_table_images_dir / image_name
+            if not image_path.exists():
+                logging.warning(f"Image not found for {json_file.name}: {image_path}")
+                image_path_str = ""
+            else:
+                image_path_str = str(image_path)
+
+            # Append chunk
+            table_chunks.append({
+                "section": section,
+                "raw_text": raw_text_str,
+                "id": f"chunk{chunk_counter}",
+                "metadata": {},
+                "src_image_path": image_path_str
+            })
+            chunk_counter += 1
+
+        for png_file in sorted(out_report_table_images_dir.glob("*.png")):
+            if "Structure_Complexity" in png_file.name:
+                section = f"This table named {png_file.name} lists the structure complexity of the roof."
+                table_chunks.append({
+                    "section": section,
+                    "raw_text": "Dummy Text for now.",
+                    "id": f"chunk{chunk_counter}",
+                    "metadata": {},
+                    "src_image_path": str(png_file)
+                })
+                chunk_counter += 1
+
+        # Save consolidated table_chunks.json
+        chunks_file = out_report_dir / "table_chunks.json"
+        chunks_data = {"tables": table_chunks}
+        chunks_file.write_text(json.dumps(chunks_data, ensure_ascii=False, indent=2), encoding="utf-8")
     
     def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
         """Process Office documents (DOCX, PPTX) using Docling."""
