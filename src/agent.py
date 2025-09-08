@@ -23,6 +23,8 @@ from pydantic import BaseModel, Field
 from .config import config
 from .vector_store import VectorStoreManager
 from .bedrock_client import create_bedrock_llm, create_bedrock_embeddings
+from .image_utils import ImageManager
+from .context_manager import ContextManager
 
 
 class AgentState(BaseModel):
@@ -91,6 +93,7 @@ class AgenticRAG:
         vector_stores: Optional[List[Dict[str, Any]]] = None,
         llm: Optional[Any] = None,
         config_instance: Optional[Any] = None,
+        context_manager: Optional[ContextManager] = None,
         **kwargs
     ):
         """
@@ -101,6 +104,7 @@ class AgenticRAG:
             vector_stores: List of vector store configurations
             llm: Language model instance
             config_instance: Configuration instance
+            context_manager: Context manager for structured data integration
             **kwargs: Additional arguments for LLM
         """
         self.config = config_instance or config
@@ -108,6 +112,9 @@ class AgenticRAG:
         self.vector_stores = []
         self.tools = []
         self.graph = None
+        
+        # Initialize context manager
+        self.context_manager = context_manager or ContextManager()
         
         # Setup vector stores
         if vector_stores:
@@ -209,7 +216,7 @@ class AgenticRAG:
         return state
     
     def _search_documents(self, state: AgentState) -> AgentState:
-        """Search for relevant documents."""
+        """Search for relevant documents with context enhancement."""
         query = state.query
         all_documents = []
         
@@ -245,10 +252,21 @@ class AgenticRAG:
         
         # Limit to top results
         max_docs = self.config.get("retrieval", "k", 10)
-        state.documents = unique_documents[:max_docs]
+        limited_documents = unique_documents[:max_docs]
+        
+        # Enhance documents with structured context
+        try:
+            enriched_documents = self.context_manager.enrich_documents_with_context(
+                limited_documents, query
+            )
+            state.documents = enriched_documents
+        except Exception as e:
+            logging.warning(f"Error enriching documents with context: {e}")
+            state.documents = limited_documents
+        
         state.step = "documents_retrieved"
         
-        logging.info(f"Retrieved {len(state.documents)} relevant documents")
+        logging.info(f"Retrieved and enriched {len(state.documents)} relevant documents")
         
         return state
     
@@ -262,9 +280,30 @@ class AgenticRAG:
             state.step = "completed"
             return state
         
-        # Prepare context with enhanced image handling
+        # Prepare context with enhanced image handling and structured data
         context_parts = []
         retrieved_images = []  # Store images for UI display
+        extracted_conditions = []
+        extracted_roof_types = []
+        extracted_materials = []
+        report_ids = set()
+        
+        # Collect report IDs for context summary
+        for doc in documents:
+            report_id = doc.metadata.get("report_id")
+            if report_id:
+                report_ids.add(report_id)
+        
+        # Add structured context summary if we have report IDs
+        if report_ids:
+            try:
+                context_summary = self.context_manager.create_context_summary(
+                    list(report_ids), query
+                )
+                if context_summary:
+                    context_parts.append(f"=== STRUCTURED REPORT CONTEXT ===\n{context_summary}\n")
+            except Exception as e:
+                logging.warning(f"Error creating context summary: {e}")
         
         for i, doc in enumerate(documents, 1):
             content = doc.page_content
@@ -274,16 +313,59 @@ class AgenticRAG:
             if doc.metadata.get('type') == 'image':
                 image_info = {
                     'page': metadata.get('page_number', 'unknown'),
-                    'source': metadata.get('source', 'unknown source'),
+                    'source': metadata.get('source', metadata.get('source_file', 'unknown source')),
                     'size': metadata.get('image_size', 'unknown'),
                     'index': metadata.get('image_index', i),
-                    'image_data': doc.metadata.get('image_data')  # Include for UI
+                    'image_data': doc.metadata.get('image_data'),
+                    'label': metadata.get('image_label') or metadata.get('image_description'),
+                    'filename': metadata.get('image_filename'),
+                    'path': metadata.get('image_file_path'),
+                    'report_id': metadata.get('report_id'),
+                    'gemini_analysis': metadata.get('gemini_analysis')
                 }
                 retrieved_images.append(image_info)
-                
                 # Enhanced description for LLM
                 size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
                 content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
+                gemini = metadata.get('gemini_analysis')
+                if not isinstance(gemini, dict):
+                    try:
+                        manager = ImageManager()
+                        analysis = manager.analyze_image_with_gemini(doc.metadata)
+                        if isinstance(analysis, dict) and 'error' not in analysis:
+                            metadata['gemini_analysis'] = analysis
+                            doc.metadata['gemini_analysis'] = analysis
+                            gemini = analysis
+                    except Exception:
+                        gemini = metadata.get('gemini_analysis')
+                if isinstance(gemini, dict):
+                    summary = gemini.get('full_analysis') or gemini.get('caption') or gemini.get('measurements_analysis')
+                    if summary:
+                        content = f"{content}\nGemini: {summary}"
+                    roof_type = gemini.get('roof_type')
+                    material = gemini.get('material')
+                    condition = gemini.get('condition')
+                    issues = gemini.get('issues')
+                    orientation = gemini.get('orientation')
+                    if condition and condition != 'Not specified':
+                        extracted_conditions.append(condition)
+                    if roof_type and roof_type != 'Not specified':
+                        extracted_roof_types.append(roof_type)
+                    if material and material != 'Not specified':
+                        extracted_materials.append(material)
+                    fields = []
+                    if roof_type and roof_type != 'Not specified':
+                        fields.append(f"Roof Type: {roof_type}")
+                    if material and material != 'Not specified':
+                        fields.append(f"Material: {material}")
+                    if condition and condition != 'Not specified':
+                        fields.append(f"Condition: {condition}")
+                    if issues and issues != 'Not specified':
+                        fields.append(f"Issues: {issues}")
+                    if orientation and orientation != 'Not specified':
+                        fields.append(f"Orientation: {orientation}")
+                    if fields:
+                        content = f"{content}\n" + " | ".join(fields)
             
             elif doc.metadata.get('type') == 'table':
                 table_info = {
@@ -304,6 +386,16 @@ class AgenticRAG:
     )
 
             context_parts.append(f"Document {i}:\n{content}\nSource: {metadata.get('source', 'Unknown')}\n")
+
+        if extracted_conditions or extracted_roof_types or extracted_materials:
+            summary_bits = []
+            if extracted_conditions:
+                summary_bits.append(f"Condition: {', '.join(dict.fromkeys(extracted_conditions))}")
+            if extracted_roof_types:
+                summary_bits.append(f"Roof Type: {', '.join(dict.fromkeys(extracted_roof_types))}")
+            if extracted_materials:
+                summary_bits.append(f"Material: {', '.join(dict.fromkeys(extracted_materials))}")
+            context_parts.insert(0, f"Structured Findings:\n" + " | ".join(summary_bits) + "\n")
         
         # Store retrieved images in state for UI access
         state.retrieved_images = retrieved_images
@@ -311,17 +403,24 @@ class AgenticRAG:
         context = "\n".join(context_parts)
         
         # Create prompt
-        system_prompt = """You are a helpful AI assistant that answers questions based on the provided context documents. 
+        system_prompt = """You are a helpful AI assistant specialized in property inspection and roof report analysis. You answer questions based on the provided context documents and structured data.
 
 Guidelines:
-1. Answer questions accurately based on the provided context
-2. If information is not in the context, clearly state that
-3. Cite relevant documents when making claims
-4. For DIAGRAM/IMAGE references, acknowledge them as potentially containing relevant visual information like charts, photos, technical diagrams, or illustrations
-5. When diagrams/images are mentioned, suggest that the user should "view the referenced diagrams/images" for visual details
-6. Be concise but comprehensive
-7. If multiple documents provide different information, synthesize appropriately
-8. Pay special attention to visual elements that may contain important technical details, measurements, or visual evidence"""
+1. Answer questions accurately based on the provided context and structured report data
+2. Use the STRUCTURED REPORT CONTEXT section for key property details, measurements, and client information
+3. If information is not in the context, clearly state that
+4. Cite relevant documents and report IDs when making claims
+5. For DIAGRAM/IMAGE references, acknowledge them as containing visual information and use any Gemini analysis provided
+6. When discussing measurements, always reference the structured data when available
+7. Be concise but comprehensive, prioritizing accuracy
+8. If multiple reports provide different information, clearly distinguish between them
+9. Pay special attention to:
+   - Property addresses and report IDs for context
+   - Measurements and roof specifications
+   - Material types and conditions
+   - Visual evidence from images and diagrams
+   - Client information when relevant to the query
+10. Format numerical data clearly (e.g., areas in SQ, pitches as ratios, lengths with units)"""
 
         user_prompt = f"""Based on the following context documents, please answer this question: {query}
 
@@ -396,27 +495,92 @@ Please provide a comprehensive answer based on the available information."""
             if not all_documents:
                 return {"response": "No relevant documents found.", "images": []}
             
+            # Enhance documents with structured context
+            try:
+                enriched_documents = self.context_manager.enrich_documents_with_context(
+                    all_documents[:5], query
+                )
+            except Exception as e:
+                logging.warning(f"Error enriching documents with context: {e}")
+                enriched_documents = all_documents[:5]
+            
             # Process images similar to the LangGraph version
             retrieved_images = []
             context_parts = []
+            report_ids = set()
             
-            for i, doc in enumerate(all_documents[:5]):
+            # Collect report IDs and add structured context
+            for doc in enriched_documents:
+                report_id = doc.metadata.get("report_id")
+                if report_id:
+                    report_ids.add(report_id)
+            
+            if report_ids:
+                try:
+                    context_summary = self.context_manager.create_context_summary(
+                        list(report_ids), query
+                    )
+                    if context_summary:
+                        context_parts.append(f"=== STRUCTURED REPORT CONTEXT ===\n{context_summary}\n")
+                except Exception as e:
+                    logging.warning(f"Error creating context summary: {e}")
+            
+            for i, doc in enumerate(enriched_documents):
                 content = doc.page_content[:300] + "..."
                 
                 # Handle image documents
                 if doc.metadata.get('type') == 'image':
                     image_info = {
                         'page': doc.metadata.get('page_number', 'unknown'),
-                        'source': doc.metadata.get('source', 'unknown source'),
+                        'source': doc.metadata.get('source', doc.metadata.get('source_file', 'unknown source')),
                         'size': doc.metadata.get('image_size', 'unknown'),
                         'index': doc.metadata.get('image_index', i),
-                        'image_data': doc.metadata.get('image_data')
+                        'image_data': doc.metadata.get('image_data'),
+                        'label': doc.metadata.get('image_label') or doc.metadata.get('image_description'),
+                        'filename': doc.metadata.get('image_filename'),
+                        'path': doc.metadata.get('image_file_path'),
+                        'report_id': doc.metadata.get('report_id'),
+                        'gemini_analysis': doc.metadata.get('gemini_analysis')
                     }
                     retrieved_images.append(image_info)
                     
                     # Enhanced description for LLM
                     size_str = f"{image_info['size'][0]}x{image_info['size'][1]}" if isinstance(image_info['size'], (list, tuple)) else str(image_info['size'])
                     content = f"[DIAGRAM/IMAGE: Located on page {image_info['page']} of {Path(image_info['source']).name}. Size: {size_str} pixels. This appears to be a visual element that may contain important diagrams, charts, photos, or technical illustrations relevant to the roof report.]"
+                    gemini = doc.metadata.get('gemini_analysis')
+                    if not isinstance(gemini, dict):
+                        try:
+                            manager = ImageManager()
+                            analysis = manager.analyze_image_with_gemini(doc.metadata)
+                            if isinstance(analysis, dict) and 'error' not in analysis:
+                                doc.metadata['gemini_analysis'] = analysis
+                                gemini = analysis
+                        except Exception:
+                            gemini = doc.metadata.get('gemini_analysis')
+                    if isinstance(gemini, dict):
+                        summary = gemini.get('full_analysis') or gemini.get('caption') or gemini.get('measurements_analysis')
+                        if summary:
+                            content = f"{content}\nGemini: {summary}"
+                        roof_type = gemini.get('roof_type')
+                        material = gemini.get('material')
+                        condition = gemini.get('condition')
+                        issues = gemini.get('issues')
+                        orientation = gemini.get('orientation')
+                        if condition and condition != 'Not specified':
+                            context_parts.insert(0, f"Structured Findings:\nCondition: {condition}\n")
+                        fields = []
+                        if roof_type and roof_type != 'Not specified':
+                            fields.append(f"Roof Type: {roof_type}")
+                        if material and material != 'Not specified':
+                            fields.append(f"Material: {material}")
+                        if condition and condition != 'Not specified':
+                            fields.append(f"Condition: {condition}")
+                        if issues and issues != 'Not specified':
+                            fields.append(f"Issues: {issues}")
+                        if orientation and orientation != 'Not specified':
+                            fields.append(f"Orientation: {orientation}")
+                        if fields:
+                            content = f"{content}\n" + " | ".join(fields)
                 
                 context_parts.append(f"{i+1}. {content}")
             

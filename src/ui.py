@@ -168,6 +168,10 @@ class GradioUI:
                                 page = img.get('page', 'unknown')
                                 source = img.get('source', 'unknown')
                                 size = img.get('size', 'unknown')
+                                filename = img.get('filename', '')
+                                label = img.get('label', '')
+                                gemini_analysis = img.get('gemini_analysis', {})
+                                report_id = img.get('report_id', 'unknown')
                                 
                                 # Format size info
                                 if isinstance(size, (list, tuple)) and len(size) == 2:
@@ -175,7 +179,18 @@ class GradioUI:
                                 else:
                                     size_str = str(size)
                                 
-                                bot_response += f"• **Image {i+1}:** Page {page} of {Path(str(source)).name} ({size_str})\n"
+                                # Create descriptive image name
+                                image_name = self._get_image_display_name(filename, label)
+                                
+                                # Build image description
+                                image_desc = f"• **{image_name}** (Report {report_id})"
+                                if page != 'unknown':
+                                    image_desc += f" - Page {page}"
+                                image_desc += f" - {size_str}"
+                                
+                                # Note: Removed verbose Gemini analysis display for cleaner UI
+                                
+                                bot_response += f"{image_desc}\n"
                     else:
                         # Fallback for old string format
                         bot_response = self._format_response(str(result))
@@ -457,8 +472,13 @@ class GradioUI:
             page_num = metadata.get('page_number', 'Unknown')
             source_file = metadata.get('source_file', 'Unknown')
             has_raw_data = metadata.get('has_raw_data', False)
+            image_filename = metadata.get('image_filename', '')
+            image_label = metadata.get('image_label', '')
             
-            response += f"**Image {i+1}:**\n"
+            # Get user-friendly image name
+            display_name = self._get_image_display_name(image_filename, image_label)
+            
+            response += f"**{display_name}**\n"
             response += f"• Report ID: {report_id}\n"
             response += f"• Source: {source_file}\n"
             if page_num != 'Unknown':
@@ -467,11 +487,23 @@ class GradioUI:
             
             # Show file path if available
             image_file_path = metadata.get('image_file_path')
-            image_filename = metadata.get('image_filename')
             if image_file_path:
                 response += f"• 📁 File Path: `{image_file_path}`\n"
             if image_filename:
-                response += f"• 📷 Filename: `{image_filename}`\n"
+                response += f"• � Filename: `{image_filename}`\n"
+            
+            # Add Gemini analysis if available
+            gemini_analysis = metadata.get('gemini_analysis')
+            if isinstance(gemini_analysis, dict) and gemini_analysis:
+                analysis_text = (
+                    gemini_analysis.get('full_analysis') or 
+                    gemini_analysis.get('caption') or 
+                    gemini_analysis.get('measurements_analysis', '')
+                )
+                if analysis_text:
+                    # Truncate analysis for display
+                    truncated_analysis = analysis_text[:200] + "..." if len(analysis_text) > 200 else analysis_text
+                    response += f"• � **Analysis:** *{truncated_analysis}*\n"
             
             response += "\n"
         
@@ -479,6 +511,59 @@ class GradioUI:
             response += "💡 **Note**: Images with raw data can be extracted and displayed. In a production system, these would be shown directly in the interface.\n"
         
         return response
+    
+    def _get_image_display_name(self, filename: str, label: str) -> str:
+        """Convert image filename/label to user-friendly display name."""
+        # Use filename if available, otherwise use label
+        name = filename or label or "Unknown Image"
+        
+        # Remove .png extension
+        if name.endswith('.png'):
+            name = name[:-4]
+        
+        # Create mapping of technical names to user-friendly names
+        name_mappings = {
+            'Cover_Image': '🏠 Cover/Overview Image',
+            'Cover_Image_2': '🏠 Cover Image (Secondary)',
+            'Cover_Image_3': '🏠 Cover Image (Tertiary)',
+            'Lengthsimage': '📏 Length Measurements',
+            'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+            'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+            'Rafters': '🏗️ Rafter Structure',
+            'Azimuth': '🧭 Roof Azimuth/Direction',
+            'Area': '📊 Roof Area Measurements',
+            'Roof_Penetrations': '🔍 Roof Penetrations',
+            'Top_View': '🛰️ Aerial/Top View',
+            'North_Side': '⬆️ North Side View',
+            'South_Side': '⬇️ South Side View',
+            'East_Side': '➡️ East Side View',
+            'West_Side': '⬅️ West Side View',
+            'Structure_Summary': '📋 Structure Summary'
+        }
+        
+        # Check for exact matches first
+        if name in name_mappings:
+            return name_mappings[name]
+        
+        # Check for partial matches (e.g., "Cover_Image_2")
+        for key, display_name in name_mappings.items():
+            if name.startswith(key):
+                # Handle numbered variants
+                if name != key and '_' in name[len(key):]:
+                    suffix = name[len(key):]
+                    return f"{display_name} {suffix.replace('_', ' ')}"
+                return display_name
+        
+        # Convert underscores to spaces and title case for unknown names
+        formatted_name = name.replace('_', ' ').title()
+        
+        # Add appropriate emoji based on content
+        if 'image' in name.lower():
+            return f"🖼️ {formatted_name}"
+        elif 'page' in name.lower():
+            return f"📄 {formatted_name}"
+        else:
+            return f"📊 {formatted_name}"
     
     def _format_response(self, response: str) -> str:
         """Format response for better display."""
