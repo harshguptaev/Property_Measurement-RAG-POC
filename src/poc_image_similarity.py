@@ -58,15 +58,24 @@ def stitch_pictometry_images_for_folder(folder_path: str, output_name: str = "st
 
     output_path = os.path.join(folder_path, output_name)
     stitched.save(output_path, format="PNG")
-    # Also save base64 string alongside the stitched image
+
+    # Save a compressed variant for storage/embedding (WEBP) and write base64 from it
+    compressed_path = os.path.join(folder_path, "stitched_image.webp")
     try:
-        b64 = image_file_to_base64(output_path)
+        stitched.save(compressed_path, format="WEBP", quality=80, method=6)
+    except Exception:
+        compressed_path = output_path
+
+    # Also save base64 string alongside the stitched image (use compressed if available)
+    try:
+        b64 = image_file_to_base64(compressed_path)
         b64_path = os.path.join(folder_path, "stiched_image_base64")
         with open(b64_path, "w", encoding="utf-8") as f:
             f.write(b64)
     except Exception:
         # If base64 persistence fails, we still return the image path
         pass
+
     return output_path
 
 
