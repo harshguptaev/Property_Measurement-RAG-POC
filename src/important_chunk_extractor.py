@@ -9,27 +9,77 @@ from typing import List, Tuple, Optional, Dict, Any
 # -------------------- New Helper Parsers For Flattened Format (defined early for usage) --------------------
 def _extract_measurements_structured(text: str) -> Dict[str, Any]:
     import re
-    patterns = {
-        "area": r"Area:\s*([\d\.]+\s*SQ|[\d,]+\s*sq\s*ft)",
-        "roof_facets": r"Roof Facets:\s*(\d+)",
-        "predominant_pitch": r"Predominant Pitch:\s*([0-9/]+)",
-        "number_of_stories": r"Number of Stories:\s*([<>]=?\d+)",
-        "ridges_hips": r"Ridges/Hips:\s*([0-9' \"/]+)",
-        "valleys": r"Valleys:\s*([0-9' \"/]+)",
-        "rakes": r"Rakes:\s*([0-9' \"/]+)",
-        "eaves": r"Eaves:\s*([0-9' \"/]+)",
-        "estimated_attic": r"Estimated Attic:\s*([\d\.]+\s*SQ)",
-        "roof_obstructions": r"Roof (?:Penetrations|Obstructions):\s*(\d+)",
-        "roof_obstructions_perimeter": r"Roof (?:Penetrations|Obstructions) Perimeter:\s*([\d' \"/]+)",
-        "roof_obstructions_area": r"Roof (?:Penetrations|Obstructions) Area:\s*([\d\.]+\s*SQ)"
-    }
+    import html
+    
+    # Look for the structured measurements section - try both formats
+    measurements_section_match = re.search(
+        r'## Measurements\s*([\s\S]*?)(?=## Prepared For|$)', 
+        text, 
+        re.IGNORECASE
+    )
+    
+    if not measurements_section_match:
+        # Try without ## prefix (for docling format)
+        measurements_section_match = re.search(
+            r'Measurements\s*([\s\S]*?)(?=Prepared For|$)', 
+            text, 
+            re.IGNORECASE
+        )
+    
     data = {}
-    for key, pat in patterns.items():
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            val = m.group(1).strip()
-            if val:
-                data[key] = val
+    
+    if measurements_section_match:
+        measurements_text = measurements_section_match.group(1)
+        
+        # The format has all labels first, then all values
+        # Split on newlines and clean up
+        lines = measurements_text.split('\n')
+        non_empty_lines = [line.strip() for line in lines if line.strip()]
+        
+        # Separate labels (end with :) from values
+        labels = []
+        values = []
+        
+        for line in non_empty_lines:
+            if line.endswith(':'):
+                labels.append(line[:-1].strip().lower())  # Remove colon and normalize
+            else:
+                # Decode HTML entities like &lt; -> <
+                decoded_value = html.unescape(line.strip())
+                values.append(decoded_value)
+        
+        # Match labels with values
+        # The values should be in the same order as the labels
+        for i, label in enumerate(labels):
+            if i < len(values):
+                value = values[i]
+                
+                # Map labels to our keys
+                if label == 'area':
+                    data['area'] = value
+                elif label == 'roof facets':
+                    data['roof_facets'] = value
+                elif label == 'predominant pitch':
+                    data['predominant_pitch'] = value
+                elif label == 'number of stories':
+                    data['number_of_stories'] = value
+                elif label == 'ridges/hips':
+                    data['ridges_hips'] = value
+                elif label == 'valleys':
+                    data['valleys'] = value
+                elif label == 'rakes':
+                    data['rakes'] = value
+                elif label == 'eaves':
+                    data['eaves'] = value
+                elif label == 'estimated attic':
+                    data['estimated_attic'] = value
+                elif label == 'roof penetrations':
+                    data['roof_penetrations'] = value
+                elif label == 'roof penetrations perimeter':
+                    data['roof_penetrations_perimeter'] = value
+                elif label == 'roof penetrations area':
+                    data['roof_penetrations_area'] = value
+    
     return data
 
 def _extract_prepared_for_structured(text: str) -> Optional[Dict[str, Any]]:
@@ -580,95 +630,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# -------------------- New Helper Parsers For Flattened Format --------------------
-
-def _extract_measurements_structured(text: str) -> Dict[str, Any]:
-    patterns = {
-        "area": r"Area:\s*([\d\.]+\s*SQ|[\d,]+\s*sq\s*ft)",
-        "roof_facets": r"Roof Facets:\s*(\d+)",
-        "predominant_pitch": r"Predominant Pitch:\s*([0-9/]+)",
-        "number_of_stories": r"Number of Stories:\s*([<>]=?\d+)",
-        "ridges_hips": r"Ridges/Hips:\s*([\d' \"/]+)",
-        "valleys": r"Valleys:\s*([\d' \"/]+)",
-        "rakes": r"Rakes:\s*([\d' \"/]+)",
-        "eaves": r"Eaves:\s*([\d' \"/]+)",
-        "estimated_attic": r"Estimated Attic:\s*([\d\.]+\s*SQ)",
-        "roof_obstructions": r"Roof (?:Penetrations|Obstructions):\s*(\d+)",
-        "roof_obstructions_perimeter": r"Roof (?:Penetrations|Obstructions) Perimeter:\s*([\d' \"/]+)",
-        "roof_obstructions_area": r"Roof (?:Penetrations|Obstructions) Area:\s*([\d\.]+\s*SQ)"
-    }
-    data = {}
-    for key, pat in patterns.items():
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            data[key] = m.group(1).strip()
-    return data
-
-def _extract_prepared_for_structured(text: str) -> Optional[Dict[str, Any]]:
-    match = re.search(r"Prepared For\s*([\s\S]{0,200})", text, re.IGNORECASE)
-    if not match:
-        return None
-    segment = match.group(0).split('\n')[:5]
-    lines = [l.strip() for l in segment if l.strip() and not l.lower().startswith('open in eagleview')]
-    if not lines:
-        return None
-    name = None
-    phone = None
-    phone_re = re.compile(r"(\(\d{3}\)\s*\d{3}-?\d{4})")
-    cleaned_lines = []
-    for l in lines:
-        ph = phone_re.search(l)
-        if ph:
-            phone = ph.group(1)
-            l = phone_re.sub("", l).strip()
-        if not name:
-            name = l
-        else:
-            cleaned_lines.append(l)
-    return {"name": name, "address": ", ".join(cleaned_lines), "phone": phone}
-
-def _extract_property_details_structured(text: str) -> Dict[str, Any]:
-    patterns = {
-        "total_roof_facets": r"Total Roof Facets\s*=\s*(\d+)",
-        "total_roof_obstructions": r"Total Roof (?:Penetrations|Obstructions)\s*=\s*(\d+)",
-        "ridges": r"Ridges\s*=\s*([0-9' \"()A-Za-z]+)",
-        "hips": r"Hips\s*=\s*([0-9' \"()A-Za-z]+)",
-        "valleys": r"Valleys\s*=\s*([0-9' \"()A-Za-z]+)",
-        "rakes": r"Rakes[†]?\s*=\s*([0-9' \"()A-Za-z]+)",
-        "eaves_starters": r"Eaves/Starters[‡]?\s*=\s*([0-9' \"()A-Za-z]+)",
-        "drip_edge": r"Drip Edge .*?=\s*([0-9' \"()A-Za-z]+)",
-        "parapet_walls": r"Parapet Walls\s*=\s*([0-9' \"()A-Za-z]+)",
-        "flashing": r"Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
-        "step_flashing": r"Step Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
-        "total_roof_obstructions_area": r"Total Roof (?:Penetrations|Obstructions) Area\s*=\s*([0-9\.]+\s*SQ)",
-        "total_roof_area_less_obstructions": r"Total Roof Area Less Roof (?:Penetrations|Obstructions)\s*=\s*([0-9\.]+\s*SQ)",
-        "total_roof_obstructions_perimeter": r"Total Roof (?:Penetrations|Obstructions) Perimeter\s*=\s*([0-9' \"()A-Za-z]+)",
-        "predominant_pitch": r"Predominant Pitch\s*=\s*([0-9/]+)",
-        "total_area_all_pitches": r"Total Area \(All Pitches\)\s*=\s*([0-9\.]+\s*SQ)",
-        "longitude": r"Longitude\s*=\s*([-0-9\.]+)",
-        "latitude": r"Latitude\s*=\s*([-0-9\.]+)"
-    }
-    data = {}
-    for key, pat in patterns.items():
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            data[key] = m.group(1).strip()
-    return data
-
-def _extract_legal_notice(text: str, report_id: str, property_address: str, date_val: str) -> Optional[Dict[str, Any]]:
-    # Find a block starting with IMPORTANT LEGAL NOTICE OR Legal Notice and Disclaimer
-    m = re.search(r"(IMPORTANT LEGAL NOTICE AND DISCLAIMER[\s\S]{0,1500})", text, re.IGNORECASE)
-    if not m:
-        m = re.search(r"(Legal Notice and Disclaimer[\s\S]{0,1500})", text, re.IGNORECASE)
-    if not m:
-        return None
-    snippet = re.sub(r"\s+", " ", m.group(1)).strip()
-    return {
-        "report_id": report_id,
-        "property_address": property_address,
-        "date": date_val,
-        "excerpt": snippet[:1000]  # truncate for brevity
-    }
 
 

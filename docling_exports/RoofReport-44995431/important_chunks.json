@@ -16,12 +16,17 @@
     "type": "text",
     "data": {
       "area": "19.6 SQ",
-      "ridges_hips": "",
-      "valleys": "",
-      "rakes": "",
-      "eaves": "",
-      "roof_obstructions_perimeter": "",
-      "roof_obstructions_area": "19.6 SQ"
+      "roof_facets": "7",
+      "predominant_pitch": "3/12",
+      "number_of_stories": "<=1",
+      "ridges_hips": "66'",
+      "valleys": "25' 1\"",
+      "rakes": "135' 5\"",
+      "eaves": "111'",
+      "estimated_attic": "0 SQ",
+      "roof_penetrations": "2",
+      "roof_penetrations_perimeter": "15'",
+      "roof_penetrations_area": "0.1 SQ"
     },
     "image_placeholder": ""
   },

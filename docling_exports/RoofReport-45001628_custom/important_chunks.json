@@ -15,13 +15,18 @@
     "section": "Measurements",
     "type": "text",
     "data": {
-      "area": "24 SQ",
-      "ridges_hips": "",
-      "valleys": "",
-      "rakes": "",
-      "eaves": "",
-      "roof_obstructions_perimeter": "",
-      "roof_obstructions_area": "24 SQ"
+      "area": "1 2 1 8 8",
+      "roof_facets": "In this 3D model, non-selected facets are shown with a checkerboard pattern to indicate their data is not included in measurement data.",
+      "predominant_pitch": "Contents",
+      "number_of_stories": "Lengths ................................................................................. 1",
+      "ridges_hips": "Pitch (Degrees)...................................................................... 2",
+      "valleys": "Pitch (on 12) .......................................................................... 3",
+      "rakes": "Rafters ................................................................................... 4",
+      "eaves": "Azimuth .................................................................................. 5",
+      "estimated_attic": "Area ....................................................................................... 6",
+      "roof_penetrations": "Roof Penetrations .................................................................. 7",
+      "roof_penetrations_perimeter": "Imagery .................................................................................. 8",
+      "roof_penetrations_area": "Roofing Report Summary ..................................................... 11"
     },
     "image_placeholder": ""
   },
