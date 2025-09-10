@@ -25,6 +25,10 @@ venv/
 env/
 ENV/
 .envrc
+.venv311/
+venv311/
+env311/
+ENV311/
 
 # Unit test / coverage
 .pytest_cache/
