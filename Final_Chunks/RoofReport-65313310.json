@@ -1,0 +1,243 @@
+{
+  "text": [
+    {
+      "chunk_id": "65313310_chunk_1",
+      "section": "Report Header",
+      "type": "text",
+      "data": {
+        "report_id": "65313310",
+        "date": "August 23, 2025",
+        "property_address": "2439 New Holland Cir Murfreesboro, TN 37128"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_2",
+      "section": "Measurements",
+      "type": "text",
+      "data": {
+        "area": "1,229.9 sq ft",
+        "roof_facets": "8",
+        "predominant_pitch": "8/12",
+        "number_of_stories": "<=1",
+        "ridges_hips": "38' 9\"",
+        "valleys": "31' 2\"",
+        "rakes": "120' 3\"",
+        "eaves": "62' 2\"",
+        "estimated_attic": "52.6 sq ft"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_3",
+      "section": "Prepared For",
+      "type": "text",
+      "data": {
+        "name": "Prepared For",
+        "address": "Doug Durham 321 Billingsly Ct, Suite 13 Franklin,TN 37067, 100%, Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx",
+        "phone": "(615) 778-1440"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_4",
+      "section": "Lengths Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
+        "image_file": "extracted_images/report_65313310/Lengthsimage.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_5",
+      "section": "Pitch (Degrees) Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof pitch in degrees for different facets",
+        "image_file": "extracted_images/report_65313310/Pitch_Degrees.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_6",
+      "section": "Pitch (on 12) Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof pitch in x/12 format for different facets",
+        "image_file": "extracted_images/report_65313310/Pitch_on_12.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_7",
+      "section": "Rafters Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing rafter lengths for different roof sections",
+        "image_file": "extracted_images/report_65313310/Rafters.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_8",
+      "section": "Azimuth Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof facet orientations in degrees relative to true north",
+        "image_file": "extracted_images/report_65313310/Azimuth.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_9",
+      "section": "Area Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof area measurements for different facets in square feet",
+        "image_file": "extracted_images/report_65313310/Area.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_10",
+      "section": "Roof Obstructions Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing locations of roof obstructions",
+        "image_file": "extracted_images/report_65313310/Roof_Penetrations.png"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_11",
+      "section": "Property Imagery",
+      "type": "image",
+      "data": {
+        "description": "Aerial images of the property from top, north, south, east, and west views",
+        "images": [
+          "extracted_images/report_65313310/Top_View.png",
+          "extracted_images/report_65313310/North_Side.png",
+          "extracted_images/report_65313310/South_Side.png",
+          "extracted_images/report_65313310/East_Side.png",
+          "extracted_images/report_65313310/West_Side.png"
+        ]
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_12",
+      "section": "Roofing Report Summary",
+      "type": "table",
+      "data": {}
+    },
+    {
+      "chunk_id": "65313310_chunk_13",
+      "section": "Property Details",
+      "type": "text",
+      "data": {
+        "total_roof_facets": "8",
+        "total_roof_obstructions": "6",
+        "ridges": "38' 9\" Hips",
+        "hips": "0'",
+        "valleys": "31' 2\"",
+        "rakes": "120' 3\"",
+        "eaves_starters": "62' 2\" (7 Eaves) Drip Edge (Eaves",
+        "drip_edge": "182' 5\" (16 Lengths) Parapet Walls",
+        "parapet_walls": "0' (0 Lengths) Flashing",
+        "flashing": "18' 11\"",
+        "step_flashing": "56' 1\"",
+        "total_roof_obstructions_area": "6 sq",
+        "total_roof_obstructions_perimeter": "24'",
+        "predominant_pitch": "8/12"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_14",
+      "section": "Longitude",
+      "type": "text",
+      "data": {
+        "longitude": "-86.4093710",
+        "coordinate_type": "longitude"
+      }
+    },
+    {
+      "chunk_id": "65313310_chunk_15",
+      "section": "Latitude",
+      "type": "text",
+      "data": {
+        "latitude": "35.8015800",
+        "coordinate_type": "latitude"
+      }
+    }
+  ],
+  "table": [
+    {
+      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "raw_text": [
+        {
+          "Roof Pitches": "4/12",
+          "Area (sq ft)": "146.4",
+          "%of Roof": "11.9%"
+        },
+        {
+          "Roof Pitches": "8/12",
+          "Area (sq ft)": "1083.6",
+          "%of Roof": "88.1%"
+        }
+      ],
+      "id": "chunk1",
+      "metadata": {},
+      "src_image_path": "docling_exports/RoofReport-65313310/tables/images/Areas_per_Pitch_Structure_1.png"
+    },
+    {
+      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
+      "raw_text": [
+        {
+          "waste": "0%",
+          "area": "114",
+          "squares": "12.33"
+        },
+        {
+          "waste": "1%",
+          "area": "115",
+          "squares": "12.66"
+        },
+        {
+          "waste": "6%",
+          "area": "121",
+          "squares": "13.33"
+        },
+        {
+          "waste": "9%",
+          "area": "124",
+          "squares": "13.66"
+        },
+        {
+          "waste": "11%",
+          "area": "126",
+          "squares": "13.66"
+        },
+        {
+          "waste": "13%",
+          "area": "129",
+          "squares": "14.00"
+        },
+        {
+          "waste": "16%",
+          "area": "132",
+          "squares": "14.33"
+        },
+        {
+          "waste": "21%",
+          "area": "138",
+          "squares": "15.00"
+        },
+        {
+          "waste": "26%",
+          "area": "143",
+          "squares": "15.66"
+        }
+      ],
+      "id": "chunk2",
+      "metadata": {},
+      "src_image_path": "docling_exports/RoofReport-65313310/tables/images/Waste_Calculation_1.png"
+    },
+    {
+      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
+      "raw_text": "Dummy Text for now.",
+      "id": "chunk3",
+      "metadata": {},
+      "src_image_path": "docling_exports/RoofReport-65313310/tables/images/Structure_Complexity_1.png"
+    }
+  ]
+}
