@@ -1,0 +1,11 @@
+{
+  "tables": [
+    {
+      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "raw_text": "[\n  {\n    \"Waste%\": \"0%\",\n    \"Area (m²)\": \"262\",\n    \"Squares *\": \"28.33\"\n  },\n  {\n    \"Waste%\": \"4%\",\n    \"Area (m²)\": \"273\",\n    \"Squares *\": \"29.66\"\n  },\n  {\n    \"Waste%\": \"9%\",\n    \"Area (m²)\": \"286\",\n    \"Squares *\": \"31.00\"\n  },\n  {\n    \"Waste%\": \"14%\",\n    \"Area (m²)\": \"299\",\n    \"Squares *\": \"32.33\"\n  },\n  {\n    \"Waste%\": \"17%\",\n    \"Area (m²)\": \"307\",\n    \"Squares *\": \"33.33\"\n  },\n  {\n    \"Waste%\": \"19%\",\n    \"Area (m²)\": \"312\",\n    \"Squares *\": \"33.66\"\n  },\n  {\n    \"Waste%\": \"21%\",\n    \"Area (m²)\": \"317\",\n    \"Squares *\": \"34.33\"\n  },\n  {\n    \"Waste%\": \"24%\",\n    \"Area (m²)\": \"325\",\n    \"Squares *\": \"35.33\"\n  },\n  {\n    \"Waste%\": \"29%\",\n    \"Area (m²)\": \"338\",\n    \"Squares *\": \"36.66\"\n  }\n]",
+      "id": "chunk1",
+      "metadata": {},
+      "src_image_path": ""
+    }
+  ]
+}

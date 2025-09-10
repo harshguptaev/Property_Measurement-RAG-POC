@@ -154,21 +154,27 @@
       "total_roof_area_less_obstructions": "15.8 SQ",
       "total_roof_obstructions_perimeter": "28' Predominant Pitch",
       "predominant_pitch": "5/12",
-      "total_area_all_pitches": "15.9 SQ",
-      "longitude": "-97.6686620",
-      "latitude": "30.5528010"
+      "total_area_all_pitches": "15.9 SQ"
     },
     "image_placeholder": ""
   },
   {
     "chunk_id": "44995432_chunk_14",
-    "section": "Legal Notice and Disclaimer",
+    "section": "Longitude",
     "type": "text",
     "data": {
-      "report_id": "44995432",
-      "property_address": "44995432 PROPERTY 1014 Mohican Round Rock, TX 78665",
-      "date": "August 21, 2025",
-      "excerpt": "IMPORTANT LEGAL NOTICE AND DISCLAIMER Notice and Disclaimer No Warranty: The Copyrighted Materials are provided to you \"as is,\" and you agree to use it at your own risk. EagleView Technologies makes no guarantees, representations or warranties of any kind, express or implied, arising by law or otherwise, including but not limited to, content, quality, accuracy, completeness, effectiveness, reliability, fitness for a particular purpose, usefulness, use or results to be obtained from the Copyrighted Materials. Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report. ' August 21, 2025 Property Address: 1014 Mohican, Round Rock, TX 78665 Report: 44995432 Copyright © 2008-2024 EagleView Technologies, Inc. - All Rights Reserved - Covered by U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125. Other Patents Pending Page 12"
+      "longitude": "-97.6686620",
+      "coordinate_type": "longitude"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995432_chunk_15",
+    "section": "Latitude",
+    "type": "text",
+    "data": {
+      "latitude": "30.5528010",
+      "coordinate_type": "latitude"
     },
     "image_placeholder": ""
   }

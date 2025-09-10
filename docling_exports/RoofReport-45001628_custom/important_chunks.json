@@ -144,21 +144,27 @@
       "total_roof_area_less_obstructions": "22.1 SQ",
       "total_roof_obstructions_perimeter": "19' Predominant Pitch",
       "predominant_pitch": "22",
-      "total_area_all_pitches": "22.2 SQ",
-      "longitude": "-71.2812050",
-      "latitude": "41.6840180"
+      "total_area_all_pitches": "22.2 SQ"
     },
     "image_placeholder": ""
   },
   {
     "chunk_id": "45001628_custom_chunk_13",
-    "section": "Legal Notice and Disclaimer",
+    "section": "Longitude",
     "type": "text",
     "data": {
-      "report_id": "45001628_custom",
-      "property_address": "45001628 PROPERTY 15 Fort Hill Rd Bristol, RI 02809",
-      "date": "September 2, 2025",
-      "excerpt": "IMPORTANT LEGAL NOTICE AND DISCLAIMER Notice and Disclaimer No Warranty: The Copyrighted Materials are provided to you \"as is,\" and you agree to use it at your own risk. EagleView Technologies makes no guarantees, representations or warranties of any kind, express or implied, arising by law or otherwise, including but not limited to, content, quality, accuracy, completeness, effectiveness, reliability, fitness for a particular purpose, usefulness, use or results to be obtained from the Copyrighted Materials. Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report. September 2, 2025 Property Address: 15 Fort Hill Rd, Bristol, RI 02809 Report: 45001628 ' Copyright © 2008-2024 EagleView Technologies, Inc. - All Rights Reserved - Covered by U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125. Other Patents Pending Page "
+      "longitude": "-71.2812050",
+      "coordinate_type": "longitude"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_14",
+    "section": "Latitude",
+    "type": "text",
+    "data": {
+      "latitude": "41.6840180",
+      "coordinate_type": "latitude"
     },
     "image_placeholder": ""
   }

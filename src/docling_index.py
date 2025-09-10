@@ -852,9 +852,9 @@ class DoclingProcessor:
                     if not chunks_data:
                         logging.warning(f"No content found in chunks for {file_path.name}")
                         return
-                    chunks_dir = Path("docling_exports") / file_path.stem
+                    chunks_dir = Path("Final_Chunks")
                     chunks_dir.mkdir(parents=True, exist_ok=True)
-                    chunks_file = chunks_dir / "important_chunks.json"
+                    chunks_file = chunks_dir / f"{file_path.stem}.json"
                     with open(chunks_file, 'w', encoding='utf-8') as f:
                         json.dump(chunks_data, f, ensure_ascii=False, indent=2)
 
@@ -879,8 +879,6 @@ class DoclingProcessor:
                             'source_file': file_path.name
                         }
                         metadata.update(chunk_dict.get('data', {}))
-                        if chunk_dict.get('image_placeholder'):
-                            metadata['image_placeholder'] = chunk_dict['image_placeholder']
                         if 'image_file' in chunk_dict.get('data', {}):
                             metadata['image_file'] = chunk_dict['data']['image_file']
                         if 'images' in chunk_dict.get('data', {}):

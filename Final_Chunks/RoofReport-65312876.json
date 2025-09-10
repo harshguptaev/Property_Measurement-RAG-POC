@@ -1,0 +1,161 @@
+[
+  {
+    "chunk_id": "65312876_chunk_1",
+    "section": "Report Header",
+    "type": "text",
+    "data": {
+      "report_id": "65312876",
+      "date": "August 23, 2025",
+      "property_address": "2325 New Holland Cir Murfreesboro, TN 37128"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_2",
+    "section": "Measurements",
+    "type": "text",
+    "data": {
+      "area": "1,274.6 sq ft",
+      "roof_facets": "8",
+      "predominant_pitch": "8/12",
+      "number_of_stories": ">1",
+      "ridges_hips": "46' 1\"",
+      "valleys": "26' 11\"",
+      "rakes": "114'",
+      "eaves": "98' 7\"",
+      "estimated_attic": "56.5 sq ft"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_3",
+    "section": "Prepared For",
+    "type": "text",
+    "data": {
+      "name": "Prepared For",
+      "address": "Doug Durham 321 Billingsly Ct, Suite 13 Franklin,TN 37067, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx",
+      "phone": "(615) 778-1440"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_4",
+    "section": "Lengths Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
+      "image_file": "extracted_images/report_65312876/Lengthsimage.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_5",
+    "section": "Pitch (Degrees) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in degrees for different facets",
+      "image_file": "extracted_images/report_65312876/Pitch_Degrees.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_6",
+    "section": "Pitch (on 12) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in x/12 format for different facets",
+      "image_file": "extracted_images/report_65312876/Pitch_on_12.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_7",
+    "section": "Rafters Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing rafter lengths for different roof sections",
+      "image_file": "extracted_images/report_65312876/Rafters.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_8",
+    "section": "Azimuth Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof facet orientations in degrees relative to true north",
+      "image_file": "extracted_images/report_65312876/Azimuth.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_9",
+    "section": "Area Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof area measurements for different facets in square feet",
+      "image_file": "extracted_images/report_65312876/Area.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_10",
+    "section": "Roof Obstructions Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing locations of roof obstructions",
+      "image_file": "extracted_images/report_65312876/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_11",
+    "section": "Property Imagery",
+    "type": "image",
+    "data": {
+      "description": "Aerial images of the property from top, north, south, east, and west views",
+      "images": [
+        "extracted_images/report_65312876/Top_View.png",
+        "extracted_images/report_65312876/North_Side.png",
+        "extracted_images/report_65312876/South_Side.png",
+        "extracted_images/report_65312876/East_Side.png",
+        "extracted_images/report_65312876/West_Side.png"
+      ]
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_12",
+    "section": "Roofing Report Summary",
+    "type": "table",
+    "data": {}
+  },
+  {
+    "chunk_id": "65312876_chunk_13",
+    "section": "Property Details",
+    "type": "text",
+    "data": {
+      "total_roof_facets": "8",
+      "total_roof_obstructions": "6",
+      "ridges": "46' 1\" Hips",
+      "hips": "0'",
+      "valleys": "26' 11\"",
+      "rakes": "114'",
+      "eaves_starters": "98' 7\" (8 Eaves)",
+      "drip_edge": "212' 7\" (20 Lengths)",
+      "parapet_walls": "0' (0 Lengths)",
+      "flashing": "50' 1\" Parapets",
+      "step_flashing": "50' 1\" Parapets",
+      "total_roof_obstructions_area": "6 sq",
+      "total_roof_obstructions_perimeter": "24' Predominant Pitch",
+      "predominant_pitch": "8/12"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_14",
+    "section": "Longitude",
+    "type": "text",
+    "data": {
+      "longitude": "-86.4108570",
+      "coordinate_type": "longitude"
+    }
+  },
+  {
+    "chunk_id": "65312876_chunk_15",
+    "section": "Latitude",
+    "type": "text",
+    "data": {
+      "latitude": "35.8006010",
+      "coordinate_type": "latitude"
+    }
+  }
+]

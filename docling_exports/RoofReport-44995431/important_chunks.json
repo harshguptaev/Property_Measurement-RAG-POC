@@ -154,21 +154,27 @@
       "total_roof_area_less_obstructions": "19.5 SQ",
       "total_roof_obstructions_perimeter": "15' Predominant Pitch",
       "predominant_pitch": "3/12",
-      "total_area_all_pitches": "19.6 SQ",
-      "longitude": "-71.8297320",
-      "latitude": "42.0156810"
+      "total_area_all_pitches": "19.6 SQ"
     },
     "image_placeholder": ""
   },
   {
     "chunk_id": "44995431_chunk_14",
-    "section": "Legal Notice and Disclaimer",
+    "section": "Longitude",
     "type": "text",
     "data": {
-      "report_id": "44995431",
-      "property_address": "185 Sand Dam Rd Thompson, CT 06277",
-      "date": "August 21, 2025",
-      "excerpt": "IMPORTANT LEGAL NOTICE AND DISCLAIMER Notice and Disclaimer No Warranty: The Copyrighted Materials are provided to you \"as is,\" and you agree to use it at your own risk. EagleView Technologies makes no guarantees, representations or warranties of any kind, express or implied, arising by law or otherwise, including but not limited to, content, quality, accuracy, completeness, effectiveness, reliability, fitness for a particular purpose, usefulness, use or results to be obtained from the Copyrighted Materials. Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report. ' August 21, 2025 Property Address: 185 Sand Dam Rd, Thompson, CT 06277 Report: 44995431 Copyright © 2008-2024 EagleView Technologies, Inc. - All Rights Reserved - Covered by U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125. Other Patents Pending Page 1"
+      "longitude": "-71.8297320",
+      "coordinate_type": "longitude"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "44995431_chunk_15",
+    "section": "Latitude",
+    "type": "text",
+    "data": {
+      "latitude": "42.0156810",
+      "coordinate_type": "latitude"
     },
     "image_placeholder": ""
   }

@@ -124,9 +124,7 @@ def _extract_property_details_structured(text: str) -> Dict[str, Any]:
         "total_roof_area_less_obstructions": r"Total Roof Area Less Roof (?:Penetrations|Obstructions)\s*=\s*([0-9\.]+\s*SQ)",
         "total_roof_obstructions_perimeter": r"Total Roof (?:Penetrations|Obstructions) Perimeter\s*=\s*([0-9' \"()A-Za-z]+)",
         "predominant_pitch": r"Predominant Pitch\s*=\s*([0-9/]+)",
-        "total_area_all_pitches": r"Total Area \(All Pitches\)\s*=\s*([0-9\.]+\s*SQ)",
-        "longitude": r"Longitude\s*=\s*([-0-9\.]+)",
-        "latitude": r"Latitude\s*=\s*([-0-9\.]+)"
+        "total_area_all_pitches": r"Total Area \(All Pitches\)\s*=\s*([0-9\.]+\s*SQ)"
     }
     data = {}
     for key, pat in patterns.items():
@@ -214,8 +212,7 @@ def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         "chunk_id": "<report>_chunk_1",
         "section": "Report Header",
         "type": "text",
-        "data": { ... },
-        "image_placeholder": ""
+        "data": { ... }
       }, ...]
     """
 
@@ -244,14 +241,13 @@ def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
 
     chunks: List[Dict[str, Any]] = []
 
-    def _add(section: str, _type: str, data: Dict[str, Any], placeholder: str = ""):
+    def _add(section: str, _type: str, data: Dict[str, Any]):
         chunk_id = f"{report_id}_chunk_{len(chunks)+1}"
         chunks.append({
             "chunk_id": chunk_id,
             "section": section,
             "type": _type,  # one of text|image|table
-            "data": data,
-            "image_placeholder": placeholder
+            "data": data
         })
 
     # ---------------- Report Header ----------------
@@ -293,7 +289,7 @@ def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
     images_dir = Path("extracted_images") / f"report_{report_id}"
     for section, filename, placeholder, desc in image_mappings:
         if (images_dir / filename).exists():
-            _add(section, "image", {"description": desc, "image_file": str(images_dir / filename)}, placeholder)
+            _add(section, "image", {"description": desc, "image_file": str(images_dir / filename)})
 
     # Property Imagery (aggregate) – use Top_View as representative if exists
     property_images = ["Top_View.png", "North_Side.png", "South_Side.png", "East_Side.png", "West_Side.png"]
@@ -302,21 +298,33 @@ def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         _add("Property Imagery", "image", {
             "description": "Aerial images of the property from top, north, south, east, and west views",
             "images": [str(images_dir / f) for f in property_images if (images_dir / f).exists()]
-        }, "[IMAGE_PROPERTY_AERIAL_VIEWS]")
+        })
 
     # ---------------- Roofing Report Summary (table placeholder) ----------------
-    _add("Roofing Report Summary", "table", {}, "")  # table intentionally left empty
+    _add("Roofing Report Summary", "table", {})  # table intentionally left empty
 
     # ---------------- Property Details ----------------
     prop_details = _extract_property_details_structured(all_text)
     if prop_details:
         _add("Property Details", "text", prop_details)
 
+    # ---------------- Longitude and Latitude (separate chunks) ----------------
+    longitude_match = re.search(r"Longitude\s*=\s*([-0-9\.]+)", all_text, re.IGNORECASE)
+    if longitude_match:
+        _add("Longitude", "text", {
+            "longitude": longitude_match.group(1).strip(),
+            "coordinate_type": "longitude"
+        })
+    
+    latitude_match = re.search(r"Latitude\s*=\s*([-0-9\.]+)", all_text, re.IGNORECASE)
+    if latitude_match:
+        _add("Latitude", "text", {
+            "latitude": latitude_match.group(1).strip(),
+            "coordinate_type": "latitude"
+        })
+
     # ---------------- Legal Notice and Disclaimer ----------------
     legal = _extract_legal_notice(all_text, report_id, property_address, date_val)
-    if legal:
-        _add("Legal Notice and Disclaimer", "text", legal)
-
     return chunks
 
 
@@ -492,7 +500,7 @@ def extract_structured_data_from_docling(docling_data: Dict[str, Any]) -> List[D
     """Extract structured data like address and prepared_for from Docling data."""
     extracted = []
     
-    # Combine all text content for pattern matching
+    # Combine all text conte nt for pattern matching
     all_text = ""
     if "texts" in docling_data:
         all_text = " ".join([text_elem.get("text", "") for text_elem in docling_data["texts"]])
