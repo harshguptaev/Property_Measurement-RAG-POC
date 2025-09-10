@@ -698,7 +698,6 @@ class DoclingProcessor:
         for json_file in sorted(out_report_table_json_dir.glob("*.json")):
             try:
                 json_content = json.loads(json_file.read_text(encoding="utf-8"))
-                raw_text_str = json.dumps(json_content, ensure_ascii=False, indent=2)
             except Exception as e:
                 logging.warning(f"Skipping {json_file.name}, failed to read JSON: {e}")
                 continue
@@ -706,7 +705,7 @@ class DoclingProcessor:
             # Determine section
             section = ""
             if "Areas_per_Pitch" in json_file.name:
-                section = f"This table named {json_file.stem } lists each pitch on this roof and the total area and percent of the roof with that pitch."
+                section = f"This table named {json_file.stem} lists each pitch on this roof and the total area and percent of the roof with that pitch."
             elif "Waste_Calculation" in json_file.name:
                 section = f"""NOTE: This waste calculation table named {json_file.stem} is for asphalt shingle roofing applications. All values in the table below 
                             only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square
@@ -728,7 +727,7 @@ class DoclingProcessor:
             # Append chunk
             table_chunks.append({
                 "section": section,
-                "raw_text": raw_text_str,
+                "raw_text": json_content,
                 "id": f"chunk{chunk_counter}",
                 "metadata": {},
                 "src_image_path": image_path_str

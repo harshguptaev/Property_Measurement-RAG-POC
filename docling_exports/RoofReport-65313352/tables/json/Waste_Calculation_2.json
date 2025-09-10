@@ -1,0 +1,47 @@
+[
+    {
+        "waste": "0%",
+        "area": "75",
+        "squares": "8.33"
+    },
+    {
+        "waste": "11%",
+        "area": "83",
+        "squares": "9.33"
+    },
+    {
+        "waste": "16%",
+        "area": "87",
+        "squares": "9.66"
+    },
+    {
+        "waste": "21%",
+        "area": "91",
+        "squares": "10.00"
+    },
+    {
+        "waste": "26%",
+        "area": "95",
+        "squares": "10.33"
+    },
+    {
+        "waste": "29%",
+        "area": "97",
+        "squares": "10.66"
+    },
+    {
+        "waste": "31%",
+        "area": "98",
+        "squares": "10.66"
+    },
+    {
+        "waste": "33%",
+        "area": "100",
+        "squares": "11.00"
+    },
+    {
+        "waste": "36%",
+        "area": "102",
+        "squares": "11.33"
+    }
+]
