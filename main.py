@@ -20,7 +20,8 @@ from src.docling_index import process_and_index_directory_with_docling, DOCLING_
 from src.agent import AgenticRAG
 from src.ui import create_ui
 from src.bedrock_client import create_bedrock_llm, create_bedrock_embeddings
-
+from src.pictometry_client import saveimagesfrompictometry
+from src.poc_image_similarity import stitch_all_pictometry_directories
 
 def setup_logging():
     """Setup logging configuration."""
@@ -53,6 +54,11 @@ def setup_aws_credentials():
 def main():
     """Main function to run the Property Data RAG System."""
     
+    # save pictometry images
+    # saved = saveimagesfrompictometry(29.482943, -98.456349)
+    # stich pictometry images and convert to base64
+    # stitch_all_pictometry_directories()
+
     # Setup AWS credentials
     setup_aws_credentials()
     

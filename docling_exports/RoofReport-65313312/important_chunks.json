@@ -1,0 +1,476 @@
+{
+  "reportId": "65313312",
+  "text": [
+    {
+      "type": "report_and_property",
+      "raw_text": "REPORT ID 65313312\nAugust 23, 2025",
+      "src_image_path": "",
+      "id": "5afb7860-66d3-4f46-b87e-6b60e55008da",
+      "metadata": {
+        "chunk_number": 1
+      }
+    },
+    {
+      "type": "measurements",
+      "raw_text": "Lengths, Areas and Pitches\nRidges = 39' (3 Ridges)\nHips = 9' 4\" (2 Hips)\nValleys = 40' 2\" (4 Valleys)\nRakes† = 110' 3\" (9 Rakes)\nEaves/Starters‡ = 73' 10\" (8 Eaves)\nDrip Edge (Eaves + Rakes) = 184' 1\" (17 Lengths)\nParapet Walls = 0' (0 Lengths)\nFlashing = 27' 11\" (3 Lengths)\nStep Flashing = 47' 10\" (7 Lengths)\nPredominant Pitch = 8/12",
+      "src_image_path": "",
+      "id": "09537a27-5350-4067-a458-d40483451da3",
+      "metadata": {
+        "chunk_number": 2
+      }
+    },
+    {
+      "type": "property_location",
+      "raw_text": "Property Location\nLongitude = -86.4088140 Latitude = 35.8016340",
+      "src_image_path": "",
+      "id": "20a92641-f830-45d1-939a-5dc05e99f8ac",
+      "metadata": {
+        "chunk_number": 3
+      }
+    }
+  ],
+  "table": [],
+  "image": [
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "55ca1d72-4d9e-4590-adc9-ae511ac4624a",
+      "metadata": {
+        "page": 1,
+        "image_index": 0,
+        "xref": "#/pictures/0"
+      },
+      "src_image_path": "extracted_images/report_65313312/Area.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "6913356c-cf2f-4e8b-9215-f640a7ad1d12",
+      "metadata": {
+        "page": 1,
+        "image_index": 1,
+        "xref": "#/pictures/1"
+      },
+      "src_image_path": "extracted_images/report_65313312/Azimuth.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "05f4343e-d635-4a12-980a-f807c5ba8dc2",
+      "metadata": {
+        "page": 1,
+        "image_index": 2,
+        "xref": "#/pictures/2"
+      },
+      "src_image_path": "extracted_images/report_65313312/Cover_Image.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "5c4d4395-0fc9-4291-abaf-74ec36b12569",
+      "metadata": {
+        "page": 1,
+        "image_index": 3,
+        "xref": "#/pictures/3"
+      },
+      "src_image_path": "extracted_images/report_65313312/Cover_Image_2.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "fa149c1c-5fd9-4bb0-ae29-595bac576e2d",
+      "metadata": {
+        "page": 1,
+        "image_index": 4,
+        "xref": "#/pictures/4"
+      },
+      "src_image_path": "extracted_images/report_65313312/Cover_Image_3.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "71685cb1-c466-421f-a1ce-9ed174e24292",
+      "metadata": {
+        "page": 1,
+        "image_index": 5,
+        "xref": "#/pictures/5"
+      },
+      "src_image_path": "extracted_images/report_65313312/East_Side.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "d6e80a81-2b02-49d4-bd98-5a5be9835c80",
+      "metadata": {
+        "page": 2,
+        "image_index": 6,
+        "xref": "#/pictures/6"
+      },
+      "src_image_path": "extracted_images/report_65313312/Lengthsimage.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "fe2cccf4-74c9-4e8c-9efe-2b4333324084",
+      "metadata": {
+        "page": 2,
+        "image_index": 7,
+        "xref": "#/pictures/7"
+      },
+      "src_image_path": "extracted_images/report_65313312/North_Side.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "46b9f30d-9ffc-4b42-9012-7c1a8267b67a",
+      "metadata": {
+        "page": 2,
+        "image_index": 8,
+        "xref": "#/pictures/8"
+      },
+      "src_image_path": "extracted_images/report_65313312/Pitch_Degrees.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "082ba21b-8eff-4440-918c-9240669b0e67",
+      "metadata": {
+        "page": 2,
+        "image_index": 9,
+        "xref": "#/pictures/9"
+      },
+      "src_image_path": "extracted_images/report_65313312/Pitch_on_12.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "80f7db1b-4ec9-49dd-8373-dc9f7a771d55",
+      "metadata": {
+        "page": 3,
+        "image_index": 10,
+        "xref": "#/pictures/10"
+      },
+      "src_image_path": "extracted_images/report_65313312/Rafters.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "a767b056-199d-4961-a47f-24776612a4ba",
+      "metadata": {
+        "page": 3,
+        "image_index": 11,
+        "xref": "#/pictures/11"
+      },
+      "src_image_path": "extracted_images/report_65313312/Roof_Penetrations.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "877c01de-8d98-4f18-979f-23a27d4c5f19",
+      "metadata": {
+        "page": 3,
+        "image_index": 12,
+        "xref": "#/pictures/12"
+      },
+      "src_image_path": "extracted_images/report_65313312/South_Side.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "2bfc8103-4b55-4342-ba8e-6a15c0b15a5e",
+      "metadata": {
+        "page": 4,
+        "image_index": 13,
+        "xref": "#/pictures/13"
+      },
+      "src_image_path": "extracted_images/report_65313312/Structure_Summary.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "62f8195a-3db6-4fa5-a932-18074cd9e415",
+      "metadata": {
+        "page": 4,
+        "image_index": 14,
+        "xref": "#/pictures/14"
+      },
+      "src_image_path": "extracted_images/report_65313312/Top_View.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "8a00d391-f3c0-41eb-b73c-489d1c788b43",
+      "metadata": {
+        "page": 4,
+        "image_index": 15,
+        "xref": "#/pictures/15"
+      },
+      "src_image_path": "extracted_images/report_65313312/West_Side.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "c50eadc2-636b-4d72-a7eb-d02336be666f",
+      "metadata": {
+        "page": 5,
+        "image_index": 16,
+        "xref": "#/pictures/16"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_17.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "1f48f54c-c412-4df0-b134-4d568e0c2325",
+      "metadata": {
+        "page": 5,
+        "image_index": 17,
+        "xref": "#/pictures/17"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_18.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "4ca083ac-8bee-49c7-8156-4188c8da6c35",
+      "metadata": {
+        "page": 5,
+        "image_index": 18,
+        "xref": "#/pictures/18"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_19.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "12fe66af-18fc-446a-91a0-76fc7769e357",
+      "metadata": {
+        "page": 6,
+        "image_index": 19,
+        "xref": "#/pictures/19"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_20.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "69343ec6-fa45-4044-b6ed-97ffa40d9e44",
+      "metadata": {
+        "page": 6,
+        "image_index": 20,
+        "xref": "#/pictures/20"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_21.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "6b5868a5-960e-43fe-b150-60cbd46dd45d",
+      "metadata": {
+        "page": 6,
+        "image_index": 21,
+        "xref": "#/pictures/21"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_22.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "2305a0dd-8965-4d30-902e-e14509d13022",
+      "metadata": {
+        "page": 7,
+        "image_index": 22,
+        "xref": "#/pictures/22"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_23.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "9a0b1258-b216-4c5c-89f8-d19facf059fb",
+      "metadata": {
+        "page": 7,
+        "image_index": 23,
+        "xref": "#/pictures/23"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_24.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "e615820c-0322-4d7e-b283-ec0592a72973",
+      "metadata": {
+        "page": 7,
+        "image_index": 24,
+        "xref": "#/pictures/24"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_25.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "390ccccc-7d7c-415f-8914-b87c36748467",
+      "metadata": {
+        "page": 8,
+        "image_index": 25,
+        "xref": "#/pictures/25"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_26.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "0655d931-7f9f-4759-a909-997e5951df1b",
+      "metadata": {
+        "page": 8,
+        "image_index": 26,
+        "xref": "#/pictures/26"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_27.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "f72fce2e-e5eb-4f5e-a221-66c4d2796d64",
+      "metadata": {
+        "page": 8,
+        "image_index": 27,
+        "xref": "#/pictures/27"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_28.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "5f0a2e1b-45e5-4bf3-9721-c214017f8b7a",
+      "metadata": {
+        "page": 9,
+        "image_index": 28,
+        "xref": "#/pictures/28"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_29.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "18ae06b2-60f2-4729-8f31-b16d0b7065ed",
+      "metadata": {
+        "page": 9,
+        "image_index": 29,
+        "xref": "#/pictures/29"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_30.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "00fc83a0-aa29-4ceb-9220-82d54b77944a",
+      "metadata": {
+        "page": 9,
+        "image_index": 30,
+        "xref": "#/pictures/30"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_31.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "50f1f19a-0c51-4433-afad-b4bddebf94db",
+      "metadata": {
+        "page": 10,
+        "image_index": 31,
+        "xref": "#/pictures/31"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_32.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "b9ad5e94-10d9-40a6-bbee-c58a91382a80",
+      "metadata": {
+        "page": 10,
+        "image_index": 32,
+        "xref": "#/pictures/32"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_33.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "1e3ee1a3-ccf7-47af-91ae-cfee6f0ca641",
+      "metadata": {
+        "page": 10,
+        "image_index": 33,
+        "xref": "#/pictures/33"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_34.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "7678cb5b-1504-41df-b1c4-abe10f541f70",
+      "metadata": {
+        "page": 11,
+        "image_index": 34,
+        "xref": "#/pictures/34"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_35.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "3fc1b49b-3b82-4a15-bf4d-8545c8d067d2",
+      "metadata": {
+        "page": 11,
+        "image_index": 35,
+        "xref": "#/pictures/35"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_36.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "7007ff49-c1c1-47b4-9474-39ee73cea462",
+      "metadata": {
+        "page": 12,
+        "image_index": 36,
+        "xref": "#/pictures/36"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_37.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "ce606786-9e7c-418d-9725-2d4b3849efdf",
+      "metadata": {
+        "page": 12,
+        "image_index": 37,
+        "xref": "#/pictures/37"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_38.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "c11f74fc-b88f-443e-aa01-edc81d453de2",
+      "metadata": {
+        "page": 13,
+        "image_index": 38,
+        "xref": "#/pictures/38"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_39.png"
+    },
+    {
+      "type": "image",
+      "raw_text": "",
+      "id": "351ab2f9-7e9b-459a-8dc6-008ef0965b10",
+      "metadata": {
+        "page": 13,
+        "image_index": 39,
+        "xref": "#/pictures/39"
+      },
+      "src_image_path": "extracted_images/report_65313312/image_40.png"
+    }
+  ],
+  "extracted": []
+}

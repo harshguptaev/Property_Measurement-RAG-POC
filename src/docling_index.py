@@ -45,6 +45,7 @@ import json
 from .config import config
 from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
 from .bedrock_client import create_bedrock_embeddings
+from .image_utils import ImageManager
 
 
 class DoclingProcessor:
@@ -56,6 +57,7 @@ class DoclingProcessor:
         self,
         vector_store_manager: Optional[VectorStoreManager] = None,
         config_instance: Optional[Any] = None,
+        enable_gemini: bool = True,
         **kwargs
     ):
         """
@@ -64,6 +66,7 @@ class DoclingProcessor:
         Args:
             vector_store_manager: Vector store manager instance
             config_instance: Configuration instance
+            enable_gemini: Whether to enable Gemini Vision for image analysis
             **kwargs: Additional arguments
         """
         if not DOCLING_AVAILABLE:
@@ -74,6 +77,9 @@ class DoclingProcessor:
         self.text_splitter = None
         self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
+        
+        # Initialize image manager with Gemini support
+        self.image_manager = ImageManager(enable_gemini=enable_gemini)
         
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
@@ -263,6 +269,11 @@ class DoclingProcessor:
             # Extract tables if present
             table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
+            
+            # Extract important chunks and save them
+            important_chunks = self._extract_and_save_important_chunks(file_path)
+            documents.extend(important_chunks)
+            
 
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
             return documents
@@ -419,6 +430,25 @@ class DoclingProcessor:
                                     'image_size': image.size
                                 }
                             )
+                            
+                            # Enhance with Gemini analysis if available
+                            if self.image_manager.gemini_client:
+                                try:
+                                    enhanced_metadata = self.image_manager.enhance_image_metadata_with_gemini(img_doc.metadata)
+                                    img_doc.metadata.update(enhanced_metadata)
+                                    
+                                    # Update page content with Gemini analysis
+                                    if "gemini_analysis" in enhanced_metadata:
+                                        analysis = enhanced_metadata["gemini_analysis"]
+                                        if "full_analysis" in analysis:
+                                            img_doc.page_content += f"\n\nGemini Analysis: {analysis['full_analysis']}"
+                                        elif "caption" in analysis:
+                                            img_doc.page_content += f"\n\nGemini Caption: {analysis['caption']}"
+                                        elif "measurements_analysis" in analysis:
+                                            img_doc.page_content += f"\n\nMeasurement Analysis: {analysis['measurements_analysis']}"
+                                except Exception as e:
+                                    logging.warning(f"Failed to enhance image with Gemini: {e}")
+                            print("Enhanced image metadata with Gemini.", img_doc.metadata)
                             documents.append(img_doc)
                         
                         pix = None  # Cleanup
@@ -773,6 +803,127 @@ class DoclingProcessor:
             logging.error(f"Error processing text file {file_path}: {e}")
             raise
     
+    def _extract_and_save_important_chunks(self, file_path: Path) -> None:
+        """Extract important chunks and save them organized by report ID."""
+
+        documents = []
+        try:
+            logging.info(f"Starting important chunk extraction for {file_path.name}")
+            
+            # Try to import the extractor
+            try:
+                from .important_chunk_extractor import extract_important_chunks
+                logging.info("Successfully imported important_chunk_extractor")
+            except ImportError as ie:
+                logging.error(f"Failed to import important_chunk_extractor: {ie}")
+                return
+            
+            # Extract report ID from filename
+            report_id = None
+            if 'RoofReport-' in file_path.name:
+                try:
+                    report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+                except:
+                    pass
+            
+            if not report_id:
+                report_id = file_path.stem
+            
+            logging.info(f"Extracting chunks for report ID: {report_id}")
+            
+            # Extract important chunks
+            chunks_data = extract_important_chunks(str(file_path))
+            
+            # Debug logging
+            logging.info(f"Chunks data type: {type(chunks_data)}")
+            logging.info(f"Chunks data truthy: {bool(chunks_data)}")
+            if isinstance(chunks_data, dict):
+                logging.info(f"Chunks data keys: {list(chunks_data.keys())}")
+                for key, value in chunks_data.items():
+                    if isinstance(value, list):
+                        logging.info(f"  {key}: {len(value)} items")
+                    else:
+                        logging.info(f"  {key}: {type(value)}")
+            
+            if chunks_data and isinstance(chunks_data, dict):
+                # Check if there's any actual content
+                has_content = False
+                for chunk_type in ['text', 'table', 'image', 'extracted']:
+                    if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list) and chunks_data[chunk_type]:
+                        has_content = True
+                        break
+                
+                if not has_content:
+                    logging.warning(f"No content found in chunks for {file_path.name}")
+                    return
+                # Create output directory structure
+                chunks_dir = Path("docling_exports") / file_path.stem
+                chunks_dir.mkdir(parents=True, exist_ok=True)
+                
+                # Save chunks as JSON
+                chunks_file = chunks_dir / "important_chunks.json"
+                with open(chunks_file, 'w', encoding='utf-8') as f:
+                    import json
+                    json.dump(chunks_data, f, ensure_ascii=False, indent=2)
+                
+                # Convert dictionary chunks to Document objects
+                all_chunks = []
+                if isinstance(chunks_data, dict):
+                    for chunk_type in ['text', 'table', 'image', 'extracted']:
+                        if chunk_type in chunks_data and isinstance(chunks_data[chunk_type], list):
+                            for chunk_dict in chunks_data[chunk_type]:
+                                if isinstance(chunk_dict, dict):
+                                    # Convert dictionary to Document object
+                                    page_content = chunk_dict.get('raw_text', '') or chunk_dict.get('content', '') or str(chunk_dict)
+                                    
+                                    # Create metadata from the chunk dictionary
+                                    metadata = {
+                                        'type': chunk_dict.get('type', chunk_type),
+                                        'extraction_method': 'important_chunks',
+                                        'report_id': report_id,
+                                        'chunk_id': chunk_dict.get('id', ''),
+                                        'source_file': file_path.name
+                                    }
+                                    
+                                    # Add any existing metadata from the chunk
+                                    if 'metadata' in chunk_dict and isinstance(chunk_dict['metadata'], dict):
+                                        metadata.update(chunk_dict['metadata'])
+                                    
+                                    # Add any additional fields from the chunk as metadata
+                                    for key, value in chunk_dict.items():
+                                        if key not in ['raw_text', 'content', 'type', 'id', 'metadata']:
+                                            metadata[key] = value
+                                    
+                                    # Create Document object
+                                    doc = Document(
+                                        page_content=page_content,
+                                        metadata=metadata
+                                    )
+                                    all_chunks.append(doc)
+                                else:
+                                    # If it's already a Document object, keep it as is
+                                    all_chunks.append(chunk_dict)
+                
+                documents.extend(all_chunks)
+                logging.info(f"✓ Saved {len(all_chunks)} important chunks to {chunks_file}")
+                
+                # Log chunk types for verification
+                chunk_types = []
+                for chunk in all_chunks:
+                    if hasattr(chunk, 'metadata') and isinstance(chunk.metadata, dict):
+                        chunk_types.append(chunk.metadata.get('type', 'unknown'))
+                    else:
+                        chunk_types.append('unknown')
+                logging.info(f"✓ Chunk types extracted: {', '.join(chunk_types)}")
+            else:
+                logging.warning(f"No important chunks extracted from {file_path.name}")
+                
+        except Exception as e:
+            logging.error(f"Error extracting important chunks from {file_path}: {e}")
+            import traceback
+            logging.error(f"Full traceback: {traceback.format_exc()}")
+        return documents
+
     def process_directory(
         self,
         directory_path: str,
