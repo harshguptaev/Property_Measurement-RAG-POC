@@ -2,43 +2,38 @@
 
 <!-- image -->
 
-1 8
+0 8
 
 ## Contents
 
-Lengths ................................................................................. 1
-
-Pitch (Degrees)...................................................................... 2
-
-Pitch (on 12) .......................................................................... 3
-
-Rafters ................................................................................... 4
-
-Azimuth .................................................................................. 5
-
-Area ....................................................................................... 6
-
-Roof Obstructions .................................................................. 7
-
-Imagery .................................................................................. 8
-
-Roofing Report Summary ..................................................... 11
+| Lengths .................................................................................    |   1 |
+|----------------------------------------------------------------------------------------------|-----|
+| Pitch (Degrees)......................................................................        |   2 |
+| Pitch (on 12) ..........................................................................     |   3 |
+| Rafters ...................................................................................  |   4 |
+| Azimuth ..................................................................................   |   5 |
+| Area ....................................................................................... |   6 |
+| Roof Obstructions ..................................................................         |   7 |
+| Imagery ..................................................................................   |   8 |
+| Roofing Report Summary .....................................................                 |  11 |
 
 ## Report Details
 
-Report ID: Claim
+Report ID:
 
-63214254 test-123
+Claim Group:
+
+66953450 Roofing
 
 <!-- image -->
 
 ## PROPERTY
 
-106 Oakwood Dr Richmond, KY 40475
+830 Forestwalk Dr Suwanee, GA 30024
 
 ## Property Address
 
-106 Oakwood Dr Richmond, KY 40475
+830 Forestwalk Dr Suwanee, GA 30024
 
 ## Measurements
 
@@ -66,33 +61,33 @@ Roof Obstructions Perimeter:
 
 Roof Obstructions Area:
 
-2,825.9 sq ft
+3,194.1 sq ft
 
-12
+31
 
-6/12
+12/12
 
 &gt;1
 
-212' 10"
+276' 1"
 
-45' 6"
+145' 7"
 
-2' 3"
+127' 9"
 
-274' 1"
+236' 7"
 
-41.5 sq ft
+109.8 sq ft
 
-13
+6
 
-51' 6"
+47' 8"
 
-15.4 sq ft
+28.3 sq ft
 
 ## Prepared For
 
-Justina Cryder 205 Hemlock Ct South Milwaukee,WI 53172 (888) 209-4899
+Jake Schmidt Roofing 4625 Three Chimneys Lane Cumming,GA 30041 (678) 446-4710
 
 <!-- image -->
 
@@ -106,25 +101,25 @@ Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx
 
 <!-- image -->
 
-Ridges = 42' 10" Hips = 170'
+Ridges = 81' 10" Hips = 194' 3"
 
-Valleys = 45' 6"
+Valleys = 145' 7"
 
-## Rakes = 2' 3"
+## Rakes = 127' 9"
 
-Eaves = 274' 1"
+Eaves = 236' 7"
 
-Flashing = 19' 11"
+Flashing = 49' 11"
 
-## Step flashing = 42' 10"
+## Step flashing = 75' 10"
 
 Parapets = 0'
 
-Other = 12' 6"
+Other = 1' 4"
 
 <!-- image -->
 
-8
+9 8
 
 <!-- image -->
 
@@ -140,7 +135,7 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
-&lt; 1 8
+&lt; 9 1 8
 
 ## Pitch (on 12)
 
@@ -150,11 +145,15 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
-&lt; 1 8
+&lt; 9 1 8
 
 ## Rafters
 
 Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases, segment labels have been removed for readability. Some numbers are prefaced by '+' signs to avoid confusion when rotated (e.g. +6 and +9).
+
+<!-- image -->
+
+3 1 8
 
 <!-- image -->
 
@@ -174,9 +173,9 @@ The area is measured in square feet per roof facet. The values have been rounded
 
 <!-- image -->
 
-<!-- image -->
+&lt; 9 1 8
 
-&lt; 1 8
+<!-- image -->
 
 ## Roof Obstructions
 
@@ -184,7 +183,7 @@ The area is measured in square feet per roof facet. The values have been rounded
 
 <!-- image -->
 
-1 8 g
+1 8
 
 ## Imagery
 
@@ -216,10 +215,10 @@ These are images of the property taken from multiple angles.
 
 ## Areas per Pitch
 
-| Roof Pitches   | 3/12   | 6/12   |
-|----------------|--------|--------|
-| Area (sq ft)   | 289.1  | 2536.8 |
-| %of Roof       | 10.2%  | 89.8%  |
+| Roof Pitches   | 6/12   | 8/12   | 9/12   | 12/12   | 22/12   |
+|----------------|--------|--------|--------|---------|---------|
+| Area (sq ft)   | 86.5   | 70     | 1459.8 | 1543.1  | 34.7    |
+| %of Roof       | 2.7%   | 2.2%   | 45.7%  | 48.3%   | 1.1%    |
 
 The table above lists each pitch on this roof and the total area and percent of the roof with that pitch.
 
@@ -229,9 +228,9 @@ The table above lists each pitch on this roof and the total area and percent of 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Simple                                                                                                                                                                                                                                                                              | Simple                                                                                                                                                                                                                                                                              | Normal                                                                                                                                                                                                                                                                              | Normal                                                                                                                                                                                                                                                                              | Normal                                                                                                                                                                                                                                                                              | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             |
 | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. |
-| Waste%                                                                                                                                                                                                                                                                              | 0%                                                                                                                                                                                                                                                                                  | 4%                                                                                                                                                                                                                                                                                  | 9%                                                                                                                                                                                                                                                                                  | 14%                                                                                                                                                                                                                                                                                 | 17%                                                                                                                                                                                                                                                                                 | 19%                                                                                                                                                                                                                                                                                 | 21%                                                                                                                                                                                                                                                                                 | 24%                                                                                                                                                                                                                                                                                 | 29%                                                                                                                                                                                                                                                                                 |
-| Area (m²)                                                                                                                                                                                                                                                                           | 262                                                                                                                                                                                                                                                                                 | 273                                                                                                                                                                                                                                                                                 | 286                                                                                                                                                                                                                                                                                 | 299                                                                                                                                                                                                                                                                                 | 307                                                                                                                                                                                                                                                                                 | 312                                                                                                                                                                                                                                                                                 | 317                                                                                                                                                                                                                                                                                 | 325                                                                                                                                                                                                                                                                                 | 338                                                                                                                                                                                                                                                                                 |
-| Squares *                                                                                                                                                                                                                                                                           | 28.33                                                                                                                                                                                                                                                                               | 29.66                                                                                                                                                                                                                                                                               | 31.00                                                                                                                                                                                                                                                                               | 32.33                                                                                                                                                                                                                                                                               | 33.33                                                                                                                                                                                                                                                                               | 33.66                                                                                                                                                                                                                                                                               | 34.33                                                                                                                                                                                                                                                                               | 35.33                                                                                                                                                                                                                                                                               | 36.66                                                                                                                                                                                                                                                                               |
+| Waste%                                                                                                                                                                                                                                                                              | 0%                                                                                                                                                                                                                                                                                  | 8%                                                                                                                                                                                                                                                                                  | 13%                                                                                                                                                                                                                                                                                 | 18%                                                                                                                                                                                                                                                                                 | 21%                                                                                                                                                                                                                                                                                 | 23%                                                                                                                                                                                                                                                                                 | 25%                                                                                                                                                                                                                                                                                 | 28%                                                                                                                                                                                                                                                                                 | 33%                                                                                                                                                                                                                                                                                 |
+| Area (m²)                                                                                                                                                                                                                                                                           | 296                                                                                                                                                                                                                                                                                 | 320                                                                                                                                                                                                                                                                                 | 335                                                                                                                                                                                                                                                                                 | 350                                                                                                                                                                                                                                                                                 | 359                                                                                                                                                                                                                                                                                 | 364                                                                                                                                                                                                                                                                                 | 370                                                                                                                                                                                                                                                                                 | 379                                                                                                                                                                                                                                                                                 | 394                                                                                                                                                                                                                                                                                 |
+| Squares *                                                                                                                                                                                                                                                                           | 32.00                                                                                                                                                                                                                                                                               | 34.66                                                                                                                                                                                                                                                                               | 36.33                                                                                                                                                                                                                                                                               | 38.00                                                                                                                                                                                                                                                                               | 38.66                                                                                                                                                                                                                                                                               | 39.33                                                                                                                                                                                                                                                                               | 40.00                                                                                                                                                                                                                                                                               | 41.00                                                                                                                                                                                                                                                                               | 42.66                                                                                                                                                                                                                                                                               |
 | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  | Measured Suggested                                                                                                                                                                                                                                                                  |
 
 - *Squares are rounded up to the 1/3 of a square
@@ -240,44 +239,26 @@ Additional materials needed for ridge, hip, and starter lengths are not included
 
 <!-- image -->
 
+Total Roof Facets = 31
+
 ## Lengths, Areas and Pitches
 
-Total Roof Facets = 12
+Ridges = 81' 10" (8 Ridges) Hips = 194' 3" (17 Hips) Valleys = 145' 7" (12 Valleys) Rakes† = 127' 9" (11 Rakes) Eaves/Starters‡ = 236' 7" (34 Eaves) Drip Edge (Eaves + Rakes) = 364' 5" (45 Lengths) Parapet Walls = 0' (0 Lengths) Flashing = 49' 11" (7 Lengths) Step Flashing = 75' 10" (15 Lengths) Total Roof Obstructions Area = 28.3 sq ft Total Roof Area Less Roof Obstructions =3,165.8 sq ft Total Roof Obstructions Perimeter = 47' 8"
 
-Total Roof Obstructions = 13
+Predominant Pitch = 12/12
 
-Ridges = 42' 10" (3 Ridges)
+Total Roof Obstructions = 6
 
-Hips = 170' (9 Hips)
-
-Valleys = 45' 6" (6 Valleys)
-
-Rakes† = 2' 3" (1 Rakes)
-
-Eaves/Starters‡ = 274' 1" (13 Eaves) Drip Edge (Eaves + Rakes) = 276' 4" (14 Lengths)
-
-Parapet Walls = 0' (0 Lengths)
-
-Flashing = 19' 11" (7 Lengths)
-
-Step Flashing = 42' 10" (7 Lengths)
-
-Total Roof Obstructions Area = 15.4 sq ft
-
-Total Roof Area Less Roof Obstructions =2,810.5 sq ft
-
-Total Roof Obstructions Perimeter = 51' 6" Predominant Pitch = 6/12
-
-Total Area (All Pitches) = 2,825.9 sq ft
+Total Area (All Pitches) = 3,194.1 sq ft
 
 - † Rakes are defined as roof edges that are sloped (not level).
 - ‡ Eaves are defined as edges that are not sloped and level
 
 ## Property Location
 
-Longitude = -84.3498190
+Longitude = -84.1125340
 
-Latitude = 37.7387620
+Latitude = 34.1013360
 
 ## Notes
 
@@ -287,11 +268,11 @@ This was ordered as a residential property. There were no changes to the structu
 
 ## Legal Notice and Disclaimer
 
-## 106 Oakwood Dr, Richmond, KY 40475
+## 830 Forestwalk Dr, Suwanee, GA 30024
 
 August 23, 2025
 
-Report: 63214254
+Report: 66953450
 
 ## IMPORTANT LEGAL NOTICE AND DISCLAIMER
 
