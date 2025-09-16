@@ -38,7 +38,7 @@ def getpictometryresponse(
     return response.json()
 
 
-def parseresponse(api_response: Dict, image_size: Tuple[int, int] = (1024, 1024)) -> Dict[str, str]:
+def parseresponse(api_response: Dict, image_size: Tuple[int, int] = (400, 400)) -> Dict[str, str]:
     """
     Parse the API response and construct downloadable image URLs for each orientation.
 
@@ -76,7 +76,7 @@ def saveimagesfrompictometry(
     latitude_or_latlng: Union[float, Tuple[float, float]],
     longitude: Optional[float] = None,
     output_root: Optional[str] = None,
-    image_size: Tuple[int, int] = (1024, 1024),
+    image_size: Tuple[int, int] = (400, 400),
     timeout_seconds: int = 60,
     extra_headers: Optional[Dict[str, str]] = None,
 ) -> Dict[str, str]:

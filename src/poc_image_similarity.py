@@ -12,7 +12,7 @@ import faiss
 
 
 EXPECTED_ORDER = ["top", "east", "west", "north", "south"]
-EXPECTED_SIZE = (1024, 1024)
+EXPECTED_SIZE = (400, 400)
 
 
 def _load_and_normalize_image(path: str, expected_size: Tuple[int, int] = EXPECTED_SIZE) -> Optional[Image.Image]:
@@ -63,23 +63,31 @@ def stitch_pictometry_images_for_folder(folder_path: str, output_name: str = "st
 
     output_path = os.path.join(folder_path, output_name)
     stitched.save(output_path, format="PNG")
-
+    
+    top_image = images[0]
     # Save a compressed variant for storage/embedding (WEBP) and write base64 from it
     compressed_path = os.path.join(folder_path, "stitched_image.webp")
+    top_image_compressed_path = os.path.join(folder_path, "top_image.webp")
     try:
         stitched.save(compressed_path, format="WEBP", quality=80, method=6)
+        top_image.save(top_image_compressed_path, format="WEBP", quality=80, method=6)
     except Exception:
         compressed_path = output_path
 
     # Also save base64 string alongside the stitched image (use compressed if available)
     try:
         b64 = image_file_to_base64(compressed_path)
+        b64_top_image = image_file_to_base64(top_image_compressed_path)
         b64_path = os.path.join(folder_path, "stiched_image_base64")
+        b64_top_image_path = os.path.join(folder_path, "top_image_base64")
         with open(b64_path, "w", encoding="utf-8") as f:
             f.write(b64)
+        with open(b64_top_image_path, "w", encoding="utf-8") as f:
+            f.write(b64_top_image)
         # Generate and persist embeddings
         try:
             generate_image_embedings(folder_path, base64_string=b64)
+            generate_image_embedings(folder_path, base64_string=b64_top_image)
         except Exception:
             pass
     except Exception:
@@ -132,45 +140,49 @@ def generate_image_embedings(
     the same folder.
     """
     b64_path = os.path.join(folder_path, "stiched_image_base64")
+    b64_top_image_path = os.path.join(folder_path, "top_image_base64")
     if base64_string is None:
         if not os.path.isfile(b64_path):
             return None
         with open(b64_path, "r", encoding="utf-8") as f:
             base64_string = f.read().strip()
-
-    # Build a helpful caption including lat/lon parsed from folder name
-    folder_name = os.path.basename(folder_path)
-    try:
-        lat_str, lon_str = folder_name.split("_", 1)
-    except ValueError:
-        lat_str, lon_str = "?", "?"
-    image_text = (
-        f"Stiched image in order (top,east,west,north,south) fetched from pictometry "
-        f"service for lat:{lat_str} lon:{lon_str}"
-    )
-
+    if not os.path.isfile(b64_top_image_path):
+        return None
+    with open(b64_top_image_path, "r", encoding="utf-8") as f:
+        base64_string_top_image = f.read().strip()
     client = boto3.client("bedrock-runtime", region_name=region_name)
     payload = {
-        "inputText": image_text,
         "inputImage": base64_string,
         "embeddingConfig": {"outputEmbeddingLength": int(output_embedding_length)},
     }
-
+    payload_top_image = {
+        "inputImage": base64_string_top_image,
+        "embeddingConfig": {"outputEmbeddingLength": int(output_embedding_length)},
+    }
     response = client.invoke_model(modelId=model_id, body=json.dumps(payload))
     body = json.loads(response["body"].read())
-
+    response_top_image = client.invoke_model(modelId=model_id, body=json.dumps(payload_top_image))
+    body_top_image = json.loads(response_top_image["body"].read())
     embedding = (
         body.get("embedding")
         or (body.get("results") or [{}])[0].get("embedding")
         or (body.get("embeddings") or [None])[0]
     )
-    if embedding is None:
+    embedding_top_image = (
+        body_top_image.get("embedding")
+        or (body_top_image.get("results") or [{}])[0].get("embedding")
+        or (body_top_image.get("embeddings") or [None])[0]
+    )
+    if embedding is None or embedding_top_image is None:
         raise ValueError(f"Unable to extract embedding from response: {body}")
 
     out_path = os.path.join(folder_path, "stiched_image_embedings")
+    out_path_top_image = os.path.join(folder_path, "top_image_embedings")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(embedding, f)
-    return out_path
+    with open(out_path_top_image, "w", encoding="utf-8") as f:
+        json.dump(embedding_top_image, f)
+    return out_path, out_path_top_image
 
 
 def push_image_embedings_todb(
@@ -259,7 +271,6 @@ def _embed_image_with_bedrock(
     def _call_with_b64(b64str: str) -> Optional[List[float]]:
         try:
             payload = {
-                "inputText": "input query image for similarity",
                 "inputImage": b64str,
                 "embeddingConfig": {"outputEmbeddingLength": int(output_embedding_length)},
             }
