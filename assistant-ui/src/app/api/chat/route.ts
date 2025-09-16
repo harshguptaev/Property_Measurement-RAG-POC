@@ -4,20 +4,37 @@ export const maxDuration = 30;
 
 interface PropertyRAGMessage {
   role: "user" | "assistant";
-  content: string;
+  content: string | Array<{ type: string; text: string; [key: string]: any }>;
 }
 
 export async function POST(req: NextRequest) {
   try {
+    console.log("API route called");
     const { messages }: { messages: PropertyRAGMessage[] } = await req.json();
+    console.log("Messages received:", messages);
     
     // Get the latest user message
     const userMessage = messages.filter(msg => msg.role === "user").pop();
     
     if (!userMessage) {
+      console.log("No user message found");
       return NextResponse.json({ error: "No user message found" }, { status: 400 });
     }
-    if (!userMessage.content || userMessage.content.trim().length === 0) {
+
+    // Extract text content from message (handle both string and array formats)
+    let messageText = "";
+    if (typeof userMessage.content === "string") {
+      messageText = userMessage.content;
+    } else if (Array.isArray(userMessage.content)) {
+      // Extract text from content array
+      messageText = userMessage.content
+        .filter(item => item.type === "text")
+        .map(item => item.text)
+        .join(" ");
+    }
+    
+    if (!messageText || messageText.trim().length === 0) {
+      console.log("Empty user message");
       // Early return with helpful message instead of calling backend with empty input
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
@@ -41,8 +58,11 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    console.log("Processing user message:", messageText);
+    
     // Call your Python RAG backend
     const ragBackendUrl = process.env.RAG_BACKEND_URL || "http://localhost:8000";
+    console.log("Using RAG backend URL:", ragBackendUrl);
     
     try {
       const response = await fetch(`${ragBackendUrl}/query`, {
@@ -52,78 +72,69 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           // Support both backend payloads: some expect `query`, others expect `question`
-          query: userMessage.content,
-          question: userMessage.content,
+          query: messageText,
+          question: messageText,
           conversation_history: messages.slice(0, -1).map(msg => ({
             role: msg.role,
-            content: msg.content
+            content: typeof msg.content === "string" ? msg.content : 
+              Array.isArray(msg.content) ? 
+                msg.content.filter(item => item.type === "text").map(item => item.text).join(" ") : 
+                ""
           }))
         }),
       });
 
       if (!response.ok) {
+        console.error(`RAG backend error: ${response.status} ${response.statusText}`);
+        const errorText = await response.text();
+        console.error("RAG backend error details:", errorText);
         throw new Error(`RAG backend responded with status: ${response.status}`);
       }
 
       const ragResult = await response.json();
+      console.log("RAG response received:", ragResult);
       
       // Return streaming response format expected by Assistant UI
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
         start(controller) {
           const responseText = ragResult.response || ragResult.answer || "I'm sorry, I couldn't process your request.";
-          const chunks = responseText.split(' ');
+          
+          // Stream the response character by character for smooth display
           let index = 0;
-          let closed = false;
-          const timers = new Set<any>();
-
-          const safeEnqueue = (data: string) => {
-            if (closed) return;
-            try {
-              controller.enqueue(encoder.encode(data));
-            } catch {
-              closed = true;
-              // best-effort cleanup
-              for (const t of timers) clearTimeout(t);
-              timers.clear();
-            }
-          };
-
-          const schedule = (fn: () => void, delay = 50) => {
-            if (closed) return;
-            const t = setTimeout(fn, delay);
-            timers.add(t);
-          };
-
-          const finish = () => {
-            if (closed) return;
-            safeEnqueue(`data: ${JSON.stringify({ type: "finish", finishReason: "stop" })}\n\n`);
-            closed = true;
-            for (const t of timers) clearTimeout(t);
-            timers.clear();
-            try { controller.close(); } catch { /* noop */ }
-          };
-
+          let currentText = "";
+          
           const sendNext = () => {
-            if (closed) return;
-            if (index < chunks.length) {
-              const chunk = chunks[index] + (index < chunks.length - 1 ? ' ' : '');
-              safeEnqueue(`data: ${JSON.stringify({ type: "text-delta", textDelta: chunk })}\n\n`);
+            if (index < responseText.length) {
+              const char = responseText[index];
+              currentText += char;
+              
+              // Send the incremental text delta
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ 
+                  type: "text-delta", 
+                  textDelta: char 
+                })}\n\n`)
+              );
+              
               index++;
-              schedule(sendNext, 50);
+              setTimeout(sendNext, 30); // Faster streaming for smoother experience
             } else {
-              finish();
+              // Send finish signal
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ 
+                  type: "finish", 
+                  finishReason: "stop" 
+                })}\n\n`)
+              );
+              controller.close();
             }
           };
 
           sendNext();
         },
         cancel() {
-          // Client disconnected; stop scheduling and prevent further writes
-          // Note: controller is not available here; just mark closed and clear timers
-          // Types deliberately loose to support both Node and Edge runtimes
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const noop = null;
+          // Client disconnected
         },
       });
 
@@ -135,6 +146,7 @@ export async function POST(req: NextRequest) {
           'X-Accel-Buffering': 'no',
         },
       });
+     
 
     } catch (backendError) {
       console.error("Error calling RAG backend:", backendError);
@@ -172,8 +184,11 @@ export async function POST(req: NextRequest) {
     
   } catch (error) {
     console.error("Error in chat API:", error);
+    console.error("Error stack:", error instanceof Error ? error.stack : 'No stack trace');
+    
+    // Return a proper error response
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

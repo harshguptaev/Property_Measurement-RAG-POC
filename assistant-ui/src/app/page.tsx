@@ -1,13 +1,75 @@
 "use client";
 
-import { AssistantRuntimeProvider } from "@assistant-ui/react";
-import { useChatRuntime } from "@assistant-ui/react-ai-sdk";
+import { AssistantRuntimeProvider, useLocalRuntime } from "@assistant-ui/react";
 import { ThreadList } from "@/components/assistant-ui/thread-list";
 import { Thread } from "@/components/assistant-ui/thread";
 import { PropertyDashboard } from "@/components/PropertyDashboard";
 
 export default function PropertyAnalysisApp() {
-  const runtime = useChatRuntime();
+  const runtime = useLocalRuntime({
+    async *run({ messages }) {
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ messages }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const reader = response.body?.getReader();
+        if (!reader) {
+          throw new Error("No response body");
+        }
+
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let accumulatedText = ""; // Accumulate text deltas
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() || "";
+
+            for (const line of lines) {
+              if (line.startsWith("data: ")) {
+                try {
+                  const data = JSON.parse(line.slice(6));
+                  
+                  if (data.type === "text-delta") {
+                    accumulatedText += data.textDelta; // Accumulate the text
+                    yield {
+                      content: [{ type: "text", text: accumulatedText }],
+                    };
+                  } else if (data.type === "finish") {
+                    return;
+                  }
+                } catch (parseError) {
+                  // Silently handle parse errors
+                }
+              }
+            }
+          }
+        } finally {
+          reader.releaseLock();
+        }
+      } catch (error) {
+        // Yield an error message to the user
+        yield {
+          content: [{ type: "text", text: `Error: ${error instanceof Error ? error.message : String(error)}` }],
+        };
+      }
+    },
+  });
 
   return (
     <div className="h-screen bg-background">
