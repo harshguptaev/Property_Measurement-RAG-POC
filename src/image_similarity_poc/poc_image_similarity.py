@@ -12,7 +12,7 @@ import faiss
 
 
 EXPECTED_ORDER = ["top", "east", "west", "north", "south"]
-EXPECTED_SIZE = (400, 400)
+EXPECTED_SIZE = (1000, 1000)
 
 
 def _load_and_normalize_image(path: str, expected_size: Tuple[int, int] = EXPECTED_SIZE) -> Optional[Image.Image]:
