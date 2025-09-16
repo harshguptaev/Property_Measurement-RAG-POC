@@ -20,7 +20,7 @@ from tqdm import tqdm
 
 # Reuse exact embedding logic from the POC to avoid divergence
 try:
-    from src.poc_image_similarity import _embed_image_with_bedrock  # type: ignore
+    from src.image_similarity_poc.poc_image_similarity import _embed_image_with_bedrock  # type: ignore
 except Exception:  # Fallback if running as module without package context
     from poc_image_similarity import _embed_image_with_bedrock  # type: ignore
 

@@ -14,16 +14,15 @@ from pathlib import Path
 # Add src to Python path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from src import image_milvus
 from src.config import config
 from src.index import process_and_index_directory
 from src.docling_index import process_and_index_directory_with_docling, DOCLING_AVAILABLE
 from src.agent import AgenticRAG
 from src.ui import create_ui
 from src.bedrock_client import create_bedrock_llm, create_bedrock_embeddings
-from src.pictometry_client import saveimagesfrompictometry
-from src.poc_image_similarity import stitch_all_pictometry_directories, push_image_embedings_todb, find_similar_images
-from src.image_milvus import ImageMilvus, print_matches
+from src.image_similarity_poc.pictometry_client import saveimagesfrompictometry
+from src.image_similarity_poc.poc_image_similarity import stitch_all_pictometry_directories, push_image_embedings_todb, find_similar_images
+from src.image_similarity_poc.image_milvus import ImageMilvus, print_matches
 
 def setup_logging():
     """Setup logging configuration."""
