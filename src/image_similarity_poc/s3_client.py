@@ -1,10 +1,14 @@
 import logging
 import os
+import json
 from pathlib import Path
 from typing import Optional, Tuple, Iterable
 
 import boto3
 from botocore.exceptions import ClientError
+from PIL import Image
+
+from .poc_image_similarity import _embed_image_with_bedrock, image_file_to_base64
 
 
 logger = logging.getLogger(__name__)
@@ -77,8 +81,64 @@ def download_report_extended_ortho(
     s3_uri = f"s3://{bucket}/{key}"
 
     dest_path = root_output_dir / report_id / "extendedOrthoImage.jpg"
+    if dest_path.exists():
+        return dest_path
     ok = download_s3_to_path(s3_uri, dest_path, region_name=region_name)
     return dest_path if ok else None
+
+
+def _save_webp_and_base64(
+    jpg_path: Path,
+    *,
+    webp_name: str = "extendedOrthoImage.webp",
+    b64_name: str = "extendedOrthoImage_base64",
+) -> Tuple[Optional[Path], Optional[Path]]:
+    if not jpg_path.exists():
+        return None, None
+    try:
+        img = Image.open(str(jpg_path)).convert("RGB")
+        webp_path = jpg_path.parent / webp_name
+        img.save(str(webp_path), format="WEBP", quality=80, method=6)
+    except Exception as e:
+        logger.error("Failed to create WEBP for %s: %s", str(jpg_path), e)
+        return None, None
+
+    try:
+        b64 = image_file_to_base64(str(webp_path))
+        b64_path = jpg_path.parent / b64_name
+        with open(b64_path, "w", encoding="utf-8") as f:
+            f.write(b64)
+    except Exception as e:
+        logger.error("Failed to write base64 for %s: %s", str(webp_path), e)
+        b64_path = None
+
+    return webp_path, b64_path
+
+
+def embed_extended_ortho(
+    report_folder: Path,
+    *,
+    webp_name: str = "extendedOrthoImage.webp",
+    embeddings_name: str = "extendedOrthoImage_embedings",
+) -> Optional[Path]:
+    """
+    Generate Titan image embedding for extended ortho WEBP and save JSON array
+    to {report_folder}/{embeddings_name}. Returns saved path or None on failure.
+    """
+    webp_path = report_folder / webp_name
+    if not webp_path.exists():
+        return None
+    try:
+        emb = _embed_image_with_bedrock(str(webp_path))
+        if not emb:
+            return None
+        out_path = report_folder / embeddings_name
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(emb, f)
+        return out_path
+    except Exception as e:
+        logger.error("Embedding failed for %s: %s", str(webp_path), e)
+        return None
 
 
 def _iter_report_ids_from_file(reports_txt_path: Path) -> Iterable[str]:
@@ -122,6 +182,16 @@ def batch_download_from_reports(
         if saved is not None:
             success_count += 1
             logger.info("Saved: %s", str(saved))
+            # After saving JPG, produce WEBP + base64 + embeddings
+            webp_path, _ = _save_webp_and_base64(saved)
+            if webp_path is not None:
+                embed_path = embed_extended_ortho(saved.parent)
+                if embed_path is not None:
+                    logger.info("Embeddings saved: %s", str(embed_path))
+                else:
+                    logger.warning("Embedding failed for report_id=%s", report_id)
+            else:
+                logger.warning("WEBP/base64 generation failed for report_id=%s", report_id)
         else:
             logger.warning("Failed: report_id=%s", report_id)
 

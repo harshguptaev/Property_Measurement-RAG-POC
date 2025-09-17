@@ -23,6 +23,7 @@ from src.bedrock_client import create_bedrock_llm, create_bedrock_embeddings
 from src.image_similarity_poc.pictometry_client import saveimagesfrompictometry
 from src.image_similarity_poc.poc_image_similarity import stitch_all_pictometry_directories, push_image_embedings_todb, find_similar_images
 from src.image_similarity_poc.image_milvus import ImageMilvus, print_matches
+from src.image_similarity_poc.s3_client import batch_download_from_reports
 
 def setup_logging():
     """Setup logging configuration."""
@@ -62,6 +63,7 @@ def main():
     # saveimagesfrompictometry(37.774929, -122.419416)
     # stich pictometry images and convert to base64
 
+    batch_download_from_reports()
     # stitch_all_pictometry_directories()
     im = ImageMilvus()
     im.index_top_embeddings()
