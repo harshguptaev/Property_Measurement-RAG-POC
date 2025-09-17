@@ -227,6 +227,72 @@ class ImageMilvus:
         return matches
 
 
+    def index_extended_ortho_embeddings(self, root_dir: str = "test_data") -> int:
+
+        """
+        Traverse root_dir expecting subfolders named like "reportid". For each, read
+        extendedOrthoImage_embedings (JSON array of floats, 1024-dim) and insert batch records.
+        Returns number of inserted items.
+        """
+        if not os.path.isdir(root_dir):
+            logger.error("Image root directory not found: %s", root_dir)
+            return 0
+
+        self.ensure_collection(drop_existing=True)
+
+        records: List[Dict[str, Any]] = []
+        counter = 0
+
+        subfolders = [
+            os.path.join(root_dir, name)
+            for name in os.listdir(root_dir)
+            if os.path.isdir(os.path.join(root_dir, name))
+        ]
+
+        for sub in tqdm(subfolders, desc="Indexing extendedOrthoImage_embedings"):
+            try:
+                embed_path = os.path.join(sub, "extendedOrthoImage_embedings")
+                if not os.path.isfile(embed_path):
+                    continue
+                with open(embed_path, "r", encoding="utf-8") as f:
+                    embedding = json.load(f)
+                if not isinstance(embedding, list) or not embedding:
+                    continue
+
+                base = os.path.basename(sub)
+
+                text = (
+                    f"Ortho Image embedding for reportId: {base}"
+                )
+
+                records.append(
+                    {
+                    "id": counter,
+                    "vector": embedding,
+                    "reportId": base,
+                    "folder": sub,
+                    "text": text,
+                    }
+                )
+                counter += 1
+            except Exception as e:
+                logger.error("Error processing %s: %s", sub, e)
+                continue
+
+        if not records:
+            logger.warning("No extendedOrthoImage_embedings found under %s", root_dir)
+            return 0
+
+        try:
+            self.milvus_client.insert(collection_name=self.collection_name, data=records)
+            logger.info("✅ Inserted %d image vectors into %s", len(records), self.collection_name)
+            return len(records)
+        except Exception as e:
+            logger.error("Failed inserting image data into Milvus: %s", e)
+            return 0
+
+
+
 def print_matches(matches: List[Dict[str, Any]]) -> None:
     if not matches:
         print("No matches found.")
