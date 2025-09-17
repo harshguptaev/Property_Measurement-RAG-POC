@@ -20,8 +20,10 @@ from src.docling_index import process_and_index_directory_with_docling, DOCLING_
 from src.agent import AgenticRAG
 from src.ui import create_ui
 from src.bedrock_client import create_bedrock_llm, create_bedrock_embeddings
-from src.pictometry_client import saveimagesfrompictometry
-from src.poc_image_similarity import stitch_all_pictometry_directories
+from src.image_similarity_poc.pictometry_client import saveimagesfrompictometry
+from src.image_similarity_poc.poc_image_similarity import stitch_all_pictometry_directories, push_image_embedings_todb, find_similar_images
+from src.image_similarity_poc.image_milvus import ImageMilvus, print_matches
+from src.image_similarity_poc.s3_client import batch_download_from_reports
 
 def setup_logging():
     """Setup logging configuration."""
@@ -55,10 +57,19 @@ def main():
     """Main function to run the Property Data RAG System."""
     
     # save pictometry images
-    # saved = saveimagesfrompictometry(29.482943, -98.456349)
+    # saved = saveimagesfrompictometry(29.836675,-95.364759)
+    # saveimagesfrompictometry(29.482943, -98.456349)
+    # saveimagesfrompictometry(41.425675,-81.916836)
+    # saveimagesfrompictometry(37.774929, -122.419416)
     # stich pictometry images and convert to base64
-    # stitch_all_pictometry_directories()
 
+    batch_download_from_reports()
+    # stitch_all_pictometry_directories()
+    im = ImageMilvus()
+    im.index_top_embeddings()
+    matches = im.search_similar_by_image("pictometry_images/29.482943_-98.456349/top_image.webp")
+    # print("matches", matches)
+    print_matches(matches)
     # Setup AWS credentials
     setup_aws_credentials()
     
