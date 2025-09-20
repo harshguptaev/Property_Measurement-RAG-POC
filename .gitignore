@@ -30,6 +30,8 @@ venv311/
 .venv_rag/
 venv_rag/
 
+Final_Chunks/
+
 # Unit test / coverage
 .pytest_cache/
 htmlcov/
