@@ -576,10 +576,9 @@ class DoclingProcessor:
             json_file.write_text(json_str, encoding="utf-8")
             return
 
-        df = df.T
-        df.columns = df.iloc[0]   # first row becomes column names
-        df = df.drop(0)           # drop the old header row
-        (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(df.to_dict(orient="records"), ensure_ascii=False, indent=4),encoding="utf-8")
+        # Convert Areas per Pitch data to desired format
+        data = self.convert_areas_per_pitch_to_format(df)
+        (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, indent=4),encoding="utf-8")
 
     def df_to_waste_json(self, df):
 
@@ -634,6 +633,157 @@ class DoclingProcessor:
             })
         
         return result
+
+    def convert_areas_per_pitch_to_format(self, df):
+        """
+        Convert Areas per Pitch data to desired format.
+        Handles both patterns:
+        1. Numeric columns ("0", "1", "2", etc.) - Pattern 1
+        2. Named columns ("Roof Pitches", "4/12", "8/12", etc.) - Pattern 2
+        
+        Output format: [{"Roof Pitches": "4/12", "Area (SQ)": "52.5", "%of Roof": "4.1%"}, ...]
+        """
+        if df is None or df.empty:
+            return []
+        
+        result = []
+        
+        try:
+            # Convert DataFrame to string for safe processing
+            df_str = df.astype(str)
+            
+            # Detect area unit from the data
+            area_unit = "Area"  # Default fallback
+            for idx, row in df_str.iterrows():
+                for cell in row:
+                    cell_str = str(cell).lower()
+                    if 'area' in cell_str:
+                        # Extract the full area label (e.g., "Area (sq ft)", "Area (SQ)", "Area (m²)")
+                        area_unit = str(row.iloc[0]) if 'area' in str(row.iloc[0]).lower() else area_unit
+                        break
+                if area_unit != "Area":
+                    break
+            
+            # Check if we have Pattern 1 (numeric columns) or Pattern 2 (named columns)
+            first_col_name = str(df.columns[0])
+            is_pattern1 = first_col_name.isdigit() or first_col_name == "0"
+            
+            if is_pattern1:
+                # Pattern 1: Numeric columns like "0", "1", "2", "3", "4"
+                # Row 0: "Roof Pitches", "4/12", "6/12", "8/12", "12/12"
+                # Row 1: "Area (sq ft)", "52.5", "110", "965.7", "146.3"  
+                # Row 2: "%of Roof", "4.1%", "8.6%", "75.8%", "11.5%"
+                
+                # Get the roof pitches from first row (skip first column which is the label)
+                roof_pitches = []
+                area_values = []
+                percent_values = []
+                
+                for idx, row in df_str.iterrows():
+                    row_values = row.tolist()
+                    
+                    # Skip header rows containing "Areas per Pitch"
+                    if any("areas per pitch" in str(cell).lower() for cell in row_values):
+                        continue
+                    
+                    if idx == 0 or (len(roof_pitches) == 0):  # Roof Pitches row
+                        roof_pitches = row_values[1:]  # Skip first column (label)
+                    elif idx == 1 or (len(area_values) == 0):  # Area row
+                        area_values = row_values[1:]  # Skip first column (label)
+                        # Update area_unit from this row's first cell
+                        area_unit = row_values[0]
+                    elif idx == 2 or (len(percent_values) == 0):  # Percent row
+                        percent_values = row_values[1:]  # Skip first column (label)
+                
+                # Create result objects
+                for i in range(len(roof_pitches)):
+                    if i < len(area_values) and i < len(percent_values):
+                        result.append({
+                            "Roof Pitches": roof_pitches[i],
+                            area_unit: area_values[i],
+                            "%of Roof": percent_values[i]
+                        })
+            
+            else:
+                # Pattern 2: Named columns like "Roof Pitches", "4/12", "8/12"
+                # Row 0: "Area (sq ft)", "163.6", "1064.8"
+                # Row 1: "%of Roof", "13.3%", "86.7%"
+                
+                # Get column names (roof pitches are in column headers, skip first column)
+                roof_pitches = list(df.columns)[1:]  # Skip "Roof Pitches" column
+                
+                area_values = []
+                percent_values = []
+                
+                for idx, row in df_str.iterrows():
+                    row_values = row.tolist()
+                    
+                    # Skip header rows containing "Areas per Pitch"
+                    if any("areas per pitch" in str(cell).lower() for cell in row_values):
+                        continue
+                    
+                    if idx == 0 or (len(area_values) == 0):  # Area row
+                        area_values = row_values[1:]  # Skip first column (label)
+                        # Update area_unit from this row's first cell
+                        area_unit = row_values[0]
+                    elif idx == 1 or (len(percent_values) == 0):  # Percent row
+                        percent_values = row_values[1:]  # Skip first column (label)
+                
+                # Create result objects
+                for i in range(len(roof_pitches)):
+                    if i < len(area_values) and i < len(percent_values):
+                        result.append({
+                            "Roof Pitches": roof_pitches[i],
+                            area_unit: area_values[i],
+                            "%of Roof": percent_values[i]
+                        })
+            
+            logging.info(f"Successfully converted {len(result)} Areas per Pitch entries using area unit: {area_unit}")
+            
+        except Exception as e:
+            logging.error(f"Error converting Areas per Pitch data: {e}")
+            return []
+        
+        return result
+
+    def _add_table_chunks_to_final(self, final_chunks_file, file_path):
+        """
+        Add table chunks from table_chunks.json to the existing Final_Chunks file.
+        Keeps existing 'text' array and adds 'table' array with table_chunks content.
+        """
+        try:
+            # Read existing final chunks
+            existing_data = []
+            if final_chunks_file.exists():
+                with open(final_chunks_file, 'r', encoding='utf-8') as f:
+                    existing_data = json.load(f)
+            
+            # Create new structure with existing text chunks and new table chunks
+            final_structure = {
+                "text": existing_data,  # Keep existing text chunks as-is
+                "table": []
+            }
+            
+            # Load table chunks from table_chunks.json
+            table_chunks_file = Path("docling_exports") / file_path.stem / "table_chunks.json"
+            if table_chunks_file.exists():
+                table_chunks_data = json.loads(table_chunks_file.read_text(encoding="utf-8"))
+                if "tables" in table_chunks_data:
+                    # Add the "tables" array content directly to "table"
+                    final_structure["table"] = table_chunks_data["tables"]
+                    logging.info(f"Added {len(final_structure['table'])} table chunks from {table_chunks_file}")
+            else:
+                logging.warning(f"Table chunks file not found: {table_chunks_file}")
+            
+            # Save the updated structure
+            with open(final_chunks_file, 'w', encoding='utf-8') as f:
+                json.dump(final_structure, f, ensure_ascii=False, indent=2)
+            
+            logging.info(f"✓ Updated final chunks with {len(final_structure['text'])} text chunks and {len(final_structure['table'])} table chunks")
+                
+        except Exception as e:
+            logging.error(f"Error adding table chunks to final: {e}")
+
     def export_table_images(self, converted_doc, file_path):
 
         """Export table images to PNG files."""
@@ -698,7 +848,6 @@ class DoclingProcessor:
         for json_file in sorted(out_report_table_json_dir.glob("*.json")):
             try:
                 json_content = json.loads(json_file.read_text(encoding="utf-8"))
-                raw_text_str = json.dumps(json_content, ensure_ascii=False, indent=2)
             except Exception as e:
                 logging.warning(f"Skipping {json_file.name}, failed to read JSON: {e}")
                 continue
@@ -706,7 +855,7 @@ class DoclingProcessor:
             # Determine section
             section = ""
             if "Areas_per_Pitch" in json_file.name:
-                section = f"This table named {json_file.stem } lists each pitch on this roof and the total area and percent of the roof with that pitch."
+                section = f"This table named {json_file.stem} lists each pitch on this roof and the total area and percent of the roof with that pitch."
             elif "Waste_Calculation" in json_file.name:
                 section = f"""NOTE: This waste calculation table named {json_file.stem} is for asphalt shingle roofing applications. All values in the table below 
                             only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square
@@ -728,7 +877,7 @@ class DoclingProcessor:
             # Append chunk
             table_chunks.append({
                 "section": section,
-                "raw_text": raw_text_str,
+                "raw_text": json_content,
                 "id": f"chunk{chunk_counter}",
                 "metadata": {},
                 "src_image_path": image_path_str
@@ -886,6 +1035,9 @@ class DoclingProcessor:
                         doc = Document(page_content=page_content, metadata=metadata)
                         all_chunks.append(doc)
 
+                    # Add table chunks to the existing final chunks structure
+                    self._add_table_chunks_to_final(chunks_file, file_path)
+                    
                     documents.extend(all_chunks)
                     logging.info(f"✓ Saved {len(all_chunks)} important flattened chunks to {chunks_file}")
                 else:

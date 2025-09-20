@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "Area:": "1,229.9 sq ft",
         "Roof Facets:": "8",
         "Predominant Pitch:": "8/12",
@@ -12,5 +13,15 @@
         "Roof Obstructions:": "6",
         "Roof Obstructions Perimeter:": "24'",
         "Roof Obstructions Area:": "6 sq ft"
+=======
+        "Roof Pitches": "4/12",
+        "Area (sq ft)": "146.4",
+        "%of Roof": "11.9%"
+    },
+    {
+        "Roof Pitches": "8/12",
+        "Area (sq ft)": "1083.6",
+        "%of Roof": "88.1%"
+>>>>>>> develop
     }
 ]

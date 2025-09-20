@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "waste": "1",
         "area": "1151.2",
         "squares": "8/12"
@@ -13,5 +14,50 @@
         "waste": "3",
         "area": "12.1",
         "squares": "12/12"
+=======
+        "waste": "0%",
+        "area": "125",
+        "squares": "13.66"
+    },
+    {
+        "waste": "2%",
+        "area": "127",
+        "squares": "14.00"
+    },
+    {
+        "waste": "7%",
+        "area": "134",
+        "squares": "14.66"
+    },
+    {
+        "waste": "12%",
+        "area": "140",
+        "squares": "15.33"
+    },
+    {
+        "waste": "15%",
+        "area": "144",
+        "squares": "15.66"
+    },
+    {
+        "waste": "17%",
+        "area": "146",
+        "squares": "16.00"
+    },
+    {
+        "waste": "19%",
+        "area": "149",
+        "squares": "16.33"
+    },
+    {
+        "waste": "22%",
+        "area": "152",
+        "squares": "16.66"
+    },
+    {
+        "waste": "27%",
+        "area": "159",
+        "squares": "17.33"
+>>>>>>> develop
     }
 ]

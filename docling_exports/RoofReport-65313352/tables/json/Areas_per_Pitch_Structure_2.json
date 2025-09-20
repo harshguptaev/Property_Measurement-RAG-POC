@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "Waste%": "0%",
         "Area (m²)": "125",
         "Squares *": "13.66"
@@ -43,5 +44,10 @@
         "Waste%": "27%",
         "Area (m²)": "159",
         "Squares *": "17.33"
+=======
+        "Roof Pitches": "8/12",
+        "Area (sq ft)": "813.4",
+        "%of Roof": "100%"
+>>>>>>> develop
     }
 ]

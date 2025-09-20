@@ -1,6 +1,10 @@
 {
   "schema_name": "DoclingDocument",
+<<<<<<< HEAD
   "version": "1.6.0",
+=======
+  "version": "1.5.0",
+>>>>>>> develop
   "name": "RoofReport-65313316",
   "origin": {
     "mimetype": "application/pdf",
@@ -48,10 +52,14 @@
         "cref": "#/texts/6"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/7"
       },
       {
         "cref": "#/texts/8"
+=======
+        "cref": "#/pictures/2"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/9"
@@ -63,13 +71,21 @@
         "cref": "#/texts/11"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/12"
+=======
+        "cref": "#/groups/0"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/13"
       },
       {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/38"
@@ -78,6 +94,7 @@
         "cref": "#/texts/39"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/2"
       },
       {
@@ -103,27 +120,63 @@
       },
       {
         "cref": "#/texts/48"
+=======
+        "cref": "#/pictures/3"
+      },
+      {
+        "cref": "#/texts/40"
+      },
+      {
+        "cref": "#/pictures/4"
+      },
+      {
+        "cref": "#/texts/42"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/5"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/58"
+=======
+        "cref": "#/texts/43"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/6"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/7"
       },
       {
         "cref": "#/texts/60"
+=======
+        "cref": "#/groups/2"
+      },
+      {
+        "cref": "#/groups/3"
+      },
+      {
+        "cref": "#/pictures/7"
+      },
+      {
+        "cref": "#/groups/4"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/61"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/62"
+=======
+        "cref": "#/pictures/8"
+      },
+      {
+        "cref": "#/pictures/9"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/63"
@@ -138,15 +191,26 @@
         "cref": "#/texts/66"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/8"
       },
       {
         "cref": "#/pictures/9"
+=======
+        "cref": "#/texts/67"
+      },
+      {
+        "cref": "#/texts/68"
+      },
+      {
+        "cref": "#/texts/69"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/10"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/72"
       },
       {
@@ -154,11 +218,20 @@
       },
       {
         "cref": "#/texts/74"
+=======
+        "cref": "#/pictures/11"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/75"
       },
       {
+<<<<<<< HEAD
+=======
+        "cref": "#/pictures/12"
+      },
+      {
+>>>>>>> develop
         "cref": "#/texts/76"
       },
       {
@@ -168,15 +241,29 @@
         "cref": "#/texts/78"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/11"
       },
       {
         "cref": "#/pictures/12"
+=======
+        "cref": "#/texts/79"
+      },
+      {
+        "cref": "#/texts/80"
+      },
+      {
+        "cref": "#/texts/81"
+      },
+      {
+        "cref": "#/texts/82"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/13"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/83"
       },
       {
@@ -187,17 +274,27 @@
       },
       {
         "cref": "#/texts/86"
+=======
+        "cref": "#/pictures/14"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/87"
       },
       {
+<<<<<<< HEAD
+=======
+        "cref": "#/pictures/15"
+      },
+      {
+>>>>>>> develop
         "cref": "#/texts/88"
       },
       {
         "cref": "#/texts/89"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/14"
       },
       {
@@ -205,6 +302,9 @@
       },
       {
         "cref": "#/pictures/16"
+=======
+        "cref": "#/texts/90"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/91"
@@ -219,24 +319,57 @@
         "cref": "#/texts/94"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/95"
       },
       {
         "cref": "#/texts/96"
+=======
+        "cref": "#/pictures/16"
+      },
+      {
+        "cref": "#/texts/95"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/17"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/103"
       },
       {
         "cref": "#/pictures/18"
+=======
+        "cref": "#/pictures/18"
+      },
+      {
+        "cref": "#/texts/97"
+      },
+      {
+        "cref": "#/texts/98"
+      },
+      {
+        "cref": "#/texts/99"
+      },
+      {
+        "cref": "#/texts/100"
+      },
+      {
+        "cref": "#/texts/101"
+      },
+      {
+        "cref": "#/texts/102"
+      },
+      {
+        "cref": "#/texts/103"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/19"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/105"
       },
       {
@@ -265,11 +398,42 @@
       },
       {
         "cref": "#/pictures/21"
+=======
+        "cref": "#/texts/110"
+      },
+      {
+        "cref": "#/pictures/20"
+      },
+      {
+        "cref": "#/pictures/21"
+      },
+      {
+        "cref": "#/texts/112"
+      },
+      {
+        "cref": "#/texts/113"
+      },
+      {
+        "cref": "#/texts/114"
+      },
+      {
+        "cref": "#/texts/115"
+      },
+      {
+        "cref": "#/texts/116"
+      },
+      {
+        "cref": "#/texts/117"
+      },
+      {
+        "cref": "#/texts/118"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/22"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/121"
       },
       {
@@ -283,6 +447,9 @@
       },
       {
         "cref": "#/texts/125"
+=======
+        "cref": "#/texts/127"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/23"
@@ -291,6 +458,7 @@
         "cref": "#/pictures/24"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/127"
       },
       {
@@ -300,6 +468,8 @@
         "cref": "#/texts/128"
       },
       {
+=======
+>>>>>>> develop
         "cref": "#/texts/129"
       },
       {
@@ -318,16 +488,39 @@
         "cref": "#/texts/134"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/135"
+=======
+        "cref": "#/pictures/25"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/26"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/27"
       },
       {
         "cref": "#/pictures/28"
+=======
+        "cref": "#/texts/136"
+      },
+      {
+        "cref": "#/pictures/27"
+      },
+      {
+        "cref": "#/texts/137"
+      },
+      {
+        "cref": "#/texts/138"
+      },
+      {
+        "cref": "#/texts/139"
+      },
+      {
+        "cref": "#/texts/140"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/141"
@@ -342,15 +535,20 @@
         "cref": "#/texts/144"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/145"
       },
       {
         "cref": "#/texts/146"
+=======
+        "cref": "#/pictures/28"
+>>>>>>> develop
       },
       {
         "cref": "#/pictures/29"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/30"
       },
       {
@@ -358,6 +556,15 @@
       },
       {
         "cref": "#/pictures/31"
+=======
+        "cref": "#/texts/150"
+      },
+      {
+        "cref": "#/pictures/30"
+      },
+      {
+        "cref": "#/texts/151"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/152"
@@ -375,18 +582,27 @@
         "cref": "#/texts/156"
       },
       {
+<<<<<<< HEAD
+=======
+        "cref": "#/pictures/31"
+      },
+      {
+>>>>>>> develop
         "cref": "#/pictures/32"
       },
       {
         "cref": "#/pictures/33"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/160"
       },
       {
         "cref": "#/texts/161"
       },
       {
+=======
+>>>>>>> develop
         "cref": "#/texts/162"
       },
       {
@@ -399,6 +615,7 @@
         "cref": "#/texts/165"
       },
       {
+<<<<<<< HEAD
         "cref": "#/tables/1"
       },
       {
@@ -412,14 +629,26 @@
       },
       {
         "cref": "#/texts/169"
+=======
+        "cref": "#/texts/166"
+      },
+      {
+        "cref": "#/pictures/34"
+      },
+      {
+        "cref": "#/pictures/35"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/170"
       },
       {
+<<<<<<< HEAD
         "cref": "#/tables/2"
       },
       {
+=======
+>>>>>>> develop
         "cref": "#/texts/171"
       },
       {
@@ -429,9 +658,12 @@
         "cref": "#/texts/173"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/34"
       },
       {
+=======
+>>>>>>> develop
         "cref": "#/texts/174"
       },
       {
@@ -444,31 +676,57 @@
         "cref": "#/texts/177"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/178"
       },
       {
+=======
+        "cref": "#/tables/1"
+      },
+      {
+        "cref": "#/texts/178"
+      },
+      {
+        "cref": "#/tables/2"
+      },
+      {
+>>>>>>> develop
         "cref": "#/texts/179"
       },
       {
         "cref": "#/texts/180"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/181"
+=======
+        "cref": "#/groups/5"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/182"
       },
       {
+<<<<<<< HEAD
+=======
+        "cref": "#/pictures/36"
+      },
+      {
+>>>>>>> develop
         "cref": "#/texts/183"
       },
       {
         "cref": "#/texts/184"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/185"
       },
       {
         "cref": "#/texts/186"
+=======
+        "cref": "#/groups/6"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/187"
@@ -477,15 +735,20 @@
         "cref": "#/texts/188"
       },
       {
+<<<<<<< HEAD
         "cref": "#/texts/189"
       },
       {
         "cref": "#/texts/190"
+=======
+        "cref": "#/groups/7"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/191"
       },
       {
+<<<<<<< HEAD
         "cref": "#/groups/3"
       },
       {
@@ -493,6 +756,9 @@
       },
       {
         "cref": "#/texts/193"
+=======
+        "cref": "#/groups/8"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/194"
@@ -501,7 +767,11 @@
         "cref": "#/texts/195"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/35"
+=======
+        "cref": "#/pictures/37"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/196"
@@ -516,6 +786,12 @@
         "cref": "#/texts/199"
       },
       {
+<<<<<<< HEAD
+=======
+        "cref": "#/pictures/38"
+      },
+      {
+>>>>>>> develop
         "cref": "#/texts/200"
       },
       {
@@ -525,9 +801,12 @@
         "cref": "#/texts/202"
       },
       {
+<<<<<<< HEAD
         "cref": "#/pictures/36"
       },
       {
+=======
+>>>>>>> develop
         "cref": "#/texts/203"
       },
       {
@@ -537,7 +816,11 @@
         "cref": "#/texts/205"
       },
       {
+<<<<<<< HEAD
         "cref": "#/groups/4"
+=======
+        "cref": "#/texts/206"
+>>>>>>> develop
       },
       {
         "cref": "#/texts/207"
@@ -549,12 +832,19 @@
         "cref": "#/texts/209"
       },
       {
+<<<<<<< HEAD
+=======
+        "cref": "#/pictures/39"
+      },
+      {
+>>>>>>> develop
         "cref": "#/texts/210"
       },
       {
         "cref": "#/texts/211"
       },
       {
+<<<<<<< HEAD
         "cref": "#/groups/5"
       },
       {
@@ -571,6 +861,9 @@
       },
       {
         "cref": "#/texts/215"
+=======
+        "cref": "#/texts/212"
+>>>>>>> develop
       }
     ],
     "content_layer": "body",
@@ -585,6 +878,23 @@
       },
       "children": [
         {
+<<<<<<< HEAD
+=======
+          "cref": "#/texts/12"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/1",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [
+        {
+>>>>>>> develop
           "cref": "#/texts/14"
         },
         {
@@ -662,13 +972,24 @@
       "label": "key_value_area"
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/groups/1",
+=======
+      "self_ref": "#/groups/2",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/40"
+=======
+          "cref": "#/texts/45"
+        },
+        {
+          "cref": "#/texts/46"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
@@ -676,6 +997,7 @@
       "label": "key_value_area"
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/groups/2",
       "parent": {
         "cref": "#/body"
@@ -686,11 +1008,27 @@
       "label": "key_value_area"
     },
     {
+=======
+>>>>>>> develop
       "self_ref": "#/groups/3",
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/47"
+        },
+        {
+          "cref": "#/texts/48"
+        },
+        {
+          "cref": "#/texts/49"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "name": "group",
       "label": "key_value_area"
@@ -702,7 +1040,17 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/206"
+=======
+          "cref": "#/texts/58"
+        },
+        {
+          "cref": "#/texts/59"
+        },
+        {
+          "cref": "#/texts/60"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
@@ -714,7 +1062,66 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/181"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/6",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [
+        {
+          "cref": "#/texts/185"
+        },
+        {
+          "cref": "#/texts/186"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/7",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [
+        {
+          "cref": "#/texts/189"
+        },
+        {
+          "cref": "#/texts/190"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/8",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [
+        {
+          "cref": "#/texts/192"
+        },
+        {
+          "cref": "#/texts/193"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "name": "group",
       "label": "key_value_area"
@@ -929,7 +1336,11 @@
     {
       "self_ref": "#/texts/7",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/body"
+=======
+        "cref": "#/pictures/2"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -958,7 +1369,11 @@
     {
       "self_ref": "#/texts/8",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/body"
+=======
+        "cref": "#/pictures/2"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -991,7 +1406,11 @@
       },
       "children": [],
       "content_layer": "body",
+<<<<<<< HEAD
       "label": "text",
+=======
+      "label": "section_header",
+>>>>>>> develop
       "prov": [
         {
           "page_no": 1,
@@ -1011,7 +1430,12 @@
       "orig": "PROPERTY",
       "text": "PROPERTY",
       "formatting": null,
+<<<<<<< HEAD
       "hyperlink": null
+=======
+      "hyperlink": null,
+      "level": 1
+>>>>>>> develop
     },
     {
       "self_ref": "#/texts/10",
@@ -1075,7 +1499,11 @@
     {
       "self_ref": "#/texts/12",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/body"
+=======
+        "cref": "#/groups/0"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1134,7 +1562,11 @@
     {
       "self_ref": "#/texts/14",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1163,7 +1595,11 @@
     {
       "self_ref": "#/texts/15",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1192,7 +1628,11 @@
     {
       "self_ref": "#/texts/16",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1221,7 +1661,11 @@
     {
       "self_ref": "#/texts/17",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1250,7 +1694,11 @@
     {
       "self_ref": "#/texts/18",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1279,7 +1727,11 @@
     {
       "self_ref": "#/texts/19",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1308,7 +1760,11 @@
     {
       "self_ref": "#/texts/20",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1337,7 +1793,11 @@
     {
       "self_ref": "#/texts/21",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1366,7 +1826,11 @@
     {
       "self_ref": "#/texts/22",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1395,7 +1859,11 @@
     {
       "self_ref": "#/texts/23",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1424,7 +1892,11 @@
     {
       "self_ref": "#/texts/24",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1453,7 +1925,11 @@
     {
       "self_ref": "#/texts/25",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1482,7 +1958,11 @@
     {
       "self_ref": "#/texts/26",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1511,7 +1991,11 @@
     {
       "self_ref": "#/texts/27",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1540,7 +2024,11 @@
     {
       "self_ref": "#/texts/28",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1569,7 +2057,11 @@
     {
       "self_ref": "#/texts/29",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1598,7 +2090,11 @@
     {
       "self_ref": "#/texts/30",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1627,7 +2123,11 @@
     {
       "self_ref": "#/texts/31",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1656,7 +2156,11 @@
     {
       "self_ref": "#/texts/32",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1685,7 +2189,11 @@
     {
       "self_ref": "#/texts/33",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1714,7 +2222,11 @@
     {
       "self_ref": "#/texts/34",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1743,7 +2255,11 @@
     {
       "self_ref": "#/texts/35",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1772,7 +2288,11 @@
     {
       "self_ref": "#/texts/36",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1801,7 +2321,11 @@
     {
       "self_ref": "#/texts/37",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/0"
+=======
+        "cref": "#/groups/1"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1889,7 +2413,11 @@
     {
       "self_ref": "#/texts/40",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/groups/1"
+=======
+        "cref": "#/body"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -1918,6 +2446,7 @@
     {
       "self_ref": "#/texts/41",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/3"
       },
       "children": [],
@@ -1977,6 +2506,9 @@
       "self_ref": "#/texts/43",
       "parent": {
         "cref": "#/pictures/3"
+=======
+        "cref": "#/pictures/4"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2003,7 +2535,40 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/44",
+=======
+      "self_ref": "#/texts/42",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 464.8,
+            "t": 165.56600000000003,
+            "r": 545.129,
+            "b": 150.18200000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            56
+          ]
+        }
+      ],
+      "orig": "Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx",
+      "text": "Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/43",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2032,9 +2597,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/45",
       "parent": {
         "cref": "#/body"
+=======
+      "self_ref": "#/texts/44",
+      "parent": {
+        "cref": "#/pictures/6"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2062,9 +2633,15 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/46",
       "parent": {
         "cref": "#/body"
+=======
+      "self_ref": "#/texts/45",
+      "parent": {
+        "cref": "#/groups/2"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2091,9 +2668,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/47",
       "parent": {
         "cref": "#/body"
+=======
+      "self_ref": "#/texts/46",
+      "parent": {
+        "cref": "#/groups/2"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2120,6 +2703,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/48",
       "parent": {
         "cref": "#/body"
@@ -2127,60 +2711,140 @@
       "children": [],
       "content_layer": "body",
       "label": "caption",
+=======
+      "self_ref": "#/texts/47",
+      "parent": {
+        "cref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+>>>>>>> develop
       "prov": [
         {
           "page_no": 2,
           "bbox": {
             "l": 224.659,
             "t": 774.149,
+<<<<<<< HEAD
             "r": 288.925,
             "b": 739.487,
+=======
+            "r": 285.559,
+            "b": 764.449,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             49
           ]
         }
       ],
       "orig": "Rakes = 114' 8\" Eaves = 101' 6\" Flashing = 37' 4\"",
       "text": "Rakes = 114' 8\" Eaves = 101' 6\" Flashing = 37' 4\"",
+=======
+            15
+          ]
+        }
+      ],
+      "orig": "Rakes = 114' 8\"",
+      "text": "Rakes = 114' 8\"",
+      "formatting": null,
+      "hyperlink": null,
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/48",
+      "parent": {
+        "cref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 224.659,
+            "t": 761.668,
+            "r": 285.084,
+            "b": 751.968,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "Eaves = 101' 6\"",
+      "text": "Eaves = 101' 6\"",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
       "self_ref": "#/texts/49",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
       },
       "children": [],
       "content_layer": "body",
       "label": "caption",
+=======
+        "cref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+>>>>>>> develop
       "prov": [
         {
           "page_no": 2,
           "bbox": {
+<<<<<<< HEAD
             "l": 399.937,
             "t": 774.149,
             "r": 486.392,
+=======
+            "l": 224.659,
+            "t": 749.187,
+            "r": 288.925,
+>>>>>>> develop
             "b": 739.487,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             48
           ]
         }
       ],
       "orig": "Step flashing = 51' 11\" Parapets = 0' Other = 0'",
       "text": "Step flashing = 51' 11\" Parapets = 0' Other = 0'",
+=======
+            17
+          ]
+        }
+      ],
+      "orig": "Flashing = 37' 4\"",
+      "text": "Flashing = 37' 4\"",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
       "self_ref": "#/texts/50",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2209,7 +2873,11 @@
     {
       "self_ref": "#/texts/51",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2238,7 +2906,11 @@
     {
       "self_ref": "#/texts/52",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2267,7 +2939,11 @@
     {
       "self_ref": "#/texts/53",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2296,7 +2972,11 @@
     {
       "self_ref": "#/texts/54",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2325,7 +3005,11 @@
     {
       "self_ref": "#/texts/55",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2354,7 +3038,11 @@
     {
       "self_ref": "#/texts/56",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2383,7 +3071,11 @@
     {
       "self_ref": "#/texts/57",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/pictures/5"
+=======
+        "cref": "#/pictures/7"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2412,6 +3104,97 @@
     {
       "self_ref": "#/texts/58",
       "parent": {
+<<<<<<< HEAD
+=======
+        "cref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 399.937,
+            "t": 774.149,
+            "r": 486.392,
+            "b": 764.449,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            23
+          ]
+        }
+      ],
+      "orig": "Step flashing = 51' 11\"",
+      "text": "Step flashing = 51' 11\"",
+      "formatting": null,
+      "hyperlink": null,
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/59",
+      "parent": {
+        "cref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 399.937,
+            "t": 761.668,
+            "r": 451.019,
+            "b": 751.968,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "Parapets = 0'",
+      "text": "Parapets = 0'",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/60",
+      "parent": {
+        "cref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 399.937,
+            "t": 749.187,
+            "r": 437.987,
+            "b": 739.487,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "Other = 0'",
+      "text": "Other = 0'",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/61",
+      "parent": {
+>>>>>>> develop
         "cref": "#/body"
       },
       "children": [],
@@ -2439,9 +3222,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/59",
       "parent": {
         "cref": "#/pictures/6"
+=======
+      "self_ref": "#/texts/62",
+      "parent": {
+        "cref": "#/pictures/8"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2468,7 +3257,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/60",
+=======
+      "self_ref": "#/texts/63",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2497,7 +3290,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/61",
+=======
+      "self_ref": "#/texts/64",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2511,22 +3308,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/65",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/62",
+=======
+      "self_ref": "#/texts/66",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2555,7 +3397,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/63",
+=======
+      "self_ref": "#/texts/67",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2584,6 +3430,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/64",
       "parent": {
         "cref": "#/body"
@@ -2614,6 +3461,9 @@
     },
     {
       "self_ref": "#/texts/65",
+=======
+      "self_ref": "#/texts/68",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2643,7 +3493,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/66",
+=======
+      "self_ref": "#/texts/69",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2672,9 +3526,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/67",
       "parent": {
         "cref": "#/pictures/8"
+=======
+      "self_ref": "#/texts/70",
+      "parent": {
+        "cref": "#/pictures/10"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2701,9 +3561,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/68",
       "parent": {
         "cref": "#/pictures/8"
+=======
+      "self_ref": "#/texts/71",
+      "parent": {
+        "cref": "#/pictures/10"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2730,9 +3596,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/69",
       "parent": {
         "cref": "#/pictures/8"
+=======
+      "self_ref": "#/texts/72",
+      "parent": {
+        "cref": "#/pictures/10"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2759,9 +3631,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/70",
       "parent": {
         "cref": "#/pictures/8"
+=======
+      "self_ref": "#/texts/73",
+      "parent": {
+        "cref": "#/pictures/10"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2788,9 +3666,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/71",
       "parent": {
         "cref": "#/pictures/9"
+=======
+      "self_ref": "#/texts/74",
+      "parent": {
+        "cref": "#/pictures/11"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -2817,7 +3701,40 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/72",
+=======
+      "self_ref": "#/texts/75",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 447.3333333333333,
+            "t": 593.3333333333334,
+            "r": 457.6666666666667,
+            "b": 452.6666666666667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "orig": "< 1 8",
+      "text": "< 1 8",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/76",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2846,7 +3763,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/73",
+=======
+      "self_ref": "#/texts/77",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2860,22 +3781,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/78",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/74",
+=======
+      "self_ref": "#/texts/79",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2904,7 +3870,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/75",
+=======
+      "self_ref": "#/texts/80",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2933,6 +3903,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/76",
       "parent": {
         "cref": "#/body"
@@ -2963,6 +3934,9 @@
     },
     {
       "self_ref": "#/texts/77",
+=======
+      "self_ref": "#/texts/81",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -2992,7 +3966,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/78",
+=======
+      "self_ref": "#/texts/82",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3021,9 +3999,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/79",
       "parent": {
         "cref": "#/pictures/11"
+=======
+      "self_ref": "#/texts/83",
+      "parent": {
+        "cref": "#/pictures/13"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3050,9 +4034,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/80",
       "parent": {
         "cref": "#/pictures/11"
+=======
+      "self_ref": "#/texts/84",
+      "parent": {
+        "cref": "#/pictures/13"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3079,9 +4069,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/81",
       "parent": {
         "cref": "#/pictures/11"
+=======
+      "self_ref": "#/texts/85",
+      "parent": {
+        "cref": "#/pictures/13"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3108,9 +4104,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/82",
       "parent": {
         "cref": "#/pictures/12"
+=======
+      "self_ref": "#/texts/86",
+      "parent": {
+        "cref": "#/pictures/14"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3137,7 +4139,40 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/83",
+=======
+      "self_ref": "#/texts/87",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 447.3333333333333,
+            "t": 593.3333333333334,
+            "r": 457.6666666666667,
+            "b": 452.6666666666667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "orig": "< 1 8",
+      "text": "< 1 8",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/88",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3166,7 +4201,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/84",
+=======
+      "self_ref": "#/texts/89",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3180,22 +4219,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/90",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/85",
+=======
+      "self_ref": "#/texts/91",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3224,7 +4308,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/86",
+=======
+      "self_ref": "#/texts/92",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3253,6 +4341,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/87",
       "parent": {
         "cref": "#/body"
@@ -3283,6 +4372,9 @@
     },
     {
       "self_ref": "#/texts/88",
+=======
+      "self_ref": "#/texts/93",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3312,7 +4404,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/89",
+=======
+      "self_ref": "#/texts/94",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3341,9 +4437,44 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/90",
       "parent": {
         "cref": "#/pictures/15"
+=======
+      "self_ref": "#/texts/95",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 448.0,
+            "t": 437.3333333333333,
+            "r": 456.0,
+            "b": 417.3333333333333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "orig": "8",
+      "text": "8",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/96",
+      "parent": {
+        "cref": "#/pictures/17"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3370,7 +4501,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/91",
+=======
+      "self_ref": "#/texts/97",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3399,7 +4534,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/92",
+=======
+      "self_ref": "#/texts/98",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3413,22 +4552,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/99",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/93",
+=======
+      "self_ref": "#/texts/100",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3457,7 +4641,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/94",
+=======
+      "self_ref": "#/texts/101",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3486,7 +4674,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/95",
+=======
+      "self_ref": "#/texts/102",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3516,7 +4708,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/96",
+=======
+      "self_ref": "#/texts/103",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3545,9 +4741,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/97",
       "parent": {
         "cref": "#/pictures/17"
+=======
+      "self_ref": "#/texts/104",
+      "parent": {
+        "cref": "#/pictures/19"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3574,9 +4776,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/98",
       "parent": {
         "cref": "#/pictures/17"
+=======
+      "self_ref": "#/texts/105",
+      "parent": {
+        "cref": "#/pictures/19"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3603,9 +4811,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/99",
       "parent": {
         "cref": "#/pictures/17"
+=======
+      "self_ref": "#/texts/106",
+      "parent": {
+        "cref": "#/pictures/19"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3632,9 +4846,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/100",
       "parent": {
         "cref": "#/pictures/17"
+=======
+      "self_ref": "#/texts/107",
+      "parent": {
+        "cref": "#/pictures/19"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3661,9 +4881,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/101",
       "parent": {
         "cref": "#/pictures/17"
+=======
+      "self_ref": "#/texts/108",
+      "parent": {
+        "cref": "#/pictures/19"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3690,9 +4916,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/102",
       "parent": {
         "cref": "#/pictures/17"
+=======
+      "self_ref": "#/texts/109",
+      "parent": {
+        "cref": "#/pictures/19"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3719,7 +4951,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/103",
+=======
+      "self_ref": "#/texts/110",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3748,9 +4984,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/104",
       "parent": {
         "cref": "#/pictures/19"
+=======
+      "self_ref": "#/texts/111",
+      "parent": {
+        "cref": "#/pictures/20"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -3777,7 +5019,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/105",
+=======
+      "self_ref": "#/texts/112",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3806,7 +5052,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/106",
+=======
+      "self_ref": "#/texts/113",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3820,22 +5070,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/114",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/107",
+=======
+      "self_ref": "#/texts/115",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3864,7 +5159,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/108",
+=======
+      "self_ref": "#/texts/116",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3893,6 +5192,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/109",
       "parent": {
         "cref": "#/body"
@@ -3923,6 +5223,9 @@
     },
     {
       "self_ref": "#/texts/110",
+=======
+      "self_ref": "#/texts/117",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3952,7 +5255,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/111",
+=======
+      "self_ref": "#/texts/118",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -3981,9 +5288,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/112",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/119",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4010,9 +5323,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/113",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/120",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4039,9 +5358,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/114",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/121",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4068,9 +5393,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/115",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/122",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4097,9 +5428,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/116",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/123",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4126,9 +5463,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/117",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/124",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4155,9 +5498,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/118",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/125",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4184,9 +5533,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/119",
       "parent": {
         "cref": "#/pictures/20"
+=======
+      "self_ref": "#/texts/126",
+      "parent": {
+        "cref": "#/pictures/22"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4213,7 +5568,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/120",
+=======
+      "self_ref": "#/texts/127",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4224,6 +5583,38 @@
         {
           "page_no": 7,
           "bbox": {
+<<<<<<< HEAD
+=======
+            "l": 447.3333333333333,
+            "t": 566.3333333333334,
+            "r": 457.6666666666667,
+            "b": 425.6666666666667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "orig": "< 1 8",
+      "text": "< 1 8",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/128",
+      "parent": {
+        "cref": "#/pictures/23"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+>>>>>>> develop
             "l": 386.0,
             "t": 329.0,
             "r": 394.6666666666667,
@@ -4242,7 +5633,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/121",
+=======
+      "self_ref": "#/texts/129",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4271,7 +5666,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/122",
+=======
+      "self_ref": "#/texts/130",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4285,22 +5684,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/131",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/123",
+=======
+      "self_ref": "#/texts/132",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4329,7 +5773,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/124",
+=======
+      "self_ref": "#/texts/133",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4358,7 +5806,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/125",
+=======
+      "self_ref": "#/texts/134",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4388,9 +5840,15 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/126",
       "parent": {
         "cref": "#/pictures/24"
+=======
+      "self_ref": "#/texts/135",
+      "parent": {
+        "cref": "#/pictures/26"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -4417,7 +5875,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/127",
+=======
+      "self_ref": "#/texts/136",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4446,7 +5908,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/128",
+=======
+      "self_ref": "#/texts/137",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4475,7 +5941,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/129",
+=======
+      "self_ref": "#/texts/138",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4489,22 +5959,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/139",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/130",
+=======
+      "self_ref": "#/texts/140",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4533,7 +6048,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/131",
+=======
+      "self_ref": "#/texts/141",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4562,7 +6081,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/132",
+=======
+      "self_ref": "#/texts/142",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4592,7 +6115,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/133",
+=======
+      "self_ref": "#/texts/143",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4621,7 +6148,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/134",
+=======
+      "self_ref": "#/texts/144",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4651,7 +6182,156 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/135",
+=======
+      "self_ref": "#/texts/145",
+      "parent": {
+        "cref": "#/pictures/28"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 226.66666666666669,
+            "t": 506.66666666666663,
+            "r": 252.0,
+            "b": 498.66666666666663,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "orig": "92025",
+      "text": "92025",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/146",
+      "parent": {
+        "cref": "#/pictures/28"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 364.0,
+            "t": 508.0,
+            "r": 409.3333333333333,
+            "b": 498.0,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "02/18/2025",
+      "text": "02/18/2025",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/147",
+      "parent": {
+        "cref": "#/pictures/29"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 158.66666666666666,
+            "t": 243.0,
+            "r": 226.0,
+            "b": 225.66666666666663,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            9
+          ]
+        }
+      ],
+      "orig": "eagleview",
+      "text": "eagleview",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/148",
+      "parent": {
+        "cref": "#/pictures/29"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 226.0,
+            "t": 236.33333333333337,
+            "r": 252.0,
+            "b": 227.66666666666663,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "orig": "92025",
+      "text": "92025",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/149",
+      "parent": {
+        "cref": "#/pictures/29"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 364.66666666666663,
+            "t": 237.0,
+            "r": 409.3333333333333,
+            "b": 227.0,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "03/10/2025",
+      "text": "03/10/2025",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/150",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4681,6 +6361,7 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/136",
       "parent": {
         "cref": "#/pictures/26"
@@ -4827,6 +6508,9 @@
     },
     {
       "self_ref": "#/texts/141",
+=======
+      "self_ref": "#/texts/151",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4855,7 +6539,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/142",
+=======
+      "self_ref": "#/texts/152",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4884,7 +6572,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/143",
+=======
+      "self_ref": "#/texts/153",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4913,7 +6605,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/144",
+=======
+      "self_ref": "#/texts/154",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4942,7 +6638,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/145",
+=======
+      "self_ref": "#/texts/155",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -4972,7 +6672,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/146",
+=======
+      "self_ref": "#/texts/156",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5002,9 +6706,15 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/147",
       "parent": {
         "cref": "#/pictures/29"
+=======
+      "self_ref": "#/texts/157",
+      "parent": {
+        "cref": "#/pictures/31"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5031,9 +6741,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/148",
       "parent": {
         "cref": "#/pictures/29"
+=======
+      "self_ref": "#/texts/158",
+      "parent": {
+        "cref": "#/pictures/31"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5060,9 +6776,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/149",
       "parent": {
         "cref": "#/pictures/29"
+=======
+      "self_ref": "#/texts/159",
+      "parent": {
+        "cref": "#/pictures/31"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5089,9 +6811,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/150",
       "parent": {
         "cref": "#/pictures/30"
+=======
+      "self_ref": "#/texts/160",
+      "parent": {
+        "cref": "#/pictures/32"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5118,9 +6846,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/151",
       "parent": {
         "cref": "#/pictures/30"
+=======
+      "self_ref": "#/texts/161",
+      "parent": {
+        "cref": "#/pictures/32"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5147,7 +6881,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/152",
+=======
+      "self_ref": "#/texts/162",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5176,7 +6914,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/153",
+=======
+      "self_ref": "#/texts/163",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5205,7 +6947,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/154",
+=======
+      "self_ref": "#/texts/164",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5234,7 +6980,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/155",
+=======
+      "self_ref": "#/texts/165",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5263,7 +7013,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/156",
+=======
+      "self_ref": "#/texts/166",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5293,9 +7047,15 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/157",
       "parent": {
         "cref": "#/pictures/32"
+=======
+      "self_ref": "#/texts/167",
+      "parent": {
+        "cref": "#/pictures/34"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5322,9 +7082,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/158",
       "parent": {
         "cref": "#/pictures/32"
+=======
+      "self_ref": "#/texts/168",
+      "parent": {
+        "cref": "#/pictures/34"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5351,9 +7117,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/159",
       "parent": {
         "cref": "#/pictures/32"
+=======
+      "self_ref": "#/texts/169",
+      "parent": {
+        "cref": "#/pictures/34"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5380,7 +7152,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/160",
+=======
+      "self_ref": "#/texts/170",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5409,7 +7185,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/161",
+=======
+      "self_ref": "#/texts/171",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5423,22 +7203,67 @@
             "l": 50.915,
             "t": 96.33000000000004,
             "r": 213.097,
+<<<<<<< HEAD
+=======
+            "b": 71.91300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/172",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 50.915,
+            "t": 72.83000000000004,
+            "r": 115.708,
+>>>>>>> develop
             "b": 64.07899999999995,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             92
           ]
         }
       ],
       "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
       "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+=======
+            16
+          ]
+        }
+      ],
+      "orig": "Report: 65313316",
+      "text": "Report: 65313316",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/162",
+=======
+      "self_ref": "#/texts/173",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5467,7 +7292,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/163",
+=======
+      "self_ref": "#/texts/174",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5496,7 +7325,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/164",
+=======
+      "self_ref": "#/texts/175",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5526,7 +7359,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/165",
+=======
+      "self_ref": "#/texts/176",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5556,7 +7393,41 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/166",
+=======
+      "self_ref": "#/texts/177",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 55.893,
+            "t": 748.336,
+            "r": 143.382,
+            "b": 734.998,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "Areas per Pitch",
+      "text": "Areas per Pitch",
+      "formatting": null,
+      "hyperlink": null,
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/178",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5585,6 +7456,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/167",
       "parent": {
         "cref": "#/body"
@@ -5704,6 +7576,9 @@
     },
     {
       "self_ref": "#/texts/171",
+=======
+      "self_ref": "#/texts/179",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5732,13 +7607,50 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/172",
+=======
+      "self_ref": "#/texts/180",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
       "children": [],
       "content_layer": "body",
+<<<<<<< HEAD
       "label": "footnote",
+=======
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 314.197,
+            "t": 495.224,
+            "r": 358.513,
+            "b": 485.524,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            9
+          ]
+        }
+      ],
+      "orig": "Suggested",
+      "text": "Suggested",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/181",
+      "parent": {
+        "cref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+>>>>>>> develop
       "prov": [
         {
           "page_no": 12,
@@ -5758,10 +7670,19 @@
       "orig": "*Squares are rounded up to the 1/3 of a square",
       "text": "*Squares are rounded up to the 1/3 of a square",
       "formatting": null,
+<<<<<<< HEAD
       "hyperlink": null
     },
     {
       "self_ref": "#/texts/173",
+=======
+      "hyperlink": null,
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/182",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5775,11 +7696,32 @@
             "l": 47.754,
             "t": 458.918,
             "r": 513.563,
+<<<<<<< HEAD
             "b": 400.985,
+=======
+            "b": 410.753,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
+=======
+            637
+          ]
+        },
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 47.754,
+            "t": 410.079,
+            "r": 146.398,
+            "b": 400.985,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            638,
+>>>>>>> develop
             665
           ]
         }
@@ -5790,7 +7732,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/174",
+=======
+      "self_ref": "#/texts/183",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5819,6 +7765,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/175",
       "parent": {
         "cref": "#/body"
@@ -5849,6 +7796,9 @@
     },
     {
       "self_ref": "#/texts/176",
+=======
+      "self_ref": "#/texts/184",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -5878,9 +7828,15 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/177",
       "parent": {
         "cref": "#/body"
+=======
+      "self_ref": "#/texts/185",
+      "parent": {
+        "cref": "#/groups/6"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -5891,6 +7847,7 @@
           "bbox": {
             "l": 226.83,
             "t": 387.236,
+<<<<<<< HEAD
             "r": 327.602,
             "b": 377.536,
             "coord_origin": "BOTTOMLEFT"
@@ -6038,10 +7995,15 @@
             "t": 327.544,
             "r": 383.685,
             "b": 309.16100000000006,
+=======
+            "r": 383.685,
+            "b": 228.84799999999996,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             48
           ]
         }
@@ -6135,13 +8097,25 @@
       ],
       "orig": "Step Flashing = 51' 11\" (6 Lengths)",
       "text": "Step Flashing = 51' 11\" (6 Lengths)",
+=======
+            420
+          ]
+        }
+      ],
+      "orig": "Ridges = 47' 8\" (3 Ridges) Hips = 0' (0 Hips) Valleys = 26' 11\" (5 Valleys) Rakes† = 114' 8\" (12 Rakes) Eaves/Starters‡ = 101' 6\" (8 Eaves) Drip Edge (Eaves + Rakes) = 216' 3\" (20 Lengths) Parapet Walls = 0' (0 Lengths) Flashing = 37' 4\" (8 Lengths) Step Flashing = 51' 11\" (6 Lengths) Total Roof Obstructions Area = 4.5 sq ft Total Roof Area Less Roof Obstructions =1,280.3 sq ft Total Roof Obstructions Perimeter = 20'",
+      "text": "Ridges = 47' 8\" (3 Ridges) Hips = 0' (0 Hips) Valleys = 26' 11\" (5 Valleys) Rakes† = 114' 8\" (12 Rakes) Eaves/Starters‡ = 101' 6\" (8 Eaves) Drip Edge (Eaves + Rakes) = 216' 3\" (20 Lengths) Parapet Walls = 0' (0 Lengths) Flashing = 37' 4\" (8 Lengths) Step Flashing = 51' 11\" (6 Lengths) Total Roof Obstructions Area = 4.5 sq ft Total Roof Area Less Roof Obstructions =1,280.3 sq ft Total Roof Obstructions Perimeter = 20'",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
     {
       "self_ref": "#/texts/186",
       "parent": {
+<<<<<<< HEAD
         "cref": "#/body"
+=======
+        "cref": "#/groups/6"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -6151,19 +8125,34 @@
           "page_no": 12,
           "bbox": {
             "l": 226.83,
+<<<<<<< HEAD
             "t": 271.10799999999995,
             "r": 379.423,
             "b": 261.408,
+=======
+            "t": 226.61,
+            "r": 324.459,
+            "b": 216.90999999999997,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             40
           ]
         }
       ],
       "orig": "Total Roof Obstructions Area = 4.5 sq ft",
       "text": "Total Roof Obstructions Area = 4.5 sq ft",
+=======
+            24
+          ]
+        }
+      ],
+      "orig": "Predominant Pitch = 8/12",
+      "text": "Predominant Pitch = 8/12",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
@@ -6179,20 +8168,36 @@
         {
           "page_no": 12,
           "bbox": {
+<<<<<<< HEAD
             "l": 226.83,
             "t": 259.169,
             "r": 380.129,
             "b": 240.78700000000003,
+=======
+            "l": 47.754,
+            "t": 210.87300000000005,
+            "r": 153.557,
+            "b": 201.173,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             53
           ]
         }
       ],
       "orig": "Total Roof Area Less Roof Obstructions =1,280.3 sq ft",
       "text": "Total Roof Area Less Roof Obstructions =1,280.3 sq ft",
+=======
+            27
+          ]
+        }
+      ],
+      "orig": "Total Roof Obstructions = 6",
+      "text": "Total Roof Obstructions = 6",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
@@ -6209,6 +8214,7 @@
           "page_no": 12,
           "bbox": {
             "l": 226.83,
+<<<<<<< HEAD
             "t": 238.548,
             "r": 379.151,
             "b": 216.90999999999997,
@@ -6238,6 +8244,8 @@
           "page_no": 12,
           "bbox": {
             "l": 226.83,
+=======
+>>>>>>> develop
             "t": 214.67200000000003,
             "r": 381.316,
             "b": 204.97199999999998,
@@ -6255,6 +8263,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/190",
       "parent": {
         "cref": "#/body"
@@ -6262,6 +8271,15 @@
       "children": [],
       "content_layer": "body",
       "label": "footnote",
+=======
+      "self_ref": "#/texts/189",
+      "parent": {
+        "cref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+>>>>>>> develop
       "prov": [
         {
           "page_no": 12,
@@ -6281,6 +8299,7 @@
       "orig": "† Rakes are defined as roof edges that are sloped (not level).",
       "text": "† Rakes are defined as roof edges that are sloped (not level).",
       "formatting": null,
+<<<<<<< HEAD
       "hyperlink": null
     },
     {
@@ -6291,6 +8310,20 @@
       "children": [],
       "content_layer": "body",
       "label": "footnote",
+=======
+      "hyperlink": null,
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/190",
+      "parent": {
+        "cref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+>>>>>>> develop
       "prov": [
         {
           "page_no": 12,
@@ -6310,10 +8343,19 @@
       "orig": "‡ Eaves are defined as edges that are not sloped and level",
       "text": "‡ Eaves are defined as edges that are not sloped and level",
       "formatting": null,
+<<<<<<< HEAD
       "hyperlink": null
     },
     {
       "self_ref": "#/texts/192",
+=======
+      "hyperlink": null,
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/191",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6343,9 +8385,15 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/193",
       "parent": {
         "cref": "#/body"
+=======
+      "self_ref": "#/texts/192",
+      "parent": {
+        "cref": "#/groups/8"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -6357,17 +8405,58 @@
             "l": 416.759,
             "t": 388.321,
             "r": 513.439,
+<<<<<<< HEAD
+=======
+            "b": 378.621,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            23
+          ]
+        }
+      ],
+      "orig": "Longitude = -86.4103110",
+      "text": "Longitude = -86.4103110",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/193",
+      "parent": {
+        "cref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 416.759,
+            "t": 378.011,
+            "r": 503.306,
+>>>>>>> develop
             "b": 368.311,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
             0,
+<<<<<<< HEAD
             45
           ]
         }
       ],
       "orig": "Longitude = -86.4103110 Latitude = 35.8005390",
       "text": "Longitude = -86.4103110 Latitude = 35.8005390",
+=======
+            21
+          ]
+        }
+      ],
+      "orig": "Latitude = 35.8005390",
+      "text": "Latitude = 35.8005390",
+>>>>>>> develop
       "formatting": null,
       "hyperlink": null
     },
@@ -6442,6 +8531,7 @@
         {
           "page_no": 12,
           "bbox": {
+<<<<<<< HEAD
             "l": 314.197,
             "t": 495.224,
             "r": 358.513,
@@ -6529,6 +8619,8 @@
         {
           "page_no": 12,
           "bbox": {
+=======
+>>>>>>> develop
             "l": 586.917,
             "t": 74.83600000000001,
             "r": 588.519,
@@ -6547,7 +8639,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/200",
+=======
+      "self_ref": "#/texts/197",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6576,7 +8672,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/201",
+=======
+      "self_ref": "#/texts/198",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6605,7 +8705,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/202",
+=======
+      "self_ref": "#/texts/199",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6634,6 +8738,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/203",
       "parent": {
         "cref": "#/body"
@@ -6664,6 +8769,9 @@
     },
     {
       "self_ref": "#/texts/204",
+=======
+      "self_ref": "#/texts/200",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6693,7 +8801,41 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/205",
+=======
+      "self_ref": "#/texts/201",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 36.901,
+            "t": 764.073,
+            "r": 274.322,
+            "b": 750.735,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            41
+          ]
+        }
+      ],
+      "orig": "432 John Deere Dr, Murfreesboro, TN 37128",
+      "text": "432 John Deere Dr, Murfreesboro, TN 37128",
+      "formatting": null,
+      "hyperlink": null,
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/202",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6722,9 +8864,15 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/206",
       "parent": {
         "cref": "#/groups/4"
+=======
+      "self_ref": "#/texts/203",
+      "parent": {
+        "cref": "#/body"
+>>>>>>> develop
       },
       "children": [],
       "content_layer": "body",
@@ -6751,7 +8899,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/207",
+=======
+      "self_ref": "#/texts/204",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6781,7 +8933,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/208",
+=======
+      "self_ref": "#/texts/205",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6811,7 +8967,11 @@
       "level": 1
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/209",
+=======
+      "self_ref": "#/texts/206",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6840,7 +9000,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/210",
+=======
+      "self_ref": "#/texts/207",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6869,7 +9033,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/211",
+=======
+      "self_ref": "#/texts/208",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6898,7 +9066,40 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/212",
+=======
+      "self_ref": "#/texts/209",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 50.915,
+            "t": 96.33000000000004,
+            "r": 213.097,
+            "b": 64.07899999999995,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            92
+          ]
+        }
+      ],
+      "orig": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+      "text": "August 23, 2025 Property Address: 432 John Deere Dr, Murfreesboro, TN 37128 Report: 65313316",
+      "formatting": null,
+      "hyperlink": null
+    },
+    {
+      "self_ref": "#/texts/210",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6927,6 +9128,7 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/213",
       "parent": {
         "cref": "#/body"
@@ -6957,6 +9159,9 @@
     },
     {
       "self_ref": "#/texts/214",
+=======
+      "self_ref": "#/texts/211",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -6985,7 +9190,11 @@
       "hyperlink": null
     },
     {
+<<<<<<< HEAD
       "self_ref": "#/texts/215",
+=======
+      "self_ref": "#/texts/212",
+>>>>>>> develop
       "parent": {
         "cref": "#/body"
       },
@@ -7031,10 +9240,17 @@
         {
           "page_no": 1,
           "bbox": {
+<<<<<<< HEAD
             "l": 67.9161376953125,
             "t": 787.8213195800781,
             "r": 211.997802734375,
             "b": 747.635383605957,
+=======
+            "l": 67.99437713623047,
+            "t": 787.3384246826172,
+            "r": 212.294189453125,
+            "b": 747.1934814453125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7061,10 +9277,17 @@
         {
           "page_no": 1,
           "bbox": {
+<<<<<<< HEAD
             "l": 55.890499114990234,
             "t": 687.9423828125,
             "r": 182.68231201171875,
             "b": 475.1093444824219,
+=======
+            "l": 55.82993698120117,
+            "t": 687.8446807861328,
+            "r": 184.00840759277344,
+            "b": 474.1376647949219,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7084,17 +9307,35 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/7"
+        },
+        {
+          "cref": "#/texts/8"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 1,
           "bbox": {
+<<<<<<< HEAD
             "l": 350.584716796875,
             "t": 392.30828857421875,
             "r": 372.1106872558594,
             "b": 375.8440856933594,
+=======
+            "l": 366.584716796875,
+            "t": 791.1861877441406,
+            "r": 420.066162109375,
+            "b": 772.2645568847656,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7114,6 +9355,7 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/41"
@@ -7125,16 +9367,26 @@
           "cref": "#/texts/43"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 1,
           "bbox": {
+<<<<<<< HEAD
             "l": 463.5106201171875,
             "t": 249.4931640625,
             "r": 546.0970458984375,
             "b": 149.93853759765625,
+=======
+            "l": 350.645263671875,
+            "t": 391.849365234375,
+            "r": 372.4709167480469,
+            "b": 375.61724853515625,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7154,17 +9406,32 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/41"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 1,
           "bbox": {
+<<<<<<< HEAD
             "l": 448.1025085449219,
             "t": 71.5928955078125,
             "r": 545.2149047851562,
             "b": 59.642822265625,
+=======
+            "l": 467.873779296875,
+            "t": 249.2213134765625,
+            "r": 537.8219604492188,
+            "b": 179.781005859375,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7184,10 +9451,78 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/49"
         },
+=======
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 447.9807434082031,
+            "t": 71.510986328125,
+            "r": 544.9041137695312,
+            "b": 59.24481201171875,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "image": null,
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/6",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [
+        {
+          "cref": "#/texts/44"
+        }
+      ],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 49.468467712402344,
+            "t": 801.8809814453125,
+            "r": 116.55347442626953,
+            "b": 782.5904312133789,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "image": null,
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/7",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [
+>>>>>>> develop
         {
           "cref": "#/texts/50"
         },
@@ -7219,6 +9554,7 @@
         {
           "page_no": 2,
           "bbox": {
+<<<<<<< HEAD
             "l": 143.66201782226562,
             "t": 724.5658874511719,
             "r": 351.3455505371094,
@@ -7291,6 +9627,12 @@
             "t": 79.86370849609375,
             "r": 550.8798217773438,
             "b": 68.320556640625,
+=======
+            "l": 143.6136932373047,
+            "t": 723.613395690918,
+            "r": 353.014404296875,
+            "b": 373.6153259277344,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7312,6 +9654,7 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/67"
         },
         {
@@ -7322,18 +9665,30 @@
         },
         {
           "cref": "#/texts/70"
+=======
+          "cref": "#/texts/62"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 3,
           "bbox": {
             "l": 144.99212646484375,
             "t": 742.9278793334961,
             "r": 350.9722595214844,
             "b": 397.2852783203125,
+=======
+          "page_no": 2,
+          "bbox": {
+            "l": 386.05401611328125,
+            "t": 347.1214599609375,
+            "r": 424.6260681152344,
+            "b": 309.21575927734375,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7353,21 +9708,34 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/71"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 3,
           "bbox": {
             "l": 385.77001953125,
             "t": 371.6180419921875,
             "r": 424.40802001953125,
             "b": 332.5011901855469,
+=======
+          "page_no": 2,
+          "bbox": {
+            "l": 454.3017578125,
+            "t": 79.96173095703125,
+            "r": 550.8197631835938,
+            "b": 67.71466064453125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7387,17 +9755,41 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/70"
+        },
+        {
+          "cref": "#/texts/71"
+        },
+        {
+          "cref": "#/texts/72"
+        },
+        {
+          "cref": "#/texts/73"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 3,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.271728515625,
             "t": 79.83697509765625,
             "r": 550.86669921875,
             "b": 68.4149169921875,
+=======
+            "l": 145.9890899658203,
+            "t": 741.5491027832031,
+            "r": 351.8498840332031,
+            "b": 396.8364562988281,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7419,6 +9811,7 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/79"
         },
         {
@@ -7426,18 +9819,30 @@
         },
         {
           "cref": "#/texts/81"
+=======
+          "cref": "#/texts/74"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 4,
           "bbox": {
             "l": 144.86825561523438,
             "t": 742.9425506591797,
             "r": 351.0358581542969,
             "b": 397.314453125,
+=======
+          "page_no": 3,
+          "bbox": {
+            "l": 386.0438232421875,
+            "t": 371.1268005371094,
+            "r": 424.5832214355469,
+            "b": 333.2478942871094,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7457,21 +9862,34 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/82"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 4,
           "bbox": {
             "l": 385.7885437011719,
             "t": 371.63531494140625,
             "r": 424.41021728515625,
             "b": 332.42120361328125,
+=======
+          "page_no": 3,
+          "bbox": {
+            "l": 454.3377685546875,
+            "t": 79.94293212890625,
+            "r": 550.8143920898438,
+            "b": 67.72772216796875,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7491,17 +9909,38 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/83"
+        },
+        {
+          "cref": "#/texts/84"
+        },
+        {
+          "cref": "#/texts/85"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 4,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.2589416503906,
             "t": 79.82647705078125,
             "r": 550.850341796875,
             "b": 68.429443359375,
+=======
+            "l": 145.96121215820312,
+            "t": 741.6047210693359,
+            "r": 351.83770751953125,
+            "b": 396.8124084472656,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7521,17 +9960,34 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/86"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 5,
           "bbox": {
             "l": 144.76963806152344,
             "t": 706.2941589355469,
             "r": 351.7189636230469,
             "b": 362.5999755859375,
+=======
+          "page_no": 4,
+          "bbox": {
+            "l": 386.04034423828125,
+            "t": 371.1255187988281,
+            "r": 424.5858459472656,
+            "b": 333.2447814941406,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7551,21 +10007,34 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/90"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 5,
           "bbox": {
             "l": 385.6065673828125,
             "t": 336.4342041015625,
             "r": 424.97430419921875,
             "b": 295.69964599609375,
+=======
+          "page_no": 4,
+          "bbox": {
+            "l": 454.3298034667969,
+            "t": 79.94488525390625,
+            "r": 550.8216552734375,
+            "b": 67.72198486328125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7592,10 +10061,17 @@
         {
           "page_no": 5,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.17803955078125,
             "t": 79.83404541015625,
             "r": 550.9597778320312,
             "b": 68.24224853515625,
+=======
+            "l": 145.83009338378906,
+            "t": 705.6076965332031,
+            "r": 351.3627624511719,
+            "b": 362.5062561035156,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7617,6 +10093,7 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/97"
         },
         {
@@ -7633,18 +10110,30 @@
         },
         {
           "cref": "#/texts/102"
+=======
+          "cref": "#/texts/96"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 6,
           "bbox": {
             "l": 145.1503143310547,
             "t": 734.15966796875,
             "r": 350.9609680175781,
             "b": 389.4487609863281,
+=======
+          "page_no": 5,
+          "bbox": {
+            "l": 386.1848449707031,
+            "t": 335.84600830078125,
+            "r": 424.557373046875,
+            "b": 298.0047607421875,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7669,12 +10158,21 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 6,
           "bbox": {
             "l": 454.19024658203125,
             "t": 79.81787109375,
             "r": 550.91650390625,
             "b": 68.282958984375,
+=======
+          "page_no": 5,
+          "bbox": {
+            "l": 454.32666015625,
+            "t": 79.91729736328125,
+            "r": 550.8029174804688,
+            "b": 67.70977783203125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7697,6 +10195,24 @@
       "children": [
         {
           "cref": "#/texts/104"
+<<<<<<< HEAD
+=======
+        },
+        {
+          "cref": "#/texts/105"
+        },
+        {
+          "cref": "#/texts/106"
+        },
+        {
+          "cref": "#/texts/107"
+        },
+        {
+          "cref": "#/texts/108"
+        },
+        {
+          "cref": "#/texts/109"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
@@ -7705,10 +10221,17 @@
         {
           "page_no": 6,
           "bbox": {
+<<<<<<< HEAD
             "l": 385.8127136230469,
             "t": 362.69708251953125,
             "r": 424.83026123046875,
             "b": 323.03009033203125,
+=======
+            "l": 146.0269317626953,
+            "t": 733.0464553833008,
+            "r": 351.6249694824219,
+            "b": 388.8481750488281,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7730,6 +10253,7 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/112"
         },
         {
@@ -7752,18 +10276,30 @@
         },
         {
           "cref": "#/texts/119"
+=======
+          "cref": "#/texts/111"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 7,
           "bbox": {
             "l": 145.1429443359375,
             "t": 715.893180847168,
             "r": 351.3394775390625,
             "b": 371.53839111328125,
+=======
+          "page_no": 6,
+          "bbox": {
+            "l": 386.1580505371094,
+            "t": 362.6540832519531,
+            "r": 424.5269470214844,
+            "b": 324.4268798828125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7788,12 +10324,21 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 7,
           "bbox": {
             "l": 387.99273681640625,
             "t": 344.7651672363281,
             "r": 425.7563171386719,
             "b": 304.9307861328125,
+=======
+          "page_no": 6,
+          "bbox": {
+            "l": 454.3223571777344,
+            "t": 79.9183349609375,
+            "r": 550.7745971679688,
+            "b": 67.71856689453125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7813,17 +10358,53 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/119"
+        },
+        {
+          "cref": "#/texts/120"
+        },
+        {
+          "cref": "#/texts/121"
+        },
+        {
+          "cref": "#/texts/122"
+        },
+        {
+          "cref": "#/texts/123"
+        },
+        {
+          "cref": "#/texts/124"
+        },
+        {
+          "cref": "#/texts/125"
+        },
+        {
+          "cref": "#/texts/126"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 7,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.2618713378906,
             "t": 79.84130859375,
             "r": 550.89697265625,
             "b": 68.3521728515625,
+=======
+            "l": 145.8706817626953,
+            "t": 715.2390518188477,
+            "r": 351.60406494140625,
+            "b": 370.939697265625,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7843,17 +10424,34 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/128"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 8,
           "bbox": {
             "l": 145.08201599121094,
             "t": 746.1176910400391,
             "r": 351.3351135253906,
             "b": 401.3509826660156,
+=======
+          "page_no": 7,
+          "bbox": {
+            "l": 386.1396789550781,
+            "t": 344.85565185546875,
+            "r": 424.7619323730469,
+            "b": 306.54583740234375,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7873,21 +10471,34 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/126"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 8,
           "bbox": {
             "l": 385.66796875,
             "t": 375.27252197265625,
             "r": 424.79559326171875,
             "b": 335.57733154296875,
+=======
+          "page_no": 7,
+          "bbox": {
+            "l": 454.33251953125,
+            "t": 79.90313720703125,
+            "r": 550.8037719726562,
+            "b": 67.73175048828125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7914,10 +10525,17 @@
         {
           "page_no": 8,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.24365234375,
             "t": 79.8345947265625,
             "r": 550.9112548828125,
             "b": 68.35809326171875,
+=======
+            "l": 145.97634887695312,
+            "t": 745.3652954101562,
+            "r": 351.36083984375,
+            "b": 401.2197570800781,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7939,22 +10557,35 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/136"
         },
         {
           "cref": "#/texts/137"
+=======
+          "cref": "#/texts/135"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 9,
           "bbox": {
             "l": 138.96636962890625,
             "t": 714.7969665527344,
             "r": 411.9281005859375,
             "b": 495.95123291015625,
+=======
+          "page_no": 8,
+          "bbox": {
+            "l": 386.0581970214844,
+            "t": 375.17584228515625,
+            "r": 424.6982116699219,
+            "b": 336.5814514160156,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7974,6 +10605,7 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/138"
@@ -7985,16 +10617,28 @@
           "cref": "#/texts/140"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 9,
           "bbox": {
             "l": 139.06777954101562,
             "t": 444.4627380371094,
             "r": 412.0379943847656,
             "b": 225.217041015625,
+=======
+          "page_no": 8,
+          "bbox": {
+            "l": 454.3038330078125,
+            "t": 80.0069580078125,
+            "r": 550.830322265625,
+            "b": 67.69879150390625,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8014,17 +10658,35 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/145"
+        },
+        {
+          "cref": "#/texts/146"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 9,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.40008544921875,
             "t": 79.83673095703125,
             "r": 550.7849731445312,
             "b": 68.48095703125,
+=======
+            "l": 138.9334259033203,
+            "t": 714.8464508056641,
+            "r": 412.04473876953125,
+            "b": 495.4939270019531,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8059,12 +10721,21 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 10,
           "bbox": {
             "l": 139.25917053222656,
             "t": 782.7196388244629,
             "r": 412.0633239746094,
             "b": 564.0806274414062,
+=======
+          "page_no": 9,
+          "bbox": {
+            "l": 139.34336853027344,
+            "t": 444.1832275390625,
+            "r": 412.1251220703125,
+            "b": 225.1246337890625,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8084,6 +10755,7 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [
         {
           "cref": "#/texts/150"
@@ -8092,16 +10764,28 @@
           "cref": "#/texts/151"
         }
       ],
+=======
+      "children": [],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 10,
           "bbox": {
             "l": 139.2599334716797,
             "t": 512.2989501953125,
             "r": 412.03662109375,
             "b": 293.26611328125,
+=======
+          "page_no": 9,
+          "bbox": {
+            "l": 454.295654296875,
+            "t": 79.94403076171875,
+            "r": 550.8194580078125,
+            "b": 67.736328125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8121,17 +10805,38 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/157"
+        },
+        {
+          "cref": "#/texts/158"
+        },
+        {
+          "cref": "#/texts/159"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
           "page_no": 10,
           "bbox": {
+<<<<<<< HEAD
             "l": 454.4173889160156,
             "t": 79.8463134765625,
             "r": 550.8296508789062,
             "b": 68.468017578125,
+=======
+            "l": 139.12489318847656,
+            "t": 782.8855934143066,
+            "r": 412.5138854980469,
+            "b": 563.3791198730469,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8153,6 +10858,7 @@
       },
       "children": [
         {
+<<<<<<< HEAD
           "cref": "#/texts/157"
         },
         {
@@ -8160,18 +10866,33 @@
         },
         {
           "cref": "#/texts/159"
+=======
+          "cref": "#/texts/160"
+        },
+        {
+          "cref": "#/texts/161"
+>>>>>>> develop
         }
       ],
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 11,
           "bbox": {
             "l": 138.94528198242188,
             "t": 782.9237861633301,
             "r": 412.01202392578125,
             "b": 563.8825073242188,
+=======
+          "page_no": 10,
+          "bbox": {
+            "l": 139.1654510498047,
+            "t": 512.4359741210938,
+            "r": 412.2412109375,
+            "b": 292.70928955078125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8196,12 +10917,21 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 11,
           "bbox": {
             "l": 454.3451843261719,
             "t": 79.875732421875,
             "r": 550.86865234375,
             "b": 68.4007568359375,
+=======
+          "page_no": 10,
+          "bbox": {
+            "l": 454.31756591796875,
+            "t": 79.97479248046875,
+            "r": 550.8574829101562,
+            "b": 67.72015380859375,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8221,17 +10951,40 @@
       "parent": {
         "cref": "#/body"
       },
+<<<<<<< HEAD
       "children": [],
+=======
+      "children": [
+        {
+          "cref": "#/texts/167"
+        },
+        {
+          "cref": "#/texts/168"
+        },
+        {
+          "cref": "#/texts/169"
+        }
+      ],
+>>>>>>> develop
       "content_layer": "body",
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 12,
           "bbox": {
             "l": 51.519771575927734,
             "t": 394.26593017578125,
             "r": 161.16021728515625,
             "b": 250.57147216796875,
+=======
+          "page_no": 11,
+          "bbox": {
+            "l": 139.36285400390625,
+            "t": 782.9559555053711,
+            "r": 411.92108154296875,
+            "b": 563.303955078125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8256,12 +11009,21 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 12,
           "bbox": {
             "l": 454.3259582519531,
             "t": 79.73065185546875,
             "r": 550.7769165039062,
             "b": 68.48431396484375,
+=======
+          "page_no": 11,
+          "bbox": {
+            "l": 454.37445068359375,
+            "t": 79.89306640625,
+            "r": 550.8441162109375,
+            "b": 67.72772216796875,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8286,12 +11048,21 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 13,
           "bbox": {
             "l": 24.82477569580078,
             "t": 814.6672344207764,
             "r": 243.61497497558594,
             "b": 790.1701011657715,
+=======
+          "page_no": 12,
+          "bbox": {
+            "l": 51.3111686706543,
+            "t": 394.0936279296875,
+            "r": 162.06553649902344,
+            "b": 249.65069580078125,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8316,12 +11087,81 @@
       "label": "picture",
       "prov": [
         {
+<<<<<<< HEAD
           "page_no": 13,
           "bbox": {
             "l": 454.3885498046875,
             "t": 79.74560546875,
             "r": 550.7539672851562,
             "b": 68.52117919921875,
+=======
+          "page_no": 12,
+          "bbox": {
+            "l": 454.1431884765625,
+            "t": 79.9351806640625,
+            "r": 550.8538208007812,
+            "b": 67.75726318359375,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "image": null,
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/38",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 25.211750030517578,
+            "t": 814.7315864562988,
+            "r": 243.70736694335938,
+            "b": 790.052562713623,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "image": null,
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/39",
+      "parent": {
+        "cref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 454.2817077636719,
+            "t": 79.7750244140625,
+            "r": 550.8287963867188,
+            "b": 67.7196044921875,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8350,10 +11190,17 @@
         {
           "page_no": 1,
           "bbox": {
+<<<<<<< HEAD
             "l": 46.10599136352539,
             "t": 427.26513671875,
             "r": 269.4407043457031,
             "b": 303.12200927734375,
+=======
+            "l": 46.44081497192383,
+            "t": 427.41259765625,
+            "r": 269.5539855957031,
+            "b": 302.43548583984375,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -9090,10 +11937,17 @@
         {
           "page_no": 12,
           "bbox": {
+<<<<<<< HEAD
             "l": 46.474552154541016,
             "t": 752.4573135375977,
             "r": 546.0527954101562,
             "b": 680.9398040771484,
+=======
+            "l": 46.15707015991211,
+            "t": 731.9823608398438,
+            "r": 545.6808471679688,
+            "b": 681.4872589111328,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -9110,6 +11964,7 @@
         "table_cells": [
           {
             "bbox": {
+<<<<<<< HEAD
               "l": 55.893,
               "t": 93.66399999999999,
               "r": 143.382,
@@ -9129,6 +11984,8 @@
           },
           {
             "bbox": {
+=======
+>>>>>>> develop
               "l": 59.149,
               "t": 114.07899999999995,
               "r": 118.756,
@@ -9137,13 +11994,22 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+>>>>>>> develop
             "start_col_offset_idx": 0,
             "end_col_offset_idx": 1,
             "text": "Roof Pitches",
             "column_header": false,
+<<<<<<< HEAD
             "row_header": false,
+=======
+            "row_header": true,
+>>>>>>> develop
             "row_section": false
           },
           {
@@ -9156,8 +12022,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+>>>>>>> develop
             "start_col_offset_idx": 1,
             "end_col_offset_idx": 2,
             "text": "4/12",
@@ -9175,8 +12046,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+>>>>>>> develop
             "start_col_offset_idx": 2,
             "end_col_offset_idx": 3,
             "text": "6/12",
@@ -9194,8 +12070,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+>>>>>>> develop
             "start_col_offset_idx": 3,
             "end_col_offset_idx": 4,
             "text": "8/12",
@@ -9213,8 +12094,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+>>>>>>> develop
             "start_col_offset_idx": 4,
             "end_col_offset_idx": 5,
             "text": "12/12",
@@ -9232,13 +12118,22 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+>>>>>>> develop
             "start_col_offset_idx": 0,
             "end_col_offset_idx": 1,
             "text": "Area (sq ft)",
             "column_header": false,
+<<<<<<< HEAD
             "row_header": false,
+=======
+            "row_header": true,
+>>>>>>> develop
             "row_section": false
           },
           {
@@ -9251,8 +12146,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+>>>>>>> develop
             "start_col_offset_idx": 1,
             "end_col_offset_idx": 2,
             "text": "50.4",
@@ -9270,8 +12170,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+>>>>>>> develop
             "start_col_offset_idx": 2,
             "end_col_offset_idx": 3,
             "text": "119.9",
@@ -9289,8 +12194,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+>>>>>>> develop
             "start_col_offset_idx": 3,
             "end_col_offset_idx": 4,
             "text": "957.6",
@@ -9308,8 +12218,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+>>>>>>> develop
             "start_col_offset_idx": 4,
             "end_col_offset_idx": 5,
             "text": "157",
@@ -9327,13 +12242,22 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 3,
             "end_row_offset_idx": 4,
+=======
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+>>>>>>> develop
             "start_col_offset_idx": 0,
             "end_col_offset_idx": 1,
             "text": "%of Roof",
             "column_header": false,
+<<<<<<< HEAD
             "row_header": false,
+=======
+            "row_header": true,
+>>>>>>> develop
             "row_section": false
           },
           {
@@ -9346,8 +12270,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 3,
             "end_row_offset_idx": 4,
+=======
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+>>>>>>> develop
             "start_col_offset_idx": 1,
             "end_col_offset_idx": 2,
             "text": "3.9%",
@@ -9365,8 +12294,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 3,
             "end_row_offset_idx": 4,
+=======
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+>>>>>>> develop
             "start_col_offset_idx": 2,
             "end_col_offset_idx": 3,
             "text": "9.3%",
@@ -9384,8 +12318,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 3,
             "end_row_offset_idx": 4,
+=======
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+>>>>>>> develop
             "start_col_offset_idx": 3,
             "end_col_offset_idx": 4,
             "text": "74.5%",
@@ -9403,8 +12342,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 3,
             "end_row_offset_idx": 4,
+=======
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+>>>>>>> develop
             "start_col_offset_idx": 4,
             "end_col_offset_idx": 5,
             "text": "12.2%",
@@ -9413,12 +12357,17 @@
             "row_section": false
           }
         ],
+<<<<<<< HEAD
         "num_rows": 4,
+=======
+        "num_rows": 3,
+>>>>>>> develop
         "num_cols": 5,
         "grid": [
           [
             {
               "bbox": {
+<<<<<<< HEAD
                 "l": 55.893,
                 "t": 93.66399999999999,
                 "r": 143.382,
@@ -9516,6 +12465,8 @@
           [
             {
               "bbox": {
+=======
+>>>>>>> develop
                 "l": 59.149,
                 "t": 114.07899999999995,
                 "r": 118.756,
@@ -9524,13 +12475,22 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+>>>>>>> develop
               "start_col_offset_idx": 0,
               "end_col_offset_idx": 1,
               "text": "Roof Pitches",
               "column_header": false,
+<<<<<<< HEAD
               "row_header": false,
+=======
+              "row_header": true,
+>>>>>>> develop
               "row_section": false
             },
             {
@@ -9543,8 +12503,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+>>>>>>> develop
               "start_col_offset_idx": 1,
               "end_col_offset_idx": 2,
               "text": "4/12",
@@ -9562,8 +12527,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+>>>>>>> develop
               "start_col_offset_idx": 2,
               "end_col_offset_idx": 3,
               "text": "6/12",
@@ -9581,8 +12551,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+>>>>>>> develop
               "start_col_offset_idx": 3,
               "end_col_offset_idx": 4,
               "text": "8/12",
@@ -9600,8 +12575,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+>>>>>>> develop
               "start_col_offset_idx": 4,
               "end_col_offset_idx": 5,
               "text": "12/12",
@@ -9621,13 +12601,22 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+>>>>>>> develop
               "start_col_offset_idx": 0,
               "end_col_offset_idx": 1,
               "text": "Area (sq ft)",
               "column_header": false,
+<<<<<<< HEAD
               "row_header": false,
+=======
+              "row_header": true,
+>>>>>>> develop
               "row_section": false
             },
             {
@@ -9640,8 +12629,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+>>>>>>> develop
               "start_col_offset_idx": 1,
               "end_col_offset_idx": 2,
               "text": "50.4",
@@ -9659,8 +12653,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+>>>>>>> develop
               "start_col_offset_idx": 2,
               "end_col_offset_idx": 3,
               "text": "119.9",
@@ -9678,8 +12677,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+>>>>>>> develop
               "start_col_offset_idx": 3,
               "end_col_offset_idx": 4,
               "text": "957.6",
@@ -9697,8 +12701,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+>>>>>>> develop
               "start_col_offset_idx": 4,
               "end_col_offset_idx": 5,
               "text": "157",
@@ -9718,13 +12727,22 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 3,
               "end_row_offset_idx": 4,
+=======
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+>>>>>>> develop
               "start_col_offset_idx": 0,
               "end_col_offset_idx": 1,
               "text": "%of Roof",
               "column_header": false,
+<<<<<<< HEAD
               "row_header": false,
+=======
+              "row_header": true,
+>>>>>>> develop
               "row_section": false
             },
             {
@@ -9737,8 +12755,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 3,
               "end_row_offset_idx": 4,
+=======
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+>>>>>>> develop
               "start_col_offset_idx": 1,
               "end_col_offset_idx": 2,
               "text": "3.9%",
@@ -9756,8 +12779,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 3,
               "end_row_offset_idx": 4,
+=======
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+>>>>>>> develop
               "start_col_offset_idx": 2,
               "end_col_offset_idx": 3,
               "text": "9.3%",
@@ -9775,8 +12803,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 3,
               "end_row_offset_idx": 4,
+=======
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+>>>>>>> develop
               "start_col_offset_idx": 3,
               "end_col_offset_idx": 4,
               "text": "74.5%",
@@ -9794,8 +12827,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 3,
               "end_row_offset_idx": 4,
+=======
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+>>>>>>> develop
               "start_col_offset_idx": 4,
               "end_col_offset_idx": 5,
               "text": "12.2%",
@@ -9820,10 +12858,17 @@
         {
           "page_no": 12,
           "bbox": {
+<<<<<<< HEAD
             "l": 53.45238494873047,
             "t": 565.1237487792969,
             "r": 540.4686279296875,
             "b": 497.920654296875,
+=======
+            "l": 46.545570373535156,
+            "t": 656.8805084228516,
+            "r": 545.42529296875,
+            "b": 488.8379821777344,
+>>>>>>> develop
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -9840,6 +12885,104 @@
         "table_cells": [
           {
             "bbox": {
+<<<<<<< HEAD
+=======
+              "l": 55.893,
+              "t": 190.25699999999995,
+              "r": 176.517,
+              "b": 203.59400000000005,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 10,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 10,
+            "text": "Structure Complexity",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false
+          },
+          {
+            "bbox": {
+              "l": 107.446,
+              "t": 210.67200000000003,
+              "r": 137.232,
+              "b": 221.58500000000004,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 2,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 2,
+            "text": "Simple",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false
+          },
+          {
+            "bbox": {
+              "l": 259.932,
+              "t": 210.67200000000003,
+              "r": 291.359,
+              "b": 221.58500000000004,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 3,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 5,
+            "text": "Normal",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false
+          },
+          {
+            "bbox": {
+              "l": 430.868,
+              "t": 210.67200000000003,
+              "r": 469.332,
+              "b": 221.58500000000004,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 5,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 5,
+            "end_col_offset_idx": 10,
+            "text": "Complex",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false
+          },
+          {
+            "bbox": {
+              "l": 53.18,
+              "t": 240.72400000000005,
+              "r": 493.655,
+              "b": 271.904,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 10,
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 10,
+            "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false
+          },
+          {
+            "bbox": {
+>>>>>>> develop
               "l": 60.777,
               "t": 283.28499999999997,
               "r": 95.432,
@@ -9848,6 +12991,7 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 0,
@@ -9855,6 +12999,15 @@
             "text": "Waste%",
             "column_header": false,
             "row_header": true,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Waste%",
+            "column_header": true,
+            "row_header": false,
+>>>>>>> develop
             "row_section": false
           },
           {
@@ -9867,12 +13020,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 1,
             "end_col_offset_idx": 2,
             "text": "0%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "0%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -9886,12 +13048,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 2,
             "end_col_offset_idx": 3,
             "text": "4%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "4%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -9905,12 +13076,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 3,
             "end_col_offset_idx": 4,
             "text": "9%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 3,
+            "end_col_offset_idx": 4,
+            "text": "9%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -9924,12 +13104,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 4,
             "end_col_offset_idx": 5,
             "text": "12%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 4,
+            "end_col_offset_idx": 5,
+            "text": "12%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -9943,12 +13132,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 5,
             "end_col_offset_idx": 6,
             "text": "14%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 5,
+            "end_col_offset_idx": 6,
+            "text": "14%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -9962,12 +13160,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 6,
             "end_col_offset_idx": 7,
             "text": "16%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 6,
+            "end_col_offset_idx": 7,
+            "text": "16%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -9981,12 +13188,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 7,
             "end_col_offset_idx": 8,
             "text": "19%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 7,
+            "end_col_offset_idx": 8,
+            "text": "19%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -10000,12 +13216,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 8,
             "end_col_offset_idx": 9,
             "text": "24%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 8,
+            "end_col_offset_idx": 9,
+            "text": "24%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -10019,12 +13244,21 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 0,
             "end_row_offset_idx": 1,
             "start_col_offset_idx": 9,
             "end_col_offset_idx": 10,
             "text": "29%",
             "column_header": false,
+=======
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 9,
+            "end_col_offset_idx": 10,
+            "text": "29%",
+            "column_header": true,
+>>>>>>> develop
             "row_header": false,
             "row_section": false
           },
@@ -10038,13 +13272,22 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 0,
             "end_col_offset_idx": 1,
             "text": "Area (m²)",
             "column_header": false,
+<<<<<<< HEAD
             "row_header": true,
+=======
+            "row_header": false,
+>>>>>>> develop
             "row_section": false
           },
           {
@@ -10057,8 +13300,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 1,
             "end_col_offset_idx": 2,
             "text": "119",
@@ -10076,8 +13324,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 2,
             "end_col_offset_idx": 3,
             "text": "124",
@@ -10095,8 +13348,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 3,
             "end_col_offset_idx": 4,
             "text": "130",
@@ -10114,8 +13372,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 4,
             "end_col_offset_idx": 5,
             "text": "133",
@@ -10133,8 +13396,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 5,
             "end_col_offset_idx": 6,
             "text": "136",
@@ -10152,8 +13420,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 6,
             "end_col_offset_idx": 7,
             "text": "138",
@@ -10171,8 +13444,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 7,
             "end_col_offset_idx": 8,
             "text": "142",
@@ -10190,8 +13468,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 8,
             "end_col_offset_idx": 9,
             "text": "148",
@@ -10209,8 +13492,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 1,
             "end_row_offset_idx": 2,
+=======
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+>>>>>>> develop
             "start_col_offset_idx": 9,
             "end_col_offset_idx": 10,
             "text": "153",
@@ -10228,13 +13516,22 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 0,
             "end_col_offset_idx": 1,
             "text": "Squares *",
             "column_header": false,
+<<<<<<< HEAD
             "row_header": true,
+=======
+            "row_header": false,
+>>>>>>> develop
             "row_section": false
           },
           {
@@ -10247,8 +13544,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 1,
             "end_col_offset_idx": 2,
             "text": "13.00",
@@ -10266,8 +13568,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 2,
             "end_col_offset_idx": 3,
             "text": "13.66",
@@ -10285,8 +13592,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 3,
             "end_col_offset_idx": 4,
             "text": "14.00",
@@ -10304,8 +13616,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 4,
             "end_col_offset_idx": 5,
             "text": "14.66",
@@ -10323,8 +13640,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 5,
             "end_col_offset_idx": 6,
             "text": "14.66",
@@ -10342,8 +13664,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 6,
             "end_col_offset_idx": 7,
             "text": "15.00",
@@ -10361,8 +13688,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 7,
             "end_col_offset_idx": 8,
             "text": "15.33",
@@ -10380,8 +13712,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 8,
             "end_col_offset_idx": 9,
             "text": "16.00",
@@ -10399,8 +13736,13 @@
             },
             "row_span": 1,
             "col_span": 1,
+<<<<<<< HEAD
             "start_row_offset_idx": 2,
             "end_row_offset_idx": 3,
+=======
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+>>>>>>> develop
             "start_col_offset_idx": 9,
             "end_col_offset_idx": 10,
             "text": "16.66",
@@ -10409,12 +13751,595 @@
             "row_section": false
           }
         ],
+<<<<<<< HEAD
         "num_rows": 3,
+=======
+        "num_rows": 6,
+>>>>>>> develop
         "num_cols": 10,
         "grid": [
           [
             {
               "bbox": {
+<<<<<<< HEAD
+=======
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 55.893,
+                "t": 190.25699999999995,
+                "r": 176.517,
+                "b": 203.59400000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Structure Complexity",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+                "l": 107.446,
+                "t": 210.67200000000003,
+                "r": 137.232,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 2,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 2,
+              "text": "Simple",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 107.446,
+                "t": 210.67200000000003,
+                "r": 137.232,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 2,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 2,
+              "text": "Simple",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 259.932,
+                "t": 210.67200000000003,
+                "r": 291.359,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 3,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 5,
+              "text": "Normal",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 259.932,
+                "t": 210.67200000000003,
+                "r": 291.359,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 3,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 5,
+              "text": "Normal",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 259.932,
+                "t": 210.67200000000003,
+                "r": 291.359,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 3,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 5,
+              "text": "Normal",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 430.868,
+                "t": 210.67200000000003,
+                "r": 469.332,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 5,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 5,
+              "end_col_offset_idx": 10,
+              "text": "Complex",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 430.868,
+                "t": 210.67200000000003,
+                "r": 469.332,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 5,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 5,
+              "end_col_offset_idx": 10,
+              "text": "Complex",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 430.868,
+                "t": 210.67200000000003,
+                "r": 469.332,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 5,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 5,
+              "end_col_offset_idx": 10,
+              "text": "Complex",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 430.868,
+                "t": 210.67200000000003,
+                "r": 469.332,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 5,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 5,
+              "end_col_offset_idx": 10,
+              "text": "Complex",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 430.868,
+                "t": 210.67200000000003,
+                "r": 469.332,
+                "b": 221.58500000000004,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 5,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 5,
+              "end_col_offset_idx": 10,
+              "text": "Complex",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            },
+            {
+              "bbox": {
+                "l": 53.18,
+                "t": 240.72400000000005,
+                "r": 493.655,
+                "b": 271.904,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 10,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 10,
+              "text": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+>>>>>>> develop
                 "l": 60.777,
                 "t": 283.28499999999997,
                 "r": 95.432,
@@ -10423,6 +14348,7 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 0,
@@ -10430,6 +14356,15 @@
               "text": "Waste%",
               "column_header": false,
               "row_header": true,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Waste%",
+              "column_header": true,
+              "row_header": false,
+>>>>>>> develop
               "row_section": false
             },
             {
@@ -10442,12 +14377,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 1,
               "end_col_offset_idx": 2,
               "text": "0%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "0%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10461,12 +14405,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 2,
               "end_col_offset_idx": 3,
               "text": "4%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "4%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10480,12 +14433,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 3,
               "end_col_offset_idx": 4,
               "text": "9%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 3,
+              "end_col_offset_idx": 4,
+              "text": "9%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10499,12 +14461,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 4,
               "end_col_offset_idx": 5,
               "text": "12%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 4,
+              "end_col_offset_idx": 5,
+              "text": "12%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10518,12 +14489,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 5,
               "end_col_offset_idx": 6,
               "text": "14%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 5,
+              "end_col_offset_idx": 6,
+              "text": "14%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10537,12 +14517,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 6,
               "end_col_offset_idx": 7,
               "text": "16%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 6,
+              "end_col_offset_idx": 7,
+              "text": "16%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10556,12 +14545,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 7,
               "end_col_offset_idx": 8,
               "text": "19%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 7,
+              "end_col_offset_idx": 8,
+              "text": "19%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10575,12 +14573,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 8,
               "end_col_offset_idx": 9,
               "text": "24%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 8,
+              "end_col_offset_idx": 9,
+              "text": "24%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             },
@@ -10594,12 +14601,21 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 0,
               "end_row_offset_idx": 1,
               "start_col_offset_idx": 9,
               "end_col_offset_idx": 10,
               "text": "29%",
               "column_header": false,
+=======
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 9,
+              "end_col_offset_idx": 10,
+              "text": "29%",
+              "column_header": true,
+>>>>>>> develop
               "row_header": false,
               "row_section": false
             }
@@ -10615,13 +14631,22 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 0,
               "end_col_offset_idx": 1,
               "text": "Area (m²)",
               "column_header": false,
+<<<<<<< HEAD
               "row_header": true,
+=======
+              "row_header": false,
+>>>>>>> develop
               "row_section": false
             },
             {
@@ -10634,8 +14659,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 1,
               "end_col_offset_idx": 2,
               "text": "119",
@@ -10653,8 +14683,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 2,
               "end_col_offset_idx": 3,
               "text": "124",
@@ -10672,8 +14707,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 3,
               "end_col_offset_idx": 4,
               "text": "130",
@@ -10691,8 +14731,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 4,
               "end_col_offset_idx": 5,
               "text": "133",
@@ -10710,8 +14755,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 5,
               "end_col_offset_idx": 6,
               "text": "136",
@@ -10729,8 +14779,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 6,
               "end_col_offset_idx": 7,
               "text": "138",
@@ -10748,8 +14803,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 7,
               "end_col_offset_idx": 8,
               "text": "142",
@@ -10767,8 +14827,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 8,
               "end_col_offset_idx": 9,
               "text": "148",
@@ -10786,8 +14851,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 1,
               "end_row_offset_idx": 2,
+=======
+              "start_row_offset_idx": 4,
+              "end_row_offset_idx": 5,
+>>>>>>> develop
               "start_col_offset_idx": 9,
               "end_col_offset_idx": 10,
               "text": "153",
@@ -10807,13 +14877,22 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 0,
               "end_col_offset_idx": 1,
               "text": "Squares *",
               "column_header": false,
+<<<<<<< HEAD
               "row_header": true,
+=======
+              "row_header": false,
+>>>>>>> develop
               "row_section": false
             },
             {
@@ -10826,8 +14905,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 1,
               "end_col_offset_idx": 2,
               "text": "13.00",
@@ -10845,8 +14929,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 2,
               "end_col_offset_idx": 3,
               "text": "13.66",
@@ -10864,8 +14953,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 3,
               "end_col_offset_idx": 4,
               "text": "14.00",
@@ -10883,8 +14977,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 4,
               "end_col_offset_idx": 5,
               "text": "14.66",
@@ -10902,8 +15001,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 5,
               "end_col_offset_idx": 6,
               "text": "14.66",
@@ -10921,8 +15025,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 6,
               "end_col_offset_idx": 7,
               "text": "15.00",
@@ -10940,8 +15049,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 7,
               "end_col_offset_idx": 8,
               "text": "15.33",
@@ -10959,8 +15073,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 8,
               "end_col_offset_idx": 9,
               "text": "16.00",
@@ -10978,8 +15097,13 @@
               },
               "row_span": 1,
               "col_span": 1,
+<<<<<<< HEAD
               "start_row_offset_idx": 2,
               "end_row_offset_idx": 3,
+=======
+              "start_row_offset_idx": 5,
+              "end_row_offset_idx": 6,
+>>>>>>> develop
               "start_col_offset_idx": 9,
               "end_col_offset_idx": 10,
               "text": "16.66",

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
   {
     "chunk_id": "63214254_chunk_1",
@@ -159,3 +160,223 @@
     }
   }
 ]
+=======
+{
+  "text": [
+    {
+      "chunk_id": "63214254_chunk_1",
+      "section": "Report Header",
+      "type": "text",
+      "data": {
+        "report_id": "63214254",
+        "date": "August 23, 2025",
+        "property_address": "106 Oakwood Dr Richmond, KY 40475"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_2",
+      "section": "Measurements",
+      "type": "text",
+      "data": {
+        "area": "2,825.9 sq ft",
+        "roof_facets": "12",
+        "predominant_pitch": "6/12",
+        "number_of_stories": ">1",
+        "ridges_hips": "212' 10\"",
+        "valleys": "45' 6\"",
+        "rakes": "2' 3\"",
+        "eaves": "274' 1\"",
+        "estimated_attic": "41.5 sq ft"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_3",
+      "section": "Prepared For",
+      "type": "text",
+      "data": {
+        "name": "Prepared For",
+        "address": "Justina Cryder 205 Hemlock Ct South Milwaukee,WI 53172, 100%, Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx",
+        "phone": "(888) 209-4899"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_4",
+      "section": "Lengths Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
+        "image_file": "extracted_images/report_63214254/Lengthsimage.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_5",
+      "section": "Pitch (Degrees) Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof pitch in degrees for different facets",
+        "image_file": "extracted_images/report_63214254/Pitch_Degrees.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_6",
+      "section": "Pitch (on 12) Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof pitch in x/12 format for different facets",
+        "image_file": "extracted_images/report_63214254/Pitch_on_12.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_7",
+      "section": "Rafters Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing rafter lengths for different roof sections",
+        "image_file": "extracted_images/report_63214254/Rafters.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_8",
+      "section": "Azimuth Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof facet orientations in degrees relative to true north",
+        "image_file": "extracted_images/report_63214254/Azimuth.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_9",
+      "section": "Area Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof area measurements for different facets in square feet",
+        "image_file": "extracted_images/report_63214254/Area.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_10",
+      "section": "Roof Obstructions Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing locations of roof obstructions",
+        "image_file": "extracted_images/report_63214254/Roof_Penetrations.png"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_11",
+      "section": "Property Imagery",
+      "type": "image",
+      "data": {
+        "description": "Aerial images of the property from top, north, south, east, and west views",
+        "images": [
+          "extracted_images/report_63214254/Top_View.png",
+          "extracted_images/report_63214254/North_Side.png",
+          "extracted_images/report_63214254/South_Side.png",
+          "extracted_images/report_63214254/East_Side.png",
+          "extracted_images/report_63214254/West_Side.png"
+        ]
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_12",
+      "section": "Roofing Report Summary",
+      "type": "table",
+      "data": {}
+    },
+    {
+      "chunk_id": "63214254_chunk_13",
+      "section": "Property Details",
+      "type": "text",
+      "data": {
+        "total_roof_facets": "12",
+        "total_roof_obstructions": "13",
+        "ridges": "42' 10\" Hips",
+        "hips": "170'",
+        "valleys": "45' 6\"",
+        "rakes": "2' 3\"",
+        "eaves_starters": "274' 1\" (13 Eaves) Drip Edge (Eaves",
+        "drip_edge": "276' 4\" (14 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
+        "flashing": "19' 11\"",
+        "step_flashing": "42' 10\"",
+        "total_roof_obstructions_area": "15.4 sq",
+        "total_roof_obstructions_perimeter": "51' 6\" Predominant Pitch",
+        "predominant_pitch": "6/12"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_14",
+      "section": "Longitude",
+      "type": "text",
+      "data": {
+        "longitude": "-84.3498190",
+        "coordinate_type": "longitude"
+      }
+    },
+    {
+      "chunk_id": "63214254_chunk_15",
+      "section": "Latitude",
+      "type": "text",
+      "data": {
+        "latitude": "37.7387620",
+        "coordinate_type": "latitude"
+      }
+    }
+  ],
+  "table": [
+    {
+      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "raw_text": [
+        {
+          "Roof Pitches": "Structure Complexity.Simple.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "0%",
+          "%of Roof": "262"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "4%",
+          "%of Roof": "273"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "9%",
+          "%of Roof": "286"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Normal.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "14%",
+          "%of Roof": "299"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "17%",
+          "%of Roof": "307"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "19%",
+          "%of Roof": "312"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "21%",
+          "%of Roof": "317"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "24%",
+          "%of Roof": "325"
+        },
+        {
+          "Roof Pitches": "Structure Complexity.Complex.Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.",
+          "Waste%": "29%",
+          "%of Roof": "338"
+        }
+      ],
+      "id": "chunk1",
+      "metadata": {},
+      "src_image_path": ""
+    }
+  ]
+}
+>>>>>>> develop
