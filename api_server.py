@@ -144,16 +144,24 @@ async def health_check():
     
     doc_count = 0
     vector_store_active = False
-    
+
     if rag_agent is not None:
         try:
-            doc_count = rag_agent.vector_store_manager.get_count()
-            vector_store_active = True
+            # Support new AgenticRAG API which maintains multiple vector stores
+            if hasattr(rag_agent, "vector_stores") and rag_agent.vector_stores:
+                vector_store_active = True
+                for vs in rag_agent.vector_stores:
+                    try:
+                        doc_count += vs["store"].get_count()
+                    except Exception as e:
+                        logger.warning(f"Error getting count from a vector store: {e}")
+            else:
+                vector_store_active = False
         except Exception as e:
             logger.error(f"Error checking vector store: {e}")
-    
+
     return SystemStatusResponse(
-        status="healthy" if rag_agent is not None else "no_documents",
+        status="healthy" if vector_store_active else ("no_documents" if rag_agent is not None else "not_initialized"),
         documents_loaded=doc_count,
         vector_store_active=vector_store_active,
         backend_version="1.0.0"
@@ -291,7 +299,14 @@ async def get_document_stats():
         }
     
     try:
-        doc_count = rag_agent.vector_store_manager.get_count()
+        # Sum counts across all configured vector stores (new AgenticRAG API)
+        doc_count = 0
+        if hasattr(rag_agent, "vector_stores") and rag_agent.vector_stores:
+            for vs in rag_agent.vector_stores:
+                try:
+                    doc_count += vs["store"].get_count()
+                except Exception as e:
+                    logger.warning(f"Error getting count from a vector store: {e}")
         vector_config = config.get_vector_store_config()
         
         return {
@@ -317,8 +332,12 @@ async def search_documents(query: str, k: int = 5):
         )
     
     try:
-        # Use vector store manager to search
-        docs = rag_agent.vector_store_manager.similarity_search(query, k=k)
+        # Use the first available vector store to search (for simplicity)
+        if not hasattr(rag_agent, "vector_stores") or not rag_agent.vector_stores:
+            raise HTTPException(status_code=503, detail="No vector stores configured")
+
+        store = rag_agent.vector_stores[0]["store"]
+        docs = store.similarity_search(query, k=k)
         
         results = []
         for doc in docs:

@@ -31,7 +31,11 @@ export function PropertyDashboard() {
 
   const fetchStats = async () => {
     try {
-      const backendUrl = process.env.RAG_BACKEND_URL || "http://localhost:8000";
+      // Use public env var in the browser; fall back to server env var and localhost
+      const backendUrl =
+        process.env.NEXT_PUBLIC_RAG_BACKEND_URL ||
+        process.env.RAG_BACKEND_URL ||
+        "http://localhost:8000";
       
       const [statsResponse, healthResponse] = await Promise.all([
         fetch(`${backendUrl}/documents/stats`),
