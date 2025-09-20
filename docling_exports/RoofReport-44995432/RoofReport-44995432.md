@@ -2,20 +2,25 @@
 
 <!-- image -->
 
-8
-
 ## Contents
 
-| Lengths .................................................................................    |   1 |
-|----------------------------------------------------------------------------------------------|-----|
-| Pitch (Degrees)......................................................................        |   2 |
-| Pitch (on 12) ..........................................................................     |   3 |
-| Rafters ...................................................................................  |   4 |
-| Azimuth ..................................................................................   |   5 |
-| Area ....................................................................................... |   6 |
-| Roof Penetrations ..................................................................         |   7 |
-| Imagery ..................................................................................   |   8 |
-| Roofing Report Summary .....................................................                 |  11 |
+Lengths ................................................................................. 1
+
+Pitch (Degrees)...................................................................... 2
+
+Pitch (on 12) .......................................................................... 3
+
+Rafters ................................................................................... 4
+
+Azimuth .................................................................................. 5
+
+Area ....................................................................................... 6
+
+Roof Penetrations .................................................................. 7
+
+Imagery .................................................................................. 8
+
+Roofing Report Summary ..................................................... 11
 
 ## Report Details
 
@@ -23,23 +28,21 @@ Report ID:
 
 44995432
 
-<!-- image -->
+8
 
-## PROPERTY
+REPORT ID
 
-1014 Mohican Round Rock, TX 78665
+44995432
+
+PROPERTY 1014 Mohican Round Rock, TX 78665
 
 ## Property Address
 
-1014 Mohican
-
-Round Rock, TX 78665
+1014 Mohican Round Rock, TX 78665
 
 ## Measurements
 
 Area:
-
-15.9 SQ
 
 Roof Facets:
 
@@ -62,6 +65,8 @@ Roof Penetrations:
 Roof Penetrations Perimeter:
 
 Roof Penetrations Area:
+
+15.9 SQ
 
 6
 
@@ -95,35 +100,23 @@ Open in EagleView One™
 
 <!-- image -->
 
-Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx
-
 <!-- image -->
 
-<!-- image -->
+## Lengths
 
 Ridges = 14' 7" Hips = 116' 8"
 
 Valleys = 23' 2"
 
-## Rakes = 0'
+Rakes = 0' Eaves = 155' 11" Flashing = 0'
 
-Eaves = 155' 11"
+Step flashing = 0' Parapets = 0' Other = 0'
 
-Flashing = 0'
-
-## Step flashing = 0'
-
-Parapets = 0'
-
-Other = 0'
+<!-- image -->
 
 <!-- image -->
 
 34'1"
-
-<!-- image -->
-
-1 8
 
 <!-- image -->
 
@@ -137,8 +130,6 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
-1 { &lt; 1 8
-
 <!-- image -->
 
 '
@@ -150,8 +141,6 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 <!-- image -->
 
 <!-- image -->
-
-1 { &lt; 1 8
 
 <!-- image -->
 
@@ -173,8 +162,6 @@ The azimuth is the orientation of the structure to true north. In this diagram r
 
 <!-- image -->
 
-&lt; 8
-
 <!-- image -->
 
 <!-- image -->
@@ -189,8 +176,6 @@ The area is measured in squares per roof facet. The values have been rounded to 
 
 <!-- image -->
 
-1 { &lt; 1 8
-
 <!-- image -->
 
 '
@@ -200,8 +185,6 @@ The area is measured in squares per roof facet. The values have been rounded to 
 <!-- image -->
 
 <!-- image -->
-
-&lt; 1 8
 
 <!-- image -->
 
@@ -213,11 +196,11 @@ These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
-<!-- image -->
-
-<!-- image -->
-
 ## NORTH SIDE
+
+<!-- image -->
+
+<!-- image -->
 
 <!-- image -->
 
@@ -255,19 +238,22 @@ These are images of the property taken from multiple angles.
 
 The table above lists each pitch on this roof and the total area and percent of the roof with that pitch.
 
-| Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                | Structure Complexity                                                                                                                                                                                                                                                                |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Simple                                                                                                                                                                                                                                                                              | Simple                                                                                                                                                                                                                                                                              | Normal                                                                                                                                                                                                                                                                              | Normal                                                                                                                                                                                                                                                                              | Normal                                                                                                                                                                                                                                                                              | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             | Complex                                                                                                                                                                                                                                                                             |
-| Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. | Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below. |
-| Waste%                                                                                                                                                                                                                                                                              | 0%                                                                                                                                                                                                                                                                                  | 5%                                                                                                                                                                                                                                                                                  | 10%                                                                                                                                                                                                                                                                                 | 15%                                                                                                                                                                                                                                                                                 | 18%                                                                                                                                                                                                                                                                                 | 20%                                                                                                                                                                                                                                                                                 | 22%                                                                                                                                                                                                                                                                                 | 25%                                                                                                                                                                                                                                                                                 | 30%                                                                                                                                                                                                                                                                                 |
-| Area (m²)                                                                                                                                                                                                                                                                           | 147                                                                                                                                                                                                                                                                                 | 154                                                                                                                                                                                                                                                                                 | 162                                                                                                                                                                                                                                                                                 | 169                                                                                                                                                                                                                                                                                 | 174                                                                                                                                                                                                                                                                                 | 177                                                                                                                                                                                                                                                                                 | 180                                                                                                                                                                                                                                                                                 | 184                                                                                                                                                                                                                                                                                 | 191                                                                                                                                                                                                                                                                                 |
-| Squares *                                                                                                                                                                                                                                                                           | 16.00                                                                                                                                                                                                                                                                               | 17.00                                                                                                                                                                                                                                                                               | 17.66                                                                                                                                                                                                                                                                               | 18.33                                                                                                                                                                                                                                                                               | 19.00                                                                                                                                                                                                                                                                               | 19.33                                                                                                                                                                                                                                                                               | 19.66                                                                                                                                                                                                                                                                               | 20.00                                                                                                                                                                                                                                                                               | 20.66                                                                                                                                                                                                                                                                               |
+## Structure Complexity
+
+Simple
+
+## Waste Calculation
+
+NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.
+
+| Waste%    |   0% |   5% |    10% |    15% |   18% |    20% |    22% |   25% |    30% |
+|-----------|------|------|--------|--------|-------|--------|--------|-------|--------|
+| Area (m²) |  147 |  154 | 162    | 169    |   174 | 177    | 180    |   184 | 191    |
+| Squares * |   16 |   17 |  17.66 |  18.33 |    19 |  19.33 |  19.66 |    20 |  20.66 |
 
 Measured
 
-Suggested
-
-- *Squares are rounded up to the 1/3 of a square
+*Squares are rounded up to the 1/3 of a square
 
 Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste factor is intended to serve as a guide-actual waste percentages may differ based upon several variables that EagleView does not control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given replacement or repair work.
 
@@ -279,20 +265,41 @@ Total Roof Penetrations = 7
 
 ## Lengths, Areas and Pitches
 
-Ridges = 14' 7" (2 Ridges) Hips = 116' 8" (6 Hips) Valleys = 23' 2" (1 Valleys) Rakes† = 0' (0 Rakes) Eaves/Starters‡ = 155' 11" (6 Eaves) Drip Edge (Eaves + Rakes) = 155' 11" (6 Lengths) Parapet Walls = 0' (0 Lengths) Flashing = 0' (0 Lengths) Step Flashing = 0' (0 Lengths) Total Roof Penetrations Area = 0.1 SQ Total Roof Area Less Roof Penetrations =15.8 SQ Total Roof Penetrations Perimeter = 28'
+Ridges = 14' 7" (2 Ridges)
 
-Predominant Pitch = 5/12
+Hips = 116' 8" (6 Hips)
+
+Valleys = 23' 2" (1 Valleys)
+
+Rakes† = 0' (0 Rakes)
+
+Eaves/Starters‡ = 155' 11" (6 Eaves)
+
+Drip Edge (Eaves + Rakes) = 155' 11" (6 Lengths)
+
+Parapet Walls = 0' (0 Lengths)
+
+Flashing = 0' (0 Lengths)
+
+Step Flashing = 0' (0 Lengths)
+
+Total Roof Penetrations Area = 0.1 SQ
+
+Total Roof Area Less Roof Penetrations =15.8 SQ
+
+Total Roof Penetrations Perimeter = 28' Predominant Pitch = 5/12
 
 Total Area (All Pitches) = 15.9 SQ
 
-- † Rakes are defined as roof edges that are sloped (not level).
-- ‡ Eaves are defined as edges that are not sloped and level
+† Rakes are defined as roof edges that are sloped (not level).
+
+‡ Eaves are defined as edges that are not sloped and level
+
+August 21, 2025 Property Address: 1014 Mohican, Round Rock, TX 78665 Report: 44995432
 
 ## Property Location
 
-Longitude = -97.6686620
-
-Latitude = 30.5528010
+Longitude = -97.6686620 Latitude = 30.5528010
 
 ## Notes
 
@@ -300,13 +307,19 @@ This was ordered as a residential property. There were no changes to the structu
 
 <!-- image -->
 
+Suggested
+
+Normal
+
+Complex
+
 '
 
 <!-- image -->
 
-## Legal Notice and Disclaimer
+1014 Mohican, Round Rock, TX 78665
 
-## 1014 Mohican, Round Rock, TX 78665
+## Legal Notice and Disclaimer
 
 August 21, 2025
 
@@ -321,8 +334,6 @@ No Warranty: The Copyrighted Materials are provided to you "as is," and you agre
 EagleView Technologies makes no guarantees, representations or warranties of any kind, express or implied, arising by law or otherwise, including but not limited to, content, quality, accuracy, completeness, effectiveness, reliability, fitness for a particular purpose, usefulness, use or results to be obtained from the Copyrighted Materials.
 
 Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report.
-
-August 21, 2025 Property Address: 1014 Mohican, Round Rock, TX 78665 Report: 44995432
 
 <!-- image -->
 

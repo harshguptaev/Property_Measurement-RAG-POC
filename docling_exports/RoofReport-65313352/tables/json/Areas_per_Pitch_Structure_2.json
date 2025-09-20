@@ -1,7 +1,53 @@
 [
     {
+<<<<<<< HEAD
+        "Waste%": "0%",
+        "Area (m²)": "125",
+        "Squares *": "13.66"
+    },
+    {
+        "Waste%": "2%",
+        "Area (m²)": "127",
+        "Squares *": "14.00"
+    },
+    {
+        "Waste%": "7%",
+        "Area (m²)": "134",
+        "Squares *": "14.66"
+    },
+    {
+        "Waste%": "12%",
+        "Area (m²)": "140",
+        "Squares *": "15.33"
+    },
+    {
+        "Waste%": "15%",
+        "Area (m²)": "144",
+        "Squares *": "15.66"
+    },
+    {
+        "Waste%": "17%",
+        "Area (m²)": "146",
+        "Squares *": "16.00"
+    },
+    {
+        "Waste%": "19%",
+        "Area (m²)": "149",
+        "Squares *": "16.33"
+    },
+    {
+        "Waste%": "22%",
+        "Area (m²)": "152",
+        "Squares *": "16.66"
+    },
+    {
+        "Waste%": "27%",
+        "Area (m²)": "159",
+        "Squares *": "17.33"
+=======
         "Roof Pitches": "8/12",
         "Area (sq ft)": "813.4",
         "%of Roof": "100%"
+>>>>>>> develop
     }
 ]

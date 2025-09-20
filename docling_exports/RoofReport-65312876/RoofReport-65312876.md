@@ -2,8 +2,11 @@
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 8 8 8
 
+>>>>>>> develop
 ## Contents
 
 | Lengths .................................................................................    |   1 |
@@ -23,9 +26,17 @@ Report ID:
 
 65312876
 
+<<<<<<< HEAD
+8 8 8
+
+REPORT ID 65312876
+
+PROPERTY
+=======
 <!-- image -->
 
 ## PROPERTY
+>>>>>>> develop
 
 2325 New Holland Cir Murfreesboro, TN 37128
 
@@ -93,12 +104,19 @@ Open in EagleView One™
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx
 
+>>>>>>> develop
 <!-- image -->
 
 ## Lengths
 
+<<<<<<< HEAD
+<!-- image -->
+
+=======
 Ridges = 46' 1" Hips = 0'
 
 ## Rakes = 114'
@@ -117,6 +135,7 @@ Flashing = 37' 3"
 
 &lt; 9 8
 
+>>>>>>> develop
 <!-- image -->
 
 <!-- image -->
@@ -131,8 +150,11 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 9 8
 
+>>>>>>> develop
 ## Pitch (on 12)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
@@ -141,8 +163,11 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 9 8
 
+>>>>>>> develop
 ## Rafters
 
 Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases, segment labels have been removed for readability. Some numbers are prefaced by '+' signs to avoid confusion when rotated (e.g. +6 and +9).
@@ -151,8 +176,11 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 9 1 8
 
+>>>>>>> develop
 ## Azimuth
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
@@ -161,14 +189,20 @@ The azimuth is the orientation of the structure to true north. In this diagram r
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 8
 
+>>>>>>> develop
 ## Area
 
 The area is measured in square feet per roof facet. The values have been rounded to the nearest foot square.
 
+<<<<<<< HEAD
+=======
 9 8
 
+>>>>>>> develop
 <!-- image -->
 
 <!-- image -->
@@ -179,20 +213,32 @@ The area is measured in square feet per roof facet. The values have been rounded
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 9 8
 
+>>>>>>> develop
 ## Imagery
 
 These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
+<<<<<<< HEAD
+## NORTH SIDE
+
+<!-- image -->
+
+<!-- image -->
+
+=======
 <!-- image -->
 
 <!-- image -->
 
 ## NORTH SIDE
 
+>>>>>>> develop
 ## SOUTH SIDE
 
 ## EAST SIDE
@@ -205,8 +251,11 @@ These are images of the property taken from multiple angles.
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 August 23, 2025 Property Address: 2325 New Holland Cir, Murfreesboro, TN 37128 Report: 65312876
 
+>>>>>>> develop
 <!-- image -->
 
 '
@@ -215,6 +264,32 @@ August 23, 2025 Property Address: 2325 New Holland Cir, Murfreesboro, TN 37128 R
 
 ## All Structures
 
+<<<<<<< HEAD
+| Areas per Pitch   | Areas per Pitch   | Areas per Pitch   | Areas per Pitch   | Areas per Pitch   |
+|-------------------|-------------------|-------------------|-------------------|-------------------|
+| Roof Pitches      | 4/12              | 6/12              | 8/12              | 12/12             |
+| Area (sq ft)      | 52.5              | 110               | 965.7             | 146.3             |
+| %of Roof          | 4.1%              | 8.6%              | 75.8%             | 11.5%             |
+
+The table above lists each pitch on this roof and the total area and percent of the roof with that pitch.
+
+## Structure Complexity
+
+Simple
+
+## Waste Calculation
+
+NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.
+
+| Waste%    |   0% |     3% |   8% |    11% |    13% |    15% |    18% |   23% |    28% |
+|-----------|------|--------|------|--------|--------|--------|--------|-------|--------|
+| Area (m²) |  118 | 121    |  127 | 131    | 133    | 136    | 139    |   145 | 151    |
+| Squares * |   13 |  13.33 |   14 |  14.33 |  14.66 |  14.66 |  15.33 |    16 |  16.33 |
+
+Measured
+
+*Squares are rounded up to the 1/3 of a square
+=======
 ## Areas per Pitch
 
 | Roof Pitches   | 4/12   | 6/12   | 8/12   | 12/12   |
@@ -237,6 +312,7 @@ Measured
 Suggested
 
 - *Squares are rounded up to the 1/3 of a square
+>>>>>>> develop
 
 Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste factor is intended to serve as a guide-actual waste percentages may differ based upon several variables that EagleView does not control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given replacement or repair work.
 
@@ -244,10 +320,13 @@ Additional materials needed for ridge, hip, and starter lengths are not included
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 Total Roof Facets = 8
 
 Total Roof Obstructions = 6
 
+>>>>>>> develop
 ## Lengths, Areas and Pitches
 
 Ridges = 46' 1" (3 Ridges)
@@ -260,9 +339,13 @@ Rakes† = 114' (12 Rakes)
 
 Eaves/Starters‡ = 98' 7" (8 Eaves)
 
+<<<<<<< HEAD
+Drip Edge (Eaves + Rakes) = 212' 7" (20 Lengths)
+=======
 Drip Edge (Eaves + Rakes) = 212' 7" (20
 
 Lengths)
+>>>>>>> develop
 
 Parapet Walls = 0' (0 Lengths)
 
@@ -278,6 +361,17 @@ Total Roof Obstructions Perimeter = 24' Predominant Pitch = 8/12
 
 Total Area (All Pitches) = 1,274.6 sq ft
 
+<<<<<<< HEAD
+† Rakes are defined as roof edges that are sloped (not level).
+
+‡ Eaves are defined as edges that are not sloped and level
+
+August 23, 2025 Property Address: 2325 New Holland Cir, Murfreesboro, TN 37128 Report: 65312876
+
+## Property Location
+
+Longitude = -86.4108570 Latitude = 35.8006010
+=======
 - † Rakes are defined as roof edges that are sloped (not level).
 - ‡ Eaves are defined as edges that are not sloped and level
 
@@ -286,6 +380,7 @@ Total Area (All Pitches) = 1,274.6 sq ft
 Longitude = -86.4108570
 
 Latitude = 35.8006010
+>>>>>>> develop
 
 ## Notes
 
@@ -293,14 +388,34 @@ This was ordered as a residential property. There were no changes to the structu
 
 <!-- image -->
 
+<<<<<<< HEAD
+Suggested
+
+Total Roof Facets = 8
+
+Total Roof Obstructions = 6
+
+Normal
+
+Complex
+
+=======
+>>>>>>> develop
 '
 
 <!-- image -->
 
+<<<<<<< HEAD
+## 2325 New Holland Cir, Murfreesboro, TN 37128
+
+## Legal Notice and Disclaimer
+
+=======
 ## Legal Notice and Disclaimer
 
 ## 2325 New Holland Cir, Murfreesboro, TN 37128
 
+>>>>>>> develop
 August 23, 2025
 
 Report: 65312876
@@ -315,8 +430,11 @@ EagleView Technologies makes no guarantees, representations or warranties of any
 
 Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report.
 
+<<<<<<< HEAD
+=======
 August 23, 2025 Property Address: 2325 New Holland Cir, Murfreesboro, TN 37128 Report: 65312876
 
+>>>>>>> develop
 <!-- image -->
 
 '

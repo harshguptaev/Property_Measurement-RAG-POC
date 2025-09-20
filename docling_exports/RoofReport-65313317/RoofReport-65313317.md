@@ -23,11 +23,15 @@ Report ID:
 
 65313317
 
+<<<<<<< HEAD
+PROPERTY 434 Kubota Dr Murfreesboro, TN 37128
+=======
 <!-- image -->
 
 ## PROPERTY
 
 434 Kubota Dr Murfreesboro, TN 37128
+>>>>>>> develop
 
 ## Property Address
 
@@ -93,6 +97,24 @@ Open in EagleView One™
 
 <!-- image -->
 
+<<<<<<< HEAD
+<!-- image -->
+
+## Lengths
+
+Ridges = 47' 6"
+
+Hips = 0' Valleys = 26' 3"
+
+Step flashing = 52' Parapets = 0' Other = 8' 9"
+
+<!-- image -->
+
+Rakes = 105' 3" Eaves = 101' 5" Flashing = 36' 11"
+
+<!-- image -->
+
+=======
 Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx
 
 <!-- image -->
@@ -117,6 +139,7 @@ Parapets = 0'
 
 Other = 8' 9"
 
+>>>>>>> develop
 1 8 g
 
 <!-- image -->
@@ -131,8 +154,11 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 1 8
 
+>>>>>>> develop
 <!-- image -->
 
 '
@@ -145,8 +171,11 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 1 8
 
+>>>>>>> develop
 <!-- image -->
 
 '
@@ -157,8 +186,11 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 8
 
+>>>>>>> develop
 <!-- image -->
 
 <!-- image -->
@@ -171,8 +203,11 @@ The azimuth is the orientation of the structure to true north. In this diagram r
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 8
 
+>>>>>>> develop
 <!-- image -->
 
 <!-- image -->
@@ -185,10 +220,13 @@ The area is measured in square feet per roof facet. The values have been rounded
 
 <!-- image -->
 
+<<<<<<< HEAD
+=======
 &lt; 1 8
 
 <!-- image -->
 
+>>>>>>> develop
 <!-- image -->
 
 '
@@ -211,14 +249,24 @@ These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
+<<<<<<< HEAD
+=======
 <!-- image -->
 
 <!-- image -->
 
+>>>>>>> develop
 ## NORTH SIDE
 
 <!-- image -->
 
+<<<<<<< HEAD
+<!-- image -->
+
+<!-- image -->
+
+=======
+>>>>>>> develop
 '
 
 ## SOUTH SIDE
@@ -233,8 +281,11 @@ These are images of the property taken from multiple angles.
 
 '
 
+<<<<<<< HEAD
+=======
 ## WEST SIDE
 
+>>>>>>> develop
 <!-- image -->
 
 <!-- image -->
@@ -245,6 +296,32 @@ These are images of the property taken from multiple angles.
 
 ## All Structures
 
+<<<<<<< HEAD
+| Areas per Pitch   | Areas per Pitch   | Areas per Pitch   | Areas per Pitch   | Areas per Pitch   |
+|-------------------|-------------------|-------------------|-------------------|-------------------|
+| Roof Pitches      | 4/12              | 6/12              | 8/12              | 12/12             |
+| Area (sq ft)      | 52.1              | 106.5             | 964.7             | 157               |
+| %of Roof          | 4.1%              | 8.3%              | 75.4%             | 12.3%             |
+
+The table above lists each pitch on this roof and the total area and percent of the roof with that pitch.
+
+## Structure Complexity
+
+Simple
+
+## Waste Calculation
+
+NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to Lengths, Areas, and Pitches section below.
+
+| Waste%    |   0% |     2% |   7% |    10% |    12% |    14% |   17% |    22% |    27% |
+|-----------|------|--------|------|--------|--------|--------|-------|--------|--------|
+| Area (m²) |  118 | 121    |  127 | 130    | 133    | 135    |   139 | 145    | 151    |
+| Squares * |   13 |  13.33 |   14 |  14.33 |  14.66 |  14.66 |    15 |  15.66 |  16.33 |
+
+Measured
+
+*Squares are rounded up to the 1/3 of a square
+=======
 ## Areas per Pitch
 
 | Roof Pitches   | 4/12   | 6/12   | 8/12   | 12/12   |
@@ -269,6 +346,7 @@ Measured
 Suggested
 
 - *Squares are rounded up to the 1/3 of a square
+>>>>>>> develop
 
 Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste factor is intended to serve as a guide-actual waste percentages may differ based upon several variables that EagleView does not control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given replacement or repair work.
 
@@ -276,6 +354,45 @@ Additional materials needed for ridge, hip, and starter lengths are not included
 
 Total Roof Facets = 8
 
+<<<<<<< HEAD
+Total Roof Obstructions = 6
+
+## Lengths, Areas and Pitches
+
+Ridges = 47' 6" (3 Ridges)
+
+Hips = 0' (0 Hips)
+
+Valleys = 26' 3" (5 Valleys)
+
+Rakes† = 105' 3" (11 Rakes)
+
+Eaves/Starters‡ = 101' 5" (8 Eaves)
+
+Drip Edge (Eaves + Rakes) = 206' 8" (19 Lengths)
+
+Parapet Walls = 0' (0 Lengths)
+
+Flashing = 36' 11" (8 Lengths)
+
+Step Flashing = 52' (6 Lengths)
+
+Total Roof Obstructions Area = 4.5 sq ft
+
+Total Roof Area Less Roof Obstructions =1,275.7 sq ft
+
+Total Roof Obstructions Perimeter = 20' Predominant Pitch = 8/12
+
+Total Area (All Pitches) = 1,280.2 sq ft
+
+† Rakes are defined as roof edges that are sloped (not level).
+
+‡ Eaves are defined as edges that are not sloped and level
+
+## Property Location
+
+Longitude = -86.4102330 Latitude = 35.8011480
+=======
 ## Lengths, Areas and Pitches
 
 Ridges = 47' 6" (3 Ridges) Hips = 0' (0 Hips) Valleys = 26' 3" (5 Valleys) Rakes† = 105' 3" (11 Rakes) Eaves/Starters‡ = 101' 5" (8 Eaves) Drip Edge (Eaves + Rakes) = 206' 8" (19 Lengths) Parapet Walls = 0' (0 Lengths) Flashing = 36' 11" (8 Lengths) Step Flashing = 52' (6 Lengths) Total Roof Obstructions Area = 4.5 sq ft Total Roof Area Less Roof Obstructions =1,275.7 sq ft Total Roof Obstructions Perimeter = 20'
@@ -294,6 +411,7 @@ Total Area (All Pitches) = 1,280.2 sq ft
 Longitude = -86.4102330
 
 Latitude = 35.8011480
+>>>>>>> develop
 
 ## Notes
 
@@ -301,14 +419,30 @@ This was ordered as a residential property. There were no changes to the structu
 
 <!-- image -->
 
+<<<<<<< HEAD
+Suggested
+
+Normal
+
+Complex
+
+=======
+>>>>>>> develop
 '
 
 <!-- image -->
 
+<<<<<<< HEAD
+434 Kubota Dr, Murfreesboro, TN 37128
+
+## Legal Notice and Disclaimer
+
+=======
 ## Legal Notice and Disclaimer
 
 ## 434 Kubota Dr, Murfreesboro, TN 37128
 
+>>>>>>> develop
 August 23, 2025
 
 Report: 65313317
@@ -323,8 +457,11 @@ EagleView Technologies makes no guarantees, representations or warranties of any
 
 Contractors agree to always conduct a preliminary site survey to verify Roof Report ordered.In the event of an error in a Report, your sole remedy will be a refund of the fees paid by you to obtain this Report.
 
+<<<<<<< HEAD
+=======
 August 23, 2025 Property Address: 434 Kubota Dr, Murfreesboro, TN 37128 Report: 65313317
 
+>>>>>>> develop
 <!-- image -->
 
 '

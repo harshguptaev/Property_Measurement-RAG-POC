@@ -1,3 +1,150 @@
+<<<<<<< HEAD
+[
+  {
+    "chunk_id": "65313315_chunk_1",
+    "section": "Report Header",
+    "type": "text",
+    "data": {
+      "report_id": "65313315",
+      "date": "August 23, 2025",
+      "property_address": "2332 New Holland Cir Murfreesboro, TN 37128"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_2",
+    "section": "Prepared For",
+    "type": "text",
+    "data": {
+      "name": "Prepared For",
+      "address": "Doug Durham 321 Billingsly Ct, Suite 13 Franklin,TN 37067, Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx, 100%",
+      "phone": "(615) 778-1440"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_3",
+    "section": "Lengths Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
+      "image_file": "extracted_images/report_65313315/Lengthsimage.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_4",
+    "section": "Pitch (Degrees) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in degrees for different facets",
+      "image_file": "extracted_images/report_65313315/Pitch_Degrees.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_5",
+    "section": "Pitch (on 12) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in x/12 format for different facets",
+      "image_file": "extracted_images/report_65313315/Pitch_on_12.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_6",
+    "section": "Rafters Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing rafter lengths for different roof sections",
+      "image_file": "extracted_images/report_65313315/Rafters.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_7",
+    "section": "Azimuth Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof facet orientations in degrees relative to true north",
+      "image_file": "extracted_images/report_65313315/Azimuth.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_8",
+    "section": "Area Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof area measurements for different facets in square feet",
+      "image_file": "extracted_images/report_65313315/Area.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_9",
+    "section": "Roof Obstructions Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing locations of roof obstructions",
+      "image_file": "extracted_images/report_65313315/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_10",
+    "section": "Property Imagery",
+    "type": "image",
+    "data": {
+      "description": "Aerial images of the property from top, north, south, east, and west views",
+      "images": [
+        "extracted_images/report_65313315/Top_View.png",
+        "extracted_images/report_65313315/North_Side.png",
+        "extracted_images/report_65313315/South_Side.png",
+        "extracted_images/report_65313315/East_Side.png",
+        "extracted_images/report_65313315/West_Side.png"
+      ]
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_11",
+    "section": "Roofing Report Summary",
+    "type": "table",
+    "data": {}
+  },
+  {
+    "chunk_id": "65313315_chunk_12",
+    "section": "Property Details",
+    "type": "text",
+    "data": {
+      "total_roof_facets": "7",
+      "total_roof_obstructions": "7",
+      "ridges": "37' 3\" Hips",
+      "hips": "0'",
+      "valleys": "25' 9\"",
+      "rakes": "125' 2\"",
+      "eaves_starters": "48' 10\" (6 Eaves)",
+      "drip_edge": "174' (16 Lengths)",
+      "parapet_walls": "0' (0 Lengths)",
+      "flashing": "5' 9\"",
+      "step_flashing": "43'",
+      "total_roof_obstructions_area": "4.8 sq",
+      "total_roof_obstructions_perimeter": "22' Predominant Pitch",
+      "predominant_pitch": "8/12"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_13",
+    "section": "Longitude",
+    "type": "text",
+    "data": {
+      "longitude": "-86.4103630",
+      "coordinate_type": "longitude"
+    }
+  },
+  {
+    "chunk_id": "65313315_chunk_14",
+    "section": "Latitude",
+    "type": "text",
+    "data": {
+      "latitude": "35.8007610",
+      "coordinate_type": "latitude"
+    }
+  }
+]
+=======
 {
   "text": [
     {
@@ -241,3 +388,4 @@
     }
   ]
 }
+>>>>>>> develop

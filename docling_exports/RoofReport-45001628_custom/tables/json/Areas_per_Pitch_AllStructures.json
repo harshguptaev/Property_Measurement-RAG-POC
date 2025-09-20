@@ -1,0 +1,27 @@
+[
+    {
+        "waste": "1",
+        "area": "1.7",
+        "squares": "4.8°"
+    },
+    {
+        "waste": "2",
+        "area": "1.9",
+        "squares": "9.5°"
+    },
+    {
+        "waste": "3",
+        "area": "0",
+        "squares": "14°"
+    },
+    {
+        "waste": "4",
+        "area": "20.2",
+        "squares": "22.6°"
+    },
+    {
+        "waste": "5",
+        "area": "0.3",
+        "squares": "26.6°"
+    }
+]

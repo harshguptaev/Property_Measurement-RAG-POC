@@ -1,0 +1,171 @@
+[
+  {
+    "chunk_id": "45001628_custom_chunk_1",
+    "section": "Report Header",
+    "type": "text",
+    "data": {
+      "report_id": "45001628_custom",
+      "date": "September 2, 2025",
+      "property_address": "45001628 PROPERTY 15 Fort Hill Rd Bristol, RI 02809"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_2",
+    "section": "Measurements",
+    "type": "text",
+    "data": {
+      "area": "1 2 1 8 8",
+      "roof_facets": "In this 3D model, non-selected facets are shown with a checkerboard pattern to indicate their data is not included in measurement data.",
+      "predominant_pitch": "Contents",
+      "number_of_stories": "Lengths ................................................................................. 1",
+      "ridges_hips": "Pitch (Degrees)...................................................................... 2",
+      "valleys": "Pitch (on 12) .......................................................................... 3",
+      "rakes": "Rafters ................................................................................... 4",
+      "eaves": "Azimuth .................................................................................. 5",
+      "estimated_attic": "Area ....................................................................................... 6",
+      "roof_penetrations": "Roof Penetrations .................................................................. 7",
+      "roof_penetrations_perimeter": "Imagery .................................................................................. 8",
+      "roof_penetrations_area": "Roofing Report Summary ..................................................... 11"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_3",
+    "section": "Prepared For",
+    "type": "text",
+    "data": {
+      "name": "Prepared For",
+      "address": "Wilson 1234 Test 145 30th Ave Seattle,WA 98122, This report is user generated from select data.It does not represent all measurements on the property., Satisfact",
+      "phone": "(999) 999-9999"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_4",
+    "section": "Pitch (Degrees) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in degrees for different facets",
+      "image_file": "extracted_images/report_45001628_custom/Pitch_Degrees.png"
+    },
+    "image_placeholder": "[IMAGE_PITCH_DEGREES_DIAGRAM]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_5",
+    "section": "Pitch (on 12) Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch in x/12 format for different facets",
+      "image_file": "extracted_images/report_45001628_custom/Pitch_on_12.png"
+    },
+    "image_placeholder": "[IMAGE_PITCH_ON_12_DIAGRAM]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_6",
+    "section": "Rafters Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing rafter lengths for different roof sections",
+      "image_file": "extracted_images/report_45001628_custom/Rafters.png"
+    },
+    "image_placeholder": "[IMAGE_RAFTERS_DIAGRAM]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_7",
+    "section": "Azimuth Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof facet orientations in degrees relative to true north",
+      "image_file": "extracted_images/report_45001628_custom/Azimuth.png"
+    },
+    "image_placeholder": "[IMAGE_AZIMUTH_DIAGRAM]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_8",
+    "section": "Area Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof area measurements for different facets in square feet",
+      "image_file": "extracted_images/report_45001628_custom/Area.png"
+    },
+    "image_placeholder": "[IMAGE_AREA_DIAGRAM]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_9",
+    "section": "Roof Obstructions Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing locations of roof obstructions",
+      "image_file": "extracted_images/report_45001628_custom/Roof_Penetrations.png"
+    },
+    "image_placeholder": "[IMAGE_ROOF_OBSTRUCTIONS_DIAGRAM]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_10",
+    "section": "Property Imagery",
+    "type": "image",
+    "data": {
+      "description": "Aerial images of the property from top, north, south, east, and west views",
+      "images": [
+        "extracted_images/report_45001628_custom/Top_View.png",
+        "extracted_images/report_45001628_custom/North_Side.png",
+        "extracted_images/report_45001628_custom/South_Side.png",
+        "extracted_images/report_45001628_custom/East_Side.png",
+        "extracted_images/report_45001628_custom/West_Side.png"
+      ]
+    },
+    "image_placeholder": "[IMAGE_PROPERTY_AERIAL_VIEWS]"
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_11",
+    "section": "Roofing Report Summary",
+    "type": "table",
+    "data": {},
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_12",
+    "section": "Property Details",
+    "type": "text",
+    "data": {
+      "total_roof_facets": "23",
+      "total_roof_obstructions": "4",
+      "ridges": "108'",
+      "hips": "16'",
+      "valleys": "52'",
+      "rakes": "161'",
+      "eaves_starters": "168' (20 Eaves)",
+      "drip_edge": "302' (34 Lengths)",
+      "parapet_walls": "0' (0 Lengths)",
+      "flashing": "33'",
+      "step_flashing": "66'",
+      "total_roof_obstructions_area": "0.1 SQ",
+      "total_roof_area_less_obstructions": "22.1 SQ",
+      "total_roof_obstructions_perimeter": "19' Predominant Pitch",
+      "predominant_pitch": "22",
+      "total_area_all_pitches": "22.2 SQ"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_13",
+    "section": "Longitude",
+    "type": "text",
+    "data": {
+      "longitude": "-71.2812050",
+      "coordinate_type": "longitude"
+    },
+    "image_placeholder": ""
+  },
+  {
+    "chunk_id": "45001628_custom_chunk_14",
+    "section": "Latitude",
+    "type": "text",
+    "data": {
+      "latitude": "41.6840180",
+      "coordinate_type": "latitude"
+    },
+    "image_placeholder": ""
+  }
+]
