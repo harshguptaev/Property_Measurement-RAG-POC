@@ -108,7 +108,9 @@ def initialize_rag_system():
         vector_store_manager = VectorStoreManager(
             store_type=vector_config["store_type"],
             collection_name=vector_config["collection_name"],
-            embeddings=embeddings
+            embeddings=embeddings,
+            milvus_uri=vector_config.get("milvus_uri"),
+            embedding_dim=vector_config.get("embedding_dim", 1536)
         )
         
         # Check if vector store has documents

@@ -60,7 +60,9 @@ class ConfigLoader:
                 "vector_store_type": "faiss",
                 "collection_name": "property_documents",
                 "chunk_size": 1000,
-                "chunk_overlap": 200
+                "chunk_overlap": 200,
+                "milvus_uri": "./milvus_rag.db",
+                "embedding_dim": 1536
             },
             "retrieval": {
                 "k": 10,
@@ -150,7 +152,9 @@ class ConfigLoader:
             "store_type": self.get("database", "vector_store_type"),
             "collection_name": self.get("database", "collection_name"),
             "chunk_size": self.get("database", "chunk_size"),
-            "chunk_overlap": self.get("database", "chunk_overlap")
+            "chunk_overlap": self.get("database", "chunk_overlap"),
+            "milvus_uri": self.get("database", "milvus_uri"),
+            "embedding_dim": self.get("database", "embedding_dim")
         }
     
     def get_retrieval_config(self) -> Dict[str, Any]:

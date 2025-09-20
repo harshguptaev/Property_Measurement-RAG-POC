@@ -1,12 +1,13 @@
 """
 Vector store operations and management for storing and retrieving document embeddings.
-Supports FAISS and Chroma vector stores.
+Supports FAISS, Chroma, and Milvus vector stores.
 """
 import os
 import pickle
 import logging
 from typing import Any, Dict, List, Optional
 from pathlib import Path
+import uuid
 
 from langchain_community.vectorstores import FAISS
 from langchain.vectorstores.base import VectorStore
@@ -14,6 +15,13 @@ from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_text_splitters.html import HTMLSemanticPreservingSplitter
 from langchain.embeddings.base import Embeddings
+
+try:
+    from pymilvus import MilvusClient
+    MILVUS_AVAILABLE = True
+except ImportError:
+    MILVUS_AVAILABLE = False
+    MilvusClient = None
 
 
 class VectorStoreManager:
@@ -27,16 +35,20 @@ class VectorStoreManager:
         collection_name: str = "documents",
         persist_directory: Optional[str] = None,
         embeddings: Optional[Embeddings] = None,
+        milvus_uri: Optional[str] = None,
+        embedding_dim: int = 1024,  # Default for Titan embeddings
         **kwargs
     ):
         """
         Initialize vector store manager.
         
         Args:
-            store_type: Type of vector store ('faiss' or 'chroma')
+            store_type: Type of vector store ('faiss', 'chroma', or 'milvus')
             collection_name: Name of the collection
             persist_directory: Directory to persist the vector store
             embeddings: Embeddings model to use
+            milvus_uri: URI for Milvus connection (for milvus store_type)
+            embedding_dim: Dimension of embeddings (required for Milvus)
             **kwargs: Additional arguments for vector store
         """
         self.store_type = store_type.lower()
@@ -45,6 +57,11 @@ class VectorStoreManager:
         self.embeddings = embeddings
         self.vector_store: Optional[VectorStore] = None
         self.kwargs = kwargs
+        
+        # Milvus-specific properties
+        self.milvus_uri = milvus_uri or "./milvus_rag.db"
+        self.embedding_dim = embedding_dim
+        self.milvus_client = None
         
         # Create persist directory if it doesn't exist
         Path(self.persist_directory).mkdir(parents=True, exist_ok=True)
@@ -59,6 +76,8 @@ class VectorStoreManager:
         try:
             if self.store_type == "faiss":
                 self._setup_faiss()
+            elif self.store_type == "milvus":
+                self._setup_milvus()
             else:
                 raise ValueError(f"Unsupported vector store type: {self.store_type}")
                 
@@ -90,6 +109,28 @@ class VectorStoreManager:
             # Will be created when documents are added
             self.vector_store = None
     
+    def _setup_milvus(self):
+        """Setup Milvus vector store."""
+        if not MILVUS_AVAILABLE:
+            raise ValueError("pymilvus is not installed. Install it with: pip install pymilvus")
+        
+        try:
+            self.milvus_client = MilvusClient(uri=self.milvus_uri)
+            
+            # Check if collection exists
+            if self.milvus_client.has_collection(self.collection_name):
+                logging.info(f"Using existing Milvus collection: {self.collection_name}")
+                # Collection exists, we can use it
+                self.vector_store = "milvus_initialized"  # Placeholder to indicate initialized
+            else:
+                # Collection will be created when documents are added
+                logging.info(f"Milvus collection {self.collection_name} will be created when documents are added")
+                self.vector_store = None
+                
+        except Exception as e:
+            logging.error(f"Error connecting to Milvus: {e}")
+            raise
+    
     def add_documents(self, documents: List[Document], **kwargs) -> List[str]:
         """
         Add documents to the vector store.
@@ -108,6 +149,8 @@ class VectorStoreManager:
         try:
             if self.store_type == "faiss":
                 return self._add_documents_faiss(documents, **kwargs)
+            elif self.store_type == "milvus":
+                return self._add_documents_milvus(documents, **kwargs)
             else:
                 raise ValueError(f"Unsupported vector store type: {self.store_type}")
                 
@@ -130,6 +173,69 @@ class VectorStoreManager:
         # Return dummy IDs (FAISS doesn't return actual IDs)
         return [f"doc_{i}" for i in range(len(documents))]
     
+    def _add_documents_milvus(self, documents: List[Document], **kwargs) -> List[str]:
+        """Add documents to Milvus vector store."""
+        if self.milvus_client is None:
+            raise ValueError("Milvus client not initialized")
+        
+        # Create collection if it doesn't exist
+        if not self.milvus_client.has_collection(self.collection_name):
+            self.milvus_client.create_collection(
+                collection_name=self.collection_name,
+                dimension=self.embedding_dim,
+                metric_type="COSINE",
+                consistency_level="Bounded",
+            )
+            logging.info(f"Created Milvus collection: {self.collection_name}")
+        
+        # Prepare data for insertion
+        records = []
+        doc_ids = []
+        
+        # Get current collection count to generate integer IDs
+        try:
+            if self.milvus_client.has_collection(self.collection_name):
+                collection_stats = self.milvus_client.get_collection_stats(self.collection_name)
+                start_id = collection_stats.get('row_count', 0)
+            else:
+                start_id = 0
+        except:
+            start_id = 0
+        
+        for i, doc in enumerate(documents):
+            # Generate embeddings for the document
+            embedding = self.embeddings.embed_query(doc.page_content)
+            if len(embedding) != self.embedding_dim:
+                logging.warning(
+                    f"Embedding dimension mismatch: got {len(embedding)}, expected {self.embedding_dim}"
+                )
+                # Try to adjust the embedding dimension
+                if len(embedding) > self.embedding_dim:
+                    embedding = embedding[:self.embedding_dim]
+                else:
+                    # Pad with zeros if too short
+                    embedding = embedding + [0.0] * (self.embedding_dim - len(embedding))
+            
+            doc_id = start_id + i + 1  # Use integer ID
+            doc_ids.append(str(doc_id))  # Return string for compatibility
+            
+            record = {
+                "id": doc_id,  # Now using integer ID
+                "vector": embedding,
+                "text": doc.page_content,
+                "metadata": str(doc.metadata)  # Convert metadata to string for storage
+            }
+            records.append(record)
+        
+        # Insert documents into Milvus
+        self.milvus_client.insert(collection_name=self.collection_name, data=records)
+        logging.info(f"Added {len(records)} documents to Milvus collection: {self.collection_name}")
+        
+        # Update vector_store to indicate it's initialized
+        self.vector_store = "milvus_initialized"
+        
+        return doc_ids
+    
     def similarity_search(
         self,
         query: str,
@@ -149,6 +255,9 @@ class VectorStoreManager:
         Returns:
             List of similar documents
         """
+        if self.store_type == "milvus":
+            return self._similarity_search_milvus(query, k, score_threshold, **kwargs)
+        
         if self.vector_store is None:
             logging.warning("Vector store is empty")
             return []
@@ -184,6 +293,9 @@ class VectorStoreManager:
         Returns:
             List of (document, score) tuples
         """
+        if self.store_type == "milvus":
+            return self._similarity_search_with_score_milvus(query, k, **kwargs)
+        
         if self.vector_store is None:
             logging.warning("Vector store is empty")
             return []
@@ -194,8 +306,111 @@ class VectorStoreManager:
             logging.error(f"Error performing similarity search with score: {e}")
             raise
     
+    def _similarity_search_milvus(
+        self,
+        query: str,
+        k: int = 5,
+        score_threshold: Optional[float] = None,
+        **kwargs
+    ) -> List[Document]:
+        """Perform similarity search using Milvus."""
+        if self.milvus_client is None or not self.milvus_client.has_collection(self.collection_name):
+            logging.warning("Milvus collection not available")
+            return []
+        
+        try:
+            # Generate query embedding
+            query_embedding = self.embeddings.embed_query(query)
+            
+            # Perform search
+            results = self.milvus_client.search(
+                collection_name=self.collection_name,
+                data=[query_embedding],
+                limit=k,
+                output_fields=["text", "metadata"],
+                **kwargs
+            )
+            
+            documents = []
+            if results and results[0]:
+                for hit in results[0]:
+                    # Apply score threshold if specified
+                    if score_threshold is not None and hit.get("distance", 0) < score_threshold:
+                        continue
+                    
+                    # Parse metadata back from string
+                    metadata_str = hit.get("metadata", "{}")
+                    try:
+                        metadata = eval(metadata_str) if metadata_str != "{}" else {}
+                    except:
+                        metadata = {}
+                    
+                    doc = Document(
+                        page_content=hit.get("text", ""),
+                        metadata=metadata
+                    )
+                    documents.append(doc)
+            
+            return documents
+            
+        except Exception as e:
+            logging.error(f"Error performing Milvus similarity search: {e}")
+            return []
+    
+    def _similarity_search_with_score_milvus(
+        self,
+        query: str,
+        k: int = 5,
+        **kwargs
+    ) -> List[tuple]:
+        """Perform similarity search with scores using Milvus."""
+        if self.milvus_client is None or not self.milvus_client.has_collection(self.collection_name):
+            logging.warning("Milvus collection not available")
+            return []
+        
+        try:
+            # Generate query embedding
+            query_embedding = self.embeddings.embed_query(query)
+            
+            # Perform search
+            results = self.milvus_client.search(
+                collection_name=self.collection_name,
+                data=[query_embedding],
+                limit=k,
+                output_fields=["text", "metadata"],
+                **kwargs
+            )
+            
+            docs_and_scores = []
+            if results and results[0]:
+                for hit in results[0]:
+                    # Parse metadata back from string
+                    metadata_str = hit.get("metadata", "{}")
+                    try:
+                        metadata = eval(metadata_str) if metadata_str != "{}" else {}
+                    except:
+                        metadata = {}
+                    
+                    doc = Document(
+                        page_content=hit.get("text", ""),
+                        metadata=metadata
+                    )
+                    score = hit.get("distance", 0.0)
+                    docs_and_scores.append((doc, score))
+            
+            return docs_and_scores
+            
+        except Exception as e:
+            logging.error(f"Error performing Milvus similarity search with score: {e}")
+            return []
+    
     def save(self):
         """Save the vector store to disk."""
+        if self.store_type == "milvus":
+            # Milvus automatically persists data, no explicit save needed
+            logging.info("Milvus data is automatically persisted")
+            return
+        
         if self.vector_store is None:
             logging.warning("No vector store to save")
             return
@@ -216,6 +431,16 @@ class VectorStoreManager:
     # Added public utility methods used elsewhere in the codebase
     def get_count(self) -> int:
         """Return number of vectors/documents in the store."""
+        if self.store_type == "milvus":
+            if self.milvus_client is None or not self.milvus_client.has_collection(self.collection_name):
+                return 0
+            try:
+                stats = self.milvus_client.get_collection_stats(self.collection_name)
+                return stats.get("row_count", 0)
+            except Exception as e:
+                logging.warning(f"Error getting Milvus collection stats: {e}")
+                return 0
+        
         if self.vector_store is None:
             return 0
         try:
@@ -231,12 +456,24 @@ class VectorStoreManager:
             'collection_name': self.collection_name,
             'persist_directory': self.persist_directory,
             'count': self.get_count(),
-            'initialized': self.vector_store is not None
+            'initialized': (
+                self.vector_store is not None if self.store_type == "faiss"
+                else self.milvus_client is not None if self.store_type == "milvus"
+                else False
+            )
         }
 
     def delete_collection(self):
-        """Delete the persisted collection (FAISS files)."""
-        if self.store_type == 'faiss':
+        """Delete the persisted collection."""
+        if self.store_type == 'milvus':
+            try:
+                if self.milvus_client and self.milvus_client.has_collection(self.collection_name):
+                    self.milvus_client.drop_collection(self.collection_name)
+                    logging.info(f"Dropped Milvus collection: {self.collection_name}")
+                self.vector_store = None
+            except Exception as e:
+                logging.error(f"Error deleting Milvus collection: {e}")
+        elif self.store_type == 'faiss':
             try:
                 faiss_index_path = os.path.join(self.persist_directory, f"{self.collection_name}.faiss")
                 faiss_pkl_path = os.path.join(self.persist_directory, f"{self.collection_name}.pkl")
@@ -244,9 +481,11 @@ class VectorStoreManager:
                     if os.path.exists(p):
                         os.remove(p)
                         logging.info(f"Removed {p}")
+                self.vector_store = None
             except Exception as e:
                 logging.error(f"Error deleting FAISS collection: {e}")
-        self.vector_store = None
+        else:
+            logging.warning(f"Delete operation not implemented for store type: {self.store_type}")
 
 def create_text_splitter(chunk_size: int = 1000, chunk_overlap: int = 200) -> RecursiveCharacterTextSplitter:
     """

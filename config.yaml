@@ -22,10 +22,12 @@ aws:
 
 # Database Configuration
 database:
-  vector_store_type: "faiss"  # Options: faiss, chroma
+  vector_store_type: "milvus"  # Options: faiss, chroma, milvus
   collection_name: "property_documents"
   chunk_size: 1000
   chunk_overlap: 200
+  milvus_uri: "./milvus_rag.db"  # Milvus Lite database file
+  embedding_dim: 1024  # Dimension for text embeddings (Titan Image v1)
 
 # Retrieval Configuration
 retrieval:
