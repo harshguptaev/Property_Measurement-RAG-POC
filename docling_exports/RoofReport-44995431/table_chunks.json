@@ -4,84 +4,54 @@
       "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
       "raw_text": [
         {
-          "Roof Pitches": "1/12",
-          "Area (SQ)": "1",
-          "%of Roof": "5.3%"
+          "Roof Pitches": "0%",
+          "Area (m²)": "172",
+          "%of Roof": "18.66"
         },
         {
-          "Roof Pitches": "3/12",
-          "Area (SQ)": "9.4",
-          "%of Roof": "48.1%"
+          "Roof Pitches": "5%",
+          "Area (m²)": "180",
+          "%of Roof": "19.66"
         },
         {
-          "Roof Pitches": "5/12",
-          "Area (SQ)": "9.1",
-          "%of Roof": "46.6%"
+          "Roof Pitches": "8%",
+          "Area (m²)": "185",
+          "%of Roof": "20.33"
+        },
+        {
+          "Roof Pitches": "10%",
+          "Area (m²)": "189",
+          "%of Roof": "20.66"
+        },
+        {
+          "Roof Pitches": "12%",
+          "Area (m²)": "192",
+          "%of Roof": "21.00"
+        },
+        {
+          "Roof Pitches": "15%",
+          "Area (m²)": "197",
+          "%of Roof": "21.33"
+        },
+        {
+          "Roof Pitches": "20%",
+          "Area (m²)": "206",
+          "%of Roof": "22.33"
+        },
+        {
+          "Roof Pitches": "25%",
+          "Area (m²)": "215",
+          "%of Roof": "23.33"
+        },
+        {
+          "Roof Pitches": "30%",
+          "Area (m²)": "223",
+          "%of Roof": "24.33"
         }
       ],
       "id": "chunk1",
       "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-44995431/tables/images/Areas_per_Pitch_Structure_1.png"
-    },
-    {
-      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
-      "raw_text": [
-        {
-          "waste": "0%",
-          "area": "172",
-          "squares": "18.66"
-        },
-        {
-          "waste": "5%",
-          "area": "180",
-          "squares": "19.66"
-        },
-        {
-          "waste": "8%",
-          "area": "185",
-          "squares": "20.33"
-        },
-        {
-          "waste": "10%",
-          "area": "189",
-          "squares": "20.66"
-        },
-        {
-          "waste": "12%",
-          "area": "192",
-          "squares": "21.00"
-        },
-        {
-          "waste": "15%",
-          "area": "197",
-          "squares": "21.33"
-        },
-        {
-          "waste": "20%",
-          "area": "206",
-          "squares": "22.33"
-        },
-        {
-          "waste": "25%",
-          "area": "215",
-          "squares": "23.33"
-        },
-        {
-          "waste": "30%",
-          "area": "223",
-          "squares": "24.33"
-        }
-      ],
-      "id": "chunk2",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-44995431/tables/images/Waste_Calculation_1.png"
-    },
-    {
-      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
-      "raw_text": "Dummy Text for now.",
-      "id": "chunk3",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-44995431/tables/images/Structure_Complexity_1.png"
+      "src_image_path": ""
     }
   ]
 }

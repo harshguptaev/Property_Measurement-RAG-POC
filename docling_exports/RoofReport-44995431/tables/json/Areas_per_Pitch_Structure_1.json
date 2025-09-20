@@ -1,47 +1,47 @@
 [
     {
-        "Waste%": "0%",
+        "Roof Pitches": "0%",
         "Area (m²)": "172",
-        "Squares *": "18.66"
+        "%of Roof": "18.66"
     },
     {
-        "Waste%": "5%",
+        "Roof Pitches": "5%",
         "Area (m²)": "180",
-        "Squares *": "19.66"
+        "%of Roof": "19.66"
     },
     {
-        "Waste%": "8%",
+        "Roof Pitches": "8%",
         "Area (m²)": "185",
-        "Squares *": "20.33"
+        "%of Roof": "20.33"
     },
     {
-        "Waste%": "10%",
+        "Roof Pitches": "10%",
         "Area (m²)": "189",
-        "Squares *": "20.66"
+        "%of Roof": "20.66"
     },
     {
-        "Waste%": "12%",
+        "Roof Pitches": "12%",
         "Area (m²)": "192",
-        "Squares *": "21.00"
+        "%of Roof": "21.00"
     },
     {
-        "Waste%": "15%",
+        "Roof Pitches": "15%",
         "Area (m²)": "197",
-        "Squares *": "21.33"
+        "%of Roof": "21.33"
     },
     {
-        "Waste%": "20%",
+        "Roof Pitches": "20%",
         "Area (m²)": "206",
-        "Squares *": "22.33"
+        "%of Roof": "22.33"
     },
     {
-        "Waste%": "25%",
+        "Roof Pitches": "25%",
         "Area (m²)": "215",
-        "Squares *": "23.33"
+        "%of Roof": "23.33"
     },
     {
-        "Waste%": "30%",
+        "Roof Pitches": "30%",
         "Area (m²)": "223",
-        "Squares *": "24.33"
+        "%of Roof": "24.33"
     }
 ]

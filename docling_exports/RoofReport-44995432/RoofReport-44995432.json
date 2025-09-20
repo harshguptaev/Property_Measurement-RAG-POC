@@ -1,6 +1,6 @@
 {
   "schema_name": "DoclingDocument",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "name": "RoofReport-44995432",
   "origin": {
     "mimetype": "application/pdf",
@@ -6851,9 +6851,9 @@
           "page_no": 1,
           "bbox": {
             "l": 67.87844848632812,
-            "t": 787.837028503418,
+            "t": 787.8370399475098,
             "r": 212.1673583984375,
-            "b": 747.5848083496094,
+            "b": 747.5847930908203,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -6880,9 +6880,9 @@
         {
           "page_no": 1,
           "bbox": {
-            "l": 57.27391815185547,
+            "l": 57.27389144897461,
             "t": 690.2680816650391,
-            "r": 223.68878173828125,
+            "r": 223.6887664794922,
             "b": 506.69329833984375,
             "coord_origin": "BOTTOMLEFT"
           },
@@ -7026,10 +7026,10 @@
         {
           "page_no": 2,
           "bbox": {
-            "l": 122.55921936035156,
-            "t": 718.2541809082031,
+            "l": 122.55923461914062,
+            "t": 718.2542266845703,
             "r": 432.7957458496094,
-            "b": 372.3554992675781,
+            "b": 372.35552978515625,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7134,9 +7134,9 @@
           "page_no": 3,
           "bbox": {
             "l": 121.99286651611328,
-            "t": 742.490852355957,
+            "t": 742.4908752441406,
             "r": 432.92840576171875,
-            "b": 396.67095947265625,
+            "b": 396.6708984375,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7227,10 +7227,10 @@
         {
           "page_no": 4,
           "bbox": {
-            "l": 121.91226959228516,
-            "t": 742.5737762451172,
+            "l": 121.9122543334961,
+            "t": 742.5737991333008,
             "r": 433.0346984863281,
-            "b": 396.5531005859375,
+            "b": 396.5530700683594,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7327,8 +7327,8 @@
         {
           "page_no": 5,
           "bbox": {
-            "l": 125.23482513427734,
-            "t": 703.9510650634766,
+            "l": 125.23480224609375,
+            "t": 703.9510345458984,
             "r": 518.6185302734375,
             "b": 306.93475341796875,
             "coord_origin": "BOTTOMLEFT"
@@ -7357,7 +7357,7 @@
         {
           "page_no": 5,
           "bbox": {
-            "l": 454.0984191894531,
+            "l": 454.098388671875,
             "t": 81.58831787109375,
             "r": 551.1376953125,
             "b": 66.7962646484375,
@@ -7403,9 +7403,9 @@
         {
           "page_no": 6,
           "bbox": {
-            "l": 121.97683715820312,
+            "l": 121.97681427001953,
             "t": 733.7189865112305,
-            "r": 433.1089782714844,
+            "r": 433.1090393066406,
             "b": 388.9068908691406,
             "coord_origin": "BOTTOMLEFT"
           },
@@ -7440,9 +7440,9 @@
         {
           "page_no": 6,
           "bbox": {
-            "l": 414.2264099121094,
+            "l": 414.2264404296875,
             "t": 363.1375732421875,
-            "r": 453.7176513671875,
+            "r": 453.71759033203125,
             "b": 322.587890625,
             "coord_origin": "BOTTOMLEFT"
           },
@@ -7501,9 +7501,9 @@
           "page_no": 7,
           "bbox": {
             "l": 121.95639038085938,
-            "t": 715.4826354980469,
+            "t": 715.4826583862305,
             "r": 432.9793701171875,
-            "b": 370.0242614746094,
+            "b": 370.0242004394531,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7591,7 +7591,7 @@
           "page_no": 8,
           "bbox": {
             "l": 121.86616516113281,
-            "t": 745.849853515625,
+            "t": 745.8498764038086,
             "r": 433.49005126953125,
             "b": 400.15228271484375,
             "coord_origin": "BOTTOMLEFT"
@@ -7690,9 +7690,9 @@
         {
           "page_no": 9,
           "bbox": {
-            "l": 139.0523681640625,
+            "l": 139.0524139404297,
             "t": 714.6364059448242,
-            "r": 411.94476318359375,
+            "r": 411.9447326660156,
             "b": 495.96539306640625,
             "coord_origin": "BOTTOMLEFT"
           },
@@ -7731,9 +7731,9 @@
           "page_no": 9,
           "bbox": {
             "l": 138.97198486328125,
-            "t": 444.4395446777344,
+            "t": 444.4395751953125,
             "r": 412.1452331542969,
-            "b": 225.296630859375,
+            "b": 225.29656982421875,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -7840,9 +7840,9 @@
         {
           "page_no": 10,
           "bbox": {
-            "l": 139.03965759277344,
+            "l": 139.0396270751953,
             "t": 512.2489929199219,
-            "r": 412.0113830566406,
+            "r": 412.0114440917969,
             "b": 293.2342529296875,
             "coord_origin": "BOTTOMLEFT"
           },
@@ -8027,10 +8027,10 @@
         {
           "page_no": 13,
           "bbox": {
-            "l": 24.76168441772461,
-            "t": 814.6616439819336,
+            "l": 24.761674880981445,
+            "t": 814.6616535186768,
             "r": 243.55841064453125,
-            "b": 790.1219100952148,
+            "b": 790.121898651123,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8057,9 +8057,9 @@
         {
           "page_no": 13,
           "bbox": {
-            "l": 454.12506103515625,
+            "l": 454.1250305175781,
             "t": 81.43896484375,
-            "r": 551.0521850585938,
+            "r": 551.0521240234375,
             "b": 66.82501220703125,
             "coord_origin": "BOTTOMLEFT"
           },
@@ -8124,7 +8124,8 @@
             "text": "Areas per Pitch",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8143,7 +8144,8 @@
             "text": "Roof Pitches",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8162,7 +8164,8 @@
             "text": "5/12",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8181,7 +8184,8 @@
             "text": "Area (SQ)",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8200,7 +8204,8 @@
             "text": "15.9",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8219,7 +8224,8 @@
             "text": "%of Roof",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8238,7 +8244,8 @@
             "text": "100%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           }
         ],
         "num_rows": 4,
@@ -8262,7 +8269,8 @@
               "text": "Areas per Pitch",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -8281,7 +8289,8 @@
               "text": "Areas per Pitch",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ],
           [
@@ -8302,7 +8311,8 @@
               "text": "Roof Pitches",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -8321,7 +8331,8 @@
               "text": "5/12",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ],
           [
@@ -8342,7 +8353,8 @@
               "text": "Area (SQ)",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -8361,7 +8373,8 @@
               "text": "15.9",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ],
           [
@@ -8382,7 +8395,8 @@
               "text": "%of Roof",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -8401,7 +8415,8 @@
               "text": "100%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ]
         ]
@@ -8420,10 +8435,10 @@
         {
           "page_no": 12,
           "bbox": {
-            "l": 53.86558532714844,
-            "t": 565.5361022949219,
-            "r": 540.1130981445312,
-            "b": 490.91070556640625,
+            "l": 53.865638732910156,
+            "t": 565.5360717773438,
+            "r": 540.113037109375,
+            "b": 490.91058349609375,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -8455,7 +8470,8 @@
             "text": "Waste%",
             "column_header": false,
             "row_header": true,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8474,7 +8490,8 @@
             "text": "0%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8493,7 +8510,8 @@
             "text": "5%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8512,7 +8530,8 @@
             "text": "10%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8531,7 +8550,8 @@
             "text": "15%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8550,7 +8570,8 @@
             "text": "18%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8569,7 +8590,8 @@
             "text": "20%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8588,7 +8610,8 @@
             "text": "22%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8607,7 +8630,8 @@
             "text": "25%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8626,7 +8650,8 @@
             "text": "30%",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8645,7 +8670,8 @@
             "text": "Area (m²)",
             "column_header": false,
             "row_header": true,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8664,7 +8690,8 @@
             "text": "147",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8683,7 +8710,8 @@
             "text": "154",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8702,7 +8730,8 @@
             "text": "162",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8721,7 +8750,8 @@
             "text": "169",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8740,7 +8770,8 @@
             "text": "174",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8759,7 +8790,8 @@
             "text": "177",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8778,7 +8810,8 @@
             "text": "180",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8797,7 +8830,8 @@
             "text": "184",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8816,7 +8850,8 @@
             "text": "191",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8835,7 +8870,8 @@
             "text": "Squares *",
             "column_header": false,
             "row_header": true,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8854,7 +8890,8 @@
             "text": "16.00",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8873,7 +8910,8 @@
             "text": "17.00",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8892,7 +8930,8 @@
             "text": "17.66",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8911,7 +8950,8 @@
             "text": "18.33",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8930,7 +8970,8 @@
             "text": "19.00",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8949,7 +8990,8 @@
             "text": "19.33",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8968,7 +9010,8 @@
             "text": "19.66",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -8987,7 +9030,8 @@
             "text": "20.00",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           },
           {
             "bbox": {
@@ -9006,7 +9050,8 @@
             "text": "20.66",
             "column_header": false,
             "row_header": false,
-            "row_section": false
+            "row_section": false,
+            "fillable": false
           }
         ],
         "num_rows": 3,
@@ -9030,7 +9075,8 @@
               "text": "Waste%",
               "column_header": false,
               "row_header": true,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9049,7 +9095,8 @@
               "text": "0%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9068,7 +9115,8 @@
               "text": "5%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9087,7 +9135,8 @@
               "text": "10%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9106,7 +9155,8 @@
               "text": "15%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9125,7 +9175,8 @@
               "text": "18%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9144,7 +9195,8 @@
               "text": "20%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9163,7 +9215,8 @@
               "text": "22%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9182,7 +9235,8 @@
               "text": "25%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9201,7 +9255,8 @@
               "text": "30%",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ],
           [
@@ -9222,7 +9277,8 @@
               "text": "Area (m²)",
               "column_header": false,
               "row_header": true,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9241,7 +9297,8 @@
               "text": "147",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9260,7 +9317,8 @@
               "text": "154",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9279,7 +9337,8 @@
               "text": "162",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9298,7 +9357,8 @@
               "text": "169",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9317,7 +9377,8 @@
               "text": "174",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9336,7 +9397,8 @@
               "text": "177",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9355,7 +9417,8 @@
               "text": "180",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9374,7 +9437,8 @@
               "text": "184",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9393,7 +9457,8 @@
               "text": "191",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ],
           [
@@ -9414,7 +9479,8 @@
               "text": "Squares *",
               "column_header": false,
               "row_header": true,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9433,7 +9499,8 @@
               "text": "16.00",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9452,7 +9519,8 @@
               "text": "17.00",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9471,7 +9539,8 @@
               "text": "17.66",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9490,7 +9559,8 @@
               "text": "18.33",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9509,7 +9579,8 @@
               "text": "19.00",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9528,7 +9599,8 @@
               "text": "19.33",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9547,7 +9619,8 @@
               "text": "19.66",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9566,7 +9639,8 @@
               "text": "20.00",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             },
             {
               "bbox": {
@@ -9585,7 +9659,8 @@
               "text": "20.66",
               "column_header": false,
               "row_header": false,
-              "row_section": false
+              "row_section": false,
+              "fillable": false
             }
           ]
         ]

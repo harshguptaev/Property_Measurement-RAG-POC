@@ -7,7 +7,7 @@
       "data": {
         "report_id": "66953450",
         "date": "August 23, 2025",
-        "property_address": "830 Forestwalk Dr Suwanee, GA 30024"
+        "property_address": "66953450 PROPERTY 830 Forestwalk Dr Suwanee, GA 30024"
       }
     },
     {
@@ -32,7 +32,7 @@
       "type": "text",
       "data": {
         "name": "Prepared For",
-        "address": "Jake Schmidt Roofing 4625 Three Chimneys Lane Cumming,GA 30041, 1009, Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx",
+        "address": "Jake Schmidt Roofing 4625 Three Chimneys Lane Cumming,GA 30041, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx",
         "phone": "(678) 446-4710"
       }
     },
@@ -127,17 +127,17 @@
       "data": {
         "total_roof_facets": "31",
         "total_roof_obstructions": "6",
-        "ridges": "81' 10\" Hips",
+        "ridges": "81' 10\"",
         "hips": "194' 3\"",
         "valleys": "145' 7\"",
         "rakes": "127' 9\"",
-        "eaves_starters": "236' 7\" (34 Eaves) Drip Edge (Eaves",
-        "drip_edge": "364' 5\" (45 Lengths) Parapet Walls",
-        "parapet_walls": "0' (0 Lengths) Flashing",
+        "eaves_starters": "236' 7\" (34 Eaves)",
+        "drip_edge": "364' 5\" (45 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
         "flashing": "49' 11\"",
-        "step_flashing": "75' 10\"",
+        "step_flashing": "75' 10\" Parapets",
         "total_roof_obstructions_area": "28.3 sq",
-        "total_roof_obstructions_perimeter": "47' 8\"",
+        "total_roof_obstructions_perimeter": "47' 8\" Predominant Pitch",
         "predominant_pitch": "12/12"
       }
     },
@@ -165,29 +165,49 @@
       "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
       "raw_text": [
         {
-          "Roof Pitches": "6/12",
-          "Area (sq ft)": "86.5",
-          "%of Roof": "2.7%"
+          "Roof Pitches": "0%",
+          "Area (m²)": "296",
+          "%of Roof": "32.00"
         },
         {
-          "Roof Pitches": "8/12",
-          "Area (sq ft)": "70",
-          "%of Roof": "2.2%"
+          "Roof Pitches": "8%",
+          "Area (m²)": "320",
+          "%of Roof": "34.66"
         },
         {
-          "Roof Pitches": "9/12",
-          "Area (sq ft)": "1459.8",
-          "%of Roof": "45.7%"
+          "Roof Pitches": "13%",
+          "Area (m²)": "335",
+          "%of Roof": "36.33"
         },
         {
-          "Roof Pitches": "12/12",
-          "Area (sq ft)": "1543.1",
-          "%of Roof": "48.3%"
+          "Roof Pitches": "18%",
+          "Area (m²)": "350",
+          "%of Roof": "38.00"
         },
         {
-          "Roof Pitches": "22/12",
-          "Area (sq ft)": "34.7",
-          "%of Roof": "1.1%"
+          "Roof Pitches": "21%",
+          "Area (m²)": "359",
+          "%of Roof": "38.66"
+        },
+        {
+          "Roof Pitches": "23%",
+          "Area (m²)": "364",
+          "%of Roof": "39.33"
+        },
+        {
+          "Roof Pitches": "25%",
+          "Area (m²)": "370",
+          "%of Roof": "40.00"
+        },
+        {
+          "Roof Pitches": "28%",
+          "Area (m²)": "379",
+          "%of Roof": "41.00"
+        },
+        {
+          "Roof Pitches": "33%",
+          "Area (m²)": "394",
+          "%of Roof": "42.66"
         }
       ],
       "id": "chunk1",

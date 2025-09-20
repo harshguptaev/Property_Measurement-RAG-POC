@@ -1,171 +1,3 @@
-<<<<<<< HEAD
-[
-  {
-    "chunk_id": "44995432_chunk_1",
-    "section": "Report Header",
-    "type": "text",
-    "data": {
-      "report_id": "44995432",
-      "date": "August 21, 2025",
-      "property_address": "44995432 PROPERTY 1014 Mohican Round Rock, TX 78665"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_2",
-    "section": "Measurements",
-    "type": "text",
-    "data": {
-      "area": "15.9 SQ",
-      "roof_facets": "6",
-      "predominant_pitch": "5/12",
-      "number_of_stories": "<=1",
-      "ridges_hips": "131' 3\"",
-      "valleys": "23' 2\"",
-      "rakes": "0'",
-      "eaves": "155' 11\"",
-      "estimated_attic": "0 SQ",
-      "roof_penetrations": "7",
-      "roof_penetrations_perimeter": "28'",
-      "roof_penetrations_area": "0.1 SQ"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_3",
-    "section": "Prepared For",
-    "type": "text",
-    "data": {
-      "name": "Prepared For",
-      "address": "Divya Devadas 10900 NE 4th St Suite 80123 Bellevue,WA 98004, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx",
-      "phone": "(855) 984-6590"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_4",
-    "section": "Lengths Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
-      "image_file": "extracted_images/report_44995432/Lengthsimage.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_5",
-    "section": "Pitch (Degrees) Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing roof pitch in degrees for different facets",
-      "image_file": "extracted_images/report_44995432/Pitch_Degrees.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_6",
-    "section": "Pitch (on 12) Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing roof pitch in x/12 format for different facets",
-      "image_file": "extracted_images/report_44995432/Pitch_on_12.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_7",
-    "section": "Rafters Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing rafter lengths for different roof sections",
-      "image_file": "extracted_images/report_44995432/Rafters.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_8",
-    "section": "Azimuth Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing roof facet orientations in degrees relative to true north",
-      "image_file": "extracted_images/report_44995432/Azimuth.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_9",
-    "section": "Area Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing roof area measurements for different facets in square feet",
-      "image_file": "extracted_images/report_44995432/Area.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_10",
-    "section": "Roof Obstructions Diagram",
-    "type": "image",
-    "data": {
-      "description": "Diagram showing locations of roof obstructions",
-      "image_file": "extracted_images/report_44995432/Roof_Penetrations.png"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_11",
-    "section": "Property Imagery",
-    "type": "image",
-    "data": {
-      "description": "Aerial images of the property from top, north, south, east, and west views",
-      "images": [
-        "extracted_images/report_44995432/Top_View.png",
-        "extracted_images/report_44995432/North_Side.png",
-        "extracted_images/report_44995432/South_Side.png",
-        "extracted_images/report_44995432/East_Side.png",
-        "extracted_images/report_44995432/West_Side.png"
-      ]
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_12",
-    "section": "Roofing Report Summary",
-    "type": "table",
-    "data": {}
-  },
-  {
-    "chunk_id": "44995432_chunk_13",
-    "section": "Property Details",
-    "type": "text",
-    "data": {
-      "total_roof_facets": "6",
-      "total_roof_obstructions": "7",
-      "ridges": "14' 7\" Hips",
-      "hips": "116' 8\"",
-      "valleys": "23' 2\"",
-      "rakes": "0' Eaves",
-      "eaves_starters": "155' 11\" (6 Eaves)",
-      "drip_edge": "155' 11\" (6 Lengths)",
-      "parapet_walls": "0' (0 Lengths)",
-      "flashing": "0'",
-      "step_flashing": "0' Parapets",
-      "total_roof_obstructions_area": "0.1 SQ",
-      "total_roof_area_less_obstructions": "15.8 SQ",
-      "total_roof_obstructions_perimeter": "28' Predominant Pitch",
-      "predominant_pitch": "5/12",
-      "total_area_all_pitches": "15.9 SQ"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_14",
-    "section": "Longitude",
-    "type": "text",
-    "data": {
-      "longitude": "-97.6686620",
-      "coordinate_type": "longitude"
-    }
-  },
-  {
-    "chunk_id": "44995432_chunk_15",
-    "section": "Latitude",
-    "type": "text",
-    "data": {
-      "latitude": "30.5528010",
-      "coordinate_type": "latitude"
-    }
-  }
-]
-=======
 {
   "text": [
     {
@@ -175,7 +7,7 @@
       "data": {
         "report_id": "44995432",
         "date": "August 21, 2025",
-        "property_address": "1014 Mohican Round Rock, TX 78665"
+        "property_address": "44995432 PROPERTY 1014 Mohican Round Rock, TX 78665"
       }
     },
     {
@@ -203,7 +35,7 @@
       "type": "text",
       "data": {
         "name": "Prepared For",
-        "address": "Divya Devadas 10900 NE 4th St Suite 80123 Bellevue,WA 98004, 100%, Satisfaction Guaranteed www.eagleview.com/Guarantee.aspx",
+        "address": "Divya Devadas 10900 NE 4th St Suite 80123 Bellevue,WA 98004, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx",
         "phone": "(855) 984-6590"
       }
     },
@@ -301,15 +133,15 @@
         "ridges": "14' 7\" Hips",
         "hips": "116' 8\"",
         "valleys": "23' 2\"",
-        "rakes": "0'",
-        "eaves_starters": "155' 11\" (6 Eaves) Drip Edge (Eaves",
-        "drip_edge": "155' 11\" (6 Lengths) Parapet Walls",
-        "parapet_walls": "0' (0 Lengths) Flashing",
+        "rakes": "0' Eaves",
+        "eaves_starters": "155' 11\" (6 Eaves)",
+        "drip_edge": "155' 11\" (6 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
         "flashing": "0'",
-        "step_flashing": "0'",
+        "step_flashing": "0' Parapets",
         "total_roof_obstructions_area": "0.1 SQ",
         "total_roof_area_less_obstructions": "15.8 SQ",
-        "total_roof_obstructions_perimeter": "28'",
+        "total_roof_obstructions_perimeter": "28' Predominant Pitch",
         "predominant_pitch": "5/12",
         "total_area_all_pitches": "15.9 SQ"
       }
@@ -338,75 +170,54 @@
       "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
       "raw_text": [
         {
-          "Roof Pitches": "5/12",
-          "Area (SQ)": "15.9",
-          "%of Roof": "100%"
+          "Roof Pitches": "0%",
+          "Area (m²)": "147",
+          "%of Roof": "16.00"
+        },
+        {
+          "Roof Pitches": "5%",
+          "Area (m²)": "154",
+          "%of Roof": "17.00"
+        },
+        {
+          "Roof Pitches": "10%",
+          "Area (m²)": "162",
+          "%of Roof": "17.66"
+        },
+        {
+          "Roof Pitches": "15%",
+          "Area (m²)": "169",
+          "%of Roof": "18.33"
+        },
+        {
+          "Roof Pitches": "18%",
+          "Area (m²)": "174",
+          "%of Roof": "19.00"
+        },
+        {
+          "Roof Pitches": "20%",
+          "Area (m²)": "177",
+          "%of Roof": "19.33"
+        },
+        {
+          "Roof Pitches": "22%",
+          "Area (m²)": "180",
+          "%of Roof": "19.66"
+        },
+        {
+          "Roof Pitches": "25%",
+          "Area (m²)": "184",
+          "%of Roof": "20.00"
+        },
+        {
+          "Roof Pitches": "30%",
+          "Area (m²)": "191",
+          "%of Roof": "20.66"
         }
       ],
       "id": "chunk1",
       "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-44995432/tables/images/Areas_per_Pitch_Structure_1.png"
-    },
-    {
-      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
-      "raw_text": [
-        {
-          "waste": "0%",
-          "area": "147",
-          "squares": "16.00"
-        },
-        {
-          "waste": "5%",
-          "area": "154",
-          "squares": "17.00"
-        },
-        {
-          "waste": "10%",
-          "area": "162",
-          "squares": "17.66"
-        },
-        {
-          "waste": "15%",
-          "area": "169",
-          "squares": "18.33"
-        },
-        {
-          "waste": "18%",
-          "area": "174",
-          "squares": "19.00"
-        },
-        {
-          "waste": "20%",
-          "area": "177",
-          "squares": "19.33"
-        },
-        {
-          "waste": "22%",
-          "area": "180",
-          "squares": "19.66"
-        },
-        {
-          "waste": "25%",
-          "area": "184",
-          "squares": "20.00"
-        },
-        {
-          "waste": "30%",
-          "area": "191",
-          "squares": "20.66"
-        }
-      ],
-      "id": "chunk2",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-44995432/tables/images/Waste_Calculation_1.png"
-    },
-    {
-      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
-      "raw_text": "Dummy Text for now.",
-      "id": "chunk3",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-44995432/tables/images/Structure_Complexity_1.png"
+      "src_image_path": ""
     }
   ]
 }
->>>>>>> develop

@@ -1,16 +1,7 @@
 [
     {
-        "Area:": "1,227.5 sq ft",
+        "Roof Pitches": "1,227.5 sq ft",
         "Roof Facets:": "10",
-        "Predominant Pitch:": "8/12",
-        "Number of Stories:": "<=1",
-        "Ridges/Hips:": "48' 4\"",
-        "Valleys:": "40' 2\"",
-        "Rakes:": "110' 3\"",
-        "Eaves:": "73' 10\"",
-        "Estimated Attic:": "54.5 sq ft",
-        "Roof Obstructions:": "7",
-        "Roof Obstructions Perimeter:": "24'",
-        "Roof Obstructions Area:": "5.5 sq ft"
+        "%of Roof": "8/12"
     }
 ]

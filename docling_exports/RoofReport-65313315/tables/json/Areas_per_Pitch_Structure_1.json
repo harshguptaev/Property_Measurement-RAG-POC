@@ -1,27 +1,7 @@
 [
     {
-<<<<<<< HEAD
-        "Area:": "1,228.4 sq ft",
+        "Roof Pitches": "1,228.4 sq ft",
         "Roof Facets:": "7",
-        "Predominant Pitch:": "8/12",
-        "Number of Stories:": ">1",
-        "Ridges/Hips:": "37' 3\"",
-        "Valleys:": "25' 9\"",
-        "Rakes:": "125' 2\"",
-        "Eaves:": "48' 10\"",
-        "Estimated Attic:": "55.2 sq ft",
-        "Roof Obstructions:": "7",
-        "Roof Obstructions Perimeter:": "22'",
-        "Roof Obstructions Area:": "4.8 sq ft"
-=======
-        "Roof Pitches": "4/12",
-        "Area (sq ft)": "163.6",
-        "%of Roof": "13.3%"
-    },
-    {
-        "Roof Pitches": "8/12",
-        "Area (sq ft)": "1064.8",
-        "%of Roof": "86.7%"
->>>>>>> develop
+        "%of Roof": "8/12"
     }
 ]
