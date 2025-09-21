@@ -81,6 +81,114 @@ def _extract_measurements_structured(text: str) -> Dict[str, Any]:
                     data['roof_penetrations_area'] = value
  
     return data
+
+def _extract_structure_wise_measurements(text: str) -> List[Dict[str, Any]]:
+    """Extract structure-wise measurements including individual structures and totals."""
+    import re
+    import html
+    
+    structures = []
+    
+    # Find all "Total Roof Facets" sections which precede measurements
+    facets_matches = list(re.finditer(r'Total Roof Facets = (\d+)', text, re.IGNORECASE))
+    
+    for i, facets_match in enumerate(facets_matches):
+        facets_count = int(facets_match.group(1))
+        
+        # Determine structure type based on context analysis
+        structure_name = None
+        structure_type = None
+        
+        # Look for "All Structure" in the preceding and following context
+        preceding_context = text[max(0, facets_match.start() - 1000):facets_match.start()]
+        following_context = text[facets_match.start():min(len(text), facets_match.start() + 500)]
+        
+        if re.search(r'All Structure', preceding_context + following_context, re.IGNORECASE):
+            structure_name = "All Structure Totals"
+            structure_type = "all_structures"
+        else:
+            # For individual structures, look for explicit structure indicators
+            structure_patterns = [
+                r'Structure\s+(\d+)',  # "Structure 1", "Structure 2", etc.
+                r'Building\s+(\d+)',   # "Building 1", "Building 2", etc.
+                r'Section\s+(\d+)',    # "Section 1", "Section 2", etc.
+            ]
+            
+            structure_number = None
+            for pattern in structure_patterns:
+                match = re.search(pattern, preceding_context, re.IGNORECASE)
+                if match:
+                    structure_number = match.group(1)
+                    break
+            
+            if structure_number:
+                structure_name = f"Structure {structure_number}"
+                structure_type = "individual_structure"
+            else:
+                # Count individual structures encountered so far (excluding "All Structure")
+                individual_structures_count = sum(1 for s in structures if s.get("structure_type") == "individual_structure")
+                structure_name = f"Structure {individual_structures_count + 1}"
+                structure_type = "individual_structure"
+        
+        # Find the measurements section that follows this facets declaration
+        # Look for the measurements from this point until the next "Total Roof Facets" or end
+        search_start = facets_match.end()
+        if i + 1 < len(facets_matches):
+            search_end = facets_matches[i + 1].start()
+        else:
+            search_end = len(text)
+        
+        section_text = text[search_start:search_end]
+        
+        # Extract measurements from this section
+        measurements_data = _extract_measurements_from_section(section_text, facets_count)
+        
+        if measurements_data:
+            structures.append({
+                "structure_name": structure_name,
+                "structure_type": structure_type,
+                "total_roof_facets": facets_count,
+                "measurements": measurements_data
+            })
+    
+    return structures
+
+def _extract_measurements_from_section(section_text: str, total_facets: int) -> Dict[str, Any]:
+    """Extract measurements data from a specific section of text."""
+    import re
+    
+    data = {}
+    
+    # Common measurement patterns
+    patterns = {
+        "total_roof_obstructions": r"Total Roof (?:Penetrations|Obstructions)\s*=\s*(\d+)",
+        "ridges": r"Ridges\s*=\s*([0-9' \"()A-Za-z]+)",
+        "hips": r"Hips\s*=\s*([0-9' \"()A-Za-z]+)",
+        "valleys": r"Valleys\s*=\s*([0-9' \"()A-Za-z]+)", 
+        "rakes": r"Rakes[†]?\s*=\s*([0-9' \"()A-Za-z]+)",
+        "eaves_starters": r"Eaves/Starters[‡]?\s*=\s*([0-9' \"()A-Za-z]+)",
+        "drip_edge": r"Drip Edge .*?=\s*([0-9' \"()A-Za-z]+)",
+        "parapet_walls": r"Parapet Walls\s*=\s*([0-9' \"()A-Za-z]+)",
+        "flashing": r"Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
+        "step_flashing": r"Step Flashing\s*=\s*([0-9' \"()A-Za-z]+)",
+        "total_roof_obstructions_area": r"Total Roof (?:Penetrations|Obstructions) Area\s*=\s*([0-9\.]+\s*(?:sq ft|SQ))",
+        "total_roof_area_less_obstructions": r"Total Roof Area Less Roof (?:Penetrations|Obstructions)\s*=\s*([0-9,\.]+\s*(?:sq ft|SQ))",
+        "total_roof_obstructions_perimeter": r"Total Roof (?:Penetrations|Obstructions) Perimeter\s*=\s*([0-9' \"]+)",
+        "predominant_pitch": r"Predominant Pitch\s*=\s*([0-9/]+)",
+        "total_area_all_pitches": r"Total Area \(All Pitches\)\s*=\s*([0-9,\.]+\s*(?:sq ft|SQ))"
+    }
+    
+    # Extract each measurement
+    for key, pattern in patterns.items():
+        match = re.search(pattern, section_text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            data[key] = value
+    
+    # Add the total facets count
+    data["total_roof_facets"] = total_facets
+    
+    return data
  
 def _extract_prepared_for_structured(text: str) -> Optional[Dict[str, Any]]:
     import re
@@ -266,8 +374,23 @@ def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
     })
  
     # ---------------- Measurements ----------------
+    # Extract structure-wise measurements instead of single measurements section
+    structure_measurements = _extract_structure_wise_measurements(all_text)
+    
+    # Create separate chunks for each structure's measurements
+    for structure_data in structure_measurements:
+        structure_name = structure_data["structure_name"]
+        section_name = f"Measurements - {structure_name}"
+        
+        _add(section_name, "text", {
+            "structure_name": structure_name,
+            "structure_type": structure_data["structure_type"],
+            **structure_data["measurements"]
+        })
+    
+    # Also keep the legacy single measurements extraction for backward compatibility
     measurements_data = _extract_measurements_structured(all_text)
-    if measurements_data:
+    if measurements_data and not structure_measurements:
         _add("Measurements", "text", measurements_data)
  
     # ---------------- Prepared For ----------------
@@ -615,11 +738,40 @@ def split_text_into_chunks(text: str, chunk_size: int = 500) -> List[str]:
  
 def write_chunks_output(pdf_path: str, chunks: List[Dict[str, Any]]) -> Path:
     stem = Path(pdf_path).stem
+    
+    # Save to docling_exports (original location)
     out_dir = Path("docling_exports") / stem
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / "important_chunks.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(chunks, f, ensure_ascii=False, indent=2)
+    
+    # Also save to Final_Chunks folder in the expected format
+    final_chunks_dir = Path("Final_Chunks")
+    final_chunks_dir.mkdir(parents=True, exist_ok=True)
+    final_chunks_file = final_chunks_dir / f"{stem}.json"
+    
+    # The Final_Chunks format expects the chunks to be wrapped in a "text" array
+    # and may also include table data
+    final_chunks_data = {
+        "text": chunks
+    }
+    
+    # If there are any table chunks, we should extract them to a separate "table" section
+    # For now, let's check if we have table data from existing files
+    if final_chunks_file.exists():
+        try:
+            with open(final_chunks_file, "r", encoding="utf-8") as f:
+                existing_data = json.load(f)
+                # Preserve existing table data if it exists
+                if "table" in existing_data:
+                    final_chunks_data["table"] = existing_data["table"]
+        except Exception:
+            pass  # If we can't read existing data, continue without it
+    
+    with open(final_chunks_file, "w", encoding="utf-8") as f:
+        json.dump(final_chunks_data, f, ensure_ascii=False, indent=2)
+    
     return out_file
  
  

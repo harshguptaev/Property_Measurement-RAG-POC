@@ -12,18 +12,27 @@
     },
     {
       "chunk_id": "66953450_chunk_2",
-      "section": "Measurements",
+      "section": "Measurements - Structure 1",
       "type": "text",
       "data": {
-        "area": "3,194.1 sq ft",
-        "roof_facets": "31",
+        "structure_name": "Structure 1",
+        "structure_type": "individual_structure",
+        "total_roof_obstructions": "6",
+        "ridges": "81' 10\" (8 Ridges)",
+        "hips": "194' 3\" (17 Hips)",
+        "valleys": "145' 7\" (12 Valleys)",
+        "rakes": "127' 9\" (11 Rakes)",
+        "eaves_starters": "236' 7\" (34 Eaves)",
+        "drip_edge": "364' 5\" (45 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
+        "flashing": "49' 11\" (7 Lengths)",
+        "step_flashing": "75' 10\" (15 Lengths)",
+        "total_roof_obstructions_area": "28.3 sq ft",
+        "total_roof_area_less_obstructions": "3,165.8 sq ft",
+        "total_roof_obstructions_perimeter": "47' 8\"",
         "predominant_pitch": "12/12",
-        "number_of_stories": ">1",
-        "ridges_hips": "276' 1\"",
-        "valleys": "145' 7\"",
-        "rakes": "127' 9\"",
-        "eaves": "236' 7\"",
-        "estimated_attic": "109.8 sq ft"
+        "total_area_all_pitches": "3,194.1 sq ft",
+        "total_roof_facets": 31
       }
     },
     {

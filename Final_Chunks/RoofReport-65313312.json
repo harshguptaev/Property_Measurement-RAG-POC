@@ -12,6 +12,31 @@
     },
     {
       "chunk_id": "65313312_chunk_2",
+      "section": "Measurements - Structure 1",
+      "type": "text",
+      "data": {
+        "structure_name": "Structure 1",
+        "structure_type": "individual_structure",
+        "total_roof_obstructions": "7",
+        "ridges": "39' (3 Ridges)",
+        "hips": "9' 4\" (2 Hips)",
+        "valleys": "40' 2\" (4 Valleys)",
+        "rakes": "110' 3\" (9 Rakes)",
+        "eaves_starters": "73' 10\" (8 Eaves)",
+        "drip_edge": "184' 1\" (17 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
+        "flashing": "27' 11\" (3 Lengths)",
+        "step_flashing": "47' 10\" (7 Lengths)",
+        "total_roof_obstructions_area": "5.5 sq ft",
+        "total_roof_area_less_obstructions": "1,222 sq ft",
+        "total_roof_obstructions_perimeter": "24'",
+        "predominant_pitch": "8/12",
+        "total_area_all_pitches": "1,227.5 sq ft",
+        "total_roof_facets": 10
+      }
+    },
+    {
+      "chunk_id": "65313312_chunk_3",
       "section": "Prepared For",
       "type": "text",
       "data": {
@@ -21,7 +46,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_3",
+      "chunk_id": "65313312_chunk_4",
       "section": "Lengths Diagram",
       "type": "image",
       "data": {
@@ -30,7 +55,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_4",
+      "chunk_id": "65313312_chunk_5",
       "section": "Pitch (Degrees) Diagram",
       "type": "image",
       "data": {
@@ -39,7 +64,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_5",
+      "chunk_id": "65313312_chunk_6",
       "section": "Pitch (on 12) Diagram",
       "type": "image",
       "data": {
@@ -48,7 +73,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_6",
+      "chunk_id": "65313312_chunk_7",
       "section": "Rafters Diagram",
       "type": "image",
       "data": {
@@ -57,7 +82,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_7",
+      "chunk_id": "65313312_chunk_8",
       "section": "Azimuth Diagram",
       "type": "image",
       "data": {
@@ -66,7 +91,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_8",
+      "chunk_id": "65313312_chunk_9",
       "section": "Area Diagram",
       "type": "image",
       "data": {
@@ -75,7 +100,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_9",
+      "chunk_id": "65313312_chunk_10",
       "section": "Roof Obstructions Diagram",
       "type": "image",
       "data": {
@@ -84,7 +109,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_10",
+      "chunk_id": "65313312_chunk_11",
       "section": "Property Imagery",
       "type": "image",
       "data": {
@@ -99,13 +124,13 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_11",
+      "chunk_id": "65313312_chunk_12",
       "section": "Roofing Report Summary",
       "type": "table",
       "data": {}
     },
     {
-      "chunk_id": "65313312_chunk_12",
+      "chunk_id": "65313312_chunk_13",
       "section": "Property Details",
       "type": "text",
       "data": {
@@ -126,7 +151,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_13",
+      "chunk_id": "65313312_chunk_14",
       "section": "Longitude",
       "type": "text",
       "data": {
@@ -135,7 +160,7 @@
       }
     },
     {
-      "chunk_id": "65313312_chunk_14",
+      "chunk_id": "65313312_chunk_15",
       "section": "Latitude",
       "type": "text",
       "data": {
