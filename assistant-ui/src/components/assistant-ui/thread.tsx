@@ -5,6 +5,7 @@ import {
   ErrorPrimitive,
   MessagePrimitive,
   ThreadPrimitive,
+  useMessage,
 } from "@assistant-ui/react";
 import {
   ArrowDownIcon,
@@ -25,6 +26,8 @@ import {
   UserMessageAttachments,
 } from "@/components/assistant-ui/attachment";
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
+import { EnhancedMessageContent } from "@/components/assistant-ui/enhanced-message-content";
+import { RoofPitchResultButton } from "@/components/RoofPitchResultButton";
 import { ToolFallback } from "@/components/assistant-ui/tool-fallback";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/components/ui/button";
@@ -236,6 +239,13 @@ const MessageError: FC = () => {
 };
 
 const AssistantMessage: FC = () => {
+  const message = useMessage();
+  
+  // Check if the message content contains roof pitch data
+  const messageContent = message.content?.[0];
+  const hasRoofPitchData = messageContent && (messageContent as any)?.hasRoofPitchData;
+  const roofPitchData = hasRoofPitchData ? (messageContent as any)?.roofPitchData : null;
+  
   return (
     <MessagePrimitive.Root asChild>
       <div
@@ -250,6 +260,14 @@ const AssistantMessage: FC = () => {
             }}
           />
           <MessageError />
+          
+          {/* Add roof pitch result button if data is available */}
+          {hasRoofPitchData && roofPitchData && (
+            <RoofPitchResultButton 
+              roofPitchData={roofPitchData}
+              propertiesCount={roofPitchData.length}
+            />
+          )}
         </div>
 
         <div className="aui-assistant-message-footer mt-2 ml-2 flex">

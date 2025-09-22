@@ -99,6 +99,7 @@ export async function POST(req: NextRequest) {
       
       // Extract response and additional info from hierarchical RAG
       let responseText = ragResult.response || ragResult.answer || "I'm sorry, I couldn't process your request.";
+      let roofPitchData = ragResult.roof_pitch_data || null;
       
       // Add hierarchical search info if available
       if (ragResult.level1_docs || ragResult.level2_chunks) {
@@ -123,7 +124,7 @@ export async function POST(req: NextRequest) {
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
         start(controller) {
-          // Stream the response character by character for smooth display
+          // First send the text content
           let index = 0;
           let currentText = "";
           
@@ -141,8 +142,18 @@ export async function POST(req: NextRequest) {
               );
               
               index++;
-              setTimeout(sendNext, 30); // Faster streaming for smoother experience
+              setTimeout(sendNext, 30);
             } else {
+              // After text is complete, send roof pitch data if available
+              if (roofPitchData && roofPitchData.length > 0) {
+                controller.enqueue(
+                  encoder.encode(`data: ${JSON.stringify({ 
+                    type: "roof-pitch-data", 
+                    roofPitchData: roofPitchData 
+                  })}\n\n`)
+                );
+              }
+              
               // Send finish signal
               controller.enqueue(
                 encoder.encode(`data: ${JSON.stringify({ 

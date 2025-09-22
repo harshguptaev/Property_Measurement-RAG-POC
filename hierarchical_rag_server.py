@@ -12,6 +12,8 @@ from typing import Optional, Any, Dict
 
 from fastapi import FastAPI, HTTPException, Request, Body
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 # Add current directory to Python path to import our hierarchical RAG
@@ -42,6 +44,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount static files for serving images
+extracted_images_path = Path("extracted_images")
+if extracted_images_path.exists():
+    app.mount("/images", StaticFiles(directory=str(extracted_images_path)), name="images")
+
 # Global variables
 hierarchical_rag = None
 documents_loaded = 0
@@ -62,6 +69,7 @@ class QueryResponse(BaseModel):
     confidence: Optional[float] = None
     level1_docs: Optional[list] = Field(default_factory=list, description="Documents found in Level 1 search")
     level2_chunks: Optional[list] = Field(default_factory=list, description="Chunks found in Level 2 search")
+    roof_pitch_data: Optional[list] = Field(default_factory=list, description="Structured roof pitch data for rich display")
 
 class HealthResponse(BaseModel):
     status: str
@@ -235,6 +243,25 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
             return QueryResponse(response=msg, sources=[], confidence=None)
 
         logger.info(f"Processing hierarchical query: {prompt[:100]}...")
+        
+        # Check if this is a roof pitch query
+        roof_pitch_keywords = ["roof pitch", "pitch information", "pitch data", "pitch across properties", "roof slope"]
+        is_roof_pitch_query = any(keyword in prompt.lower() for keyword in roof_pitch_keywords)
+        
+        if is_roof_pitch_query:
+            # Get roof pitch data and format as rich response
+            roof_data = await get_roof_pitch_data_internal()
+            if roof_data and roof_data["properties_found"] > 0:
+                # Format the response with structured data for chat
+                response_text = format_roof_pitch_response(roof_data)
+                return QueryResponse(
+                    response=response_text,
+                    sources=[f"Found {roof_data['properties_found']} properties with roof pitch data"],
+                    confidence=1.0,
+                    level1_docs=[],
+                    level2_chunks=[],
+                    roof_pitch_data=roof_data["roof_pitch_data"]
+                )
         
         # Use hierarchical search to get relevant chunks
         search_results = hierarchical_rag.search_hierarchical(prompt, level1_limit, level2_limit)
@@ -429,6 +456,202 @@ async def rebuild_indices():
         logger.error(f"Error rebuilding indices: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error rebuilding indices: {str(e)}")
 
+@app.get("/roof-pitch-data")
+async def get_roof_pitch_data():
+    """Get detailed roof pitch information with actual values and images."""
+    try:
+        import json
+        
+        final_chunks_dir = Path("Final_Chunks")
+        if not final_chunks_dir.exists():
+            raise HTTPException(status_code=404, detail="Final_Chunks directory not found")
+        
+        roof_pitch_data = []
+        
+        # Process each JSON file in Final_Chunks
+        for json_file in final_chunks_dir.glob("*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                
+                property_info = {}
+                
+                # Extract basic property information
+                for chunk in data.get('text', []):
+                    if chunk.get('section') == 'Report Header':
+                        property_info.update(chunk.get('data', {}))
+                    elif chunk.get('section') == 'Measurements - Structure 1':
+                        structure_data = chunk.get('data', {})
+                        property_info['predominant_pitch'] = structure_data.get('predominant_pitch')
+                        property_info['total_roof_facets'] = structure_data.get('total_roof_facets')
+                        property_info['total_roof_area'] = structure_data.get('total_area_all_pitches')
+                
+                # Extract pitch images
+                pitch_images = {}
+                for chunk in data.get('text', []):
+                    if chunk.get('section') == 'Pitch (on 12) Diagram':
+                        pitch_images['pitch_on_12'] = chunk.get('data', {}).get('image_file')
+                    elif chunk.get('section') == 'Pitch (Degrees) Diagram':
+                        pitch_images['pitch_degrees'] = chunk.get('data', {}).get('image_file')
+                
+                # Extract pitch table data (Areas per Pitch)
+                pitch_breakdown = []
+                for table in data.get('table', []):
+                    if 'Areas_per_Pitch' in table.get('section', ''):
+                        raw_text = table.get('raw_text', [])
+                        if isinstance(raw_text, list):
+                            for row in raw_text:
+                                if isinstance(row, dict) and 'Roof Pitches' in row:
+                                    pitch_breakdown.append({
+                                        'pitch': row.get('Roof Pitches'),
+                                        'area': row.get('Area (sq ft)', row.get('Area (m²)')),
+                                        'percentage': row.get('%of Roof')
+                                    })
+                        break
+                
+                if property_info.get('report_id'):
+                    roof_pitch_data.append({
+                        'property_id': property_info.get('report_id'),
+                        'property_address': property_info.get('property_address'),
+                        'predominant_pitch': property_info.get('predominant_pitch'),
+                        'total_roof_facets': property_info.get('total_roof_facets'),
+                        'total_roof_area': property_info.get('total_roof_area'),
+                        'pitch_breakdown': pitch_breakdown,
+                        'images': pitch_images
+                    })
+                    
+            except Exception as e:
+                logger.warning(f"Error processing {json_file}: {e}")
+                continue
+        
+        return {
+            "status": "success",
+            "properties_found": len(roof_pitch_data),
+            "roof_pitch_data": roof_pitch_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Error extracting roof pitch data: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error extracting roof pitch data: {str(e)}")
+
+async def get_roof_pitch_data_internal():
+    """Internal function to get roof pitch data (same as endpoint but returns data directly)."""
+    try:
+        import json
+        
+        final_chunks_dir = Path("Final_Chunks")
+        if not final_chunks_dir.exists():
+            return None
+        
+        roof_pitch_data = []
+        
+        # Process each JSON file in Final_Chunks
+        for json_file in final_chunks_dir.glob("*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                
+                property_info = {}
+                
+                # Extract basic property information
+                for chunk in data.get('text', []):
+                    if chunk.get('section') == 'Report Header':
+                        property_info.update(chunk.get('data', {}))
+                    elif chunk.get('section') == 'Measurements - Structure 1':
+                        structure_data = chunk.get('data', {})
+                        property_info['predominant_pitch'] = structure_data.get('predominant_pitch')
+                        property_info['total_roof_facets'] = structure_data.get('total_roof_facets')
+                        property_info['total_roof_area'] = structure_data.get('total_area_all_pitches')
+                
+                # Extract pitch images
+                pitch_images = {}
+                for chunk in data.get('text', []):
+                    if chunk.get('section') == 'Pitch (on 12) Diagram':
+                        pitch_images['pitch_on_12'] = chunk.get('data', {}).get('image_file')
+                    elif chunk.get('section') == 'Pitch (Degrees) Diagram':
+                        pitch_images['pitch_degrees'] = chunk.get('data', {}).get('image_file')
+                
+                # Extract pitch table data (Areas per Pitch)
+                pitch_breakdown = []
+                for table in data.get('table', []):
+                    if 'Areas_per_Pitch' in table.get('section', ''):
+                        raw_text = table.get('raw_text', [])
+                        if isinstance(raw_text, list):
+                            for row in raw_text:
+                                if isinstance(row, dict) and 'Roof Pitches' in row:
+                                    pitch_breakdown.append({
+                                        'pitch': row.get('Roof Pitches'),
+                                        'area': row.get('Area (sq ft)', row.get('Area (m²)')),
+                                        'percentage': row.get('%of Roof')
+                                    })
+                        break
+                
+                if property_info.get('report_id'):
+                    roof_pitch_data.append({
+                        'property_id': property_info.get('report_id'),
+                        'property_address': property_info.get('property_address'),
+                        'predominant_pitch': property_info.get('predominant_pitch'),
+                        'total_roof_facets': property_info.get('total_roof_facets'),
+                        'total_roof_area': property_info.get('total_roof_area'),
+                        'pitch_breakdown': pitch_breakdown,
+                        'images': pitch_images
+                    })
+                    
+            except Exception as e:
+                logger.warning(f"Error processing {json_file}: {e}")
+                continue
+        
+        return {
+            "status": "success",
+            "properties_found": len(roof_pitch_data),
+            "roof_pitch_data": roof_pitch_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Error extracting roof pitch data: {e}")
+        return None
+
+def format_roof_pitch_response(roof_data):
+    """Format roof pitch data as a clean text response for chat with result console integration."""
+    properties = roof_data.get("roof_pitch_data", [])
+    
+    if not properties:
+        return "No roof pitch data found in the database."
+    
+    # Create a clean text response that will trigger the result console
+    response = f"""# 🏠 Roof Pitch Information
+
+Found **{len(properties)}** properties with detailed roof pitch data including:
+
+📊 **Analysis Overview:**
+- Predominant pitch values for each property
+- Complete roof facet breakdowns  
+- Detailed area measurements and percentages
+- Visual pitch diagrams (degrees and X/12 format)
+
+📋 **Properties Analyzed:**
+"""
+    
+    # Add a summary list of properties
+    for i, prop in enumerate(properties, 1):
+        property_id = prop.get('property_id', 'Unknown')
+        address = prop.get('property_address', 'Unknown Address')
+        pitch = prop.get('predominant_pitch', 'N/A')
+        
+        response += f"{i}. **Property {property_id}** - {pitch} pitch\n   {address}\n\n"
+    
+    response += """
+🔍 **What you can view:**
+- Interactive property cards with all measurements
+- Detailed pitch breakdown tables
+- High-resolution roof pitch diagrams
+- Comprehensive area calculations
+
+*Click the "View Results" button below to open the detailed analysis in the result console.*
+"""
+    
+    return response
+
 @app.get("/")
 async def root():
     """Root endpoint with API information."""
@@ -460,7 +683,8 @@ async def root():
             "document_count": "/documents/count",
             "document_stats": "/documents/stats",
             "collections_status": "/collections/status",
-            "rebuild": "/rebuild"
+            "rebuild": "/rebuild",
+            "roof_pitch_data": "/roof-pitch-data"
         }
     }
 

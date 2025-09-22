@@ -30,6 +30,7 @@ export default function PropertyAnalysisApp() {
         const decoder = new TextDecoder();
         let buffer = "";
         let accumulatedText = ""; // Accumulate text deltas
+        let roofPitchData = null; // Store roof pitch data
 
         try {
           while (true) {
@@ -49,6 +50,17 @@ export default function PropertyAnalysisApp() {
                     accumulatedText += data.textDelta; // Accumulate the text
                     yield {
                       content: [{ type: "text", text: accumulatedText }],
+                    };
+                  } else if (data.type === "roof-pitch-data") {
+                    roofPitchData = data.roofPitchData;
+                    // Update the final message with roof pitch data
+                    yield {
+                      content: [{ 
+                        type: "text", 
+                        text: accumulatedText,
+                        hasRoofPitchData: true,
+                        roofPitchData: roofPitchData
+                      }],
                     };
                   } else if (data.type === "finish") {
                     return;
@@ -71,6 +83,10 @@ export default function PropertyAnalysisApp() {
     },
   });
 
+  return <PropertyAnalysisAppContent runtime={runtime} />;
+}
+
+function PropertyAnalysisAppContent({ runtime }: { runtime: any }) {
   return (
     <div className="h-screen bg-background">
       <AssistantRuntimeProvider runtime={runtime}>
@@ -116,6 +132,7 @@ export default function PropertyAnalysisApp() {
             <PropertyDashboard />
           </div>
         </div>
+
       </AssistantRuntimeProvider>
     </div>
   );

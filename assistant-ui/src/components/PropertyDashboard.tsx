@@ -165,7 +165,11 @@ export function PropertyDashboard() {
           {[
             { icon: "🏠", label: "Property Overview", query: "Provide a comprehensive overview of all properties in the database" },
             { icon: "📏", label: "Area Measurements", query: "What are the roof area measurements for properties?" },
-            { icon: "📐", label: "Roof Pitch Info", query: "Show me roof pitch information across properties" },
+            { 
+              icon: "📐", 
+              label: "Roof Pitch Info", 
+              query: "Show me roof pitch information across properties"
+            },
             { icon: "⚠️", label: "Roof Obstructions", query: "What roof obstructions are mentioned in the reports?" },
             { icon: "🏗️", label: "Structural Details", query: "Show me structural measurements like ridges, hips, and valleys" },
             { icon: "📊", label: "Property Comparison", query: "Compare measurements across different properties" }
