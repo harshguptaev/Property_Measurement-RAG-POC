@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { X, Maximize2, Minimize2 } from "lucide-react";
 
 interface SidePanelOverlayProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title?: string;
-  children: React.ReactNode;
+  readonly isOpen: boolean;
+  readonly onClose: () => void;
+  readonly title?: string;
+  readonly children: React.ReactNode;
 }
 
 export function SidePanelOverlay({ isOpen, onClose, title = "Analysis Results", children }: SidePanelOverlayProps) {
@@ -21,50 +21,39 @@ export function SidePanelOverlay({ isOpen, onClose, title = "Analysis Results", 
     }
   }, [isOpen]);
 
-  console.log('SidePanelOverlay: isOpen =', isOpen, ', isMaximized =', isMaximized);
-
   if (!isOpen) return null;
 
   return (
     <>
-      {/* Debug overlay - always visible when isOpen */}
-      {isOpen && (
-        <div className="fixed top-4 left-4 bg-red-500 text-white p-2 z-[9999] text-xs">
-          Overlay Active (isMaximized: {isMaximized.toString()})
-        </div>
-      )}
-      
-      {/* Backdrop - only covers the non-panel area */}
-      <div 
+      {/* Backdrop */}
+      <button 
         className={`
-          fixed top-0 left-0 h-full bg-black/40 z-40 transition-all duration-300 ease-in-out
-          ${isMaximized ? 'w-0' : 'w-[50vw]'}
+          fixed inset-0 bg-black/40 z-40 transition-all duration-300 ease-in-out border-none cursor-pointer
           ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
         `}
         onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            onClose();
+          }
+        }}
+        aria-label="Close overlay"
       />
       
-      {/* Backdrop for maximized state */}
-      {isMaximized && isOpen && (
-        <div 
-          className="fixed inset-0 bg-black/20 z-40"
-          onClick={onClose}
-        />
-      )}
-      
       {/* Side Panel */}
-      <div 
+      <dialog 
         className={`
           fixed top-0 right-0 h-full bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 z-50 shadow-2xl
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out max-w-none max-h-none m-0 p-0
           ${isMaximized ? 'w-full' : 'w-[50vw]'}
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         `}
-        onClick={(e) => e.stopPropagation()}
+        open={isOpen}
+        aria-labelledby="panel-title"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border bg-card/50">
-          <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+          <h2 id="panel-title" className="text-lg font-semibold text-foreground">{title}</h2>
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
@@ -93,7 +82,7 @@ export function SidePanelOverlay({ isOpen, onClose, title = "Analysis Results", 
         <div className="h-[calc(100vh-60px)] overflow-auto">
           {children}
         </div>
-      </div>
+      </dialog>
     </>
   );
 }

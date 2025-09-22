@@ -32,13 +32,8 @@ export function ImageGalleryManager() {
   console.log('ImageGalleryManager: isOpen =', isOpen, ', imageData =', !!imageData);
 
   return (
-    <SidePanelOverlay isOpen={isOpen} onClose={handleClose}>
-      <div className="h-full p-4">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
-          Property Image Gallery
-        </h2>
-        <ImageGalleryViewer />
-      </div>
+    <SidePanelOverlay isOpen={isOpen} onClose={handleClose} title="Property Image Gallery">
+      <ImageGalleryViewer onClose={handleClose} />
     </SidePanelOverlay>
   );
 }

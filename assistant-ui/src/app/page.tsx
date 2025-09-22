@@ -5,6 +5,7 @@ import { ThreadList } from "@/components/assistant-ui/thread-list";
 import { Thread } from "@/components/assistant-ui/thread";
 import { PropertyDashboard } from "@/components/PropertyDashboard";
 import { ImageGalleryManager } from "@/components/ImageGalleryManager";
+import { MeasurementOverlayManager } from "@/components/MeasurementOverlayManager";
 
 export default function PropertyAnalysisApp() {
   const runtime = useLocalRuntime({
@@ -167,6 +168,9 @@ function PropertyAnalysisAppContent({ runtime }: { runtime: any }) {
 
         {/* Image Gallery Overlay Manager */}
         <ImageGalleryManager />
+        
+        {/* Measurement Overlay Manager */}
+        <MeasurementOverlayManager />
 
       </AssistantRuntimeProvider>
     </div>

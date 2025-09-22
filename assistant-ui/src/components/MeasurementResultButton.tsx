@@ -3,22 +3,22 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { BarChart3, ExternalLink, Ruler, Building, Calculator, Compass } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface MeasurementResultButtonProps {
-  measurementData: any[];
-  measurementType: string;
-  propertiesCount: number;
+  readonly measurementData: any[];
+  readonly measurementType: string;
+  readonly propertiesCount: number;
 }
 
 export function MeasurementResultButton({ measurementData, measurementType, propertiesCount }: MeasurementResultButtonProps) {
-  const router = useRouter();
 
   const measurementConfig = {
     'roof_pitch': {
       icon: BarChart3,
       title: 'Roof Pitch Analysis Ready',
       description: 'detailed pitch data and diagrams',
+      overlayTitle: 'Roof Pitch Analysis',
+      overlayDescription: 'Detailed pitch data and diagrams',
       storageKey: 'roofPitchData',
       route: '/roof-pitch-results'
     },
@@ -26,6 +26,8 @@ export function MeasurementResultButton({ measurementData, measurementType, prop
       icon: Ruler,
       title: 'Length Measurements Ready',
       description: 'ridge, hip, valley, and eave measurements',
+      overlayTitle: 'Length Measurements Analysis',
+      overlayDescription: 'Detailed ridge, hip, valley, and eave measurements',
       storageKey: 'lengthsData',
       route: '/measurement-results?type=lengths'
     },
@@ -33,6 +35,8 @@ export function MeasurementResultButton({ measurementData, measurementType, prop
       icon: Building,
       title: 'Rafter Analysis Ready',
       description: 'detailed rafter length measurements',
+      overlayTitle: 'Rafter Analysis Results',
+      overlayDescription: 'Comprehensive rafter length calculations and analysis',
       storageKey: 'raftersData',
       route: '/measurement-results?type=rafters'
     },
@@ -40,6 +44,8 @@ export function MeasurementResultButton({ measurementData, measurementType, prop
       icon: Calculator,
       title: 'Area Analysis Ready',
       description: 'roof area measurements and breakdowns',
+      overlayTitle: 'Roof Area Analysis',
+      overlayDescription: 'Complete roof area measurements and breakdowns',
       storageKey: 'areaData',
       route: '/measurement-results?type=area'
     },
@@ -47,6 +53,8 @@ export function MeasurementResultButton({ measurementData, measurementType, prop
       icon: Compass,
       title: 'Orientation Analysis Ready',
       description: 'roof facet orientations and azimuth data',
+      overlayTitle: 'Roof Orientation Analysis',
+      overlayDescription: 'Roof facet orientations and azimuth data',
       storageKey: 'azimuthData',
       route: '/measurement-results?type=azimuth'
     }
@@ -56,10 +64,21 @@ export function MeasurementResultButton({ measurementData, measurementType, prop
   const IconComponent = config.icon;
 
   const handleViewResults = () => {
-    // Store the measurement data in sessionStorage so the results page can access it
+    // Store the measurement data in sessionStorage for fallback
     sessionStorage.setItem(config.storageKey, JSON.stringify(measurementData));
     sessionStorage.setItem('measurementType', measurementType);
-    router.push(config.route);
+    
+    // Dispatch event to show measurement overlay
+    const event = new CustomEvent('showMeasurementOverlay', { 
+      detail: {
+        measurementType,
+        measurementData,
+        title: config.overlayTitle,
+        description: config.overlayDescription
+      }
+    });
+    console.log('MeasurementResultButton: Dispatching showMeasurementOverlay event', event);
+    window.dispatchEvent(event);
   };
 
   return (
