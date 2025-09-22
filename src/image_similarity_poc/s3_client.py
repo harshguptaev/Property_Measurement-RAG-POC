@@ -62,7 +62,7 @@ def download_s3_to_path(s3_uri: str, destination_path: Path, *, region_name: str
         return False
 
 
-def download_report_extended_ortho(
+def download_report_backgroundImage(
     report_id: str,
     *,
     bucket: str = "evtech-us-east-2-pg-prod-sunsitecomplete",
@@ -70,17 +70,17 @@ def download_report_extended_ortho(
     root_output_dir: Optional[Path] = None,
 ) -> Optional[Path]:
     """
-    Download the extendedOrthoImage.jpg for a given report ID and save to
-    test_data/{report_id}/extendedOrthoImage.jpg under repo root (or root_output_dir if provided).
+    Download the backgroundImage.jpg for a given report ID and save to
+    test_data/{report_id}/backgroundImage.jpg under repo root (or root_output_dir if provided).
     Returns the saved file path on success, otherwise None.
     """
     if root_output_dir is None:
         root_output_dir = _project_root() / "test_data"
 
-    key = f"{report_id}/deliverable/extendedOrthoImage.jpg"
+    key = f"{report_id}/deliverable/backgroundImage.jpg"
     s3_uri = f"s3://{bucket}/{key}"
 
-    dest_path = root_output_dir / report_id / "extendedOrthoImage.jpg"
+    dest_path = root_output_dir / report_id / "backgroundImage.jpg"
     if dest_path.exists():
         return dest_path
     ok = download_s3_to_path(s3_uri, dest_path, region_name=region_name)
@@ -90,8 +90,8 @@ def download_report_extended_ortho(
 def _save_webp_and_base64(
     jpg_path: Path,
     *,
-    webp_name: str = "extendedOrthoImage.webp",
-    b64_name: str = "extendedOrthoImage_base64",
+    webp_name: str = "backgroundImage.webp",
+    b64_name: str = "backgroundImage_base64",
 ) -> Tuple[Optional[Path], Optional[Path]]:
     if not jpg_path.exists():
         return None, None
@@ -115,11 +115,11 @@ def _save_webp_and_base64(
     return webp_path, b64_path
 
 
-def embed_extended_ortho(
+def embed_backgroundImage(
     report_folder: Path,
     *,
-    webp_name: str = "extendedOrthoImage.webp",
-    embeddings_name: str = "extendedOrthoImage_embedings",
+    webp_name: str = "backgroundImage.webp",
+    embeddings_name: str = "backgroundImage_embedings",
 ) -> Optional[Path]:
     """
     Generate Titan image embedding for extended ortho WEBP and save JSON array
@@ -160,8 +160,8 @@ def batch_download_from_reports(
     root_output_dir: Optional[Path] = None,
 ) -> None:
     """
-    Read report IDs from Reports.txt and download each extendedOrthoImage.jpg
-    into test_data/{report_id}/extendedOrthoImage.jpg.
+    Read report IDs from Reports.txt and download each backgroundImage.jpg
+    into test_data/{report_id}/backgroundImage.jpg.
     """
     if root_output_dir is None:
         root_output_dir = _project_root() / "test_data"
@@ -173,7 +173,7 @@ def batch_download_from_reports(
     total = 0
     for report_id in _iter_report_ids_from_file(reports_txt_path):
         total += 1
-        saved = download_report_extended_ortho(
+        saved = download_report_backgroundImage(
             report_id,
             bucket=bucket,
             region_name=region_name,
@@ -185,7 +185,7 @@ def batch_download_from_reports(
             # After saving JPG, produce WEBP + base64 + embeddings
             webp_path, _ = _save_webp_and_base64(saved)
             if webp_path is not None:
-                embed_path = embed_extended_ortho(saved.parent)
+                embed_path = embed_backgroundImage(saved.parent)
                 if embed_path is not None:
                     logger.info("Embeddings saved: %s", str(embed_path))
                 else:

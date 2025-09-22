@@ -180,7 +180,7 @@ class ImageMilvus:
         self,
         image_path: str,
         *,
-        top_k: int = 2,
+        top_k: int = 3,
         region_name: str = "us-east-1",
         model_id: str = "amazon.titan-embed-image-v1",
     ) -> List[Dict[str, Any]]:
@@ -204,7 +204,7 @@ class ImageMilvus:
                 collection_name=self.collection_name,
                 data=[query_vec],
                 limit=int(top_k),
-                output_fields=["lat", "lon", "folder", "text"],
+                output_fields=["lat", "lon", "folder", "text", "reportId"],
             )
         except Exception as e:
             logger.error("Milvus search failed: %s", e)
@@ -218,6 +218,7 @@ class ImageMilvus:
                         "id": hit.get("id"),
                         "lat": hit.get("lat"),
                         "lon": hit.get("lon"),
+                        "reportId": hit.get("reportId"),
                         "folder": hit.get("folder"),
                         "text": hit.get("text"),
                         # For COSINE metric, Milvus returns similarity in [0,1]
@@ -227,11 +228,11 @@ class ImageMilvus:
         return matches
 
 
-    def index_extended_ortho_embeddings(self, root_dir: str = "test_data") -> int:
+    def index_backgroundImage_embeddings(self, root_dir: str = "test_data") -> int:
 
         """
         Traverse root_dir expecting subfolders named like "reportid". For each, read
-        extendedOrthoImage_embedings (JSON array of floats, 1024-dim) and insert batch records.
+        backgroundImage_embedings (JSON array of floats, 1024-dim) and insert batch records.
         Returns number of inserted items.
         """
         if not os.path.isdir(root_dir):
@@ -249,9 +250,9 @@ class ImageMilvus:
             if os.path.isdir(os.path.join(root_dir, name))
         ]
 
-        for sub in tqdm(subfolders, desc="Indexing extendedOrthoImage_embedings"):
+        for sub in tqdm(subfolders, desc="Indexing backgroundImage_embedings"):
             try:
-                embed_path = os.path.join(sub, "extendedOrthoImage_embedings")
+                embed_path = os.path.join(sub, "backgroundImage_embedings")
                 if not os.path.isfile(embed_path):
                     continue
                 with open(embed_path, "r", encoding="utf-8") as f:
@@ -280,7 +281,7 @@ class ImageMilvus:
                 continue
 
         if not records:
-            logger.warning("No extendedOrthoImage_embedings found under %s", root_dir)
+            logger.warning("No backgroundImage_embedings found under %s", root_dir)
             return 0
 
         try:

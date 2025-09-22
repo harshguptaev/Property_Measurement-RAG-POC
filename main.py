@@ -63,12 +63,16 @@ def main():
     # saveimagesfrompictometry(37.774929, -122.419416)
     # stich pictometry images and convert to base64
 
-    batch_download_from_reports()
+    # batch_download_from_reports()
     # stitch_all_pictometry_directories()
-    im = ImageMilvus()
-    im.index_top_embeddings()
-    matches = im.search_similar_by_image("pictometry_images/29.482943_-98.456349/top_image.webp")
-    # print("matches", matches)
+    im = ImageMilvus(milvus_uri="./milvus_test.db", collection_name="Background_Image_Index")
+    im.index_backgroundImage_embeddings()
+    # im.index_top_embeddings()
+    # matches = im.search_similar_by_image("pictometry_images/29.482943_-98.456349/top_image.webp")
+    matches = im.search_similar_by_image("test_data/66728326/backgroundImage.webp")
+    # matches = im.search_similar_by_image("test_data/65313316/extendedOrthoImage.webp")
+    # matches = im.search_similar_by_image("test_data/65452196/extendedOrthoImage.webp")
+    print("matches", matches)
     print_matches(matches)
     # Setup AWS credentials
     setup_aws_credentials()
