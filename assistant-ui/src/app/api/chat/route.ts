@@ -100,6 +100,8 @@ export async function POST(req: NextRequest) {
       // Extract response and additional info from hierarchical RAG
       let responseText = ragResult.response || ragResult.answer || "I'm sorry, I couldn't process your request.";
       let roofPitchData = ragResult.roof_pitch_data || null;
+      let measurementData = ragResult.measurement_data || null;
+      let measurementType = ragResult.measurement_type || null;
       
       // Add hierarchical search info if available
       if (ragResult.level1_docs || ragResult.level2_chunks) {
@@ -150,6 +152,17 @@ export async function POST(req: NextRequest) {
                   encoder.encode(`data: ${JSON.stringify({ 
                     type: "roof-pitch-data", 
                     roofPitchData: roofPitchData 
+                  })}\n\n`)
+                );
+              }
+              
+              // After text is complete, send measurement data if available
+              if (measurementData && measurementData.length > 0 && measurementType) {
+                controller.enqueue(
+                  encoder.encode(`data: ${JSON.stringify({ 
+                    type: "measurement-data", 
+                    measurementData: measurementData,
+                    measurementType: measurementType 
                   })}\n\n`)
                 );
               }

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ThreadPrimitive } from "@assistant-ui/react";
+import { Button } from "@/components/ui/button";
 
 interface DocumentStats {
   total_documents: number;
@@ -164,15 +165,18 @@ export function PropertyDashboard() {
         <div className="space-y-2">
           {[
             { icon: "🏠", label: "Property Overview", query: "Provide a comprehensive overview of all properties in the database" },
-            { icon: "📏", label: "Area Measurements", query: "What are the roof area measurements for properties?" },
             { 
               icon: "📐", 
               label: "Roof Pitch Info", 
               query: "Show me roof pitch information across properties"
             },
+            { icon: "📏", label: "Length Measurements", query: "Show me roof length measurements including ridges, hips, and valleys" },
+            { icon: "🏗️", label: "Rafter Analysis", query: "Show me rafter length measurements and analysis" },
+            { icon: "📊", label: "Area Analysis", query: "Show me roof area measurements and breakdowns" },
+            { icon: "🧭", label: "Roof Orientations", query: "Show me roof azimuth and orientation data" },
+            { icon: "📸", label: "View All Images", query: "Show me all property images and photo gallery" },
             { icon: "⚠️", label: "Roof Obstructions", query: "What roof obstructions are mentioned in the reports?" },
-            { icon: "🏗️", label: "Structural Details", query: "Show me structural measurements like ridges, hips, and valleys" },
-            { icon: "📊", label: "Property Comparison", query: "Compare measurements across different properties" }
+            { icon: "�", label: "Property Comparison", query: "Compare measurements across different properties" }
           ].map((item, index) => (
             <ThreadPrimitive.Suggestion key={index} prompt={item.query} method="replace" autoSend asChild>
               <button
@@ -210,6 +214,23 @@ export function PropertyDashboard() {
             <div className="text-muted-foreground">Professional evaluations</div>
           </div>
         </div>
+      </div>
+
+      {/* Test Image Gallery Button */}
+      <div className="mt-4">
+        <Button 
+          onClick={() => {
+            console.log('Test button clicked - dispatching showImageGallery event');
+            const testData = [{ property_id: 'test', measurement_diagrams: [], property_views: [], roof_analysis: [] }];
+            const event = new CustomEvent('showImageGallery', { detail: testData });
+            window.dispatchEvent(event);
+          }}
+          variant="outline"
+          size="sm"
+          className="w-full"
+        >
+          🔧 Test Image Gallery Overlay
+        </Button>
       </div>
     </div>
   );

@@ -70,6 +70,8 @@ class QueryResponse(BaseModel):
     level1_docs: Optional[list] = Field(default_factory=list, description="Documents found in Level 1 search")
     level2_chunks: Optional[list] = Field(default_factory=list, description="Chunks found in Level 2 search")
     roof_pitch_data: Optional[list] = Field(default_factory=list, description="Structured roof pitch data for rich display")
+    measurement_data: Optional[list] = Field(default_factory=list, description="Structured measurement data for rich display")
+    measurement_type: Optional[str] = Field(default=None, description="Type of measurement data (lengths, rafters, area, azimuth)")
 
 class HealthResponse(BaseModel):
     status: str
@@ -244,23 +246,104 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
 
         logger.info(f"Processing hierarchical query: {prompt[:100]}...")
         
-        # Check if this is a roof pitch query
+        # Check for different measurement query types
         roof_pitch_keywords = ["roof pitch", "pitch information", "pitch data", "pitch across properties", "roof slope"]
-        is_roof_pitch_query = any(keyword in prompt.lower() for keyword in roof_pitch_keywords)
+        lengths_keywords = ["roof lengths", "ridge", "hip", "valley", "rake", "eaves", "flashing", "length measurements", "structural lengths"]
+        rafters_keywords = ["rafter", "rafters", "rafter length", "rafter measurements", "structural rafters"]
+        area_keywords = ["roof area", "area measurements", "square feet", "sq ft", "roof facet area", "total area"]
+        azimuth_keywords = ["azimuth", "orientation", "roof direction", "compass", "bearing", "facet orientation"]
+        images_keywords = ["images", "image gallery", "photos", "pictures", "visual", "all images", "property images", "house images", "aerial", "views"]
         
-        if is_roof_pitch_query:
-            # Get roof pitch data and format as rich response
-            roof_data = await get_roof_pitch_data_internal()
-            if roof_data and roof_data["properties_found"] > 0:
-                # Format the response with structured data for chat
-                response_text = format_roof_pitch_response(roof_data)
+        measurement_type = None
+        measurement_data = None
+        
+        if any(keyword in prompt.lower() for keyword in roof_pitch_keywords):
+            measurement_type = "roof_pitch"
+            measurement_data = await get_roof_pitch_data_internal()
+            if measurement_data and measurement_data["properties_found"] > 0:
+                response_text = format_roof_pitch_response(measurement_data)
                 return QueryResponse(
                     response=response_text,
-                    sources=[f"Found {roof_data['properties_found']} properties with roof pitch data"],
+                    sources=[f"Found {measurement_data['properties_found']} properties with roof pitch data"],
                     confidence=1.0,
                     level1_docs=[],
                     level2_chunks=[],
-                    roof_pitch_data=roof_data["roof_pitch_data"]
+                    roof_pitch_data=measurement_data["roof_pitch_data"]
+                )
+        
+        elif any(keyword in prompt.lower() for keyword in lengths_keywords):
+            measurement_type = "lengths"
+            measurement_data = await get_measurement_data_internal('lengths')
+            if measurement_data and measurement_data["properties_found"] > 0:
+                response_text = format_measurement_response(measurement_data, 'lengths')
+                return QueryResponse(
+                    response=response_text,
+                    sources=[f"Found {measurement_data['properties_found']} properties with length measurement data"],
+                    confidence=1.0,
+                    level1_docs=[],
+                    level2_chunks=[],
+                    measurement_data=measurement_data["measurement_data"],
+                    measurement_type="lengths"
+                )
+        
+        elif any(keyword in prompt.lower() for keyword in rafters_keywords):
+            measurement_type = "rafters"
+            measurement_data = await get_measurement_data_internal('rafters')
+            if measurement_data and measurement_data["properties_found"] > 0:
+                response_text = format_measurement_response(measurement_data, 'rafters')
+                return QueryResponse(
+                    response=response_text,
+                    sources=[f"Found {measurement_data['properties_found']} properties with rafter measurement data"],
+                    confidence=1.0,
+                    level1_docs=[],
+                    level2_chunks=[],
+                    measurement_data=measurement_data["measurement_data"],
+                    measurement_type="rafters"
+                )
+        
+        elif any(keyword in prompt.lower() for keyword in area_keywords):
+            measurement_type = "area"
+            measurement_data = await get_measurement_data_internal('area')
+            if measurement_data and measurement_data["properties_found"] > 0:
+                response_text = format_measurement_response(measurement_data, 'area')
+                return QueryResponse(
+                    response=response_text,
+                    sources=[f"Found {measurement_data['properties_found']} properties with area measurement data"],
+                    confidence=1.0,
+                    level1_docs=[],
+                    level2_chunks=[],
+                    measurement_data=measurement_data["measurement_data"],
+                    measurement_type="area"
+                )
+        
+        elif any(keyword in prompt.lower() for keyword in azimuth_keywords):
+            measurement_type = "azimuth"
+            measurement_data = await get_measurement_data_internal('azimuth')
+            if measurement_data and measurement_data["properties_found"] > 0:
+                response_text = format_measurement_response(measurement_data, 'azimuth')
+                return QueryResponse(
+                    response=response_text,
+                    sources=[f"Found {measurement_data['properties_found']} properties with azimuth measurement data"],
+                    confidence=1.0,
+                    level1_docs=[],
+                    level2_chunks=[],
+                    measurement_data=measurement_data["measurement_data"],
+                    measurement_type="azimuth"
+                )
+        
+        elif any(keyword in prompt.lower() for keyword in images_keywords):
+            measurement_type = "images"
+            measurement_data = await get_all_images_data()
+            if measurement_data and measurement_data["properties_found"] > 0:
+                response_text = format_all_images_response(measurement_data)
+                return QueryResponse(
+                    response=response_text,
+                    sources=[f"Found {measurement_data['properties_found']} properties with image data"],
+                    confidence=1.0,
+                    level1_docs=[],
+                    level2_chunks=[],
+                    measurement_data=measurement_data["measurement_data"],
+                    measurement_type="images"
                 )
         
         # Use hierarchical search to get relevant chunks
@@ -648,6 +731,297 @@ Found **{len(properties)}** properties with detailed roof pitch data including:
 - Comprehensive area calculations
 
 *Click the "View Results" button below to open the detailed analysis in the result console.*
+"""
+    
+    return response
+
+async def get_measurement_data_internal(measurement_type):
+    """Generic function to extract measurement data by type."""
+    try:
+        import json
+        
+        final_chunks_dir = Path("Final_Chunks")
+        if not final_chunks_dir.exists():
+            return None
+        
+        measurement_data = []
+        
+        # Process each JSON file in Final_Chunks
+        for json_file in final_chunks_dir.glob("*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                
+                property_info = {}
+                measurement_images = {}
+                
+                # Extract basic property information and measurements
+                for chunk in data.get('text', []):
+                    chunk_data = chunk.get('data', {})
+                    
+                    if 'report_id' in chunk_data:
+                        property_info.update(chunk_data)
+                    
+                    if 'structure_name' in chunk_data:
+                        property_info.update(chunk_data)
+                
+                # Extract relevant images based on measurement type
+                for chunk in data.get('text', []):
+                    if chunk.get('type') == 'image':
+                        section = chunk.get('section', '').lower()
+                        image_file = chunk.get('data', {}).get('image_file', '')
+                        
+                        if measurement_type == 'lengths' and 'lengths' in section:
+                            measurement_images['lengths_diagram'] = image_file
+                        elif measurement_type == 'rafters' and 'rafters' in section:
+                            measurement_images['rafters_diagram'] = image_file
+                        elif measurement_type == 'area' and 'area' in section:
+                            measurement_images['area_diagram'] = image_file
+                        elif measurement_type == 'azimuth' and 'azimuth' in section:
+                            measurement_images['azimuth_diagram'] = image_file
+                
+                if property_info.get('report_id'):
+                    measurement_data.append({
+                        'property_id': property_info.get('report_id'),
+                        'property_address': property_info.get('property_address'),
+                        'measurements': property_info,
+                        'images': measurement_images
+                    })
+                    
+            except Exception as e:
+                logger.warning(f"Error processing {json_file}: {e}")
+                continue
+        
+        return {
+            "status": "success",
+            "measurement_type": measurement_type,
+            "properties_found": len(measurement_data),
+            "measurement_data": measurement_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Error extracting {measurement_type} data: {e}")
+        return None
+
+@app.get("/lengths-data")
+async def get_lengths_data():
+    """Get detailed roof length measurements (ridges, hips, valleys, etc.)."""
+    result = await get_measurement_data_internal('lengths')
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=500, detail="Error extracting length measurement data")
+
+@app.get("/rafters-data")
+async def get_rafters_data():
+    """Get detailed rafter measurement data."""
+    result = await get_measurement_data_internal('rafters')
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=500, detail="Error extracting rafter measurement data")
+
+@app.get("/area-data")
+async def get_area_data():
+    """Get detailed roof area measurement data."""
+    result = await get_measurement_data_internal('area')
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=500, detail="Error extracting area measurement data")
+
+@app.get("/azimuth-data")
+async def get_azimuth_data():
+    """Get detailed roof azimuth/orientation data."""
+    result = await get_measurement_data_internal('azimuth')
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=500, detail="Error extracting azimuth measurement data")
+
+@app.get("/all-images-data")
+async def get_all_images_data():
+    """Get comprehensive image data for all properties including all diagram types and property views."""
+    try:
+        import json
+        
+        final_chunks_dir = Path("Final_Chunks")
+        if not final_chunks_dir.exists():
+            raise HTTPException(status_code=404, detail="Final_Chunks directory not found")
+        
+        image_data = []
+        
+        # Process each JSON file in Final_Chunks
+        for json_file in final_chunks_dir.glob("*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                
+                property_info = {}
+                measurement_diagrams = []
+                property_views = []
+                roof_analysis = []
+                
+                # Extract basic property information
+                for chunk in data.get('text', []):
+                    chunk_data = chunk.get('data', {})
+                    
+                    if 'report_id' in chunk_data:
+                        property_info.update(chunk_data)
+                
+                # Extract all images and categorize them
+                for chunk in data.get('text', []):
+                    if chunk.get('type') == 'image':
+                        section = chunk.get('section', '').lower()
+                        chunk_data = chunk.get('data', {})
+                        
+                        # Handle single image
+                        if 'image_file' in chunk_data:
+                            image_info = {
+                                'type': section,
+                                'title': chunk.get('section', 'Unknown'),
+                                'description': chunk_data.get('description', ''),
+                                'image_path': chunk_data['image_file']
+                            }
+                            
+                            # Categorize images
+                            if any(x in section for x in ['length', 'pitch', 'rafter', 'azimuth', 'area']):
+                                measurement_diagrams.append(image_info)
+                            elif any(x in section for x in ['obstruction', 'penetration']):
+                                roof_analysis.append(image_info)
+                            else:
+                                roof_analysis.append(image_info)
+                        
+                        # Handle multiple images (property views)
+                        if 'images' in chunk_data and isinstance(chunk_data['images'], list):
+                            for i, image_path in enumerate(chunk_data['images']):
+                                # Extract view type from filename
+                                filename = image_path.split('/')[-1].replace('.png', '').replace('_', ' ')
+                                
+                                image_info = {
+                                    'type': f'property_view_{i}',
+                                    'title': filename.title(),
+                                    'description': f'Property view: {filename}',
+                                    'image_path': image_path
+                                }
+                                property_views.append(image_info)
+                
+                if property_info.get('report_id'):
+                    image_data.append({
+                        'property_id': property_info.get('report_id'),
+                        'property_address': property_info.get('property_address'),
+                        'images': {
+                            'measurement_diagrams': measurement_diagrams,
+                            'property_views': property_views,
+                            'roof_analysis': roof_analysis
+                        }
+                    })
+                    
+            except Exception as e:
+                logger.warning(f"Error processing {json_file}: {e}")
+                continue
+        
+        return {
+            "status": "success",
+            "properties_found": len(image_data),
+            "image_data": image_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Error extracting all images data: {e}")
+        raise HTTPException(status_code=500, detail="Error extracting all images data")
+
+def format_all_images_response(image_data):
+    """Format all images data as a clean text response for chat."""
+    properties = image_data.get("image_data", [])
+    
+    if not properties:
+        return "No image data found in the database."
+    
+    # Count total images
+    total_images = 0
+    for prop in properties:
+        total_images += len(prop['images']['measurement_diagrams'])
+        total_images += len(prop['images']['property_views'])
+        total_images += len(prop['images']['roof_analysis'])
+    
+    response = f"""# 🏠 Complete Property Image Gallery
+
+Found **{len(properties)}** properties with comprehensive image data including **{total_images}** total images:
+
+📊 **Image Categories Available:**
+- 📐 **Measurement Diagrams**: Length measurements, pitch analysis, rafter calculations, area breakdowns, azimuth orientations
+- 🏠 **Property Views**: Aerial imagery from top, north, south, east, and west perspectives  
+- 🔍 **Roof Analysis**: Roof penetrations, obstructions, and structural analysis diagrams
+
+💡 **Visual Analysis Features:**
+- High-resolution property imagery from multiple angles
+- Technical measurement diagrams with precise calculations
+- Roof obstruction and penetration mapping
+- Comprehensive structural analysis visuals
+
+*Click the "View Results" button below to open the complete image gallery in the side panel.*
+"""
+    
+    return response
+
+def format_measurement_response(measurement_data, measurement_type):
+    """Format measurement data as a clean text response for chat."""
+    properties = measurement_data.get("measurement_data", [])
+    
+    if not properties:
+        return f"No {measurement_type} measurement data found in the database."
+    
+    # Create measurement-specific response
+    measurement_titles = {
+        'lengths': '📏 Roof Length Measurements',
+        'rafters': '🏗️ Rafter Analysis', 
+        'area': '📐 Roof Area Analysis',
+        'azimuth': '🧭 Roof Orientation Analysis'
+    }
+    
+    title = measurement_titles.get(measurement_type, f'{measurement_type.title()} Analysis')
+    
+    response = f"""# {title}
+
+Found **{len(properties)}** properties with detailed {measurement_type} measurement data including:
+
+📊 **Analysis Overview:**
+- Comprehensive {measurement_type} measurements for each property
+- Detailed breakdowns with precise values
+- Visual measurement diagrams and technical drawings
+- Property-specific measurement data
+
+💡 **Available Data Types:**"""
+
+    if measurement_type == 'lengths':
+        response += """
+- Ridge lengths and counts
+- Hip measurements  
+- Valley dimensions
+- Rake measurements
+- Eaves and starter measurements
+- Drip edge lengths
+- Flashing and step flashing details"""
+    elif measurement_type == 'rafters':
+        response += """
+- Rafter length calculations
+- Section-specific measurements
+- Structural analysis data"""
+    elif measurement_type == 'area':
+        response += """
+- Total roof area calculations
+- Facet-specific area measurements  
+- Area breakdowns by section"""
+    elif measurement_type == 'azimuth':
+        response += """
+- Roof facet orientations
+- Compass bearing measurements
+- True north references"""
+
+    response += f"""
+
+*Click the "View Results" button below to open the detailed {measurement_type} analysis in the result console.*
 """
     
     return response

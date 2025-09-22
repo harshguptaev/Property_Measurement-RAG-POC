@@ -4,6 +4,7 @@ import { AssistantRuntimeProvider, useLocalRuntime } from "@assistant-ui/react";
 import { ThreadList } from "@/components/assistant-ui/thread-list";
 import { Thread } from "@/components/assistant-ui/thread";
 import { PropertyDashboard } from "@/components/PropertyDashboard";
+import { ImageGalleryManager } from "@/components/ImageGalleryManager";
 
 export default function PropertyAnalysisApp() {
   const runtime = useLocalRuntime({
@@ -31,6 +32,9 @@ export default function PropertyAnalysisApp() {
         let buffer = "";
         let accumulatedText = ""; // Accumulate text deltas
         let roofPitchData = null; // Store roof pitch data
+        let measurementData = null; // Store measurement data
+        let measurementType = null; // Store measurement type
+        let imageGalleryData = null; // Store image gallery data
 
         try {
           while (true) {
@@ -62,6 +66,34 @@ export default function PropertyAnalysisApp() {
                         roofPitchData: roofPitchData
                       }],
                     };
+                  } else if (data.type === "measurement-data") {
+                    measurementData = data.measurementData;
+                    measurementType = data.measurementType;
+                    
+                    // Check if this is image gallery data
+                    if (data.measurementType === "images") {
+                      imageGalleryData = measurementData;
+                      // Update the final message with image gallery data
+                      yield {
+                        content: [{ 
+                          type: "text", 
+                          text: accumulatedText,
+                          hasImageGalleryData: true,
+                          imageGalleryData: imageGalleryData
+                        }],
+                      };
+                    } else {
+                      // Update the final message with measurement data
+                      yield {
+                        content: [{ 
+                          type: "text", 
+                          text: accumulatedText,
+                          hasMeasurementData: true,
+                          measurementData: measurementData,
+                          measurementType: measurementType
+                        }],
+                      };
+                    }
                   } else if (data.type === "finish") {
                     return;
                   }
@@ -132,6 +164,9 @@ function PropertyAnalysisAppContent({ runtime }: { runtime: any }) {
             <PropertyDashboard />
           </div>
         </div>
+
+        {/* Image Gallery Overlay Manager */}
+        <ImageGalleryManager />
 
       </AssistantRuntimeProvider>
     </div>
