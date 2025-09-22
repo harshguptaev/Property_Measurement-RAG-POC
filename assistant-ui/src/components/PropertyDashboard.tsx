@@ -6,6 +6,8 @@ import { ThreadPrimitive } from "@assistant-ui/react";
 interface DocumentStats {
   total_documents: number;
   total_chunks: number;
+  level1_entities?: number;
+  level2_entities?: number;
   vector_store_type: string;
   status: string;
 }
@@ -13,8 +15,11 @@ interface DocumentStats {
 interface SystemStatus {
   status: string;
   documents_loaded: number;
-  vector_store_active: boolean;
+  level1_entities?: number;
+  level2_entities?: number;
+  vector_store_active?: boolean;
   backend_version: string;
+  rag_available?: boolean;
 }
 
 export function PropertyDashboard() {
@@ -35,7 +40,7 @@ export function PropertyDashboard() {
       const backendUrl =
         process.env.NEXT_PUBLIC_RAG_BACKEND_URL ||
         process.env.RAG_BACKEND_URL ||
-        "http://localhost:8000";
+        "http://localhost:8001";  // Updated default port for hierarchical RAG
       
       const [statsResponse, healthResponse] = await Promise.all([
         fetch(`${backendUrl}/documents/stats`),
@@ -100,6 +105,13 @@ export function PropertyDashboard() {
                 </div>
               </div>
               <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">RAG System</span>
+                <div className="flex items-center gap-2">
+                  <div className={`h-2 w-2 rounded-full ${systemStatus.rag_available ? 'bg-green-500' : 'bg-red-500'}`} />
+                  <span className="text-xs">{systemStatus.rag_available ? 'Active' : 'Inactive'}</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Vector Store</span>
                 <div className="flex items-center gap-2">
                   <div className={`h-2 w-2 rounded-full ${systemStatus.vector_store_active ? 'bg-green-500' : 'bg-red-500'}`} />
@@ -118,7 +130,7 @@ export function PropertyDashboard() {
       {/* Document Statistics */}
       <div>
         <h3 className="mb-3 text-sm font-medium text-foreground">
-          Document Overview
+          Hierarchical Index Status
         </h3>
         <div className="space-y-2">
           {docStats && (
@@ -128,8 +140,12 @@ export function PropertyDashboard() {
                 <span className="text-xs font-mono">{docStats.total_documents}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">Document Chunks</span>
-                <span className="text-xs font-mono">{docStats.total_chunks}</span>
+                <span className="text-xs text-muted-foreground">Level 1 (Summaries)</span>
+                <span className="text-xs font-mono">{docStats.level1_entities || 0}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">Level 2 (Chunks)</span>
+                <span className="text-xs font-mono">{docStats.level2_entities || docStats.total_chunks}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Store Type</span>
@@ -147,12 +163,12 @@ export function PropertyDashboard() {
         </h3>
         <div className="space-y-2">
           {[
-            { icon: "🏠", label: "Property Overview", query: "Provide a comprehensive overview of this property" },
-            { icon: "🏗️", label: "Structural Analysis", query: "What is the structural condition of this property?" },
-            { icon: "⚠️", label: "Issues & Risks", query: "Identify any major issues, risks, or concerns" },
-            { icon: "🔧", label: "Maintenance Items", query: "What maintenance or repairs are recommended?" },
-            { icon: "💰", label: "Cost Estimates", query: "Summarize any cost estimates mentioned in the reports" },
-            { icon: "📊", label: "Measurements", query: "Show me the key measurements and dimensions" }
+            { icon: "🏠", label: "Property Overview", query: "Provide a comprehensive overview of all properties in the database" },
+            { icon: "📏", label: "Area Measurements", query: "What are the roof area measurements for properties?" },
+            { icon: "📐", label: "Roof Pitch Info", query: "Show me roof pitch information across properties" },
+            { icon: "⚠️", label: "Roof Obstructions", query: "What roof obstructions are mentioned in the reports?" },
+            { icon: "🏗️", label: "Structural Details", query: "Show me structural measurements like ridges, hips, and valleys" },
+            { icon: "📊", label: "Property Comparison", query: "Compare measurements across different properties" }
           ].map((item, index) => (
             <ThreadPrimitive.Suggestion key={index} prompt={item.query} method="replace" autoSend asChild>
               <button
