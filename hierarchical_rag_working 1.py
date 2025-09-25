@@ -74,7 +74,7 @@ class HierarchicalRAG:
     - Level 2: Chunk Index
     """
     
-    def __init__(self, region_name: str = "us-east-1", model_id: str = "anthropic.claude-3-haiku-20240307-v1:0"):
+    def __init__(self, region_name: str = "us-east-1", model_id: str = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"):
         """
         Initialize the Hierarchical RAG System
         What was the % of Roof and Area covered where roof pitch is about 6/12 for address  2455 New Holland Cir, Murfreesboro, TN 37128
