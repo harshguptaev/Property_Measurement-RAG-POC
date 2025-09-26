@@ -1,0 +1,304 @@
+{
+  "DateTimeStamp": "2025-06-03T07:06:53.8678134-07:00",
+  "RequiredData": {
+    "Roof": true,
+    "ForcePlanarization": false,
+    "Walls": false,
+    "RoofPenetrations": true,
+    "Material": false,
+    "FloorPlan": false,
+    "WindowsAndDoors": false,
+    "ImageScale": false,
+    "Trees": false,
+    "RoofObstructions": false,
+    "Fences": false,
+    "IncludeDeckAndPatio": false,
+    "SketchUp": false,
+    "QuickMeasurementsPage": false,
+    "WallMaterials": false,
+    "AutoWallDrop": true
+  },
+  "OrderTags": {
+    "ProductType": 54,
+    "ProductClass": 1,
+    "OrderPriority": 5,
+    "OrderHandling": 1
+  },
+  "ImageMetaData": {
+    "OrderID": "45015743",
+    "CustomerID": "563922.615228",
+    "History": [
+      "Order 45015743 created by CACHER on 03.06.2025_07:06:53"
+    ],
+    "Date": "03.06.2025_07:06:53",
+    "DueDate": "2025-06-08 Sun 18:00:00",
+    "OrderPlacedDate": "2025-06-03 Tue 06:55:50",
+    "Address": "172 Dowell Rd",
+    "City": "Rockwall",
+    "State": "TX",
+    "Zip": "75032",
+    "ClaimID": "1234",
+    "Longitude": -96.3872506,
+    "Latitude": 32.9035164,
+    "MeasurementRequestType": "PrimaryPlusDetachedGarage",
+    "Notes": [
+      "Order 45015743 created by CACHER on 03.06.2025_07:06:53",
+      ""
+    ],
+    "Precision": "parcel",
+    "ImageCount": 5,
+    "Views": "ONEWS",
+    "Images": [
+      {
+        "View": "O",
+        "Image": "O_2021_12.jpg",
+        "Heading": 0.0,
+        "Level": "N",
+        "Day": 17,
+        "Month": 12,
+        "Year": 2021,
+        "Width": 750,
+        "Height": 600,
+        "UL": [
+          -96.387499,
+          32.903684
+        ],
+        "UR": [
+          -96.387003,
+          32.903684
+        ],
+        "LR": [
+          -96.387003,
+          32.903349
+        ],
+        "LL": [
+          -96.387499,
+          32.903349
+        ],
+        "Clip": {
+          "URL": "http://imagehub.cmh.reportstest.evinternal.net/ImagePortal/m?id=c301c7280ebb44beaa8a221fc5ea9e43",
+          "Resource": "c301c7280ebb44beaa8a221fc5ea9e43",
+          "UL": [
+            -96.387499,
+            32.903684
+          ],
+          "UR": [
+            -96.387003,
+            32.903684
+          ],
+          "LR": [
+            -96.387003,
+            32.903349
+          ],
+          "LL": [
+            -96.387499,
+            32.903349
+          ]
+        },
+        "ImageId": "urn:eagleview.com:v4:spatial-data:raster:visual:georegistered:SwmcqljeME-QjHXNA8xtFg:2544624405:5:-10730004.251739787:3882731.0224199723:-10729554.176231058:3882171.2032649266:7568:6113",
+        "GSD": 2.4442401957966435
+      },
+      {
+        "View": "N",
+        "Image": "N_2021_12.jpg",
+        "Heading": 4.0,
+        "Level": "N",
+        "Day": 30,
+        "Month": 12,
+        "Year": 2021,
+        "Width": 750,
+        "Height": 600,
+        "UL": [
+          -96.387545,
+          32.903946
+        ],
+        "UR": [
+          -96.386884,
+          32.90382
+        ],
+        "LR": [
+          -96.386972,
+          32.903109
+        ],
+        "LL": [
+          -96.387603,
+          32.903225
+        ],
+        "Clip": {
+          "URL": "http://imagehub.cmh.reportstest.evinternal.net/ImagePortal/m?id=404c25674cd1415d9a1375220ed56f23",
+          "Resource": "404c25674cd1415d9a1375220ed56f23",
+          "UL": [
+            -96.387545,
+            32.903946
+          ],
+          "UR": [
+            -96.386884,
+            32.90382
+          ],
+          "LR": [
+            -96.386972,
+            32.903109
+          ],
+          "LL": [
+            -96.387603,
+            32.903225
+          ]
+        },
+        "ImageId": "urn:eagleview.com:v4:spatial-data:raster:visual:georegistered:-QBkhMqy8kOT9Mylyp9hLw:2542414019:5",
+        "GSD": 5.2432297272454145
+      },
+      {
+        "View": "E",
+        "Image": "E_2021_12.jpg",
+        "Heading": 108.0,
+        "Level": "N",
+        "Day": 17,
+        "Month": 12,
+        "Year": 2021,
+        "Width": 750,
+        "Height": 600,
+        "UL": [
+          -96.386871,
+          32.903677
+        ],
+        "UR": [
+          -96.38699,
+          32.903194
+        ],
+        "LR": [
+          -96.387618,
+          32.903361
+        ],
+        "LL": [
+          -96.387501,
+          32.903824
+        ],
+        "Clip": {
+          "URL": "http://imagehub.cmh.reportstest.evinternal.net/ImagePortal/m?id=357cade21643411f81bc60f058730921",
+          "Resource": "357cade21643411f81bc60f058730921",
+          "UL": [
+            -96.386871,
+            32.903677
+          ],
+          "UR": [
+            -96.38699,
+            32.903194
+          ],
+          "LR": [
+            -96.387618,
+            32.903361
+          ],
+          "LL": [
+            -96.387501,
+            32.903824
+          ]
+        },
+        "ImageId": "urn:eagleview.com:v4:spatial-data:raster:visual:georegistered:-QBkhMqy8kOT9Mylyp9hLw:2542401610:5",
+        "GSD": 4.0198234281261005
+      },
+      {
+        "View": "W",
+        "Image": "W_2021_12.jpg",
+        "Heading": 285.0,
+        "Level": "N",
+        "Day": 17,
+        "Month": 12,
+        "Year": 2021,
+        "Width": 750,
+        "Height": 600,
+        "UL": [
+          -96.387809,
+          32.903345
+        ],
+        "UR": [
+          -96.387643,
+          32.903918
+        ],
+        "LR": [
+          -96.386724,
+          32.903679
+        ],
+        "LL": [
+          -96.386879,
+          32.903136
+        ],
+        "Clip": {
+          "URL": "http://imagehub.cmh.reportstest.evinternal.net/ImagePortal/m?id=4539e5319bb6422e99d3021f78d37d39",
+          "Resource": "4539e5319bb6422e99d3021f78d37d39",
+          "UL": [
+            -96.387809,
+            32.903345
+          ],
+          "UR": [
+            -96.387643,
+            32.903918
+          ],
+          "LR": [
+            -96.386724,
+            32.903679
+          ],
+          "LL": [
+            -96.386879,
+            32.903136
+          ]
+        },
+        "ImageId": "urn:eagleview.com:v4:spatial-data:raster:visual:georegistered:-QBkhMqy8kOT9Mylyp9hLw:2542396954:5",
+        "GSD": 5.8944467797766853
+      },
+      {
+        "View": "S",
+        "Image": "S_2021_12.jpg",
+        "Heading": 175.0,
+        "Level": "N",
+        "Day": 30,
+        "Month": 12,
+        "Year": 2021,
+        "Width": 750,
+        "Height": 600,
+        "UL": [
+          -96.386883,
+          32.903181
+        ],
+        "UR": [
+          -96.387527,
+          32.903171
+        ],
+        "LR": [
+          -96.3876,
+          32.903837
+        ],
+        "LL": [
+          -96.386985,
+          32.903848
+        ],
+        "Clip": {
+          "URL": "http://imagehub.cmh.reportstest.evinternal.net/ImagePortal/m?id=7156f548691e4891ba9d0b8e343d4f05",
+          "Resource": "7156f548691e4891ba9d0b8e343d4f05",
+          "UL": [
+            -96.386883,
+            32.903181
+          ],
+          "UR": [
+            -96.387527,
+            32.903171
+          ],
+          "LR": [
+            -96.3876,
+            32.903837
+          ],
+          "LL": [
+            -96.386985,
+            32.903848
+          ]
+        },
+        "ImageId": "urn:eagleview.com:v4:spatial-data:raster:visual:georegistered:-QBkhMqy8kOT9Mylyp9hLw:2542402866:5",
+        "GSD": 4.8924041626921255
+      }
+    ]
+  },
+  "PreviousMeasurementInformation": {
+    "IsPreviouslyMeasured": false,
+    "PreviouslyMeasuredFloorType": -1,
+    "CheckForWalls": false
+  }
+}
