@@ -222,7 +222,9 @@ export async function POST(req: NextRequest) {
               let imagesPayload = imagesAvailable;
               if ((!imagesPayload || imagesPayload.length === 0) && searchResults && searchResults.length > 0) {
                 try {
-                  imagesPayload = searchResults.filter((r: any) => r.chunk_type === 'image').map((r: any) => {
+                  imagesPayload = [];
+                  
+                  searchResults.filter((r: any) => r.chunk_type === 'image').forEach((r: any) => {
                     // Remove "Diagram" from section names and use clean image names
                     let cleanSection = r.section || 'Unknown Image';
                     cleanSection = cleanSection.replace(' Diagram', '').replace('Diagram', '');
@@ -230,14 +232,74 @@ export async function POST(req: NextRequest) {
                     // Use the image_title if available, otherwise clean the section name
                     const displayTitle = r.image_title || cleanSection;
                     
-                    return {
-                      section: displayTitle,
-                      description: r.image_description || r.chunk_text || 'Property image',
-                      doc_address: r.doc_address || 'Unknown Address',
-                      image_file: r.image_path || r.image_file,
-                      image_files: r.image_files,
-                      title: displayTitle
-                    };
+                    // Extract all image paths from chunk_text (works for both single and multiple images)
+                    const imagePaths: string[] = [];
+                    
+                    if (r.chunk_text) {
+                      const lines = r.chunk_text.split('\n');
+                      lines.forEach(line => {
+                        // Look for lines containing image paths
+                        if (line.includes('extracted_images/')) {
+                          // Extract the path - handle different formats
+                          const match = line.match(/extracted_images\/[^,\s\]]+\.png/);
+                          if (match) {
+                            imagePaths.push(match[0]);
+                          }
+                        }
+                        // Also check for image_file: format
+                        if (line.includes('image_file:')) {
+                          const pathMatch = line.split('image_file:')[1]?.trim();
+                          if (pathMatch && pathMatch.includes('extracted_images/')) {
+                            imagePaths.push(pathMatch);
+                          }
+                        }
+                      });
+                    }
+                    
+                    // If we found image paths, create entries for each
+                    if (imagePaths.length > 0) {
+                      imagePaths.forEach(imagePath => {
+                        // Extract filename for better titles
+                        const filename = imagePath.split('/').pop()?.replace('.png', '') || '';
+                        
+                        // Create user-friendly titles
+                        const titleMappings = {
+                          'Lengthsimage': '📏 Length Measurements',
+                          'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+                          'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+                          'Rafters': '🏗️ Rafter Structure',
+                          'Azimuth': '🧭 Roof Azimuth/Direction',
+                          'Area': '📊 Roof Area Measurements',
+                          'Roof_Penetrations': '🔍 Roof Penetrations',
+                          'Top_View': '🛰️ Aerial/Top View',
+                          'North_Side': '⬆️ North Side View',
+                          'South_Side': '⬇️ South Side View',
+                          'East_Side': '➡️ East Side View',
+                          'West_Side': '⬅️ West Side View',
+                          'Cover_Image': '🏠 Cover/Overview Image',
+                          'Structure_Summary': '📋 Structure Summary'
+                        };
+                        
+                        const imageTitle = titleMappings[filename as keyof typeof titleMappings] || displayTitle;
+                        
+                        imagesPayload.push({
+                          section: imageTitle,
+                          description: r.image_description || `${cleanSection} image`,
+                          doc_address: r.doc_address || 'Unknown Address',
+                          image_file: imagePath,
+                          title: imageTitle
+                        });
+                      });
+                    } else {
+                      // Fallback: create entry even without image path (for debugging)
+                      imagesPayload.push({
+                        section: displayTitle,
+                        description: r.image_description || r.chunk_text || 'Property image',
+                        doc_address: r.doc_address || 'Unknown Address',
+                        image_file: r.image_path || r.image_file || '',
+                        title: displayTitle
+                      });
+                    }
                   });
                 } catch (e) {
                   console.error('Error processing image data:', e);

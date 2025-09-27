@@ -396,49 +396,78 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
         for result in image_chunks:
             # Extract image information from chunk text
             chunk_text = result.get("chunk_text", "")
-            image_path = ""
+            image_paths = []
             description = ""
             
-            # Parse image information from chunk text
-            for line in chunk_text.split('\n'):
-                if line.startswith('image_file:'):
-                    image_path = line.split('image_file:')[1].strip()
-                elif line.startswith('description:'):
+            # Debug log for Property Imagery chunks
+            if result.get("section") == "Property Imagery":
+                logger.info(f"Processing Property Imagery chunk: {result.get('chunk_id')}")
+                logger.info(f"Doc address: {result.get('doc_address')}")
+                logger.info(f"Chunk text: {chunk_text[:200]}...")
+            
+            # Parse image information from chunk text - handle multiple formats
+            lines = chunk_text.split('\n')
+            for line in lines:
+                # Look for image paths in different formats
+                if 'extracted_images/' in line:
+                    # Extract path using regex to handle different formats
+                    import re
+                    matches = re.findall(r'extracted_images/[^,\s\]]+\.png', line)
+                    image_paths.extend(matches)
+                
+                if line.startswith('description:'):
                     description = line.split('description:')[1].strip()
             
-            # Create user-friendly image title
-            filename = image_path.split('/')[-1].replace('.png', '') if image_path else ""
-            title_mappings = {
-                'Lengthsimage': '📏 Length Measurements',
-                'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
-                'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
-                'Rafters': '🏗️ Rafter Structure',
-                'Azimuth': '🧭 Roof Azimuth/Direction',
-                'Area': '📊 Roof Area Measurements',
-                'Roof_Penetrations': '🔍 Roof Penetrations',
-                'Top_View': '🛰️ Aerial/Top View',
-                'North_Side': '⬆️ North Side View',
-                'South_Side': '⬇️ South Side View',
-                'East_Side': '➡️ East Side View',
-                'West_Side': '⬅️ West Side View',
-                'Cover_Image': '🏠 Cover/Overview Image',
-                'Structure_Summary': '📋 Structure Summary'
-            }
-            
-            display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))
-            
-            # Level 2 chunk info for images
-            chunk_info = {
-                "chunk_id": result.get("chunk_id"),
-                "section": result.get("section"),
-                "chunk_type": result.get("chunk_type"),
-                "content": f"Image: {display_title}",
-                "distance": result.get("distance", 0),
-                "image_path": image_path,
-                "image_title": display_title,
-                "image_description": description
-            }
-            level2_chunks.append(chunk_info)
+            # If we found image paths, create entries for each
+            if image_paths:
+                for image_path in image_paths:
+                    # Create user-friendly image title
+                    filename = image_path.split('/')[-1].replace('.png', '') if image_path else ""
+                    title_mappings = {
+                        'Lengthsimage': '📏 Length Measurements',
+                        'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+                        'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+                        'Rafters': '🏗️ Rafter Structure',
+                        'Azimuth': '🧭 Roof Azimuth/Direction',
+                        'Area': '📊 Roof Area Measurements',
+                        'Roof_Penetrations': '🔍 Roof Penetrations',
+                        'Top_View': '🛰️ Aerial/Top View',
+                        'North_Side': '⬆️ North Side View',
+                        'South_Side': '⬇️ South Side View',
+                        'East_Side': '➡️ East Side View',
+                        'West_Side': '⬅️ West Side View',
+                        'Cover_Image': '🏠 Cover/Overview Image',
+                        'Structure_Summary': '📋 Structure Summary'
+                    }
+                    
+                    display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))
+                    
+                    # Level 2 chunk info for images
+                    chunk_info = {
+                        "chunk_id": result.get("chunk_id") + f"_{filename}" if len(image_paths) > 1 else result.get("chunk_id"),
+                        "section": display_title,
+                        "chunk_type": result.get("chunk_type"),
+                        "content": f"Image: {display_title}",
+                        "distance": result.get("distance", 0),
+                        "image_path": image_path,
+                        "image_title": display_title,
+                        "image_description": description or f"{display_title} image"
+                    }
+                    level2_chunks.append(chunk_info)
+            else:
+                # Fallback for chunks without extractable image paths
+                display_title = result.get("section", "Unknown Image")
+                chunk_info = {
+                    "chunk_id": result.get("chunk_id"),
+                    "section": display_title,
+                    "chunk_type": result.get("chunk_type"),
+                    "content": f"Image: {display_title}",
+                    "distance": result.get("distance", 0),
+                    "image_path": "",
+                    "image_title": display_title,
+                    "image_description": description or "Property image"
+                }
+                level2_chunks.append(chunk_info)
         
         # Collect unique documents from all results
         for result in search_results:

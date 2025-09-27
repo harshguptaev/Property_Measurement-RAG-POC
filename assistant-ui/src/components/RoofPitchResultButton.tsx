@@ -18,7 +18,7 @@ export function RoofPitchResultButton({ roofPitchData, propertiesCount }: RoofPi
     sessionStorage.setItem('roofPitchData', JSON.stringify(roofPitchData));
     router.push('/roof-pitch-results');
   };
-
+   console.log()
   return (
     <div className="mt-4 p-4 border border-border rounded-lg bg-card/50">
       <div className="flex items-center justify-between">

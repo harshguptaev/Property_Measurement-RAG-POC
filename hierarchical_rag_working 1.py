@@ -263,10 +263,11 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 source_file = doc.get("source_file", "unknown.pdf")
                 chunks = doc.get("chunks", [])
                 
-                # Extract address from chunks
+                # Extract address from chunks - try multiple approaches
                 address = "Unknown Address"
                 date = "Unknown Date"
                 
+                # First try Report Header
                 for chunk in chunks:
                     if chunk.get("section") == "Report Header":
                         data = chunk.get("data", {})
@@ -275,6 +276,24 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         if "date" in data:
                             date = data["date"]
                         break
+                
+                # If still unknown, try other sections that might have address
+                if address == "Unknown Address":
+                    for chunk in chunks:
+                        data = chunk.get("data", {})
+                        if isinstance(data, dict):
+                            # Look for any field containing address
+                            for key, value in data.items():
+                                if "address" in key.lower() and value and value != "Unknown Address":
+                                    address = value
+                                    break
+                            if address != "Unknown Address":
+                                break
+                
+                # Final fallback - extract from doc_id if it contains address info
+                if address == "Unknown Address":
+                    # Some doc_ids might contain property info
+                    address = f"Property {doc_id}"
                 
                 print("=" * 80)
                 print(f"address ::: {address}")
