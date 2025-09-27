@@ -454,7 +454,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             res1 = self.milvus_client.search(
                 collection_name=self.level1_collection_name,
                 data=[query_vec],
-                limit=2,
+                limit=1,
                 output_fields=["doc_id", "chunk_ids", "address", "summary"],
                 search_params=search_params
             )
@@ -517,7 +517,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             res2 = self.milvus_client.search(
                 collection_name=self.level2_collection_name,
                 data=[query_vec],
-                limit=10,  # Get more results to include images
+                limit=7,  # Get more results to include images
                 filter=expr,
                 output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id"]
             )
