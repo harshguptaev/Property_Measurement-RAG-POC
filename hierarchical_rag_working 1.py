@@ -192,7 +192,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         except Exception as e:
             logger.error(f"Error creating document summary: {str(e)}")
             # Fallback to simple concatenation
-            return f"Roofing report with {len(chunks_data)} sections covering measurements, diagrams, and property details."
+            return f"Roofing report with {len(chunks_data)} sections covering measurements, images, and property details."
     
     def create_milvus_collections(self, clear_existing: bool = True):
         """
@@ -498,7 +498,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             res2 = self.milvus_client.search(
                 collection_name=self.level2_collection_name,
                 data=[query_vec],
-                limit=3,  # Get more results to filter
+                limit=10,  # Get more results to include images
                 filter=expr,
                 output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id"]
             )
@@ -515,10 +515,12 @@ Provide a clear, structured summary in 2-3 sentences:"""
 
             print(f"\n{'='*80}")
             print(f"relevant_doc_ids :: {relevant_doc_ids}")
-            #print(f"res2 --------->: {res2}")
             print(f"Length :: {len(res2[0])}")
             print("=" * 80)
 
+            # Separate text and image chunks
+            text_chunks = []
+            image_chunks = []
 
             for result in res2[0]:
                 chunk_doc_id = result.get("doc_id")
@@ -539,10 +541,61 @@ Provide a clear, structured summary in 2-3 sentences:"""
                             chunk_info["doc_summary"] = doc_info["summary"]
                             break
                     
-                    final_results.append(chunk_info)
+                    # Separate by type
+                    if result.get("chunk_type") == "image":
+                        image_chunks.append(chunk_info)
+                    else:
+                        text_chunks.append(chunk_info)
+
+            # Combine results: prioritize text chunks but include all relevant images
+            final_results = text_chunks[:level2_limit]  # Take top text chunks based on limit
+            
+            # Add all image chunks from relevant documents (they're important for frontend display)
+            final_results.extend(image_chunks)
+            
+            # If we don't have many image chunks, try to get ALL images from relevant documents
+            if len(image_chunks) < 3:
+                try:
+                    # Search for all image chunks from relevant documents
+                    doc_ids_quoted = [f'"{doc_id}"' for doc_id in relevant_doc_ids]
+                    doc_filter = f'doc_id in [{",".join(doc_ids_quoted)}]'
                     
-                    # if len(final_results) >= level2_limit:
-                    #     break
+                    all_images_res = self.milvus_client.search(
+                        collection_name=self.level2_collection_name,
+                        data=[query_vec],
+                        limit=20,  # Get more images
+                        filter=doc_filter,
+                        output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id"]
+                    )
+                    
+                    if all_images_res and all_images_res[0]:
+                        for result in all_images_res[0]:
+                            if result.get("chunk_type") == "image" and result.get("doc_id") in relevant_doc_ids:
+                                # Check if we already have this image
+                                chunk_id = result.get("chunk_id")
+                                if not any(chunk["chunk_id"] == chunk_id for chunk in final_results):
+                                    chunk_info = {
+                                        "chunk_id": chunk_id,
+                                        "doc_id": result.get("doc_id"),
+                                        "section": result.get("section"),
+                                        "chunk_type": result.get("chunk_type"),
+                                        "chunk_text": result.get("chunk_text"),
+                                        "distance": result.get("distance", 0)
+                                    }
+                                    
+                                    # Add document-level info
+                                    for doc_info in level1_docs:
+                                        if doc_info["doc_id"] == result.get("doc_id"):
+                                            chunk_info["doc_address"] = doc_info["address"]
+                                            chunk_info["doc_summary"] = doc_info["summary"]
+                                            break
+                                    
+                                    final_results.append(chunk_info)
+                except Exception as e:
+                    logger.warning(f"Error fetching additional images: {e}")
+            
+            print(f"Text chunks: {len(text_chunks)}, Image chunks: {len(image_chunks)}")
+            print(f"Final results: {len(final_results)}")
             
             #print(f"final_results --------->: {final_results}")
             print(f"level2_limit :: {level2_limit}")
@@ -571,11 +624,49 @@ Provide a clear, structured summary in 2-3 sentences:"""
         
         # Prepare context from retrieved chunks
         context_parts = []
+        images_found = []
+        
         for i, result in enumerate(results, 1):
             doc_address = result.get('doc_address', 'Unknown Address')
             section = result.get('section', 'Unknown Section')
             chunk_type = result.get('chunk_type', 'text')
             chunk_text = result.get('chunk_text', '')
+            
+            # Extract image information if this is an image chunk
+            if chunk_type == 'image' and 'image_file:' in chunk_text:
+                image_path = None
+                for line in chunk_text.split('\n'):
+                    if line.startswith('image_file:'):
+                        image_path = line.split('image_file:')[1].strip()
+                        break
+                
+                if image_path:
+                    # Create user-friendly image title
+                    filename = image_path.split('/')[-1].replace('.png', '')
+                    title_mappings = {
+                        'Lengthsimage': '📏 Length Measurements',
+                        'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+                        'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+                        'Rafters': '🏗️ Rafter Structure',
+                        'Azimuth': '🧭 Roof Azimuth/Direction',
+                        'Area': '📊 Roof Area Measurements',
+                        'Roof_Penetrations': '🔍 Roof Penetrations',
+                        'Top_View': '🛰️ Aerial/Top View',
+                        'North_Side': '⬆️ North Side View',
+                        'South_Side': '⬇️ South Side View',
+                        'East_Side': '➡️ East Side View',
+                        'West_Side': '⬅️ West Side View',
+                        'Cover_Image': '🏠 Cover/Overview Image',
+                        'Structure_Summary': '📋 Structure Summary'
+                    }
+                    
+                    display_title = title_mappings.get(filename, section)
+                    images_found.append({
+                        'title': display_title,
+                        'section': section,
+                        'filename': filename,
+                        'address': doc_address
+                    })
             
             # Clean up chunk text for context
             if chunk_text.startswith('Section:'):
@@ -598,12 +689,18 @@ Content: {chunk_text}
         context = "\n".join(context_parts)
         
         # Create comprehensive prompt for LLM
+        images_context = ""
+        if images_found:
+            images_context = f"\n\nAvailable Images:\n"
+            for img in images_found:
+                images_context += f"- {img['title']} (from {img['address']})\n"
+        
         prompt = f"""You are a helpful assistant analyzing roofing report data. Based on the retrieved information below, provide a comprehensive and accurate answer to the user's question in JSON format.
 
 User Question: {query}
 
 Retrieved Information:
-{context}
+{context}{images_context}
 
 Instructions:
 1. Return your response as a valid JSON object with the following structure
@@ -612,7 +709,7 @@ Instructions:
 4. If multiple properties are mentioned, clearly distinguish between them
 5. Organize the information logically (e.g., by property, by measurement type)
 6. Use a conversational but professional tone
-7. If the information contains diagrams or images, mention what they show
+7. If the information contains images, mention what they show and reference them by their descriptive names
 
 Required JSON Response Format:
 {{
@@ -630,7 +727,15 @@ Required JSON Response Format:
             "additional_details": ["List of other relevant details"]
         }}
     ],
-    "diagrams_mentioned": ["List of diagrams or images referenced"],
+    "images_mentioned": ["List of images referenced"],
+    "images_available": [
+        {{
+            "title": "User-friendly image title",
+            "section": "Section name",
+            "filename": "Technical filename",
+            "address": "Property address"
+        }}
+    ],
     "confidence": "high/medium/low based on completeness of information",
     "notes": "Any limitations or additional context"
 }}
@@ -660,6 +765,9 @@ Provide only the JSON response, no additional text:"""
             # Try to parse as JSON
             try:
                 json_response = json.loads(llm_text)
+                # Add images_found to the response if not already included
+                if images_found and 'images_available' not in json_response:
+                    json_response['images_available'] = images_found
                 return json.dumps(json_response, indent=2)
             except json.JSONDecodeError:
                 # If not valid JSON, return as-is
@@ -747,9 +855,15 @@ Provide only the JSON response, no additional text:"""
                         for detail in prop["additional_details"]:
                             formatted_parts.append(f"       • {detail}")
             
-            # Diagrams
-            if "diagrams_mentioned" in data and data["diagrams_mentioned"]:
-                formatted_parts.append(f"\n📊 **Diagrams/Images**: {', '.join(data['diagrams_mentioned'])}")
+            # Images
+            if "images_mentioned" in data and data["images_mentioned"]:
+                formatted_parts.append(f"\n📊 **Images**: {', '.join(data['images_mentioned'])}")
+            
+            # Images Available
+            if "images_available" in data and data["images_available"]:
+                formatted_parts.append(f"\n🖼️ **Available Images**:")
+                for img in data["images_available"]:
+                    formatted_parts.append(f"  • {img.get('title', 'Unknown Image')} (from {img.get('address', 'Unknown Address')})")
             
             # Confidence and notes
             if "confidence" in data:
@@ -980,7 +1094,7 @@ def main(query: str = None, build_index: bool = True, show_raw: bool = False, ra
             "What is the property address?",
             "What are the roof obstructions?",
             "What is the roof pitch information?",
-            "Show me the imagery and diagrams"
+            "Show me the imagery and images"
         ]
     
     if raw_only:

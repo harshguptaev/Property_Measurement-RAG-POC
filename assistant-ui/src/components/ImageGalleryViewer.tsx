@@ -17,7 +17,7 @@ interface PropertyImageData {
   property_id: string;
   property_address: string;
   images: {
-    measurement_diagrams: PropertyImage[];
+    measurement_images: PropertyImage[];
     property_views: PropertyImage[];
     roof_analysis: PropertyImage[];
   };
@@ -177,7 +177,7 @@ export function ImageGalleryViewer({ onClose }: ImageGalleryViewerProps) {
             
             <TabsContent value="measurement" className="space-y-4">
               <div className="grid gap-4">
-                {selectedPropertyData.images.measurement_diagrams.map((image, index) => (
+                {selectedPropertyData.images.measurement_images.map((image, index) => (
                   <Card key={index}>
                     <CardHeader>
                       <CardTitle className="text-sm">{image.title}</CardTitle>

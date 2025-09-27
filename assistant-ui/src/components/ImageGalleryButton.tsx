@@ -32,7 +32,7 @@ export const ImageGalleryButton: React.FC<ImageGalleryButtonProps> = ({
     if (imageData && Array.isArray(imageData)) {
       const totalImages = imageData.reduce((sum, property) => {
         return sum + 
-          (property.measurement_diagrams?.length || 0) + 
+          (property.measurement_images?.length || 0) + 
           (property.property_views?.length || 0) + 
           (property.roof_analysis?.length || 0);
       }, 0);

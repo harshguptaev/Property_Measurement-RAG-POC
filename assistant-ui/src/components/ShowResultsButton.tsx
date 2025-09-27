@@ -14,6 +14,10 @@ interface ImageData {
   image_file?: string;
   image_files?: string[];
   doc_address: string;
+  title?: string;
+  image_path?: string;
+  image_title?: string;
+  image_description?: string;
 }
 
 interface ShowResultsButtonProps {
@@ -39,29 +43,7 @@ export function ShowResultsButton({
     return `/${p}`;
   };
 
-  // Deduplicate images: prefer grouped multi-image entries over individual ones
-  const deduplicatedImages = React.useMemo(() => {
-    const sectionGroups = new Map<string, ImageData>();
-    
-    // First pass: collect all entries by section + doc_address
-    for (const item of imagesAvailable) {
-      const key = `${item.section}_${item.doc_address || 'unknown'}`;
-      const existing = sectionGroups.get(key);
-      
-      // Prefer entries with image_files (grouped) over single image_file
-      if (!existing || (item.image_files && !existing.image_files)) {
-        sectionGroups.set(key, item);
-      }
-    }
-    
-    return Array.from(sectionGroups.values());
-  }, [imagesAvailable]);
-
-  const totalImages = deduplicatedImages.reduce((count, item) => {
-    if (item.image_file) return count + 1;
-    if (Array.isArray(item.image_files)) return count + item.image_files.length;
-    return count;
-  }, 0);
+  const totalImages = imagesAvailable.length;
 
   const totalResults = searchResults.length;
 
@@ -103,83 +85,24 @@ export function ShowResultsButton({
           </TabsList>
           
           <TabsContent value="images" className="mt-4 max-h-[70vh] overflow-y-auto">
-            {deduplicatedImages.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {deduplicatedImages.map((item, index) => (
-                  <Card key={index} className="overflow-hidden">
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <CardTitle className="text-sm font-medium">
-                            {item.section}
-                          </CardTitle>
-                          <div className="text-xs mt-1 flex items-center gap-1 text-muted-foreground">
-                            <MapPinIcon className="w-3 h-3" />
-                            <span>{item.doc_address}</span>
-                          </div>
-                        </div>
-                        <Badge variant="secondary" className="text-xs">
-                          {Array.isArray(item.image_files) ? `${item.image_files.length} images` : '1 image'}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    
-                    <CardContent className="pt-0">
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {item.description}
-                      </p>
-                      
-                      {/* Display single image */}
-                      {item.image_file && (
-                        <div className="space-y-2">
-                          <div className="relative group">
-                            <img
-                              loading="lazy"
-                              src={resolveSrc(item.image_file)}
-                              alt={item.section}
-                              className="w-full h-48 object-cover rounded-md border cursor-pointer hover:opacity-90 transition-opacity"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = '/placeholder-image.png';
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all rounded-md" />
-                          </div>
-                          <p className="text-xs text-muted-foreground font-mono">
-                            {item.image_file}
-                          </p>
-                        </div>
-                      )}
-                      
-                      {/* Display multiple images */}
-                      {item.image_files && item.image_files.length > 0 && (
-                        <div className="space-y-2">
-                          <div className="grid grid-cols-2 gap-2">
-                            {item.image_files.slice(0, 12).map((imagePath, imgIndex) => (
-                              <div key={imgIndex} className="relative group">
-                                <img
-                                  loading="lazy"
-                                  src={resolveSrc(imagePath)}
-                                  alt={`${item.section} ${imgIndex + 1}`}
-                                  className="w-full h-24 object-cover rounded-md border cursor-pointer hover:opacity-90 transition-opacity"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.src = '/placeholder-image.png';
-                                  }}
-                                />
-                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all rounded-md" />
-                              </div>
-                            ))}
-                          </div>
-                          {item.image_files.length > 12 && (
-                            <p className="text-xs text-muted-foreground">
-                              +{item.image_files.length - 12} more images
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
+            {imagesAvailable && imagesAvailable.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {imagesAvailable.map((item, index) => (
+                  <div key={index} className="space-y-2">
+                    <img 
+                      src={resolveSrc(item.image_file || item.image_path)} 
+                      alt={item.title || item.section}
+                      className="w-full h-48 object-cover rounded-md border"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = '/placeholder-image.png';
+                      }}
+                    />
+                    <div className="text-xs">
+                      <p className="font-medium">{item.title || item.section}</p>
+                      <p className="text-muted-foreground">{item.doc_address}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (

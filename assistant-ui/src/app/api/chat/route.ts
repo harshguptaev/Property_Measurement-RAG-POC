@@ -222,14 +222,26 @@ export async function POST(req: NextRequest) {
               let imagesPayload = imagesAvailable;
               if ((!imagesPayload || imagesPayload.length === 0) && searchResults && searchResults.length > 0) {
                 try {
-                  imagesPayload = searchResults.filter((r: any) => r.chunk_type === 'image').map((r: any) => ({
-                    section: r.section,
-                    description: r.chunk_text,
-                    doc_address: r.doc_address,
-                    image_file: r.image_file,
-                    image_files: r.image_files,
-                  }));
-                } catch {}
+                  imagesPayload = searchResults.filter((r: any) => r.chunk_type === 'image').map((r: any) => {
+                    // Remove "Diagram" from section names and use clean image names
+                    let cleanSection = r.section || 'Unknown Image';
+                    cleanSection = cleanSection.replace(' Diagram', '').replace('Diagram', '');
+                    
+                    // Use the image_title if available, otherwise clean the section name
+                    const displayTitle = r.image_title || cleanSection;
+                    
+                    return {
+                      section: displayTitle,
+                      description: r.image_description || r.chunk_text || 'Property image',
+                      doc_address: r.doc_address || 'Unknown Address',
+                      image_file: r.image_path || r.image_file,
+                      image_files: r.image_files,
+                      title: displayTitle
+                    };
+                  });
+                } catch (e) {
+                  console.error('Error processing image data:', e);
+                }
               }
 
               if (imagesPayload && imagesPayload.length > 0) {

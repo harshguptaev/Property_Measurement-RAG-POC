@@ -346,7 +346,7 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                     measurement_type="images"
                 )
         
-        # Use hierarchical search to get relevant chunks
+        # Use hierarchical search to get relevant chunks (including images)
         search_results = hierarchical_rag.search_hierarchical(prompt, level1_limit, level2_limit)
         
         # Generate LLM response
@@ -363,7 +363,12 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
         level1_docs = []
         level2_chunks = []
         
-        for result in search_results[:3]:  # Limit to top 3 sources
+        # Separate text and image chunks for better processing
+        text_chunks = [r for r in search_results if r.get("chunk_type") != "image"]
+        image_chunks = [r for r in search_results if r.get("chunk_type") == "image"]
+        
+        # Process text chunks (limit to top results for sources)
+        for result in text_chunks[:3]:
             # Level 2 chunk info
             chunk_info = {
                 "chunk_id": result.get("chunk_id"),
@@ -386,8 +391,57 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                 }
             }
             sources.append(source_info)
+        
+        # Process all image chunks (important for frontend display)
+        for result in image_chunks:
+            # Extract image information from chunk text
+            chunk_text = result.get("chunk_text", "")
+            image_path = ""
+            description = ""
             
-            # Level 1 doc info (unique docs only)
+            # Parse image information from chunk text
+            for line in chunk_text.split('\n'):
+                if line.startswith('image_file:'):
+                    image_path = line.split('image_file:')[1].strip()
+                elif line.startswith('description:'):
+                    description = line.split('description:')[1].strip()
+            
+            # Create user-friendly image title
+            filename = image_path.split('/')[-1].replace('.png', '') if image_path else ""
+            title_mappings = {
+                'Lengthsimage': '📏 Length Measurements',
+                'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+                'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+                'Rafters': '🏗️ Rafter Structure',
+                'Azimuth': '🧭 Roof Azimuth/Direction',
+                'Area': '📊 Roof Area Measurements',
+                'Roof_Penetrations': '🔍 Roof Penetrations',
+                'Top_View': '🛰️ Aerial/Top View',
+                'North_Side': '⬆️ North Side View',
+                'South_Side': '⬇️ South Side View',
+                'East_Side': '➡️ East Side View',
+                'West_Side': '⬅️ West Side View',
+                'Cover_Image': '🏠 Cover/Overview Image',
+                'Structure_Summary': '📋 Structure Summary'
+            }
+            
+            display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))
+            
+            # Level 2 chunk info for images
+            chunk_info = {
+                "chunk_id": result.get("chunk_id"),
+                "section": result.get("section"),
+                "chunk_type": result.get("chunk_type"),
+                "content": f"Image: {display_title}",
+                "distance": result.get("distance", 0),
+                "image_path": image_path,
+                "image_title": display_title,
+                "image_description": description
+            }
+            level2_chunks.append(chunk_info)
+        
+        # Collect unique documents from all results
+        for result in search_results:
             doc_info = {
                 "doc_id": result.get("doc_id"),
                 "address": result.get("doc_address"),
@@ -573,9 +627,19 @@ async def get_roof_pitch_data():
                 pitch_images = {}
                 for chunk in data.get('text', []):
                     if chunk.get('section') == 'Pitch (on 12) Diagram':
-                        pitch_images['pitch_on_12'] = chunk.get('data', {}).get('image_file')
+                        chunk_data = chunk.get('data', {})
+                        pitch_images['pitch_on_12'] = {
+                            'image_path': chunk_data.get('image_file'),
+                            'title': '📐 Roof Pitch (Rise over 12)',
+                            'description': chunk_data.get('description', 'Roof pitch image in x/12 format')
+                        }
                     elif chunk.get('section') == 'Pitch (Degrees) Diagram':
-                        pitch_images['pitch_degrees'] = chunk.get('data', {}).get('image_file')
+                        chunk_data = chunk.get('data', {})
+                        pitch_images['pitch_degrees'] = {
+                            'image_path': chunk_data.get('image_file'),
+                            'title': '📐 Roof Pitch (Degrees)',
+                            'description': chunk_data.get('description', 'Roof pitch image in degrees')
+                        }
                 
                 # Extract pitch table data (Areas per Pitch)
                 pitch_breakdown = []
@@ -650,9 +714,19 @@ async def get_roof_pitch_data_internal():
                 pitch_images = {}
                 for chunk in data.get('text', []):
                     if chunk.get('section') == 'Pitch (on 12) Diagram':
-                        pitch_images['pitch_on_12'] = chunk.get('data', {}).get('image_file')
+                        chunk_data = chunk.get('data', {})
+                        pitch_images['pitch_on_12'] = {
+                            'image_path': chunk_data.get('image_file'),
+                            'title': '📐 Roof Pitch (Rise over 12)',
+                            'description': chunk_data.get('description', 'Roof pitch image in x/12 format')
+                        }
                     elif chunk.get('section') == 'Pitch (Degrees) Diagram':
-                        pitch_images['pitch_degrees'] = chunk.get('data', {}).get('image_file')
+                        chunk_data = chunk.get('data', {})
+                        pitch_images['pitch_degrees'] = {
+                            'image_path': chunk_data.get('image_file'),
+                            'title': '📐 Roof Pitch (Degrees)',
+                            'description': chunk_data.get('description', 'Roof pitch image in degrees')
+                        }
                 
                 # Extract pitch table data (Areas per Pitch)
                 pitch_breakdown = []
@@ -769,16 +843,36 @@ async def get_measurement_data_internal(measurement_type):
                 for chunk in data.get('text', []):
                     if chunk.get('type') == 'image':
                         section = chunk.get('section', '').lower()
-                        image_file = chunk.get('data', {}).get('image_file', '')
+                        chunk_data = chunk.get('data', {})
+                        image_file = chunk_data.get('image_file', '')
                         
-                        if measurement_type == 'lengths' and 'lengths' in section:
-                            measurement_images['lengths_diagram'] = image_file
-                        elif measurement_type == 'rafters' and 'rafters' in section:
-                            measurement_images['rafters_diagram'] = image_file
-                        elif measurement_type == 'area' and 'area' in section:
-                            measurement_images['area_diagram'] = image_file
-                        elif measurement_type == 'azimuth' and 'azimuth' in section:
-                            measurement_images['azimuth_diagram'] = image_file
+                        # Extract filename for better matching
+                        filename = image_file.split('/')[-1].lower() if image_file else ''
+                        
+                        if measurement_type == 'lengths' and ('lengths' in section or 'lengthsimage' in filename):
+                            measurement_images['lengths_image'] = {
+                                'image_path': image_file,
+                                'title': '📏 Length Measurements',
+                                'description': chunk_data.get('description', 'Roof length measurements image')
+                            }
+                        elif measurement_type == 'rafters' and ('rafters' in section or 'rafters' in filename):
+                            measurement_images['rafters_image'] = {
+                                'image_path': image_file,
+                                'title': '🏗️ Rafter Structure',
+                                'description': chunk_data.get('description', 'Rafter measurements image')
+                            }
+                        elif measurement_type == 'area' and ('area' in section or 'area' in filename):
+                            measurement_images['area_image'] = {
+                                'image_path': image_file,
+                                'title': '📊 Roof Area Measurements',
+                                'description': chunk_data.get('description', 'Roof area measurements image')
+                            }
+                        elif measurement_type == 'azimuth' and ('azimuth' in section or 'azimuth' in filename):
+                            measurement_images['azimuth_image'] = {
+                                'image_path': image_file,
+                                'title': '🧭 Roof Azimuth/Direction',
+                                'description': chunk_data.get('description', 'Roof orientation image')
+                            }
                 
                 if property_info.get('report_id'):
                     measurement_data.append({
@@ -858,7 +952,7 @@ async def get_all_images_data():
                     data = json.load(f)
                 
                 property_info = {}
-                measurement_diagrams = []
+                measurement_images = []
                 property_views = []
                 roof_analysis = []
                 
@@ -872,27 +966,57 @@ async def get_all_images_data():
                 # Extract all images and categorize them
                 for chunk in data.get('text', []):
                     if chunk.get('type') == 'image':
-                        section = chunk.get('section', '').lower()
+                        section = chunk.get('section', '')
+                        section_lower = section.lower()
                         chunk_data = chunk.get('data', {})
                         
                         # Handle single image
                         if 'image_file' in chunk_data:
-                            image_info = {
-                                'type': section,
-                                'title': chunk.get('section', 'Unknown'),
-                                'description': chunk_data.get('description', ''),
-                                'image_path': chunk_data['image_file']
+                            # Extract filename for better titles
+                            image_path = chunk_data['image_file']
+                            filename = image_path.split('/')[-1].replace('.png', '')
+                            
+                            # Create user-friendly title based on filename
+                            title_mappings = {
+                                'Lengthsimage': '📏 Length Measurements',
+                                'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+                                'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+                                'Rafters': '🏗️ Rafter Structure',
+                                'Azimuth': '🧭 Roof Azimuth/Direction',
+                                'Area': '📊 Roof Area Measurements',
+                                'Roof_Penetrations': '🔍 Roof Penetrations',
+                                'Top_View': '🛰️ Aerial/Top View',
+                                'North_Side': '⬆️ North Side View',
+                                'South_Side': '⬇️ South Side View',
+                                'East_Side': '➡️ East Side View',
+                                'West_Side': '⬅️ West Side View',
+                                'Cover_Image': '🏠 Cover/Overview Image',
+                                'Structure_Summary': '📋 Structure Summary'
                             }
                             
-                            # Categorize images
-                            if any(x in section for x in ['length', 'pitch', 'rafter', 'azimuth', 'area']):
-                                measurement_diagrams.append(image_info)
-                            elif any(x in section for x in ['obstruction', 'penetration']):
+                            display_title = title_mappings.get(filename, section or 'Unknown Image')
+                            
+                            image_info = {
+                                'type': section_lower.replace(' ', '_'),
+                                'title': display_title,
+                                'description': chunk_data.get('description', ''),
+                                'image_path': image_path
+                            }
+                            
+                            # Categorize images based on section and filename
+                            if any(x in section_lower for x in ['length', 'pitch', 'rafter', 'azimuth', 'area']) or \
+                               any(x in filename.lower() for x in ['lengthsimage', 'pitch_degrees', 'pitch_on_12', 'rafters', 'azimuth', 'area']):
+                                measurement_images.append(image_info)
+                            elif any(x in section_lower for x in ['obstruction', 'penetration', 'roof penetrations']) or \
+                                 'roof_penetrations' in filename.lower():
                                 roof_analysis.append(image_info)
+                            elif any(x in filename.lower() for x in ['top_view', 'north_side', 'south_side', 'east_side', 'west_side', 'cover_image']):
+                                property_views.append(image_info)
                             else:
+                                # Default to roof analysis for other images
                                 roof_analysis.append(image_info)
                         
-                        # Handle multiple images (property views)
+                        # Handle multiple images (property views) - if this structure exists
                         if 'images' in chunk_data and isinstance(chunk_data['images'], list):
                             for i, image_path in enumerate(chunk_data['images']):
                                 # Extract view type from filename
@@ -911,7 +1035,7 @@ async def get_all_images_data():
                         'property_id': property_info.get('report_id'),
                         'property_address': property_info.get('property_address'),
                         'images': {
-                            'measurement_diagrams': measurement_diagrams,
+                            'measurement_images': measurement_images,
                             'property_views': property_views,
                             'roof_analysis': roof_analysis
                         }
@@ -941,7 +1065,7 @@ def format_all_images_response(image_data):
     # Count total images
     total_images = 0
     for prop in properties:
-        total_images += len(prop['images']['measurement_diagrams'])
+        total_images += len(prop['images']['measurement_images'])
         total_images += len(prop['images']['property_views'])
         total_images += len(prop['images']['roof_analysis'])
     
@@ -950,13 +1074,13 @@ def format_all_images_response(image_data):
 Found **{len(properties)}** properties with comprehensive image data including **{total_images}** total images:
 
 📊 **Image Categories Available:**
-- 📐 **Measurement Diagrams**: Length measurements, pitch analysis, rafter calculations, area breakdowns, azimuth orientations
+- 📐 **Measurement Images**: Length measurements, pitch analysis, rafter calculations, area breakdowns, azimuth orientations
 - 🏠 **Property Views**: Aerial imagery from top, north, south, east, and west perspectives  
-- 🔍 **Roof Analysis**: Roof penetrations, obstructions, and structural analysis diagrams
+- 🔍 **Roof Analysis**: Roof penetrations, obstructions, and structural analysis images
 
 💡 **Visual Analysis Features:**
 - High-resolution property imagery from multiple angles
-- Technical measurement diagrams with precise calculations
+- Technical measurement images with precise calculations
 - Roof obstruction and penetration mapping
 - Comprehensive structural analysis visuals
 

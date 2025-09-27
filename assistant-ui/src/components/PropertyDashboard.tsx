@@ -221,7 +221,7 @@ export function PropertyDashboard() {
         <Button 
           onClick={() => {
             console.log('Test button clicked - dispatching showImageGallery event');
-            const testData = [{ property_id: 'test', measurement_diagrams: [], property_views: [], roof_analysis: [] }];
+            const testData = [{ property_id: 'test', measurement_images: [], property_views: [], roof_analysis: [] }];
             const event = new CustomEvent('showImageGallery', { detail: testData });
             window.dispatchEvent(event);
           }}
