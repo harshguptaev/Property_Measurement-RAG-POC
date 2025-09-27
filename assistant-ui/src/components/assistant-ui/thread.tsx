@@ -30,6 +30,7 @@ import { EnhancedMessageContent } from "@/components/assistant-ui/enhanced-messa
 import { RoofPitchResultButton } from "@/components/RoofPitchResultButton";
 import { MeasurementResultButton } from "@/components/MeasurementResultButton";
 import { ImageGalleryButton } from "@/components/ImageGalleryButton";
+import { ShowResultsButton } from "@/components/ShowResultsButton";
 import { ToolFallback } from "@/components/assistant-ui/tool-fallback";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/components/ui/button";
@@ -255,6 +256,12 @@ const AssistantMessage: FC = () => {
   const hasImageGalleryData = messageContent && (messageContent as any)?.hasImageGalleryData;
   const imageGalleryData = hasImageGalleryData ? (messageContent as any)?.imageGalleryData : null;
   
+  // Check for hierarchical RAG results with images
+  const hasSearchResults = messageContent && (messageContent as any)?.searchResults;
+  const searchResults = hasSearchResults ? (messageContent as any)?.searchResults : null;
+  const hasImagesAvailable = messageContent && (messageContent as any)?.imagesAvailable;
+  const imagesAvailable = hasImagesAvailable ? (messageContent as any)?.imagesAvailable : null;
+  
   return (
     <MessagePrimitive.Root asChild>
       <div
@@ -291,6 +298,15 @@ const AssistantMessage: FC = () => {
           {hasImageGalleryData && imageGalleryData && (
             <ImageGalleryButton 
               imageData={imageGalleryData}
+              className="mt-3"
+            />
+          )}
+          
+          {/* Add show results button for hierarchical RAG results */}
+          {(hasSearchResults || hasImagesAvailable) && (
+            <ShowResultsButton 
+              searchResults={searchResults || []}
+              imagesAvailable={imagesAvailable || []}
               className="mt-3"
             />
           )}

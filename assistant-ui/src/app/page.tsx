@@ -36,6 +36,8 @@ export default function PropertyAnalysisApp() {
         let measurementData = null; // Store measurement data
         let measurementType = null; // Store measurement type
         let imageGalleryData = null; // Store image gallery data
+        let searchResults = null; // Store hierarchical RAG search results
+        let imagesAvailable = null; // Store available images from RAG
 
         try {
           while (true) {
@@ -95,7 +97,39 @@ export default function PropertyAnalysisApp() {
                         }],
                       };
                     }
+                  } else if (data.type === "search-results") {
+                    searchResults = data.searchResults;
+                    // Update the final message with search results
+                    yield {
+                      content: [{ 
+                        type: "text", 
+                        text: accumulatedText,
+                        searchResults: searchResults
+                      }],
+                    };
+                  } else if (data.type === "images-available") {
+                    imagesAvailable = data.imagesAvailable;
+                    // Update the final message with available images
+                    yield {
+                      content: [{ 
+                        type: "text", 
+                        text: accumulatedText,
+                        imagesAvailable: imagesAvailable
+                      }],
+                    };
                   } else if (data.type === "finish") {
+                    // Final message with all accumulated data
+                    yield {
+                      content: [{ 
+                        type: "text", 
+                        text: accumulatedText,
+                        ...(roofPitchData && { hasRoofPitchData: true, roofPitchData }),
+                        ...(measurementData && { hasMeasurementData: true, measurementData, measurementType }),
+                        ...(imageGalleryData && { hasImageGalleryData: true, imageGalleryData }),
+                        ...(searchResults && { searchResults }),
+                        ...(imagesAvailable && { imagesAvailable })
+                      }],
+                    };
                     return;
                   }
                 } catch (parseError) {

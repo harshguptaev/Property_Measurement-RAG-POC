@@ -102,6 +102,47 @@ export async function POST(req: NextRequest) {
       let roofPitchData = ragResult.roof_pitch_data || null;
       let measurementData = ragResult.measurement_data || null;
       let measurementType = ragResult.measurement_type || null;
+      let searchResults = ragResult.search_results || ragResult.level2_chunks || null;
+      let imagesAvailable = ragResult.images_available || null;
+      let addresses = ragResult.addresses || null;
+      let structured = ragResult.structured || null;
+      const normalizeImagePath = (p: string) => {
+        if (!p) return p;
+        if (p.startsWith('http://') || p.startsWith('https://')) return p;
+        const base = new URL(ragBackendUrl);
+        if (p.startsWith('extracted_images/')) return `${base.origin}/images/${p.replace('extracted_images/', '')}`;
+        if (p.startsWith('/extracted_images/')) return `${base.origin}/images/${p.replace('/extracted_images/', '')}`;
+        if (p.startsWith('/')) return `${base.origin}${p}`;
+        return `${base.origin}/${p}`;
+      };
+      
+      // Parse JSON response if it's a string (from improved hierarchical RAG)
+      if (typeof responseText === 'string' && responseText.trim().startsWith('{')) {
+        try {
+          const parsedResponse = JSON.parse(responseText);
+          responseText = parsedResponse.answer || responseText;
+          
+          // Extract images_available from the JSON response
+          if (parsedResponse.images_available) {
+            imagesAvailable = typeof parsedResponse.images_available === 'string' 
+              ? JSON.parse(parsedResponse.images_available) 
+              : parsedResponse.images_available;
+          }
+          if (!addresses && parsedResponse.addresses) {
+            addresses = parsedResponse.addresses;
+          }
+          if (!structured && parsedResponse.structured) {
+            structured = parsedResponse.structured;
+          }
+          
+          // Extract search results if not already available
+          if (!searchResults && parsedResponse.search_results) {
+            searchResults = parsedResponse.search_results;
+          }
+        } catch (parseError) {
+          console.log("Response is not JSON, treating as plain text");
+        }
+      }
       
       // Add hierarchical search info if available
       if (ragResult.level1_docs || ragResult.level2_chunks) {
@@ -167,12 +208,47 @@ export async function POST(req: NextRequest) {
                 );
               }
               
+              // Send search results if available
+              if (searchResults && searchResults.length > 0) {
+                controller.enqueue(
+                  encoder.encode(`data: ${JSON.stringify({ 
+                    type: "search-results", 
+                    searchResults: searchResults 
+                  })}\n\n`)
+                );
+              }
+              
+              // Prefer images_available from backend, else derive from search results
+              let imagesPayload = imagesAvailable;
+              if ((!imagesPayload || imagesPayload.length === 0) && searchResults && searchResults.length > 0) {
+                try {
+                  imagesPayload = searchResults.filter((r: any) => r.chunk_type === 'image').map((r: any) => ({
+                    section: r.section,
+                    description: r.chunk_text,
+                    doc_address: r.doc_address,
+                    image_file: r.image_file,
+                    image_files: r.image_files,
+                  }));
+                } catch {}
+              }
+
+              if (imagesPayload && imagesPayload.length > 0) {
+                controller.enqueue(
+                  encoder.encode(`data: ${JSON.stringify({ 
+                    type: "images-available", 
+                    imagesAvailable: imagesPayload 
+                  })}\n\n`)
+                );
+              }
+              
+              // Include addresses and structured in the final payload
+              const finishPayload: any = { type: "finish", finishReason: "stop" };
+              if (addresses) finishPayload.addresses = addresses;
+              if (structured) finishPayload.structured = structured;
+              console.log("finishPayload", JSON.stringify(finishPayload))
               // Send finish signal
               controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify({ 
-                  type: "finish", 
-                  finishReason: "stop" 
-                })}\n\n`)
+                encoder.encode(`data: ${JSON.stringify(finishPayload)}\n\n`)
               );
               controller.close();
             }
