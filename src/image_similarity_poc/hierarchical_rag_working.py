@@ -619,62 +619,148 @@ Provide only the JSON response, no additional text:"""
     
     def format_json_response(self, json_response: str) -> str:
         """
-        Format JSON response for better display
+        Format JSON response with markdown tables for better frontend display
         
         Args:
             json_response: JSON string response from LLM
             
         Returns:
-            Formatted string for display
+            Formatted markdown string with proper tables
         """
         try:
             data = json.loads(json_response)
             
-            # Create a nicely formatted display
             formatted_parts = []
             
-            # Main answer
-            if "answer" in data:
-                formatted_parts.append(f"📋 **Answer**: {data['answer']}")
-            
-            # Summary
-            if "summary" in data:
-                formatted_parts.append(f"📊 **Summary**: {data['summary']}")
-            
-            # Properties
+            # Header with property info
             if "properties" in data and data["properties"]:
-                formatted_parts.append("\n🏠 **Properties**:")
-                for i, prop in enumerate(data["properties"], 1):
-                    formatted_parts.append(f"  {i}. **Address**: {prop.get('address', 'N/A')}")
+                prop = data["properties"][0]  # Assume single property for now
+                address = prop.get('address', 'Unknown Address')
+                formatted_parts.append(f"# 🏠 Property Analysis Report")
+                formatted_parts.append(f"**Address:** {address}")
+                formatted_parts.append("")
+            
+            # Executive Summary
+            if "summary" in data:
+                formatted_parts.append("## 📊 Executive Summary")
+                formatted_parts.append(f"> {data['summary']}")
+                formatted_parts.append("")
+            
+            # Main Measurements Table
+            if "properties" in data and data["properties"]:
+                prop = data["properties"][0]
+                if "key_measurements" in prop:
+                    measurements = prop["key_measurements"]
                     
+                    formatted_parts.append("## 📏 Core Measurements")
+                    formatted_parts.append("| Measurement Type | Value |")
+                    formatted_parts.append("|------------------|-------|")
+                    
+                    # Basic measurements first
+                    basic_measurements = ['roof_facets', 'predominant_pitch', 'total_area', 'obstructions']
+                    for key in basic_measurements:
+                        if key in measurements and measurements[key] and measurements[key] != "N/A":
+                            display_name = key.replace('_', ' ').title()
+                            value = str(measurements[key])
+                            formatted_parts.append(f"| {display_name} | {value} |")
+                    
+                    formatted_parts.append("")
+                    
+                    # Roof Components Table
+                    roof_components = {}
+                    for key, value in measurements.items():
+                        if value and value != "N/A" and key not in basic_measurements:
+                            if any(term in key.lower() for term in ['ridge', 'hip', 'valley', 'rake', 'eave', 'drip', 'flash']):
+                                roof_components[key] = value
+                    
+                    if roof_components:
+                        formatted_parts.append("## 🔧 Roof Components")
+                        formatted_parts.append("| Component | Measurement | Details |")
+                        formatted_parts.append("|-----------|-------------|---------|")
+                        
+                        for key, value in roof_components.items():
+                            component = key.replace('_', ' ').title()
+                            # Split value into measurement and details if possible
+                            value_parts = str(value).split('(')
+                            measurement = value_parts[0].strip()
+                            details = '(' + value_parts[1] if len(value_parts) > 1 else ''
+                            
+                            formatted_parts.append(f"| {component} | {measurement} | {details} |")
+                        
+                        formatted_parts.append("")
+                    
+                    # Location & Coordinates
+                    if 'coordinates' in measurements:
+                        formatted_parts.append("## 📍 Location Information")
+                        formatted_parts.append("| Property | Details |")
+                        formatted_parts.append("|----------|---------|")
+                        formatted_parts.append(f"| Address | {address} |")
+                        formatted_parts.append(f"| Coordinates | {measurements['coordinates']} |")
+                        formatted_parts.append("")
+            
+            # Additional Details Section
+            if "properties" in data and data["properties"]:
+                prop = data["properties"][0]
+                if "additional_details" in prop and prop["additional_details"]:
+                    formatted_parts.append("## 📝 Additional Details")
+                    for detail in prop["additional_details"]:
+                        formatted_parts.append(f"- {detail}")
+                    formatted_parts.append("")
+            
+            # Images Section
+            if "images_available" in data and data["images_available"]:
+                formatted_parts.append("## 🖼️ Available Documentation")
+                for img in data["images_available"]:
+                    title = img.get('title', 'Unknown Image')
+                    formatted_parts.append(f"- 📸 {title}")
+                formatted_parts.append("")
+            
+            # Diagrams (legacy support)
+            if "diagrams_mentioned" in data and data["diagrams_mentioned"]:
+                formatted_parts.append("## 📊 Referenced Diagrams")
+                formatted_parts.append(f"- {', '.join(data['diagrams_mentioned'])}")
+                formatted_parts.append("")
+            
+            # Analysis Summary
+            if "properties" in data and data["properties"]:
+                formatted_parts.append("## 📈 Analysis Summary")
+                formatted_parts.append("| Metric | Value |")
+                formatted_parts.append("|--------|-------|")
+                formatted_parts.append(f"| Properties Analyzed | {len(data['properties'])} |")
+                
+                # Extract key stats
+                total_facets = 0
+                pitch_info = []
+                for prop in data["properties"]:
                     if "key_measurements" in prop:
                         measurements = prop["key_measurements"]
-                        formatted_parts.append("     📏 **Key Measurements**:")
-                        for key, value in measurements.items():
-                            if value and value != "N/A":
-                                formatted_parts.append(f"       • {key.replace('_', ' ').title()}: {value}")
-                    
-                    if "additional_details" in prop and prop["additional_details"]:
-                        formatted_parts.append("     📝 **Additional Details**:")
-                        for detail in prop["additional_details"]:
-                            formatted_parts.append(f"       • {detail}")
+                        if "roof_facets" in measurements:
+                            try:
+                                facets = int(str(measurements["roof_facets"]).split()[0])
+                                total_facets += facets
+                            except:
+                                pass
+                        if "predominant_pitch" in measurements:
+                            pitch_info.append(measurements["predominant_pitch"])
+                
+                if total_facets > 0:
+                    formatted_parts.append(f"| Total Roof Facets | {total_facets} |")
+                if pitch_info:
+                    formatted_parts.append(f"| Pitch Variations | {', '.join(set(pitch_info))} |")
+                
+                formatted_parts.append("")
             
-            # Diagrams
-            if "diagrams_mentioned" in data and data["diagrams_mentioned"]:
-                formatted_parts.append(f"\n📊 **Diagrams/Images**: {', '.join(data['diagrams_mentioned'])}")
-            
-            # Confidence and notes
+            # Footer with confidence
             if "confidence" in data:
                 confidence_emoji = {"high": "🟢", "medium": "🟡", "low": "🔴"}.get(data["confidence"], "⚪")
-                formatted_parts.append(f"\n{confidence_emoji} **Confidence**: {data['confidence'].title()}")
+                formatted_parts.append(f"**{confidence_emoji} Analysis Confidence:** {data['confidence'].upper()}")
             
             if "notes" in data and data["notes"]:
-                formatted_parts.append(f"💡 **Notes**: {data['notes']}")
+                formatted_parts.append(f"**💡 Notes:** {data['notes']}")
             
             return "\n".join(formatted_parts)
             
         except json.JSONDecodeError:
-            # If not JSON, return as-is
             return json_response
 
     def print_search_results(self, query: str, results: List[Dict]) -> None:
