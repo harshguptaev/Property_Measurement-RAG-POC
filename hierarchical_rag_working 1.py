@@ -666,7 +666,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
         
         # Prepare context from retrieved chunks
         context_parts = []
-        images_found = []
         
         for i, result in enumerate(results, 1):
             doc_address = result.get('doc_address', 'Unknown Address')
@@ -674,41 +673,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
             chunk_type = result.get('chunk_type', 'text')
             chunk_text = result.get('chunk_text', '')
             
-            # Extract image information if this is an image chunk
-            if chunk_type == 'image' and 'image_file:' in chunk_text:
-                image_path = None
-                for line in chunk_text.split('\n'):
-                    if line.startswith('image_file:'):
-                        image_path = line.split('image_file:')[1].strip()
-                        break
-                
-                if image_path:
-                    # Create user-friendly image title
-                    filename = image_path.split('/')[-1].replace('.png', '')
-                    title_mappings = {
-                        'Lengthsimage': '📏 Length Measurements',
-                        'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
-                        'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
-                        'Rafters': '🏗️ Rafter Structure',
-                        'Azimuth': '🧭 Roof Azimuth/Direction',
-                        'Area': '📊 Roof Area Measurements',
-                        'Roof_Penetrations': '🔍 Roof Penetrations',
-                        'Top_View': '🛰️ Aerial/Top View',
-                        'North_Side': '⬆️ North Side View',
-                        'South_Side': '⬇️ South Side View',
-                        'East_Side': '➡️ East Side View',
-                        'West_Side': '⬅️ West Side View',
-                        'Cover_Image': '🏠 Cover/Overview Image',
-                        'Structure_Summary': '📋 Structure Summary'
-                    }
-                    
-                    display_title = title_mappings.get(filename, section)
-                    images_found.append({
-                        'title': display_title,
-                        'section': section,
-                        'filename': filename,
-                        'address': doc_address
-                    })
             
             # Clean up chunk text for context
             if chunk_text.startswith('Section:'):
@@ -728,76 +692,44 @@ Section: {section} ({chunk_type})
 Content: {chunk_text}
 """)
         
+        # Add image chunks directly to context as JSON
+        image_chunks = [result for result in results if result.get('chunk_type') == 'image']
+        if image_chunks:
+            context_parts.append(f"\n\nIMAGE CHUNKS FROM LEVEL 2 SEARCH:")
+            for img_chunk in image_chunks:
+                context_parts.append(f"""
+Image Chunk ID: {img_chunk.get('chunk_id', 'N/A')}
+Document: {img_chunk.get('doc_address', 'Unknown Address')}
+Section: {img_chunk.get('section', 'Unknown Section')}
+Description: {img_chunk.get('chunk_text', 'No description available')}
+""")
+
         context = "\n".join(context_parts)
         
-        # Create comprehensive prompt for LLM
-        images_context = ""
-        if images_found:
-            images_context = f"\n\nAvailable Images:\n"
-            for img in images_found:
-                images_context += f"- {img['title']} (from {img['address']})\n"
-        
-        prompt = f"""You are a professional roofing analysis specialist. Based on the retrieved information below, provide a comprehensive and accurate answer to the user's question in JSON format with enhanced structure and detail.
+        prompt = f"""You are a professional EagleView assistant specializing in roofing analysis and property information.
 
-User Question: {query}
+Your task is to provide accurate, relevant information to customer questions based on retrieved property data.
 
-Retrieved Information:
-{context}{images_context}
+INFORMATION PROVIDED:
+- Level 1 chunks: General property information and overviews
+- Level 2 chunks: Specific technical details (roof area, facets, pitch, measurements, etc.)
 
-Instructions:
-1. Return your response as a valid JSON object with the following enhanced structure
-2. Provide a direct, comprehensive answer to the user's question
-3. Include ALL specific measurements, addresses, and technical details available
-4. Organize measurements by logical categories (basic info, roof components, dimensions)
-5. Use precise technical language while remaining clear and professional
-6. Reference images by their descriptive names and explain their relevance
-7. Provide detailed analysis and context for measurements
+INSTRUCTIONS:
+1. Answer ONLY using the information from the provided chunks
+2. Provide complete, accurate measurements and technical details when available
+3. If exact information is not available, infer reasonable estimates from related chunk data
+4. Be concise but comprehensive - include all relevant measurements and specifications
+5. Use professional, clear language appropriate for roofing industry customers
+6. Include specific numbers, units, and technical terms as they appear in the chunks
+7. Reference image data when relevant to the question
+8. You will receive text chunks, image chunks, and table chunks containing comprehensive property data 
 
-Enhanced JSON Response Format:
-{{
-    "answer": "Comprehensive, detailed answer to the user's question with specific measurements and technical details",
-    "summary": "Executive summary highlighting the most critical findings and key measurements",
-    "properties": [
-        {{
-            "address": "Complete property address",
-            "key_measurements": {{
-                "total_area": "Total roof area with units (e.g., '2,450 sq ft')",
-                "roof_facets": "Number of roof facets (e.g., '31 facets')",
-                "predominant_pitch": "Main roof pitch (e.g., '12/12')",
-                "obstructions": "Obstruction details (e.g., '6 obstructions, 28.3 sq ft total')",
-                "ridges": "Ridge measurements with units",
-                "hips": "Hip measurements with units", 
-                "valleys": "Valley measurements with units",
-                "rakes": "Rake measurements with units",
-                "eaves_starters": "Eaves measurements with counts",
-                "drip_edge": "Drip edge measurements with counts",
-                "flashing": "Flashing measurements",
-                "step_flashing": "Step flashing measurements",
-                "coordinates": "Latitude and longitude if available"
-            }},
-            "additional_details": [
-                "Detailed technical specifications",
-                "Material requirements",
-                "Structural observations",
-                "Access considerations",
-                "Special conditions or notes"
-            ]
-        }}
-    ],
-    "images_mentioned": ["List of specific images referenced in the analysis"],
-    "images_available": [
-        {{
-            "title": "Descriptive image title (e.g., 'Roof Azimuth/Direction Diagram')",
-            "section": "Technical section name",
-            "filename": "Technical filename",
-            "address": "Property address"
-        }}
-    ],
-    "confidence": "high/medium/low based on data completeness and accuracy",
-    "notes": "Technical limitations, data quality notes, or additional context for analysis"
-}}
+QUESTION: {query}
 
-Provide only the JSON response, no additional text:"""
+RETRIEVED INFORMATION:
+{context}
+
+Provide a clear, professional answer that directly addresses the customer's question with specific details from the data."""
 
         try:
             body = {
