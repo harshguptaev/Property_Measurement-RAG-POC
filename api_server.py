@@ -25,6 +25,7 @@ from src.docling_index import process_and_index_directory_with_docling, DOCLING_
 from src.agent import AgenticRAG
 from src.bedrock_client import create_bedrock_llm, create_bedrock_embeddings
 from src.vector_store import VectorStoreManager
+from hierarchical_rag_working import HierarchicalRAG
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -46,8 +47,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global RAG agent instance
+# Global RAG agent instances
 rag_agent: Optional[AgenticRAG] = None
+hierarchical_rag: Optional[HierarchicalRAG] = None
 
 # Request/Response models
 class ChatMessage(BaseModel):
@@ -105,9 +107,16 @@ def initialize_rag_system():
                     embeddings=embeddings
                 )
                 
-                # Create RAG agent with existing vector store
+                # Create RAG agents with existing vector store
                 llm = create_bedrock_llm(bedrock_config)
                 rag_agent = AgenticRAG(
+                    vector_store_manager=vector_store_manager,
+                    llm=llm
+                )
+
+                # Initialize hierarchical RAG for level 2 chunk extraction
+                global hierarchical_rag
+                hierarchical_rag = HierarchicalRAG(
                     vector_store_manager=vector_store_manager,
                     llm=llm
                 )
@@ -140,8 +149,8 @@ async def root():
 @app.get("/health", response_model=SystemStatusResponse)
 async def health_check():
     """Health check endpoint."""
-    global rag_agent
-    
+    global rag_agent, hierarchical_rag
+
     doc_count = 0
     vector_store_active = False
 
@@ -160,8 +169,15 @@ async def health_check():
         except Exception as e:
             logger.error(f"Error checking vector store: {e}")
 
+    # Check if hierarchical RAG is also available
+    hierarchical_active = hierarchical_rag is not None
+
+    status = "healthy" if (vector_store_active and hierarchical_active) else (
+        "partial" if (rag_agent is not None or hierarchical_rag is not None) else "not_initialized"
+    )
+
     return SystemStatusResponse(
-        status="healthy" if vector_store_active else ("no_documents" if rag_agent is not None else "not_initialized"),
+        status=status,
         documents_loaded=doc_count,
         vector_store_active=vector_store_active,
         backend_version="1.0.0"
@@ -169,43 +185,68 @@ async def health_check():
 
 @app.post("/query", response_model=QueryResponse)
 async def query_documents(request: QueryRequest):
-    """Query the RAG system with a question."""
-    global rag_agent
-    
-    if rag_agent is None:
+    """Query the RAG system with a question using hierarchical search."""
+    global hierarchical_rag
+
+    if hierarchical_rag is None:
         raise HTTPException(
             status_code=503,
-            detail="RAG system not initialized. Please process documents first."
+            detail="Hierarchical RAG system not initialized. Please process documents first."
         )
-    
+
     try:
-        logger.info(f"Processing query: {request.question}")
-        
-        # Run the RAG agent
-        result = rag_agent.run(request.question)
-        
-        # Handle response format
-        if isinstance(result, dict):
-            response_text = result.get("response", "")
-            sources = result.get("sources", [])
-            images = result.get("images", [])
-            metadata = result.get("metadata", {})
-        else:
-            # Fallback for string response
-            response_text = str(result)
-            sources = []
-            images = []
-            metadata = {}
-        
-        logger.info(f"Query completed successfully")
-        
+        logger.info(f"Processing query with hierarchical search: {request.question}")
+
+        # Run hierarchical search to get level 2 chunks only
+        level2_chunks = hierarchical_rag.search_hierarchical(request.question)
+
+        # Generate response using the level 2 chunks
+        response_text = hierarchical_rag.generate_response(request.question, level2_chunks)
+
+        # Format sources as the level 2 chunks for frontend display
+        sources = []
+        images = []
+
+        for chunk in level2_chunks:
+            # Format each chunk as a source for the frontend
+            source_info = {
+                "chunk_id": chunk.get("chunk_id", ""),
+                "doc_id": chunk.get("doc_id", ""),
+                "doc_address": chunk.get("doc_address", ""),
+                "section": chunk.get("section", ""),
+                "chunk_type": chunk.get("chunk_type", ""),
+                "distance": chunk.get("distance", 0),
+                "content": chunk.get("chunk_text", "")[:500] + "..." if len(chunk.get("chunk_text", "")) > 500 else chunk.get("chunk_text", "")
+            }
+            sources.append(source_info)
+
+            # Separate image chunks for images array
+            if chunk.get("chunk_type") == "image":
+                images.append({
+                    "chunk_id": chunk.get("chunk_id", ""),
+                    "doc_id": chunk.get("doc_id", ""),
+                    "doc_address": chunk.get("doc_address", ""),
+                    "section": chunk.get("section", ""),
+                    "description": chunk.get("chunk_text", ""),
+                    "distance": chunk.get("distance", 0)
+                })
+
+        metadata = {
+            "search_method": "hierarchical",
+            "level2_chunks_count": len(level2_chunks),
+            "images_count": len(images),
+            "total_sources": len(sources)
+        }
+
+        logger.info(f"Hierarchical search completed. Found {len(level2_chunks)} level 2 chunks")
+
         return QueryResponse(
             response=response_text,
             sources=sources,
             images=images,
             metadata=metadata
         )
-        
+
     except Exception as e:
         logger.error(f"Error processing query: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -213,7 +254,7 @@ async def query_documents(request: QueryRequest):
 @app.post("/process-documents")
 async def process_documents(background_tasks: BackgroundTasks):
     """Process documents in the input_files directory."""
-    global rag_agent
+    global rag_agent, hierarchical_rag
     
     try:
         input_dir = Path("input_files")
@@ -270,11 +311,18 @@ async def process_documents_task(input_dir: str):
                 drop_existing=True
             )
         
-        # Create new RAG agent
+        # Create new RAG agents
         bedrock_config = config.get_bedrock_config()
         llm = create_bedrock_llm(bedrock_config)
-        
+
         rag_agent = AgenticRAG(
+            vector_store_manager=vector_store_manager,
+            llm=llm
+        )
+
+        # Initialize hierarchical RAG for level 2 chunk extraction
+        global hierarchical_rag
+        hierarchical_rag = HierarchicalRAG(
             vector_store_manager=vector_store_manager,
             llm=llm
         )
