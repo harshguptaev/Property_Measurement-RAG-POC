@@ -615,10 +615,33 @@ Provide a clear, structured summary in 2-3 sentences:"""
             
             print(f"Text chunks: {len(text_chunks)}, Image chunks: {len(image_chunks)}")
             print(f"Final results: {len(final_results)}")
-            
-            #print(f"final_results --------->: {final_results}")
             print(f"level2_limit :: {level2_limit}")
             print(f"len(final_results) :: {len(final_results)}")
+
+            print("\n" + "="*80)
+            print("FINAL RESULTS - DISTINGUISHABLE CHUNKS")
+            print("="*80)
+
+            for i, chunk in enumerate(final_results, 1):
+                print(f"\n{'='*60} CHUNK #{i} {'='*60}")
+                print(f"📄 Type: {chunk.get('chunk_type', 'N/A').upper()}")
+                print(f"🆔 Chunk ID: {chunk.get('chunk_id', 'N/A')}")
+                print(f"📋 Doc ID: {chunk.get('doc_id', 'N/A')}")
+                if chunk.get('doc_summary'):
+                    print(f"📝 Summary: {chunk.get('doc_summary', 'N/A')}")
+
+                print("\n📖 Content:")
+                content = chunk.get('chunk_text', 'N/A')
+                if len(content) > 500:
+                    print(f"   {content[:500]}...")
+                else:
+                    print(f"   {content}")
+
+                print(f"{'='*60} END CHUNK #{i} {'='*60}")
+
+            print("\n" + "="*80)
+            print("END OF FINAL RESULTS")
+            print("="*80)
             
             logger.info(f"✅ Hierarchical search completed. Found {len(final_results)} relevant chunks")
             return final_results
