@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ImageIcon, FileTextIcon, MapPinIcon, RulerIcon } from "lucide-react";
+import { ImageIcon, FileTextIcon, MapPinIcon, RulerIcon, Maximize2 } from "lucide-react";
 
 interface ImageData {
   section: string;
@@ -26,12 +26,13 @@ interface ShowResultsButtonProps {
   className?: string;
 }
 
-export function ShowResultsButton({ 
-  imagesAvailable = [], 
-  searchResults = [], 
-  className = "" 
+export function ShowResultsButton({
+  imagesAvailable = [],
+  searchResults = [],
+  className = ""
 }: ShowResultsButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedImage, setExpandedImage] = useState<ImageData | null>(null);
 
   const resolveSrc = (p?: string) => {
     if (!p) return p as any;
@@ -89,15 +90,25 @@ export function ShowResultsButton({
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {imagesAvailable.map((item, index) => (
                   <div key={index} className="space-y-2">
-                    <img 
-                      src={resolveSrc(item.image_file || item.image_path)} 
-                      alt={item.title || item.section}
-                      className="w-full h-48 object-cover rounded-md border"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = '/placeholder-image.png';
-                      }}
-                    />
+                    <div className="relative group">
+                      <img
+                        src={resolveSrc(item.image_file || item.image_path)}
+                        alt={item.title || item.section}
+                        className="w-full h-48 object-cover rounded-md border"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/placeholder-image.png';
+                        }}
+                      />
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 hover:bg-black/70 border-0"
+                        onClick={() => setExpandedImage(item)}
+                      >
+                        <Maximize2 className="w-4 h-4 text-white" />
+                      </Button>
+                    </div>
                     <div className="text-xs">
                       <p className="font-medium">{item.title || item.section}</p>
                       <p className="text-muted-foreground">{item.doc_address}</p>
@@ -178,6 +189,51 @@ export function ShowResultsButton({
           </TabsContent>
         </Tabs>
       </DialogContent>
+
+      {/* Expanded Image Modal */}
+      {expandedImage && (
+        <Dialog open={!!expandedImage} onOpenChange={() => setExpandedImage(null)}>
+          <DialogContent className="max-w-7xl max-h-[95vh] overflow-hidden">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <ImageIcon className="w-5 h-5" />
+                {expandedImage.title || expandedImage.section}
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="flex flex-col space-y-4">
+              <div className="flex justify-center">
+                <img
+                  src={resolveSrc(expandedImage.image_file || expandedImage.image_path)}
+                  alt={expandedImage.title || expandedImage.section}
+                  className="max-w-full max-h-[80vh] object-contain rounded-md"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = '/placeholder-image.png';
+                  }}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <h4 className="font-medium mb-2">Property Details</h4>
+                  <p className="text-muted-foreground"><strong>Address:</strong> {expandedImage.doc_address}</p>
+                  <p className="text-muted-foreground"><strong>Section:</strong> {expandedImage.section}</p>
+                  {expandedImage.image_description && (
+                    <p className="text-muted-foreground"><strong>Description:</strong> {expandedImage.image_description}</p>
+                  )}
+                </div>
+
+                <div>
+                  <h4 className="font-medium mb-2">Image Information</h4>
+                  <p className="text-muted-foreground"><strong>File:</strong> {expandedImage.image_file || expandedImage.image_path || 'N/A'}</p>
+                  <p className="text-muted-foreground"><strong>Type:</strong> Property Measurement Image</p>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </Dialog>
   );
 }
