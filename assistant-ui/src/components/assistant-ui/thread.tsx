@@ -26,10 +26,6 @@ import {
   UserMessageAttachments,
 } from "@/components/assistant-ui/attachment";
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
-import { EnhancedMessageContent } from "@/components/assistant-ui/enhanced-message-content";
-import { RoofPitchResultButton } from "@/components/RoofPitchResultButton";
-import { MeasurementResultButton } from "@/components/MeasurementResultButton";
-import { ImageGalleryButton } from "@/components/ImageGalleryButton";
 import { ShowResultsButton } from "@/components/ShowResultsButton";
 import { ToolFallback } from "@/components/assistant-ui/tool-fallback";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
@@ -244,19 +240,8 @@ const MessageError: FC = () => {
 const AssistantMessage: FC = () => {
   const message = useMessage();
   
-  // Check if the message content contains measurement data
-  const messageContent = message.content?.[0];
-  const hasRoofPitchData = messageContent && (messageContent as any)?.hasRoofPitchData;
-  const roofPitchData = hasRoofPitchData ? (messageContent as any)?.roofPitchData : null;
-  
-  const hasMeasurementData = messageContent && (messageContent as any)?.hasMeasurementData;
-  const measurementData = hasMeasurementData ? (messageContent as any)?.measurementData : null;
-  const measurementType = hasMeasurementData ? (messageContent as any)?.measurementType : null;
-  
-  const hasImageGalleryData = messageContent && (messageContent as any)?.hasImageGalleryData;
-  const imageGalleryData = hasImageGalleryData ? (messageContent as any)?.imageGalleryData : null;
-  
   // Check for hierarchical RAG results with images
+  const messageContent = message.content?.[0];
   const hasSearchResults = messageContent && (messageContent as any)?.searchResults;
   const searchResults = hasSearchResults ? (messageContent as any)?.searchResults : null;
   const hasImagesAvailable = messageContent && (messageContent as any)?.imagesAvailable;
@@ -276,35 +261,10 @@ const AssistantMessage: FC = () => {
             }}
           />
           <MessageError />
-          
-          {/* Add roof pitch result button if data is available */}
-          {hasRoofPitchData && roofPitchData && (
-            <RoofPitchResultButton 
-              roofPitchData={roofPitchData}
-              propertiesCount={roofPitchData.length}
-            />
-          )}
-          
-          {/* Add generic measurement result button if data is available */}
-          {hasMeasurementData && measurementData && measurementType && (
-            <MeasurementResultButton 
-              measurementData={measurementData}
-              measurementType={measurementType}
-              propertiesCount={measurementData.length}
-            />
-          )}
-          
-          {/* Add image gallery button if data is available */}
-          {hasImageGalleryData && imageGalleryData && (
-            <ImageGalleryButton 
-              imageData={imageGalleryData}
-              className="mt-3"
-            />
-          )}
-          
+
           {/* Add show results button for hierarchical RAG results */}
           {(hasSearchResults || hasImagesAvailable) && (
-            <ShowResultsButton 
+            <ShowResultsButton
               searchResults={searchResults || []}
               imagesAvailable={imagesAvailable || []}
               className="mt-3"

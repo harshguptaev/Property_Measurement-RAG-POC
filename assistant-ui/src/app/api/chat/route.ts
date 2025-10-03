@@ -99,9 +99,6 @@ export async function POST(req: NextRequest) {
       
       // Extract response and additional info from hierarchical RAG
       let responseText = ragResult.response || ragResult.answer || "I'm sorry, I couldn't process your request.";
-      let roofPitchData = ragResult.roof_pitch_data || null;
-      let measurementData = ragResult.measurement_data || null;
-      let measurementType = ragResult.measurement_type || null;
       let searchResults = ragResult.search_results || ragResult.level2_chunks || null;
       let imagesAvailable = ragResult.images_available || null;
       let addresses = ragResult.addresses || null;
@@ -187,27 +184,6 @@ export async function POST(req: NextRequest) {
               index++;
               setTimeout(sendNext, 30);
             } else {
-              // After text is complete, send roof pitch data if available
-              if (roofPitchData && roofPitchData.length > 0) {
-                controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify({ 
-                    type: "roof-pitch-data", 
-                    roofPitchData: roofPitchData 
-                  })}\n\n`)
-                );
-              }
-              
-              // After text is complete, send measurement data if available
-              if (measurementData && measurementData.length > 0 && measurementType) {
-                controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify({ 
-                    type: "measurement-data", 
-                    measurementData: measurementData,
-                    measurementType: measurementType 
-                  })}\n\n`)
-                );
-              }
-              
               // Send search results if available
               if (searchResults && searchResults.length > 0) {
                 controller.enqueue(
@@ -237,7 +213,7 @@ export async function POST(req: NextRequest) {
                     
                     if (r.chunk_text) {
                       const lines = r.chunk_text.split('\n');
-                      lines.forEach(line => {
+                      lines.forEach((line: string) => {
                         // Look for lines containing image paths
                         if (line.includes('extracted_images/')) {
                           // Extract the path - handle different formats

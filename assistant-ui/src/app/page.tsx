@@ -32,10 +32,6 @@ export default function PropertyAnalysisApp() {
         const decoder = new TextDecoder();
         let buffer = "";
         let accumulatedText = ""; // Accumulate text deltas
-        let roofPitchData = null; // Store roof pitch data
-        let measurementData = null; // Store measurement data
-        let measurementType = null; // Store measurement type
-        let imageGalleryData = null; // Store image gallery data
         let searchResults = null; // Store hierarchical RAG search results
         let imagesAvailable = null; // Store available images from RAG
 
@@ -58,51 +54,12 @@ export default function PropertyAnalysisApp() {
                     yield {
                       content: [{ type: "text", text: accumulatedText }],
                     };
-                  } else if (data.type === "roof-pitch-data") {
-                    roofPitchData = data.roofPitchData;
-                    // Update the final message with roof pitch data
-                    yield {
-                      content: [{ 
-                        type: "text", 
-                        text: accumulatedText,
-                        hasRoofPitchData: true,
-                        roofPitchData: roofPitchData
-                      }],
-                    };
-                  } else if (data.type === "measurement-data") {
-                    measurementData = data.measurementData;
-                    measurementType = data.measurementType;
-                    
-                    // Check if this is image gallery data
-                    if (data.measurementType === "images") {
-                      imageGalleryData = measurementData;
-                      // Update the final message with image gallery data
-                      yield {
-                        content: [{ 
-                          type: "text", 
-                          text: accumulatedText,
-                          hasImageGalleryData: true,
-                          imageGalleryData: imageGalleryData
-                        }],
-                      };
-                    } else {
-                      // Update the final message with measurement data
-                      yield {
-                        content: [{ 
-                          type: "text", 
-                          text: accumulatedText,
-                          hasMeasurementData: true,
-                          measurementData: measurementData,
-                          measurementType: measurementType
-                        }],
-                      };
-                    }
                   } else if (data.type === "search-results") {
                     searchResults = data.searchResults;
                     // Update the final message with search results
                     yield {
-                      content: [{ 
-                        type: "text", 
+                      content: [{
+                        type: "text",
                         text: accumulatedText,
                         searchResults: searchResults
                       }],
@@ -111,8 +68,8 @@ export default function PropertyAnalysisApp() {
                     imagesAvailable = data.imagesAvailable;
                     // Update the final message with available images
                     yield {
-                      content: [{ 
-                        type: "text", 
+                      content: [{
+                        type: "text",
                         text: accumulatedText,
                         imagesAvailable: imagesAvailable
                       }],
@@ -120,12 +77,9 @@ export default function PropertyAnalysisApp() {
                   } else if (data.type === "finish") {
                     // Final message with all accumulated data
                     yield {
-                      content: [{ 
-                        type: "text", 
+                      content: [{
+                        type: "text",
                         text: accumulatedText,
-                        ...(roofPitchData && { hasRoofPitchData: true, roofPitchData }),
-                        ...(measurementData && { hasMeasurementData: true, measurementData, measurementType }),
-                        ...(imageGalleryData && { hasImageGalleryData: true, imageGalleryData }),
                         ...(searchResults && { searchResults }),
                         ...(imagesAvailable && { imagesAvailable })
                       }],
