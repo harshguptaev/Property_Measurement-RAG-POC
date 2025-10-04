@@ -120,7 +120,6 @@ class HierarchicalRAG:
             
             response = self.bedrock_client.invoke_model(
                 modelId="amazon.titan-embed-text-v1",
-                #modelId="amazon.titan-embed-image-v1"
                 body=body,
                 accept="application/json",
                 contentType="application/json"
@@ -171,8 +170,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
         
         try:
             body = {
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 200,
+                "anthropic_version": "anthropic.claude-3-7-sonnet-20250219-v1:0",
+                "max_tokens": 1000,
                 "messages": [
                     {
                         "role": "user",
@@ -1103,18 +1102,12 @@ def main(query: str = None, build_index: bool = True, show_raw: bool = False, ra
         logger.info("⏭️ Skipping index building (using existing indices)")
     
     # Handle query input
-    if query:
-        # Single query provided as parameter
-        test_queries = [query]
-    else:
-        # Default test queries
-        test_queries = [
-            "What are the area for address 1407 Moher Blvd Franklin, TN 37067?",
-            "What is the property address?",
-            "What are the roof obstructions?",
-            "What is the roof pitch information?",
-            "Show me the imagery and images"
-        ]
+    if not query:
+        logger.info("No query provided. Use --query to specify a search query.")
+        return
+
+    # Single query provided as parameter
+    test_queries = [query]
     
     if raw_only:
         logger.info("🔍 Testing hierarchical search (raw results only)...")
