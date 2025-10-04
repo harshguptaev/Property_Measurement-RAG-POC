@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
           query: messageText,
           question: messageText,
           level1_limit: 2,
-          level2_limit: 3,
+          level2_limit: 5,
           show_raw_results: false,
           conversation_history: messages.slice(0, -1).map(msg => ({
             role: msg.role,

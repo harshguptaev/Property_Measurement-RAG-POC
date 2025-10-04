@@ -60,7 +60,7 @@ class QueryRequest(BaseModel):
     question: Optional[str] = None
     conversation_history: Optional[list] = Field(default_factory=list)
     level1_limit: Optional[int] = Field(default=2, description="Number of documents to retrieve from Level 1")
-    level2_limit: Optional[int] = Field(default=3, description="Number of chunks to retrieve from Level 2")
+    level2_limit: Optional[int] = Field(default=5, description="Number of chunks to retrieve from Level 2")
     show_raw_results: Optional[bool] = Field(default=False, description="Whether to show raw search results")
 
 class QueryResponse(BaseModel):
@@ -207,13 +207,13 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
         # Determine the actual prompt text, supporting multiple payload shapes
         prompt = None
         level1_limit = 2
-        level2_limit = 3
+        level2_limit = 5
         show_raw_results = False
         
         if request_data is not None:
             prompt = (request_data.query or request_data.question)
             level1_limit = request_data.level1_limit or 2
-            level2_limit = request_data.level2_limit or 3
+            level2_limit = request_data.level2_limit or 7
             show_raw_results = request_data.show_raw_results or False
 
         if not prompt:
@@ -225,7 +225,7 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
             if isinstance(payload, dict):
                 prompt = payload.get("query") or payload.get("question")
                 level1_limit = payload.get("level1_limit", 2)
-                level2_limit = payload.get("level2_limit", 3)
+                level2_limit = payload.get("level2_limit", 7)
                 show_raw_results = payload.get("show_raw_results", False)
                 
                 if not prompt and isinstance(payload.get("messages"), list):

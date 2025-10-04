@@ -153,99 +153,66 @@
         "latitude": "35.8007610",
         "coordinate_type": "latitude"
       }
-    }
-  ],
-  "table": [
-    {
-      "section": "This table named Areas_per_Pitch_AllStructures lists each pitch on this roof and the total area and percent of the roof with that pitch.",
-      "raw_text": [
-        {
-          "Roof Pitches": "0%",
-          "Area (m²)": "114",
-          "%of Roof": "12.33"
-        },
-        {
-          "Roof Pitches": "2%",
-          "Area (m²)": "116",
-          "%of Roof": "12.66"
-        },
-        {
-          "Roof Pitches": "7%",
-          "Area (m²)": "122",
-          "%of Roof": "13.33"
-        },
-        {
-          "Roof Pitches": "10%",
-          "Area (m²)": "125",
-          "%of Roof": "13.66"
-        },
-        {
-          "Roof Pitches": "12%",
-          "Area (m²)": "127",
-          "%of Roof": "14.00"
-        },
-        {
-          "Roof Pitches": "14%",
-          "Area (m²)": "130",
-          "%of Roof": "14.00"
-        },
-        {
-          "Roof Pitches": "17%",
-          "Area (m²)": "133",
-          "%of Roof": "14.66"
-        },
-        {
-          "Roof Pitches": "22%",
-          "Area (m²)": "139",
-          "%of Roof": "15.00"
-        },
-        {
-          "Roof Pitches": "27%",
-          "Area (m²)": "144",
-          "%of Roof": "15.66"
-        }
-      ],
-      "id": "chunk1",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65313315/tables/images/Areas_per_Pitch_AllStructures.png"
     },
     {
-      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
-      "raw_text": [
-        {
-          "Roof Pitches": "1,228.4 sq ft",
-          "Roof Facets:": "7",
-          "%of Roof": "8/12"
-        }
-      ],
-      "id": "chunk2",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65313315/tables/images/Areas_per_Pitch_Structure_1.png"
+      "chunk_id": "65313315_chunk_16",
+      "section": "Areas per Pitch All Structures",
+      "type": "table",
+      "data": {
+        "table_name": "Areas_per_Pitch_AllStructures",
+        "description": "This table lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+        "pitches": [
+          {"pitch": "0%", "area_m2": "114", "percent_of_roof": "12.33"},
+          {"pitch": "2%", "area_m2": "116", "percent_of_roof": "12.66"},
+          {"pitch": "7%", "area_m2": "122", "percent_of_roof": "13.33"},
+          {"pitch": "10%", "area_m2": "125", "percent_of_roof": "13.66"},
+          {"pitch": "12%", "area_m2": "127", "percent_of_roof": "14.00"},
+          {"pitch": "14%", "area_m2": "130", "percent_of_roof": "14.00"},
+          {"pitch": "17%", "area_m2": "133", "percent_of_roof": "14.66"},
+          {"pitch": "22%", "area_m2": "139", "percent_of_roof": "15.00"},
+          {"pitch": "27%", "area_m2": "144", "percent_of_roof": "15.66"}
+        ],
+        "image_path": "docling_exports/RoofReport-65313315/tables/images/Areas_per_Pitch_AllStructures.png"
+      }
     },
     {
-      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
-      "raw_text": [
-        {
-          "waste": "1",
-          "area": "163.6",
-          "squares": "4/12"
-        },
-        {
-          "waste": "2",
-          "area": "1064.8",
-          "squares": "8/12"
-        }
-      ],
-      "id": "chunk3",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65313315/tables/images/Waste_Calculation_1.png"
+      "chunk_id": "65313315_chunk_17",
+      "section": "Areas per Pitch Structure 1",
+      "type": "table",
+      "data": {
+        "table_name": "Areas_per_Pitch_Structure_1",
+        "description": "This table lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+        "summary": [
+          {"total_area_sq_ft": "1,228.4 sq ft", "roof_facets": "7", "pitch": "8/12"}
+        ],
+        "image_path": "docling_exports/RoofReport-65313315/tables/images/Areas_per_Pitch_Structure_1.png"
+      }
     },
     {
-      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
-      "raw_text": "Dummy Text for now.",
-      "id": "chunk4",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65313315/tables/images/Structure_Complexity_1.png"
+      "chunk_id": "65313315_chunk_18",
+      "section": "Waste Calculation 1",
+      "type": "table",
+      "data": {
+        "table_name": "Waste_Calculation_1",
+        "description": "This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square. Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not control.",
+        "note": "Individual results may vary from suggested waste factor that EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given replacement or repair work.",
+        "waste_factors": [
+          {"structure_number": "1", "area": "163.6", "pitch": "4/12"},
+          {"structure_number": "2", "area": "1064.8", "pitch": "8/12"}
+        ],
+        "image_path": "docling_exports/RoofReport-65313315/tables/images/Waste_Calculation_1.png"
+      }
+    },
+    {
+      "chunk_id": "65313315_chunk_19",
+      "section": "Structure Complexity 1",
+      "type": "table",
+      "data": {
+        "table_name": "Structure_Complexity_1",
+        "description": "This table lists the structure complexity of the roof.",
+        "content": "Dummy Text for now.",
+        "image_path": "docling_exports/RoofReport-65313315/tables/images/Structure_Complexity_1.png"
+      }
     }
   ]
 }

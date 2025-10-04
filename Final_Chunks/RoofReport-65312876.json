@@ -153,96 +153,55 @@
         "latitude": "35.8006010",
         "coordinate_type": "latitude"
       }
-    }
-  ],
-  "table": [
-    {
-      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
-      "raw_text": [
-        {
-          "Roof Pitches": "4/12",
-          "Area (sq ft)": "52.5",
-          "%of Roof": "4.1%"
-        },
-        {
-          "Roof Pitches": "6/12",
-          "Area (sq ft)": "110",
-          "%of Roof": "8.6%"
-        },
-        {
-          "Roof Pitches": "8/12",
-          "Area (sq ft)": "965.7",
-          "%of Roof": "75.8%"
-        },
-        {
-          "Roof Pitches": "12/12",
-          "Area (sq ft)": "146.3",
-          "%of Roof": "11.5%"
-        }
-      ],
-      "id": "chunk1",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65312876/tables/images/Areas_per_Pitch_Structure_1.png"
     },
     {
-      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
-      "raw_text": [
-        {
-          "waste": "0%",
-          "area": "118",
-          "squares": "13.00"
-        },
-        {
-          "waste": "3%",
-          "area": "121",
-          "squares": "13.33"
-        },
-        {
-          "waste": "8%",
-          "area": "127",
-          "squares": "14.00"
-        },
-        {
-          "waste": "11%",
-          "area": "131",
-          "squares": "14.33"
-        },
-        {
-          "waste": "13%",
-          "area": "133",
-          "squares": "14.66"
-        },
-        {
-          "waste": "15%",
-          "area": "136",
-          "squares": "14.66"
-        },
-        {
-          "waste": "18%",
-          "area": "139",
-          "squares": "15.33"
-        },
-        {
-          "waste": "23%",
-          "area": "145",
-          "squares": "16.00"
-        },
-        {
-          "waste": "28%",
-          "area": "151",
-          "squares": "16.33"
-        }
-      ],
-      "id": "chunk2",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65312876/tables/images/Waste_Calculation_1.png"
+      "chunk_id": "65312876_chunk_16",
+      "section": "Areas per Pitch Structure 1",
+      "type": "table",
+      "data": {
+        "table_name": "Areas_per_Pitch_Structure_1",
+        "description": "This table lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+        "pitches": [
+          {"pitch": "4/12", "area_sq_ft": "52.5", "percent_of_roof": "4.1%"},
+          {"pitch": "6/12", "area_sq_ft": "110", "percent_of_roof": "8.6%"},
+          {"pitch": "8/12", "area_sq_ft": "965.7", "percent_of_roof": "75.8%"},
+          {"pitch": "12/12", "area_sq_ft": "146.3", "percent_of_roof": "11.5%"}
+        ],
+        "image_path": "docling_exports/RoofReport-65312876/tables/images/Areas_per_Pitch_Structure_1.png"
+      }
     },
     {
-      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
-      "raw_text": "Dummy Text for now.",
-      "id": "chunk3",
-      "metadata": {},
-      "src_image_path": "docling_exports/RoofReport-65312876/tables/images/Structure_Complexity_1.png"
+      "chunk_id": "65312876_chunk_17",
+      "section": "Waste Calculation 1",
+      "type": "table",
+      "data": {
+        "table_name": "Waste_Calculation_1",
+        "description": "This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square. Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not control.",
+        "note": "Individual results may vary from suggested waste factor that EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given replacement or repair work.",
+        "waste_factors": [
+          {"waste_percent": "0%", "area": "118", "squares": "13.00"},
+          {"waste_percent": "3%", "area": "121", "squares": "13.33"},
+          {"waste_percent": "8%", "area": "127", "squares": "14.00"},
+          {"waste_percent": "11%", "area": "131", "squares": "14.33"},
+          {"waste_percent": "13%", "area": "133", "squares": "14.66"},
+          {"waste_percent": "15%", "area": "136", "squares": "14.66"},
+          {"waste_percent": "18%", "area": "139", "squares": "15.33"},
+          {"waste_percent": "23%", "area": "145", "squares": "16.00"},
+          {"waste_percent": "28%", "area": "151", "squares": "16.33"}
+        ],
+        "image_path": "docling_exports/RoofReport-65312876/tables/images/Waste_Calculation_1.png"
+      }
+    },
+    {
+      "chunk_id": "65312876_chunk_18",
+      "section": "Structure Complexity 1",
+      "type": "table",
+      "data": {
+        "table_name": "Structure_Complexity_1",
+        "description": "This table lists the structure complexity of the roof.",
+        "content": "Dummy Text for now.",
+        "image_path": "docling_exports/RoofReport-65312876/tables/images/Structure_Complexity_1.png"
+      }
     }
   ]
 }

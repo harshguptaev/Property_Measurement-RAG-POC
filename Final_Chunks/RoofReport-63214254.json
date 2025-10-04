@@ -167,61 +167,27 @@
         "latitude": "37.7387620",
         "coordinate_type": "latitude"
       }
-    }
-  ],
-  "table": [
+    },
     {
-      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
-      "raw_text": [
-        {
-          "Roof Pitches": "0%",
-          "Area (m²)": "262",
-          "%of Roof": "28.33"
-        },
-        {
-          "Roof Pitches": "4%",
-          "Area (m²)": "273",
-          "%of Roof": "29.66"
-        },
-        {
-          "Roof Pitches": "9%",
-          "Area (m²)": "286",
-          "%of Roof": "31.00"
-        },
-        {
-          "Roof Pitches": "14%",
-          "Area (m²)": "299",
-          "%of Roof": "32.33"
-        },
-        {
-          "Roof Pitches": "17%",
-          "Area (m²)": "307",
-          "%of Roof": "33.33"
-        },
-        {
-          "Roof Pitches": "19%",
-          "Area (m²)": "312",
-          "%of Roof": "33.66"
-        },
-        {
-          "Roof Pitches": "21%",
-          "Area (m²)": "317",
-          "%of Roof": "34.33"
-        },
-        {
-          "Roof Pitches": "24%",
-          "Area (m²)": "325",
-          "%of Roof": "35.33"
-        },
-        {
-          "Roof Pitches": "29%",
-          "Area (m²)": "338",
-          "%of Roof": "36.66"
-        }
-      ],
-      "id": "chunk1",
-      "metadata": {},
-      "src_image_path": ""
+      "chunk_id": "63214254_chunk_16",
+      "section": "Areas per Pitch Structure 1",
+      "type": "table",
+      "data": {
+        "table_name": "Areas_per_Pitch_Structure_1",
+        "description": "This table lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+        "pitches": [
+          {"pitch": "0%", "area_m2": "262", "percent_of_roof": "28.33"},
+          {"pitch": "4%", "area_m2": "273", "percent_of_roof": "29.66"},
+          {"pitch": "9%", "area_m2": "286", "percent_of_roof": "31.00"},
+          {"pitch": "14%", "area_m2": "299", "percent_of_roof": "32.33"},
+          {"pitch": "17%", "area_m2": "307", "percent_of_roof": "33.33"},
+          {"pitch": "19%", "area_m2": "312", "percent_of_roof": "33.66"},
+          {"pitch": "21%", "area_m2": "317", "percent_of_roof": "34.33"},
+          {"pitch": "24%", "area_m2": "325", "percent_of_roof": "35.33"},
+          {"pitch": "29%", "area_m2": "338", "percent_of_roof": "36.66"}
+        ],
+        "image_path": ""
+      }
     }
   ]
 }

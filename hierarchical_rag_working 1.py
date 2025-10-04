@@ -426,7 +426,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         else:
             logger.warning("No data to insert into Level 2 Index")
     
-    def search_hierarchical(self, query: str, level1_limit: int = 1, level2_limit: int = 3) -> List[Dict]:
+    def search_hierarchical(self, query: str, level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
         """
         Perform hierarchical search: Level 1 → Level 2
         
@@ -519,7 +519,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 data=[query_vec],
                 limit=7,  # Get more results to include images
                 filter=expr,
-                output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id"]
+                output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id","data","raw_text"]
             )
             
             if not res2 or not res2[0]:
@@ -537,9 +537,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
             print(f"Length :: {len(res2[0])}")
             print("=" * 80)
 
-            # Separate text and image chunks
-            text_chunks = []
-            image_chunks = []
+            # Collect all chunks (text, image, table) from relevant documents
+            all_chunks = []
 
             for result in res2[0]:
                 chunk_doc_id = result.get("doc_id")
@@ -552,68 +551,25 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         "chunk_text": result.get("chunk_text"),
                         "distance": result.get("distance", 0)
                     }
-                    
+
                     # Add document-level info from Level 1
                     for doc_info in level1_docs:
                         if doc_info["doc_id"] == chunk_doc_id:
                             chunk_info["doc_address"] = doc_info["address"]
                             chunk_info["doc_summary"] = doc_info["summary"]
                             break
-                    
-                    # Separate by type
-                    if result.get("chunk_type") == "image":
-                        image_chunks.append(chunk_info)
-                    else:
-                        text_chunks.append(chunk_info)
 
-            # Combine results: prioritize text chunks but include all relevant images
-            final_results = text_chunks[:level2_limit]  # Take top text chunks based on limit
+                    all_chunks.append(chunk_info)
+
+            # Sort all chunks by distance (relevance) and take top level2_limit
+            all_chunks.sort(key=lambda x: x["distance"])
+            final_results = all_chunks[:level2_limit]
             
-            # Add all image chunks from relevant documents (they're important for frontend display)
-            final_results.extend(image_chunks)
-            
-            # If we don't have many image chunks, try to get ALL images from relevant documents
-            if len(image_chunks) < 3:
-                try:
-                    # Search for all image chunks from relevant documents
-                    doc_ids_quoted = [f'"{doc_id}"' for doc_id in relevant_doc_ids]
-                    doc_filter = f'doc_id in [{",".join(doc_ids_quoted)}]'
-                    
-                    all_images_res = self.milvus_client.search(
-                        collection_name=self.level2_collection_name,
-                        data=[query_vec],
-                        limit=20,  # Get more images
-                        filter=doc_filter,
-                        output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id"]
-                    )
-                    
-                    if all_images_res and all_images_res[0]:
-                        for result in all_images_res[0]:
-                            if result.get("chunk_type") == "image" and result.get("doc_id") in relevant_doc_ids:
-                                # Check if we already have this image
-                                chunk_id = result.get("chunk_id")
-                                if not any(chunk["chunk_id"] == chunk_id for chunk in final_results):
-                                    chunk_info = {
-                                        "chunk_id": chunk_id,
-                                        "doc_id": result.get("doc_id"),
-                                        "section": result.get("section"),
-                                        "chunk_type": result.get("chunk_type"),
-                                        "chunk_text": result.get("chunk_text"),
-                                        "distance": result.get("distance", 0)
-                                    }
-                                    
-                                    # Add document-level info
-                                    for doc_info in level1_docs:
-                                        if doc_info["doc_id"] == result.get("doc_id"):
-                                            chunk_info["doc_address"] = doc_info["address"]
-                                            chunk_info["doc_summary"] = doc_info["summary"]
-                                            break
-                                    
-                                    final_results.append(chunk_info)
-                except Exception as e:
-                    logger.warning(f"Error fetching additional images: {e}")
-            
-            print(f"Text chunks: {len(text_chunks)}, Image chunks: {len(image_chunks)}")
+            # Count chunk types for logging
+            text_count = sum(1 for chunk in all_chunks if chunk["chunk_type"] != "image")
+            image_count = sum(1 for chunk in all_chunks if chunk["chunk_type"] == "image")
+
+            print(f"Total chunks found: {len(all_chunks)} (Text: {text_count}, Images: {image_count})")
             print(f"Final results: {len(final_results)}")
             print(f"level2_limit :: {level2_limit}")
             print(f"len(final_results) :: {len(final_results)}")
@@ -978,7 +934,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
         
         print("=" * 80)
     
-    def answer_query(self, query: str, level1_limit: int = 1, level2_limit: int = 3, show_raw_results: bool = False) -> str:
+    def answer_query(self, query: str, level1_limit: int = 1, level2_limit: int = 5, show_raw_results: bool = False) -> str:
         """
         Complete query answering pipeline: search + LLM response generation
         
@@ -1164,7 +1120,7 @@ def main(query: str = None, build_index: bool = True, show_raw: bool = False, ra
         logger.info("🔍 Testing hierarchical search (raw results only)...")
         for test_query in test_queries:
             print(f"\n{'='*80}")
-            results = hierarchical_rag.search_hierarchical(test_query, level1_limit=1, level2_limit=3)
+            results = hierarchical_rag.search_hierarchical(test_query, level1_limit=1, level2_limit=5)
             hierarchical_rag.print_search_results(test_query, results)
             time.sleep(1)  # Small delay between queries
     else:
@@ -1175,7 +1131,7 @@ def main(query: str = None, build_index: bool = True, show_raw: bool = False, ra
             print("=" * 80)
             
             # Get LLM-generated response
-            llm_response = hierarchical_rag.answer_query(test_query, level1_limit=2, level2_limit=3, show_raw_results=show_raw)
+            llm_response = hierarchical_rag.answer_query(test_query, level1_limit=2, level2_limit=5, show_raw_results=show_raw)
             
             print("🤖 AI Assistant Response:")
             print("-" * 40)
@@ -1204,24 +1160,24 @@ if __name__ == "__main__":
         description="Hierarchical RAG System with Two-Level Indices",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  # Build indices and run default queries (clears existing collections)
-  python src/hierarchical_rag_working.py
-  
-  # Search with a specific query (will build indices first with duplicate prevention)
-  python src/hierarchical_rag_working.py --query "What is the roof area?"
-  
-  # Search without rebuilding indices (faster if indices already exist)
-  python src/hierarchical_rag_working.py --query "What are the obstructions?" --no-build
-  
-  # Show current collection status
-  python src/hierarchical_rag_working.py --show-status
-  
-  # Clear all collections (use with caution!)
-  python src/hierarchical_rag_working.py --clear-collections
-  
-  # Interactive mode - just build indices, then you can call functions directly
-  python src/hierarchical_rag_working.py --build-only
+        Examples:
+        # Build indices and run default queries (clears existing collections)
+        python src/hierarchical_rag_working.py
+        
+        # Search with a specific query (will build indices first with duplicate prevention)
+        python src/hierarchical_rag_working.py --query "What is the roof area?"
+        
+        # Search without rebuilding indices (faster if indices already exist)
+        python src/hierarchical_rag_working.py --query "What are the obstructions?" --no-build
+        
+        # Show current collection status
+        python src/hierarchical_rag_working.py --show-status
+        
+        # Clear all collections (use with caution!)
+        python src/hierarchical_rag_working.py --clear-collections
+        
+        # Interactive mode - just build indices, then you can call functions directly
+        python src/hierarchical_rag_working.py --build-only
         """
     )
     
