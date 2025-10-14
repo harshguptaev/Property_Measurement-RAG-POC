@@ -1,0 +1,159 @@
+{
+  "text": [
+    {
+      "chunk_id": "32248944_premium_chunk_1",
+      "section": "Premium Report Header",
+      "type": "text",
+      "data": {
+        "date": "1/2/2020",
+        "property_address": "2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461",
+        "report_id": "32248944",
+        "claim_number": "B-10122485"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_2",
+      "section": "Prepared For",
+      "type": "text",
+      "data": {
+        "contact": "Pilot Catastrophe Services,",
+        "company": "Pilot Catastrophe Services,",
+        "address": "PO Box 91300, Mobile, AL 36695",
+        "phone": "800-345-2288"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_3",
+      "section": "Summary Measurements",
+      "type": "text",
+      "data": {
+        "total_roof_area": "5,615 sq ft",
+        "total_roof_facets": "36",
+        "predominant_pitch": "10/12",
+        "number_of_stories": ">1",
+        "total_ridges_hips": "403 ft",
+        "total_valleys": "189 ft",
+        "total_rakes": "124 ft",
+        "total_eaves": "345 ft"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_4",
+      "section": "House Diagram",
+      "type": "image",
+      "data": {
+        "description": "3D house diagram showing the property structure and roof layout",
+        "image_file": "extracted_images/report_32248944/House_Diagram.png",
+        "page": "1"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_5",
+      "section": "Property Images",
+      "type": "image",
+      "data": {
+        "description": "Aerial images showing different angles of the property including top view, north side, south side, east side, and west side",
+        "image_files": [
+          "extracted_images/report_32248944/Top_View.png",
+          "extracted_images/report_32248944/North_Side.png",
+          "extracted_images/report_32248944/South_Side.png"
+        ],
+        "image_types": [
+          "top_view",
+          "north_side",
+          "south_side",
+          "east_side",
+          "west_side"
+        ],
+        "pages": "2-5"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_6",
+      "section": "Detailed Measurements",
+      "type": "text",
+      "data": {
+        "ridges": "132 ft (13 Ridges)",
+        "hips": "271 ft (20 Hips)",
+        "valleys": "189 ft (18 Valleys)",
+        "rakes": "124 ft (13 Rakes)",
+        "eaves_starter": "345 ft (31 Eaves)",
+        "drip_edge": "469 ft (44 Lengths)",
+        "parapet_walls": "0 (0 Lengths)",
+        "flashing": "47 ft (14 Lengths)",
+        "step_flashing": "78 ft (15 Lengths)",
+        "predominant_pitch": "10/12",
+        "total_area_all_pitches": "5,615 sq ft"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_7",
+      "section": "Property Location",
+      "type": "text",
+      "data": {
+        "longitude": "-78.1302015",
+        "latitude": "33.9297880"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_8",
+      "section": "Notes and Links",
+      "type": "text",
+      "data": {
+        "notes": "Diagram...........................................................7 Report Summary........................................................8 Total Roof Area =5,615 sq ft Total Roof Facets =36 Predominant Pitch =10/12 Number of Stories >1 Total Ridges/Hips =403 ft Total Valleys =189 ft Total Rakes =124 ft Total Eaves =345 ft MEASUREMENTS Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 IMAGES © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 1 The following aerial images show different angles of this structure for your reference. Top View Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 IMAGES © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 2 North Side South Side Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 IMAGES © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 3 East Side West Side Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 LENGTH DIAGRAM © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 4 Note: This diagram contains segment lengths (rounded to the nearest whole number) over 5.0 Feet. In some cases, segment labels have been removed for readability. Plus signs preface some numbers to avoid confusion when rotated (e.g. +6 and +9). Total Line Lengths: Ridges = 132 ft Hips = 271 ft Valleys = 189 ft Rakes = 124 ft Eaves = 345 ft Flashing = 47 ft Step flashing = 78 ft Parapets = 0 ft 14 +9 11 +6 11 18 15 14 2222 7 36 14 16 14 16 12 26 14 26 +6 15 14 14 5 +9 8 12 10 +9 10 7 7 7 21 13 +6 14 14 12 +6 +6 12 +6 11 11 10 8 7 18 23 35 8 8 12 16 5 16 13 5 +6 11 12 20 14 26 18 30 15 15 S N W E  2020 Eagle View Technologies, Inc., All Rights Reserved. Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 PITCH DIAGRAM © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 5 Note: This diagram contains labeled pitches for facet areas larger than 20.0 square feet. In some cases, pitch labels have been removed for readability. Blue shading indicates a pitch of 3/12 and greater. Pitch values are shown in inches per foot, and arrows indicate slope direction. The predominant pitch on this roof is 10/12 10  10  12 10  12  10  10  10  10 10  12  10   10 12  10  10  12  10  10  12   10  8  8  10  10  10  10  8 S N W E  2020 Eagle View Technologies, Inc., All Rights Reserved. Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 AREA DIAGRAM © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 6 Note: This diagram shows the square feet of each roof facet (rounded to the nearest Foot). The total area in square feet, at the top of this page, is based on the non-rounded values of each roof facet (rounded to the nearest square foot after being totaled). Total Area = 5,615 sq ft, with 36 facets. 39 414 30 77 435 38 65 185 39 8 +89 4 531 748 35 110 5 135 12 620 215 37 +90 70 790 +66 +66 424 42 42 37 5 46 24 23 20 S N W E  2020 Eagle View Technologies, Inc., All Rights Reserved. Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 NOTES DIAGRAM © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 7 Roof facets are labeled from smallest to largest (A to Z) for easy reference. N AD I W AF M S AB O D X A AG AI J Z B AA E AH AC L Y T AJ V U AE P Q K C R H G F S N W E  2020 Eagle View Technologies, Inc., All Rights Reserved. Premium Report 1/2/2020 Claim: B-10122485 2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461 Report: 32248944 REPORT SUMMARY © 2008-2020 Eagle View Technologies, Inc. and Pictometry International Corp. – All Rights Reserved – Covered by one or more of U.S. Patent Nos. 8,078,436; 8,145,578; 8,170,840; 8,209,152; 8,515,125; 8,825,454; 9,135,737; 8,670,961; 9,514,568; 8,818,770; 8,542,880; 9,244,589; 9,329,749; 9,599,466. Other Patents Pending. PAGE 8 All Structures Areas per Pitch Roof Pitches Area (sq ft) % of Roof 6/12 8/12 10/12 12/12 11.6 177.1 3712.3 1713.9 0.2% 3.2% 66.1% 30.5% The table above lists each pitch on this roof and the total area and percent (both rounded) of the roof with that pitch. Waste Calculation Table Waste % 0% 10% 12% 15% 17% 20% 22% Area (sq ft) 5,615 6,177 6,289 6,457 6,570 6,738 6,850 Squares 56.1 61.8 62.9 64.6 65.7 67.4 68.5 This table shows the total roof area and squares (rounded up to the nearest decimal) based upon different waste percentages. The waste factor is subject to the complexity of the roof, individual roofing techniques and your experience. Please consider this when calculating appropriate waste percentages. Note that only roof area is included in these waste calculations. Additional materials needed for ridge, hip, valley, and starter lengths are not included. All Structures Totals Total Roof Facets = 36 Lengths, Areas and Pitches Ridges = 132 ft (13 Ridges) Hips = 271 ft (20 Hips). Valleys = 189 ft (18 Valleys) Rakes† = 124 ft (13 Rakes) Eaves/Starter‡ = 345 ft (31 Eaves) Drip Edge (Eaves + Rakes) = 469 ft (44 Lengths) Parapet Walls = 0 (0 Lengths). Flashing = 47 ft (14 Lengths) Step flashing = 78 ft (15 Lengths) Predominant Pitch = 10/12 Total Area (All Pitches) = 5,615 sq ft Property Location Longitude = -78.1302015 Latitude = 33.9297880 Notes This was ordered as a residential property. There were no changes to the structure in the past four years",
+        "property_map_url": "http://maps.google.com/maps?f=g&source=s_q&hl=en&geocode=&q=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461",
+        "directions_url": "http://maps.google.com/maps?f=d&source=s_d&saddr=PO+Box+91300,Mobile,AL,36695&daddr=2778+HARBORMASTER+DR+SE,ST"
+      }
+    },
+    {
+      "chunk_id": "32248944_premium_chunk_9",
+      "section": "Business Links",
+      "type": "text",
+      "data": {
+        "description": "Links to businesses near the property including restaurants, fast food, medical centers, hospitals, doctors, and gas stations",
+        "page": 10
+      }
+    }
+  ],
+  "table": [
+    {
+      "type": "table_image",
+      "table_name": "Areas per Pitch",
+      "page_number": 10,
+      "image_file_path": "extracted_images/report_32248944/tables/Areas_per_Pitch_Table.png",
+      "image_size": [
+        1224,
+        316
+      ],
+      "report_id": "32248944",
+      "searchable_keywords": [
+        "pitch",
+        "area",
+        "percentage",
+        "roof",
+        "table"
+      ],
+      "premium_pdf": true
+    },
+    {
+      "type": "table_image",
+      "table_name": "Waste Calculation",
+      "page_number": 10,
+      "image_file_path": "extracted_images/report_32248944/tables/Waste_Calculation_Table.png",
+      "image_size": [
+        1224,
+        316
+      ],
+      "report_id": "32248944",
+      "searchable_keywords": [
+        "waste",
+        "calculation",
+        "percentage",
+        "area",
+        "squares",
+        "table"
+      ],
+      "premium_pdf": true
+    }
+  ]
+}

@@ -313,7 +313,7 @@ def extract_section_lines(all_pages_text: List[str], header: str, stop_headers: 
  
 def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
     """Extract important chunks in the NEW flattened JSON format.
- 
+
     Output Example (list):
     [
       {
@@ -323,7 +323,15 @@ def extract_important_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         "data": { ... }
       }, ...]
     """
- 
+
+    # Check if this is a premium PDF and use the appropriate extractor
+    if '_Premium' in Path(pdf_path).name or 'Premium' in Path(pdf_path).name:
+        import sys
+        import os
+        sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+        from premium_chunk_extractor import extract_premium_chunks
+        return extract_premium_chunks(pdf_path)
+
     # Extract report ID from filename
     if 'RoofReport-' in Path(pdf_path).name:
         try:
