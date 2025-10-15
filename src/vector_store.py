@@ -59,7 +59,7 @@ class VectorStoreManager:
         self.kwargs = kwargs
         
         # Milvus-specific properties
-        self.milvus_uri = milvus_uri or "./milvus_rag.db"
+        self.milvus_uri = milvus_uri or "http://localhost:19530"
         self.embedding_dim = embedding_dim
         self.milvus_client = None
         

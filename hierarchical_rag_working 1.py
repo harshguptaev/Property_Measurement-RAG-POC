@@ -34,9 +34,7 @@ class MilvusCollectionManager:
             self.client.create_collection(
                 collection_name=collection_name,
                 dimension=embedding_dim,
-                metric_type=metric_type,
-                index_type="HNSW",
-                max_length=65535
+                metric_type=metric_type
             )
     
     def get_collection_info(self, collection_name: str) -> Dict:
@@ -85,12 +83,21 @@ class HierarchicalRAG:
         self.bedrock_client = boto3.client('bedrock-runtime', region_name=region_name)
         self.model_id = model_id
         self.region_name = region_name
-        
-        # Initialize Milvus client (using Milvus Lite)
-        self.milvus_client = MilvusClient(uri="./milvus_demo.db")
-        
+
+        # Initialize Milvus client (using full Milvus via Docker)
+        logger.info("🔗 Connecting to Milvus database at http://localhost:19530")
+        try:
+            self.milvus_client = MilvusClient(uri="http://localhost:19530")
+            # Test connection
+            collections = self.milvus_client.list_collections()
+            logger.info(f"✅ Connected to Milvus successfully. Found {len(collections)} existing collections.")
+        except Exception as e:
+            logger.error(f"❌ Failed to connect to Milvus at http://localhost:19530: {str(e)}")
+            logger.error("Please ensure Milvus is running with: ./start_milvus.sh")
+            raise
+
         # Initialize Milvus collection manager for safe collection handling
-        self.milvus_manager = MilvusCollectionManager(uri="./milvus_demo.db")
+        self.milvus_manager = MilvusCollectionManager(uri="http://localhost:19530")
         
         # Collection names for the two levels
         self.level1_collection_name = "hierarchical_level1"

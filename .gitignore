@@ -69,6 +69,8 @@ coverage.xml
 # Docker / misc
 *.pid
 *.local
+volumes/
+*.sqlite3
 
 # Python packaging alt
 __pypackages__/

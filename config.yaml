@@ -26,8 +26,8 @@ database:
   collection_name: "property_documents"
   chunk_size: 1000
   chunk_overlap: 200
-  milvus_uri: "./milvus_rag.db"  # Milvus Lite database file
-  embedding_dim: 1024  # Dimension for text embeddings (Titan Image v1)
+  milvus_uri: "http://localhost:19530"  # Full Milvus database URI
+  embedding_dim: 1536  # Dimension for text embeddings (Titan Text v1)
 
 # Retrieval Configuration
 retrieval:

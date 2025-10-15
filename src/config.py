@@ -61,7 +61,7 @@ class ConfigLoader:
                 "collection_name": "property_documents",
                 "chunk_size": 1000,
                 "chunk_overlap": 200,
-                "milvus_uri": "./milvus_rag.db",
+                "milvus_uri": "http://localhost:19530",
                 "embedding_dim": 1536
             },
             "retrieval": {

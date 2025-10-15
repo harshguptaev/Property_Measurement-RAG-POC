@@ -19,6 +19,17 @@ from pydantic import BaseModel, Field
 # Add current directory to Python path to import our hierarchical RAG
 sys.path.insert(0, str(Path(__file__).parent))
 
+# Ensure we're using the venv_rag virtual environment
+venv_path = Path("venv_rag")
+if venv_path.exists():
+    # Add venv bin to PATH
+    venv_bin = venv_path / "bin"
+    if str(venv_bin) not in os.environ.get("PATH", ""):
+        os.environ["PATH"] = str(venv_bin) + ":" + os.environ.get("PATH", "")
+    print(f"✅ Using virtual environment: {venv_bin}")
+else:
+    print("⚠️  venv_rag not found, using system Python")
+
 # Import our hierarchical RAG system
 # Since the file has a space in the name, we need to import it differently
 import importlib.util

@@ -72,12 +72,53 @@ A multimodal Retrieval-Augmented Generation (RAG) system that processes property
 | Component | Technology |
 |-----------|------------|
 | **PDF Processing** | PyPDFLoader, PyMuPDF (fitz) |
-| **Vector Store** | FAISS |
+| **Vector Store** | FAISS / Milvus (Hierarchical RAG) |
 | **Embeddings** | AWS Bedrock Titan Embeddings |
 | **LLM** | AWS Bedrock Claude 3 Sonnet |
 | **Web Interface** | Gradio |
 | **Image Processing** | PIL (Pillow) |
 | **Workflow** | LangGraph (optional) |
+
+---
+
+## 🏗️ **Hierarchical RAG System (Milvus)**
+
+A two-level hierarchical RAG system using Milvus vector database for improved search accuracy and performance.
+
+### **Features:**
+- **Two-Level Indexing**: Document summaries (Level 1) + detailed chunks (Level 2)
+- **Milvus Vector Database**: Scalable, production-ready vector storage
+- **Hierarchical Search**: First find relevant documents, then search within them
+- **Docker Integration**: Easy deployment with provided docker-compose.yml
+
+### **Quick Start with Milvus:**
+
+1. **Start Milvus Database:**
+```bash
+./start_milvus.sh
+```
+
+2. **Run Hierarchical RAG:**
+```bash
+# Build indices and ask a question
+python "hierarchical_rag_working 1.py" --query "What is the roof area for address 2455 New Holland Cir?"
+
+# Or just build indices first
+python "hierarchical_rag_working 1.py" --build-only
+
+# Then ask questions later
+python "hierarchical_rag_working 1.py" --query "Show me roof pitch information" --no-build
+```
+
+3. **Access Milvus Web UI:**
+- **Attu (Milvus Admin)**: http://localhost:8000
+- **MinIO (Object Storage)**: http://localhost:9001
+
+### **API Server:**
+```bash
+python hierarchical_rag_server.py
+```
+Access the API at: http://localhost:8001
 
 ---
 
