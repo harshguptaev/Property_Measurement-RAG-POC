@@ -185,155 +185,134 @@ def _extract_coordinates(text: str) -> Dict[str, Any]:
     return data
 
 
-def _extract_notes_and_links(text: str) -> Dict[str, Any]:
-    """Extract notes and online map links."""
+def _extract_online_maps(text: str) -> Dict[str, Any]:
+    """Extract online maps and directions links."""
     data = {}
-    
-    # Extract notes section more precisely
-    notes_match = re.search(r'Notes\s*(.*?)(?=Online Maps|Directions|$)', text, re.DOTALL | re.IGNORECASE)
-    if notes_match:
-        notes_text = notes_match.group(1).strip()
-        # Clean up the notes text
-        notes_text = re.sub(r'\s+', ' ', notes_text)
-        # Remove any trailing periods or unwanted characters
-        notes_text = notes_text.strip('. ')
-        if notes_text:
-            data['notes'] = notes_text
-    
+
     # Extract property map URL
     property_map_match = re.search(r'Online map of property\s*(http[^\s]+)', text)
     if property_map_match:
         data['property_map_url'] = property_map_match.group(1)
-    
+
     # Extract directions URL
     directions_match = re.search(r'Directions from.*?\s*(http[^\s]+)', text, re.DOTALL)
     if directions_match:
         data['directions_url'] = directions_match.group(1)
-    
+
     return data
 
 
+def _extract_business_links(text: str) -> Dict[str, str]:
+    """Extract business links from the premium report."""
+    business_links = {}
+
+    # Patterns for different business types
+    patterns = {
+        'restaurants': r'Restaurants\s*http[^\s]+',
+        'fast_food': r'Fast Food\s*http[^\s]+',
+        'medical_centers': r'Medical Centers\s*http[^\s]+',
+        'hospitals': r'Hospitals\s*http[^\s]+',
+        'doctors': r'Doctors\s*http[^\s]+',
+        'gas_stations': r'Gas Stations\s*http[^\s]+'
+    }
+
+    for business_type, pattern in patterns.items():
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            url_match = re.search(r'http[^\s]+', match.group(0))
+            if url_match:
+                business_links[business_type] = url_match.group(0)
+
+    return business_links
+
+
 def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
-    """Extract important chunks from premium PDF format."""
-    
+    """Extract important text chunks from premium PDF format."""
+
     report_id = Path(pdf_path).stem
     if '_Premium' in report_id:
         report_id = report_id.replace('_Premium', '')
-    
+    # Extract the numeric report ID from filename like "report_67849245"
+    report_id_match = re.search(r'report_(\d+)', report_id)
+    if report_id_match:
+        report_id = report_id_match.group(1)
+
     pages = read_pdf_text_by_page(pdf_path)
     all_text = "\n".join(pages)
-    
+
     chunks: List[Dict[str, Any]] = []
-    
+
     def _add(section: str, _type: str, data: Dict[str, Any]):
-        chunk_id = f"{report_id}_premium_chunk_{len(chunks)+1}"
+        chunk_id = f"{report_id}_chunk_{len(chunks)+1}"
         chunks.append({
             "chunk_id": chunk_id,
             "section": section,
             "type": _type,
             "data": data
         })
-    
+
     header_data = _extract_premium_header(all_text)
     if header_data:
         _add("Premium Report Header", "text", header_data)
-    
+
+    online_maps = _extract_online_maps(all_text)
+    if online_maps:
+        _add("Property Navigation", "text", online_maps)
+
     prepared_for = _extract_prepared_for_premium(all_text)
     if prepared_for:
         _add("Prepared For", "text", prepared_for)
-    
+
     summary_measurements = _extract_summary_measurements(all_text)
     if summary_measurements:
         _add("Summary Measurements", "text", summary_measurements)
-    
-    _add("Property Images", "image", {
-        "description": "Aerial images showing different angles of the property including top view, north side, south side, east side, and west side",
-        "image_types": ["top_view", "north_side", "south_side", "east_side", "west_side"],
-        "pages": "2-4"
-    })
-    
-    _add("Length Diagram", "image", {
-        "description": "Detailed diagram showing roof segment lengths including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets with measurements",
-        "page": "5"
-    })
-    
-    _add("Pitch Diagram", "image", {
-        "description": "Diagram showing roof pitch values in inches per foot with arrows indicating slope direction and blue shading for pitches 3/12 and greater",
-        "page": "6"
-    })
-    
-    _add("Area Diagram", "image", {
-        "description": "Diagram showing square footage of each roof facet with total area and facet count",
-        "page": "7"
-    })
-    
-    _add("Notes Diagram", "image", {
-        "description": "Diagram showing roof facets labeled from smallest to largest (A to Z) for easy reference",
-        "page": "8"
-    })
-    
+
     detailed_measurements = _extract_detailed_measurements(all_text)
     if detailed_measurements:
         _add("Detailed Measurements", "text", detailed_measurements)
-    
-    pitch_breakdown = _extract_pitch_breakdown(all_text)
-    if pitch_breakdown:
-        _add("Pitch Breakdown", "table", {
-            "description": "Areas per pitch showing roof pitches, area in square feet, and percentage of total roof",
-            "data": pitch_breakdown
-        })
-    
-    waste_calculation = _extract_waste_calculation(all_text)
-    if waste_calculation:
-        _add("Waste Calculation", "table", {
-            "description": "Waste calculation table showing total roof area and squares based on different waste percentages",
-            "data": waste_calculation
-        })
-    
+
     coordinates = _extract_coordinates(all_text)
     if coordinates:
         _add("Property Location", "text", coordinates)
-    
-    notes_and_links = _extract_notes_and_links(all_text)
-    if notes_and_links:
-        _add("Notes and Links", "text", notes_and_links)
-    
-    business_links_page = None
-    for i, page in enumerate(pages):
-        if "BUSINESSES NEAR THIS PROPERTY" in page:
-            business_links_page = i + 1
-            break
-    
-    if business_links_page:
+
+    business_links = _extract_business_links(all_text)
+    if business_links:
         _add("Business Links", "text", {
             "description": "Links to businesses near the property including restaurants, fast food, medical centers, hospitals, doctors, and gas stations",
-            "page": business_links_page
+            "links": business_links
         })
-    
+
     return chunks
 
 
 def write_premium_chunks_output(pdf_path: str, chunks: List[Dict[str, Any]]) -> Path:
     """Write premium chunks to output files."""
     stem = Path(pdf_path).stem
-    
-    out_dir = Path("docling_exports") / stem
+
+    # Extract the numeric report ID from filename like "report_67849245"
+    report_id_match = re.search(r'report_(\d+)', stem)
+    if report_id_match:
+        report_id = report_id_match.group(1)
+    else:
+        report_id = stem
+
+    out_dir = Path("docling_exports") / f"{report_id}_Premium"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / "important_chunks.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(chunks, f, ensure_ascii=False, indent=2)
-    
+
     final_chunks_dir = Path("Final_Chunks")
     final_chunks_dir.mkdir(parents=True, exist_ok=True)
-    final_chunks_file = final_chunks_dir / f"{stem}.json"
-    
+    final_chunks_file = final_chunks_dir / f"RoofReport-{report_id}.json"
+
     final_chunks_data = {
         "text": chunks
     }
-    
+
     with open(final_chunks_file, "w", encoding="utf-8") as f:
         json.dump(final_chunks_data, f, ensure_ascii=False, indent=2)
-    
+
     return out_file
 
 

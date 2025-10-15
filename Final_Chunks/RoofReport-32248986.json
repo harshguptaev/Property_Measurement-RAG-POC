@@ -1,0 +1,93 @@
+{
+  "text": [
+    {
+      "chunk_id": "32248986_chunk_1",
+      "section": "Premium Report Header",
+      "type": "text",
+      "data": {
+        "date": "1/2/2020",
+        "property_address": "1135 WHITE RD, GROVE CITY, OH 43123",
+        "report_id": "32248986",
+        "claim_number": "A00002296463"
+      }
+    },
+    {
+      "chunk_id": "32248986_chunk_2",
+      "section": "Property Navigation",
+      "type": "text",
+      "data": {
+        "property_map_url": "http://maps.google.com/maps?f=g&source=s_q&hl=en&geocode=&q=1135+WHITE+RD,GROVE+CITY,OH,43123-8996",
+        "directions_url": "http://maps.google.com/maps?f=d&source=s_d&saddr=PO+Box+23,Worthington,OH,43085&daddr=1135+WHITE+RD,GROVE+CITY,"
+      }
+    },
+    {
+      "chunk_id": "32248986_chunk_3",
+      "section": "Prepared For",
+      "type": "text",
+      "data": {
+        "contact": "Nevon Roberts",
+        "company": "Erie Insurance",
+        "address": "PO Box 23, Worthington, OH 43085",
+        "phone": "614-204-0292"
+      }
+    },
+    {
+      "chunk_id": "32248986_chunk_4",
+      "section": "Summary Measurements",
+      "type": "text",
+      "data": {
+        "total_roof_area": "2,162 sq ft",
+        "total_roof_facets": "10",
+        "predominant_pitch": "7/12",
+        "number_of_stories": ">1",
+        "total_ridges_hips": "129 ft",
+        "total_valleys": "31 ft",
+        "total_rakes": "90 ft",
+        "total_eaves": "188 ft"
+      }
+    },
+    {
+      "chunk_id": "32248986_chunk_5",
+      "section": "Detailed Measurements",
+      "type": "text",
+      "data": {
+        "ridges": "68 ft (2 Ridges)",
+        "hips": "61 ft (4 Hips)",
+        "valleys": "31 ft (2 Valleys)",
+        "rakes": "90 ft (6 Rakes)",
+        "eaves_starter": "188 ft (10 Eaves)",
+        "drip_edge": "278 ft (16 Lengths)",
+        "parapet_walls": "0 (0 Lengths)",
+        "flashing": "9 ft (3 Lengths)",
+        "step_flashing": "59 ft (5 Lengths)",
+        "predominant_pitch": "7/12",
+        "total_area_all_pitches": "2,162 sq ft"
+      }
+    },
+    {
+      "chunk_id": "32248986_chunk_6",
+      "section": "Property Location",
+      "type": "text",
+      "data": {
+        "longitude": "-83.0338733",
+        "latitude": "39.8691880"
+      }
+    },
+    {
+      "chunk_id": "32248986_chunk_7",
+      "section": "Business Links",
+      "type": "text",
+      "data": {
+        "description": "Links to businesses near the property including restaurants, fast food, medical centers, hospitals, doctors, and gas stations",
+        "links": {
+          "restaurants": "http://maps.google.com/maps?near=1135+WHITE+RD,GROVE+CITY,OH,43123-8996&q=Restauraunts",
+          "fast_food": "http://maps.google.com/maps?near=1135+WHITE+RD,GROVE+CITY,OH,43123-8996&q=Fast+Food",
+          "medical_centers": "http://maps.google.com/maps?near=1135+WHITE+RD,GROVE+CITY,OH,43123-8996&q=Medical+Centers",
+          "hospitals": "http://maps.google.com/maps?near=1135+WHITE+RD,GROVE+CITY,OH,43123-8996&q=Hospitals",
+          "doctors": "http://maps.google.com/maps?near=1135+WHITE+RD,GROVE+CITY,OH,43123-8996&q=Doctors",
+          "gas_stations": "http://maps.google.com/maps?near=1135+WHITE+RD,GROVE+CITY,OH,43123-8996&q=Gas+Stations"
+        }
+      }
+    }
+  ]
+}

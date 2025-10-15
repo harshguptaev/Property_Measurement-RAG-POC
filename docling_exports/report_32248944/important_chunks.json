@@ -1,0 +1,129 @@
+[
+  {
+    "chunk_id": "32248944_premium_chunk_1",
+    "section": "Premium Report Header",
+    "type": "text",
+    "data": {
+      "date": "1/2/2020",
+      "property_address": "2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461",
+      "report_id": "32248944",
+      "claim_number": "B-10122485"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_2",
+    "section": "Prepared For",
+    "type": "text",
+    "data": {
+      "contact": "Pilot Catastrophe Services,",
+      "company": "Pilot Catastrophe Services,",
+      "address": "PO Box 91300, Mobile, AL 36695",
+      "phone": "800-345-2288"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_3",
+    "section": "Summary Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_area": "5,615 sq ft",
+      "total_roof_facets": "36",
+      "predominant_pitch": "10/12",
+      "number_of_stories": ">1",
+      "total_ridges_hips": "403 ft",
+      "total_valleys": "189 ft",
+      "total_rakes": "124 ft",
+      "total_eaves": "345 ft"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_4",
+    "section": "Detailed Measurements",
+    "type": "text",
+    "data": {
+      "ridges": "132 ft (13 Ridges)",
+      "hips": "271 ft (20 Hips)",
+      "valleys": "189 ft (18 Valleys)",
+      "rakes": "124 ft (13 Rakes)",
+      "eaves_starter": "345 ft (31 Eaves)",
+      "drip_edge": "469 ft (44 Lengths)",
+      "parapet_walls": "0 (0 Lengths)",
+      "flashing": "47 ft (14 Lengths)",
+      "step_flashing": "78 ft (15 Lengths)",
+      "predominant_pitch": "10/12",
+      "total_area_all_pitches": "5,615 sq ft"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_5",
+    "section": "Property Location",
+    "type": "text",
+    "data": {
+      "longitude": "-78.1302015",
+      "latitude": "33.9297880"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_6",
+    "section": "Notes and Links",
+    "type": "text",
+    "data": {
+      "property_map_url": "http://maps.google.com/maps?f=g&source=s_q&hl=en&geocode=&q=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461",
+      "directions_url": "http://maps.google.com/maps?f=d&source=s_d&saddr=PO+Box+91300,Mobile,AL,36695&daddr=2778+HARBORMASTER+DR+SE,ST"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_7",
+    "section": "Business Links - Restaurants",
+    "type": "text",
+    "data": {
+      "description": "Link to restaurants near the property",
+      "url": "http://maps.google.com/maps?near=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461&q=Restauraunts"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_8",
+    "section": "Business Links - Fast_Food",
+    "type": "text",
+    "data": {
+      "description": "Link to fast_food near the property",
+      "url": "http://maps.google.com/maps?near=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461&q=Fast+Food"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_9",
+    "section": "Business Links - Medical_Centers",
+    "type": "text",
+    "data": {
+      "description": "Link to medical_centers near the property",
+      "url": "http://maps.google.com/maps?near=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461&q=Medical+Centers"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_10",
+    "section": "Business Links - Hospitals",
+    "type": "text",
+    "data": {
+      "description": "Link to hospitals near the property",
+      "url": "http://maps.google.com/maps?near=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461&q=Hospitals"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_11",
+    "section": "Business Links - Doctors",
+    "type": "text",
+    "data": {
+      "description": "Link to doctors near the property",
+      "url": "http://maps.google.com/maps?near=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461&q=Doctors"
+    }
+  },
+  {
+    "chunk_id": "32248944_premium_chunk_12",
+    "section": "Business Links - Gas_Stations",
+    "type": "text",
+    "data": {
+      "description": "Link to gas_stations near the property",
+      "url": "http://maps.google.com/maps?near=2778+HARBORMASTER+DR+SE,ST+JAMES+FD,NC,28461&q=Gas+Stations"
+    }
+  }
+]
