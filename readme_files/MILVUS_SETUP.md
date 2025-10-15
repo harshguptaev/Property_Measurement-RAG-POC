@@ -6,7 +6,7 @@ This system now uses **Milvus DB** (via Docker) instead of Milvus Lite for bette
 
 ### 1. Start the Complete System
 ```bash
-./start_rag_system.sh
+./start_backend.sh
 ```
 
 **Note:** Volumes are now managed by Docker (not in project directory)
@@ -117,5 +117,5 @@ docker-compose down -v
 docker volume prune
 
 # Restart fresh
-./start_milvus.sh
+./start_backend.sh
 ```
