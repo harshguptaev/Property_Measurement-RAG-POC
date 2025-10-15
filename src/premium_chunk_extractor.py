@@ -24,23 +24,19 @@ def read_pdf_text_by_page(pdf_path: str) -> List[str]:
 def _extract_premium_header(text: str) -> Dict[str, Any]:
     """Extract header information from premium report."""
     data = {}
-    
+
     date_match = re.search(r'(\d{1,2}/\d{1,2}/\d{4})', text)
     if date_match:
         data['date'] = date_match.group(1)
-    
+
     address_match = re.search(r'(\d+[^,\n]+,[^,\n]+,\s*[A-Z]{2}\s+\d{5})', text)
     if address_match:
         data['property_address'] = address_match.group(1).strip()
-    
+
     report_match = re.search(r'Report:\s*(\d+)', text)
     if report_match:
         data['report_id'] = report_match.group(1)
-    
-    claim_match = re.search(r'Claim:\s*([A-Z0-9-]+)', text)
-    if claim_match:
-        data['claim_number'] = claim_match.group(1)
-    
+
     return data
 
 
@@ -253,7 +249,7 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
 
     header_data = _extract_premium_header(all_text)
     if header_data:
-        _add("Premium Report Header", "text", header_data)
+        _add("Report Header", "text", header_data)
 
     online_maps = _extract_online_maps(all_text)
     if online_maps:

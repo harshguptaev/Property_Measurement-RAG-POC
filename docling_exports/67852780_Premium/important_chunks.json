@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "67852780_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "10/14/2025",
       "property_address": "3387 RUDON LN, COLUMBUS, OH 43204",
-      "report_id": "67852780",
-      "claim_number": "A00007127778"
+      "report_id": "67852780"
     }
   },
   {

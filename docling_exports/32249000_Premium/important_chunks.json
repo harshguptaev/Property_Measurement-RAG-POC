@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "32249000_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "1/2/2020",
       "property_address": "1208 N 35TH ST, ROGERS, AR 72756",
-      "report_id": "32249000",
-      "claim_number": "03P01102047"
+      "report_id": "32249000"
     }
   },
   {

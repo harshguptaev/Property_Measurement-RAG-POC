@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "32249017_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "1/2/2020",
       "property_address": "2671 E PIONEER TRL, AURORA, OH 44202",
-      "report_id": "32249017",
-      "claim_number": "A00002293648"
+      "report_id": "32249017"
     }
   },
   {

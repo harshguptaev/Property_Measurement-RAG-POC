@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "32248944_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "1/2/2020",
       "property_address": "2778 HARBORMASTER DR SE, ST JAMES FD, NC 28461",
-      "report_id": "32248944",
-      "claim_number": "B-10122485"
+      "report_id": "32248944"
     }
   },
   {

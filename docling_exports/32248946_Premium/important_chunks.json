@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "32248946_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "1/2/2020",
       "property_address": "102 Van Dusen Ln, Carl Junction, MO 64834",
-      "report_id": "32248946",
-      "claim_number": "016186795-009"
+      "report_id": "32248946"
     }
   },
   {

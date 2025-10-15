@@ -2,13 +2,12 @@
   "text": [
     {
       "chunk_id": "32249005_chunk_1",
-      "section": "Premium Report Header",
+      "section": "Report Header",
       "type": "text",
       "data": {
         "date": "1/2/2020",
         "property_address": "482 CHARLEY ST, DECATUR, AR 72722",
-        "report_id": "32249005",
-        "claim_number": "03P01102272"
+        "report_id": "32249005"
       }
     },
     {

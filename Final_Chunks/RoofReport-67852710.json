@@ -2,13 +2,12 @@
   "text": [
     {
       "chunk_id": "67852710_chunk_1",
-      "section": "Premium Report Header",
+      "section": "Report Header",
       "type": "text",
       "data": {
         "date": "10/14/2025",
         "property_address": "1925 RACHAEL DR, LANCASTER, PA 17601",
-        "report_id": "67852710",
-        "claim_number": "A00007156224"
+        "report_id": "67852710"
       }
     },
     {

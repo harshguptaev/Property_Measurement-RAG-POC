@@ -2,13 +2,12 @@
   "text": [
     {
       "chunk_id": "67852435_chunk_1",
-      "section": "Premium Report Header",
+      "section": "Report Header",
       "type": "text",
       "data": {
         "date": "10/14/2025",
         "property_address": "104 MOULL ST, NEWARK, OH 43055",
-        "report_id": "67852435",
-        "claim_number": "A00007163723"
+        "report_id": "67852435"
       }
     },
     {

@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "67849245_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "10/13/2025",
       "property_address": "503 Haywood Creek Drive, Trent Woods, NC 28562",
-      "report_id": "67849245",
-      "claim_number": "HW00771035"
+      "report_id": "67849245"
     }
   },
   {

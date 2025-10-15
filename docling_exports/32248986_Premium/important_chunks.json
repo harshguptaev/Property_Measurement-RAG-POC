@@ -1,13 +1,12 @@
 [
   {
     "chunk_id": "32248986_chunk_1",
-    "section": "Premium Report Header",
+    "section": "Report Header",
     "type": "text",
     "data": {
       "date": "1/2/2020",
       "property_address": "1135 WHITE RD, GROVE CITY, OH 43123",
-      "report_id": "32248986",
-      "claim_number": "A00002296463"
+      "report_id": "32248986"
     }
   },
   {

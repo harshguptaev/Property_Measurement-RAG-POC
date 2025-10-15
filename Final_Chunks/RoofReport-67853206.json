@@ -2,13 +2,12 @@
   "text": [
     {
       "chunk_id": "67853206_chunk_1",
-      "section": "Premium Report Header",
+      "section": "Report Header",
       "type": "text",
       "data": {
         "date": "10/14/2025",
         "property_address": "1103 HIGHLAND LAKE WAY, BROWNSBURG, IN 46112",
-        "report_id": "67853206",
-        "claim_number": "A00007174698"
+        "report_id": "67853206"
       }
     },
     {
