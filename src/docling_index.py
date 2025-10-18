@@ -153,10 +153,7 @@ class DoclingProcessor:
             
             if file_path.suffix.lower() == '.pdf':
                 documents = self._process_pdf_with_docling(file_path, extract_images)
-            elif file_path.suffix.lower() in ['.docx', '.pptx']:
-                documents = self._process_office_document(file_path, extract_images)
-            else:
-                documents = self._process_text_file(file_path)
+            
             
             # Add metadata with enhanced indexing information
             for i, doc in enumerate(documents):
@@ -260,7 +257,10 @@ class DoclingProcessor:
                     text_chunks = self.text_splitter.split_documents([text_doc])
                     documents.extend(text_chunks)
                 
-            
+            # Extract important chunks
+            important_chunks = self._extract_and_save_important_chunks(file_path)
+            documents.extend(important_chunks)
+
             # Extract page-level content with images
             if extract_images:
                 page_documents = self._extract_pages_and_images(converted_doc, file_path)
@@ -270,9 +270,6 @@ class DoclingProcessor:
             table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
             
-            # Extract important chunks and save them
-            important_chunks = self._extract_and_save_important_chunks(file_path)
-            documents.extend(important_chunks)
             
 
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")
@@ -301,6 +298,8 @@ class DoclingProcessor:
 
         return documents
     
+
+    # Extract images using PyMuPDF as fallback since Docling image extraction isn't working.
     def _extract_images_with_pymupdf(self, file_path: Path) -> List[Document]:
         """Extract images using PyMuPDF as fallback since Docling image extraction isn't working."""
         try:
@@ -464,7 +463,8 @@ class DoclingProcessor:
         return documents
     
     # Removed unused image OCR helper methods (_process_page_image, _process_standalone_image, _extract_text_from_image)
-        
+
+    # Extract tables from the converted document
     def _extract_tables(self, converted_doc, tables_list, file_path: Path) -> List[Document]:
         """
         For each Docling table:
@@ -540,6 +540,7 @@ class DoclingProcessor:
             out_docs.append(table_doc)
         return out_docs
     
+    # Export table data to JSON files
     def export_table_data(self, df, file_path, idx, tables_list):
 
         """Export table data to JSON files."""
@@ -634,6 +635,7 @@ class DoclingProcessor:
         
         return result
 
+    # Convert Areas per Pitch data to desired format
     def convert_areas_per_pitch_to_format(self, df):
         """
         Convert Areas per Pitch data to desired format.
@@ -746,6 +748,7 @@ class DoclingProcessor:
         
         return result
 
+    # Add table chunks to the existing Final_Chunks file
     def _add_table_chunks_to_final(self, final_chunks_file, file_path):
         """
         Add table chunks from table_chunks.json to the existing Final_Chunks file.
@@ -784,6 +787,105 @@ class DoclingProcessor:
         except Exception as e:
             logging.error(f"Error adding table chunks to final: {e}")
 
+
+    # Add image chunks to the existing Final_Chunks file
+    def _add_image_chunks_to_final(self, final_chunks_file, file_path):
+        """
+        Add image chunks from extracted images to the existing Final_Chunks file.
+        Adds an 'image' array with image chunk data to match the structure.
+        """
+        try:
+            # Read existing final chunks
+            existing_data = {}
+            if final_chunks_file.exists():
+                with open(final_chunks_file, 'r', encoding='utf-8') as f:
+                    existing_data = json.load(f)
+
+            # Ensure we have the right structure
+            if not isinstance(existing_data, dict):
+                existing_data = {"text": existing_data if isinstance(existing_data, list) else []}
+
+            # Initialize image array if not present
+            if "image" not in existing_data:
+                existing_data["image"] = []
+
+            # Extract report ID
+            report_id = None
+            if 'RoofReport-' in file_path.name:
+                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+
+            if not report_id:
+                logging.warning(f"Could not extract report ID from {file_path.name}")
+                return
+
+            # Get extracted images directory
+            images_dir = Path("extracted_images") / f"report_{report_id}"
+            if not images_dir.exists():
+                logging.info(f"No extracted images directory found for {report_id}")
+                return
+
+            # Get all image files
+            image_files = list(images_dir.glob("*.png"))
+            if not image_files:
+                logging.info(f"No image files found in {images_dir}")
+                return
+
+            # Create image chunks
+            chunk_counter = len(existing_data.get("text", [])) + len(existing_data.get("table", [])) + 1
+
+            for image_file in sorted(image_files):
+                try:
+                    # Extract section name from filename (remove .png extension)
+                    section_name = image_file.stem
+
+                    # Create descriptive section names
+                    section_mapping = {
+                        "Cover_Image": "Cover Image",
+                        "Lengthsimage": "Lengths Diagram",
+                        "Pitch_Degrees": "Pitch (Degrees) Diagram",
+                        "Pitch_on_12": "Pitch (on 12) Diagram",
+                        "Rafters": "Rafters Diagram",
+                        "Azimuth": "Azimuth Diagram",
+                        "Area": "Area Diagram",
+                        "Roof_Penetrations": "Roof Penetrations Diagram",
+                        "Top_View": "Top View",
+                        "North_Side": "North Side View",
+                        "South_Side": "South Side View",
+                        "East_Side": "East Side View",
+                        "West_Side": "West Side View",
+                        "Structure_Summary": "Structure Summary"
+                    }
+
+                    display_section = section_mapping.get(section_name, section_name.replace("_", " "))
+
+                    # Create image chunk
+                    image_chunk = {
+                        "chunk_id": f"{report_id}_chunk_{chunk_counter}",
+                        "section": display_section,
+                        "type": "image",
+                        "data": {
+                            "description": f"Visual diagram showing {display_section.lower()} for the property roof inspection",
+                            "image_file": f"extracted_images/report_{report_id}/{image_file.name}"
+                        }
+                    }
+
+                    existing_data["image"].append(image_chunk)
+                    chunk_counter += 1
+
+                except Exception as e:
+                    logging.error(f"Error processing image file {image_file}: {e}")
+                    continue
+
+            # Save the updated structure
+            with open(final_chunks_file, 'w', encoding='utf-8') as f:
+                json.dump(existing_data, f, ensure_ascii=False, indent=2)
+
+            logging.info(f"✓ Added {len(existing_data['image'])} image chunks to final chunks")
+
+        except Exception as e:
+            logging.error(f"Error adding image chunks to final: {e}")
+
+    # Export table images to PNG files
     def export_table_images(self, converted_doc, file_path):
 
         """Export table images to PNG files."""
@@ -825,6 +927,8 @@ class DoclingProcessor:
                 top_img.save(f"{out_report_table_images_dir}/Structure_Complexity_{table_counter//2}.png")
                 bottom_img.save(f"{out_report_table_images_dir}/Waste_Calculation_{table_counter//2}.png")
 
+
+    # Export table data chunks to JSON files
     def export_table_data_chunks(self, file_path):
         """Export table data chunks to JSON files.
           "table":[{
@@ -901,58 +1005,9 @@ class DoclingProcessor:
         chunks_data = {"tables": table_chunks}
         chunks_file.write_text(json.dumps(chunks_data, ensure_ascii=False, indent=2), encoding="utf-8")
     
-    def _process_office_document(self, file_path: Path, extract_images: bool = True) -> List[Document]:
-        """Process Office documents (DOCX, PPTX) using Docling."""
-        documents = []
-        
-        try:
-            result = self.converter.convert(str(file_path))
-            converted_doc = result.document  # Remove type hint
-            
-            # Extract main text
-            main_text = converted_doc.export_to_markdown()
-            if main_text.strip():
-                text_doc = Document(
-                    page_content=main_text,
-                    metadata={
-                        'type': 'text',
-                        'extraction_method': 'docling_office'
-                    }
-                )
-                text_chunks = self.text_splitter.split_documents([text_doc])
-                documents.extend(text_chunks)
-            
-            # Extract images if enabled
-            if extract_images:
-                image_documents = self._extract_pages_and_images(converted_doc, file_path)
-                documents.extend(image_documents)
-        
-        except Exception as e:
-            logging.error(f"Error processing Office document {file_path}: {e}")
-            raise
-        
-        return documents
-    
-    def _process_text_file(self, file_path: Path) -> List[Document]:
-        """Process text-based files."""
-        try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            
-            document = Document(
-                page_content=content,
-                metadata={
-                    'type': 'text',
-                    'extraction_method': 'direct_text'
-                }
-            )
-            
-            return self.text_splitter.split_documents([document])
-            
-        except Exception as e:
-            logging.error(f"Error processing text file {file_path}: {e}")
-            raise
-    
+
+
+    # Extract important chunks Text Chunks and save them
     def _extract_and_save_important_chunks(self, file_path: Path) -> None:
         """Extract important chunks and save them organized by report ID."""
 
@@ -960,21 +1015,12 @@ class DoclingProcessor:
         try:
             logging.info(f"Starting important chunk extraction for {file_path.name}")
             
-            # Try to import the extractor
-            try:
-                from .important_chunk_extractor import extract_important_chunks
-                logging.info("Successfully imported important_chunk_extractor")
-            except ImportError as ie:
-                logging.error(f"Failed to import important_chunk_extractor: {ie}")
-                return
+            from src.premium_chunk_extractor import extract_premium_chunks
             
             # Extract report ID from filename
             report_id = None
             if 'RoofReport-' in file_path.name:
-                try:
-                    report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-                except:
-                    pass
+                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
             
             if not report_id:
                 report_id = file_path.stem
@@ -982,18 +1028,8 @@ class DoclingProcessor:
             logging.info(f"Extracting chunks for report ID: {report_id}")
             
             # Extract important chunks
-            chunks_data = extract_important_chunks(str(file_path))
-            
-            # Debug logging
-            logging.info(f"Chunks data type: {type(chunks_data)}")
-            logging.info(f"Chunks data truthy: {bool(chunks_data)}")
-            if isinstance(chunks_data, dict):
-                logging.info(f"Chunks data keys: {list(chunks_data.keys())}")
-                for key, value in chunks_data.items():
-                    if isinstance(value, list):
-                        logging.info(f"  {key}: {len(value)} items")
-                    else:
-                        logging.info(f"  {key}: {type(value)}")
+            chunks_data = extract_premium_chunks(str(file_path))
+        
             
             if chunks_data:
                 # New flattened format: list of chunk dicts
@@ -1037,6 +1073,9 @@ class DoclingProcessor:
 
                     # Add table chunks to the existing final chunks structure
                     self._add_table_chunks_to_final(chunks_file, file_path)
+
+                    # Add image chunks to the existing final chunks structure
+                    self._add_image_chunks_to_final(chunks_file, file_path)
                     
                     documents.extend(all_chunks)
                     logging.info(f"✓ Saved {len(all_chunks)} important flattened chunks to {chunks_file}")
@@ -1051,6 +1090,8 @@ class DoclingProcessor:
             logging.error(f"Full traceback: {traceback.format_exc()}")
         return documents
 
+
+    # Main function to process a directory with Docling
     def process_directory(
         self,
         directory_path: str,
@@ -1103,73 +1144,45 @@ class DoclingProcessor:
         return all_documents
 
 
-def process_and_index_directory_with_docling(
+# Main function to process a directory with Docling
+def process_directory_with_docling(
     directory_path: str,
-    vector_store_manager: Optional[VectorStoreManager] = None,
-    drop_existing: bool = False,
     file_extensions: Optional[List[str]] = None,
     extract_images: bool = True,
     config_instance: Optional[Any] = None
-) -> VectorStoreManager:
+) -> List[Document]:
     """
-    Process and index all documents in a directory using Docling.
-    
+    Process all documents in a directory using Docling without indexing.
+
     Args:
         directory_path: Path to the directory containing documents
-        vector_store_manager: Existing vector store manager (optional)
-        drop_existing: Whether to drop existing collection
         file_extensions: List of file extensions to process
         extract_images: Whether to extract images from documents
         config_instance: Configuration instance
-        
+
     Returns:
-        Vector store manager with indexed documents
+        List of processed documents
     """
     config_instance = config_instance or config
-    
-    # Create vector store manager if not provided
-    if vector_store_manager is None:
-        bedrock_config = config_instance.get_bedrock_config()
-        vector_config = config_instance.get_vector_store_config()
-        
-        embeddings = create_bedrock_embeddings(bedrock_config)
-        
-        vector_store_manager = VectorStoreManager(
-            store_type=vector_config["store_type"],
-            collection_name=vector_config["collection_name"],
-            embeddings=embeddings
-        )
-    
-    # Drop existing collection if requested
-    if drop_existing:
-        vector_store_manager.delete_collection()
-        vector_store_manager._setup_vector_store()
-    
-    # Process documents with Docling
+
+    # Create processor without vector store
     processor = DoclingProcessor(
-        vector_store_manager=vector_store_manager,
+        vector_store_manager=None,  # No vector store needed
         config_instance=config_instance
     )
-    
+
     documents = processor.process_directory(
         directory_path=directory_path,
         file_extensions=file_extensions,
         extract_images=extract_images
     )
-    
+
     if documents:
-        # Add documents to vector store
-        logging.info(f"Adding {len(documents)} documents to vector store...")
-        vector_store_manager.add_documents(documents)
-        
-        # Save vector store
-        vector_store_manager.save()
-        
-        logging.info(f"Successfully indexed {len(documents)} documents with Docling")
+        logging.info(f"Successfully processed {len(documents)} documents with Docling")
     else:
-        logging.warning("No documents found to index")
-    
-    return vector_store_manager
+        logging.warning("No documents found to process")
+
+    return documents
 
 
 ## Removed unused public helper functions get_docling_processor and create_enhanced_index_processor (not referenced in codebase)
