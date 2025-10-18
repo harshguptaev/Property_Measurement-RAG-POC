@@ -1,9 +1,3 @@
-CISFACTION
-
-100%
-
-GUARANTEED
-
 <!-- image -->
 
 <!-- image -->
@@ -34,7 +28,7 @@ Report ID:
 
 44995432
 
-• 2025 Eagle View Technologies, Inc. All Rights Reserved
+8
 
 REPORT ID
 
@@ -108,23 +102,11 @@ Open in EagleView One™
 
 <!-- image -->
 
-3' 2"
-
 ## Lengths
 
 Ridges = 14' 7" Hips = 116' 8"
 
 Valleys = 23' 2"
-
-23'4"
-
-43'11"
-
-31'8"
-
-Flashing = 0'
-
-23'4"
 
 Rakes = 0' Eaves = 155' 11" Flashing = 0'
 
@@ -134,20 +116,16 @@ Step flashing = 0' Parapets = 0' Other = 0'
 
 <!-- image -->
 
-Other = 0'
+34'1"
 
 <!-- image -->
 
 '
-
-ses, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (Degrees)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
-- 23°
-
 <!-- image -->
 
 <!-- image -->
@@ -155,8 +133,6 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 <!-- image -->
 
 '
-
-ses, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (on 12)
 
@@ -180,19 +156,13 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 
 '
 
-s true north. Flat facets are labeled as 'F'.
-
 ## Azimuth
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
 
-340
-
 <!-- image -->
 
 <!-- image -->
-
-250
 
 <!-- image -->
 
@@ -226,10 +196,6 @@ These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
-/eagleview © 2024
-
-/ eagleview © 2024
-
 ## NORTH SIDE
 
 <!-- image -->
@@ -241,10 +207,6 @@ These are images of the property taken from multiple angles.
 '
 
 ## SOUTH SIDE
-
-eaglevieW © 2024
-
-eagleview ® 2024
 
 ## EAST SIDE
 
@@ -258,15 +220,11 @@ eagleview ® 2024
 
 ## WEST SIDE
 
-eagleview © 2024
-
 <!-- image -->
 
 <!-- image -->
 
 '
-
-replacement or repair work.
 
 ## ROOFING REPORT SUMMARY
 

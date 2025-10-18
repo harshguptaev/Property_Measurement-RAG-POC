@@ -2,231 +2,233 @@
   "text": [
     {
       "chunk_id": "65313312_chunk_1",
-      "section": "Unknown",
+      "section": "Report Header",
       "type": "text",
-      "data": "Cover_Image from page 1 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page1, 65313312, report65313312, overview, aerial, top, cover image"
+      "data": {
+        "report_id": "65313312",
+        "date": "August 23, 2025",
+        "property_address": "2455 New Holland Cir Murfreesboro, TN 37128"
+      }
     },
     {
       "chunk_id": "65313312_chunk_2",
-      "section": "Unknown",
+      "section": "Measurements - Structure 1",
       "type": "text",
-      "data": "Cover_Image_2 from page 1 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page1, 65313312, report65313312, overview, aerial, top, cover image 2"
+      "data": {
+        "structure_name": "Structure 1",
+        "structure_type": "individual_structure",
+        "total_roof_obstructions": "7",
+        "ridges": "39' (3 Ridges)",
+        "hips": "9' 4\" (2 Hips)",
+        "valleys": "40' 2\" (4 Valleys)",
+        "rakes": "110' 3\" (9 Rakes)",
+        "eaves_starters": "73' 10\" (8 Eaves)",
+        "drip_edge": "184' 1\" (17 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
+        "flashing": "27' 11\" (3 Lengths)",
+        "step_flashing": "47' 10\" (7 Lengths)",
+        "total_roof_obstructions_area": "5.5 sq ft",
+        "total_roof_area_less_obstructions": "1,222 sq ft",
+        "total_roof_obstructions_perimeter": "24'",
+        "predominant_pitch": "8/12",
+        "total_area_all_pitches": "1,227.5 sq ft",
+        "total_roof_facets": 10
+      }
     },
     {
       "chunk_id": "65313312_chunk_3",
-      "section": "Unknown",
+      "section": "Prepared For",
       "type": "text",
-      "data": "Cover_Image_3 from page 1 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page1, 65313312, report65313312, overview, aerial, top, cover image 3"
+      "data": {
+        "name": "Prepared For",
+        "address": "Doug Durham 321 Billingsly Ct, Suite 13 Franklin,TN 37067, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx",
+        "phone": "(615) 778-1440"
+      }
     },
     {
       "chunk_id": "65313312_chunk_4",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Lengthsimage from page 2 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page2, 65313312, report65313312, overview, aerial, top, lengthsimage"
+      "section": "Lengths Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets",
+        "image_file": "extracted_images/report_65313312/Lengthsimage.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_5",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Pitch_Degrees from page 3 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page3, 65313312, report65313312, overview, aerial, top, pitch degrees"
+      "section": "Pitch (Degrees) Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof pitch in degrees for different facets",
+        "image_file": "extracted_images/report_65313312/Pitch_Degrees.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_6",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Pitch_on_12 from page 4 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page4, 65313312, report65313312, east, side, east side, pitch on 12"
+      "section": "Pitch (on 12) Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof pitch in x/12 format for different facets",
+        "image_file": "extracted_images/report_65313312/Pitch_on_12.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_7",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Rafters from page 5 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page5, 65313312, report65313312, west, side, west side, rafters"
+      "section": "Rafters Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing rafter lengths for different roof sections",
+        "image_file": "extracted_images/report_65313312/Rafters.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_8",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Azimuth from page 6 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page6, 65313312, report65313312, north, side, north side, azimuth"
+      "section": "Azimuth Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof facet orientations in degrees relative to true north",
+        "image_file": "extracted_images/report_65313312/Azimuth.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_9",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Area from page 7 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page7, 65313312, report65313312, south, side, south side, area"
+      "section": "Area Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing roof area measurements for different facets in square feet",
+        "image_file": "extracted_images/report_65313312/Area.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_10",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Roof_Penetrations from page 8 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page8, 65313312, report65313312, east, side, east side, roof penetrations"
+      "section": "Roof Obstructions Diagram",
+      "type": "image",
+      "data": {
+        "description": "Diagram showing locations of roof obstructions",
+        "image_file": "extracted_images/report_65313312/Roof_Penetrations.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_11",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Top_View from page 9 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page9, 65313312, report65313312, west, side, west side, top view"
+      "section": "Property Imagery",
+      "type": "image",
+      "data": {
+        "description": "Aerial images of the property from top, north, south, east, and west views",
+        "images": [
+          "extracted_images/report_65313312/Top_View.png",
+          "extracted_images/report_65313312/North_Side.png",
+          "extracted_images/report_65313312/South_Side.png",
+          "extracted_images/report_65313312/East_Side.png",
+          "extracted_images/report_65313312/West_Side.png"
+        ]
+      }
     },
     {
       "chunk_id": "65313312_chunk_12",
-      "section": "Unknown",
-      "type": "text",
-      "data": "North_Side from page 9 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page9, 65313312, report65313312, west, side, west side, north side"
+      "section": "Roofing Report Summary",
+      "type": "table",
+      "data": {}
     },
     {
       "chunk_id": "65313312_chunk_13",
-      "section": "Unknown",
+      "section": "Property Details",
       "type": "text",
-      "data": "South_Side from page 10 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page10, 65313312, report65313312, north, side, north side, south side"
+      "data": {
+        "total_roof_facets": "10",
+        "total_roof_obstructions": "7",
+        "ridges": "39'",
+        "hips": "9' 4\" Valleys",
+        "valleys": "40' 2\"",
+        "rakes": "110' 3\" Eaves",
+        "eaves_starters": "73' 10\" (8 Eaves)",
+        "drip_edge": "184' 1\" (17 Lengths)",
+        "parapet_walls": "0' (0 Lengths)",
+        "flashing": "27' 11\"",
+        "step_flashing": "47' 10\" Parapets",
+        "total_roof_obstructions_area": "5.5 sq",
+        "total_roof_obstructions_perimeter": "24' Predominant Pitch",
+        "predominant_pitch": "8/12"
+      }
     },
     {
       "chunk_id": "65313312_chunk_14",
-      "section": "Unknown",
+      "section": "Longitude",
       "type": "text",
-      "data": "East_Side from page 10 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page10, 65313312, report65313312, north, side, north side, east side"
+      "data": {
+        "longitude": "-86.4088140",
+        "coordinate_type": "longitude"
+      }
     },
     {
       "chunk_id": "65313312_chunk_15",
-      "section": "Unknown",
+      "section": "Latitude",
       "type": "text",
-      "data": "West_Side from page 11 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page11, 65313312, report65313312, south, side, south side, west side"
+      "data": {
+        "latitude": "35.8016340",
+        "coordinate_type": "latitude"
+      }
     },
     {
       "chunk_id": "65313312_chunk_16",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Structure_Summary from page 12 of RoofReport-65313312.pdf Report ID: 65313312 Keywords: roof, inspection, page12, 65313312, report65313312, east, side, east side, structure summary"
+      "section": "Areas per Pitch All Structures",
+      "type": "table",
+      "data": {
+        "table_name": "Areas_per_Pitch_AllStructures",
+        "description": "This table lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+        "pitches": [
+          {"pitch": "0%", "area_m2": "111", "percent_of_roof": "12.33"},
+          {"pitch": "4%", "area_m2": "116", "percent_of_roof": "12.66"},
+          {"pitch": "9%", "area_m2": "121", "percent_of_roof": "13.33"},
+          {"pitch": "12%", "area_m2": "125", "percent_of_roof": "13.66"},
+          {"pitch": "14%", "area_m2": "127", "percent_of_roof": "14.00"},
+          {"pitch": "16%", "area_m2": "129", "percent_of_roof": "14.00"},
+          {"pitch": "19%", "area_m2": "133", "percent_of_roof": "14.33"},
+          {"pitch": "24%", "area_m2": "138", "percent_of_roof": "15.00"},
+          {"pitch": "29%", "area_m2": "144", "percent_of_roof": "15.66"}
+        ],
+        "image_path": "docling_exports/RoofReport-65313312/tables/images/Areas_per_Pitch_AllStructures.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_17",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\n[\n    {\n        \"Roof Pitches\": \"0%\",\n        \"Area (m²)\": \"111\",\n        \"%of Roof\": \"12.33\"\n    },\n    {\n        \"Roof Pitches\": \"4%\",\n        \"Area (m²)\": \"116\",\n        \"%of Roof\": \"12.66\"\n    },\n    {\n        \"Roof Pitches\": \"9%\",\n        \"Area (m²)\": \"121\",\n        \"%of Roof\": \"13.33\"\n    },\n    {\n        \"Roof Pitches\": \"12%\",\n        \"Area (m²)\": \"125\",\n        \"%of Roof\": \"13.66\"\n    },\n    {\n        \"Roof Pitches\": \"14%\",\n        \"Area (m²)\": \"127\",\n        \"%of Roof\": \"14.00\"\n    },\n    {\n        \"Roof Pitches\": \"16%\",\n        \"Area (m²)\": \"129\",\n        \"%of Roof\": \"14.00\"\n    },\n    {\n        \"Roof Pitches\": \"19%\",\n        \"Area (m²)\": \"133\",\n        \"%of Roof\": \"14.33\"\n    },\n    {\n        \"Roof Pitches\": \"24%\",\n        \"Area (m²)\": \"138\",\n        \"%of Roof\": \"15.00\"\n    },\n    {\n        \"Roof Pitches\": \"29%\",\n        \"Area (m²)\": \"144\",\n        \"%of Roof\": \"15.66\"\n    }\n]"
+      "section": "Areas per Pitch Structure 1",
+      "type": "table",
+      "data": {
+        "table_name": "Areas_per_Pitch_Structure_1",
+        "description": "This table lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+        "summary": [
+          {"total_area_sq_ft": "1,227.5 sq ft", "roof_facets": "10", "pitch": "8/12"}
+        ],
+        "image_path": "docling_exports/RoofReport-65313312/tables/images/Areas_per_Pitch_Structure_1.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_18",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\n[\n    {\n        \"Roof Pitches\": \"1,227.5 sq ft\",\n        \"Roof Facets:\": \"10\",\n        \"%of Roof\": \"8/12\"\n    }\n]"
+      "section": "Waste Calculation 1",
+      "type": "table",
+      "data": {
+        "table_name": "Waste_Calculation_1",
+        "description": "This waste calculation table is for asphalt shingle roofing applications. All values in the table below only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square. Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not control.",
+        "note": "Individual results may vary from suggested waste factor that EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given replacement or repair work.",
+        "waste_factors": [
+          {"structure_number": "1", "area": "23.4", "pitch": "0/12"},
+          {"structure_number": "2", "area": "119.9", "pitch": "5/12"},
+          {"structure_number": "3", "area": "39.1", "pitch": "6/12"},
+          {"structure_number": "4", "area": "1045.1", "pitch": "8/12"}
+        ],
+        "image_path": "docling_exports/RoofReport-65313312/tables/images/Waste_Calculation_1.png"
+      }
     },
     {
       "chunk_id": "65313312_chunk_19",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\n[\n    {\n        \"waste\": \"1\",\n        \"area\": \"23.4\",\n        \"squares\": \"0/12\"\n    },\n    {\n        \"waste\": \"2\",\n        \"area\": \"119.9\",\n        \"squares\": \"5/12\"\n    },\n    {\n        \"waste\": \"3\",\n        \"area\": \"39.1\",\n        \"squares\": \"6/12\"\n    },\n    {\n        \"waste\": \"4\",\n        \"area\": \"1045.1\",\n        \"squares\": \"8/12\"\n    }\n]"
-    },
-    {
-      "chunk_id": "65313312_chunk_20",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\ndocling_exports/RoofReport-65313312/tables/images/Structure_Complexity_1.png"
-    },
-    {
-      "chunk_id": "65313312_chunk_21",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\ndocling_exports/RoofReport-65313312/tables/images/Areas_per_Pitch_AllStructures.png"
-    },
-    {
-      "chunk_id": "65313312_chunk_22",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\ndocling_exports/RoofReport-65313312/tables/images/Waste_Calculation_1.png"
-    },
-    {
-      "chunk_id": "65313312_chunk_23",
-      "section": "Unknown",
-      "type": "text",
-      "data": "Report ID: 65313312\ndocling_exports/RoofReport-65313312/tables/images/Areas_per_Pitch_Structure_1.png"
-    },
-    {
-      "chunk_id": "65313312_chunk_24",
-      "section": "Report Header",
-      "type": "text",
-      "data": "{\"section\": \"Report Header\", \"report_id\": \"65313312\", \"date\": \"August 23, 2025\", \"property_address\": \"2455 New Holland Cir Murfreesboro, TN 37128\"}"
-    },
-    {
-      "chunk_id": "65313312_chunk_25",
-      "section": "Measurements - Structure 1",
-      "type": "text",
-      "data": "{\"section\": \"Measurements - Structure 1\", \"structure_name\": \"Structure 1\", \"structure_type\": \"individual_structure\", \"total_roof_obstructions\": \"7\", \"ridges\": \"39' (3 Ridges)\", \"hips\": \"9' 4\\\" (2 Hips)\", \"valleys\": \"40' 2\\\" (4 Valleys)\", \"rakes\": \"110' 3\\\" (9 Rakes)\", \"eaves_starters\": \"73' 10\\\" (8 Eaves)\", \"drip_edge\": \"184' 1\\\" (17 Lengths)\", \"parapet_walls\": \"0' (0 Lengths)\", \"flashing\": \"27' 11\\\" (3 Lengths)\", \"step_flashing\": \"47' 10\\\" (7 Lengths)\", \"total_roof_obstructions_area\": \"5.5 sq ft\", \"total_roof_area_less_obstructions\": \"1,222 sq ft\", \"total_roof_obstructions_perimeter\": \"24'\", \"predominant_pitch\": \"8/12\", \"total_area_all_pitches\": \"1,227.5 sq ft\", \"total_roof_facets\": 10}"
-    },
-    {
-      "chunk_id": "65313312_chunk_26",
-      "section": "Prepared For",
-      "type": "text",
-      "data": "{\"section\": \"Prepared For\", \"name\": \"Prepared For\", \"address\": \"Doug Durham 321 Billingsly Ct, Suite 13 Franklin,TN 37067, Satisfaction Guaranteed, www.eagleview.com/Guarantee.aspx\", \"phone\": \"(615) 778-1440\"}"
-    },
-    {
-      "chunk_id": "65313312_chunk_27",
-      "section": "Lengths Diagram",
-      "type": "text",
-      "data": "Image Section: Lengths Diagram Diagram showing roof length measurements including ridges, hips, valleys, rakes, eaves, flashing, step flashing, and parapets"
-    },
-    {
-      "chunk_id": "65313312_chunk_28",
-      "section": "Pitch (Degrees) Diagram",
-      "type": "text",
-      "data": "Image Section: Pitch (Degrees) Diagram Diagram showing roof pitch in degrees for different facets"
-    },
-    {
-      "chunk_id": "65313312_chunk_29",
-      "section": "Pitch (on 12) Diagram",
-      "type": "text",
-      "data": "Image Section: Pitch (on 12) Diagram Diagram showing roof pitch in x/12 format for different facets"
-    },
-    {
-      "chunk_id": "65313312_chunk_30",
-      "section": "Rafters Diagram",
-      "type": "text",
-      "data": "Image Section: Rafters Diagram Diagram showing rafter lengths for different roof sections"
-    },
-    {
-      "chunk_id": "65313312_chunk_31",
-      "section": "Azimuth Diagram",
-      "type": "text",
-      "data": "Image Section: Azimuth Diagram Diagram showing roof facet orientations in degrees relative to true north"
-    },
-    {
-      "chunk_id": "65313312_chunk_32",
-      "section": "Area Diagram",
-      "type": "text",
-      "data": "Image Section: Area Diagram Diagram showing roof area measurements for different facets in square feet"
-    },
-    {
-      "chunk_id": "65313312_chunk_33",
-      "section": "Roof Obstructions Diagram",
-      "type": "text",
-      "data": "Image Section: Roof Obstructions Diagram Diagram showing locations of roof obstructions"
-    },
-    {
-      "chunk_id": "65313312_chunk_34",
-      "section": "Property Imagery",
-      "type": "text",
-      "data": "Image Section: Property Imagery Aerial images of the property from top, north, south, east, and west views"
-    },
-    {
-      "chunk_id": "65313312_chunk_35",
-      "section": "Roofing Report Summary",
-      "type": "text",
-      "data": "Table Section: Roofing Report Summary"
-    },
-    {
-      "chunk_id": "65313312_chunk_36",
-      "section": "Property Details",
-      "type": "text",
-      "data": "{\"section\": \"Property Details\", \"total_roof_facets\": \"10\", \"total_roof_obstructions\": \"7\", \"ridges\": \"39'\", \"hips\": \"9' 4\\\" Valleys\", \"valleys\": \"40' 2\\\"\", \"rakes\": \"110' 3\\\" Eaves\", \"eaves_starters\": \"73' 10\\\" (8 Eaves)\", \"drip_edge\": \"184' 1\\\" (17 Lengths)\", \"parapet_walls\": \"0' (0 Lengths)\", \"flashing\": \"27' 11\\\"\", \"step_flashing\": \"47' 10\\\" Parapets\", \"total_roof_obstructions_area\": \"5.5 sq\", \"total_roof_obstructions_perimeter\": \"24' Predominant Pitch\", \"predominant_pitch\": \"8/12\"}"
-    },
-    {
-      "chunk_id": "65313312_chunk_37",
-      "section": "Longitude",
-      "type": "text",
-      "data": "{\"section\": \"Longitude\", \"longitude\": \"-86.4088140\", \"coordinate_type\": \"longitude\"}"
-    },
-    {
-      "chunk_id": "65313312_chunk_38",
-      "section": "Latitude",
-      "type": "text",
-      "data": "{\"section\": \"Latitude\", \"latitude\": \"35.8016340\", \"coordinate_type\": \"latitude\"}"
+      "section": "Structure Complexity 1",
+      "type": "table",
+      "data": {
+        "table_name": "Structure_Complexity_1",
+        "description": "This table lists the structure complexity of the roof.",
+        "content": "Dummy Text for now.",
+        "image_path": "docling_exports/RoofReport-65313312/tables/images/Structure_Complexity_1.png"
+      }
     }
   ]
 }

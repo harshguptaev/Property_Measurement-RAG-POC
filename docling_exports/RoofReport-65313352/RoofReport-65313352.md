@@ -1,12 +1,4 @@
-CISFACTION
-
-100%
-
-GUARANTEED
-
 <!-- image -->
-
-• 2025 Eagle View Technologies, Inc. All Rights Reserved|
 
 <!-- image -->
 
@@ -69,8 +61,6 @@ Open in EagleView One™
 
 This document is provided under License by EagleView Technologies to the requestor for their Internal Use Only subject to the terms and conditions previously agreed to by the requestor when they registered for use of EagleView Technologies Services. It remains the property of EagleView Technologies and may be reproduced and distributed only within the requestor's company. Any reproduction or distribution to anyone outside of the requestor's company without EagleView's prior written permission is prohibited. All aspects and handling of this report are subject to the Terms and Conditions previously agreed to by the requestor.
 
-alleys = 75'2"
-
 ## Lengths
 
 Ridges = 51' 11"
@@ -79,27 +69,11 @@ Hips = 89' 2"
 
 Valleys = 75' 2"
 
-Flashing = 53'4"
-
 Rakes = 146' 2" Eaves = 186' 1"
 
 Flashing = 53' 4"
 
-\_--
-
-1936"...
-
 <!-- image -->
-
-21'10"
-
-21'7"
-
-?!'2.
-
-15'6"
-
-Other = 53'9"
 
 Step flashing = 68' 2"
 
@@ -107,10 +81,6 @@ Parapets = 0'
 
 Other = 53' 9"
 
-24'11"
-
-Technolog
-
 <!-- image -->
 
 <!-- image -->
@@ -118,32 +88,20 @@ Technolog
 <!-- image -->
 
 '
-
-some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (Degrees)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
-~ 34°
-
-<!-- image -->
-
-- 34°
-
-All Rights Reserved
-
 <!-- image -->
 
 <!-- image -->
 
 <!-- image -->
 
-E
+<!-- image -->
 
 '
-
-some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (on 12)
 
@@ -152,10 +110,6 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 <!-- image -->
 
 <!-- image -->
-
-E
-
-All Rights Reserved
 
 <!-- image -->
 
@@ -167,11 +121,7 @@ All Rights Reserved
 
 Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases, segment labels have been removed for readability. Some numbers are prefaced by '+' signs to avoid confusion when rotated (e.g. +6 and +9).
 
-15
-
 <!-- image -->
-
-2025 Eagle View Technologies, Inc. All Rights Reserved
 
 <!-- image -->
 
@@ -181,31 +131,13 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 
 '
 
-(360°) as true north. Flat facets are labeled
-
 ## Azimuth
-
-303
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
 
-213
-
 <!-- image -->
 
-All Rights Reserved
-
 <!-- image -->
-
-S
-
-as 'F'.
-
-303
-
-W
-
-E
 
 <!-- image -->
 
@@ -215,23 +147,11 @@ E
 
 ## Area
 
-219
-
-90
-
 The area is measured in square feet per roof facet. The values have been rounded to the nearest foot square.
 
-188
-
-90
-
-188
+&lt; 1 8
 
 <!-- image -->
-
-511
-
-All Rights Reserved
 
 <!-- image -->
 
@@ -244,8 +164,6 @@ All Rights Reserved
 ## Roof Obstructions
 
 <!-- image -->
-
-All Rights Reserved
 
 <!-- image -->
 
@@ -261,10 +179,6 @@ These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
-/ eagleview © 2020
-
-eagleview 012020,
-
 ## NORTH SIDE
 
 <!-- image -->
@@ -279,15 +193,7 @@ eagleview 012020,
 
 ## SOUTH SIDE
 
-LITT
-
-/eagleview © 2020
-
-eaglevieW ® 2020
-
 ## EAST SIDE
-
-1
 
 <!-- image -->
 
@@ -299,15 +205,11 @@ eaglevieW ® 2020
 
 ## WEST SIDE
 
-/ eagleview © 2020
-
 <!-- image -->
 
 <!-- image -->
 
 '
-
-replacement or repair work.
 
 ## ROOFING REPORT SUMMARY
 
@@ -395,8 +297,6 @@ Normal
 Complex
 
 '
-
-replacement or repair work.
 
 ## ROOFING REPORT SUMMARY
 

@@ -1,12 +1,4 @@
-CISFACTION
-
-100%
-
-GUARANTEED
-
 <!-- image -->
-
-© 2025 Eagle View Technologies, Inc. All Rights Reserved
 
 <!-- image -->
 
@@ -28,6 +20,8 @@ GUARANTEED
 Report ID:
 
 65313315
+
+8 8 8
 
 REPORT ID
 
@@ -69,19 +63,11 @@ Open in EagleView One™
 
 <!-- image -->
 
-Valleys = 25'9"
-
 ## Lengths
 
 Ridges = 37' 3" Hips = 0'
 
 Valleys = 25' 9"
-
-5'3"
-
-Flashing = 5'9"
-
-22'1"
 
 Rakes = 125' 2"
 
@@ -101,24 +87,12 @@ Other = 0'
 
 <!-- image -->
 
-N
-
-10'8"
-
-22'1"
-
-Other = 0'
-
 '
-
-In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (Degrees)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
-&lt; 18°
-
 <!-- image -->
 
 <!-- image -->
@@ -127,13 +101,9 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 '
 
-In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
-
 ## Pitch (on 12)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
-
-&lt; 4
 
 <!-- image -->
 
@@ -147,31 +117,19 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases, segment labels have been removed for readability. Some numbers are prefaced by '+' signs to avoid confusion when rotated (e.g. +6 and +9).
 
-11
-
-<!-- image -->
-
-Xan
-
 <!-- image -->
 
 <!-- image -->
 
-11
+<!-- image -->
 
 '
-
-0° (360°) as true north. Flat facets are labeled as 'F'.
 
 ## Azimuth
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
 
-187
-
 <!-- image -->
-
-N
 
 <!-- image -->
 
@@ -183,31 +141,17 @@ N
 
 The area is measured in square feet per roof facet. The values have been rounded to the nearest foot square.
 
-56
-
-56
-
-<!-- image -->
-
-Xan
-
 <!-- image -->
 
 <!-- image -->
 
-37
-
-© 2025 Eagle View Technologies, Inc. All Rights Reserved
+<!-- image -->
 
 '
 
 ## Roof Obstructions
 
 <!-- image -->
-
-N
-
-Xan
 
 <!-- image -->
 
@@ -221,10 +165,6 @@ These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
-eagleview © 2025
-
-eagleview © 2025
-
 ## NORTH SIDE
 
 <!-- image -->
@@ -236,12 +176,6 @@ eagleview © 2025
 '
 
 ## SOUTH SIDE
-
-• =
-
-/ eaglevieW 0 2025
-
-eagleview © 2025
 
 ## EAST SIDE
 
@@ -255,19 +189,13 @@ eagleview © 2025
 
 ## WEST SIDE
 
-/ eagleview © 2025
-
 <!-- image -->
 
 <!-- image -->
 
 '
 
-replacement or repair work.
-
 ## ROOFING REPORT SUMMARY
-
-1
 
 ## All Structures
 
