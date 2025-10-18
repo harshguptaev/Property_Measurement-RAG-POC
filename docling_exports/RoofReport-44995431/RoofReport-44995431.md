@@ -1,3 +1,9 @@
+CISFACTION
+
+100%
+
+GUARANTEED
+
 <!-- image -->
 
 <!-- image -->
@@ -28,7 +34,9 @@ Report ID:
 
 44995431
 
-0 8
+Eagle View Technologies, Inc. All Rights Reserved|
+
+© 2025
 
 REPORT ID
 
@@ -104,11 +112,37 @@ Open in EagleView One™
 
 <!-- image -->
 
+1"
+
 ## Lengths
 
 Ridges = 66' Hips = 0'
 
 Valleys = 25' 1"
+
+14'1"
+
+20'6"
+
+5'6"
+
+9'9"
+
+Flashing =
+
+25'1"
+
+13'3"
+
+14'6"
+
+9'9"
+
+1
+
+3'
+
+11'6"
 
 Rakes = 135' 5" Eaves = 111' Flashing = 13'
 
@@ -120,16 +154,18 @@ Other = 0'
 
 <!-- image -->
 
-š 1 8
-
 <!-- image -->
 
 '
+
+s, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (Degrees)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
+- 23°
+
 <!-- image -->
 
 <!-- image -->
@@ -138,9 +174,13 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 '
 
+s, pitch labels have been removed for readability. Flat facets are labels 'F'.
+
 ## Pitch (on 12)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
+
++ 5
 
 <!-- image -->
 
@@ -160,13 +200,19 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 
 '
 
+rue north. Flat facets are labeled as 'F'.
+
 ## Azimuth
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
 
-<!-- image -->
+240
 
-1 8
+330
+
+151
+
+<!-- image -->
 
 <!-- image -->
 
@@ -186,8 +232,6 @@ The area is measured in squares per roof facet. The values have been rounded to 
 
 <!-- image -->
 
-1 8 g
-
 <!-- image -->
 
 '
@@ -197,6 +241,10 @@ The area is measured in squares per roof facet. The values have been rounded to 
 These are images of the property taken from multiple angles.
 
 ## TOP VIEW
+
+=/ eagleview ® 202,
+
+E/ eagleview © 2022
 
 ## NORTH SIDE
 
@@ -210,6 +258,10 @@ These are images of the property taken from multiple angles.
 
 ## SOUTH SIDE
 
+=/ eagleview © 2022
+
+/ eagleview 02022
+
 ## EAST SIDE
 
 <!-- image -->
@@ -222,11 +274,15 @@ These are images of the property taken from multiple angles.
 
 ## WEST SIDE
 
+eagleview o 2022
+
 <!-- image -->
 
 <!-- image -->
 
 '
+
+replacement or repair work.
 
 ## ROOFING REPORT SUMMARY
 

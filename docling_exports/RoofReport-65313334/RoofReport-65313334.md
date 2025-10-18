@@ -1,4 +1,22 @@
+CISFACTION
+
+100%
+
+GUARANTEED
+
 <!-- image -->
+
+Reserved
+
+Rights
+
+Inc.
+
+technologies.
+
+Eagle View
+
+2025
 
 <!-- image -->
 
@@ -20,8 +38,6 @@
 Report ID:
 
 65313334
-
-{ 2 8 8
 
 REPORT ID
 
@@ -95,6 +111,10 @@ Open in EagleView One™
 
 <!-- image -->
 
+= 23'
+
+1"
+
 ## Lengths
 
 Ridges = 61' 10"
@@ -102,6 +122,12 @@ Ridges = 61' 10"
 Hips = 17' 9"
 
 Valleys = 23' 1"
+
+28'11"
+
+Flashing = 62'
+
+28'11"
 
 Rakes = 73' 4" Eaves = 193' 6" Flashing = 62'
 
@@ -113,7 +139,11 @@ Step flashing = 89' 11" Parapets = 0' Other = 57' 10"
 
 <!-- image -->
 
+Other = 57'10"
+
 '
+
+• cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (Degrees)
 
@@ -124,6 +154,8 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 <!-- image -->
 
 '
+
+• cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (on 12)
 
@@ -144,6 +176,8 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 <!-- image -->
 
 '
+
+°) as true north. Flat facets are labeled as 'F'.
 
 ## Azimuth
 
@@ -173,6 +207,10 @@ The area is measured in square feet per roof facet. The values have been rounded
 
 '
 
+eagleview •
+
+=/ eagleview
+
 ## Imagery
 
 These are images of the property taken from multiple angles.
@@ -185,6 +223,8 @@ These are images of the property taken from multiple angles.
 
 <!-- image -->
 
+→ br
+
 <!-- image -->
 
 <!-- image -->
@@ -193,7 +233,17 @@ These are images of the property taken from multiple angles.
 
 ## SOUTH SIDE
 
+(FIED
+
+BELA
+
+BATT
+
+Kengleview eagleview ®
+
 ## EAST SIDE
+
+E.
 
 <!-- image -->
 
@@ -205,11 +255,17 @@ These are images of the property taken from multiple angles.
 
 ## WEST SIDE
 
+/ eagleview © 2024
+
+00 0,000
+
 <!-- image -->
 
 <!-- image -->
 
 '
+
+replacement or repair work.
 
 ## ROOFING REPORT SUMMARY
 

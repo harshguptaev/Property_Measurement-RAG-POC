@@ -1,8 +1,14 @@
-<!-- image -->
+CISFACTION
+
+100%
+
+GUARANTEED
 
 <!-- image -->
 
-4 1 8
+<!-- image -->
+
+© 2025 Eagle View Technologies, Inc. All Rights Reserved
 
 ## Contents
 
@@ -63,15 +69,43 @@ Open in EagleView One™
 
 <!-- image -->
 
+22'3"
+
+in
+
+10'6"
+
+10'6"
+
+Flashing = 18'11"
+
 ## Lengths
 
 Ridges = 38' 9"
 
 Hips = 0' Valleys = 31' 2"
 
+20'
+
 Rakes = 120' 3" Eaves = 62' 2" Flashing = 18' 11"
 
+23'
+
 <!-- image -->
+
+24'6"
+
+9'2"
+
+14/4"
+
+181
+
+in
+
+10'6"
+
+Other = O'
 
 Step flashing = 56' 1" Parapets = 0' Other = 0'
 
@@ -81,11 +115,27 @@ Step flashing = 56' 1" Parapets = 0' Other = 0'
 
 '
 
+:h labels have been removed for readability. Flat facets are labels 'F'.
+
 ## Pitch (Degrees)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
+34° →
+
+34° →
+
+18° →
+
 <!-- image -->
+
+- 34°
+
+&lt; 18°
+
+3.
+
+&lt; 34°
 
 <!-- image -->
 
@@ -93,11 +143,25 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 '
 
+:h labels have been removed for readability. Flat facets are labels 'F'.
+
 ## Pitch (on 12)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
+- 8
+
 <!-- image -->
+
+&lt; 4
+
+&lt; 8
+
+8.
+
+8→
+
+4→
 
 <!-- image -->
 
@@ -109,6 +173,10 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases, segment labels have been removed for readability. Some numbers are prefaced by '+' signs to avoid confusion when rotated (e.g. +6 and +9).
 
+10
+
+10
+
 <!-- image -->
 
 August 23, 2025 Property Address: 2439 New Holland Cir, Murfreesboro, TN 37128 Report: 65313310
@@ -119,11 +187,23 @@ August 23, 2025 Property Address: 2439 New Holland Cir, Murfreesboro, TN 37128 R
 
 '
 
+orth. Flat facets are labeled as 'F'.
+
 ## Azimuth
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
 
+187
+
 <!-- image -->
+
+277
+
+277
+
+97
+
+97
 
 <!-- image -->
 
@@ -133,9 +213,23 @@ The azimuth is the orientation of the structure to true north. In this diagram r
 
 ## Area
 
+41
+
 The area is measured in square feet per roof facet. The values have been rounded to the nearest foot square.
 
+514
+
+51
+
+53
+
 <!-- image -->
+
+53
+
+51
+
+444
 
 <!-- image -->
 
@@ -159,6 +253,10 @@ These are images of the property taken from multiple angles.
 
 ## TOP VIEW
 
+eagleview © 2019
+
+/ eagleview oRong
+
 ## NORTH SIDE
 
 <!-- image -->
@@ -171,6 +269,10 @@ These are images of the property taken from multiple angles.
 
 ## SOUTH SIDE
 
+/ eagleview © 2019
+
+-dg eview ©/20191
+
 ## EAST SIDE
 
 <!-- image -->
@@ -180,6 +282,10 @@ These are images of the property taken from multiple angles.
 <!-- image -->
 
 '
+
+1© 2019
+
+eagleview
 
 <!-- image -->
 

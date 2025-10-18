@@ -953,7 +953,7 @@ class DoclingProcessor:
             logging.error(f"Error processing text file {file_path}: {e}")
             raise
     
-    def _extract_and_save_important_chunks(self, file_path: Path) -> None:
+    def _extract_and_save_important_chunks(self, file_path: Path) -> List[Document]:
         """Extract important chunks and save them organized by report ID."""
 
         documents = []
@@ -966,14 +966,14 @@ class DoclingProcessor:
                 logging.info("Successfully imported important_chunk_extractor")
             except ImportError as ie:
                 logging.error(f"Failed to import important_chunk_extractor: {ie}")
-                return
+                return []
             
             # Extract report ID from filename
             report_id = None
             if 'RoofReport-' in file_path.name:
                 try:
                     report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-                except:
+                except (IndexError, AttributeError):
                     pass
             
             if not report_id:
@@ -1000,7 +1000,7 @@ class DoclingProcessor:
                 if isinstance(chunks_data, list):
                     if not chunks_data:
                         logging.warning(f"No content found in chunks for {file_path.name}")
-                        return
+                        return []
                     chunks_dir = Path("Final_Chunks")
                     chunks_dir.mkdir(parents=True, exist_ok=True)
                     chunks_file = chunks_dir / f"{file_path.stem}.json"

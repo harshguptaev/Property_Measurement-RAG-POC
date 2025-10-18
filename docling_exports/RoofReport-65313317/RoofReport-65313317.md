@@ -1,8 +1,14 @@
-<!-- image -->
+CISFACTION
+
+100%
+
+GUARANTEED
 
 <!-- image -->
 
-2 1 8
+<!-- image -->
+
+• 2025 Eagle View Technologies, Inc. All Rights Reserved.
 
 ## Contents
 
@@ -91,31 +97,69 @@ Open in EagleView One™
 
 <!-- image -->
 
+22'2"
+
+22'2"
+
+5'7"
+
+Flashing = 36'11"
+
 ## Lengths
 
 Ridges = 47' 6"
 
 Hips = 0' Valleys = 26' 3"
 
+oi,,
+
+11'6"
+
+24'6"
+
+Rakes = 105' 3" Eaves = 101' 5" Flashing = 36' 11"
+
+24'6"
+
+5'11"
+
+8'9"
+
+3TI™
+
+<!-- image -->
+
+19'
+
+24
+
+19'
+
+8'9"
+
+Other = 8'9
+
+<!-- image -->
+
 Step flashing = 52' Parapets = 0' Other = 8' 9"
 
 <!-- image -->
 
-Rakes = 105' 3" Eaves = 101' 5" Flashing = 36' 11"
-
-<!-- image -->
-
-1 8 g
-
-<!-- image -->
-
 '
+
+ch labels have been removed for readability. Flat facets are labels 'F'.
 
 ## Pitch (Degrees)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
++ 45°45°→
+
+-45°|45°→
+
 <!-- image -->
+
+= 27°
 
 <!-- image -->
 
@@ -123,11 +167,19 @@ In some cases, pitch labels have been removed for readability. Flat facets are l
 
 '
 
+ch labels have been removed for readability. Flat facets are labels 'F'.
+
 ## Pitch (on 12)
 
 In some cases, pitch labels have been removed for readability. Flat facets are labels 'F'.
 
+&lt; 12
+
+12 →
+
 <!-- image -->
+
+-12|12→
 
 <!-- image -->
 
@@ -147,11 +199,25 @@ Rafter lengths (rounded to the nearest whole number) over 5 feet. In some cases,
 
 '
 
+orth. Flat facets are labeled as 'F'.
+
 ## Azimuth
 
 The azimuth is the orientation of the structure to true north. In this diagram roof facet directions are labeled in degrees, with 0° (360°) as true north. Flat facets are labeled as 'F'.
 
+6
+
 <!-- image -->
+
+276
+
+96
+
+186
+
+186
+
+276
 
 <!-- image -->
 
@@ -161,7 +227,21 @@ The azimuth is the orientation of the structure to true north. In this diagram r
 
 ## Area
 
+39
+
+39
+
+422
+
+106
+
+39
+
+52
+
 The area is measured in square feet per roof facet. The values have been rounded to the nearest foot square.
+
+543
 
 <!-- image -->
 
@@ -175,8 +255,6 @@ The area is measured in square feet per roof facet. The values have been rounded
 
 <!-- image -->
 
-&lt; 1 8 g
-
 <!-- image -->
 
 '
@@ -186,6 +264,10 @@ The area is measured in square feet per roof facet. The values have been rounded
 These are images of the property taken from multiple angles.
 
 ## TOP VIEW
+
+/eagleview 0.2025
+
+-/ eagleview 0/2025
 
 ## NORTH SIDE
 
@@ -199,6 +281,10 @@ These are images of the property taken from multiple angles.
 
 ## SOUTH SIDE
 
+/ eagleview © 2025
+
+deagleview o 2025
+
 ## EAST SIDE
 
 <!-- image -->
@@ -208,6 +294,8 @@ These are images of the property taken from multiple angles.
 <!-- image -->
 
 '
+
+eagleviewo 2025
 
 <!-- image -->
 
