@@ -44,12 +44,12 @@ def setup_aws_credentials():
 def main():
     """Main function to process property documents."""
 
-    # Image processing setup
-    batch_download_from_reports()
-    im = ImageMilvus()
-    im.index_top_embeddings()
-    matches = im.search_similar_by_image("pictometry_images/29.482943_-98.456349/top_image.webp")
-    print_matches(matches)
+    # # Image processing setup
+    # batch_download_from_reports()
+    # im = ImageMilvus()
+    # im.index_top_embeddings()
+    # matches = im.search_similar_by_image("pictometry_images/29.482943_-98.456349/top_image.webp")
+    # print_matches(matches)
 
     # Setup AWS credentials
     setup_aws_credentials()

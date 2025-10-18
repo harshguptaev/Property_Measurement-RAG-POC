@@ -1,0 +1,47 @@
+{
+  "tables": [
+    {
+      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "raw_text": [
+        {
+          "Roof Pitches": "Waste Calculation Table.0%",
+          "Area (sq ft)": "2,162",
+          "%of Roof": "21.6"
+        },
+        {
+          "Roof Pitches": "Waste Calculation Table.10%",
+          "Area (sq ft)": "2,378",
+          "%of Roof": "23.8"
+        },
+        {
+          "Roof Pitches": "Waste Calculation Table.12%",
+          "Area (sq ft)": "2,421",
+          "%of Roof": "24.2"
+        },
+        {
+          "Roof Pitches": "Waste Calculation Table.15%",
+          "Area (sq ft)": "2,486",
+          "%of Roof": "24.9"
+        },
+        {
+          "Roof Pitches": "Waste Calculation Table.17%",
+          "Area (sq ft)": "2,530",
+          "%of Roof": "25.3"
+        },
+        {
+          "Roof Pitches": "Waste Calculation Table.20%",
+          "Area (sq ft)": "2,594",
+          "%of Roof": "25.9"
+        },
+        {
+          "Roof Pitches": "Waste Calculation Table.22%",
+          "Area (sq ft)": "2,638",
+          "%of Roof": "26.4"
+        }
+      ],
+      "id": "chunk1",
+      "metadata": {},
+      "src_image_path": ""
+    }
+  ]
+}

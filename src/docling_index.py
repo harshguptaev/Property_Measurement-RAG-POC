@@ -257,6 +257,7 @@ class DoclingProcessor:
                     text_chunks = self.text_splitter.split_documents([text_doc])
                     documents.extend(text_chunks)
                 
+            
             # Extract important chunks
             important_chunks = self._extract_and_save_important_chunks(file_path)
             documents.extend(important_chunks)
@@ -269,6 +270,14 @@ class DoclingProcessor:
             # Extract tables if present
             table_documents = self._extract_tables(converted_doc, tables_list, file_path)
             documents.extend(table_documents)
+            
+
+             # Add table chunks to the existing final chunks structure
+            final_chunks_file = Path("Final_Chunks") / f"{file_path.stem}.json"
+            self._add_table_chunks_to_final(final_chunks_file, file_path)
+
+            # Add image chunks to the existing final chunks structure
+            self._add_image_chunks_to_final(final_chunks_file, file_path)
             
             
 
@@ -754,6 +763,7 @@ class DoclingProcessor:
         Add table chunks from table_chunks.json to the existing Final_Chunks file.
         Keeps existing 'text' array and adds 'table' array with table_chunks content.
         """
+        print(f"DEBUG: _add_table_chunks_to_final called with {final_chunks_file}")
         try:
             # Read existing final chunks
             existing_data = []
@@ -768,7 +778,8 @@ class DoclingProcessor:
             }
             
             # Load table chunks from table_chunks.json
-            table_chunks_file = Path("docling_exports") / file_path.stem / "table_chunks.json"
+            report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+            table_chunks_file = Path("docling_exports") / f"report_{report_id}" / "table_chunks.json"
             if table_chunks_file.exists():
                 table_chunks_data = json.loads(table_chunks_file.read_text(encoding="utf-8"))
                 if "tables" in table_chunks_data:
@@ -794,6 +805,7 @@ class DoclingProcessor:
         Add image chunks from extracted images to the existing Final_Chunks file.
         Adds an 'image' array with image chunk data to match the structure.
         """
+        print(f"DEBUG: _add_image_chunks_to_final called with {final_chunks_file}")
         try:
             # Read existing final chunks
             existing_data = {}
@@ -1071,11 +1083,7 @@ class DoclingProcessor:
                         doc = Document(page_content=page_content, metadata=metadata)
                         all_chunks.append(doc)
 
-                    # Add table chunks to the existing final chunks structure
-                    self._add_table_chunks_to_final(chunks_file, file_path)
-
-                    # Add image chunks to the existing final chunks structure
-                    self._add_image_chunks_to_final(chunks_file, file_path)
+                   
                     
                     documents.extend(all_chunks)
                     logging.info(f"✓ Saved {len(all_chunks)} important flattened chunks to {chunks_file}")
