@@ -15,6 +15,9 @@ import boto3
 from pymilvus import MilvusClient
 from tqdm import tqdm
 
+# Import the general query handler module
+from query_router import GeneralQueryHandler
+
 # Simple MilvusCollectionManager class
 class MilvusCollectionManager:
     """Simple collection manager for Milvus operations"""
@@ -98,17 +101,24 @@ class HierarchicalRAG:
 
         # Initialize Milvus collection manager for safe collection handling
         self.milvus_manager = MilvusCollectionManager(uri="http://localhost:19530")
-        
+
         # Collection names for the two levels
         self.level1_collection_name = "hierarchical_level1"
         self.level2_collection_name = "hierarchical_level2"
-        
+
         # Embedding dimension for Titan (will be determined dynamically)
         self.embedding_dim = 1536  # Titan embedding dimension
-        
+
+        # Initialize General Query Handler for cross-property queries
+        self.general_query_handler = GeneralQueryHandler(self.milvus_client)
+        # Inject the required dependencies into the handler
+        self.general_query_handler._get_query_embedding = self.titan_embed_text
+        self.general_query_handler._bedrock_client = self.bedrock_client
+
         logger.info(f"🔧 Initialized Hierarchical RAG with model: {model_id}")
         logger.info(f"🔧 Level 1 collection: {self.level1_collection_name}")
         logger.info(f"🔧 Level 2 collection: {self.level2_collection_name}")
+        logger.info(f"🔧 General Query Handler: Initialized")
     
     def titan_embed_text(self, text: str) -> List[float]:
         """
@@ -432,15 +442,33 @@ Provide a clear, structured summary in 2-3 sentences:"""
         else:
             logger.warning("No data to insert into Level 2 Index")
     
+    def detect_query_type(self, query: str) -> str:
+        """
+        Detect if a query is property-specific or general.
+
+        Args:
+            query: The search query
+
+        Returns:
+            "property_specific" if query mentions a specific property/address
+            "general" if query is asking general questions across all properties
+        """
+        # First check if it's a general query using the GeneralQueryHandler
+        if self.general_query_handler.is_general_query(query):
+            return "general"
+
+        # If not general, it's property-specific
+        return "property_specific"
+
     def search_hierarchical(self, query: str, level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
         """
         Perform hierarchical search: Level 1 → Level 2
-        
+
         Args:
             query: Search query
             level1_limit: Number of documents to retrieve from Level 1
             level2_limit: Number of chunks to retrieve from Level 2
-            
+
         Returns:
             List of relevant chunks with metadata
         """
@@ -460,7 +488,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             res1 = self.milvus_client.search(
                 collection_name=self.level1_collection_name,
                 data=[query_vec],
-                limit=1,
+                limit=level1_limit,
                 output_fields=["doc_id", "chunk_ids", "address", "summary"],
                 search_params=search_params
             )
@@ -611,7 +639,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         except Exception as e:
             logger.error(f"Error during hierarchical search: {str(e)}")
             return []
-    
+
     def generate_llm_response(self, query: str, results: List[Dict]) -> str:
         """
         Use LLM to generate a comprehensive response based on retrieved chunks
@@ -628,7 +656,10 @@ Provide a clear, structured summary in 2-3 sentences:"""
         
         # Prepare context from retrieved chunks
         context_parts = []
-        
+
+        # Check if we have image chunks
+        images_found = [result for result in results if result.get('chunk_type') == 'image']
+
         for i, result in enumerate(results, 1):
             doc_address = result.get('doc_address', 'Unknown Address')
             section = result.get('section', 'Unknown Section')
@@ -667,7 +698,7 @@ Description: {img_chunk.get('chunk_text', 'No description available')}
 """)
 
         context = "\n".join(context_parts)
-        
+
         prompt = f"""You are a professional EagleView assistant specializing in roofing analysis and property information.
 
 Your task is to provide accurate, relevant information to customer questions based on retrieved property data.
@@ -684,7 +715,7 @@ INSTRUCTIONS:
 5. Use professional, clear language appropriate for roofing industry customers
 6. Include specific numbers, units, and technical terms as they appear in the chunks
 7. Reference image data when relevant to the question
-8. You will receive text chunks, image chunks, and table chunks containing comprehensive property data 
+8. You will receive text chunks, image chunks, and table chunks containing comprehensive property data
 
 QUESTION: {query}
 
@@ -939,32 +970,89 @@ Provide a clear, professional answer that directly addresses the customer's ques
             print()
         
         print("=" * 80)
-    
+
     def answer_query(self, query: str, level1_limit: int = 1, level2_limit: int = 5, show_raw_results: bool = False) -> str:
         """
-        Complete query answering pipeline: search + LLM response generation
-        
+        Complete query answering pipeline: detect query type and route to appropriate search flow
+
+        Note: For server/API use, use answer_query_with_raw_results() instead to get both LLM response and raw search results.
+
         Args:
             query: User's question
-            level1_limit: Number of documents to retrieve from Level 1
-            level2_limit: Number of chunks to retrieve from Level 2
+            level1_limit: Number of documents to retrieve from Level 1 (for hierarchical search)
+            level2_limit: Number of chunks to retrieve from Level 2 (for hierarchical search)
             show_raw_results: Whether to print raw search results
-            
+
         Returns:
             LLM-generated response string
         """
-        # Perform hierarchical search
-        results = self.search_hierarchical(query, level1_limit, level2_limit)
-        
+        # Detect query type and route to appropriate search strategy
+        query_type = self.detect_query_type(query)
+
+        if query_type == "property_specific":
+            logger.info("🏠 Using hierarchical search flow (property-specific query)")
+            results = self.search_hierarchical(query, level1_limit, level2_limit)
+        else:
+            logger.info("🌍 Using general search flow (cross-property query)")
+            results = self.general_query_handler.search_general(query, limit=max(level2_limit * 2, 20))
+
         # Optionally show raw results
         if show_raw_results:
-            self.print_search_results(query, results)
-        
-        # Generate LLM response
-        llm_response = self.generate_llm_response(query, results)
-        
+            if query_type == "property_specific":
+                self.print_search_results(query, results)
+            else:
+                # For general search, use GeneralQueryHandler's print method
+                self.general_query_handler._print_general_search_results(query, results)
+
+        # Generate LLM response using the appropriate handler
+        if query_type == "property_specific":
+            llm_response = self.generate_llm_response(query, results)
+        else:
+            # For general queries, use the GeneralQueryHandler's response generation
+            llm_response = self.general_query_handler.generate_general_response(query, results)
+
         return llm_response
-    
+
+    def answer_query_with_raw_results(self, query: str, level1_limit: int = 1, level2_limit: int = 5, show_raw_results: bool = False) -> Tuple[str, List[Dict]]:
+        """
+        Complete query answering pipeline that returns both LLM response and raw search results
+
+        Args:
+            query: User's question
+            level1_limit: Number of documents to retrieve from Level 1 (for hierarchical search)
+            level2_limit: Number of chunks to retrieve from Level 2 (for hierarchical search)
+            show_raw_results: Whether to print raw search results
+
+        Returns:
+            Tuple of (LLM response string, raw search results)
+        """
+        # Detect query type and route to appropriate search strategy
+        query_type = self.detect_query_type(query)
+
+        if query_type == "property_specific":
+            logger.info("🏠 Using hierarchical search flow (property-specific query)")
+            results = self.search_hierarchical(query, level1_limit, level2_limit)
+        else:
+            logger.info("🌍 Using general search flow (cross-property query)")
+            results = self.general_query_handler.search_general(query, limit=max(level2_limit * 2, 20))
+
+        # Optionally show raw results
+        if show_raw_results:
+            if query_type == "property_specific":
+                self.print_search_results(query, results)
+            else:
+                # For general search, use GeneralQueryHandler's print method
+                self.general_query_handler._print_general_search_results(query, results)
+
+        # Generate LLM response using the appropriate handler
+        if query_type == "property_specific":
+            llm_response = self.generate_llm_response(query, results)
+        else:
+            # For general queries, use the GeneralQueryHandler's response generation
+            llm_response = self.general_query_handler.generate_general_response(query, results)
+
+        return llm_response, results, query_type
+
     def show_collection_status(self):
         """Show the current status of both hierarchical collections"""
         logger.info("📊 Checking collection status...")

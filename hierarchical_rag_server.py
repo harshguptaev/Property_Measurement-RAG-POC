@@ -257,11 +257,9 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
 
         logger.info(f"Processing hierarchical query: {prompt[:100]}...")
 
-        # Always use hierarchical search for generic responses
-        search_results = hierarchical_rag.search_hierarchical(prompt, level1_limit, level2_limit)
-        
-        # Generate LLM response
-        llm_response = hierarchical_rag.generate_llm_response(prompt, search_results)
+        # Use the intelligent query routing system (detects property-specific vs general queries)
+        # This handles both search and LLM response generation, and returns raw results for source extraction
+        llm_response, search_results, query_type = hierarchical_rag.answer_query_with_raw_results(prompt, level1_limit, level2_limit, show_raw_results=False)
         
         # Format response
         try:
@@ -269,126 +267,132 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
         except:
             formatted_response = llm_response
         
-        # Extract sources from search results
-        sources = []
-        level1_docs = []
-        level2_chunks = []
-        
-        # Separate text and image chunks for better processing
-        text_chunks = [r for r in search_results if r.get("chunk_type") != "image"]
-        image_chunks = [r for r in search_results if r.get("chunk_type") == "image"]
-        
-        # Process text chunks (limit to top results for sources)
-        for result in text_chunks[:3]:
-            # Level 2 chunk info
-            chunk_info = {
-                "chunk_id": result.get("chunk_id"),
-                "section": result.get("section"),
-                "chunk_type": result.get("chunk_type"),
-                "content": result.get("chunk_text", "")[:200] + "..." if len(result.get("chunk_text", "")) > 200 else result.get("chunk_text", ""),
-                "distance": result.get("distance", 0)
-            }
-            level2_chunks.append(chunk_info)
-            
-            # Source info for compatibility
-            source_info = {
-                "content": chunk_info["content"],
-                "metadata": {
-                    "doc_id": result.get("doc_id"),
-                    "address": result.get("doc_address"),
+        # For general queries, don't expose document metadata to maintain privacy
+        if query_type == "general":
+            sources = []
+            level1_docs = []
+            level2_chunks = []
+        else:
+            # Extract sources from search results for property-specific queries
+            sources = []
+            level1_docs = []
+            level2_chunks = []
+
+            # Separate text and image chunks for better processing
+            text_chunks = [r for r in search_results if r.get("chunk_type") != "image"]
+            image_chunks = [r for r in search_results if r.get("chunk_type") == "image"]
+
+            # Process text chunks (limit to top results for sources)
+            for result in text_chunks[:3]:
+                # Level 2 chunk info
+                chunk_info = {
+                    "chunk_id": result.get("chunk_id"),
                     "section": result.get("section"),
                     "chunk_type": result.get("chunk_type"),
+                    "content": result.get("chunk_text", "")[:200] + "..." if len(result.get("chunk_text", "")) > 200 else result.get("chunk_text", ""),
                     "distance": result.get("distance", 0)
                 }
-            }
-            sources.append(source_info)
-        
-        # Process all image chunks (important for frontend display)
-        for result in image_chunks:
-            # Extract image information from chunk text
-            chunk_text = result.get("chunk_text", "")
-            image_paths = []
-            description = ""
-            
-            # Debug log for Property Imagery chunks
-            if result.get("section") == "Property Imagery":
-                logger.info(f"Processing Property Imagery chunk: {result.get('chunk_id')}")
-                logger.info(f"Doc address: {result.get('doc_address')}")
-                logger.info(f"Chunk text: {chunk_text[:200]}...")
-            
-            # Parse image information from chunk text - handle multiple formats
-            lines = chunk_text.split('\n')
-            for line in lines:
-                # Look for image paths in different formats
-                if 'extracted_images/' in line:
-                    # Extract path using regex to handle different formats
-                    import re
-                    matches = re.findall(r'extracted_images/[^,\s\]]+\.png', line)
-                    image_paths.extend(matches)
-                
-                if line.startswith('description:'):
-                    description = line.split('description:')[1].strip()
-            
-            # If we found image paths, create entries for each
-            if image_paths:
-                for image_path in image_paths:
-                    # Create user-friendly image title
-                    filename = image_path.split('/')[-1].replace('.png', '') if image_path else ""
-                    title_mappings = {
-                        'Lengthsimage': '📏 Length Measurements',
-                        'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
-                        'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
-                        'Rafters': '🏗️ Rafter Structure',
-                        'Azimuth': '🧭 Roof Azimuth/Direction',
-                        'Area': '📊 Roof Area Measurements',
-                        'Roof_Penetrations': '🔍 Roof Penetrations',
-                        'Top_View': '🛰️ Aerial/Top View',
-                        'North_Side': '⬆️ North Side View',
-                        'South_Side': '⬇️ South Side View',
-                        'East_Side': '➡️ East Side View',
-                        'West_Side': '⬅️ West Side View',
-                        'Cover_Image': '🏠 Cover/Overview Image',
-                        'Structure_Summary': '📋 Structure Summary'
+                level2_chunks.append(chunk_info)
+
+                # Source info for compatibility
+                source_info = {
+                    "content": chunk_info["content"],
+                    "metadata": {
+                        "doc_id": result.get("doc_id"),
+                        "address": result.get("doc_address"),
+                        "section": result.get("section"),
+                        "chunk_type": result.get("chunk_type"),
+                        "distance": result.get("distance", 0)
                     }
-                    
-                    display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))
-                    
-                    # Level 2 chunk info for images
+                }
+                sources.append(source_info)
+
+            # Process all image chunks (important for frontend display)
+            for result in image_chunks:
+                # Extract image information from chunk text
+                chunk_text = result.get("chunk_text", "")
+                image_paths = []
+                description = ""
+
+                # Debug log for Property Imagery chunks
+                if result.get("section") == "Property Imagery":
+                    logger.info(f"Processing Property Imagery chunk: {result.get('chunk_id')}")
+                    logger.info(f"Doc address: {result.get('doc_address')}")
+                    logger.info(f"Chunk text: {chunk_text[:200]}...")
+
+                # Parse image information from chunk text - handle multiple formats
+                lines = chunk_text.split('\n')
+                for line in lines:
+                    # Look for image paths in different formats
+                    if 'extracted_images/' in line:
+                        # Extract path using regex to handle different formats
+                        import re
+                        matches = re.findall(r'extracted_images/[^,\s\]]+\.png', line)
+                        image_paths.extend(matches)
+
+                    if line.startswith('description:'):
+                        description = line.split('description:')[1].strip()
+
+                # If we found image paths, create entries for each
+                if image_paths:
+                    for image_path in image_paths:
+                        # Create user-friendly image title
+                        filename = image_path.split('/')[-1].replace('.png', '') if image_path else ""
+                        title_mappings = {
+                            'Lengthsimage': '📏 Length Measurements',
+                            'Pitch_Degrees': '📐 Roof Pitch (Degrees)',
+                            'Pitch_on_12': '📐 Roof Pitch (Rise over 12)',
+                            'Rafters': '🏗️ Rafter Structure',
+                            'Azimuth': '🧭 Roof Azimuth/Direction',
+                            'Area': '📊 Roof Area Measurements',
+                            'Roof_Penetrations': '🔍 Roof Penetrations',
+                            'Top_View': '🛰️ Aerial/Top View',
+                            'North_Side': '⬆️ North Side View',
+                            'South_Side': '⬇️ South Side View',
+                            'East_Side': '➡️ East Side View',
+                            'West_Side': '⬅️ West Side View',
+                            'Cover_Image': '🏠 Cover/Overview Image',
+                            'Structure_Summary': '📋 Structure Summary'
+                        }
+
+                        display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))
+
+                        # Level 2 chunk info for images
+                        chunk_info = {
+                            "chunk_id": result.get("chunk_id") + f"_{filename}" if len(image_paths) > 1 else result.get("chunk_id"),
+                            "section": display_title,
+                            "chunk_type": result.get("chunk_type"),
+                            "content": f"Image: {display_title}",
+                            "distance": result.get("distance", 0),
+                            "image_path": image_path,
+                            "image_title": display_title,
+                            "image_description": description or f"{display_title} image"
+                        }
+                        level2_chunks.append(chunk_info)
+                else:
+                    # Fallback for chunks without extractable image paths
+                    display_title = result.get("section", "Unknown Image")
                     chunk_info = {
-                        "chunk_id": result.get("chunk_id") + f"_{filename}" if len(image_paths) > 1 else result.get("chunk_id"),
+                        "chunk_id": result.get("chunk_id"),
                         "section": display_title,
                         "chunk_type": result.get("chunk_type"),
                         "content": f"Image: {display_title}",
                         "distance": result.get("distance", 0),
-                        "image_path": image_path,
+                        "image_path": "",
                         "image_title": display_title,
-                        "image_description": description or f"{display_title} image"
+                        "image_description": description or "Property image"
                     }
                     level2_chunks.append(chunk_info)
-            else:
-                # Fallback for chunks without extractable image paths
-                display_title = result.get("section", "Unknown Image")
-                chunk_info = {
-                    "chunk_id": result.get("chunk_id"),
-                    "section": display_title,
-                    "chunk_type": result.get("chunk_type"),
-                    "content": f"Image: {display_title}",
-                    "distance": result.get("distance", 0),
-                    "image_path": "",
-                    "image_title": display_title,
-                    "image_description": description or "Property image"
+
+            # Collect unique documents from all results
+            for result in search_results:
+                doc_info = {
+                    "doc_id": result.get("doc_id"),
+                    "address": result.get("doc_address"),
+                    "summary": result.get("doc_summary")
                 }
-                level2_chunks.append(chunk_info)
-        
-        # Collect unique documents from all results
-        for result in search_results:
-            doc_info = {
-                "doc_id": result.get("doc_id"),
-                "address": result.get("doc_address"),
-                "summary": result.get("doc_summary")
-            }
-            if doc_info not in level1_docs:
-                level1_docs.append(doc_info)
+                if doc_info not in level1_docs:
+                    level1_docs.append(doc_info)
         
         logger.info("✅ Hierarchical query processed successfully")
         
