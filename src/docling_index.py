@@ -293,22 +293,138 @@ class DoclingProcessor:
         documents = []
 
         try:
-            # Since Docling image extraction is not working, fall back to PyMuPDF for actual image extraction
-            # but keep Docling metadata for organization
+            # Extract images using PyMuPDF for basic aerial images
             image_documents = self._extract_images_with_pymupdf(file_path)
             documents.extend(image_documents)
-            
-            # Also process Docling picture metadata for additional context
-            if hasattr(converted_doc, 'pictures') and converted_doc.pictures:
-                logging.info(f"Docling detected {len(converted_doc.pictures)} pictures (using PyMuPDF for extraction)")
-                
+
+            # Extract diagrams using Docling for complex diagrams that PyMuPDF can't handle
+            diagram_documents = self._extract_diagrams_with_docling(converted_doc, file_path)
+            documents.extend(diagram_documents)
+            logging.info(f"Added {len(diagram_documents)} diagram documents")
+
         except Exception as e:
             logging.error(f"Error extracting pages and images: {e}")
 
         return documents
-    
 
-    # Extract images using PyMuPDF as fallback since Docling image extraction isn't working.
+    def _extract_diagrams_with_docling(self, converted_doc: Any, file_path: Path) -> List[Document]:
+        """Extract diagrams by rendering full pages since diagrams are vector graphics."""
+        documents = []
+
+        try:
+            # Extract report ID for organization
+            report_id = None
+            if 'RoofReport-' in file_path.name:
+                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+
+            # Create images directory structure
+            images_dir = Path("extracted_images")
+            if report_id:
+                report_dir = images_dir / f"report_{report_id}"
+            else:
+                report_dir = images_dir / file_path.stem
+            report_dir.mkdir(parents=True, exist_ok=True)
+
+            # Define which pages contain which diagrams
+            diagram_mapping = {
+                5: "Lengths_Diagram",  # Page 6 (1-indexed) - contains length diagram
+                6: "Pitch_Diagram",    # Page 7 (1-indexed) - contains pitch diagram
+                7: "Area_Diagram"      # Page 8 (1-indexed) - contains area diagram
+            }
+
+            # Use PyMuPDF to render full pages containing diagrams
+            import fitz  # PyMuPDF
+
+            pdf_document = fitz.open(str(file_path))
+
+            for page_no, diagram_name in diagram_mapping.items():
+                try:
+                    page_index = page_no - 1  # Convert to 0-indexed
+                    if page_index >= len(pdf_document):
+                        continue
+
+                    page = pdf_document.load_page(page_index)
+
+                    # Render the full page at high resolution
+                    zoom = 2  # Higher resolution for better quality
+                    matrix = fitz.Matrix(zoom, zoom)
+                    pix = page.get_pixmap(matrix=matrix)
+
+                    # Convert to PIL Image
+                    from PIL import Image
+                    import io
+                    img_data = pix.tobytes("png")
+                    img = Image.open(io.BytesIO(img_data))
+
+                    # Crop out the header and footer to focus on the diagram content
+                    width, height = img.size
+                    crop_top = int(height * 0.18)  # Remove top 18% (header with EagleView logo and title)
+                    crop_bottom = height - int(height * 0.08)  # Remove bottom 8% (footer)
+                    img = img.crop((0, crop_top, width, crop_bottom))
+
+                    # Save the full page image as the diagram
+                    image_filename = f"{diagram_name}.png"
+                    image_file_path = report_dir / image_filename
+                    img.save(image_file_path, quality=95)
+
+                    logging.info(f"Saved full page diagram to: {image_file_path}")
+
+                    # Create document for the diagram
+                    image_content = f"{diagram_name.replace('_', ' ')} from page {page_no} of {file_path.name}"
+                    if report_id:
+                        image_content += f" Report ID: {report_id}"
+
+                    # Keywords for diagrams
+                    location_keywords = ["roof", "inspection", f"page{page_no}"]
+                    if report_id:
+                        location_keywords.extend([report_id, f"report{report_id}"])
+
+                    if "Lengths" in diagram_name:
+                        location_keywords.extend(["lengths", "diagram", "measurements", "dimensions", "rakes", "eaves", "valleys"])
+                    elif "Pitch" in diagram_name:
+                        location_keywords.extend(["pitch", "diagram", "slope", "angle", "roof pitch"])
+                    elif "Area" in diagram_name:
+                        location_keywords.extend(["area", "diagram", "square feet", "facets", "roof area"])
+
+                    location_keywords.append(diagram_name.replace("_", " ").lower())
+
+                    # Create document with image metadata
+                    img_doc = Document(
+                        page_content=image_content,
+                        metadata={
+                            'type': 'image',
+                            'content_type': 'image',
+                            'page_number': page_no,
+                            'source_file': file_path.name,
+                            'report_id': report_id,
+                            'extraction_method': 'page_render_diagram',
+                            'image_description': diagram_name,
+                            'searchable_keywords': location_keywords,
+                            'image_type': 'roof_diagram',
+                            'has_raw_data': True,
+                            'image_file_path': str(image_file_path),
+                            'image_filename': image_filename,
+                            'image_label': diagram_name,
+                            'image_size': img.size
+                        }
+                    )
+
+                    documents.append(img_doc)
+
+                except Exception as e:
+                    logging.warning(f"Failed to extract diagram {diagram_name} from page {page_no}: {e}")
+                    continue
+
+            pdf_document.close()
+
+            logging.info(f"Extracted {len(documents)} diagram pages")
+
+        except Exception as e:
+            logging.error(f"Error extracting diagrams: {e}")
+
+        return documents
+
+    # Extract images using PyMuPDF for aerial images
     def _extract_images_with_pymupdf(self, file_path: Path) -> List[Document]:
         """Extract images using PyMuPDF as fallback since Docling image extraction isn't working."""
         try:
@@ -352,33 +468,40 @@ class DoclingProcessor:
                             report_dir.mkdir(parents=True, exist_ok=True)
                             
                             def _label_for(p, i, n):
-                                if p == 0:
-                                    return "Cover_Image" if i == 0 else f"Cover_Image_{i + 1}"
-                                if p == 1:
-                                    return "Lengthsimage" if n == 1 else f"Lengthsimage_{i + 1}"
-                                if p == 2:
-                                    return "Pitch_Degrees" if i == 0 else f"Pitch_Degrees_{i + 1}"
-                                if p == 3:
-                                    return "Pitch_on_12" if i == 0 else f"Pitch_on_12_{i + 1}"
-                                if p == 4:
-                                    return "Rafters" if i == 0 else f"Rafters_{i + 1}"
-                                if p == 5:
-                                    return "Azimuth" if i == 0 else f"Azimuth_{i + 1}"
-                                if p == 6:
-                                    return "Area" if i == 0 else f"Area_{i + 1}"
-                                if p == 7:
-                                    return "Roof_Penetrations" if i == 0 else f"Roof_Penetrations_{i + 1}"
-                                if p == 8:
-                                    return "Top_View" if i == 0 else ("North_Side" if i == 1 else f"Page_8_Image_{i + 1}")
-                                if p == 9:
-                                    return "South_Side" if i == 0 else ("East_Side" if i == 1 else f"Page_9_Image_{i + 1}")
-                                if p == 10:
-                                    return "West_Side" if i == 0 else f"West_Side_{i + 1}"
-                                if p == 11:
-                                    return "Structure_Summary" if i == 0 else f"Structure_Summary_{i + 1}"
-                                return f"Page_{p}_Image_{i + 1}"
+                                # Simplified labeling based on specific pages only
+                                # Skip EagleView logo (i == 0) and only process content images
+                                if i == 0:  # Skip logos
+                                    return None
+
+                                if p == 1:  # Page 2 (0-indexed) - Top View
+                                    return "Top_View" if i == 1 else None
+                                elif p == 2:  # Page 3 (0-indexed) - North and South views
+                                    if i == 1:
+                                        return "North_Side"
+                                    elif i == 2:
+                                        return "South_Side"
+                                    else:
+                                        return None
+                                elif p == 3:  # Page 4 (0-indexed) - East and West views
+                                    if i == 1:
+                                        return "East_Side"
+                                    elif i == 2:
+                                        return "West_Side"
+                                    else:
+                                        return None
+                                elif p == 4:  # Page 5 (0-indexed) - Lengths Diagram
+                                    return "Lengths_Diagram" if i == 1 else None
+                                elif p == 5:  # Page 6 (0-indexed) - Pitch Diagram
+                                    return "Pitch_Diagram" if i == 1 else None
+                                elif p == 6:  # Page 7 (0-indexed) - Length Diagram
+                                    return "Length_Diagram" if i == 1 else None
+                                else:
+                                    return None  # Skip images from pages outside our specified range
 
                             image_label = _label_for(page_num, img_index, num_images_on_page)
+                            if image_label is None:
+                                continue  # Skip images that don't belong to our specified pages
+
                             image_filename = f"{image_label}.png"
                             image_file_path = report_dir / image_filename
                             
@@ -393,22 +516,27 @@ class DoclingProcessor:
                             from PIL import Image
                             image = Image.open(BytesIO(img_data))
                             
-                            # Add location-specific keywords based on page
+                            # Add location-specific keywords based on simplified structure
                             location_keywords = ["roof", "inspection", f"page{page_num + 1}"]
                             if report_id:
                                 location_keywords.extend([report_id, f"report{report_id}"])
-                            
-                            # Infer location from page position
-                            if page_num <= 2:
-                                location_keywords.extend(["overview", "aerial", "top"])
-                            elif page_num % 4 == 1:
+
+                            # Add keywords based on specific image types
+                            if image_label == "Top_View":
+                                location_keywords.extend(["top", "view", "overview", "aerial"])
+                            elif image_label == "North_Side":
                                 location_keywords.extend(["north", "side", "north side"])
-                            elif page_num % 4 == 2:
+                            elif image_label == "South_Side":
                                 location_keywords.extend(["south", "side", "south side"])
-                            elif page_num % 4 == 3:
+                            elif image_label == "East_Side":
                                 location_keywords.extend(["east", "side", "east side"])
-                            elif page_num % 4 == 0:
+                            elif image_label == "West_Side":
                                 location_keywords.extend(["west", "side", "west side"])
+                            elif "Lengths_Diagram" in image_label or "Length_Diagram" in image_label:
+                                location_keywords.extend(["lengths", "diagram", "measurements", "dimensions"])
+                            elif "Pitch_Diagram" in image_label:
+                                location_keywords.extend(["pitch", "diagram", "slope", "angle"])
+
                             location_keywords.append(image_label.replace("_", " ").lower())
                             
                             # Create enhanced image content
@@ -852,20 +980,15 @@ class DoclingProcessor:
 
                     # Create descriptive section names
                     section_mapping = {
-                        "Cover_Image": "Cover Image",
-                        "Lengthsimage": "Lengths Diagram",
-                        "Pitch_Degrees": "Pitch (Degrees) Diagram",
-                        "Pitch_on_12": "Pitch (on 12) Diagram",
-                        "Rafters": "Rafters Diagram",
-                        "Azimuth": "Azimuth Diagram",
-                        "Area": "Area Diagram",
-                        "Roof_Penetrations": "Roof Penetrations Diagram",
                         "Top_View": "Top View",
                         "North_Side": "North Side View",
                         "South_Side": "South Side View",
                         "East_Side": "East Side View",
                         "West_Side": "West Side View",
-                        "Structure_Summary": "Structure Summary"
+                        "Lengths_Diagram": "Lengths Diagram",
+                        "Pitch_Diagram": "Pitch Diagram",
+                        "Area_Diagram": "Area Diagram",
+                        "Length_Diagram": "Length Diagram"
                     }
 
                     display_section = section_mapping.get(section_name, section_name.replace("_", " "))

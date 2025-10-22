@@ -1132,14 +1132,19 @@ def load_agentic_rag_output() -> List[Dict]:
             source_file = chunk_file.name
             
             # Extract chunks from the file data
-            # The structure appears to be {"text": [...chunks...], ...}
+            # Handle both formats: direct array or {"text": [...], "table": [...], "image": [...]}
             chunks = []
-            if "text" in file_data:
-                chunks.extend(file_data["text"])
-            if "table" in file_data:
-                chunks.extend(file_data["table"])
-            if "image" in file_data:
-                chunks.extend(file_data["image"])
+            if isinstance(file_data, list):
+                # Direct array format (current Final_Chunks structure)
+                chunks.extend(file_data)
+            else:
+                # Wrapped format {"text": [...], ...}
+                if "text" in file_data:
+                    chunks.extend(file_data["text"])
+                if "table" in file_data:
+                    chunks.extend(file_data["table"])
+                if "image" in file_data:
+                    chunks.extend(file_data["image"])
             
             # Create document entry
             doc_entry = {
