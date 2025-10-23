@@ -1262,6 +1262,7 @@ class DoclingProcessor:
     def _upload_to_s3_if_enabled(self, file_path: Path) -> None:
         """
         Upload extracted images and final chunks for a specific report to S3 if enabled.
+        After upload, append S3 image links to the Final_Chunks JSON file.
 
         Args:
             file_path: Path to the processed file
@@ -1288,21 +1289,129 @@ class DoclingProcessor:
 
             # Upload extracted images for this specific report
             images_dir = Path("extracted_images") / f"report_{report_id}"
+            image_urls = []
             if images_dir.exists():
                 image_urls = self.s3_client.upload_directory(str(images_dir), f"property-data/extracted_images/report_{report_id}")
                 logging.info(f"Uploaded {len(image_urls)} images for report {report_id}")
+            else:
+                logging.warning(f"Images directory not found: {images_dir}")
 
             # Upload final chunks for this specific report
-            chunks_file = Path("Final_Chunks") / f"{report_id}.json"
+            chunks_file = Path("Final_Chunks") / f"report_{report_id}.json"
+            chunk_url = None
             if chunks_file.exists():
                 chunk_url = self.s3_client.upload_file(str(chunks_file), f"property-data/final_chunks/{report_id}.json")
                 if chunk_url:
                     logging.info(f"Uploaded final chunks for report {report_id}")
+            else:
+                logging.warning(f"Chunks file not found: {chunks_file}")
+
+            # Append S3 image links to the Final_Chunks JSON file
+            self._append_image_links_to_chunks(chunks_file, image_urls, report_id)
+
+            # Re-upload the updated chunks file with image links
+            if chunks_file.exists() and image_urls:
+                updated_chunk_url = self.s3_client.upload_file(str(chunks_file), f"property-data/final_chunks/{report_id}.json")
+                if updated_chunk_url:
+                    logging.info(f"Re-uploaded updated chunks file with image links for report {report_id}")
 
             logging.info(f"Successfully uploaded data to S3 for report {report_id}")
 
         except Exception as e:
             logging.error(f"Failed to upload data to S3 for {file_path.name}: {e}")
+
+    def _append_image_links_to_chunks(self, chunks_file: Path, image_urls: List[str], report_id: str) -> None:
+        """
+        Append S3 image links as new chunks to the Final_Chunks JSON file.
+
+        Args:
+            chunks_file: Path to the chunks JSON file
+            image_urls: List of S3 URLs for uploaded images
+            report_id: Report ID for chunk numbering
+        """
+        if not chunks_file.exists() or not image_urls:
+            return
+
+        try:
+            # Read existing chunks
+            with open(chunks_file, 'r', encoding='utf-8') as f:
+                chunks = json.load(f)
+
+            # Find the next available chunk number
+            existing_chunk_ids = [chunk.get('chunk_id', '') for chunk in chunks if isinstance(chunk, dict)]
+            max_chunk_num = 0
+            for chunk_id in existing_chunk_ids:
+                try:
+                    # Extract number from chunk_id like "32248944_chunk_7"
+                    if '_chunk_' in chunk_id:
+                        num = int(chunk_id.split('_chunk_')[-1])
+                        max_chunk_num = max(max_chunk_num, num)
+                except (ValueError, IndexError):
+                    continue
+
+            # Define image descriptions based on filename
+            image_mappings = {
+                "Top_View.png": {
+                    "section": "Top View Diagram",
+                    "description": "Top view diagram showing the overall roof structure and layout"
+                },
+                "North_Side.png": {
+                    "section": "North Side View",
+                    "description": "North side view of the property showing roof structure"
+                },
+                "South_Side.png": {
+                    "section": "South Side View",
+                    "description": "South side view of the property showing roof structure"
+                },
+                "East_Side.png": {
+                    "section": "East Side View",
+                    "description": "East side view of the property showing roof structure"
+                },
+                "West_Side.png": {
+                    "section": "West Side View",
+                    "description": "West side view of the property showing roof structure"
+                },
+                "Lengths_Diagram.png": {
+                    "section": "Lengths Diagram",
+                    "description": "Diagram showing roof lengths and measurements for different facets"
+                },
+                "Pitch_Diagram.png": {
+                    "section": "Pitch Diagram",
+                    "description": "Diagram showing roof pitch measurements and angles"
+                },
+                "Area_Diagram.png": {
+                    "section": "Area Diagram",
+                    "description": "Diagram showing roof area calculations for different facets"
+                }
+            }
+
+            # Add image chunks
+            for image_url in image_urls:
+                filename = image_url.split('/')[-1]
+                if filename in image_mappings:
+                    max_chunk_num += 1
+                    mapping = image_mappings[filename]
+
+                    image_chunk = {
+                        "chunk_id": f"{report_id}_chunk_{max_chunk_num}",
+                        "section": mapping["section"],
+                        "type": "image",
+                        "data": {
+                            "description": mapping["description"],
+                            "image_file": image_url
+                        }
+                    }
+                    chunks.append(image_chunk)
+                    logging.info(f"Added image chunk for {filename} to {chunks_file}")
+
+            # Save updated chunks
+            with open(chunks_file, 'w', encoding='utf-8') as f:
+                json.dump(chunks, f, indent=2, ensure_ascii=False)
+
+            logging.info(f"Appended {len(image_urls)} image chunks to {chunks_file}")
+
+        except Exception as e:
+            logging.error(f"Failed to append image links to chunks file {chunks_file}: {e}")
 
 
 # Main function to process a directory with Docling

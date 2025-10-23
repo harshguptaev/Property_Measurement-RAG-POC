@@ -86,5 +86,77 @@
         "gas_stations": "http://maps.google.com/maps?near=1208+N+35TH+ST,ROGERS,AR,72756&q=Gas+Stations"
       }
     }
+  },
+  {
+    "chunk_id": "32249000_chunk_8",
+    "section": "Pitch Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch measurements and angles",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/Pitch_Diagram.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_9",
+    "section": "Top View Diagram",
+    "type": "image",
+    "data": {
+      "description": "Top view diagram showing the overall roof structure and layout",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/Top_View.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_10",
+    "section": "North Side View",
+    "type": "image",
+    "data": {
+      "description": "North side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/North_Side.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_11",
+    "section": "Area Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof area calculations for different facets",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/Area_Diagram.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_12",
+    "section": "West Side View",
+    "type": "image",
+    "data": {
+      "description": "West side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/West_Side.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_13",
+    "section": "East Side View",
+    "type": "image",
+    "data": {
+      "description": "East side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/East_Side.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_14",
+    "section": "Lengths Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof lengths and measurements for different facets",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/Lengths_Diagram.png"
+    }
+  },
+  {
+    "chunk_id": "32249000_chunk_15",
+    "section": "South Side View",
+    "type": "image",
+    "data": {
+      "description": "South side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_32249000/South_Side.png"
+    }
   }
 ]

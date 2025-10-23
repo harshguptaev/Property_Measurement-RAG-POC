@@ -70,5 +70,77 @@
       "longitude": "-90.7868245",
       "latitude": "42.5720872"
     }
+  },
+  {
+    "chunk_id": "67852931_chunk_7",
+    "section": "Pitch Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof pitch measurements and angles",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/Pitch_Diagram.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_8",
+    "section": "Top View Diagram",
+    "type": "image",
+    "data": {
+      "description": "Top view diagram showing the overall roof structure and layout",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/Top_View.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_9",
+    "section": "North Side View",
+    "type": "image",
+    "data": {
+      "description": "North side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/North_Side.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_10",
+    "section": "Area Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof area calculations for different facets",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/Area_Diagram.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_11",
+    "section": "West Side View",
+    "type": "image",
+    "data": {
+      "description": "West side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/West_Side.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_12",
+    "section": "East Side View",
+    "type": "image",
+    "data": {
+      "description": "East side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/East_Side.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_13",
+    "section": "Lengths Diagram",
+    "type": "image",
+    "data": {
+      "description": "Diagram showing roof lengths and measurements for different facets",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/Lengths_Diagram.png"
+    }
+  },
+  {
+    "chunk_id": "67852931_chunk_14",
+    "section": "South Side View",
+    "type": "image",
+    "data": {
+      "description": "South side view of the property showing roof structure",
+      "image_file": "https://evtech-us-east-2-pg-test-sunsitecomplete.s3.us-east-2.amazonaws.com/property-data/extracted_images/report_67852931/South_Side.png"
+    }
   }
 ]
