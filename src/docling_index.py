@@ -46,6 +46,7 @@ from .config import config
 from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
 from .bedrock_client import create_bedrock_embeddings
 from .image_utils import ImageManager
+from .s3_upload_client import S3UploadClient
 
 
 class DoclingProcessor:
@@ -58,15 +59,27 @@ class DoclingProcessor:
         vector_store_manager: Optional[VectorStoreManager] = None,
         config_instance: Optional[Any] = None,
         enable_gemini: bool = True,
+        enable_s3_upload: bool = False,
+        s3_bucket_name: str = "evtech-us-east-2-pg-test-sunsitecomplete",
+        s3_region: str = "us-east-2",
+        s3_access_key_id: Optional[str] = None,
+        s3_secret_access_key: Optional[str] = None,
+        s3_session_token: Optional[str] = None,
         **kwargs
     ):
         """
         Initialize Docling document processor.
-        
+
         Args:
             vector_store_manager: Vector store manager instance
             config_instance: Configuration instance
             enable_gemini: Whether to enable Gemini Vision for image analysis
+            enable_s3_upload: Whether to enable S3 upload for images and final chunks
+            s3_bucket_name: S3 bucket name for uploads
+            s3_region: AWS region for S3 bucket
+            s3_access_key_id: AWS access key ID for S3
+            s3_secret_access_key: AWS secret access key for S3
+            s3_session_token: AWS session token for temporary credentials
             **kwargs: Additional arguments
         """
         if not DOCLING_AVAILABLE:
@@ -77,10 +90,27 @@ class DoclingProcessor:
         self.text_splitter = None
         self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
-        
+
         # Initialize image manager with Gemini support
         self.image_manager = ImageManager(enable_gemini=enable_gemini)
-        
+
+        # Initialize S3 client if enabled
+        self.enable_s3_upload = enable_s3_upload
+        self.s3_client = None
+        if enable_s3_upload:
+            try:
+                self.s3_client = S3UploadClient(
+                    bucket_name=s3_bucket_name,
+                    region=s3_region,
+                    aws_access_key_id=s3_access_key_id,
+                    aws_secret_access_key=s3_secret_access_key,
+                    aws_session_token=s3_session_token
+                )
+                logging.info("S3 upload client initialized")
+            except Exception as e:
+                logging.warning(f"Failed to initialize S3 client: {e}")
+                self.enable_s3_upload = False
+
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
         self._setup_text_splitter()
@@ -150,11 +180,11 @@ class DoclingProcessor:
         
         try:
             documents = []
-            
+
             if file_path.suffix.lower() == '.pdf':
                 documents = self._process_pdf_with_docling(file_path, extract_images)
-            
-            
+
+
             # Add metadata with enhanced indexing information
             for i, doc in enumerate(documents):
                 # Extract report ID from filename if it's a roof report
@@ -164,7 +194,7 @@ class DoclingProcessor:
                         report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
                     except:
                         pass
-                
+
                 doc.metadata.update({
                     'source': str(file_path),
                     'file_name': file_path.name,
@@ -176,13 +206,21 @@ class DoclingProcessor:
                     'content_type': doc.metadata.get('type', 'text'),
                     'searchable_text': doc.page_content.lower()  # For better search matching
                 })
-            
+
             logging.info(f"Processed {len(documents)} documents from {file_path.name}")
+
             return documents
-            
+
         except Exception as e:
             logging.error(f"Error processing file {file_path}: {e}")
-            raise
+            # Don't raise the exception - allow S3 upload to happen even if processing fails
+            # raise
+        finally:
+            # Always try to upload to S3 if enabled, even if processing failed
+            try:
+                self._upload_to_s3_if_enabled(file_path)
+            except Exception as s3_error:
+                logging.error(f"S3 upload failed for {file_path}: {s3_error}")
     
     def save_docling_exports(self, main_text: str, converted_doc: ConversionResult, file_path: Path):
         """Persist Docling exports (Markdown and JSON)"""
@@ -1221,8 +1259,53 @@ class DoclingProcessor:
             logging.error(f"Full traceback: {traceback.format_exc()}")
         return documents
 
+    def _upload_to_s3_if_enabled(self, file_path: Path) -> None:
+        """
+        Upload extracted images and final chunks for a specific report to S3 if enabled.
 
-    # Main function to process a directory with Docling
+        Args:
+            file_path: Path to the processed file
+        """
+        if not self.enable_s3_upload or not self.s3_client:
+            return
+
+        try:
+            # Extract report ID from filename
+            report_id = None
+            if 'RoofReport-' in file_path.name:
+                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+            elif file_path.stem.startswith('report_'):
+                # Extract the number part from report_XXXXX
+                report_id = file_path.stem.split('report_')[1]
+            else:
+                report_id = file_path.stem
+
+            if not report_id:
+                logging.warning(f"Could not extract report ID from {file_path.name}")
+                return
+
+            logging.info(f"Uploading data to S3 for report {report_id}")
+
+            # Upload extracted images for this specific report
+            images_dir = Path("extracted_images") / f"report_{report_id}"
+            if images_dir.exists():
+                image_urls = self.s3_client.upload_directory(str(images_dir), f"property-data/extracted_images/report_{report_id}")
+                logging.info(f"Uploaded {len(image_urls)} images for report {report_id}")
+
+            # Upload final chunks for this specific report
+            chunks_file = Path("Final_Chunks") / f"{report_id}.json"
+            if chunks_file.exists():
+                chunk_url = self.s3_client.upload_file(str(chunks_file), f"property-data/final_chunks/{report_id}.json")
+                if chunk_url:
+                    logging.info(f"Uploaded final chunks for report {report_id}")
+
+            logging.info(f"Successfully uploaded data to S3 for report {report_id}")
+
+        except Exception as e:
+            logging.error(f"Failed to upload data to S3 for {file_path.name}: {e}")
+
+
+# Main function to process a directory with Docling
     def process_directory(
         self,
         directory_path: str,
@@ -1280,7 +1363,13 @@ def process_directory_with_docling(
     directory_path: str,
     file_extensions: Optional[List[str]] = None,
     extract_images: bool = True,
-    config_instance: Optional[Any] = None
+    config_instance: Optional[Any] = None,
+    enable_s3_upload: bool = False,
+    s3_bucket_name: str = "evtech-us-east-2-pg-test-sunsitecomplete",
+    s3_region: str = "us-east-2",
+    s3_access_key_id: Optional[str] = None,
+    s3_secret_access_key: Optional[str] = None,
+    s3_session_token: Optional[str] = None
 ) -> List[Document]:
     """
     Process all documents in a directory using Docling without indexing.
@@ -1290,6 +1379,12 @@ def process_directory_with_docling(
         file_extensions: List of file extensions to process
         extract_images: Whether to extract images from documents
         config_instance: Configuration instance
+        enable_s3_upload: Whether to enable S3 upload for images and final chunks
+        s3_bucket_name: S3 bucket name for uploads
+        s3_region: AWS region for S3 bucket
+        s3_access_key_id: AWS access key ID for S3
+        s3_secret_access_key: AWS secret access key for S3
+        s3_session_token: AWS session token for temporary credentials
 
     Returns:
         List of processed documents
@@ -1299,7 +1394,13 @@ def process_directory_with_docling(
     # Create processor without vector store
     processor = DoclingProcessor(
         vector_store_manager=None,  # No vector store needed
-        config_instance=config_instance
+        config_instance=config_instance,
+        enable_s3_upload=enable_s3_upload,
+        s3_bucket_name=s3_bucket_name,
+        s3_region=s3_region,
+        s3_access_key_id=s3_access_key_id,
+        s3_secret_access_key=s3_secret_access_key,
+        s3_session_token=s3_session_token
     )
 
     documents = processor.process_directory(

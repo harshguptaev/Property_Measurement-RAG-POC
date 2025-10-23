@@ -87,9 +87,25 @@ def main():
         # Process documents
         print("\n🔄 Processing documents with Docling...")
         try:
+            # Get S3-specific AWS credentials from environment
+            aws_access_key_id = os.getenv('S3_AWS_ACCESS_KEY_ID')
+            aws_secret_access_key = os.getenv('S3_AWS_SECRET_ACCESS_KEY')
+            aws_session_token = os.getenv('S3_AWS_SESSION_TOKEN')
+
+            # Enable S3 upload if credentials are available
+            enable_s3 = bool(aws_access_key_id and aws_secret_access_key)
+            if enable_s3:
+                print("📤 S3 upload enabled - files will be uploaded after processing")
+            else:
+                print("⚠️  S3 upload disabled - no AWS credentials found")
+
             documents = process_directory_with_docling(
                 directory_path=str(input_dir),
-                extract_images=True
+                extract_images=True,
+                enable_s3_upload=enable_s3,
+                s3_access_key_id=aws_access_key_id,
+                s3_secret_access_key=aws_secret_access_key,
+                s3_session_token=aws_session_token
             )
 
             print(f"✅ Successfully processed {len(documents)} documents!")
