@@ -1,0 +1,46 @@
+{
+  "text": [
+    {
+      "property_id": "PROP_67676202",
+      "address": "4865 Oakside Dr, Stone Mountain, GA 30088",
+      "latitude": 33.7858221,
+      "longitude": -84.1904709,
+      "owner": "Amandeep Singh Next Renewable Global Pte. Ltd"
+    },
+    {
+      "chunk_id": "C001",
+      "property_id": "PROP_67676202",
+      "section": "House Measurements",
+      "type": "text",
+      "data": {
+        "number_of_stories": ">1",
+        "total_roof_facets": 30,
+        "structure_complexity": "Normal",
+        "estimated_attic": "3227.8 sq ft",
+        "total_roof_obstructions": 16
+      }
+    },
+    {
+      "chunk_id": "C002",
+      "property_id": "PROP_67676202",
+      "section": "Roof Measurements",
+      "type": "text",
+      "data": {
+        "total_area": "3,721 sq ft",
+        "total_roof_facets": 30,
+        "predominant_pitch": "34°",
+        "ridges": "82.6 ft (Multiple Ridges)",
+        "hips": "210.9 ft (Multiple Hips)",
+        "valleys": "67.9 ft (Multiple Valleys)",
+        "rakes": "109.8 ft (Multiple Rakes)",
+        "eaves_starters": "402.5 ft (Multiple Eaves_Starter)",
+        "flashing": "45.5 ft (Multiple Flashing)",
+        "step_flashing": "83.6 ft (Multiple Step_Flashing)",
+        "parapet_walls": "0 ft (Multiple Parapet_Walls)",
+        "roof_obstructions_perimeter": "75.4 ft",
+        "roof_obstructions_area": "35 sq ft",
+        "net_roof_area": "3686.0 sq ft"
+      }
+    }
+  ]
+}

@@ -42,79 +42,77 @@ def _extract_premium_header(text: str) -> Dict[str, Any]:
 
 def _extract_prepared_for_premium(text: str) -> Optional[Dict[str, Any]]:
     """Extract prepared for information from premium report."""
-    prepared_section = re.search(r'PREPARED FOR\s*(.*?)(?=TABLE OF CONTENTS|MEASUREMENTS)', text, re.DOTALL | re.IGNORECASE)
+    prepared_section = re.search(r'Prepared for\s*(.*?)(?=September \d{1,2}, \d{4}|Property Address:)', text, re.DOTALL | re.IGNORECASE)
     if not prepared_section:
         return None
-    
+
     section_text = prepared_section.group(1)
-    data = {}
-    
-    contact_match = re.search(r'Contact:\s*([^\n]+)', section_text)
-    if contact_match:
-        data['contact'] = contact_match.group(1).strip()
-    
-    company_match = re.search(r'Company:\s*([^\n]+)', section_text)
-    if company_match:
-        data['company'] = company_match.group(1).strip()
-    
-    address_match = re.search(r'Address:\s*([^\n]+(?:\n[^\n:]+)*?)(?=\s*Phone:|$)', section_text, re.DOTALL)
-    if address_match:
-        address_lines = [line.strip() for line in address_match.group(1).split('\n') if line.strip()]
-        data['address'] = ', '.join(address_lines)
-    
-    phone_match = re.search(r'Phone:\s*([0-9-]+)', section_text)
-    if phone_match:
-        data['phone'] = phone_match.group(1)
-    
-    return data
+    lines = [line.strip() for line in section_text.split('\n') if line.strip()]
+
+    if len(lines) >= 4:
+        data = {}
+        data['contact'] = f"{lines[0]} {lines[1]}" if len(lines) > 1 else lines[0]
+        data['address'] = ', '.join(lines[2:-1]) if len(lines) > 3 else lines[2] if len(lines) > 2 else ""
+        data['phone'] = lines[-1] if lines else ""
+        return data
+
+    return None
 
 
 def _extract_summary_measurements(text: str) -> Dict[str, Any]:
-    """Extract summary measurements from the first page."""
+    """Extract summary measurements from the measurements section."""
     data = {}
-    
+
     patterns = {
-        'total_roof_area': r'Total Roof Area\s*=\s*([0-9,]+\s*sq ft)',
-        'total_roof_facets': r'Total Roof Facets\s*=\s*(\d+)',
-        'predominant_pitch': r'Predominant Pitch\s*=\s*([0-9/]+)',
-        'number_of_stories': r'Number of Stories\s*([<>=]*\d+)',
-        'total_ridges_hips': r'Total Ridges/Hips\s*=\s*([0-9]+\s*ft)',
-        'total_valleys': r'Total Valleys\s*=\s*([0-9]+\s*ft)',
-        'total_rakes': r'Total Rakes\s*=\s*([0-9]+\s*ft)',
-        'total_eaves': r'Total Eaves\s*=\s*([0-9]+\s*ft)'
+        'total_roof_area': r'Area:\s*([0-9,]+\.?\d*\s*sq ft)',
+        'total_roof_facets': r'Roof Facets:\s*(\d+)',
+        'predominant_pitch': r'Predominant Pitch:\s*([0-9°]+)',
+        'number_of_stories': r'Number of Stories:\s*([<>=]*\d+)',
+        'total_ridges_hips': r'Ridges/Hips:\s*([0-9]+\.?\d*\s*ft)',
+        'total_valleys': r'Valleys:\s*([0-9]+\.?\d*\s*ft)',
+        'total_rakes': r'Rakes:\s*([0-9]+\.?\d*\s*ft)',
+        'total_eaves': r'Eaves:\s*([0-9]+\.?\d*\s*ft)',
+        'estimated_attic': r'Estimated Attic:\s*([0-9,]+\.?\d*\s*sq ft)',
+        'total_roof_obstructions': r'Roof Obstructions:\s*(\d+)',
+        'roof_obstructions_perimeter': r'Roof Obstructions Perimeter:\s*([0-9]+\.?\d*\s*ft)',
+        'roof_obstructions_area': r'Roof Obstructions Area:\s*([0-9]+\.?\d*\s*sq ft)'
     }
-    
+
     for key, pattern in patterns.items():
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
             data[key] = match.group(1).strip()
-    
+
     return data
 
 
 def _extract_detailed_measurements(text: str) -> Dict[str, Any]:
-    """Extract detailed measurements from report summary page."""
+    """Extract detailed measurements from the lengths section."""
     data = {}
-    
+
     patterns = {
-        'ridges': r'Ridges\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'hips': r'Hips\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'valleys': r'Valleys\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'rakes': r'Rakes†?\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'eaves_starter': r'Eaves/Starter‡?\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'drip_edge': r'Drip Edge[^=]*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'parapet_walls': r'Parapet Walls\s*=\s*([0-9]+\s*\([^)]+\))',
-        'flashing': r'Flashing\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'step_flashing': r'Step flashing\s*=\s*([0-9]+\s*ft\s*\([^)]+\))',
-        'predominant_pitch': r'Predominant Pitch\s*=\s*([0-9/]+)',
-        'total_area_all_pitches': r'Total Area \(All Pitches\)\s*=\s*([0-9,]+\s*sq ft)'
+        'ridges': r'Ridges\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'hips': r'Hips\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'valleys': r'Valleys\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'rakes': r'Rakes\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'eaves_starter': r'Eaves\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'flashing': r'Flashing\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'step_flashing': r'Step flashing\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'parapet_walls': r'Parapets\s*=\s*([0-9]+\.?\d*\s*ft)',
+        'predominant_pitch': r'Predominant Pitch:\s*([0-9°]+)',
+        'total_area_all_pitches': r'Area:\s*([0-9,]+\.?\d*\s*sq ft)'
     }
-    
+
     for key, pattern in patterns.items():
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
-            data[key] = match.group(1).strip()
-    
+            value = match.group(1).strip()
+            if key in ['ridges', 'hips', 'valleys', 'rakes', 'eaves_starter', 'flashing', 'step_flashing', 'parapet_walls']:
+                # Convert to format like "58 ft (3 Ridges)" - we'll need to count them from the detailed breakdown
+                data[key] = f"{value} (Multiple {key.title()})"
+            else:
+                data[key] = value
+
     return data
 
 
@@ -233,50 +231,98 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
     if report_id_match:
         report_id = report_id_match.group(1)
 
+    property_id = f"PROP_{report_id}"
+
     pages = read_pdf_text_by_page(pdf_path)
     all_text = "\n".join(pages)
 
     chunks: List[Dict[str, Any]] = []
 
-    def _add(section: str, _type: str, data: Dict[str, Any]):
-        chunk_id = f"{report_id}_chunk_{len(chunks)+1}"
+    def _add(chunk_id: str, property_id: str, section: str, _type: str, data: Dict[str, Any]):
         chunks.append({
             "chunk_id": chunk_id,
+            "property_id": property_id,
             "section": section,
             "type": _type,
             "data": data
         })
 
     header_data = _extract_premium_header(all_text)
-    if header_data:
-        _add("Report Header", "text", header_data)
-
-    online_maps = _extract_online_maps(all_text)
-    if online_maps:
-        _add("Property Navigation", "text", online_maps)
-
+    coordinates = _extract_coordinates(all_text)
     prepared_for = _extract_prepared_for_premium(all_text)
-    if prepared_for:
-        _add("Prepared For", "text", prepared_for)
+
+    property_info = {
+        "property_id": property_id,
+        "address": header_data.get("property_address", ""),
+        "latitude": float(coordinates.get("latitude", 0)),
+        "longitude": float(coordinates.get("longitude", 0)),
+        "owner": prepared_for.get("contact", "") if prepared_for else ""
+    }
+    chunks.append(property_info)
 
     summary_measurements = _extract_summary_measurements(all_text)
-    if summary_measurements:
-        _add("Summary Measurements", "text", summary_measurements)
-
     detailed_measurements = _extract_detailed_measurements(all_text)
-    if detailed_measurements:
-        _add("Detailed Measurements", "text", detailed_measurements)
 
-    coordinates = _extract_coordinates(all_text)
-    if coordinates:
-        _add("Property Location", "text", coordinates)
+    if summary_measurements:
+        house_data = {}
+        if "number_of_stories" in summary_measurements:
+            house_data["number_of_stories"] = summary_measurements["number_of_stories"]
+        if "total_roof_facets" in summary_measurements:
+            facets = int(summary_measurements["total_roof_facets"])
+            house_data["total_roof_facets"] = facets
+            if facets < 7:
+                house_data["structure_complexity"] = "Simple"
+            elif facets <= 50:
+                house_data["structure_complexity"] = "Normal"
+            else:
+                house_data["structure_complexity"] = "Complex"
+        if "estimated_attic" in summary_measurements:
+            house_data["estimated_attic"] = summary_measurements["estimated_attic"]
+        if "total_roof_obstructions" in summary_measurements:
+            house_data["total_roof_obstructions"] = int(summary_measurements["total_roof_obstructions"])
 
-    business_links = _extract_business_links(all_text)
-    if business_links:
-        _add("Business Links", "text", {
-            "description": "Links to businesses near the property including restaurants, fast food, medical centers, hospitals, doctors, and gas stations",
-            "links": business_links
-        })
+        if house_data:
+            _add("C001", property_id, "House Measurements", "text", house_data)
+
+    if summary_measurements or detailed_measurements:
+        roof_data = {}
+        if "total_roof_area" in summary_measurements:
+            roof_data["total_area"] = summary_measurements["total_roof_area"]
+        if "total_roof_facets" in summary_measurements:
+            roof_data["total_roof_facets"] = int(summary_measurements["total_roof_facets"])
+        if "predominant_pitch" in summary_measurements:
+            roof_data["predominant_pitch"] = summary_measurements["predominant_pitch"]
+        elif "predominant_pitch" in detailed_measurements:
+            roof_data["predominant_pitch"] = detailed_measurements["predominant_pitch"]
+
+        if "ridges" in detailed_measurements:
+            roof_data["ridges"] = detailed_measurements["ridges"]
+        if "hips" in detailed_measurements:
+            roof_data["hips"] = detailed_measurements["hips"]
+        if "valleys" in detailed_measurements:
+            roof_data["valleys"] = detailed_measurements["valleys"]
+        if "rakes" in detailed_measurements:
+            roof_data["rakes"] = detailed_measurements["rakes"]
+        if "eaves_starter" in detailed_measurements:
+            roof_data["eaves_starters"] = detailed_measurements["eaves_starter"]
+        if "flashing" in detailed_measurements:
+            roof_data["flashing"] = detailed_measurements["flashing"]
+        if "step_flashing" in detailed_measurements:
+            roof_data["step_flashing"] = detailed_measurements["step_flashing"]
+        if "parapet_walls" in detailed_measurements:
+            roof_data["parapet_walls"] = detailed_measurements["parapet_walls"]
+
+        if "roof_obstructions_perimeter" in summary_measurements:
+            roof_data["roof_obstructions_perimeter"] = summary_measurements["roof_obstructions_perimeter"]
+        if "roof_obstructions_area" in summary_measurements:
+            roof_data["roof_obstructions_area"] = summary_measurements["roof_obstructions_area"]
+
+        net_area = float(summary_measurements.get("total_roof_area", "0 sq ft").replace(" sq ft", "").replace(",", ""))
+        obstruction_area = float(summary_measurements.get("roof_obstructions_area", "0 sq ft").replace(" sq ft", "").replace(",", ""))
+        roof_data["net_roof_area"] = f"{net_area - obstruction_area:.1f} sq ft"
+
+        if roof_data:
+            _add("C002", property_id, "Roof Measurements", "text", roof_data)
 
     return chunks
 

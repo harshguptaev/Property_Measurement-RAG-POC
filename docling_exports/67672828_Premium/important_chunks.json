@@ -1,0 +1,44 @@
+[
+  {
+    "property_id": "PROP_67672828",
+    "address": "3021 Carrington Ln, Lawrence, KS 66049",
+    "latitude": 38.9916658,
+    "longitude": -95.2735747,
+    "owner": "Jesse Pacheco Cromwell Solar"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67672828",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 11,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1769.3 sq ft",
+      "total_roof_obstructions": 10
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67672828",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "2058.2 sq ft",
+      "total_roof_facets": 11,
+      "predominant_pitch": "27°",
+      "ridges": "63 ft (Multiple Ridges)",
+      "hips": "5.4 ft (Multiple Hips)",
+      "valleys": "37.4 ft (Multiple Valleys)",
+      "rakes": "180.4 ft (Multiple Rakes)",
+      "eaves_starters": "137.6 ft (Multiple Eaves_Starter)",
+      "flashing": "48.9 ft (Multiple Flashing)",
+      "step_flashing": "59.7 ft (Multiple Step_Flashing)",
+      "parapet_walls": "0 ft (Multiple Parapet_Walls)",
+      "roof_obstructions_perimeter": "38 ft",
+      "roof_obstructions_area": "10 sq ft",
+      "net_roof_area": "2048.2 sq ft"
+    }
+  }
+]

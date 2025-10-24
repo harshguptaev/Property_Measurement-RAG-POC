@@ -1,0 +1,44 @@
+[
+  {
+    "property_id": "PROP_67673289",
+    "address": "65 South Sunken Meadow, Eastham, MA 02642",
+    "latitude": 41.8684762,
+    "longitude": -69.9979646,
+    "owner": "Matthew Cole Cape Associates, Inc."
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67673289",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 8,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1,412 sq ft",
+      "total_roof_obstructions": 8
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67673289",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "1550.2 sq ft",
+      "total_roof_facets": 8,
+      "predominant_pitch": "23°",
+      "ridges": "62.3 ft (Multiple Ridges)",
+      "hips": "0 ft (Multiple Hips)",
+      "valleys": "14.8 ft (Multiple Valleys)",
+      "rakes": "102.8 ft (Multiple Rakes)",
+      "eaves_starters": "171.4 ft (Multiple Eaves_Starter)",
+      "flashing": "65.8 ft (Multiple Flashing)",
+      "step_flashing": "19.8 ft (Multiple Step_Flashing)",
+      "parapet_walls": "0 ft (Multiple Parapet_Walls)",
+      "roof_obstructions_perimeter": "41.2 ft",
+      "roof_obstructions_area": "10 sq ft",
+      "net_roof_area": "1540.2 sq ft"
+    }
+  }
+]

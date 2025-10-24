@@ -1,0 +1,44 @@
+[
+  {
+    "property_id": "PROP_67676606",
+    "address": "111 Thomas Park Dr, Hutto, TX 78634",
+    "latitude": 30.5863054,
+    "longitude": -97.5535928,
+    "owner": "Carlos Hernandez Kstylez Roofing & Construction"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67676606",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 12,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3031.2 sq ft",
+      "total_roof_obstructions": 28
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67676606",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "3158.1 sq ft",
+      "total_roof_facets": 12,
+      "predominant_pitch": "14°",
+      "ridges": "141.1 ft (Multiple Ridges)",
+      "hips": "0 ft (Multiple Hips)",
+      "valleys": "40.6 ft (Multiple Valleys)",
+      "rakes": "169.4 ft (Multiple Rakes)",
+      "eaves_starters": "223.5 ft (Multiple Eaves_Starter)",
+      "flashing": "0 ft (Multiple Flashing)",
+      "step_flashing": "16.2 ft (Multiple Step_Flashing)",
+      "parapet_walls": "0 ft (Multiple Parapet_Walls)",
+      "roof_obstructions_perimeter": "108 ft",
+      "roof_obstructions_area": "33 sq ft",
+      "net_roof_area": "3125.1 sq ft"
+    }
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "property_id": "PROP_67676640",
+    "address": "11911 Stout Oak Trail, Austin, TX 78750",
+    "latitude": 30.4568831,
+    "longitude": -97.8149572,
+    "owner": "Carlos Hernandez Kstylez Roofing & Construction"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67676640",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 6,
+      "structure_complexity": "Simple",
+      "estimated_attic": "2507.2 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67676640",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "2642.8 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "18°",
+      "ridges": "27.6 ft (Multiple Ridges)",
+      "hips": "134.5 ft (Multiple Hips)",
+      "valleys": "17.7 ft (Multiple Valleys)",
+      "rakes": "0 ft (Multiple Rakes)",
+      "eaves_starters": "216 ft (Multiple Eaves_Starter)",
+      "flashing": "0 ft (Multiple Flashing)",
+      "step_flashing": "0 ft (Multiple Step_Flashing)",
+      "parapet_walls": "0 ft (Multiple Parapet_Walls)",
+      "roof_obstructions_perimeter": "58 ft",
+      "roof_obstructions_area": "32 sq ft",
+      "net_roof_area": "2610.8 sq ft"
+    }
+  }
+]
