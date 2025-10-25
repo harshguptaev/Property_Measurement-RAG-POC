@@ -91,27 +91,43 @@ def _extract_detailed_measurements(text: str) -> Dict[str, Any]:
     data = {}
 
     patterns = {
-        'ridges': r'Ridges\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'hips': r'Hips\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'valleys': r'Valleys\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'rakes': r'Rakes\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'eaves_starter': r'Eaves\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'flashing': r'Flashing\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'step_flashing': r'Step flashing\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'parapet_walls': r'Parapets\s*=\s*([0-9]+\.?\d*\s*ft)',
-        'predominant_pitch': r'Predominant Pitch:\s*([0-9°]+)',
-        'total_area_all_pitches': r'Area:\s*([0-9,]+\.?\d*\s*sq ft)'
+        'ridges': r'Ridges\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Ridges?\)',
+        'hips': r'Hips\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Hips?\)',
+        'valleys': r'Valleys\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Valleys?\)',
+        'rakes': r'Rakes[^\w]*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Rakes?\)',
+        'eaves_starter': r'Eaves/Starter[^\w]*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Eaves?\)',
+        'flashing': r'Flashing\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Lengths?\)',
+        'step_flashing': r'Step flashing\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Lengths?\)',
+        'parapet_walls': r'Parapet Walls\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Lengths?\)',
+        'drip_edge': r'Drip Edge\s*\(Eaves\s*\+\s*Rakes\)\s*=\s*([0-9]+\.?\d*(?:\s*ft)?)\s*\(([0-9]+)\s*Lengths?\)',
+        'predominant_pitch': r'Predominant Pitch\s*=\s*([0-9/°]+)',
+        'total_area_all_pitches': r'Total Area\s*\(All Pitches\)\s*=\s*([0-9,]+\.?\d*\s*sq ft)',
+        'net_roof_area': r'Total Roof Area Less Roof Obstructions\s*=\s*([0-9,]+\.?\d*\s*sq ft)',
+        'roof_obstructions_area': r'Total Roof Obstructions Area\s*=\s*([0-9]+\.?\d*\s*sq ft)',
+        'roof_obstructions_perimeter': r'Total Roof Obstructions Perimeter\s*=\s*([0-9]+\.?\d*\s*ft)'
     }
 
     for key, pattern in patterns.items():
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
-            value = match.group(1).strip()
-            if key in ['ridges', 'hips', 'valleys', 'rakes', 'eaves_starter', 'flashing', 'step_flashing', 'parapet_walls']:
-                # Convert to format like "58 ft (3 Ridges)" - we'll need to count them from the detailed breakdown
-                data[key] = f"{value} (Multiple {key.title()})"
+            if len(match.groups()) == 2:
+                # Patterns with count (measurement and count)
+                measurement = match.group(1).strip()
+                count = match.group(2).strip()
+                # Add " ft" if not present
+                if not measurement.endswith(' ft'):
+                    measurement = f"{measurement} ft"
+                if key == 'eaves_starter':
+                    data[key] = f"{measurement} ({count} Eaves)"
+                elif key == 'parapet_walls':
+                    data[key] = f"{measurement} ({count} Lengths)"
+                elif key in ['flashing', 'step_flashing', 'drip_edge']:
+                    data[key] = f"{measurement} ({count} Lengths)"
+                else:
+                    data[key] = f"{measurement} ({count} {key.title()})"
             else:
-                data[key] = value
+                # Single group patterns
+                data[key] = match.group(1).strip()
 
     return data
 
@@ -286,14 +302,16 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
 
     if summary_measurements or detailed_measurements:
         roof_data = {}
-        if "total_roof_area" in summary_measurements:
+        if "total_area_all_pitches" in detailed_measurements:
+            roof_data["total_area"] = detailed_measurements["total_area_all_pitches"]
+        elif "total_roof_area" in summary_measurements:
             roof_data["total_area"] = summary_measurements["total_roof_area"]
         if "total_roof_facets" in summary_measurements:
             roof_data["total_roof_facets"] = int(summary_measurements["total_roof_facets"])
-        if "predominant_pitch" in summary_measurements:
-            roof_data["predominant_pitch"] = summary_measurements["predominant_pitch"]
-        elif "predominant_pitch" in detailed_measurements:
+        if "predominant_pitch" in detailed_measurements:
             roof_data["predominant_pitch"] = detailed_measurements["predominant_pitch"]
+        elif "predominant_pitch" in summary_measurements:
+            roof_data["predominant_pitch"] = summary_measurements["predominant_pitch"]
 
         if "ridges" in detailed_measurements:
             roof_data["ridges"] = detailed_measurements["ridges"]
@@ -305,6 +323,8 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
             roof_data["rakes"] = detailed_measurements["rakes"]
         if "eaves_starter" in detailed_measurements:
             roof_data["eaves_starters"] = detailed_measurements["eaves_starter"]
+        if "drip_edge" in detailed_measurements:
+            roof_data["drip_edge"] = detailed_measurements["drip_edge"]
         if "flashing" in detailed_measurements:
             roof_data["flashing"] = detailed_measurements["flashing"]
         if "step_flashing" in detailed_measurements:
@@ -312,14 +332,21 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         if "parapet_walls" in detailed_measurements:
             roof_data["parapet_walls"] = detailed_measurements["parapet_walls"]
 
-        if "roof_obstructions_perimeter" in summary_measurements:
+        if "roof_obstructions_perimeter" in detailed_measurements:
+            roof_data["roof_obstructions_perimeter"] = detailed_measurements["roof_obstructions_perimeter"]
+        elif "roof_obstructions_perimeter" in summary_measurements:
             roof_data["roof_obstructions_perimeter"] = summary_measurements["roof_obstructions_perimeter"]
-        if "roof_obstructions_area" in summary_measurements:
+        if "roof_obstructions_area" in detailed_measurements:
+            roof_data["roof_obstructions_area"] = detailed_measurements["roof_obstructions_area"]
+        elif "roof_obstructions_area" in summary_measurements:
             roof_data["roof_obstructions_area"] = summary_measurements["roof_obstructions_area"]
 
-        net_area = float(summary_measurements.get("total_roof_area", "0 sq ft").replace(" sq ft", "").replace(",", ""))
-        obstruction_area = float(summary_measurements.get("roof_obstructions_area", "0 sq ft").replace(" sq ft", "").replace(",", ""))
-        roof_data["net_roof_area"] = f"{net_area - obstruction_area:.1f} sq ft"
+        if "net_roof_area" in detailed_measurements:
+            roof_data["net_roof_area"] = detailed_measurements["net_roof_area"]
+        else:
+            net_area = float((detailed_measurements.get("total_area_all_pitches", summary_measurements.get("total_roof_area", "0 sq ft"))).replace(" sq ft", "").replace(",", ""))
+            obstruction_area = float((detailed_measurements.get("roof_obstructions_area", summary_measurements.get("roof_obstructions_area", "0 sq ft"))).replace(" sq ft", "").replace(",", ""))
+            roof_data["net_roof_area"] = f"{net_area - obstruction_area:.1f} sq ft"
 
         if roof_data:
             _add("C002", property_id, "Roof Measurements", "text", roof_data)
@@ -346,7 +373,7 @@ def write_premium_chunks_output(pdf_path: str, chunks: List[Dict[str, Any]]) -> 
 
     final_chunks_dir = Path("Final_Chunks")
     final_chunks_dir.mkdir(parents=True, exist_ok=True)
-    final_chunks_file = final_chunks_dir / f"RoofReport-{report_id}.json"
+    final_chunks_file = final_chunks_dir / f"report_{report_id}.json"
 
     final_chunks_data = {
         "text": chunks
