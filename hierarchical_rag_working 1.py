@@ -259,186 +259,180 @@ Provide a clear, structured summary in 2-3 sentences:"""
     
     def build_level1_index(self, documents_data: List[Dict], clear_existing: bool = True) -> None:
         """
-        Build Level 1 Index (Summary/Metadata Index)
-        
+        Build Level 1 Index (Parent Chunk Index)
+
         Args:
             documents_data: List of documents with their chunks
             clear_existing: Whether to clear existing collections to prevent duplicates
         """
-        logger.info("🏗️ Building Level 1 Index (Summary/Metadata Index)")
-        
+        logger.info("🏗️ Building Level 1 Index (Parent Chunk Index)")
+
         # Create collections first (with duplicate prevention)
         self.create_milvus_collections(clear_existing=clear_existing)
-        
+
         level1_data = []
-        
+
         for i, doc in enumerate(tqdm(documents_data, desc="Building Level 1 Index")):
             try:
                 # Extract document metadata
                 doc_id = doc.get("doc_id", f"doc_{i}")
                 source_file = doc.get("source_file", "unknown.pdf")
                 chunks = doc.get("chunks", [])
-                
-                # Extract address from chunks - try multiple approaches
-                address = "Unknown Address"
-                date = "Unknown Date"
-                
-                # First try Report Header
-                for chunk in chunks:
-                    if chunk.get("section") == "Report Header":
-                        data = chunk.get("data", {})
-                        if "property_address" in data:
-                            address = data["property_address"]
-                        if "date" in data:
-                            date = data["date"]
-                        break
-                
-                # If still unknown, try other sections that might have address
-                if address == "Unknown Address":
-                    for chunk in chunks:
-                        data = chunk.get("data", {})
-                        if isinstance(data, dict):
-                            # Look for any field containing address
-                            for key, value in data.items():
-                                if "address" in key.lower() and value and value != "Unknown Address":
-                                    address = value
-                                    break
-                            if address != "Unknown Address":
-                                break
-                
-                # Final fallback - extract from doc_id if it contains address info
-                if address == "Unknown Address":
-                    # Some doc_ids might contain property info
-                    address = f"Property {doc_id}"
-                
+
+                # The first chunk contains property metadata
+                if not chunks or len(chunks) == 0:
+                    logger.warning(f"No chunks found for document {doc_id}")
+                    continue
+
+                property_chunk = chunks[0]  # First chunk is property metadata
+
+                # Extract property information from the first chunk
+                property_id = property_chunk.get("property_id", f"PROP_{doc_id}")
+                address = property_chunk.get("address", "Unknown Address")
+                latitude = property_chunk.get("latitude", 0.0)
+                longitude = property_chunk.get("longitude", 0.0)
+
+                # Extract report_id from property_id (remove PROP_ prefix)
+                report_id = property_id.replace("PROP_", "")
+
+                # Generate PDF filename
+                # Format: {report_id}_{address_cleaned}.pdf
+                address_cleaned = address.replace(" ", "_").replace(",", "").replace(".", "")
+                pdf_filename = f"{report_id}_{address_cleaned}.pdf"
+
+                # Collect child chunk IDs (all chunks except the first property metadata chunk)
+                child_chunk_ids = []
+                for chunk in chunks[1:]:  # Skip the first chunk (property metadata)
+                    chunk_id = chunk.get("chunk_id", "")
+                    if chunk_id:
+                        child_chunk_ids.append(chunk_id)
+
                 print("=" * 80)
+                print(f"property_id ::: {property_id}")
+                print(f"report_id ::: {report_id}")
                 print(f"address ::: {address}")
-                #print(f"date --------->: {chunks}")
-
-                # Create document summary
-                #summary = self.create_document_summary(chunks)
-                
-                # Collect all chunk IDs
-                chunk_ids = [chunk.get("chunk_id", "") for chunk in chunks]
-                chunk_ids_str = ",".join(chunk_ids)
-
-                print(f"chunk_ids ::: {chunk_ids_str}")
+                print(f"latitude ::: {latitude}")
+                print(f"longitude ::: {longitude}")
+                print(f"pdf_filename ::: {pdf_filename}")
+                print(f"child_chunk_ids ::: {child_chunk_ids}")
                 print("=" * 80)
-                
-                # Generate embedding for summary
-                summary_embedding = self.titan_embed_text(address)
 
+                # Generate embedding for the address (for vector search)
+                address_embedding = self.titan_embed_text(address)
 
-                #print(f"summary_embedding --------->: {summary}")
-               
                 level1_data.append({
                     "id": i,
-                    "vector": summary_embedding,
-                    "doc_id": doc_id,
-                    "summary": "Summary",
-                    "chunk_ids": chunk_ids_str,
-                    "address": address,
-                    "source_file": source_file,
-                    "date": date
+                    "vector": address_embedding,
+                    "property_id": property_id,
+                    "report_id": report_id,
+                    "data": {
+                        "address": address,
+                        "latitude": latitude,
+                        "longitude": longitude
+                    },
+                    "pdf_filename": pdf_filename,
+                    "child_chunk_ids": child_chunk_ids
                 })
-                
-                #print(f"summary json--------->: {level1_data}")
-                
 
-                logger.info(f"Created Level 1 entry for {doc_id}: {address}")
+                logger.info(f"Created Level 1 entry for {property_id}: {address}")
                 print()
                 print()
-                
+
             except Exception as e:
                 logger.error(f"Error processing document {i}: {str(e)}")
                 continue
-        
+
         # Insert data into Level 1 collection
         if level1_data:
             self.milvus_client.insert(
                 collection_name=self.level1_collection_name,
                 data=level1_data
             )
-            logger.info(f"✅ Level 1 Index built with {len(level1_data)} documents")
+            logger.info(f"✅ Level 1 Index built with {len(level1_data)} parent chunks")
         else:
             logger.warning("No data to insert into Level 1 Index")
     
     def build_level2_index(self, documents_data: List[Dict], clear_existing: bool = False) -> None:
         """
-        Build Level 2 Index (Chunk Index)
-        
+        Build Level 2 Index (Children Chunks Index)
+
         Args:
             documents_data: List of documents with their chunks
             clear_existing: Whether to clear existing collections (usually False since Level 1 already did this)
         """
-        logger.info("🏗️ Building Level 2 Index (Chunk Index)")
-        
+        logger.info("🏗️ Building Level 2 Index (Children Chunks Index)")
+
         # Only create collections if they don't exist (Level 1 should have created them)
         if not self.milvus_client.has_collection(self.level2_collection_name):
             logger.warning("Level 2 collection doesn't exist, creating it...")
             self.create_milvus_collections(clear_existing=clear_existing)
-        
+
         level2_data = []
         chunk_counter = 0
-        
+
         for doc in tqdm(documents_data, desc="Building Level 2 Index"):
             try:
                 doc_id = doc.get("doc_id", "unknown")
                 chunks = doc.get("chunks", [])
-                
-                for chunk in chunks:
+
+                # Skip the first chunk as it contains property metadata (stored in Level 1)
+                for chunk in chunks[1:]:  # Start from index 1 to skip property metadata
                     try:
-                        # Extract chunk information
+                        # Extract chunk information in the specified format
                         chunk_id = chunk.get("chunk_id", f"chunk_{chunk_counter}")
                         section = chunk.get("section", "Unknown Section")
                         chunk_type = chunk.get("type", "text")
-                        source_file = doc.get("source_file", "unknown.pdf")
-                        
-                        # Create chunk text for embedding
-                        chunk_text = ""
+
+                        # Get property_id from the chunk (should be set)
+                        property_id = chunk.get("property_id", f"PROP_{doc_id}")
+
+                        # Get the data field directly (contains the structured data)
                         data = chunk.get("data", {})
-                        
+
+                        # Create chunk text for embedding (flatten the data for semantic search)
+                        chunk_text = ""
                         if isinstance(data, dict):
-                            # Flatten the data dictionary into readable text
+                            # Flatten the data dictionary into readable text for embedding
                             for key, value in data.items():
                                 chunk_text += f"{key}: {value}\n"
                         else:
                             chunk_text = str(data)
-                        
-                        # Add section and type information
+
+                        # Add section and type information to the chunk text
                         chunk_text = f"Section: {section}\nType: {chunk_type}\nContent: {chunk_text}"
-                        
+
                         # Generate embedding for chunk text
                         chunk_embedding = self.titan_embed_text(chunk_text)
-                        
+
                         level2_data.append({
                             "id": chunk_counter,
                             "vector": chunk_embedding,
                             "chunk_id": chunk_id,
-                            "doc_id": doc_id,
+                            "property_id": property_id,
                             "section": section,
-                            "chunk_text": chunk_text[:5000],  # Truncate if too long
-                            "chunk_type": chunk_type,
-                            "source_file": source_file
+                            "type": chunk_type,
+                            "data": data,
+                            "chunk_text": chunk_text[:5000]  # Truncate if too long, for debugging
                         })
-                        
+
+                        print(f"Created Level 2 chunk: {chunk_id} ({section}) for property {property_id}")
                         chunk_counter += 1
-                        
+
                     except Exception as e:
-                        logger.error(f"Error processing chunk {chunk_id}: {str(e)}")
+                        logger.error(f"Error processing chunk {chunk.get('chunk_id', 'unknown')}: {str(e)}")
                         continue
-                        
+
             except Exception as e:
                 logger.error(f"Error processing document {doc_id}: {str(e)}")
                 continue
-        
+
         # Insert data into Level 2 collection
         if level2_data:
             self.milvus_client.insert(
                 collection_name=self.level2_collection_name,
                 data=level2_data
             )
-            logger.info(f"✅ Level 2 Index built with {len(level2_data)} chunks")
+            logger.info(f"✅ Level 2 Index built with {len(level2_data)} children chunks")
         else:
             logger.warning("No data to insert into Level 2 Index")
     
@@ -483,13 +477,13 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 "params": {"ef": 64}   # higher ef = better recall, slower search
                 }
             
-            # Step 2: Search Level 1 (Summaries)
-            logger.info("📊 Searching Level 1 (Summary Index)...")
+            # Step 2: Search Level 1 (Parent Chunks)
+            logger.info("📊 Searching Level 1 (Parent Chunk Index)...")
             res1 = self.milvus_client.search(
                 collection_name=self.level1_collection_name,
                 data=[query_vec],
-                limit=level1_limit,
-                output_fields=["doc_id", "chunk_ids", "address", "summary"],
+                limit=1,
+                output_fields=["property_id", "child_chunk_ids", "data", "report_id", "pdf_filename"],
                 search_params=search_params
             )
             
@@ -499,61 +493,62 @@ Provide a clear, structured summary in 2-3 sentences:"""
 
 
             print(f"Fetching Chunks from Level 1 Index - Address matching")
-
+            print(f"res1 ::: {res1}")
             # Get relevant chunk_ids
             retrieved_chunk_ids = []
             level1_docs = []
-            
+
             for hit in res1[0]:
+                # Extract data from the nested structure
+                data = hit.get("data", {})
+                address = data.get("address", "Unknown Address") if isinstance(data, dict) else "Unknown Address"
+
                 doc_info = {
-                    "doc_id": hit.get("doc_id"),
-                    "address": hit.get("address"),
-                    "summary": hit.get("summary"),
+                    "property_id": hit.get("property_id"),
+                    "address": address,
+                    "report_id": hit.get("report_id"),
+                    "pdf_filename": hit.get("pdf_filename"),
                     "distance": hit.get("distance", 0)
                 }
                 level1_docs.append(doc_info)
 
                 print(f"\n{'='*80}")
+                print(f"property_id: {doc_info['property_id']}")
                 print(f"address: {doc_info['address']}")
-                print(f"doc_id: {doc_info['doc_id']}")
+                print(f"report_id: {doc_info['report_id']}")
+                print(f"pdf_filename: {doc_info['pdf_filename']}")
                 print(f"distance: {doc_info['distance']}")
-            
-                
-                # Parse chunk IDs
-                chunk_ids_str = hit.get("chunk_ids", "")
-                #print(f"Retrieved chunk_ids_str --------->: {chunk_ids_str}")
 
-                #lets include chunk from 1st index
-                if chunk_ids_str:
-                    retrieved_chunk_ids.extend(chunk_ids_str.split(",")[1:])
+                # Get child chunk IDs
+                child_chunk_ids = hit.get("child_chunk_ids", [])
+                if isinstance(child_chunk_ids, list):
+                    retrieved_chunk_ids.extend(child_chunk_ids)
 
                 print(f"retrieved_chunk_ids ::: {retrieved_chunk_ids}")
                 print("=" * 80)
             
             logger.info(f"📋 Found {len(level1_docs)} relevant documents with {len(retrieved_chunk_ids)} total chunks")
-            
+
+            # Get property IDs from level 1 results for filtering level 2 search
+            relevant_property_ids = [doc["property_id"] for doc in level1_docs]
+
             # Step 3: Search Level 2 (Chunks within retrieved docs)
             logger.info("📊 Searching Level 2 (Chunk Index)...")
-            
+
             if not retrieved_chunk_ids:
                 logger.warning("No chunk IDs found from Level 1 search")
                 return []
 
-
-            # Step 3: Search Level 2 (Chunks within retrieved docs)
-            #expr = f'chunk_id in {retrieved_chunk_ids}'
-
             # Safer way: use repr() to auto-quote strings, then replace single quotes with double quotes
-            chunk_ids_quoted = [f'"{cid}"' for cid in retrieved_chunk_ids]
-            expr = f'chunk_id in [{",".join(chunk_ids_quoted)}]'
+            property_ids_quoted = [f'"{pid}"' for pid in relevant_property_ids]
 
-            # For simplicity, let's search all chunks and then filter by relevance
+            # Search Level 2 chunks filtered by property_id from Level 1 results
             res2 = self.milvus_client.search(
                 collection_name=self.level2_collection_name,
                 data=[query_vec],
-                limit=7,  # Get more results to include images
-                filter=expr,
-                output_fields=["chunk_text", "section", "doc_id", "chunk_type", "chunk_id","data","raw_text"]
+                limit=5,  # Get more results to include images
+                filter=f'property_id in [{",".join(property_ids_quoted)}]',
+                output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "data"]
             )
             
             if not res2 or not res2[0]:
@@ -562,12 +557,11 @@ Provide a clear, structured summary in 2-3 sentences:"""
             
             # Step 4: Filter results to only include chunks from relevant documents
             final_results = []
-            relevant_doc_ids = [doc["doc_id"] for doc in level1_docs]
 
             print(f"Fetching Chunks from Level 2 Index")
 
             print(f"\n{'='*80}")
-            print(f"relevant_doc_ids :: {relevant_doc_ids}")
+            print(f"relevant_property_ids :: {relevant_property_ids}")
             print(f"Length :: {len(res2[0])}")
             print("=" * 80)
 
@@ -575,22 +569,24 @@ Provide a clear, structured summary in 2-3 sentences:"""
             all_chunks = []
 
             for result in res2[0]:
-                chunk_doc_id = result.get("doc_id")
-                if chunk_doc_id in relevant_doc_ids:
+                chunk_property_id = result.get("property_id")
+                if chunk_property_id in relevant_property_ids:
                     chunk_info = {
                         "chunk_id": result.get("chunk_id"),
-                        "doc_id": chunk_doc_id,
+                        "property_id": chunk_property_id,
                         "section": result.get("section"),
-                        "chunk_type": result.get("chunk_type"),
+                        "chunk_type": result.get("type"),  # Changed from chunk_type to type
                         "chunk_text": result.get("chunk_text"),
+                        "data": result.get("data"),  # Include the structured data
                         "distance": result.get("distance", 0)
                     }
 
                     # Add document-level info from Level 1
                     for doc_info in level1_docs:
-                        if doc_info["doc_id"] == chunk_doc_id:
+                        if doc_info["property_id"] == chunk_property_id:
                             chunk_info["doc_address"] = doc_info["address"]
-                            chunk_info["doc_summary"] = doc_info["summary"]
+                            chunk_info["report_id"] = doc_info["report_id"]
+                            chunk_info["pdf_filename"] = doc_info["pdf_filename"]
                             break
 
                     all_chunks.append(chunk_info)
@@ -616,9 +612,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 print(f"\n{'='*60} CHUNK #{i} {'='*60}")
                 print(f"📄 Type: {chunk.get('chunk_type', 'N/A').upper()}")
                 print(f"🆔 Chunk ID: {chunk.get('chunk_id', 'N/A')}")
-                print(f"📋 Doc ID: {chunk.get('doc_id', 'N/A')}")
-                if chunk.get('doc_summary'):
-                    print(f"📝 Summary: {chunk.get('doc_summary', 'N/A')}")
+                print(f"🏠 Property ID: {chunk.get('property_id', 'N/A')}")
+                print(f"📋 Section: {chunk.get('section', 'N/A')}")
+                print(f"📍 Address: {chunk.get('doc_address', 'N/A')}")
 
                 print("\n📖 Content:")
                 content = chunk.get('chunk_text', 'N/A')
@@ -626,6 +622,13 @@ Provide a clear, structured summary in 2-3 sentences:"""
                     print(f"   {content[:500]}...")
                 else:
                     print(f"   {content}")
+
+                # Show structured data if available
+                data = chunk.get('data', {})
+                if data and isinstance(data, dict):
+                    print("\n📊 Structured Data:")
+                    for key, value in data.items():
+                        print(f"   {key}: {value}")
 
                 print(f"{'='*60} END CHUNK #{i} {'='*60}")
 

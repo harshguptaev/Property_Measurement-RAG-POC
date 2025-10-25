@@ -298,7 +298,7 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                 source_info = {
                     "content": chunk_info["content"],
                     "metadata": {
-                        "doc_id": result.get("doc_id"),
+                        "property_id": result.get("property_id"),
                         "address": result.get("doc_address"),
                         "section": result.get("section"),
                         "chunk_type": result.get("chunk_type"),
@@ -317,7 +317,7 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                 # Debug log for Property Imagery chunks
                 if result.get("section") == "Property Imagery":
                     logger.info(f"Processing Property Imagery chunk: {result.get('chunk_id')}")
-                    logger.info(f"Doc address: {result.get('doc_address')}")
+                    logger.info(f"Property address: {result.get('doc_address')}")
                     logger.info(f"Chunk text: {chunk_text[:200]}...")
 
                 # Parse image information from chunk text - handle multiple formats
@@ -387,9 +387,10 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
             # Collect unique documents from all results
             for result in search_results:
                 doc_info = {
-                    "doc_id": result.get("doc_id"),
+                    "property_id": result.get("property_id"),
                     "address": result.get("doc_address"),
-                    "summary": result.get("doc_summary")
+                    "report_id": result.get("report_id"),
+                    "pdf_filename": result.get("pdf_filename")
                 }
                 if doc_info not in level1_docs:
                     level1_docs.append(doc_info)
