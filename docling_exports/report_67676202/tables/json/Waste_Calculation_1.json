@@ -1,0 +1,47 @@
+[
+    {
+        "waste": "1",
+        "area": "71.5",
+        "squares": "1/12"
+    },
+    {
+        "waste": "2",
+        "area": "90.5",
+        "squares": "2/12"
+    },
+    {
+        "waste": "3",
+        "area": "565.7",
+        "squares": "3/12"
+    },
+    {
+        "waste": "4",
+        "area": "48.4",
+        "squares": "4/12"
+    },
+    {
+        "waste": "5",
+        "area": "44.1",
+        "squares": "5/12"
+    },
+    {
+        "waste": "6",
+        "area": "17.3",
+        "squares": "6/12"
+    },
+    {
+        "waste": "7",
+        "area": "31.2",
+        "squares": "7/12"
+    },
+    {
+        "waste": "8",
+        "area": "2827.1",
+        "squares": "8/12"
+    },
+    {
+        "waste": "9",
+        "area": "25.2",
+        "squares": "9/12"
+    }
+]

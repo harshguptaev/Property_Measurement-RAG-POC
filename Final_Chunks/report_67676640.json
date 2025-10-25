@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67676640",
+    "address": "11911 Stout Oak Trail, Austin, TX 78750",
+    "latitude": 30.4568831,
+    "longitude": -97.8149572,
+    "owner": "Carlos Hernandez Kstylez Roofing & Construction"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67676640",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 6,
+      "structure_complexity": "Simple",
+      "estimated_attic": "2507.2 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67676640",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "2642.8 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "4/12",
+      "ridges": "27.6 ft (2 Ridges)",
+      "hips": "134.5 ft (6 Hips)",
+      "valleys": "17.7 ft (1 Valleys)",
+      "rakes": "0 ft (0 Rakes)",
+      "eaves_starters": "216 ft (6 Eaves)",
+      "drip_edge": "216 ft (6 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "58 ft",
+      "roof_obstructions_area": "32 sq ft",
+      "net_roof_area": "2610.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67676640",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67676640/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67676640/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67676640/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67676640/Rafters.png",
+      "Azimuth": "extracted_images/report_67676640/Azimuth.png",
+      "Area": "extracted_images/report_67676640/Area.png",
+      "Roof Obstructions": "extracted_images/report_67676640/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67676640",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67676640/North_Side.png",
+      "South": "extracted_images/report_67676640/South_Side.png",
+      "East": "extracted_images/report_67676640/East_Side.png",
+      "West": "extracted_images/report_67676640/West_Side.png",
+      "Top": "extracted_images/report_67676640/Top_View.png"
+    }
+  }
+]

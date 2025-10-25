@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67676202",
+    "address": "4865 Oakside Dr, Stone Mountain, GA 30088",
+    "latitude": 33.7858221,
+    "longitude": -84.1904709,
+    "owner": "Amandeep Singh Next Renewable Global Pte. Ltd"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67676202",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 30,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3227.8 sq ft",
+      "total_roof_obstructions": 16
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67676202",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "3,721 sq ft",
+      "total_roof_facets": 30,
+      "predominant_pitch": "8/12",
+      "ridges": "82.6 ft (8 Ridges)",
+      "hips": "210.9 ft (17 Hips)",
+      "valleys": "67.9 ft (10 Valleys)",
+      "rakes": "109.8 ft (14 Rakes)",
+      "eaves_starters": "402.5 ft (30 Eaves)",
+      "drip_edge": "512.3 ft (44 Lengths)",
+      "flashing": "45.5 ft (7 Lengths)",
+      "step_flashing": "83.6 ft (14 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "75.4 ft",
+      "roof_obstructions_area": "35 sq ft",
+      "net_roof_area": "3,686 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67676202",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67676202/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67676202/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67676202/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67676202/Rafters.png",
+      "Azimuth": "extracted_images/report_67676202/Azimuth.png",
+      "Area": "extracted_images/report_67676202/Area.png",
+      "Roof Obstructions": "extracted_images/report_67676202/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67676202",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67676202/North_Side.png",
+      "South": "extracted_images/report_67676202/South_Side.png",
+      "East": "extracted_images/report_67676202/East_Side.png",
+      "West": "extracted_images/report_67676202/West_Side.png",
+      "Top": "extracted_images/report_67676202/Top_View.png"
+    }
+  }
+]

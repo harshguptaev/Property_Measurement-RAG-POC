@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67673289",
+    "address": "65 South Sunken Meadow, Eastham, MA 02642",
+    "latitude": 41.8684762,
+    "longitude": -69.9979646,
+    "owner": "Matthew Cole Cape Associates, Inc."
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67673289",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 8,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1,412 sq ft",
+      "total_roof_obstructions": 8
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67673289",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "1550.2 sq ft",
+      "total_roof_facets": 8,
+      "predominant_pitch": "5/12",
+      "ridges": "62.3 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "14.8 ft (2 Valleys)",
+      "rakes": "102.8 ft (12 Rakes)",
+      "eaves_starters": "171.4 ft (9 Eaves)",
+      "drip_edge": "274.2 ft (21 Lengths)",
+      "flashing": "65.8 ft (4 Lengths)",
+      "step_flashing": "19.8 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "41.2 ft",
+      "roof_obstructions_area": "10 sq ft",
+      "net_roof_area": "1540.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67673289",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67673289/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67673289/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67673289/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67673289/Rafters.png",
+      "Azimuth": "extracted_images/report_67673289/Azimuth.png",
+      "Area": "extracted_images/report_67673289/Area.png",
+      "Roof Obstructions": "extracted_images/report_67673289/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67673289",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67673289/North_Side.png",
+      "South": "extracted_images/report_67673289/South_Side.png",
+      "East": "extracted_images/report_67673289/East_Side.png",
+      "West": "extracted_images/report_67673289/West_Side.png",
+      "Top": "extracted_images/report_67673289/Top_View.png"
+    }
+  }
+]

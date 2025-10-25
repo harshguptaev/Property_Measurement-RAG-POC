@@ -1,0 +1,100 @@
+{
+  "tables": [
+    {
+      "section": "This table named Areas_per_Pitch_AllStructures lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "raw_text": [
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "0%",
+          "%of Roof": "2551"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "4%",
+          "%of Roof": "2654"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "9%",
+          "%of Roof": "2781"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "14%",
+          "%of Roof": "2909"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "17%",
+          "%of Roof": "2985"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "19%",
+          "%of Roof": "3036"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "21%",
+          "%of Roof": "3087"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "24%",
+          "%of Roof": "3164"
+        },
+        {
+          "Roof Pitches": "Waste Calculation NOTE: This waste calculation table is for asphalt shingle roofing applications. All values in table below only include roof areas of 3/12 pitch or greater. For total measurements of all pitches, please refer to the Lengths, Areas, and Pitches section below.",
+          "Waste%": "29%",
+          "%of Roof": "3291"
+        }
+      ],
+      "id": "chunk1",
+      "metadata": {},
+      "src_image_path": "docling_exports/report_67668772/tables/images/Areas_per_Pitch_AllStructures.png"
+    },
+    {
+      "section": "This table named Areas_per_Pitch_Structure_1 lists each pitch on this roof and the total area and percent of the roof with that pitch.",
+      "raw_text": [
+        {
+          "Roof Pitches": "2607.2 sq ft",
+          "Roof Facets:": "11",
+          "%of Roof": "23°"
+        }
+      ],
+      "id": "chunk2",
+      "metadata": {},
+      "src_image_path": "docling_exports/report_67668772/tables/images/Areas_per_Pitch_Structure_1.png"
+    },
+    {
+      "section": "NOTE: This waste calculation table named Waste_Calculation_1 is for asphalt shingle roofing applications. All values in the table below \n                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square\n                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste\n                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not\n                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt\n                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that\n                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given\n                            replacement or repair work.",
+      "raw_text": [
+        {
+          "waste": "1",
+          "area": "56.6",
+          "squares": "56.6"
+        },
+        {
+          "waste": "2",
+          "area": "",
+          "squares": ""
+        },
+        {
+          "waste": "3",
+          "area": "",
+          "squares": ""
+        }
+      ],
+      "id": "chunk3",
+      "metadata": {},
+      "src_image_path": "docling_exports/report_67668772/tables/images/Waste_Calculation_1.png"
+    },
+    {
+      "section": "This table named Structure_Complexity_1 lists the structure complexity of the roof.",
+      "raw_text": "Dummy Text for now.",
+      "id": "chunk4",
+      "metadata": {},
+      "src_image_path": "docling_exports/report_67668772/tables/images/Structure_Complexity_1.png"
+    }
+  ]
+}

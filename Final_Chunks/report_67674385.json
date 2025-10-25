@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67674385",
+    "address": "902 Cottonwood Hill Pl, Henderson, NV 89011",
+    "latitude": 36.0665573,
+    "longitude": -114.9868346,
+    "owner": "Juan Ortiz SunSolar Solutions"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67674385",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 26,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3424.7 sq ft",
+      "total_roof_obstructions": 13
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67674385",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "3710.2 sq ft",
+      "total_roof_facets": 26,
+      "predominant_pitch": "5/12",
+      "ridges": "27.1 ft (6 Ridges)",
+      "hips": "301.6 ft (21 Hips)",
+      "valleys": "105.6 ft (7 Valleys)",
+      "rakes": "6 ft (4 Rakes)",
+      "eaves_starters": "377.6 ft (29 Eaves)",
+      "drip_edge": "383.6 ft (33 Lengths)",
+      "flashing": "57.6 ft (11 Lengths)",
+      "step_flashing": "57.4 ft (10 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "26 ft",
+      "roof_obstructions_area": "4 sq ft",
+      "net_roof_area": "3706.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67674385",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67674385/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "",
+      "Rafters": "",
+      "Azimuth": "",
+      "Area": "",
+      "Roof Obstructions": "extracted_images/report_67674385/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67674385",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67674385/North_Side.png",
+      "South": "extracted_images/report_67674385/South_Side.png",
+      "East": "extracted_images/report_67674385/East_Side.png",
+      "West": "extracted_images/report_67674385/West_Side.png",
+      "Top": "extracted_images/report_67674385/Top_View.png"
+    }
+  }
+]

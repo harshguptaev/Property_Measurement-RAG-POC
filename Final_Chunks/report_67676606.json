@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67676606",
+    "address": "111 Thomas Park Dr, Hutto, TX 78634",
+    "latitude": 30.5863054,
+    "longitude": -97.5535928,
+    "owner": "Carlos Hernandez Kstylez Roofing & Construction"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67676606",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 12,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3031.2 sq ft",
+      "total_roof_obstructions": 28
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67676606",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "2584.4 sq ft",
+      "total_roof_facets": 12,
+      "predominant_pitch": "3/12",
+      "ridges": "103.8 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "40.6 ft (2 Valleys)",
+      "rakes": "106.8 ft (8 Rakes)",
+      "eaves_starters": "151 ft (5 Eaves)",
+      "drip_edge": "257.8 ft (13 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "16.1 ft (2 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "108 ft",
+      "roof_obstructions_area": "33 sq ft",
+      "net_roof_area": "3125.1 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67676606",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67676606/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67676606/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67676606/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67676606/Rafters.png",
+      "Azimuth": "extracted_images/report_67676606/Azimuth.png",
+      "Area": "extracted_images/report_67676606/Area.png",
+      "Roof Obstructions": "extracted_images/report_67676606/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67676606",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67676606/North_Side.png",
+      "South": "extracted_images/report_67676606/South_Side.png",
+      "East": "extracted_images/report_67676606/East_Side.png",
+      "West": "extracted_images/report_67676606/West_Side.png",
+      "Top": "extracted_images/report_67676606/Top_View.png"
+    }
+  }
+]

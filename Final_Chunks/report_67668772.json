@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67668772",
+    "address": "3374 Victoria Ave, Santa Clara, CA 95051",
+    "latitude": 37.3565098,
+    "longitude": -121.9879742,
+    "owner": "Jose Rosas Lanuza Sr"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67668772",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 11,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2418.8 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67668772",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "2607.2 sq ft",
+      "total_roof_facets": 11,
+      "predominant_pitch": "5/12",
+      "ridges": "58 ft (3 Ridges)",
+      "hips": "136.3 ft (8 Hips)",
+      "valleys": "86.8 ft (6 Valleys)",
+      "rakes": "15.6 ft (3 Rakes)",
+      "eaves_starters": "211.1 ft (8 Eaves)",
+      "drip_edge": "226.7 ft (11 Lengths)",
+      "flashing": "7.1 ft (2 Lengths)",
+      "step_flashing": "5.9 ft (3 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "37.2 ft",
+      "roof_obstructions_area": "11 sq ft",
+      "net_roof_area": "2596.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67668772",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67668772/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67668772/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67668772/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67668772/Rafters.png",
+      "Azimuth": "extracted_images/report_67668772/Azimuth.png",
+      "Area": "extracted_images/report_67668772/Area.png",
+      "Roof Obstructions": "extracted_images/report_67668772/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67668772",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67668772/North_Side.png",
+      "South": "extracted_images/report_67668772/South_Side.png",
+      "East": "extracted_images/report_67668772/East_Side.png",
+      "West": "extracted_images/report_67668772/West_Side.png",
+      "Top": "extracted_images/report_67668772/Top_View.png"
+    }
+  }
+]

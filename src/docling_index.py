@@ -46,7 +46,6 @@ from .config import config
 from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
 from .bedrock_client import create_bedrock_embeddings
 from .image_utils import ImageManager
-from .s3_upload_client import S3UploadClient
 
 
 class DoclingProcessor:
@@ -59,27 +58,15 @@ class DoclingProcessor:
         vector_store_manager: Optional[VectorStoreManager] = None,
         config_instance: Optional[Any] = None,
         enable_gemini: bool = True,
-        enable_s3_upload: bool = False,
-        s3_bucket_name: str = "evtech-us-east-2-pg-test-sunsitecomplete",
-        s3_region: str = "us-east-2",
-        s3_access_key_id: Optional[str] = None,
-        s3_secret_access_key: Optional[str] = None,
-        s3_session_token: Optional[str] = None,
         **kwargs
     ):
         """
         Initialize Docling document processor.
-
+        
         Args:
             vector_store_manager: Vector store manager instance
             config_instance: Configuration instance
             enable_gemini: Whether to enable Gemini Vision for image analysis
-            enable_s3_upload: Whether to enable S3 upload for images and final chunks
-            s3_bucket_name: S3 bucket name for uploads
-            s3_region: AWS region for S3 bucket
-            s3_access_key_id: AWS access key ID for S3
-            s3_secret_access_key: AWS secret access key for S3
-            s3_session_token: AWS session token for temporary credentials
             **kwargs: Additional arguments
         """
         if not DOCLING_AVAILABLE:
@@ -90,27 +77,10 @@ class DoclingProcessor:
         self.text_splitter = None
         self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
-
+        
         # Initialize image manager with Gemini support
         self.image_manager = ImageManager(enable_gemini=enable_gemini)
-
-        # Initialize S3 client if enabled
-        self.enable_s3_upload = enable_s3_upload
-        self.s3_client = None
-        if enable_s3_upload:
-            try:
-                self.s3_client = S3UploadClient(
-                    bucket_name=s3_bucket_name,
-                    region=s3_region,
-                    aws_access_key_id=s3_access_key_id,
-                    aws_secret_access_key=s3_secret_access_key,
-                    aws_session_token=s3_session_token
-                )
-                logging.info("S3 upload client initialized")
-            except Exception as e:
-                logging.warning(f"Failed to initialize S3 client: {e}")
-                self.enable_s3_upload = False
-
+        
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
         self._setup_text_splitter()
@@ -180,11 +150,11 @@ class DoclingProcessor:
         
         try:
             documents = []
-
+            
             if file_path.suffix.lower() == '.pdf':
                 documents = self._process_pdf_with_docling(file_path, extract_images)
-
-
+            
+            
             # Add metadata with enhanced indexing information
             for i, doc in enumerate(documents):
                 # Extract report ID from filename if it's a roof report
@@ -194,7 +164,7 @@ class DoclingProcessor:
                         report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
                     except:
                         pass
-
+                
                 doc.metadata.update({
                     'source': str(file_path),
                     'file_name': file_path.name,
@@ -206,21 +176,13 @@ class DoclingProcessor:
                     'content_type': doc.metadata.get('type', 'text'),
                     'searchable_text': doc.page_content.lower()  # For better search matching
                 })
-
+            
             logging.info(f"Processed {len(documents)} documents from {file_path.name}")
-
             return documents
-
+            
         except Exception as e:
             logging.error(f"Error processing file {file_path}: {e}")
-            # Don't raise the exception - allow S3 upload to happen even if processing fails
-            # raise
-        finally:
-            # Always try to upload to S3 if enabled, even if processing failed
-            try:
-                self._upload_to_s3_if_enabled(file_path)
-            except Exception as s3_error:
-                logging.error(f"S3 upload failed for {file_path}: {s3_error}")
+            raise
     
     def save_docling_exports(self, main_text: str, converted_doc: ConversionResult, file_path: Path):
         """Persist Docling exports (Markdown and JSON)"""
@@ -331,138 +293,22 @@ class DoclingProcessor:
         documents = []
 
         try:
-            # Extract images using PyMuPDF for basic aerial images
+            # Since Docling image extraction is not working, fall back to PyMuPDF for actual image extraction
+            # but keep Docling metadata for organization
             image_documents = self._extract_images_with_pymupdf(file_path)
             documents.extend(image_documents)
-
-            # Extract diagrams using Docling for complex diagrams that PyMuPDF can't handle
-            diagram_documents = self._extract_diagrams_with_docling(converted_doc, file_path)
-            documents.extend(diagram_documents)
-            logging.info(f"Added {len(diagram_documents)} diagram documents")
-
+            
+            # Also process Docling picture metadata for additional context
+            if hasattr(converted_doc, 'pictures') and converted_doc.pictures:
+                logging.info(f"Docling detected {len(converted_doc.pictures)} pictures (using PyMuPDF for extraction)")
+                
         except Exception as e:
             logging.error(f"Error extracting pages and images: {e}")
 
         return documents
+    
 
-    def _extract_diagrams_with_docling(self, converted_doc: Any, file_path: Path) -> List[Document]:
-        """Extract diagrams by rendering full pages since diagrams are vector graphics."""
-        documents = []
-
-        try:
-            # Extract report ID for organization
-            report_id = None
-            if 'RoofReport-' in file_path.name:
-                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-
-            # Create images directory structure
-            images_dir = Path("extracted_images")
-            if report_id:
-                report_dir = images_dir / f"report_{report_id}"
-            else:
-                report_dir = images_dir / file_path.stem
-            report_dir.mkdir(parents=True, exist_ok=True)
-
-            # Define which pages contain which diagrams
-            diagram_mapping = {
-                5: "Lengths_Diagram",  # Page 6 (1-indexed) - contains length diagram
-                6: "Pitch_Diagram",    # Page 7 (1-indexed) - contains pitch diagram
-                7: "Area_Diagram"      # Page 8 (1-indexed) - contains area diagram
-            }
-
-            # Use PyMuPDF to render full pages containing diagrams
-            import fitz  # PyMuPDF
-
-            pdf_document = fitz.open(str(file_path))
-
-            for page_no, diagram_name in diagram_mapping.items():
-                try:
-                    page_index = page_no - 1  # Convert to 0-indexed
-                    if page_index >= len(pdf_document):
-                        continue
-
-                    page = pdf_document.load_page(page_index)
-
-                    # Render the full page at high resolution
-                    zoom = 2  # Higher resolution for better quality
-                    matrix = fitz.Matrix(zoom, zoom)
-                    pix = page.get_pixmap(matrix=matrix)
-
-                    # Convert to PIL Image
-                    from PIL import Image
-                    import io
-                    img_data = pix.tobytes("png")
-                    img = Image.open(io.BytesIO(img_data))
-
-                    # Crop out the header and footer to focus on the diagram content
-                    width, height = img.size
-                    crop_top = int(height * 0.18)  # Remove top 18% (header with EagleView logo and title)
-                    crop_bottom = height - int(height * 0.08)  # Remove bottom 8% (footer)
-                    img = img.crop((0, crop_top, width, crop_bottom))
-
-                    # Save the full page image as the diagram
-                    image_filename = f"{diagram_name}.png"
-                    image_file_path = report_dir / image_filename
-                    img.save(image_file_path, quality=95)
-
-                    logging.info(f"Saved full page diagram to: {image_file_path}")
-
-                    # Create document for the diagram
-                    image_content = f"{diagram_name.replace('_', ' ')} from page {page_no} of {file_path.name}"
-                    if report_id:
-                        image_content += f" Report ID: {report_id}"
-
-                    # Keywords for diagrams
-                    location_keywords = ["roof", "inspection", f"page{page_no}"]
-                    if report_id:
-                        location_keywords.extend([report_id, f"report{report_id}"])
-
-                    if "Lengths" in diagram_name:
-                        location_keywords.extend(["lengths", "diagram", "measurements", "dimensions", "rakes", "eaves", "valleys"])
-                    elif "Pitch" in diagram_name:
-                        location_keywords.extend(["pitch", "diagram", "slope", "angle", "roof pitch"])
-                    elif "Area" in diagram_name:
-                        location_keywords.extend(["area", "diagram", "square feet", "facets", "roof area"])
-
-                    location_keywords.append(diagram_name.replace("_", " ").lower())
-
-                    # Create document with image metadata
-                    img_doc = Document(
-                        page_content=image_content,
-                        metadata={
-                            'type': 'image',
-                            'content_type': 'image',
-                            'page_number': page_no,
-                            'source_file': file_path.name,
-                            'report_id': report_id,
-                            'extraction_method': 'page_render_diagram',
-                            'image_description': diagram_name,
-                            'searchable_keywords': location_keywords,
-                            'image_type': 'roof_diagram',
-                            'has_raw_data': True,
-                            'image_file_path': str(image_file_path),
-                            'image_filename': image_filename,
-                            'image_label': diagram_name,
-                            'image_size': img.size
-                        }
-                    )
-
-                    documents.append(img_doc)
-
-                except Exception as e:
-                    logging.warning(f"Failed to extract diagram {diagram_name} from page {page_no}: {e}")
-                    continue
-
-            pdf_document.close()
-
-            logging.info(f"Extracted {len(documents)} diagram pages")
-
-        except Exception as e:
-            logging.error(f"Error extracting diagrams: {e}")
-
-        return documents
-
-    # Extract images using PyMuPDF for aerial images
+    # Extract images using PyMuPDF as fallback since Docling image extraction isn't working.
     def _extract_images_with_pymupdf(self, file_path: Path) -> List[Document]:
         """Extract images using PyMuPDF as fallback since Docling image extraction isn't working."""
         try:
@@ -470,9 +316,10 @@ class DoclingProcessor:
         except ImportError:
             logging.warning("PyMuPDF not available for image extraction")
             return []
-            
+
         documents = []
-        
+        extracted_images = {}  # Track extracted images for chunk creation
+
         try:
             # Extract report ID for better organization
             report_id = None
@@ -486,11 +333,103 @@ class DoclingProcessor:
             pdf_document = fitz.open(str(file_path))
             
             for page_num in range(len(pdf_document)):
+                if page_num in [0, 11]:  # Skip page 1 and 12
+                    continue
+
                 page = pdf_document.load_page(page_num)
+
+                # For pages 2 and 8, get full page image
+                if page_num in [1, 7]:  # Page 2 and 8
+                    try:
+                        # Render full page as image
+                        pix = page.get_pixmap(dpi=150)  # Higher DPI for better quality
+
+                        # Create images directory structure
+                        images_dir = Path("extracted_images")
+                        if report_id:
+                            report_dir = images_dir / f"report_{report_id}"
+                        else:
+                            report_dir = images_dir / file_path.stem
+                        report_dir.mkdir(parents=True, exist_ok=True)
+
+                        # Name full page images
+                        if page_num == 1:
+                            image_label = "Lengths"
+                        else:  # page_num == 7
+                            image_label = "Roof_Penetrations"
+
+                        image_filename = f"{image_label}.png"
+                        image_file_path = report_dir / image_filename
+
+                        # Save full page image
+                        img_data = pix.tobytes("png")
+                        with open(image_file_path, 'wb') as f:
+                            f.write(img_data)
+
+                        logging.info(f"Saved full page image to: {image_file_path}")
+
+                        # Track extracted image for chunk creation
+                        extracted_images[image_label] = str(image_file_path)
+
+                        # Convert to PIL for size info
+                        from PIL import Image
+                        image = Image.open(BytesIO(img_data))
+
+                        # Create document with image metadata
+                        location_keywords = ["roof", "inspection", f"page{page_num + 1}", "full_page"]
+                        if report_id:
+                            location_keywords.extend([report_id, f"report{report_id}"])
+
+                        if page_num == 1:
+                            location_keywords.extend(["lengths", "diagram", "measurements", "length_diagram"])
+                        else:
+                            location_keywords.extend(["roof_penetrations", "penetrations", "roof_plan"])
+
+                        image_content = f"{image_label} from page {page_num + 1} of {file_path.name}"
+                        if report_id:
+                            image_content += f" Report ID: {report_id}"
+                        image_content += f" Keywords: {', '.join(location_keywords)}"
+
+                        img_doc = Document(
+                            page_content=image_content,
+                            metadata={
+                                'type': 'image',
+                                'content_type': 'image',
+                                'page_number': page_num + 1,
+                                'source_file': file_path.name,
+                                'report_id': report_id,
+                                'extraction_method': 'full_page_render',
+                                'image_description': image_label,
+                                'searchable_keywords': location_keywords,
+                                'image_type': 'full_page_image',
+                                'has_raw_data': True,
+                                'image_file_path': str(image_file_path),
+                                'image_filename': image_filename,
+                                'image_label': image_label,
+                                'image_size': image.size
+                            }
+                        )
+
+                        documents.append(img_doc)
+                        continue  # Skip individual image extraction for these pages
+
+                    except Exception as e:
+                        logging.error(f"Error rendering full page {page_num + 1}: {e}")
+                        continue
+
+                # Extract individual images for other pages
                 image_list = page.get_images()
                 num_images_on_page = len(image_list)
-                
+
                 for img_index, img in enumerate(image_list):
+                    # Apply page-specific image extraction rules
+                    if page_num in [2, 3, 4, 5, 6] and img_index != 1:  # Pages 3-7: take second image only
+                        continue
+                    elif page_num in [8, 9] and img_index not in [1, 2]:  # Pages 9-10: take 2nd and 3rd images
+                        continue
+                    elif page_num == 10 and img_index != 1:  # Page 11: take second image only
+                        continue
+
                     try:
                         # Get image data
                         xref = img[0]
@@ -506,40 +445,31 @@ class DoclingProcessor:
                             report_dir.mkdir(parents=True, exist_ok=True)
                             
                             def _label_for(p, i, n):
-                                # Simplified labeling based on specific pages only
-                                # Skip EagleView logo (i == 0) and only process content images
-                                if i == 0:  # Skip logos
-                                    return None
-
-                                if p == 1:  # Page 2 (0-indexed) - Top View
-                                    return "Top_View" if i == 1 else None
-                                elif p == 2:  # Page 3 (0-indexed) - North and South views
+                                if p == 2:  # Page 3
+                                    return "Pitch_Degrees"
+                                elif p == 3:  # Page 4
+                                    return "Pitch_on_12"
+                                elif p == 4:  # Page 5
+                                    return "Rafters"
+                                elif p == 5:  # Page 6
+                                    return "Azimuth"
+                                elif p == 6:  # Page 7
+                                    return "Area"
+                                elif p == 8:  # Page 9
                                     if i == 1:
+                                        return "Top_View"
+                                    elif i == 2:
                                         return "North_Side"
-                                    elif i == 2:
-                                        return "South_Side"
-                                    else:
-                                        return None
-                                elif p == 3:  # Page 4 (0-indexed) - East and West views
+                                elif p == 9:  # Page 10
                                     if i == 1:
-                                        return "East_Side"
+                                        return "South_Side"
                                     elif i == 2:
-                                        return "West_Side"
-                                    else:
-                                        return None
-                                elif p == 4:  # Page 5 (0-indexed) - Lengths Diagram
-                                    return "Lengths_Diagram" if i == 1 else None
-                                elif p == 5:  # Page 6 (0-indexed) - Pitch Diagram
-                                    return "Pitch_Diagram" if i == 1 else None
-                                elif p == 6:  # Page 7 (0-indexed) - Length Diagram
-                                    return "Length_Diagram" if i == 1 else None
-                                else:
-                                    return None  # Skip images from pages outside our specified range
+                                        return "East_Side"
+                                elif p == 10:  # Page 11
+                                    return "West_Side"
+                                return f"Page_{p + 1}_Image_{i + 1}"
 
                             image_label = _label_for(page_num, img_index, num_images_on_page)
-                            if image_label is None:
-                                continue  # Skip images that don't belong to our specified pages
-
                             image_filename = f"{image_label}.png"
                             image_file_path = report_dir / image_filename
                             
@@ -547,34 +477,32 @@ class DoclingProcessor:
                             img_data = pix.tobytes("png")
                             with open(image_file_path, 'wb') as f:
                                 f.write(img_data)
-                            
+
                             logging.info(f"Saved image to: {image_file_path}")
+
+                            # Track extracted image for chunk creation
+                            extracted_images[image_label] = str(image_file_path)
                             
                             # Convert to PIL for size info
                             from PIL import Image
                             image = Image.open(BytesIO(img_data))
                             
-                            # Add location-specific keywords based on simplified structure
+                            # Add location-specific keywords based on page
                             location_keywords = ["roof", "inspection", f"page{page_num + 1}"]
                             if report_id:
                                 location_keywords.extend([report_id, f"report{report_id}"])
-
-                            # Add keywords based on specific image types
-                            if image_label == "Top_View":
-                                location_keywords.extend(["top", "view", "overview", "aerial"])
-                            elif image_label == "North_Side":
+                            
+                            # Infer location from page position
+                            if page_num <= 2:
+                                location_keywords.extend(["overview", "aerial", "top"])
+                            elif page_num % 4 == 1:
                                 location_keywords.extend(["north", "side", "north side"])
-                            elif image_label == "South_Side":
+                            elif page_num % 4 == 2:
                                 location_keywords.extend(["south", "side", "south side"])
-                            elif image_label == "East_Side":
+                            elif page_num % 4 == 3:
                                 location_keywords.extend(["east", "side", "east side"])
-                            elif image_label == "West_Side":
+                            elif page_num % 4 == 0:
                                 location_keywords.extend(["west", "side", "west side"])
-                            elif "Lengths_Diagram" in image_label or "Length_Diagram" in image_label:
-                                location_keywords.extend(["lengths", "diagram", "measurements", "dimensions"])
-                            elif "Pitch_Diagram" in image_label:
-                                location_keywords.extend(["pitch", "diagram", "slope", "angle"])
-
                             location_keywords.append(image_label.replace("_", " ").lower())
                             
                             # Create enhanced image content
@@ -631,12 +559,103 @@ class DoclingProcessor:
             
             pdf_document.close()
             logging.info(f"Extracted {len(documents)} images from {file_path.name} using PyMuPDF")
-            
+
+            # Create structured chunks for diagrams and imagery
+            self._create_structured_chunks(extracted_images, report_id, file_path)
+
         except Exception as e:
             logging.error(f"Error extracting images with PyMuPDF: {e}")
-            
+
         return documents
-    
+
+    def _create_structured_chunks(self, extracted_images, report_id, file_path):
+        """Create structured chunks C003 (Diagrams) and C004 (Imagery) with image paths"""
+        try:
+            import json
+            from pathlib import Path
+
+            # Prepare property_id from report_id
+            property_id = f"PROP_{report_id}" if report_id else f"PROP_{file_path.stem}"
+
+            # Create C003 - Diagrams chunk
+            diagrams_chunk = {
+                "chunk_id": "C003",
+                "property_id": property_id,
+                "section": "Diagrams",
+                "type": "diagram",
+                "data": {
+                    "Lengths": extracted_images.get("Lengths", ""),
+                    "Pitch (Degrees)": extracted_images.get("Pitch_Degrees", ""),
+                    "Pitch (on 12)": extracted_images.get("Pitch_on_12", ""),
+                    "Rafters": extracted_images.get("Rafters", ""),
+                    "Azimuth": extracted_images.get("Azimuth", ""),
+                    "Area": extracted_images.get("Area", ""),
+                    "Roof Obstructions": extracted_images.get("Roof_Penetrations", "")
+                }
+            }
+
+            # Create C004 - Imagery chunk
+            imagery_chunk = {
+                "chunk_id": "C004",
+                "property_id": property_id,
+                "section": "Imagery",
+                "type": "image",
+                "data": {
+                    "North": extracted_images.get("North_Side", ""),
+                    "South": extracted_images.get("South_Side", ""),
+                    "East": extracted_images.get("East_Side", ""),
+                    "West": extracted_images.get("West_Side", ""),
+                    "Top": extracted_images.get("Top_View", "")
+                }
+            }
+
+            # Save chunks to Final_Chunks directory
+            final_chunks_dir = Path("Final_Chunks")
+            final_chunks_dir.mkdir(exist_ok=True)
+
+            chunk_filename = f"{report_id}.json" if report_id else f"{file_path.stem}.json"
+            chunk_file_path = final_chunks_dir / chunk_filename
+
+            # Load existing chunks if file exists
+            existing_chunks = []
+            if chunk_file_path.exists():
+                try:
+                    with open(chunk_file_path, 'r') as f:
+                        existing_chunks = json.load(f)
+                        if not isinstance(existing_chunks, list):
+                            existing_chunks = [existing_chunks]
+                except:
+                    existing_chunks = []
+
+            # Update or add chunks
+            chunk_ids = {chunk.get("chunk_id") for chunk in existing_chunks}
+            if "C003" not in chunk_ids:
+                existing_chunks.append(diagrams_chunk)
+            else:
+                # Update existing C003
+                for chunk in existing_chunks:
+                    if chunk.get("chunk_id") == "C003":
+                        chunk.update(diagrams_chunk)
+                        break
+
+            if "C004" not in chunk_ids:
+                existing_chunks.append(imagery_chunk)
+            else:
+                # Update existing C004
+                for chunk in existing_chunks:
+                    if chunk.get("chunk_id") == "C004":
+                        chunk.update(imagery_chunk)
+                        break
+
+            # Save updated chunks
+            with open(chunk_file_path, 'w') as f:
+                json.dump(existing_chunks, f, indent=2)
+
+            logging.info(f"Created/updated structured chunks in {chunk_file_path}")
+
+        except Exception as e:
+            logging.error(f"Error creating structured chunks: {e}")
+
     # Removed unused image OCR helper methods (_process_page_image, _process_standalone_image, _extract_text_from_image)
 
     # Extract tables from the converted document
@@ -970,6 +989,7 @@ class DoclingProcessor:
         """
         Add image chunks from extracted images to the existing Final_Chunks file.
         Adds an 'image' array with image chunk data to match the structure.
+        Only keeps the highest-indexed image for each section (e.g., prefers Area_2.png over Area.png).
         """
         print(f"DEBUG: _add_image_chunks_to_final called with {final_chunks_file}")
         try:
@@ -1002,31 +1022,59 @@ class DoclingProcessor:
                 logging.info(f"No extracted images directory found for {report_id}")
                 return
 
-            # Get all image files
+            # Get all image files and group by base name to keep only the highest indexed version
             image_files = list(images_dir.glob("*.png"))
             if not image_files:
                 logging.info(f"No image files found in {images_dir}")
                 return
 
+            # Group images by base name and keep only the highest indexed version
+            image_groups = {}
+            for image_file in image_files:
+                base_name = image_file.stem
+                # Check if it's a numbered version (has underscore followed by number)
+                if '_' in base_name:
+                    parts = base_name.rsplit('_', 1)
+                    if parts[1].isdigit():
+                        group_name = parts[0]
+                        index = int(parts[1])
+                    else:
+                        group_name = base_name
+                        index = 0
+                else:
+                    group_name = base_name
+                    index = 0
+
+                if group_name not in image_groups or image_groups[group_name][0] < index:
+                    image_groups[group_name] = (index, image_file)
+
+            # Use only the highest indexed image for each group
+            selected_images = [data[1] for data in image_groups.values()]
+
             # Create image chunks
             chunk_counter = len(existing_data.get("text", [])) + len(existing_data.get("table", [])) + 1
 
-            for image_file in sorted(image_files):
+            for image_file in sorted(selected_images):
                 try:
                     # Extract section name from filename (remove .png extension)
                     section_name = image_file.stem
 
                     # Create descriptive section names
                     section_mapping = {
+                        "Cover_Image": "Cover Image",
+                        "Lengthsimage": "Lengths Diagram",
+                        "Pitch_Degrees": "Pitch (Degrees) Diagram",
+                        "Pitch_on_12": "Pitch (on 12) Diagram",
+                        "Rafters": "Rafters Diagram",
+                        "Azimuth": "Azimuth Diagram",
+                        "Area": "Area Diagram",
+                        "Roof_Penetrations": "Roof Penetrations Diagram",
                         "Top_View": "Top View",
                         "North_Side": "North Side View",
                         "South_Side": "South Side View",
                         "East_Side": "East Side View",
                         "West_Side": "West Side View",
-                        "Lengths_Diagram": "Lengths Diagram",
-                        "Pitch_Diagram": "Pitch Diagram",
-                        "Area_Diagram": "Area Diagram",
-                        "Length_Diagram": "Length Diagram"
+                        "Structure_Summary": "Structure Summary"
                     }
 
                     display_section = section_mapping.get(section_name, section_name.replace("_", " "))
@@ -1053,7 +1101,7 @@ class DoclingProcessor:
             with open(final_chunks_file, 'w', encoding='utf-8') as f:
                 json.dump(existing_data, f, ensure_ascii=False, indent=2)
 
-            logging.info(f"✓ Added {len(existing_data['image'])} image chunks to final chunks")
+            logging.info(f"✓ Added {len(existing_data['image'])} image chunks to final chunks (kept highest indexed images only)")
 
         except Exception as e:
             logging.error(f"Error adding image chunks to final: {e}")
@@ -1259,162 +1307,8 @@ class DoclingProcessor:
             logging.error(f"Full traceback: {traceback.format_exc()}")
         return documents
 
-    def _upload_to_s3_if_enabled(self, file_path: Path) -> None:
-        """
-        Upload extracted images and final chunks for a specific report to S3 if enabled.
-        After upload, append S3 image links to the Final_Chunks JSON file.
 
-        Args:
-            file_path: Path to the processed file
-        """
-        if not self.enable_s3_upload or not self.s3_client:
-            return
-
-        try:
-            # Extract report ID from filename
-            report_id = None
-            if 'RoofReport-' in file_path.name:
-                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-            elif file_path.stem.startswith('report_'):
-                # Extract the number part from report_XXXXX
-                report_id = file_path.stem.split('report_')[1]
-            else:
-                report_id = file_path.stem
-
-            if not report_id:
-                logging.warning(f"Could not extract report ID from {file_path.name}")
-                return
-
-            logging.info(f"Uploading data to S3 for report {report_id}")
-
-            # Upload extracted images for this specific report
-            images_dir = Path("extracted_images") / f"report_{report_id}"
-            image_urls = []
-            if images_dir.exists():
-                image_urls = self.s3_client.upload_directory(str(images_dir), f"property-data/extracted_images/report_{report_id}")
-                logging.info(f"Uploaded {len(image_urls)} images for report {report_id}")
-            else:
-                logging.warning(f"Images directory not found: {images_dir}")
-
-            # Upload final chunks for this specific report
-            chunks_file = Path("Final_Chunks") / f"report_{report_id}.json"
-            chunk_url = None
-            if chunks_file.exists():
-                chunk_url = self.s3_client.upload_file(str(chunks_file), f"property-data/final_chunks/{report_id}.json")
-                if chunk_url:
-                    logging.info(f"Uploaded final chunks for report {report_id}")
-            else:
-                logging.warning(f"Chunks file not found: {chunks_file}")
-
-            # Append S3 image links to the Final_Chunks JSON file
-            self._append_image_links_to_chunks(chunks_file, image_urls, report_id)
-
-            # Re-upload the updated chunks file with image links
-            if chunks_file.exists() and image_urls:
-                updated_chunk_url = self.s3_client.upload_file(str(chunks_file), f"property-data/final_chunks/{report_id}.json")
-                if updated_chunk_url:
-                    logging.info(f"Re-uploaded updated chunks file with image links for report {report_id}")
-
-            logging.info(f"Successfully uploaded data to S3 for report {report_id}")
-
-        except Exception as e:
-            logging.error(f"Failed to upload data to S3 for {file_path.name}: {e}")
-
-    def _append_image_links_to_chunks(self, chunks_file: Path, image_urls: List[str], report_id: str) -> None:
-        """
-        Append S3 image links as new chunks to the Final_Chunks JSON file.
-
-        Args:
-            chunks_file: Path to the chunks JSON file
-            image_urls: List of S3 URLs for uploaded images
-            report_id: Report ID for chunk numbering
-        """
-        if not chunks_file.exists() or not image_urls:
-            return
-
-        try:
-            # Read existing chunks
-            with open(chunks_file, 'r', encoding='utf-8') as f:
-                chunks = json.load(f)
-
-            # Find the next available chunk number
-            existing_chunk_ids = [chunk.get('chunk_id', '') for chunk in chunks if isinstance(chunk, dict)]
-            max_chunk_num = 0
-            for chunk_id in existing_chunk_ids:
-                try:
-                    # Extract number from chunk_id like "32248944_chunk_7"
-                    if '_chunk_' in chunk_id:
-                        num = int(chunk_id.split('_chunk_')[-1])
-                        max_chunk_num = max(max_chunk_num, num)
-                except (ValueError, IndexError):
-                    continue
-
-            # Define image descriptions based on filename
-            image_mappings = {
-                "Top_View.png": {
-                    "section": "Top View Diagram",
-                    "description": "Top view diagram showing the overall roof structure and layout"
-                },
-                "North_Side.png": {
-                    "section": "North Side View",
-                    "description": "North side view of the property showing roof structure"
-                },
-                "South_Side.png": {
-                    "section": "South Side View",
-                    "description": "South side view of the property showing roof structure"
-                },
-                "East_Side.png": {
-                    "section": "East Side View",
-                    "description": "East side view of the property showing roof structure"
-                },
-                "West_Side.png": {
-                    "section": "West Side View",
-                    "description": "West side view of the property showing roof structure"
-                },
-                "Lengths_Diagram.png": {
-                    "section": "Lengths Diagram",
-                    "description": "Diagram showing roof lengths and measurements for different facets"
-                },
-                "Pitch_Diagram.png": {
-                    "section": "Pitch Diagram",
-                    "description": "Diagram showing roof pitch measurements and angles"
-                },
-                "Area_Diagram.png": {
-                    "section": "Area Diagram",
-                    "description": "Diagram showing roof area calculations for different facets"
-                }
-            }
-
-            # Add image chunks
-            for image_url in image_urls:
-                filename = image_url.split('/')[-1]
-                if filename in image_mappings:
-                    max_chunk_num += 1
-                    mapping = image_mappings[filename]
-
-                    image_chunk = {
-                        "chunk_id": f"{report_id}_chunk_{max_chunk_num}",
-                        "section": mapping["section"],
-                        "type": "image",
-                        "data": {
-                            "description": mapping["description"],
-                            "image_file": image_url
-                        }
-                    }
-                    chunks.append(image_chunk)
-                    logging.info(f"Added image chunk for {filename} to {chunks_file}")
-
-            # Save updated chunks
-            with open(chunks_file, 'w', encoding='utf-8') as f:
-                json.dump(chunks, f, indent=2, ensure_ascii=False)
-
-            logging.info(f"Appended {len(image_urls)} image chunks to {chunks_file}")
-
-        except Exception as e:
-            logging.error(f"Failed to append image links to chunks file {chunks_file}: {e}")
-
-
-# Main function to process a directory with Docling
+    # Main function to process a directory with Docling
     def process_directory(
         self,
         directory_path: str,
@@ -1472,13 +1366,7 @@ def process_directory_with_docling(
     directory_path: str,
     file_extensions: Optional[List[str]] = None,
     extract_images: bool = True,
-    config_instance: Optional[Any] = None,
-    enable_s3_upload: bool = False,
-    s3_bucket_name: str = "evtech-us-east-2-pg-test-sunsitecomplete",
-    s3_region: str = "us-east-2",
-    s3_access_key_id: Optional[str] = None,
-    s3_secret_access_key: Optional[str] = None,
-    s3_session_token: Optional[str] = None
+    config_instance: Optional[Any] = None
 ) -> List[Document]:
     """
     Process all documents in a directory using Docling without indexing.
@@ -1488,12 +1376,6 @@ def process_directory_with_docling(
         file_extensions: List of file extensions to process
         extract_images: Whether to extract images from documents
         config_instance: Configuration instance
-        enable_s3_upload: Whether to enable S3 upload for images and final chunks
-        s3_bucket_name: S3 bucket name for uploads
-        s3_region: AWS region for S3 bucket
-        s3_access_key_id: AWS access key ID for S3
-        s3_secret_access_key: AWS secret access key for S3
-        s3_session_token: AWS session token for temporary credentials
 
     Returns:
         List of processed documents
@@ -1503,13 +1385,7 @@ def process_directory_with_docling(
     # Create processor without vector store
     processor = DoclingProcessor(
         vector_store_manager=None,  # No vector store needed
-        config_instance=config_instance,
-        enable_s3_upload=enable_s3_upload,
-        s3_bucket_name=s3_bucket_name,
-        s3_region=s3_region,
-        s3_access_key_id=s3_access_key_id,
-        s3_secret_access_key=s3_secret_access_key,
-        s3_session_token=s3_session_token
+        config_instance=config_instance
     )
 
     documents = processor.process_directory(

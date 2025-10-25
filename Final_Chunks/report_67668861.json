@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67668861",
+    "address": "171 Greenwood St, East Hartford, CT 06118",
+    "latitude": 41.7426553,
+    "longitude": -72.6014135,
+    "owner": "Taylor Allen Green Power Energy"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67668861",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 9,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2,022 sq ft",
+      "total_roof_obstructions": 6
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67668861",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "2022.3 sq ft",
+      "total_roof_facets": 9,
+      "predominant_pitch": "6/12",
+      "ridges": "56.7 ft (2 Ridges)",
+      "hips": "25.8 ft (2 Hips)",
+      "valleys": "2.3 ft (1 Valleys)",
+      "rakes": "87 ft (6 Rakes)",
+      "eaves_starters": "145 ft (7 Eaves)",
+      "drip_edge": "232 ft (13 Lengths)",
+      "flashing": "2.8 ft (3 Lengths)",
+      "step_flashing": "32.3 ft (5 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "24.4 ft",
+      "roof_obstructions_area": "7 sq ft",
+      "net_roof_area": "2226.9 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67668861",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67668861/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67668861/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67668861/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67668861/Rafters.png",
+      "Azimuth": "extracted_images/report_67668861/Azimuth.png",
+      "Area": "extracted_images/report_67668861/Area.png",
+      "Roof Obstructions": "extracted_images/report_67668861/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67668861",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67668861/North_Side.png",
+      "South": "extracted_images/report_67668861/South_Side.png",
+      "East": "extracted_images/report_67668861/East_Side.png",
+      "West": "extracted_images/report_67668861/West_Side.png",
+      "Top": "extracted_images/report_67668861/Top_View.png"
+    }
+  }
+]

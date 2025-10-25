@@ -1,0 +1,73 @@
+[
+  {
+    "property_id": "PROP_67673913",
+    "address": "14755 S 182nd Dr, Goodyear, AZ 85338",
+    "latitude": 33.312267,
+    "longitude": -112.4413553,
+    "owner": "Jonathan Sutula JSE Group"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67673913",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 31,
+      "structure_complexity": "Normal",
+      "estimated_attic": "4,920 sq ft",
+      "total_roof_obstructions": 29
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67673913",
+    "section": "Roof Measurements",
+    "type": "text",
+    "data": {
+      "total_area": "5,346 sq ft",
+      "total_roof_facets": 31,
+      "predominant_pitch": "5/12",
+      "ridges": "160 ft (7 Ridges)",
+      "hips": "204 ft (21 Hips)",
+      "valleys": "165 ft (10 Valleys)",
+      "rakes": "205 ft (19 Rakes)",
+      "eaves_starters": "308 ft (32 Eaves)",
+      "drip_edge": "513 ft (51 Lengths)",
+      "flashing": "55 ft (10 Lengths)",
+      "step_flashing": "68 ft (21 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "167 ft",
+      "roof_obstructions_area": "70 sq ft",
+      "net_roof_area": "5,276 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_report_67673913",
+    "section": "Diagrams",
+    "type": "diagram",
+    "data": {
+      "Lengths": "extracted_images/report_67673913/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67673913/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67673913/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67673913/Rafters.png",
+      "Azimuth": "extracted_images/report_67673913/Azimuth.png",
+      "Area": "extracted_images/report_67673913/Area.png",
+      "Roof Obstructions": "extracted_images/report_67673913/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_report_67673913",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67673913/North_Side.png",
+      "South": "extracted_images/report_67673913/South_Side.png",
+      "East": "extracted_images/report_67673913/East_Side.png",
+      "West": "extracted_images/report_67673913/West_Side.png",
+      "Top": "extracted_images/report_67673913/Top_View.png"
+    }
+  }
+]
