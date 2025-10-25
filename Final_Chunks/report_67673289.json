@@ -1,10 +1,10 @@
 [
   {
     "property_id": "PROP_67673289",
-    "address": "65 South Sunken Meadow, Eastham, MA 02642",
+    "address": "2025 Property Address: 65 South Sunken Meadow, Eastham, MA 02642",
     "latitude": 41.8684762,
     "longitude": -69.9979646,
-    "owner": "Matthew Cole Cape Associates, Inc."
+    "owner": "Matthew Cole Cape Associates, Inc. PO Box 1858 N. Eastham, MA 02651 508-255-1770 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -22,9 +22,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67673289",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "1550.2 sq ft",
       "total_roof_facets": 8,
       "predominant_pitch": "5/12",
@@ -32,7 +33,7 @@
       "hips": "0 ft (0 Hips)",
       "valleys": "14.8 ft (2 Valleys)",
       "rakes": "102.8 ft (12 Rakes)",
-      "eaves_starters": "171.4 ft (9 Eaves)",
+      "eaves_starter": "171.4 ft (9 Eaves)",
       "drip_edge": "274.2 ft (21 Lengths)",
       "flashing": "65.8 ft (4 Lengths)",
       "step_flashing": "19.8 ft (4 Lengths)",
@@ -40,6 +41,83 @@
       "roof_obstructions_perimeter": "41.2 ft",
       "roof_obstructions_area": "10 sq ft",
       "net_roof_area": "1540.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67673289",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "1396.3",
+          "percentage": "90.1%"
+        },
+        {
+          "pitch": "9/12",
+          "area_sq_ft": "153.9",
+          "percentage": "9.9%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67673289",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "1551",
+          "squares": "15.66"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "1583",
+          "squares": "16"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "1660",
+          "squares": "16.66"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "1707",
+          "squares": "17.33"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "1738",
+          "squares": "17.66"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "1769",
+          "squares": "18"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "1815",
+          "squares": "18.33"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "1893",
+          "squares": "19"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "1970",
+          "squares": "20"
+        }
+      ]
     }
   },
   {

@@ -63,6 +63,7 @@ def _extract_summary_measurements(text: str) -> Dict[str, Any]:
     """Extract summary measurements from the measurements section."""
     data = {}
 
+    # First try the original patterns
     patterns = {
         'total_roof_area': r'Area:\s*([0-9,]+\.?\d*\s*sq ft)',
         'total_roof_facets': r'Roof Facets:\s*(\d+)',
@@ -83,11 +84,91 @@ def _extract_summary_measurements(text: str) -> Dict[str, Any]:
         if match:
             data[key] = match.group(1).strip()
 
+    # If no data found, try the table format
+    if not data:
+        # Look for measurements in table format like | Area: | 3,721 sq ft |
+        table_match = re.search(r'## Measurements\s*(.*?)(?=##|\n\n##)', text, re.DOTALL)
+        if table_match:
+            table_content = table_match.group(1)
+
+            # Parse table rows
+            lines = [line.strip() for line in table_content.split('\n') if line.strip() and '|' in line and not line.startswith('|--')]
+
+            field_mapping = {
+                'area:': 'total_roof_area',
+                'roof facets:': 'total_roof_facets',
+                'predominant pitch:': 'predominant_pitch',
+                'number of stories:': 'number_of_stories',
+                'ridges/hips:': 'total_ridges_hips',
+                'valleys:': 'total_valleys',
+                'rakes:': 'total_rakes',
+                'eaves:': 'total_eaves',
+                'estimated attic:': 'estimated_attic',
+                'roof obstructions:': 'total_roof_obstructions',
+                'roof obstructions perimeter:': 'roof_obstructions_perimeter',
+                'roof obstructions area:': 'roof_obstructions_area'
+            }
+
+            for line in lines:
+                if '|' in line:
+                    parts = [part.strip() for part in line.split('|')[1:-1]]  # Skip empty parts at start/end
+                    if len(parts) >= 2:
+                        field_name = parts[0].lower().strip()
+                        field_value = parts[1].strip()
+
+                        # Map field name to key - check in order of specificity
+                        # Check longer/more specific patterns first
+                        matched = False
+                        for pattern in ['roof obstructions area:', 'roof obstructions perimeter:', 'roof obstructions:', 'estimated attic:', 'number of stories:', 'predominant pitch:', 'roof facets:', 'ridges/hips:', 'valleys:', 'rakes:', 'eaves:', 'area:']:
+                            if pattern in field_name:
+                                data[field_mapping[pattern]] = field_value
+                                matched = True
+                                break
+
+                        if not matched:
+                            # Fallback to any match
+                            for pattern, key in field_mapping.items():
+                                if pattern in field_name:
+                                    data[key] = field_value
+                                    break
+
     return data
 
 
 def _extract_detailed_measurements(text: str) -> Dict[str, Any]:
-    """Extract detailed measurements from the lengths section."""
+    """Extract detailed measurements from the lengths section, handling multiple structures."""
+    structures_data = {}
+
+    # Find all structure sections - handle both markdown headers and plain text
+    structure_pattern = r'(?:## Structure #(\d+)|Structure\s+(\d+)|All Structures)'
+    structure_matches = list(re.finditer(structure_pattern, text, re.IGNORECASE))
+
+    if not structure_matches:
+        # No structure sections found, extract as single structure
+        structures_data['all'] = _extract_single_structure_measurements(text, "All Structures")
+    else:
+        # Extract measurements for each structure
+        for i, match in enumerate(structure_matches):
+            structure_name = match.group(0).strip()
+            if structure_name.lower() == 'all structures':
+                structure_key = 'all_structures'
+            else:
+                # Get structure number from either group 1 or 2 (markdown header or plain text)
+                structure_num = match.group(1) or match.group(2)
+                structure_key = f'structure_{structure_num}'
+
+            # Extract text for this structure (from current match to next match or end)
+            start_pos = match.end()
+            end_pos = structure_matches[i + 1].start() if i + 1 < len(structure_matches) else len(text)
+
+            structure_text = text[start_pos:end_pos]
+            structures_data[structure_key] = _extract_single_structure_measurements(structure_text, structure_name)
+
+    return structures_data
+
+
+def _extract_single_structure_measurements(text: str, structure_name: str) -> Dict[str, Any]:
+    """Extract measurements for a single structure."""
     data = {}
 
     patterns = {
@@ -132,51 +213,273 @@ def _extract_detailed_measurements(text: str) -> Dict[str, Any]:
     return data
 
 
-def _extract_pitch_breakdown(text: str) -> List[Dict[str, Any]]:
-    """Extract pitch breakdown table from report summary."""
-    pitch_data = []
-    
-    # Look for the pitch breakdown section more specifically
-    pitch_section = re.search(r'Roof Pitches\s*Area \(sq ft\)\s*% of Roof\s*(.*?)(?=The table above|Waste Calculation)', text, re.DOTALL | re.IGNORECASE)
-    if pitch_section:
-        content = pitch_section.group(1).strip()
-        # Split into lines and process each line
-        lines = [line.strip() for line in content.split('\n') if line.strip()]
+def _extract_pitch_breakdown(text: str) -> Dict[str, List[Dict[str, Any]]]:
+    """Extract pitch breakdown table from report summary, handling multiple structures."""
+    structures_pitch_data = {}
+
+    # Find all structure sections for pitch breakdown - handle both markdown headers and plain text
+    structure_pattern = r'(?:## Structure #(\d+)|Structure\s+(\d+)|All Structures)'
+    structure_matches = list(re.finditer(structure_pattern, text, re.DOTALL | re.IGNORECASE))
+
+    if not structure_matches:
+        # No structure sections found, extract as single structure
+        structures_pitch_data['all'] = _extract_single_pitch_breakdown(text, text)
+    else:
+        # Check if this is a single structure report (has All Structures but no individual structures)
+        individual_structure_matches = [match for match in structure_matches if not match.group(0).lower().strip().startswith('all')]
         
-        # Look for lines with pitch format (e.g., "6/12", "8/12", etc.)
+        if not individual_structure_matches:
+            # Single structure report - extract pitch data from the full text
+            structures_pitch_data['all_structures'] = _extract_single_pitch_breakdown(text, text)
+        else:
+            # Multi-structure report - extract pitch data for each individual structure
+            for i, match in enumerate(individual_structure_matches):
+                structure_name = match.group(0).strip()
+                # Get structure number from either group 1 or 2 (markdown header or plain text)
+                structure_num = match.group(1) or match.group(2)
+                structure_key = f'structure_{structure_num}'
+
+                # Extract text for this structure (from current match to next match or end)
+                start_pos = match.end()
+                end_pos = individual_structure_matches[i + 1].start() if i + 1 < len(individual_structure_matches) else len(text)
+
+                structure_text = text[start_pos:end_pos]
+                structures_pitch_data[structure_key] = _extract_single_pitch_breakdown(structure_text, text)
+
+    return structures_pitch_data
+
+
+def _extract_single_pitch_breakdown(text: str, full_text: str = None) -> List[Dict[str, Any]]:
+    """Extract pitch breakdown for a single structure."""
+    pitch_data = []
+
+    # Look for the pitch breakdown table - handle both formats
+    table_match = re.search(r'\| Areas per Pitch.*?\|(.*?)(?=\n\n|\n##|\| Structure Complexity)', text, re.DOTALL)
+    if table_match:
+        table_content = table_match.group(1).strip()
+
+        # Parse the table rows
+        lines = [line.strip() for line in table_content.split('\n') if line.strip() and not line.startswith('|---')]
+
+        pitches = []
+        areas = []
+        percentages = []
+
         for line in lines:
-            # Match lines with pitch/area/percentage format
-            match = re.match(r'(\d+/\d+)\s+([\d.]+)\s+([\d.]+%)', line)
-            if match:
-                pitch_data.append({
-                    'pitch': match.group(1),
-                    'area_sq_ft': match.group(2),
-                    'percentage': match.group(3)
-                })
-    
+            if '|' in line:
+                parts = [part.strip() for part in line.split('|')[1:-1]]  # Skip first and last empty parts
+                if not parts:  # Skip empty lines
+                    continue
+
+                # Check row type based on content
+                if 'Roof Pitches' in line:
+                    # Pitch row - extract pitch values
+                    pitches = [p for p in parts[1:] if p and '/' in p]  # Skip header, get pitches
+                elif 'Area (sq ft)' in line:
+                    # Area header row - extract area values
+                    areas = [p for p in parts[1:] if p and any(c.isdigit() for c in p)]  # Skip header, get areas
+                elif '%of Roof' in line:
+                    # Percentage row - extract percentage values
+                    percentages = [p for p in parts[1:] if p and '%' in p]  # Skip header, get percentages
+                elif parts[0] == '' and any(p and any(c.isdigit() for c in p) for p in parts[1:]):
+                    # Continuation area row (empty header, contains numbers) - add to areas
+                    new_areas = [p for p in parts[1:] if p and any(c.isdigit() for c in p)]
+                    areas.extend(new_areas)
+
+        # Handle special case for Structure #2 where pitches are not in the table header
+        # but we can infer them from the All Structures section
+        if not pitches and areas and percentages and full_text:
+            # Try to infer pitches by matching areas from All Structures section
+            # Extract the entire All Structures table
+            all_struct_table_match = re.search(r'## All Structures(.*?)(?=\n##|\n\nThe table above)', full_text, re.DOTALL)
+            if all_struct_table_match:
+                table_content = all_struct_table_match.group(1).strip()
+
+                # Parse the table to get pitches and areas
+                lines = [line.strip() for line in table_content.split('\n') if line.strip() and not line.startswith('|---')]
+
+                all_pitches = []
+                all_areas = []
+
+                for line in lines:
+                    if '|' in line:
+                        parts = [part.strip() for part in line.split('|')[1:-1]]  # Skip first and last empty parts
+
+                        if 'Roof Pitches' in line:
+                            all_pitches = [p for p in parts if p and '/' in p]
+                        elif 'Area (sq ft)' in line:
+                            all_areas = [p for p in parts if p and any(c.isdigit() for c in p)]
+
+                # Create a mapping from area to pitch
+                area_to_pitch = {}
+                for i in range(min(len(all_pitches), len(all_areas))):
+                    try:
+                        area_val = float(all_areas[i].replace(',', ''))
+                        area_to_pitch[area_val] = all_pitches[i]
+                    except (ValueError, IndexError):
+                        continue
+
+                # Match our areas to pitches
+                pitches = []
+                for area in areas:
+                    if area:
+                        try:
+                            area_val = float(area.replace(',', ''))
+                            # Find closest match
+                            closest_pitch = ''
+                            min_diff = float('inf')
+                            for ref_area, pitch in area_to_pitch.items():
+                                diff = abs(area_val - ref_area)
+                                if diff < min_diff:
+                                    min_diff = diff
+                                    closest_pitch = pitch
+                            pitches.append(closest_pitch)
+                        except (ValueError, IndexError):
+                            pitches.append('')
+                    else:
+                        pitches.append('')
+
+        # If we still don't have pitches but have areas and percentages, create entries without pitches
+        if not pitches and (areas or percentages):
+            max_len = max(len(areas), len(percentages))
+            for i in range(max_len):
+                pitch_entry = {
+                    'pitch': '',
+                    'area_sq_ft': areas[i] if i < len(areas) else '',
+                    'percentage': percentages[i] if i < len(percentages) else ''
+                }
+                pitch_data.append(pitch_entry)
+        else:
+            # Combine pitches, areas, and percentages
+            max_len = max(len(pitches), len(areas), len(percentages))
+            for i in range(max_len):
+                pitch_entry = {
+                    'pitch': pitches[i] if i < len(pitches) else '',
+                    'area_sq_ft': areas[i] if i < len(areas) else '',
+                    'percentage': percentages[i] if i < len(percentages) else ''
+                }
+                if pitch_entry['pitch'] or pitch_entry['area_sq_ft'] or pitch_entry['percentage']:
+                    pitch_data.append(pitch_entry)
+
+    # Fallback to original format if table parsing fails
+    if not pitch_data:
+        pitch_section = re.search(r'Roof Pitches\s*Area \(sq ft\)\s*% of Roof\s*(.*?)(?=The table above|Waste Calculation)', text, re.DOTALL | re.IGNORECASE)
+        if pitch_section:
+            content = pitch_section.group(1).strip()
+            # Split into lines and process each line
+            lines = [line.strip() for line in content.split('\n') if line.strip()]
+
+            # Look for lines with pitch format (e.g., "6/12", "8/12", etc.)
+            for line in lines:
+                # Match lines with pitch/area/percentage format
+                match = re.match(r'(\d+/\d+)\s+([\d.]+)\s+([\d.]+%)', line)
+                if match:
+                    pitch_data.append({
+                        'pitch': match.group(1),
+                        'area_sq_ft': match.group(2),
+                        'percentage': match.group(3)
+                    })
+
     return pitch_data
 
 
-def _extract_waste_calculation(text: str) -> List[Dict[str, Any]]:
-    """Extract waste calculation table."""
-    waste_data = []
-    
-    # Look for the waste calculation table more specifically
-    waste_section = re.search(r'Waste %.*?Area \(sq ft\).*?Squares\s*(.*?)(?=This table|All Structures)', text, re.DOTALL | re.IGNORECASE)
-    if waste_section:
-        content = waste_section.group(1).strip()
-        lines = [line.strip() for line in content.split('\n') if line.strip()]
+def _extract_waste_calculation(text: str) -> Dict[str, List[Dict[str, Any]]]:
+    """Extract waste calculation table, handling multiple structures."""
+    structures_waste_data = {}
+
+    # Find all structure sections for waste calculation - handle both markdown headers and plain text
+    structure_pattern = r'(?:## Structure #(\d+)|Structure\s+(\d+)|All Structures)'
+    structure_matches = list(re.finditer(structure_pattern, text, re.DOTALL | re.IGNORECASE))
+
+    if not structure_matches:
+        # No structure sections found, extract as single structure
+        structures_waste_data['all'] = _extract_single_waste_calculation(text)
+    else:
+        # Check if this is a single structure report (has All Structures but no individual structures)
+        individual_structure_matches = [match for match in structure_matches if not match.group(0).lower().strip().startswith('all')]
         
+        if not individual_structure_matches:
+            # Single structure report - extract waste data from the full text
+            structures_waste_data['all_structures'] = _extract_single_waste_calculation(text)
+        else:
+            # Multi-structure report - extract waste data for each individual structure
+            for i, match in enumerate(individual_structure_matches):
+                structure_name = match.group(0).strip()
+                # Get structure number from either group 1 or 2 (markdown header or plain text)
+                structure_num = match.group(1) or match.group(2)
+                structure_key = f'structure_{structure_num}'
+
+                # Extract text for this structure (from current match to next match or end)
+                start_pos = match.end()
+                end_pos = individual_structure_matches[i + 1].start() if i + 1 < len(individual_structure_matches) else len(text)
+
+                structure_text = text[start_pos:end_pos]
+                structures_waste_data[structure_key] = _extract_single_waste_calculation(structure_text)
+
+    return structures_waste_data
+
+
+def _extract_single_waste_calculation(text: str) -> List[Dict[str, Any]]:
+    """Extract waste calculation for a single structure."""
+    waste_data = []
+
+    # Look for the waste calculation table - handle markdown table format
+    waste_match = re.search(r'\| Waste%.*?\|(.*?)(?=\n\n|\n##|\| Measured|\* Squares)', text, re.DOTALL)
+    if waste_match:
+        table_content = waste_match.group(1).strip()
+
+        # Parse the table rows
+        lines = [line.strip() for line in table_content.split('\n') if line.strip() and not line.startswith('|---')]
+
+        percentages = []
+        areas = []
+        squares = []
+
         for line in lines:
-            # Match lines with percentage/area/squares format
-            match = re.match(r'(\d+%)\s+([\d,]+)\s+([\d.]+)', line)
-            if match:
-                waste_data.append({
-                    'waste_percentage': match.group(1),
-                    'area_sq_ft': match.group(2),
-                    'squares': match.group(3)
-                })
-    
+            if '|' in line:
+                parts = [part.strip() for part in line.split('|')[1:-1]]  # Skip first and last empty parts
+                if not parts:  # Skip empty lines
+                    continue
+
+                # Check if this is a header row or data row
+                if 'Area (Sq ft)' in line:
+                    # This is the area row - extract all numeric values
+                    areas = [p for p in parts[1:] if p and any(c.isdigit() for c in p)]  # Skip the header
+                elif 'Squares' in line:
+                    # This is the squares row - extract all values
+                    squares = [p for p in parts[1:] if p]  # Skip the header
+                elif '%' in line and not any(word in line for word in ['Area', 'Squares']):
+                    # This is the percentage row - all parts are percentages
+                    percentages = [p for p in parts if p and '%' in p]
+
+        # Combine the data - they should all be the same length
+        max_len = max(len(percentages), len(areas), len(squares))
+        for i in range(max_len):
+            waste_entry = {
+                'waste_percentage': percentages[i] if i < len(percentages) else '',
+                'area_sq_ft': areas[i] if i < len(areas) else '',
+                'squares': squares[i] if i < len(squares) else ''
+            }
+            if waste_entry['waste_percentage'] or waste_entry['area_sq_ft'] or waste_entry['squares']:
+                waste_data.append(waste_entry)
+
+    # Fallback to original format if table parsing fails
+    if not waste_data:
+        waste_section = re.search(r'Waste %.*?Area \(sq ft\).*?Squares\s*(.*?)(?=This table|All Structures)', text, re.DOTALL | re.IGNORECASE)
+        if waste_section:
+            content = waste_section.group(1).strip()
+            lines = [line.strip() for line in content.split('\n') if line.strip()]
+
+            for line in lines:
+                # Match lines with percentage/area/squares format
+                match = re.match(r'(\d+%)\s+([\d,]+)\s+([\d.]+)', line)
+                if match:
+                    waste_data.append({
+                        'waste_percentage': match.group(1),
+                        'area_sq_ft': match.group(2),
+                        'squares': match.group(3)
+                    })
+
     return waste_data
 
 
@@ -249,8 +552,20 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
 
     property_id = f"PROP_{report_id}"
 
-    pages = read_pdf_text_by_page(pdf_path)
-    all_text = "\n".join(pages)
+    # Try to read from docling export first, fall back to PDF text
+    report_id_match = re.search(r'report_(\d+)', Path(pdf_path).stem)
+    if report_id_match:
+        report_id = report_id_match.group(1)
+        docling_md_path = Path("docling_exports") / f"report_{report_id}" / f"report_{report_id}.md"
+        if docling_md_path.exists():
+            with open(docling_md_path, 'r', encoding='utf-8') as f:
+                all_text = f.read()
+        else:
+            pages = read_pdf_text_by_page(pdf_path)
+            all_text = "\n".join(pages)
+    else:
+        pages = read_pdf_text_by_page(pdf_path)
+        all_text = "\n".join(pages)
 
     chunks: List[Dict[str, Any]] = []
 
@@ -278,6 +593,8 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
 
     summary_measurements = _extract_summary_measurements(all_text)
     detailed_measurements = _extract_detailed_measurements(all_text)
+    pitch_breakdown = _extract_pitch_breakdown(all_text)
+    waste_calculation = _extract_waste_calculation(all_text)
 
     if summary_measurements:
         house_data = {}
@@ -300,56 +617,128 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         if house_data:
             _add("C001", property_id, "House Measurements", "text", house_data)
 
-    if summary_measurements or detailed_measurements:
+    # Create roof measurement chunks for each structure
+    structure_counter = 1
+    for structure_key, measurements in detailed_measurements.items():
+        if not measurements:  # Skip empty structures
+            continue
+
         roof_data = {}
-        if "total_area_all_pitches" in detailed_measurements:
-            roof_data["total_area"] = detailed_measurements["total_area_all_pitches"]
-        elif "total_roof_area" in summary_measurements:
+
+        # Set structure name and chunk details
+        if structure_key == 'all_structures':
+            structure_name = "All Structures"
+            chunk_id = "C002"
+            section_name = "Roof Measurements - All Structures"
+        elif structure_key == 'all':
+            structure_name = "All Structures"
+            chunk_id = "C002"
+            section_name = "Roof Measurements"
+        else:
+            structure_num = structure_key.replace('structure_', '')
+            structure_name = f"Structure {structure_num}"
+            chunk_id = f"C002_S{structure_num}"
+            section_name = f"Roof Measurements - {structure_name}"
+
+        roof_data["structure"] = structure_name
+
+        if "total_area_all_pitches" in measurements:
+            roof_data["total_area"] = measurements["total_area_all_pitches"]
+        elif "total_roof_area" in summary_measurements and structure_key in ['all', 'all_structures']:
             roof_data["total_area"] = summary_measurements["total_roof_area"]
-        if "total_roof_facets" in summary_measurements:
+
+        if "total_roof_facets" in summary_measurements and structure_key in ['all', 'all_structures']:
             roof_data["total_roof_facets"] = int(summary_measurements["total_roof_facets"])
-        if "predominant_pitch" in detailed_measurements:
-            roof_data["predominant_pitch"] = detailed_measurements["predominant_pitch"]
-        elif "predominant_pitch" in summary_measurements:
+
+        if "predominant_pitch" in measurements:
+            roof_data["predominant_pitch"] = measurements["predominant_pitch"]
+        elif "predominant_pitch" in summary_measurements and structure_key in ['all', 'all_structures']:
             roof_data["predominant_pitch"] = summary_measurements["predominant_pitch"]
 
-        if "ridges" in detailed_measurements:
-            roof_data["ridges"] = detailed_measurements["ridges"]
-        if "hips" in detailed_measurements:
-            roof_data["hips"] = detailed_measurements["hips"]
-        if "valleys" in detailed_measurements:
-            roof_data["valleys"] = detailed_measurements["valleys"]
-        if "rakes" in detailed_measurements:
-            roof_data["rakes"] = detailed_measurements["rakes"]
-        if "eaves_starter" in detailed_measurements:
-            roof_data["eaves_starters"] = detailed_measurements["eaves_starter"]
-        if "drip_edge" in detailed_measurements:
-            roof_data["drip_edge"] = detailed_measurements["drip_edge"]
-        if "flashing" in detailed_measurements:
-            roof_data["flashing"] = detailed_measurements["flashing"]
-        if "step_flashing" in detailed_measurements:
-            roof_data["step_flashing"] = detailed_measurements["step_flashing"]
-        if "parapet_walls" in detailed_measurements:
-            roof_data["parapet_walls"] = detailed_measurements["parapet_walls"]
+        # Add detailed measurements
+        measurement_fields = [
+            "ridges", "hips", "valleys", "rakes", "eaves_starter", "drip_edge",
+            "flashing", "step_flashing", "parapet_walls", "roof_obstructions_perimeter",
+            "roof_obstructions_area", "net_roof_area"
+        ]
 
-        if "roof_obstructions_perimeter" in detailed_measurements:
-            roof_data["roof_obstructions_perimeter"] = detailed_measurements["roof_obstructions_perimeter"]
-        elif "roof_obstructions_perimeter" in summary_measurements:
-            roof_data["roof_obstructions_perimeter"] = summary_measurements["roof_obstructions_perimeter"]
-        if "roof_obstructions_area" in detailed_measurements:
-            roof_data["roof_obstructions_area"] = detailed_measurements["roof_obstructions_area"]
-        elif "roof_obstructions_area" in summary_measurements:
-            roof_data["roof_obstructions_area"] = summary_measurements["roof_obstructions_area"]
+        for field in measurement_fields:
+            if field in measurements:
+                roof_data[field] = measurements[field]
+            elif field in summary_measurements and structure_key in ['all', 'all_structures']:
+                roof_data[field] = summary_measurements[field]
 
-        if "net_roof_area" in detailed_measurements:
-            roof_data["net_roof_area"] = detailed_measurements["net_roof_area"]
-        else:
-            net_area = float((detailed_measurements.get("total_area_all_pitches", summary_measurements.get("total_roof_area", "0 sq ft"))).replace(" sq ft", "").replace(",", ""))
-            obstruction_area = float((detailed_measurements.get("roof_obstructions_area", summary_measurements.get("roof_obstructions_area", "0 sq ft"))).replace(" sq ft", "").replace(",", ""))
-            roof_data["net_roof_area"] = f"{net_area - obstruction_area:.1f} sq ft"
+        # Calculate net roof area if not present
+        if "net_roof_area" not in roof_data and "total_area_all_pitches" in measurements:
+            try:
+                total_area_str = measurements["total_area_all_pitches"].replace(" sq ft", "").replace(",", "")
+                obstruction_area_str = measurements.get("roof_obstructions_area", "0").replace(" sq ft", "").replace(",", "")
+                net_area = float(total_area_str) - float(obstruction_area_str)
+                roof_data["net_roof_area"] = f"{net_area:.1f} sq ft"
+            except (ValueError, AttributeError):
+                pass
 
         if roof_data:
-            _add("C002", property_id, "Roof Measurements", "text", roof_data)
+            _add(chunk_id, property_id, section_name, "text", roof_data)
+            structure_counter += 1
+
+    # Create pitch breakdown chunks for each structure
+    for structure_key, pitch_data in pitch_breakdown.items():
+        if not pitch_data:  # Skip empty pitch data
+            continue
+
+        if structure_key == 'all_structures':
+            # For single structures, use simple names
+            has_multiple_structures = any(key.startswith('structure_') for key in pitch_breakdown.keys())
+            if has_multiple_structures:
+                chunk_id = "C005"
+                section_name = "Pitch Breakdown - All Structures"
+            else:
+                chunk_id = "C005"
+                section_name = "Pitch Breakdown"
+        elif structure_key == 'all':
+            chunk_id = "C005"
+            section_name = "Pitch Breakdown"
+        else:
+            structure_num = structure_key.replace('structure_', '')
+            chunk_id = f"C005_S{structure_num}"
+            section_name = f"Pitch Breakdown - Structure {structure_num}"
+
+        pitch_chunk_data = {
+            "structure": "All Structures" if structure_key in ['all', 'all_structures'] else f"Structure {structure_key.replace('structure_', '')}",
+            "pitch_breakdown": pitch_data
+        }
+
+        _add(chunk_id, property_id, section_name, "text", pitch_chunk_data)
+
+    # Create waste calculation chunks for each structure
+    for structure_key, waste_data in waste_calculation.items():
+        if not waste_data:  # Skip empty waste data
+            continue
+
+        if structure_key == 'all_structures':
+            # For single structures, use simple names
+            has_multiple_structures = any(key.startswith('structure_') for key in waste_calculation.keys())
+            if has_multiple_structures:
+                chunk_id = "C006"
+                section_name = "Waste Calculation - All Structures"
+            else:
+                chunk_id = "C006"
+                section_name = "Waste Calculation"
+        elif structure_key == 'all':
+            chunk_id = "C006"
+            section_name = "Waste Calculation"
+        else:
+            structure_num = structure_key.replace('structure_', '')
+            chunk_id = f"C006_S{structure_num}"
+            section_name = f"Waste Calculation - Structure {structure_num}"
+
+        waste_chunk_data = {
+            "structure": "All Structures" if structure_key in ['all', 'all_structures'] else f"Structure {structure_key.replace('structure_', '')}",
+            "waste_calculation": waste_data
+        }
+
+        _add(chunk_id, property_id, section_name, "text", waste_chunk_data)
 
     return chunks
 

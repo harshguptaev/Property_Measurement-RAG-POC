@@ -4,7 +4,7 @@
     "address": "902 Cottonwood Hill Pl, Henderson, NV 89011",
     "latitude": 36.0665573,
     "longitude": -114.9868346,
-    "owner": "Juan Ortiz SunSolar Solutions"
+    "owner": "Juan Ortiz SunSolar Solutions 8932 W Cactus Rd Peoria, AZ 85381 6027736675 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -22,9 +22,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67674385",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "3710.2 sq ft",
       "total_roof_facets": 26,
       "predominant_pitch": "5/12",
@@ -32,7 +33,7 @@
       "hips": "301.6 ft (21 Hips)",
       "valleys": "105.6 ft (7 Valleys)",
       "rakes": "6 ft (4 Rakes)",
-      "eaves_starters": "377.6 ft (29 Eaves)",
+      "eaves_starter": "377.6 ft (29 Eaves)",
       "drip_edge": "383.6 ft (33 Lengths)",
       "flashing": "57.6 ft (11 Lengths)",
       "step_flashing": "57.4 ft (10 Lengths)",
@@ -40,6 +41,78 @@
       "roof_obstructions_perimeter": "26 ft",
       "roof_obstructions_area": "4 sq ft",
       "net_roof_area": "3706.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67674385",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "3710.2",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67674385",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "3711",
+          "squares": "37.33"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "4045",
+          "squares": "40.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "4231",
+          "squares": "42.33"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "4417",
+          "squares": "44.33"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "4528",
+          "squares": "45.33"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "4602",
+          "squares": "46.33"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "4676",
+          "squares": "47"
+        },
+        {
+          "waste_percentage": "34%",
+          "area_sq_ft": "4788",
+          "squares": "48"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4973",
+          "squares": "50"
+        }
+      ]
     }
   },
   {

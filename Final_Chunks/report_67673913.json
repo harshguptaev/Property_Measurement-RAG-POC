@@ -1,10 +1,10 @@
 [
   {
     "property_id": "PROP_67673913",
-    "address": "14755 S 182nd Dr, Goodyear, AZ 85338",
+    "address": "2025 Property Address: 14755 S 182nd Dr, Goodyear, AZ 85338",
     "latitude": 33.312267,
     "longitude": -112.4413553,
-    "owner": "Jonathan Sutula JSE Group"
+    "owner": "Jonathan Sutula JSE Group 5S680 Cloverdale Ct Naperville, IL 60540-3734 630-399-7805 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -22,9 +22,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67673913",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "5,346 sq ft",
       "total_roof_facets": 31,
       "predominant_pitch": "5/12",
@@ -32,7 +33,7 @@
       "hips": "204 ft (21 Hips)",
       "valleys": "165 ft (10 Valleys)",
       "rakes": "205 ft (19 Rakes)",
-      "eaves_starters": "308 ft (32 Eaves)",
+      "eaves_starter": "308 ft (32 Eaves)",
       "drip_edge": "513 ft (51 Lengths)",
       "flashing": "55 ft (10 Lengths)",
       "step_flashing": "68 ft (21 Lengths)",
@@ -40,6 +41,88 @@
       "roof_obstructions_perimeter": "167 ft",
       "roof_obstructions_area": "70 sq ft",
       "net_roof_area": "5,276 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67673913",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "3/12",
+          "area_sq_ft": "23.3",
+          "percentage": "0.4%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "4829.1",
+          "percentage": "90.3%"
+        },
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "493.3",
+          "percentage": "9.2%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67673913",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "5346",
+          "squares": "53.66"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "5507",
+          "squares": "55.33"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "5774",
+          "squares": "58.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "6041",
+          "squares": "60.66"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "6202",
+          "squares": "62.33"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "6309",
+          "squares": "63.33"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "6416",
+          "squares": "64.33"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "6576",
+          "squares": "66.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "6843",
+          "squares": "68.66"
+        }
+      ]
     }
   },
   {

@@ -4,7 +4,7 @@
     "address": "4865 Oakside Dr, Stone Mountain, GA 30088",
     "latitude": 33.7858221,
     "longitude": -84.1904709,
-    "owner": "Amandeep Singh Next Renewable Global Pte. Ltd"
+    "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -22,9 +22,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67676202",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "3,721 sq ft",
       "total_roof_facets": 30,
       "predominant_pitch": "8/12",
@@ -32,7 +33,7 @@
       "hips": "210.9 ft (17 Hips)",
       "valleys": "67.9 ft (10 Valleys)",
       "rakes": "109.8 ft (14 Rakes)",
-      "eaves_starters": "402.5 ft (30 Eaves)",
+      "eaves_starter": "402.5 ft (30 Eaves)",
       "drip_edge": "512.3 ft (44 Lengths)",
       "flashing": "45.5 ft (7 Lengths)",
       "step_flashing": "83.6 ft (14 Lengths)",
@@ -40,6 +41,118 @@
       "roof_obstructions_perimeter": "75.4 ft",
       "roof_obstructions_area": "35 sq ft",
       "net_roof_area": "3,686 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67676202",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "1/12",
+          "area_sq_ft": "71.5",
+          "percentage": "1.9%"
+        },
+        {
+          "pitch": "2/12",
+          "area_sq_ft": "90.5",
+          "percentage": "2.4%"
+        },
+        {
+          "pitch": "3/12",
+          "area_sq_ft": "565.7",
+          "percentage": "15.2%"
+        },
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "48.4",
+          "percentage": "1.3%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "44.1",
+          "percentage": "1.2%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "17.3",
+          "percentage": "0.5%"
+        },
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "31.2",
+          "percentage": "0.8%"
+        },
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "2827.1",
+          "percentage": "76%"
+        },
+        {
+          "pitch": "9/12",
+          "area_sq_ft": "25.2",
+          "percentage": "0.7%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67676202",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "3559",
+          "squares": "35.66"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "3773",
+          "squares": "38.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "3951",
+          "squares": "39.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "4129",
+          "squares": "41.33"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "4236",
+          "squares": "42.66"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "4307",
+          "squares": "43.33"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "4378",
+          "squares": "44.00"
+        },
+        {
+          "waste_percentage": "31%",
+          "area_sq_ft": "4485",
+          "squares": "45.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4663",
+          "squares": "46.66"
+        }
+      ]
     }
   },
   {

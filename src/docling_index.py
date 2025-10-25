@@ -5,18 +5,17 @@ Based on the reference implementation with improved PDF and image parsing.
 """
 import os
 import logging
-from typing import Any, Dict, List, Optional, Union, Tuple
+from typing import Any, Dict, List, Optional
 from pathlib import Path
 from io import BytesIO
 from PIL import Image
-import pandas as pd
 
 # Docling imports for advanced document processing
 try:
     from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions
-    from docling_core.types.doc import TableItem, TextItem
+    from docling_core.types.doc import TextItem
     from docling.datamodel.document import ConversionResult
     # Try different import paths for ConvertedDocument
     try:
@@ -43,7 +42,7 @@ from PIL import Image  # still required for PyMuPDF image size handling
 
 import json
 from .config import config
-from .vector_store import VectorStoreManager, create_text_splitter, create_table_splitter
+from .vector_store import VectorStoreManager, create_text_splitter
 from .bedrock_client import create_bedrock_embeddings
 from .image_utils import ImageManager
 
@@ -75,7 +74,6 @@ class DoclingProcessor:
         self.config = config_instance or config
         self.vector_store_manager = vector_store_manager
         self.text_splitter = None
-        self.table_splitter = None
         self.supported_extensions = {'.pdf', '.docx', '.pptx', '.html', '.md', '.txt'}
         
         # Initialize image manager with Gemini support
@@ -84,7 +82,6 @@ class DoclingProcessor:
         # Initialize Docling converter with enhanced options
         self._setup_docling_converter()
         self._setup_text_splitter()
-        self._setup_table_splitter()
     
     def _setup_docling_converter(self):
         """Setup Docling converter with simplified PDF processing options."""
@@ -92,8 +89,6 @@ class DoclingProcessor:
             # Configure pipeline options for better PDF processing
             pipeline_options = PdfPipelineOptions()
             pipeline_options.do_ocr = True  # Enable OCR for scanned PDFs
-            pipeline_options.do_table_structure = True
-            pipeline_options.table_structure_options.do_cell_matching = True
             pipeline_options.images_scale = 4
             pipeline_options.generate_page_images = True
 
@@ -120,13 +115,6 @@ class DoclingProcessor:
             chunk_overlap=vector_config.get("chunk_overlap", 200)
         )
     
-    def _setup_table_splitter(self):
-        """Setup table splitter for chunking tables."""
-        vector_config = self.config.get_vector_store_config()
-        self.table_splitter = create_table_splitter(
-            chunk_size=vector_config.get("chunk_size", 1000),
-            chunk_overlap=vector_config.get("chunk_overlap", 200)
-        )
         
     def process_file(self, file_path: str, extract_images: bool = True) -> List[Document]:
         """
@@ -201,21 +189,8 @@ class DoclingProcessor:
                 try:
                     doc_json = converted_doc.export_to_dict()
                 except Exception:
-                    tables_md: List[Union[str, Dict[str, Any]]] = []
-                    if hasattr(converted_doc, "tables") and converted_doc.tables:
-                        for t in converted_doc.tables:
-                            try:
-                                if hasattr(t, "export_to_markdown"):
-                                    tables_md.append(t.export_to_markdown())
-                                elif hasattr(t, "to_dict"):
-                                    tables_md.append(t.to_dict())
-                                else:
-                                    tables_md.append(str(t))
-                            except Exception:
-                                tables_md.append(str(t))
                     doc_json = {
                         "markdown": main_text,
-                        "tables": tables_md,
                         "pictures_count": len(getattr(converted_doc, "pictures", []) or []),
                         "meta": {"file_name": Path(file_path).name},
                     }
@@ -234,11 +209,6 @@ class DoclingProcessor:
             # Convert document with Docling
             result = self.converter.convert(str(file_path))
             converted_doc = result.document  # Remove type hint to avoid import issues
-            try:
-                tables_list = list(getattr(converted_doc, "tables", []) or [])
-            except Exception:
-                tables_list = getattr(converted_doc, "tables", []) or []
-            logging.info(f"Docling tables count: {len(tables_list)}")
 
             # Extract main document text
             main_text = converted_doc.export_to_markdown()
@@ -267,14 +237,6 @@ class DoclingProcessor:
                 page_documents = self._extract_pages_and_images(converted_doc, file_path)
                 documents.extend(page_documents)
             
-            # Extract tables if present
-            table_documents = self._extract_tables(converted_doc, tables_list, file_path)
-            documents.extend(table_documents)
-            
-
-             # Add table chunks to the existing final chunks structure
-            final_chunks_file = Path("Final_Chunks") / f"{file_path.stem}.json"
-            self._add_table_chunks_to_final(final_chunks_file, file_path)
 
             # Add image chunks to the existing final chunks structure
             self._add_image_chunks_to_final(final_chunks_file, file_path)
@@ -333,7 +295,7 @@ class DoclingProcessor:
             pdf_document = fitz.open(str(file_path))
             
             for page_num in range(len(pdf_document)):
-                if page_num in [0, 11]:  # Skip page 1 and 12
+                if page_num == 0 or page_num > 10:  # Skip page 1 and any pages after west side (page 11+)
                     continue
 
                 page = pdf_document.load_page(page_num)
@@ -550,7 +512,6 @@ class DoclingProcessor:
                                             img_doc.page_content += f"\n\nMeasurement Analysis: {analysis['measurements_analysis']}"
                                 except Exception as e:
                                     logging.warning(f"Failed to enhance image with Gemini: {e}")
-                            print("Enhanced image metadata with Gemini.", img_doc.metadata)
                             documents.append(img_doc)
                         
                         pix = None  # Cleanup
@@ -658,576 +619,6 @@ class DoclingProcessor:
 
     # Removed unused image OCR helper methods (_process_page_image, _process_standalone_image, _extract_text_from_image)
 
-    # Extract tables from the converted document
-    def _extract_tables(self, converted_doc, tables_list, file_path: Path) -> List[Document]:
-        """
-        For each Docling table:
-        - Export to DataFrame for analytic correctness and downstream SQL/DF pipelines.
-        - Export Areas per pitch to json.
-        - Export Waste Calculation to images.
-        - Chunk tables.
-        """
-        
-        out_docs: List[Document] = []
-        # Ensure we can iterate all tables reliably across versions
-        for idx, table in enumerate(tables_list):
-            # 1) DataFrame export (safe structure)
-            df = None
-            try:
-                df = table.export_to_dataframe()
-            except Exception as e:
-                logging.warning(f"Error exporting table {idx} to dataframe: {e}")
-                df = None
-
-            self.export_table_data(df, file_path, idx, tables_list)
-
-        self.export_table_images(converted_doc, file_path)
-        self.export_table_data_chunks(file_path)
-
-        areas_per_pitch_path = Path("docling_exports") / file_path.stem / "tables" / "json"
-        waste_calculation_path = Path("docling_exports") / file_path.stem / "tables" / "images"
-        report_id = file_path.stem.split('RoofReport-')[1].split('.')[0]
-        for area_per_pitch_file in areas_per_pitch_path.glob("*.json"):
-            print("area_per_pitch_file", area_per_pitch_file)
-            table_doc = Document(
-                page_content=f"Report ID: {report_id}\n{area_per_pitch_file.read_text()}",
-                metadata={
-                    'type': 'table',
-                    'file_name': area_per_pitch_file.name,
-                    'source_path': str(area_per_pitch_file),
-                    'file_type': 'json',
-                    'report_id': report_id,
-                    'name': 'Areas Per Pitch',
-                    'description': 'This table comes under ROOFING REPORT SUMMARY in pdf. The table lists each pitch on this roof and the total area and percent of the roof with that pitch. and the suffix of the file name tells which structure it belongs to. If suffix is AllStructures, then it is the total of the roofs for all structures.',
-                    'extraction_method': 'docling_table'
-                }
-            )
-            # Chunk tables
-            chunks = self.text_splitter.split_documents([table_doc])
-            out_docs.extend(chunks)
-
-        for waste_calculation_file in waste_calculation_path.glob("*.png"):
-            print("waste_calculation_file", waste_calculation_file.name)
-            if waste_calculation_file.name.startswith("Structure_Complexity"):
-                name = "Structure_Complexity"
-            else:
-                name = "Waste_Calculation"
-            table_doc = Document(
-                page_content=f"Report ID: {report_id}\n{waste_calculation_file}",
-                metadata={
-                    'type': 'image',
-                    'file_name': waste_calculation_file.name,
-                    'file_type': 'png',
-                    'report_id': file_path.stem.split('RoofReport-')[1].split('.')[0],
-                    'name': name,
-                    'description':'''These are basically the Structure Complexity and Waste Calculation tables in the pdf and we are storing them as images. 
-                                    This Table comes under ROOFING REPORT SUMMARY in pdf. *Squares are rounded up to the 1/3 of a square
-                                    Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
-                                    factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
-                                    control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
-                                    shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
-                                    EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
-                                    replacement or repair work''',
-                    'extraction_method': 'docling_image'
-                }
-            )
-            out_docs.append(table_doc)
-        return out_docs
-    
-    # Export table data to JSON files
-    def export_table_data(self, df, file_path, idx, tables_list):
-
-        """Export table data to JSON files."""
-        if idx==0:
-            return
-        name = ""
-
-        if idx%2==0:
-            name = "Waste_Calculation_" + str(idx//2)
-        if idx%2==1:
-            name = "Areas_per_Pitch_Structure_" + str(idx//2 + 1)
-        if len(tables_list)>3 and idx == len(tables_list)-1:
-            name = "Areas_per_Pitch_AllStructures"
-
-        out_dir = Path("docling_exports")
-        out_dir.mkdir(parents=True, exist_ok=True)
-        stem = Path(file_path).stem
-        out_report_dir = out_dir / stem
-        out_report_dir.mkdir(parents=True, exist_ok=True)
-        out_report_table_dir = out_report_dir / "tables"
-        out_report_table_dir.mkdir(parents=True, exist_ok=True)
-        out_json_report_table_dir = out_report_table_dir / "json"
-        out_json_report_table_dir.mkdir(parents=True, exist_ok=True)
-
-        if idx%2==0:
-            json_file = out_json_report_table_dir / f"{name}.json"
-            # data = self.df_to_waste_json(df)
-            df_dict = {
-                "columns": df.columns.tolist(),
-                "data": df.values.tolist()
-            }
-            data = self.df_to_waste_json(df)
-            json_str = json.dumps(data, ensure_ascii=False, indent=4)
-            json_file.write_text(json_str, encoding="utf-8")
-            return
-
-        # Convert Areas per Pitch data to desired format
-        data = self.convert_areas_per_pitch_to_format(df)
-        (out_json_report_table_dir / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, indent=4),encoding="utf-8")
-
-    def df_to_waste_json(self, df):
-
-        # Initialize indices
-        waste_row_idx = None
-        area_row_idx = None
-        squares_row_idx = None
-        
-        # Search for rows starting with specific labels (case-insensitive)
-        for idx in range(len(df)):
-            first_cell = str(df.iloc[idx, 0]).strip().lower()
-            if 'waste%' in first_cell:
-                waste_row_idx = idx
-            elif 'area' in first_cell:
-                area_row_idx = idx
-            elif 'squares' in first_cell:
-                squares_row_idx = idx
-        
-        # Extract lists
-        if waste_row_idx is not None:
-            waste_list = df.iloc[waste_row_idx, 1:].astype(str).tolist()
-        else:
-            # Parse waste from columns (last part after '.')
-            waste_list = []
-            for col in df.columns[1:]:
-                parts = str(col).split('.')
-                last_part = parts[-1].strip() if parts else ''
-                waste_list.append(last_part)
-        
-        if area_row_idx is not None:
-            area_list = df.iloc[area_row_idx, 1:].astype(str).tolist()
-        else:
-            # Assume first row is area if not found
-            area_list = df.iloc[0, 1:].astype(str).tolist()
-        
-        if squares_row_idx is not None:
-            squares_list = df.iloc[squares_row_idx, 1:].astype(str).tolist()
-        else:
-            # Assume second row is squares if not found
-            squares_list = df.iloc[1, 1:].astype(str).tolist()
-        
-        # Determine the minimum length to align lists
-        min_len = min(len(waste_list), len(area_list), len(squares_list))
-        
-        # Build the result list
-        result = []
-        for i in range(min_len):
-            result.append({
-                "waste": waste_list[i],
-                "area": area_list[i],
-                "squares": squares_list[i]
-            })
-        
-        return result
-
-    # Convert Areas per Pitch data to desired format
-    def convert_areas_per_pitch_to_format(self, df):
-        """
-        Convert Areas per Pitch data to desired format.
-        Handles both patterns:
-        1. Numeric columns ("0", "1", "2", etc.) - Pattern 1
-        2. Named columns ("Roof Pitches", "4/12", "8/12", etc.) - Pattern 2
-        
-        Output format: [{"Roof Pitches": "4/12", "Area (SQ)": "52.5", "%of Roof": "4.1%"}, ...]
-        """
-        if df is None or df.empty:
-            return []
-        
-        result = []
-        
-        try:
-            # Convert DataFrame to string for safe processing
-            df_str = df.astype(str)
-            
-            # Detect area unit from the data
-            area_unit = "Area"  # Default fallback
-            for idx, row in df_str.iterrows():
-                for cell in row:
-                    cell_str = str(cell).lower()
-                    if 'area' in cell_str:
-                        # Extract the full area label (e.g., "Area (sq ft)", "Area (SQ)", "Area (m²)")
-                        area_unit = str(row.iloc[0]) if 'area' in str(row.iloc[0]).lower() else area_unit
-                        break
-                if area_unit != "Area":
-                    break
-            
-            # Check if we have Pattern 1 (numeric columns) or Pattern 2 (named columns)
-            first_col_name = str(df.columns[0])
-            is_pattern1 = first_col_name.isdigit() or first_col_name == "0"
-            
-            if is_pattern1:
-                # Pattern 1: Numeric columns like "0", "1", "2", "3", "4"
-                # Row 0: "Roof Pitches", "4/12", "6/12", "8/12", "12/12"
-                # Row 1: "Area (sq ft)", "52.5", "110", "965.7", "146.3"  
-                # Row 2: "%of Roof", "4.1%", "8.6%", "75.8%", "11.5%"
-                
-                # Get the roof pitches from first row (skip first column which is the label)
-                roof_pitches = []
-                area_values = []
-                percent_values = []
-                
-                for idx, row in df_str.iterrows():
-                    row_values = row.tolist()
-                    
-                    # Skip header rows containing "Areas per Pitch"
-                    if any("areas per pitch" in str(cell).lower() for cell in row_values):
-                        continue
-                    
-                    if idx == 0 or (len(roof_pitches) == 0):  # Roof Pitches row
-                        roof_pitches = row_values[1:]  # Skip first column (label)
-                    elif idx == 1 or (len(area_values) == 0):  # Area row
-                        area_values = row_values[1:]  # Skip first column (label)
-                        # Update area_unit from this row's first cell
-                        area_unit = row_values[0]
-                    elif idx == 2 or (len(percent_values) == 0):  # Percent row
-                        percent_values = row_values[1:]  # Skip first column (label)
-                
-                # Create result objects
-                for i in range(len(roof_pitches)):
-                    if i < len(area_values) and i < len(percent_values):
-                        result.append({
-                            "Roof Pitches": roof_pitches[i],
-                            area_unit: area_values[i],
-                            "%of Roof": percent_values[i]
-                        })
-            
-            else:
-                # Pattern 2: Named columns like "Roof Pitches", "4/12", "8/12"
-                # Row 0: "Area (sq ft)", "163.6", "1064.8"
-                # Row 1: "%of Roof", "13.3%", "86.7%"
-                
-                # Get column names (roof pitches are in column headers, skip first column)
-                roof_pitches = list(df.columns)[1:]  # Skip "Roof Pitches" column
-                
-                area_values = []
-                percent_values = []
-                
-                for idx, row in df_str.iterrows():
-                    row_values = row.tolist()
-                    
-                    # Skip header rows containing "Areas per Pitch"
-                    if any("areas per pitch" in str(cell).lower() for cell in row_values):
-                        continue
-                    
-                    if idx == 0 or (len(area_values) == 0):  # Area row
-                        area_values = row_values[1:]  # Skip first column (label)
-                        # Update area_unit from this row's first cell
-                        area_unit = row_values[0]
-                    elif idx == 1 or (len(percent_values) == 0):  # Percent row
-                        percent_values = row_values[1:]  # Skip first column (label)
-                
-                # Create result objects
-                for i in range(len(roof_pitches)):
-                    if i < len(area_values) and i < len(percent_values):
-                        result.append({
-                            "Roof Pitches": roof_pitches[i],
-                            area_unit: area_values[i],
-                            "%of Roof": percent_values[i]
-                        })
-            
-            logging.info(f"Successfully converted {len(result)} Areas per Pitch entries using area unit: {area_unit}")
-            
-        except Exception as e:
-            logging.error(f"Error converting Areas per Pitch data: {e}")
-            return []
-        
-        return result
-
-    # Add table chunks to the existing Final_Chunks file
-    def _add_table_chunks_to_final(self, final_chunks_file, file_path):
-        """
-        Add table chunks from table_chunks.json to the existing Final_Chunks file.
-        Keeps existing 'text' array and adds 'table' array with table_chunks content.
-        """
-        print(f"DEBUG: _add_table_chunks_to_final called with {final_chunks_file}")
-        try:
-            # Read existing final chunks
-            existing_data = []
-            if final_chunks_file.exists():
-                with open(final_chunks_file, 'r', encoding='utf-8') as f:
-                    existing_data = json.load(f)
-            
-            # Create new structure with existing text chunks and new table chunks
-            final_structure = {
-                "text": existing_data,  # Keep existing text chunks as-is
-                "table": []
-            }
-            
-            # Load table chunks from table_chunks.json
-            report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-            table_chunks_file = Path("docling_exports") / f"report_{report_id}" / "table_chunks.json"
-            if table_chunks_file.exists():
-                table_chunks_data = json.loads(table_chunks_file.read_text(encoding="utf-8"))
-                if "tables" in table_chunks_data:
-                    # Add the "tables" array content directly to "table"
-                    final_structure["table"] = table_chunks_data["tables"]
-                    logging.info(f"Added {len(final_structure['table'])} table chunks from {table_chunks_file}")
-            else:
-                logging.warning(f"Table chunks file not found: {table_chunks_file}")
-            
-            # Save the updated structure
-            with open(final_chunks_file, 'w', encoding='utf-8') as f:
-                json.dump(final_structure, f, ensure_ascii=False, indent=2)
-            
-            logging.info(f"✓ Updated final chunks with {len(final_structure['text'])} text chunks and {len(final_structure['table'])} table chunks")
-                
-        except Exception as e:
-            logging.error(f"Error adding table chunks to final: {e}")
-
-
-    # Add image chunks to the existing Final_Chunks file
-    def _add_image_chunks_to_final(self, final_chunks_file, file_path):
-        """
-        Add image chunks from extracted images to the existing Final_Chunks file.
-        Adds an 'image' array with image chunk data to match the structure.
-        Only keeps the highest-indexed image for each section (e.g., prefers Area_2.png over Area.png).
-        """
-        print(f"DEBUG: _add_image_chunks_to_final called with {final_chunks_file}")
-        try:
-            # Read existing final chunks
-            existing_data = {}
-            if final_chunks_file.exists():
-                with open(final_chunks_file, 'r', encoding='utf-8') as f:
-                    existing_data = json.load(f)
-
-            # Ensure we have the right structure
-            if not isinstance(existing_data, dict):
-                existing_data = {"text": existing_data if isinstance(existing_data, list) else []}
-
-            # Initialize image array if not present
-            if "image" not in existing_data:
-                existing_data["image"] = []
-
-            # Extract report ID
-            report_id = None
-            if 'RoofReport-' in file_path.name:
-                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-
-            if not report_id:
-                logging.warning(f"Could not extract report ID from {file_path.name}")
-                return
-
-            # Get extracted images directory
-            images_dir = Path("extracted_images") / f"report_{report_id}"
-            if not images_dir.exists():
-                logging.info(f"No extracted images directory found for {report_id}")
-                return
-
-            # Get all image files and group by base name to keep only the highest indexed version
-            image_files = list(images_dir.glob("*.png"))
-            if not image_files:
-                logging.info(f"No image files found in {images_dir}")
-                return
-
-            # Group images by base name and keep only the highest indexed version
-            image_groups = {}
-            for image_file in image_files:
-                base_name = image_file.stem
-                # Check if it's a numbered version (has underscore followed by number)
-                if '_' in base_name:
-                    parts = base_name.rsplit('_', 1)
-                    if parts[1].isdigit():
-                        group_name = parts[0]
-                        index = int(parts[1])
-                    else:
-                        group_name = base_name
-                        index = 0
-                else:
-                    group_name = base_name
-                    index = 0
-
-                if group_name not in image_groups or image_groups[group_name][0] < index:
-                    image_groups[group_name] = (index, image_file)
-
-            # Use only the highest indexed image for each group
-            selected_images = [data[1] for data in image_groups.values()]
-
-            # Create image chunks
-            chunk_counter = len(existing_data.get("text", [])) + len(existing_data.get("table", [])) + 1
-
-            for image_file in sorted(selected_images):
-                try:
-                    # Extract section name from filename (remove .png extension)
-                    section_name = image_file.stem
-
-                    # Create descriptive section names
-                    section_mapping = {
-                        "Cover_Image": "Cover Image",
-                        "Lengthsimage": "Lengths Diagram",
-                        "Pitch_Degrees": "Pitch (Degrees) Diagram",
-                        "Pitch_on_12": "Pitch (on 12) Diagram",
-                        "Rafters": "Rafters Diagram",
-                        "Azimuth": "Azimuth Diagram",
-                        "Area": "Area Diagram",
-                        "Roof_Penetrations": "Roof Penetrations Diagram",
-                        "Top_View": "Top View",
-                        "North_Side": "North Side View",
-                        "South_Side": "South Side View",
-                        "East_Side": "East Side View",
-                        "West_Side": "West Side View",
-                        "Structure_Summary": "Structure Summary"
-                    }
-
-                    display_section = section_mapping.get(section_name, section_name.replace("_", " "))
-
-                    # Create image chunk
-                    image_chunk = {
-                        "chunk_id": f"{report_id}_chunk_{chunk_counter}",
-                        "section": display_section,
-                        "type": "image",
-                        "data": {
-                            "description": f"Visual diagram showing {display_section.lower()} for the property roof inspection",
-                            "image_file": f"extracted_images/report_{report_id}/{image_file.name}"
-                        }
-                    }
-
-                    existing_data["image"].append(image_chunk)
-                    chunk_counter += 1
-
-                except Exception as e:
-                    logging.error(f"Error processing image file {image_file}: {e}")
-                    continue
-
-            # Save the updated structure
-            with open(final_chunks_file, 'w', encoding='utf-8') as f:
-                json.dump(existing_data, f, ensure_ascii=False, indent=2)
-
-            logging.info(f"✓ Added {len(existing_data['image'])} image chunks to final chunks (kept highest indexed images only)")
-
-        except Exception as e:
-            logging.error(f"Error adding image chunks to final: {e}")
-
-    # Export table images to PNG files
-    def export_table_images(self, converted_doc, file_path):
-
-        """Export table images to PNG files."""
-        table_counter = 0
-        out_dir = Path("docling_exports")
-        stem = Path(file_path).stem
-        out_report_dir = out_dir / stem
-        out_report_table_dir = out_report_dir / "tables"
-        out_report_table_images_dir = out_report_table_dir / "images"
-        out_report_table_images_dir.mkdir(parents=True, exist_ok=True)
-
-        for element, _ in converted_doc.iterate_items():
-            if isinstance(element, TableItem):
-                table_counter += 1
-                if table_counter == 1:
-                    continue
-                
-                # Even tables -> Areas_per_Pitch_Structure
-                if table_counter % 2 == 0:
-                    name = f"Areas_per_Pitch_Structure_{table_counter // 2}.png"
-                    if table_counter == len(converted_doc.tables):
-                        name = "Areas_per_Pitch_AllStructures.png"
-                    img = element.get_image(converted_doc)
-                    img.save(out_report_table_images_dir / name)
-                    continue
-
-                img = element.get_image(converted_doc)
-                width, height = img.size
-                # Y positions in pixels
-                y26 = int(height * 0.26)
-                y28 = int(height * 0.28)
-                # Top part (0% → 26%)
-                top_img = img.crop((0, 0, width, y26))
-
-                # Bottom part (28% → 100%)
-                bottom_img = img.crop((0, y28, width, height))
-
-                # Save results
-                top_img.save(f"{out_report_table_images_dir}/Structure_Complexity_{table_counter//2}.png")
-                bottom_img.save(f"{out_report_table_images_dir}/Waste_Calculation_{table_counter//2}.png")
-
-
-    # Export table data chunks to JSON files
-    def export_table_data_chunks(self, file_path):
-        """Export table data chunks to JSON files.
-          "table":[{
-                "section":"Hardcoded",
-                "raw_text":"JSON or CSV",
-                "id":"autogenerated",
-                "metadata":{},
-                "src_image_path":"reference path to the image"
-        }}]"""
-        out_dir = Path("docling_exports")
-        stem = Path(file_path).stem
-        out_report_dir = out_dir / stem
-        out_report_table_dir = out_report_dir / "tables"
-        out_report_table_json_dir = out_report_table_dir / "json"
-        out_report_table_images_dir = out_report_table_dir / "images"
-
-        table_chunks = []
-        chunk_counter = 1
-
-        # Iterate over all JSON files
-        for json_file in sorted(out_report_table_json_dir.glob("*.json")):
-            try:
-                json_content = json.loads(json_file.read_text(encoding="utf-8"))
-            except Exception as e:
-                logging.warning(f"Skipping {json_file.name}, failed to read JSON: {e}")
-                continue
-
-            # Determine section
-            section = ""
-            if "Areas_per_Pitch" in json_file.name:
-                section = f"This table named {json_file.stem} lists each pitch on this roof and the total area and percent of the roof with that pitch."
-            elif "Waste_Calculation" in json_file.name:
-                section = f"""NOTE: This waste calculation table named {json_file.stem} is for asphalt shingle roofing applications. All values in the table below 
-                            only include roof areas of 3/12 pitch or greater. *Squares are rounded up to the 1/3 of a square
-                            Additional materials needed for ridge, hip, and starter lengths are not included in the above table. The provided suggested waste
-                            factor is intended to serve as a guide–actual waste percentages may differ based upon several variables that EagleView does not
-                            control. These waste factor variables include, but are not limited to, individual installation techniques, crew experiences, asphalt
-                            shingle material subtleties, and potential salvage from the site. Individual results may vary from suggested waste factor that
-                            EagleView has provided. The suggested waste is not to replace or substitute for experience or judgement as to any given
-                            replacement or repair work."""
-            # Corresponding image path (same filename but .png)
-            image_name = json_file.stem + ".png"
-            image_path = out_report_table_images_dir / image_name
-            if not image_path.exists():
-                logging.warning(f"Image not found for {json_file.name}: {image_path}")
-                image_path_str = ""
-            else:
-                image_path_str = str(image_path)
-
-            # Append chunk
-            table_chunks.append({
-                "section": section,
-                "raw_text": json_content,
-                "id": f"chunk{chunk_counter}",
-                "metadata": {},
-                "src_image_path": image_path_str
-            })
-            chunk_counter += 1
-
-        for png_file in sorted(out_report_table_images_dir.glob("*.png")):
-            if "Structure_Complexity" in png_file.name:
-                section = f"This table named {png_file.stem} lists the structure complexity of the roof."
-                table_chunks.append({
-                    "section": section,
-                    "raw_text": "Dummy Text for now.",
-                    "id": f"chunk{chunk_counter}",
-                    "metadata": {},
-                    "src_image_path": str(png_file)
-                })
-                chunk_counter += 1
-
-        # Save consolidated table_chunks.json
-        chunks_file = out_report_dir / "table_chunks.json"
-        chunks_data = {"tables": table_chunks}
-        chunks_file.write_text(json.dumps(chunks_data, ensure_ascii=False, indent=2), encoding="utf-8")
-    
-
-
     # Extract important chunks Text Chunks and save them
     def _extract_and_save_important_chunks(self, file_path: Path) -> None:
         """Extract important chunks and save them organized by report ID."""
@@ -1271,8 +662,6 @@ class DoclingProcessor:
                         # Build a textual representation for vector index (for text chunks) or minimal for others
                         if chunk_dict.get('type') == 'text':
                             page_content = json.dumps({"section": chunk_dict.get('section'), **chunk_dict.get('data', {})}, ensure_ascii=False)
-                        elif chunk_dict.get('type') == 'table':
-                            page_content = f"Table Section: {chunk_dict.get('section')}"
                         else:  # image
                             page_content = f"Image Section: {chunk_dict.get('section')} {chunk_dict.get('data', {}).get('description','')}"
 

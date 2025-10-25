@@ -1,10 +1,10 @@
 [
   {
     "property_id": "PROP_67676628",
-    "address": "13105 Mill Stone Dr, Austin, TX 78729",
+    "address": "2025 Property Address: 13105 Mill Stone Dr, Austin, TX 78729",
     "latitude": 30.4612403,
     "longitude": -97.782548,
-    "owner": "Carlos Hernandez Kstylez Roofing & Construction"
+    "owner": "Carlos Hernandez Kstylez Roofing &amp; Construction 16801 Radholme Court Suite D Round Rock, TX 78664 512-910-8009 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -12,7 +12,6 @@
     "section": "House Measurements",
     "type": "text",
     "data": {
-      "number_of_stories": ">1",
       "total_roof_facets": 4,
       "structure_complexity": "Simple",
       "estimated_attic": "1,601 sq ft",
@@ -22,9 +21,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67676628",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "1687.6 sq ft",
       "total_roof_facets": 4,
       "predominant_pitch": "4/12",
@@ -32,7 +32,7 @@
       "hips": "0 ft (0 Hips)",
       "valleys": "0 ft (0 Valleys)",
       "rakes": "96.2 ft (8 Rakes)",
-      "eaves_starters": "123.6 ft (4 Eaves)",
+      "eaves_starter": "123.6 ft (4 Eaves)",
       "drip_edge": "219.8 ft (12 Lengths)",
       "flashing": "42.4 ft (3 Lengths)",
       "step_flashing": "1.2 ft (1 Lengths)",
@@ -40,6 +40,78 @@
       "roof_obstructions_perimeter": "30.8 ft",
       "roof_obstructions_area": "11 sq ft",
       "net_roof_area": "1676.6 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67676628",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "1687.6",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67676628",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "1688",
+          "squares": "17.00"
+        },
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "1722",
+          "squares": "17.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "1773",
+          "squares": "18.00"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "1807",
+          "squares": "18.33"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "1840",
+          "squares": "18.66"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "1891",
+          "squares": "19.00"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "1975",
+          "squares": "20.00"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "2060",
+          "squares": "20.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2144",
+          "squares": "21.66"
+        }
+      ]
     }
   },
   {

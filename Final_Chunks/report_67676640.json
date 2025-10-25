@@ -4,7 +4,7 @@
     "address": "11911 Stout Oak Trail, Austin, TX 78750",
     "latitude": 30.4568831,
     "longitude": -97.8149572,
-    "owner": "Carlos Hernandez Kstylez Roofing & Construction"
+    "owner": "Carlos Hernandez Kstylez Roofing &amp; Construction 16801 Radholme Court Suite D Round Rock, TX 78664 512-910-8009 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -12,7 +12,6 @@
     "section": "House Measurements",
     "type": "text",
     "data": {
-      "number_of_stories": "<=1",
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "2507.2 sq ft",
@@ -22,9 +21,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67676640",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "2642.8 sq ft",
       "total_roof_facets": 6,
       "predominant_pitch": "4/12",
@@ -32,7 +32,7 @@
       "hips": "134.5 ft (6 Hips)",
       "valleys": "17.7 ft (1 Valleys)",
       "rakes": "0 ft (0 Rakes)",
-      "eaves_starters": "216 ft (6 Eaves)",
+      "eaves_starter": "216 ft (6 Eaves)",
       "drip_edge": "216 ft (6 Lengths)",
       "flashing": "0 ft (0 Lengths)",
       "step_flashing": "0 ft (0 Lengths)",
@@ -40,6 +40,78 @@
       "roof_obstructions_perimeter": "58 ft",
       "roof_obstructions_area": "32 sq ft",
       "net_roof_area": "2610.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67676640",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "2642.8",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67676640",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "2643",
+          "squares": "26.66"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "2776",
+          "squares": "28.00"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "2908",
+          "squares": "29.33"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "2987",
+          "squares": "30.00"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "3040",
+          "squares": "30.66"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "3093",
+          "squares": "31.00"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "3172",
+          "squares": "32.00"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "3304",
+          "squares": "33.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3436",
+          "squares": "34.66"
+        }
+      ]
     }
   },
   {

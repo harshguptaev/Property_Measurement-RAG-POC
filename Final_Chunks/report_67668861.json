@@ -4,7 +4,7 @@
     "address": "171 Greenwood St, East Hartford, CT 06118",
     "latitude": 41.7426553,
     "longitude": -72.6014135,
-    "owner": "Taylor Allen Green Power Energy"
+    "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -20,26 +20,223 @@
     }
   },
   {
-    "chunk_id": "C002",
+    "chunk_id": "C002_S1",
     "property_id": "PROP_67668861",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - Structure 1",
     "type": "text",
     "data": {
+      "structure": "Structure 1",
       "total_area": "2022.3 sq ft",
-      "total_roof_facets": 9,
       "predominant_pitch": "6/12",
       "ridges": "56.7 ft (2 Ridges)",
       "hips": "25.8 ft (2 Hips)",
       "valleys": "2.3 ft (1 Valleys)",
       "rakes": "87 ft (6 Rakes)",
-      "eaves_starters": "145 ft (7 Eaves)",
+      "eaves_starter": "145 ft (7 Eaves)",
       "drip_edge": "232 ft (13 Lengths)",
+      "flashing": "2.8 ft (3 Lengths)",
+      "step_flashing": "32.3 ft (5 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "net_roof_area": "2022.3 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C002_S2",
+    "property_id": "PROP_67668861",
+    "section": "Roof Measurements - Structure 2",
+    "type": "text",
+    "data": {
+      "structure": "Structure 2",
+      "total_area": "211.6 sq ft",
+      "predominant_pitch": "8/12",
+      "ridges": "17 ft (1 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "25.2 ft (4 Rakes)",
+      "eaves_starter": "34 ft (2 Eaves)",
+      "drip_edge": "59.2 ft (6 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "net_roof_area": "211.6 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67668861",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2233.9 sq ft",
+      "total_roof_facets": 9,
+      "predominant_pitch": "6/12",
+      "ridges": "73.6 ft (3 Ridges)",
+      "hips": "25.8 ft (2 Hips)",
+      "valleys": "2.3 ft (1 Valleys)",
+      "rakes": "112.1 ft (10 Rakes)",
+      "eaves_starter": "178.9 ft (9 Eaves)",
+      "drip_edge": "291 ft (19 Lengths)",
       "flashing": "2.8 ft (3 Lengths)",
       "step_flashing": "32.3 ft (5 Lengths)",
       "parapet_walls": "0 ft (0 Lengths)",
       "roof_obstructions_perimeter": "24.4 ft",
       "roof_obstructions_area": "7 sq ft",
       "net_roof_area": "2226.9 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005_S1",
+    "property_id": "PROP_67668861",
+    "section": "Pitch Breakdown - Structure 1",
+    "type": "text",
+    "data": {
+      "structure": "Structure 1",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "16.1%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "2.1%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "81.7%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C005_S2",
+    "property_id": "PROP_67668861",
+    "section": "Pitch Breakdown - Structure 2",
+    "type": "text",
+    "data": {
+      "structure": "Structure 2",
+      "pitch_breakdown": [
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "211.6",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006_S1",
+    "property_id": "PROP_67668861",
+    "section": "Waste Calculation - Structure 1",
+    "type": "text",
+    "data": {
+      "structure": "Structure 1",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "1696",
+          "squares": "17"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "1781",
+          "squares": "18"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "1832",
+          "squares": "18.33"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "1866",
+          "squares": "18.66"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "1900",
+          "squares": "19"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "1951",
+          "squares": "19.66"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "2036",
+          "squares": "20.66"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "2120",
+          "squares": "21.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2205",
+          "squares": "22.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006_S2",
+    "property_id": "PROP_67668861",
+    "section": "Waste Calculation - Structure 2",
+    "type": "text",
+    "data": {
+      "structure": "Structure 2",
+      "waste_calculation": [
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "212",
+          "squares": "2.33"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "236",
+          "squares": "2.66"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "246",
+          "squares": "2.66"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "257",
+          "squares": "2.66"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "263",
+          "squares": "2.66"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "268",
+          "squares": "3.00"
+        },
+        {
+          "waste_percentage": "31%",
+          "area_sq_ft": "272",
+          "squares": "3.00"
+        },
+        {
+          "waste_percentage": "36%",
+          "area_sq_ft": "278",
+          "squares": "3.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "289",
+          "squares": "3.00"
+        }
+      ]
     }
   },
   {

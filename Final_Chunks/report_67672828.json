@@ -1,10 +1,10 @@
 [
   {
     "property_id": "PROP_67672828",
-    "address": "3021 Carrington Ln, Lawrence, KS 66049",
+    "address": "2025 Property Address: 3021 Carrington Ln, Lawrence, KS 66049",
     "latitude": 38.9916658,
     "longitude": -95.2735747,
-    "owner": "Jesse Pacheco Cromwell Solar"
+    "owner": "Jesse Pacheco Cromwell Solar 615 Vermont St Lawrence, KS 66044 785-841-4612 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -22,9 +22,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67672828",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "2058.2 sq ft",
       "total_roof_facets": 11,
       "predominant_pitch": "6/12",
@@ -32,7 +33,7 @@
       "hips": "5.4 ft (2 Hips)",
       "valleys": "37.4 ft (4 Valleys)",
       "rakes": "180.4 ft (17 Rakes)",
-      "eaves_starters": "137.6 ft (14 Eaves)",
+      "eaves_starter": "137.6 ft (14 Eaves)",
       "drip_edge": "318 ft (31 Lengths)",
       "flashing": "48.9 ft (8 Lengths)",
       "step_flashing": "59.7 ft (10 Lengths)",
@@ -40,6 +41,88 @@
       "roof_obstructions_perimeter": "38 ft",
       "roof_obstructions_area": "10 sq ft",
       "net_roof_area": "2048.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67672828",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "109.2",
+          "percentage": "5.3%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "1536.1",
+          "percentage": "74.6%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "412.9",
+          "percentage": "20.1%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67672828",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "2059",
+          "squares": "20.66"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "2101",
+          "squares": "21.33"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "2204",
+          "squares": "22.33"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "2265",
+          "squares": "22.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "2307",
+          "squares": "23.33"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "2348",
+          "squares": "23.66"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "2410",
+          "squares": "24.33"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "2512",
+          "squares": "25.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2615",
+          "squares": "26.33"
+        }
+      ]
     }
   },
   {

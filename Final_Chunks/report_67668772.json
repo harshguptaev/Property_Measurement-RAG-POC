@@ -4,7 +4,7 @@
     "address": "3374 Victoria Ave, Santa Clara, CA 95051",
     "latitude": 37.3565098,
     "longitude": -121.9879742,
-    "owner": "Jose Rosas Lanuza Sr"
+    "owner": "Jose Rosas Lanuza Sr 1920 Mclaughlin Ave San Jose, CA 95122 408-630-5155 <!-- image -->"
   },
   {
     "chunk_id": "C001",
@@ -22,9 +22,10 @@
   {
     "chunk_id": "C002",
     "property_id": "PROP_67668772",
-    "section": "Roof Measurements",
+    "section": "Roof Measurements - All Structures",
     "type": "text",
     "data": {
+      "structure": "All Structures",
       "total_area": "2607.2 sq ft",
       "total_roof_facets": 11,
       "predominant_pitch": "5/12",
@@ -32,7 +33,7 @@
       "hips": "136.3 ft (8 Hips)",
       "valleys": "86.8 ft (6 Valleys)",
       "rakes": "15.6 ft (3 Rakes)",
-      "eaves_starters": "211.1 ft (8 Eaves)",
+      "eaves_starter": "211.1 ft (8 Eaves)",
       "drip_edge": "226.7 ft (11 Lengths)",
       "flashing": "7.1 ft (2 Lengths)",
       "step_flashing": "5.9 ft (3 Lengths)",
@@ -40,6 +41,88 @@
       "roof_obstructions_perimeter": "37.2 ft",
       "roof_obstructions_area": "11 sq ft",
       "net_roof_area": "2596.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67668772",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "56.6",
+          "percentage": "2.2%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "116.4",
+          "percentage": "4.5%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "2434.2",
+          "percentage": "93.4%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67668772",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "2551",
+          "squares": "25.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "2654",
+          "squares": "26.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "2781",
+          "squares": "28.00"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "2909",
+          "squares": "29.33"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "2985",
+          "squares": "30.00"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "3036",
+          "squares": "30.66"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "3087",
+          "squares": "31.00"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "3164",
+          "squares": "31.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3291",
+          "squares": "33.00"
+        }
+      ]
     }
   },
   {
