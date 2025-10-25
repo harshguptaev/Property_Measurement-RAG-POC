@@ -157,7 +157,7 @@
   },
   {
     "chunk_id": "C003",
-    "property_id": "PROP_report_67676202",
+    "property_id": "PROP_67676202",
     "section": "Diagrams",
     "type": "diagram",
     "data": {
@@ -172,7 +172,7 @@
   },
   {
     "chunk_id": "C004",
-    "property_id": "PROP_report_67676202",
+    "property_id": "PROP_67676202",
     "section": "Imagery",
     "type": "image",
     "data": {

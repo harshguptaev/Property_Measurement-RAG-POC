@@ -147,9 +147,15 @@ class DoclingProcessor:
             for i, doc in enumerate(documents):
                 # Extract report ID from filename if it's a roof report
                 report_id = None
-                if 'RoofReport-' in file_path.name:
+                filename = file_path.name
+                if 'RoofReport-' in filename:
                     try:
-                        report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+                        report_id = filename.split('RoofReport-')[1].split('.')[0]
+                    except:
+                        pass
+                elif 'report_' in filename:
+                    try:
+                        report_id = filename.split('report_')[1].split('.')[0]
                     except:
                         pass
                 
@@ -285,9 +291,15 @@ class DoclingProcessor:
         try:
             # Extract report ID for better organization
             report_id = None
-            if 'RoofReport-' in file_path.name:
+            filename = file_path.name
+            if 'RoofReport-' in filename:
                 try:
-                    report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
+                    report_id = filename.split('RoofReport-')[1].split('.')[0]
+                except:
+                    pass
+            elif 'report_' in filename:
+                try:
+                    report_id = filename.split('report_')[1].split('.')[0]
                 except:
                     pass
             
@@ -536,7 +548,7 @@ class DoclingProcessor:
             from pathlib import Path
 
             # Prepare property_id from report_id
-            property_id = f"PROP_{report_id}" if report_id else f"PROP_{file_path.stem}"
+            property_id = f"PROP_{report_id}" 
 
             # Create C003 - Diagrams chunk
             diagrams_chunk = {
@@ -574,7 +586,7 @@ class DoclingProcessor:
             final_chunks_dir = Path("Final_Chunks")
             final_chunks_dir.mkdir(exist_ok=True)
 
-            chunk_filename = f"{report_id}.json" if report_id else f"{file_path.stem}.json"
+            chunk_filename = f"report_{report_id}.json" if report_id else f"{file_path.stem}.json"
             chunk_file_path = final_chunks_dir / chunk_filename
 
             # Load existing chunks if file exists
@@ -631,9 +643,18 @@ class DoclingProcessor:
             
             # Extract report ID from filename
             report_id = None
-            if 'RoofReport-' in file_path.name:
-                report_id = file_path.name.split('RoofReport-')[1].split('.')[0]
-            
+            filename = file_path.name
+            if 'RoofReport-' in filename:
+                try:
+                    report_id = filename.split('RoofReport-')[1].split('.')[0]
+                except:
+                    pass
+            elif 'report_' in filename:
+                try:
+                    report_id = filename.split('report_')[1].split('.')[0]
+                except:
+                    pass
+
             if not report_id:
                 report_id = file_path.stem
             
