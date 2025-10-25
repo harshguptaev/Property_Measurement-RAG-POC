@@ -159,7 +159,7 @@
     "chunk_id": "C003",
     "property_id": "PROP_67676202",
     "section": "Diagrams",
-    "type": "diagram",
+    "type": "image",
     "data": {
       "Lengths": "extracted_images/report_67676202/Lengths.png",
       "Pitch (Degrees)": "extracted_images/report_67676202/Pitch_Degrees.png",

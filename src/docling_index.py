@@ -555,7 +555,7 @@ class DoclingProcessor:
                 "chunk_id": "C003",
                 "property_id": property_id,
                 "section": "Diagrams",
-                "type": "diagram",
+                "type": "image",
                 "data": {
                     "Lengths": extracted_images.get("Lengths", ""),
                     "Pitch (Degrees)": extracted_images.get("Pitch_Degrees", ""),
