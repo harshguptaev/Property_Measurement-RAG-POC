@@ -157,31 +157,24 @@ export function PropertyDashboard() {
         </div>
       </div>
 
-      {/* Property Analysis Shortcuts */}
+
+      {/* Quick Chat Prompts */}
       <div>
         <h3 className="mb-3 text-sm font-medium text-foreground">
-          Quick Analysis
+          Quick Chat Prompts
         </h3>
         <div className="space-y-2">
           {[
-            { icon: "🏠", label: "Property Overview", query: "Provide a comprehensive overview of all properties in the database" },
-            { 
-              icon: "📐", 
-              label: "Roof Pitch Info", 
-              query: "Show me roof pitch information across properties"
-            },
-            { icon: "📏", label: "Length Measurements", query: "Show me roof length measurements including ridges, hips, and valleys" },
-            { icon: "🏗️", label: "Rafter Analysis", query: "Show me rafter length measurements and analysis" },
-            { icon: "📊", label: "Area Analysis", query: "Show me roof area measurements and breakdowns" },
-            { icon: "🧭", label: "Roof Orientations", query: "Show me roof azimuth and orientation data" },
-            { icon: "📸", label: "View All Images", query: "Show me all property images and photo gallery" },
-            { icon: "⚠️", label: "Roof Obstructions", query: "What roof obstructions are mentioned in the reports?" },
-            { icon: "�", label: "Property Comparison", query: "Compare measurements across different properties" }
+            { icon: "💬", label: "Ask about roof conditions", query: "What are the current roof conditions across all properties?" },
+            { icon: "📋", label: "Request measurement summary", query: "Give me a summary of all roof measurements for property ID 67668772" },
+            { icon: "🔍", label: "Find specific property details", query: "Show me detailed information about property with roof report number 44995431" },
+            { icon: "📊", label: "Compare roof areas", query: "Compare the roof areas between different properties in the database" },
+            { icon: "🖼️", label: "Describe property images", query: "Describe what you can see in the images for property 67676202" }
           ].map((item, index) => (
             <ThreadPrimitive.Suggestion key={index} prompt={item.query} method="replace" autoSend asChild>
               <button
                 className="w-full rounded-md border border-border bg-background px-3 py-2 text-left text-xs text-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2"
-                aria-label={`Quick analysis: ${item.label}`}
+                aria-label={`Quick prompt: ${item.label}`}
               >
                 <span>{item.icon}</span>
                 <span>{item.label}</span>
@@ -189,48 +182,6 @@ export function PropertyDashboard() {
             </ThreadPrimitive.Suggestion>
           ))}
         </div>
-      </div>
-
-      {/* Property Types */}
-      <div>
-        <h3 className="mb-3 text-sm font-medium text-foreground">
-          Analysis Categories
-        </h3>
-        <div className="grid grid-cols-2 gap-2 text-xs">
-          <div className="rounded border border-border bg-background p-2">
-            <div className="font-medium">Roof Reports</div>
-            <div className="text-muted-foreground">Condition, materials, repairs</div>
-          </div>
-          <div className="rounded border border-border bg-background p-2">
-            <div className="font-medium">Measurements</div>
-            <div className="text-muted-foreground">Dimensions, areas, volumes</div>
-          </div>
-          <div className="rounded border border-border bg-background p-2">
-            <div className="font-medium">Images</div>
-            <div className="text-muted-foreground">Photos, diagrams, plans</div>
-          </div>
-          <div className="rounded border border-border bg-background p-2">
-            <div className="font-medium">Assessments</div>
-            <div className="text-muted-foreground">Professional evaluations</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Test Image Gallery Button */}
-      <div className="mt-4">
-        <Button 
-          onClick={() => {
-            console.log('Test button clicked - dispatching showImageGallery event');
-            const testData = [{ property_id: 'test', measurement_images: [], property_views: [], roof_analysis: [] }];
-            const event = new CustomEvent('showImageGallery', { detail: testData });
-            window.dispatchEvent(event);
-          }}
-          variant="outline"
-          size="sm"
-          className="w-full"
-        >
-          🔧 Test Image Gallery Overlay
-        </Button>
       </div>
     </div>
   );
