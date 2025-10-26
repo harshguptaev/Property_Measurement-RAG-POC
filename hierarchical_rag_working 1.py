@@ -1167,7 +1167,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
 
         return llm_response
 
-    def answer_query_with_raw_results(self, query: str, level1_limit: int = 1, level2_limit: int = 5, show_raw_results: bool = False) -> Tuple[str, List[Dict]]:
+    def answer_query_with_raw_results(self, query: str, level1_limit: int = 1, level2_limit: int = 5 ) -> Tuple[str, List[Dict]]:
         """
         Complete query answering pipeline that returns both LLM response and raw search results
 
@@ -1181,31 +1181,14 @@ Provide a clear, professional answer that directly addresses the customer's ques
             Tuple of (LLM response string, raw search results)
         """
         # Detect query type and route to appropriate search strategy
-        query_type = self.detect_query_type(query)
-
-        if query_type == "property_specific":
-            logger.info("🏠 Using hierarchical search flow (property-specific query)")
-            results = self.search_hierarchical(query, level1_limit, level2_limit)
-        else:
-            logger.info("🌍 Using general search flow (cross-property query)")
-            results = self.general_query_handler.search_general(query, limit=max(level2_limit * 2, 20))
-
-        # Optionally show raw results
-        if show_raw_results:
-            if query_type == "property_specific":
-                self.print_search_results(query, results)
-            else:
-                # For general search, use GeneralQueryHandler's print method
-                self.general_query_handler._print_general_search_results(query, results)
-
-        # Generate LLM response using the appropriate handler
-        if query_type == "property_specific":
-            llm_response = self.generate_llm_response(query, results)
-        else:
-            # For general queries, use the GeneralQueryHandler's response generation
-            llm_response = self.general_query_handler.generate_general_response(query, results)
-
-        return llm_response, results, query_type
+      
+        results = self.search_hierarchical(query, level1_limit, level2_limit)
+        
+        self.print_search_results(query, results)
+          
+        llm_response = self.generate_llm_response(query, results)
+       
+        return llm_response, results
 
     def show_collection_status(self):
         """Show the current status of both hierarchical collections"""
