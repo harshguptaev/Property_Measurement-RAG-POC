@@ -440,7 +440,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
                             "property_id": property_id,
                             "section": section,
                             "type": chunk_type,
-                            "data": data,
                             "chunk_text": chunk_text,
                             "metadata": {
                                 "semantic_text": semantic_text
