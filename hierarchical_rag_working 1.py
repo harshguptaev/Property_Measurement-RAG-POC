@@ -429,9 +429,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
 
                         # Add section and type information to the chunk text
                         chunk_text = f"Section: {section}\nType: {chunk_type}\nContent: {chunk_text}"
-
+                        semantic_text = self.generate_semantic_text(section, chunk_type, data)
                         # Generate embedding for chunk text - L2 uses full 1536 dimensions
-                        chunk_embedding = self.titan_embed_text(chunk_text, target_dim=1536)
+                        chunk_embedding = self.titan_embed_text(semantic_text, target_dim=1536)
 
                         level2_data.append({
                             "id": chunk_counter,
@@ -441,7 +441,10 @@ Provide a clear, structured summary in 2-3 sentences:"""
                             "section": section,
                             "type": chunk_type,
                             "data": data,
-                            "chunk_text": chunk_text[:5000]  # Truncate if too long, for debugging
+                            "chunk_text": chunk_text,
+                            "metadata": {
+                                "semantic_text": semantic_text
+                            }
                         })
 
                         print(f"Created Level 2 chunk: {chunk_id} ({section}) for property {property_id}")
