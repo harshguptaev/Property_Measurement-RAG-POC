@@ -25,19 +25,20 @@ class MilvusCollectionManager:
     def __init__(self, uri: str):
         self.client = MilvusClient(uri=uri)
     
-    def create_collection_safely(self, collection_name: str, embedding_dim: int, metric_type: str = "IP", 
+    def create_collection_safely(self, collection_name: str, embedding_dim: int, metric_type: str = "COSINE",
                                 clear_existing: bool = True, index_params: Dict = None):
         """Create a collection safely, optionally clearing existing data"""
         if clear_existing and self.client.has_collection(collection_name):
             logger.info(f"Dropping existing collection: {collection_name}")
             self.client.drop_collection(collection_name)
-        
+
         if not self.client.has_collection(collection_name):
-            logger.info(f"Creating collection: {collection_name}")
+            logger.info(f"Creating collection: {collection_name} with dimension {embedding_dim}, metric {metric_type}")
             self.client.create_collection(
                 collection_name=collection_name,
                 dimension=embedding_dim,
-                metric_type=metric_type
+                metric_type=metric_type,
+                index_params=index_params
             )
     
     def get_collection_info(self, collection_name: str) -> Dict:
@@ -106,8 +107,9 @@ class HierarchicalRAG:
         self.level1_collection_name = "hierarchical_level1"
         self.level2_collection_name = "hierarchical_level2"
 
-        # Embedding dimension for Titan (will be determined dynamically)
-        self.embedding_dim = 1536  # Titan embedding dimension
+        # Embedding dimensions: L1 uses 384 (address/geometry), L2 uses 1536 (full semantic)
+        # Default Titan embedding dimension is 1536, reduced to 384 for L1 collections
+        self.embedding_dim = 1536  # Default Titan embedding dimension
 
         # Initialize General Query Handler for cross-property queries
         self.general_query_handler = GeneralQueryHandler(self.milvus_client)
@@ -120,13 +122,14 @@ class HierarchicalRAG:
         logger.info(f"🔧 Level 2 collection: {self.level2_collection_name}")
         logger.info(f"🔧 General Query Handler: Initialized")
     
-    def titan_embed_text(self, text: str) -> List[float]:
+    def titan_embed_text(self, text: str, target_dim: int = 1536) -> List[float]:
         """
         Get text embeddings from Amazon Titan Embed Text v1
-        
+
         Args:
             text: Text to embed
-            
+            target_dim: Target dimension for the embedding (384 for L1, 1536 for L2)
+
         Returns:
             List of embedding values
         """
@@ -134,19 +137,26 @@ class HierarchicalRAG:
             body = json.dumps({
                 "inputText": text
             })
-            
+
             response = self.bedrock_client.invoke_model(
                 modelId="amazon.titan-embed-text-v1",
                 body=body,
                 accept="application/json",
                 contentType="application/json"
             )
-            
+
             result = json.loads(response["body"].read())
             embedding = result["embedding"]
-            
+
+            # Titan returns 1536 dimensions by default
+            # For L1 collections, we need to reduce to 384 dimensions
+            if target_dim == 384 and len(embedding) == 1536:
+                # Simple dimension reduction by taking every 4th element (1536 / 4 = 384)
+                embedding = embedding[::4]
+                logger.debug(f"Reduced embedding from 1536 to {len(embedding)} dimensions for L1")
+
             return embedding
-            
+
         except Exception as e:
             logger.error(f"Error generating text embedding: {str(e)}")
             raise
@@ -222,30 +232,46 @@ Provide a clear, structured summary in 2-3 sentences:"""
         if clear_existing:
             logger.info("🗑️  Clearing existing collections to prevent duplicates...")
         
-        index_params = {
+        # Level 1 Collection Configuration (Addresses, Geometry, Filters)
+        # - Fast lookup by address/coordinates + limited semantic search
+        # - ~200K vectors, 384 dimensions, COSINE metric
+        level1_index_params = {
             "index_type": "HNSW",
-            "metric_type": "IP",
+            "metric_type": "COSINE",
             "params": {
-                "M": 48,
-                "efConstruction": 200
+                "M": 24,  # Smaller neighborhood graph for L1
+                "efConstruction": 100  # Lower construction effort for L1
             }
         }
-        # Create Level 1 collection (Document summaries) - safely with clearing
+
+        # Level 2 Collection Configuration (Semantic Chunks, Embeddings)
+        # - Heavy semantic similarity search across all property chunks
+        # - ~1M vectors, 1536 dimensions, COSINE metric
+        level2_index_params = {
+            "index_type": "HNSW",
+            "metric_type": "COSINE",
+            "params": {
+                "M": 32,  # Higher degree for better recall in L2
+                "efConstruction": 200  # Higher construction effort for L2
+            }
+        }
+
+        # Create Level 1 collection (Document summaries) - 384 dimensions
         self.milvus_manager.create_collection_safely(
             collection_name=self.level1_collection_name,
-            embedding_dim=self.embedding_dim,
-            metric_type="IP",
+            embedding_dim=384,  # L1 uses smaller embeddings for address/geometry lookup
+            metric_type="COSINE",
             clear_existing=clear_existing,
-            index_params=index_params
+            index_params=level1_index_params
         )
-        
-        # Create Level 2 collection (Chunks) - safely with clearing
+
+        # Create Level 2 collection (Chunks) - 1536 dimensions
         self.milvus_manager.create_collection_safely(
             collection_name=self.level2_collection_name,
-            embedding_dim=self.embedding_dim,
-            metric_type="IP",
+            embedding_dim=1536,  # L2 uses full Titan embeddings for semantic search
+            metric_type="COSINE",
             clear_existing=clear_existing,
-            index_params=index_params
+            index_params=level2_index_params
         )
         
         logger.info(f"✅ Level 1 collection ready: {self.level1_collection_name}")
@@ -317,8 +343,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 print(f"child_chunk_ids ::: {child_chunk_ids}")
                 print("=" * 80)
 
-                # Generate embedding for the address (for vector search)
-                address_embedding = self.titan_embed_text(address)
+                # Generate embedding for the address (for vector search) - L1 uses 384 dimensions
+                address_embedding = self.titan_embed_text(address, target_dim=384)
 
                 level1_data.append({
                     "id": i,
@@ -401,8 +427,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         # Add section and type information to the chunk text
                         chunk_text = f"Section: {section}\nType: {chunk_type}\nContent: {chunk_text}"
 
-                        # Generate embedding for chunk text
-                        chunk_embedding = self.titan_embed_text(chunk_text)
+                        # Generate embedding for chunk text - L2 uses full 1536 dimensions
+                        chunk_embedding = self.titan_embed_text(chunk_text, target_dim=1536)
 
                         level2_data.append({
                             "id": chunk_counter,
@@ -469,22 +495,32 @@ Provide a clear, structured summary in 2-3 sentences:"""
         logger.info(f"🔍 Starting hierarchical search for: '{query}'")
         
         try:
-            # Step 1: Embed query
-            query_vec = self.titan_embed_text(query)
+            # Step 1: Embed query for Level 1 (384 dimensions for address/geometry lookup)
+            query_vec_l1 = self.titan_embed_text(query, target_dim=384)
 
-            search_params = {
-                "metric_type": "IP",
-                "params": {"ef": 64}   # higher ef = better recall, slower search
-                }
+            # Step 2: Embed query for Level 2 (1536 dimensions for semantic search)
+            query_vec_l2 = self.titan_embed_text(query, target_dim=1536)
+
+            # Level 1 search parameters (efSearch = 64)
+            level1_search_params = {
+                "metric_type": "COSINE",
+                "params": {"ef": 64}  # efSearch for L1
+            }
+
+            # Level 2 search parameters (efSearch = 96-128, using 96 as default)
+            level2_search_params = {
+                "metric_type": "COSINE",
+                "params": {"ef": 96}  # efSearch for L2
+            }
             
-            # Step 2: Search Level 1 (Parent Chunks)
+            # Step 3: Search Level 1 (Parent Chunks)
             logger.info("📊 Searching Level 1 (Parent Chunk Index)...")
             res1 = self.milvus_client.search(
                 collection_name=self.level1_collection_name,
-                data=[query_vec],
+                data=[query_vec_l1],
                 limit=1,
                 output_fields=["property_id", "child_chunk_ids", "data", "report_id", "pdf_filename"],
-                search_params=search_params
+                search_params=level1_search_params
             )
             
             if not res1 or not res1[0]:
@@ -545,10 +581,11 @@ Provide a clear, structured summary in 2-3 sentences:"""
             # Search Level 2 chunks filtered by property_id from Level 1 results
             res2 = self.milvus_client.search(
                 collection_name=self.level2_collection_name,
-                data=[query_vec],
-                limit=5,  # Get more results to include images
+                data=[query_vec_l2],
+                limit=5,  # Use the level2_limit parameter
                 filter=f'property_id in [{",".join(property_ids_quoted)}]',
-                output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "data"]
+                output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "data"],
+                search_params=level2_search_params
             )
             
             if not res2 or not res2[0]:
