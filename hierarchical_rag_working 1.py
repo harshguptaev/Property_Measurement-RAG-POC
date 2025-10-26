@@ -643,6 +643,115 @@ Provide a clear, structured summary in 2-3 sentences:"""
             logger.error(f"Error during hierarchical search: {str(e)}")
             return []
 
+    def generate_semantic_text(self, section: str, chunk_type: str, data: Dict) -> str:
+        """
+        Generate detailed, searchable semantic text for a chunk based on its section, type, and data.
+        The text includes key measurements and features to enable better semantic search and retrieval.
+
+        Args:
+            section: The section name (e.g., "House Measurements", "Roof Measurements")
+            chunk_type: The chunk type ("text" or "image")
+            data: The chunk data dictionary
+
+        Returns:
+            str: Detailed human-readable semantic text describing the chunk
+        """
+        if chunk_type == "image":
+            if section == "Imagery":
+                views = list(data.keys())
+                return f"Roof imagery section with visual perspectives: {', '.join(views).lower()}. Contains aerial and ground-level photos showing north, south, east, west, and top views of the roof structure for inspection and assessment."
+            elif section == "Diagrams":
+                diagrams = list(data.keys())
+                return f"Technical diagrams section featuring: {', '.join(diagrams).lower()}. Includes detailed structural drawings showing lengths, pitch measurements, rafter configurations, azimuth angles, area calculations, and roof penetration locations."
+            else:
+                return f"Visual documentation section for {section.lower()} containing reference images and diagrams."
+
+        elif chunk_type == "text":
+            if section == "House Measurements":
+                stories = data.get("number_of_stories", "unknown")
+                attic = data.get("estimated_attic", data.get("estimated_attic_area_sqft", "unknown"))
+                facets = data.get("total_roof_facets", "unknown")
+                obstructions = data.get("total_roof_obstructions", "unknown")
+                complexity = data.get("structure_complexity", "unknown")
+
+                # Clean up attic value (remove 'sq ft' if present)
+                if isinstance(attic, str) and "sq ft" in attic:
+                    attic = attic.replace(" sq ft", "")
+
+                return f"House structural measurements and characteristics: {stories} story building with estimated attic area of {attic} square feet. Roof consists of {facets} separate facets with {obstructions} obstructions. Building complexity rated as {complexity.lower()}. Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment."
+
+            elif "Roof Measurements" in section:
+                area = data.get("total_area", data.get("total_area_sqft", "unknown"))
+                facets = data.get("total_roof_facets", "unknown")
+                pitch = data.get("predominant_pitch", "unknown")
+                ridges = data.get("ridges", "unknown")
+                hips = data.get("hips", data.get("hips_ft", "unknown"))
+                valleys = data.get("valleys", data.get("valleys_ft", "unknown"))
+                rakes = data.get("rakes", data.get("rakes_ft", "unknown"))
+                eaves = data.get("eaves_starter", data.get("eaves_ft", "unknown"))
+                drip_edge = data.get("drip_edge", data.get("drip_edge_ft", "unknown"))
+                parapet = data.get("parapet_walls", data.get("parapet_walls_ft", "unknown"))
+                flashing = data.get("flashing", data.get("flashing_ft", "unknown"))
+                step_flashing = data.get("step_flashing", data.get("step_flashing_ft", "unknown"))
+                roof_obs_perimeter = data.get("roof_obstructions_perimeter", data.get("roof_obstructions_perimeter_ft", "unknown"))
+                roof_obs_area = data.get("roof_obstructions_area", data.get("roof_obstructions_area_sqft", "unknown"))
+                net_area = data.get("net_roof_area", data.get("net_roof_area_sqft", "unknown"))
+
+                # Clean up values (extract numbers and convert units)
+                def clean_measurement(value, unit="ft"):
+                    if isinstance(value, str):
+                        if f" {unit}" in value:
+                            return value.split(f" {unit}")[0]
+                        elif f" sq {unit}" in value:
+                            return value.split(f" sq {unit}")[0]
+                    return value
+
+                area = clean_measurement(area, "ft")
+                ridges = clean_measurement(ridges, "ft")
+                hips = clean_measurement(hips, "ft")
+                valleys = clean_measurement(valleys, "ft")
+                rakes = clean_measurement(rakes, "ft")
+                eaves = clean_measurement(eaves, "ft")
+                drip_edge = clean_measurement(drip_edge, "ft")
+                parapet = clean_measurement(parapet, "ft")
+                flashing = clean_measurement(flashing, "ft")
+                step_flashing = clean_measurement(step_flashing, "ft")
+                roof_obs_perimeter = clean_measurement(roof_obs_perimeter, "ft")
+                roof_obs_area = clean_measurement(roof_obs_area, "ft")
+                net_area = clean_measurement(net_area, "ft")
+
+                measurements = []
+                if area: measurements.append(f"total roof area {area} sq ft")
+                if facets: measurements.append(f"{facets} roof facets")
+                if pitch: measurements.append(f"predominant pitch {pitch}")
+                if ridges and ridges not in ["0", "0.0"]: measurements.append(f"ridge length {ridges} ft")
+                if hips and hips not in ["0", "0.0"]: measurements.append(f"hip length {hips} ft")
+                if valleys and valleys not in ["0", "0.0"]: measurements.append(f"valley length {valleys} ft")
+                if rakes and rakes not in ["0", "0.0"]: measurements.append(f"rake length {rakes} ft")
+                if eaves and eaves not in ["0", "0.0"]: measurements.append(f"eave length {eaves} ft")
+                if drip_edge and drip_edge not in ["0", "0.0"]: measurements.append(f"drip edge {drip_edge} ft")
+                if parapet and parapet not in ["0", "0.0"]: measurements.append(f"parapet wall {parapet} ft")
+                if flashing and flashing not in ["0", "0.0"]: measurements.append(f"flashing {flashing} ft")
+                if step_flashing and step_flashing not in ["0", "0.0"]: measurements.append(f"step flashing {step_flashing} ft")
+                if roof_obs_perimeter and roof_obs_perimeter not in ["0", "0.0"]: measurements.append(f"roof obstruction perimeter {roof_obs_perimeter} ft")
+                if roof_obs_area and roof_obs_area not in ["0", "0.0"]: measurements.append(f"roof obstruction area {roof_obs_area} sq ft")
+                if net_area: measurements.append(f"net roof area {net_area} sq ft")
+
+                measurement_text = ". ".join(measurements) if measurements else "various roof measurements"
+
+                return f"Comprehensive roof measurements and specifications: {measurement_text}. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes."
+
+            elif section == "Pitch Breakdown":
+                return f"Roof pitch analysis and waste calculation breakdown. Contains detailed percentage waste factors for different roof pitches including 4%, 9%, 14%, 17%, 19%, 21%, 24%, 29% waste calculations. Essential for accurate material quantity estimation based on roof slope and pitch requirements."
+
+            else:
+                # Generic fallback for other text sections
+                return f"Detailed {section.lower()} information and specifications for property assessment and measurement calculations."
+
+        # Fallback for unknown types
+        return f"Property measurement data for {section.lower()} containing detailed specifications and calculations."
+
+        
     def generate_llm_response(self, query: str, results: List[Dict]) -> str:
         """
         Use LLM to generate a comprehensive response based on retrieved chunks
