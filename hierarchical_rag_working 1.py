@@ -15,8 +15,6 @@ import boto3
 from pymilvus import MilvusClient
 from tqdm import tqdm
 
-# Import the general query handler module
-from query_router import GeneralQueryHandler
 
 # Simple MilvusCollectionManager class
 class MilvusCollectionManager:
@@ -111,16 +109,9 @@ class HierarchicalRAG:
         # Default Titan embedding dimension is 1536, reduced to 384 for L1 collections
         self.embedding_dim = 1536  # Default Titan embedding dimension
 
-        # Initialize General Query Handler for cross-property queries
-        self.general_query_handler = GeneralQueryHandler(self.milvus_client)
-        # Inject the required dependencies into the handler
-        self.general_query_handler._get_query_embedding = self.titan_embed_text
-        self.general_query_handler._bedrock_client = self.bedrock_client
-
         logger.info(f"🔧 Initialized Hierarchical RAG with model: {model_id}")
         logger.info(f"🔧 Level 1 collection: {self.level1_collection_name}")
         logger.info(f"🔧 Level 2 collection: {self.level2_collection_name}")
-        logger.info(f"🔧 General Query Handler: Initialized")
     
     def titan_embed_text(self, text: str, target_dim: int = 1536) -> List[float]:
         """
@@ -475,14 +466,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
             query: The search query
 
         Returns:
-            "property_specific" if query mentions a specific property/address
-            "general" if query is asking general questions across all properties
+            "property_specific" - all queries are treated as property-specific
         """
-        # First check if it's a general query using the GeneralQueryHandler
-        if self.general_query_handler.is_general_query(query):
-            return "general"
-
-        # If not general, it's property-specific
+        # All queries are treated as property-specific
         return "property_specific"
 
     def search_hierarchical(self, query: str, level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
@@ -1140,30 +1126,16 @@ Provide a clear, professional answer that directly addresses the customer's ques
         Returns:
             LLM-generated response string
         """
-        # Detect query type and route to appropriate search strategy
-        query_type = self.detect_query_type(query)
-
-        if query_type == "property_specific":
-            logger.info("🏠 Using hierarchical search flow (property-specific query)")
-            results = self.search_hierarchical(query, level1_limit, level2_limit)
-        else:
-            logger.info("🌍 Using general search flow (cross-property query)")
-            results = self.general_query_handler.search_general(query, limit=max(level2_limit * 2, 20))
+        # All queries use hierarchical search flow
+        logger.info("🏠 Using hierarchical search flow (property-specific query)")
+        results = self.search_hierarchical(query, level1_limit, level2_limit)
 
         # Optionally show raw results
         if show_raw_results:
-            if query_type == "property_specific":
-                self.print_search_results(query, results)
-            else:
-                # For general search, use GeneralQueryHandler's print method
-                self.general_query_handler._print_general_search_results(query, results)
+            self.print_search_results(query, results)
 
-        # Generate LLM response using the appropriate handler
-        if query_type == "property_specific":
-            llm_response = self.generate_llm_response(query, results)
-        else:
-            # For general queries, use the GeneralQueryHandler's response generation
-            llm_response = self.general_query_handler.generate_general_response(query, results)
+        # Generate LLM response
+        llm_response = self.generate_llm_response(query, results)
 
         return llm_response
 
