@@ -350,14 +350,17 @@ Provide a clear, structured summary in 2-3 sentences:"""
                     "id": i,
                     "vector": address_embedding,
                     "property_id": property_id,
-                    "report_id": report_id,
-                    "data": {
-                        "address": address,
-                        "latitude": latitude,
-                        "longitude": longitude
+                    "address": address,
+                    "address_vector": address_embedding,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [longitude, latitude]
                     },
-                    "pdf_filename": pdf_filename,
-                    "child_chunk_ids": child_chunk_ids
+                    "metadata": {
+                        "report_id": report_id,
+                        "pdf_filename": pdf_filename,
+                        "child_chunk_ids": child_chunk_ids
+                    }
                 })
 
                 logger.info(f"Created Level 1 entry for {property_id}: {address}")
@@ -519,7 +522,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 collection_name=self.level1_collection_name,
                 data=[query_vec_l1],
                 limit=1,
-                output_fields=["property_id", "child_chunk_ids", "data", "report_id", "pdf_filename"],
+                output_fields=["property_id", "address", "metadata"],
                 search_params=level1_search_params
             )
             
@@ -535,15 +538,15 @@ Provide a clear, structured summary in 2-3 sentences:"""
             level1_docs = []
 
             for hit in res1[0]:
-                # Extract data from the nested structure
-                data = hit.get("data", {})
-                address = data.get("address", "Unknown Address") if isinstance(data, dict) else "Unknown Address"
+                # Extract data from the new Level 1 structure
+                address = hit.get("address", "Unknown Address")
+                metadata = hit.get("metadata", {})
 
                 doc_info = {
                     "property_id": hit.get("property_id"),
                     "address": address,
-                    "report_id": hit.get("report_id"),
-                    "pdf_filename": hit.get("pdf_filename"),
+                    "report_id": metadata.get("report_id"),
+                    "pdf_filename": metadata.get("pdf_filename"),
                     "distance": hit.get("distance", 0)
                 }
                 level1_docs.append(doc_info)
@@ -555,8 +558,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 print(f"pdf_filename: {doc_info['pdf_filename']}")
                 print(f"distance: {doc_info['distance']}")
 
-                # Get child chunk IDs
-                child_chunk_ids = hit.get("child_chunk_ids", [])
+                # Get child chunk IDs from metadata
+                child_chunk_ids = metadata.get("child_chunk_ids", [])
                 if isinstance(child_chunk_ids, list):
                     retrieved_chunk_ids.extend(child_chunk_ids)
 
