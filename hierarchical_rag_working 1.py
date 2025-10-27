@@ -18,6 +18,9 @@ from tqdm import tqdm
 # Import query router
 from src.query_router import QueryRouter, QueryAnalysis
 
+# Import LLM response handlers
+from llm_response_handlers import LLMResponseHandlers
+
 
 # Simple MilvusCollectionManager class
 class MilvusCollectionManager:
@@ -91,6 +94,9 @@ class HierarchicalRAG:
 
         # Initialize query router
         self.query_router = QueryRouter(region_name=region_name, model_id="anthropic.claude-3-haiku-20240307-v1:0")
+
+        # Initialize LLM response handlers
+        self.llm_handlers = LLMResponseHandlers(self.bedrock_client, self.model_id)
 
         # Initialize Milvus client (using full Milvus via Docker)
         logger.info("🔗 Connecting to Milvus database at http://localhost:19530")
@@ -1030,228 +1036,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
         return f"Property measurement data for {section.lower()} containing detailed specifications and calculations."
 
         
-    def generate_llm_response(self, query: str, results: List[Dict]) -> str:
-        """
-        Use LLM to generate a comprehensive response based on retrieved chunks
-        
-        Args:
-            query: Original user query
-            results: Retrieved chunks from hierarchical search
-            
-        Returns:
-            LLM-generated response string
-        """
-        if not results:
-            return "I couldn't find any relevant information to answer your question."
-        
-        # Prepare context from retrieved chunks
-        context_parts = []
-
-        # Check if we have image chunks
-        images_found = [result for result in results if result.get('chunk_type') == 'image']
-
-        # Check if all results are address-type (similar addresses)
-        address_results = [result for result in results if result.get('chunk_type') == 'address']
-        if len(address_results) == len(results) and address_results:
-            # All results are similar addresses - delegate to specialized handler
-            return self._handle_similar_addresses_case(query, results)
-
-        for i, result in enumerate(results, 1):
-            doc_address = result.get('doc_address', 'Unknown Address')
-            section = result.get('section', 'Unknown Section')
-            chunk_type = result.get('chunk_type', 'text')
-            chunk_text = result.get('chunk_text', '')
-            
-            
-            # Clean up chunk text for context
-            if chunk_text.startswith('Section:'):
-                # Remove the redundant section/type prefixes
-                lines = chunk_text.split('\n')
-                content_lines = []
-                for line in lines:
-                    if line.startswith('Content:'):
-                        content_lines.append(line[8:].strip())  # Remove "Content:" prefix
-                    elif not line.startswith(('Section:', 'Type:')):
-                        content_lines.append(line)
-                chunk_text = '\n'.join(content_lines).strip()
-            
-            context_parts.append(f"""
-Document {i}: {doc_address}
-Section: {section} ({chunk_type})
-Content: {chunk_text}
-""")
-        
-        # Add image chunks directly to context as JSON
-        image_chunks = [result for result in results if result.get('chunk_type') == 'image']
-        if image_chunks:
-            context_parts.append(f"\n\nIMAGE CHUNKS FROM LEVEL 2 SEARCH:")
-            for img_chunk in image_chunks:
-                context_parts.append(f"""
-Image Chunk ID: {img_chunk.get('chunk_id', 'N/A')}
-Document: {img_chunk.get('doc_address', 'Unknown Address')}
-Section: {img_chunk.get('section', 'Unknown Section')}
-Description: {img_chunk.get('chunk_text', 'No description available')}
-""")
-
-        context = "\n".join(context_parts)
-
-        prompt = f"""You are a professional EagleView assistant specializing in roofing analysis and property information.
-
-Your task is to provide accurate, relevant information to customer questions based on retrieved property data.
-
-INFORMATION PROVIDED:
-- Level 1 chunks: General property information and overviews
-- Level 2 chunks: Specific technical details (roof area, facets, pitch, measurements, etc.)
-
-INSTRUCTIONS:
-1. Answer ONLY using the information from the provided chunks
-2. Provide complete, accurate measurements and technical details when available
-3. If exact information is not available, infer reasonable estimates from related chunk data
-4. Be concise but comprehensive - include all relevant measurements and specifications
-5. Use professional, clear language appropriate for roofing industry customers
-6. Include specific numbers, units, and technical terms as they appear in the chunks
-7. Reference image data when relevant to the question
-8. You will receive text chunks, image chunks, and table chunks containing comprehensive property data
-
-QUESTION: {query}
-
-RETRIEVED INFORMATION:
-{context}
-
-Provide a clear, professional answer that directly addresses the customer's question with specific details from the data."""
-
-        try:
-            body = {
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 2000,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
-            }
-            
-            response = self.bedrock_client.invoke_model(
-                modelId=self.model_id,
-                body=json.dumps(body)
-            )
-            
-            response_body = json.loads(response['body'].read())
-            llm_text = response_body['content'][0]['text'].strip()
-            
-            # Try to parse as JSON
-            try:
-                json_response = json.loads(llm_text)
-                # Add images_found to the response if not already included
-                if images_found and 'images_available' not in json_response:
-                    json_response['images_available'] = images_found
-                return json.dumps(json_response, indent=2)
-            except json.JSONDecodeError:
-                # If not valid JSON, return as-is
-                logger.warning("LLM response is not valid JSON, returning as text")
-                return llm_text
-            
-        except Exception as e:
-            logger.error(f"Error generating LLM response: {str(e)}")
-            # Fallback to simple summary
-            return self._create_fallback_response(query, results)
-
-    def _handle_similar_addresses_case(self, query: str, results: List[Dict]) -> str:
-        """
-        Handle the case where all search results are similar addresses
-
-        Args:
-            query: Original user query
-            results: Retrieved chunks (all address-type)
-
-        Returns:
-            LLM-generated response for similar addresses
-        """
-        context = f"I couldn't find an exact match for the property address you specified. However, I found {len(results)} similar properties that might be what you're looking for:\n\n"
-        for i, result in enumerate(results, 1):
-            address = result.get('doc_address', 'Unknown Address')
-            similarity = result.get('data', {}).get('similarity_score', 0)
-            report_id = result.get('report_id', 'Unknown')
-            context += f"{i}. {address} (Similarity: {similarity:.2f})\n   Report ID: {report_id}\n\n"
-
-        context += "Please check if any of these addresses match what you were looking for, or provide more specific address details for a better search."
-
-        prompt = f"""Based on the search results below, provide a helpful response to the user's query about finding property information.
-
-Query: {query}
-
-Search Results:
-{context}
-
-Please provide a response that:
-1. Acknowledges that the exact address wasn't found
-2. Lists the similar addresses found
-3. Suggests the user verify if any match their intended property
-4. Offers to help with more specific searches
-
-Response:"""
-
-        try:
-            body = {
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 1000,
-                "temperature": 0.3,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
-            }
-
-            response = self.bedrock_client.invoke_model(
-                modelId=self.model_id,
-                body=json.dumps(body)
-            )
-
-            response_body = json.loads(response['body'].read())
-            llm_response = response_body['content'][0]['text'].strip()
-
-            return llm_response
-
-        except Exception as e:
-            logger.error(f"Error generating LLM response for similar addresses: {str(e)}")
-            return f"I found {len(results)} similar property addresses to what you were looking for. Please check the details above and let me know if you'd like me to search for a specific one."
-
-    def _create_fallback_response(self, query: str, results: List[Dict]) -> str:
-        """
-        Create a fallback response if LLM fails
-        
-        Args:
-            query: Original user query
-            results: Retrieved chunks
-            
-        Returns:
-            Simple formatted response
-        """
-        response_parts = [f"Based on the roofing reports, here's what I found for your query: '{query}'\n"]
-        
-        for i, result in enumerate(results, 1):
-            doc_address = result.get('doc_address', 'Unknown Address')
-            section = result.get('section', 'Unknown Section')
-            chunk_type = result.get('chunk_type', 'text')
-            
-            response_parts.append(f"{i}. Property: {doc_address}")
-            response_parts.append(f"   Section: {section} ({chunk_type})")
-            
-            # Extract key information from chunk text
-            chunk_text = result.get('chunk_text', '')
-            if 'area:' in chunk_text.lower():
-                # Extract area information
-                lines = chunk_text.split('\n')
-                for line in lines:
-                    if 'area:' in line.lower():
-                        response_parts.append(f"   {line.strip()}")
-            
-            response_parts.append("")
-        
-        return "\n".join(response_parts)
     
     def format_json_response(self, json_response: str) -> str:
         """
@@ -1469,7 +1253,7 @@ Response:"""
             self.print_search_results(query, results)
 
         # Generate LLM response
-        llm_response = self.generate_llm_response(query, results)
+        llm_response = self.llm_handlers.generate_llm_response(query, results)
 
         return llm_response
 
@@ -1506,7 +1290,14 @@ Response:"""
 
         self.print_search_results(query, results)
 
-        llm_response = self.generate_llm_response(query, results)
+        # Use different response generation based on flow
+        if analysis.flow == "1":
+            llm_response = self.llm_handlers.generate_flow1_response(query, results)
+        elif analysis.flow == "2":
+            llm_response = self.llm_handlers.generate_flow2_response(query, results)
+        else:
+            # Fallback to generic response
+            llm_response = self.llm_handlers.generate_llm_response(query, results)
 
         return llm_response, results
 
