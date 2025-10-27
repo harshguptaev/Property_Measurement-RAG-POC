@@ -299,7 +299,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
             try:
                 # Extract document metadata
                 doc_id = doc.get("doc_id", f"doc_{i}")
-                source_file = doc.get("source_file", "unknown.pdf")
                 chunks = doc.get("chunks", [])
 
                 # The first chunk contains property metadata
@@ -476,25 +475,93 @@ Provide a clear, structured summary in 2-3 sentences:"""
         # All queries are treated as property-specific
         return "property_specific"
 
-    def search_hierarchical(self, query: str, level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
+    def search_hierarchical(self, query: str, address: Optional[str] = None, level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
         """
         Perform hierarchical search: Level 1 → Level 2
 
         Args:
             query: Search query
+            address: Optional specific address to search for
             level1_limit: Number of documents to retrieve from Level 1
             level2_limit: Number of chunks to retrieve from Level 2
 
         Returns:
             List of relevant chunks with metadata
         """
-        logger.info(f"🔍 Starting hierarchical search for: '{query}'")
-        
+        logger.info(f"🔍 Starting hierarchical search for: '{query}' (Address: {address})")
+
         try:
+            # If address is provided, first try exact scalar search
+            if address:
+                logger.info(f"🔍 Checking for exact address match: '{address}'")
+                exact_address_results = self.milvus_client.query(
+                    collection_name=self.level1_collection_name,
+                    filter=f'address == "{address}"',
+                    output_fields=["property_id", "address", "metadata"],
+                    limit=1
+                )
+
+                if exact_address_results and len(exact_address_results) > 0:
+                    logger.info(f"✅ Found exact address match: {address}")
+                    # Continue with Level 2 search for this exact match
+                    exact_match = exact_address_results[0]
+                    property_id = exact_match.get("property_id")
+                    metadata = exact_match.get("metadata", {})
+                    child_chunk_ids = metadata.get("child_chunk_ids", [])
+
+                    if not child_chunk_ids:
+                        logger.warning("No child chunks found for exact address match")
+                        return []
+
+                    # Get Level 2 results for this specific property
+                    query_vec_l2 = self.titan_embed_text(query, target_dim=1536)
+                    level2_search_params = {
+                        "metric_type": "COSINE",
+                        "params": {"ef": 96}
+                    }
+
+                    res2 = self.milvus_client.search(
+                        collection_name=self.level2_collection_name,
+                        data=[query_vec_l2],
+                        limit=level2_limit,
+                        filter=f'property_id == "{property_id}"',
+                        output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "data"],
+                        search_params=level2_search_params
+                    )
+
+                    if not res2 or not res2[0]:
+                        logger.warning("No Level 2 results found for exact address match")
+                        return []
+
+                    # Format results for exact address match
+                    final_results = []
+                    for result in res2[0]:
+                        chunk_info = {
+                            "chunk_id": result.get("chunk_id"),
+                            "property_id": property_id,
+                            "section": result.get("section"),
+                            "chunk_type": result.get("type"),
+                            "chunk_text": result.get("chunk_text"),
+                            "data": result.get("data"),
+                            "distance": result.get("distance", 0),
+                            "doc_address": address,
+                            "report_id": metadata.get("report_id"),
+                            "pdf_filename": metadata.get("pdf_filename")
+                        }
+                        final_results.append(chunk_info)
+
+                    final_results.sort(key=lambda x: x["distance"])
+                    logger.info(f"✅ Found {len(final_results)} chunks for exact address match")
+                    return final_results
+                else:
+                    logger.info(f"❌ No exact address match found for: '{address}'")
+                    # Fall back to vector search for similar addresses
+                    logger.info("🔄 Falling back to vector search for similar addresses")
+
             # Step 1: Embed query for Level 1 (384 dimensions for address/geometry lookup)
             query_vec_l1 = self.titan_embed_text(query, target_dim=384)
 
-            # Step 2: Embed query for Level 2 (1536 dimensions for semantic search)
+            # Step 2: Embed query for Level 2 (1536 dimensions for semantic search) - only if we continue to Level 2
             query_vec_l2 = self.titan_embed_text(query, target_dim=1536)
 
             # Level 1 search parameters (efSearch = 64)
@@ -508,15 +575,17 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 "metric_type": "COSINE",
                 "params": {"ef": 96}  # efSearch for L2
             }
-            # search for exact address
 
-            
             # Step 3: Search Level 1 (Parent Chunks)
-            logger.info("📊 Searching Level 1 (Parent Chunk Index)...")
+            # If we have an address but no exact match, search for 6 similar addresses
+            # Otherwise, use the default limit
+            search_limit = 6 if address else level1_limit
+            logger.info(f"📊 Searching Level 1 (Parent Chunk Index) with limit {search_limit}...")
+
             res1 = self.milvus_client.search(
                 collection_name=self.level1_collection_name,
                 data=[query_vec_l1],
-                limit=1,
+                limit=search_limit,
                 output_fields=["property_id", "address", "metadata"],
                 search_params=level1_search_params
             )
@@ -525,6 +594,34 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 logger.warning("No results found in Level 1 Index")
                 return []
 
+            # If we had an address but no exact match was found, return similar addresses from Level 1
+            if address:
+                logger.info("📋 Returning similar addresses from Level 1 (no exact match found)")
+                similar_addresses = []
+                for hit in res1[0]:
+                    # Transform address info into chunk-like format for display
+                    address_info = {
+                        "property_id": hit.get("property_id"),
+                        "doc_id": hit.get("metadata", {}).get("report_id", "unknown"),  # Add doc_id
+                        "chunk_id": f"addr_{hit.get('property_id')}",  # Create a chunk-like ID
+                        "section": "Address Information",
+                        "chunk_type": "address",  # Special type for addresses
+                        "chunk_text": f"Similar Property Address: {hit.get('address', 'Unknown Address')}\nSimilarity Score: {(1 - hit.get('distance', 0)):.4f}",
+                        "data": {
+                            "address": hit.get("address", "Unknown Address"),
+                            "report_id": hit.get("metadata", {}).get("report_id"),
+                            "pdf_filename": hit.get("metadata", {}).get("pdf_filename"),
+                            "similarity_score": 1 - hit.get("distance", 0)
+                        },
+                        "doc_address": hit.get("address", "Unknown Address"),
+                        "report_id": hit.get("metadata", {}).get("report_id"),
+                        "pdf_filename": hit.get("metadata", {}).get("pdf_filename"),
+                        "distance": hit.get("distance", 0)
+                    }
+                    similar_addresses.append(address_info)
+
+                logger.info(f"✅ Found {len(similar_addresses)} similar addresses")
+                return similar_addresses
 
             print(f"Fetching Chunks from Level 1 Index - Address matching")
             print(f"res1 ::: {res1}")
@@ -534,12 +631,12 @@ Provide a clear, structured summary in 2-3 sentences:"""
 
             for hit in res1[0]:
                 # Extract data from the new Level 1 structure
-                address = hit.get("address", "Unknown Address")
+                hit_address = hit.get("address", "Unknown Address")
                 metadata = hit.get("metadata", {})
 
                 doc_info = {
                     "property_id": hit.get("property_id"),
-                    "address": address,
+                    "address": hit_address,
                     "report_id": metadata.get("report_id"),
                     "pdf_filename": metadata.get("pdf_filename"),
                     "distance": hit.get("distance", 0)
@@ -953,6 +1050,12 @@ Provide a clear, structured summary in 2-3 sentences:"""
         # Check if we have image chunks
         images_found = [result for result in results if result.get('chunk_type') == 'image']
 
+        # Check if all results are address-type (similar addresses)
+        address_results = [result for result in results if result.get('chunk_type') == 'address']
+        if len(address_results) == len(results) and address_results:
+            # All results are similar addresses - delegate to specialized handler
+            return self._handle_similar_addresses_case(query, results)
+
         for i, result in enumerate(results, 1):
             doc_address = result.get('doc_address', 'Unknown Address')
             section = result.get('section', 'Unknown Section')
@@ -1053,7 +1156,69 @@ Provide a clear, professional answer that directly addresses the customer's ques
             logger.error(f"Error generating LLM response: {str(e)}")
             # Fallback to simple summary
             return self._create_fallback_response(query, results)
-    
+
+    def _handle_similar_addresses_case(self, query: str, results: List[Dict]) -> str:
+        """
+        Handle the case where all search results are similar addresses
+
+        Args:
+            query: Original user query
+            results: Retrieved chunks (all address-type)
+
+        Returns:
+            LLM-generated response for similar addresses
+        """
+        context = f"I couldn't find an exact match for the property address you specified. However, I found {len(results)} similar properties that might be what you're looking for:\n\n"
+        for i, result in enumerate(results, 1):
+            address = result.get('doc_address', 'Unknown Address')
+            similarity = result.get('data', {}).get('similarity_score', 0)
+            report_id = result.get('report_id', 'Unknown')
+            context += f"{i}. {address} (Similarity: {similarity:.2f})\n   Report ID: {report_id}\n\n"
+
+        context += "Please check if any of these addresses match what you were looking for, or provide more specific address details for a better search."
+
+        prompt = f"""Based on the search results below, provide a helpful response to the user's query about finding property information.
+
+Query: {query}
+
+Search Results:
+{context}
+
+Please provide a response that:
+1. Acknowledges that the exact address wasn't found
+2. Lists the similar addresses found
+3. Suggests the user verify if any match their intended property
+4. Offers to help with more specific searches
+
+Response:"""
+
+        try:
+            body = {
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 1000,
+                "temperature": 0.3,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ]
+            }
+
+            response = self.bedrock_client.invoke_model(
+                modelId=self.model_id,
+                body=json.dumps(body)
+            )
+
+            response_body = json.loads(response['body'].read())
+            llm_response = response_body['content'][0]['text'].strip()
+
+            return llm_response
+
+        except Exception as e:
+            logger.error(f"Error generating LLM response for similar addresses: {str(e)}")
+            return f"I found {len(results)} similar property addresses to what you were looking for. Please check the details above and let me know if you'd like me to search for a specific one."
+
     def _create_fallback_response(self, query: str, results: List[Dict]) -> str:
         """
         Create a fallback response if LLM fails
@@ -1287,7 +1452,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
         # Route to appropriate search flow
         if analysis.flow == "1":
             logger.info("🏠 Using Flow 1: Property-specific hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_hierarchical(query=analysis.query, address=analysis.address, level1_limit=level1_limit, level2_limit=level2_limit)
         elif analysis.flow == "2":
             logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
             # For Flow 2, we want to find multiple properties, so use higher limits
@@ -1297,7 +1462,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_hierarchical(query=analysis.query, address=analysis.address, level1_limit=level1_limit, level2_limit=level2_limit)
 
         # Optionally show raw results
         if show_raw_results:
@@ -1327,7 +1492,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
         # Route to appropriate search flow
         if analysis.flow == "1":
             logger.info("🏠 Using Flow 1: Property-specific hierarchical search")
-            results = self.search_hierarchical(analysis.query, level1_limit, level2_limit)
+            results = self.search_hierarchical(analysis.query, analysis.address, level1_limit, level2_limit)
         elif analysis.flow == "2":
             logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
             # For Flow 2, we want to find multiple properties, so use higher limits
@@ -1337,7 +1502,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_hierarchical(query=analysis.query, address=analysis.address, level1_limit=level1_limit, level2_limit=level2_limit)
 
         self.print_search_results(query, results)
 
