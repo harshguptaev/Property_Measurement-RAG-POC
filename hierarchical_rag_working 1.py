@@ -1297,7 +1297,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             llm_response = self.llm_handlers.generate_flow2_response(query, results)
         else:
             # Fallback to generic response
-            llm_response = self.llm_handlers.generate_llm_response(query, results)
+            llm_response = self.llm_handlers.generate_flow1_response(query, results)
 
         return llm_response, results
 

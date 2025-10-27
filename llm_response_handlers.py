@@ -75,7 +75,7 @@ class LLMResponseHandlers:
             address = result.get('doc_address', 'Unknown Address')
             similarity = result.get('data', {}).get('similarity_score', 0)
             report_id = result.get('report_id', 'Unknown')
-            context += f"{i}. {address} (Similarity: {similarity:.2f})\n   Report ID: {report_id}\n\n"
+            context += f"{i}. {address}\n   Report ID: {report_id}\n\n Similarity Score: {similarity:.2f}\n\n"
 
         context += "Please check if any of these addresses match what you were looking for, or provide more specific address details for a better search."
 
@@ -91,6 +91,8 @@ Please provide a response that:
 2. Lists the similar addresses found
 3. Suggests the user verify if any match their intended property
 4. Offers to help with more specific searches
+5. Please sort them in highest similarity to lowest similarity
+6. Do not include the similarity score and report id in the response, just the addresses 
 
 Response:"""
 
@@ -180,29 +182,31 @@ Description: {img_chunk.get('chunk_text', 'No description available')}
 
         context = "\n".join(context_parts)
 
-        prompt = f"""You are a professional EagleView assistant specializing in detailed roofing analysis for specific properties.
+        prompt = f"""You are a professional EagleView assistant specializing in roofing analysis and property information.
 
-Your task is to provide comprehensive, property-specific information based on the retrieved roofing report data.
+Your task is to provide accurate, relevant information to customer questions based on retrieved property data.
 
 INFORMATION PROVIDED:
-- Detailed property measurements and specifications
-- Roof geometry, pitch, and structural details
-- Visual data and image descriptions when available
+- Level 1 chunks: High-level property summaries including basic property details, overall roof assessment, structural overview, and general condition reports
+- Level 2 chunks: Detailed technical specifications including precise roof measurements (square footage, dimensions), roof geometry details (pitch angles in degrees, facet counts, azimuth directions), structural components (rafter spacing, penetrations), material specifications, and comprehensive measurement data
+
 
 INSTRUCTIONS:
-1. Focus on THIS SPECIFIC PROPERTY - provide detailed, accurate measurements
-2. Include all relevant technical specifications (area, pitch, facets, etc.)
-3. Reference visual data when it helps explain measurements or conditions
-4. Be precise with numbers, units, and technical terminology
-5. Provide complete roofing specifications for replacement/repair planning
-6. If measurements are available, calculate or reference total areas, pitches, etc.
-
+1. Answer ONLY using the information from the provided chunks
+2. Provide complete, accurate measurements and technical details when available
+3. If exact information is not available, infer reasonable estimates from related chunk data
+4. Be concise but comprehensive - include all relevant measurements and specifications
+5. Use professional, clear language appropriate for roofing industry customers
+6. Include specific numbers, units, and technical terms as they appear in the chunks
+7. Reference image data when relevant to the question
+8. You will receive text chunks, image chunks, and table chunks containing comprehensive property data
+9. Highlight the most relevant information in the response
 QUESTION: {query}
 
-PROPERTY DATA:
+RETRIEVED INFORMATION:
 {context}
 
-Provide a detailed, professional response with specific measurements and technical details for this property."""
+Provide a clear, professional answer that directly addresses the customer's question with specific details from the data."""
 
         try:
             body = {
@@ -239,7 +243,7 @@ Provide a detailed, professional response with specific measurements and technic
             return self._create_fallback_response(query, results)
 
     def generate_flow2_response(self, query: str, results: List[Dict]) -> str:
-        """
+        f"""
         Generate LLM response for Flow 2: Non-property-specific criteria search
 
         Args:
@@ -247,7 +251,11 @@ Provide a detailed, professional response with specific measurements and technic
             results: Retrieved chunks from criteria-based search across multiple properties
 
         Returns:
-            LLM-generated response string focused on comparisons and summaries
+            1. LLM should repond with property address in comparison to what is asked in the query
+            2. Dont specify the internal document and chunks you are retreiving, just the information you are providing to the user
+            3. Dont sound like a robot, sound like a human
+            4. Mentioning that you have many properties in database but you are only providing {len(results)} properties to the user
+            5. Be clear and concise in your response
         """
         if not results:
             return "I couldn't find any properties matching your criteria."
