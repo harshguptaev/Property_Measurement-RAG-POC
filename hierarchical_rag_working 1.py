@@ -1412,16 +1412,12 @@ def load_agentic_rag_output() -> List[Dict]:
     return documents
 
 
-def main(query: str = None, build_index: bool = True, show_raw: bool = False, raw_only: bool = False, json_only: bool = False):
+def main(build_index: bool = True):
     """
-    Main function to build hierarchical indices and demonstrate search
-    
+    Main function to build hierarchical indices
+
     Args:
-        query: Optional query string to search for
         build_index: Whether to build the indices (set to False if already built)
-        show_raw: Whether to show raw search results along with LLM response
-        raw_only: Whether to show only raw search results (no LLM response)
-        json_only: Whether to show only raw JSON response from LLM (no formatting)
     """
     logger.info("🚀 Starting Hierarchical RAG System")
     
@@ -1448,51 +1444,8 @@ def main(query: str = None, build_index: bool = True, show_raw: bool = False, ra
         hierarchical_rag.show_collection_status()
     else:
         logger.info("⏭️ Skipping index building (using existing indices)")
-    
-    # Handle query input
-    if not query:
-        logger.info("No query provided. Use --query to specify a search query.")
-        return
 
-    # Single query provided as parameter
-    test_queries = [query]
-    
-    if raw_only:
-        logger.info("🔍 Testing hierarchical search (raw results only)...")
-        for test_query in test_queries:
-            print(f"\n{'='*80}")
-            results = hierarchical_rag.search_hierarchical( query=test_query, level1_limit=1, level2_limit=5)
-            hierarchical_rag.print_search_results(test_query, results)
-            time.sleep(1)  # Small delay between queries
-    else:
-        logger.info("🔍 Testing hierarchical search with LLM response generation...")
-        for test_query in test_queries:
-            print(f"\n{'='*80}")
-            print(f"🤔 Question: {test_query}")
-            print("=" * 80)
-            
-            # Get LLM-generated response
-            llm_response = hierarchical_rag.answer_query(test_query, level1_limit=2, level2_limit=5, show_raw_results=show_raw)
-            
-            print("🤖 AI Assistant Response:")
-            print("-" * 40)
-            
-            if json_only:
-                # Show raw JSON response
-                print(llm_response)
-            else:
-                # Try to format as JSON if possible, otherwise display as-is
-                try:
-                    formatted_response = hierarchical_rag.format_json_response(llm_response)
-                    print(formatted_response)
-                except:
-                    print(llm_response)
-            
-            print("=" * 80)
-            
-            time.sleep(2)  # Small delay between queries
-    
-    logger.info("✅ Hierarchical RAG system demonstration completed!")
+    logger.info("✅ Hierarchical RAG system setup completed!")
 
 
 if __name__ == "__main__":
@@ -1502,30 +1455,21 @@ if __name__ == "__main__":
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
         Examples:
-        # Build indices and run default queries (clears existing collections)
+        # Build indices (clears existing collections)
         python src/hierarchical_rag_working.py
-        
-        # Search with a specific query (will build indices first with duplicate prevention)
-        python src/hierarchical_rag_working.py --query "What is the roof area?"
-        
-        # Search without rebuilding indices (faster if indices already exist)
-        python src/hierarchical_rag_working.py --query "What are the obstructions?" --no-build
-        
+
+        # Build indices without clearing existing collections
+        python src/hierarchical_rag_working.py --no-build
+
         # Show current collection status
         python src/hierarchical_rag_working.py --show-status
-        
+
         # Clear all collections (use with caution!)
         python src/hierarchical_rag_working.py --clear-collections
-        
-        # Interactive mode - just build indices, then you can call functions directly
+
+        # Just build indices without clearing, then exit
         python src/hierarchical_rag_working.py --build-only
         """
-    )
-    
-    parser.add_argument(
-        "--query", "-q",
-        type=str,
-        help="Query to search for in the hierarchical RAG system"
     )
     
     parser.add_argument(
@@ -1533,29 +1477,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Skip building indices (use existing indices)"
     )
-    
+
     parser.add_argument(
         "--build-only",
-        action="store_true", 
-        help="Only build indices, don't run any queries"
-    )
-    
-    parser.add_argument(
-        "--show-raw",
         action="store_true",
-        help="Show raw search results along with LLM response"
-    )
-    
-    parser.add_argument(
-        "--raw-only",
-        action="store_true",
-        help="Show only raw search results (no LLM response)"
-    )
-    
-    parser.add_argument(
-        "--json-only",
-        action="store_true",
-        help="Show only raw JSON response from LLM (no formatting)"
+        help="Only build indices, don't run queries"
     )
     
     parser.add_argument(
@@ -1593,10 +1519,10 @@ if __name__ == "__main__":
     
     # Handle build-only mode
     if args.build_only:
-        main(query=None, build_index=True)
-        print("\n✅ Indices built successfully! You can now run queries with --no-build flag.")
+        main(build_index=True)
+        print("\n✅ Indices built successfully! You can now use the system.")
         sys.exit(0)
-    
+
     # Run main function with parsed arguments
     build_index = not args.no_build
-    main(query=args.query, build_index=build_index, show_raw=args.show_raw, raw_only=args.raw_only, json_only=args.json_only)
+    main(build_index=build_index)
