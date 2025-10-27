@@ -119,33 +119,5 @@
         }
       ]
     }
-  },
-  {
-    "chunk_id": "C003",
-    "property_id": "PROP_67673289",
-    "section": "Diagrams",
-    "type": "image",
-    "data": {
-      "Lengths": "extracted_images/report_67673289/Lengths.png",
-      "Pitch (Degrees)": "extracted_images/report_67673289/Pitch_Degrees.png",
-      "Pitch (on 12)": "extracted_images/report_67673289/Pitch_on_12.png",
-      "Rafters": "extracted_images/report_67673289/Rafters.png",
-      "Azimuth": "extracted_images/report_67673289/Azimuth.png",
-      "Area": "extracted_images/report_67673289/Area.png",
-      "Roof Obstructions": "extracted_images/report_67673289/Roof_Penetrations.png"
-    }
-  },
-  {
-    "chunk_id": "C004",
-    "property_id": "PROP_67673289",
-    "section": "Imagery",
-    "type": "image",
-    "data": {
-      "North": "extracted_images/report_67673289/North_Side.png",
-      "South": "extracted_images/report_67673289/South_Side.png",
-      "East": "extracted_images/report_67673289/East_Side.png",
-      "West": "extracted_images/report_67673289/West_Side.png",
-      "Top": "extracted_images/report_67673289/Top_View.png"
-    }
   }
 ]

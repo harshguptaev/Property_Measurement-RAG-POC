@@ -29,9 +29,14 @@ def _extract_premium_header(text: str) -> Dict[str, Any]:
     if date_match:
         data['date'] = date_match.group(1)
 
-    address_match = re.search(r'(\d+[^,\n]+,[^,\n]+,\s*[A-Z]{2}\s+\d{5})', text)
+    address_match = re.search(r'(\d+[^,\n]+(?:,\s*[^,\n]+)?,\s*[A-Z]{2}\s+\d{5})', text)
     if address_match:
-        data['property_address'] = address_match.group(1).strip()
+        # Clean up extra spaces in the address
+        address = address_match.group(1).strip()
+        # Normalize spacing: single space after commas, single spaces between words
+        address = re.sub(r',\s+', ', ', address)  # Normalize comma spacing
+        address = re.sub(r'\s+', ' ', address)     # Normalize multiple spaces to single space
+        data['property_address'] = address
 
     report_match = re.search(r'Report:\s*(\d+)', text)
     if report_match:
@@ -42,18 +47,19 @@ def _extract_premium_header(text: str) -> Dict[str, Any]:
 
 def _extract_prepared_for_premium(text: str) -> Optional[Dict[str, Any]]:
     """Extract prepared for information from premium report."""
-    prepared_section = re.search(r'Prepared for\s*(.*?)(?=September \d{1,2}, \d{4}|Property Address:)', text, re.DOTALL | re.IGNORECASE)
-    if not prepared_section:
+    # Look for the line immediately following "## Prepared for"
+    prepared_match = re.search(r'## Prepared for\s*\n\s*([^\n]+)', text, re.IGNORECASE)
+    if not prepared_match:
         return None
 
-    section_text = prepared_section.group(1)
-    lines = [line.strip() for line in section_text.split('\n') if line.strip()]
+    # The owner information is all in one line
+    owner_line = prepared_match.group(1).strip()
 
-    if len(lines) >= 4:
+    # Parse the owner line - typically: "Name Company Address Phone"
+    # We'll take everything as contact for now
+    if owner_line:
         data = {}
-        data['contact'] = f"{lines[0]} {lines[1]}" if len(lines) > 1 else lines[0]
-        data['address'] = ', '.join(lines[2:-1]) if len(lines) > 3 else lines[2] if len(lines) > 2 else ""
-        data['phone'] = lines[-1] if lines else ""
+        data['contact'] = owner_line
         return data
 
     return None

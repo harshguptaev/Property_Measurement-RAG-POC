@@ -101,11 +101,7 @@ def main():
 
             documents = process_directory_with_docling(
                 directory_path=str(input_dir),
-                extract_images=True,
-                enable_s3_upload=enable_s3,
-                s3_access_key_id=aws_access_key_id,
-                s3_secret_access_key=aws_secret_access_key,
-                s3_session_token=aws_session_token
+                extract_images=True
             )
 
             print(f"✅ Successfully processed {len(documents)} documents!")
