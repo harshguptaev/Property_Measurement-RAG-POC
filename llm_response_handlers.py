@@ -252,6 +252,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
 
         Returns:
             1. LLM should repond with property address in comparison to what is asked in the query
+            2. So dont give chunks that are not related to the query if asked to comapare quatities like area, pitch, facets, etc. that is asked
             2. Dont specify the internal document and chunks you are retreiving, just the information you are providing to the user
             3. Dont sound like a robot, sound like a human
             4. Mentioning that you have many properties in database but you are only providing {len(results)} properties to the user

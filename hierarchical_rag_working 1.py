@@ -781,7 +781,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             logger.error(f"Error during hierarchical search: {str(e)}")
             return []
 
-    def search_flow2(self, query: str, level1_limit: int = 5, level2_limit: int = 10) -> List[Dict]:
+    def search_flow2(self, query: str, level1_limit: int = 10, level2_limit: int = 10) -> List[Dict]:
         """
         Perform Flow 2 search: Level 2 first (find relevant chunks) → Level 1 (get property details)
 
@@ -867,7 +867,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 res1 = self.milvus_client.search(
                     collection_name=self.level1_collection_name,
                     data=[level1_query_vec],
-                    limit=8,
+                    limit=10,
                     filter=property_filter,
                     output_fields=["property_id", "address", "metadata"],
                 )
@@ -1281,7 +1281,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
             # For Flow 2, we want to find multiple properties, so use higher limits
             flow2_level1_limit = max(level1_limit, 10)  # At least 10 properties for Flow 2
-            flow2_level2_limit = max(level2_limit, 20)  # At least 20 chunks for Flow 2
+            flow2_level2_limit = max(level2_limit, 10)  # At least 20 chunks for Flow 2
             results = self.search_flow2(analysis.query, flow2_level1_limit, flow2_level2_limit)
         else:
             # Fallback to hierarchical search
