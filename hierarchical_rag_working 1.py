@@ -15,6 +15,9 @@ import boto3
 from pymilvus import MilvusClient
 from tqdm import tqdm
 
+# Import query router
+from src.query_router import QueryRouter, QueryAnalysis
+
 
 # Simple MilvusCollectionManager class
 class MilvusCollectionManager:
@@ -74,7 +77,7 @@ class HierarchicalRAG:
     - Level 2: Chunk Index
     """
     
-    def __init__(self, region_name: str = "us-east-1", model_id: str = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"):
+    def __init__(self, region_name: str = "us-east-1", model_id: str = "anthropic.claude-3-haiku-20240307-v1:0"):
         """
         Initialize the Hierarchical RAG System
         What was the % of Roof and Area covered where roof pitch is about 6/12 for address  2455 New Holland Cir, Murfreesboro, TN 37128
@@ -85,6 +88,9 @@ class HierarchicalRAG:
         self.bedrock_client = boto3.client('bedrock-runtime', region_name=region_name)
         self.model_id = model_id
         self.region_name = region_name
+
+        # Initialize query router
+        self.query_router = QueryRouter(region_name=region_name, model_id="anthropic.claude-3-haiku-20240307-v1:0")
 
         # Initialize Milvus client (using full Milvus via Docker)
         logger.info("🔗 Connecting to Milvus database at http://localhost:19530")
@@ -188,7 +194,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         
         try:
             body = {
-                "anthropic_version": "anthropic.claude-3-7-sonnet-20250219-v1:0",
+                "anthropic_version": "anthropic.claude-3-haiku-20240307-v1:0",
                 "max_tokens": 1000,
                 "messages": [
                     {
@@ -342,7 +348,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
                     "vector": address_embedding,
                     "property_id": property_id,
                     "address": address,
-                    "address_vector": address_embedding,
                     "geometry": {
                         "type": "Point",
                         "coordinates": [longitude, latitude]
@@ -503,6 +508,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 "metric_type": "COSINE",
                 "params": {"ef": 96}  # efSearch for L2
             }
+            # search for exact address
+
             
             # Step 3: Search Level 1 (Parent Chunks)
             logger.info("📊 Searching Level 1 (Parent Chunk Index)...")
@@ -669,6 +676,152 @@ Provide a clear, structured summary in 2-3 sentences:"""
             
         except Exception as e:
             logger.error(f"Error during hierarchical search: {str(e)}")
+            return []
+
+    def search_flow2(self, query: str, level1_limit: int = 5, level2_limit: int = 10) -> List[Dict]:
+        """
+        Perform Flow 2 search: Level 2 first (find relevant chunks) → Level 1 (get property details)
+
+        This flow is used for non-property-specific queries where we want to find properties
+        that match certain criteria (e.g., "find properties with area > 2000 sq ft").
+
+        Args:
+            query: Search query (criteria for finding properties)
+            level1_limit: Number of documents to retrieve from Level 1 (after finding relevant chunks)
+            level2_limit: Number of chunks to retrieve from Level 2
+
+        Returns:
+            List of relevant chunks with property metadata
+        """
+        logger.info(f"🔍 Starting Flow 2 search for: '{query}'")
+
+        try:
+            # Step 1: Embed query for Level 2 (1536 dimensions for semantic search)
+            query_vec_l2 = self.titan_embed_text(query, target_dim=1536)
+
+            # Level 2 search parameters
+            level2_search_params = {
+                "metric_type": "COSINE",
+                "params": {"ef": 96}
+            }
+
+            # Step 2: Search Level 2 (Chunks) - find chunks that match the criteria
+            logger.info("📊 Searching Level 2 (Chunk Index) for property criteria...")
+            res2 = self.milvus_client.search(
+                collection_name=self.level2_collection_name,
+                data=[query_vec_l2],
+                limit=20,
+                output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "metadata"],
+                search_params=level2_search_params
+            )
+
+            if not res2 or not res2[0]:
+                logger.warning("No results found in Level 2 Index")
+                return []
+
+            # Step 3: Collect relevant property IDs from Level 2 results
+            relevant_property_ids = []
+            level2_chunks = []
+
+            print(f"Fetching Chunks from Level 2 Index")
+            print(f"\n{'='*80}")
+
+            for result in res2[0]:
+                entity = result.get("entity", {})
+                property_id = entity.get("property_id")
+                if property_id and property_id not in relevant_property_ids:
+                    relevant_property_ids.append(property_id)
+
+                chunk_info = {
+                    "chunk_id": entity.get("chunk_id"),
+                    "property_id": property_id,
+                    "section": entity.get("section"),
+                    "chunk_type": entity.get("type"),
+                    "chunk_text": entity.get("chunk_text"),
+                    "metadata": entity.get("metadata", {}),
+                    "distance": result.get("distance", 0)
+                }
+                level2_chunks.append(chunk_info)
+
+            logger.info(f"📋 Found {len(level2_chunks)} relevant chunks from {len(relevant_property_ids)} properties")
+
+            # Step 4: Search Level 1 to get property details for relevant properties
+            logger.info("📊 Searching Level 1 (Property Index) for property details...")
+
+            # Get property details from Level 1 for all relevant properties found in Level 2
+            level1_docs = []
+            if relevant_property_ids:
+                # Create filter for property IDs found in Level 2
+                property_ids_quoted = [f'"{pid}"' for pid in relevant_property_ids]
+                property_filter = f'property_id in [{",".join(property_ids_quoted)}]'
+
+                # Use a simple vector for the search (we're filtering by property_id anyway)
+                level1_query_vec = self.titan_embed_text("property", target_dim=384)
+
+                
+
+                # Search Level 1 filtered by property IDs from Level 2 results
+                res1 = self.milvus_client.search(
+                    collection_name=self.level1_collection_name,
+                    data=[level1_query_vec],
+                    limit=8,
+                    filter=property_filter,
+                    output_fields=["property_id", "address", "metadata"],
+                )
+
+                if res1 and res1[0]:
+                    for hit in res1[0]:
+                        entity = hit.get("entity", {})
+                        prop_id = entity.get("property_id")
+                        address = entity.get("address", "Unknown Address")
+                        metadata = entity.get("metadata", {})
+
+                        doc_info = {
+                            "property_id": prop_id,
+                            "address": address,
+                            "report_id": metadata.get("report_id"),
+                            "pdf_filename": metadata.get("pdf_filename"),
+                            "distance": hit.get("distance", 0)
+                        }
+                        level1_docs.append(doc_info)
+
+            # Step 5: Combine results - attach property details to chunks
+            final_results = []
+
+            for chunk in level2_chunks:
+                chunk_property_id = chunk["property_id"]
+
+                # Find matching property details
+                property_details = None
+                for doc_info in level1_docs:
+                    if doc_info["property_id"] == chunk_property_id:
+                        property_details = doc_info
+                        break
+
+                # Attach property details to chunk
+                if property_details:
+                    chunk_with_property = chunk.copy()
+                    chunk_with_property["doc_address"] = property_details["address"]
+                    chunk_with_property["report_id"] = property_details["report_id"]
+                    chunk_with_property["pdf_filename"] = property_details["pdf_filename"]
+                    final_results.append(chunk_with_property)
+
+            # Sort by relevance (distance)
+            final_results.sort(key=lambda x: x["distance"])
+
+            # Limit final results
+            final_results = final_results[:level2_limit]
+
+            print(f"Total chunks found: {len(level2_chunks)}")
+            print(f"Properties found: {len(level1_docs)}")
+            print(f"Final results: {len(final_results)}")
+            print("=" * 80)
+
+            logger.info(f"✅ Flow 2 search completed. Found {len(final_results)} relevant chunks from {len(level1_docs)} properties")
+            return final_results
+
+        except Exception as e:
+            logger.error(f"Error during Flow 2 search: {str(e)}")
             return []
 
     def generate_semantic_text(self, section: str, chunk_type: str, data: Dict) -> str:
@@ -1113,7 +1266,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
 
     def answer_query(self, query: str, level1_limit: int = 1, level2_limit: int = 5, show_raw_results: bool = False) -> str:
         """
-        Complete query answering pipeline: detect query type and route to appropriate search flow
+        Complete query answering pipeline: analyze query with router and route to appropriate search flow
 
         Note: For server/API use, use answer_query_with_raw_results() instead to get both LLM response and raw search results.
 
@@ -1126,9 +1279,25 @@ Provide a clear, professional answer that directly addresses the customer's ques
         Returns:
             LLM-generated response string
         """
-        # All queries use hierarchical search flow
-        logger.info("🏠 Using hierarchical search flow (property-specific query)")
-        results = self.search_hierarchical(query, level1_limit, level2_limit)
+        # Analyze query with router
+        analysis = self.query_router.analyze_query(query)
+        
+        logger.info(f"🔍 Query Analysis: Flow {analysis.flow}, Address: {analysis.address}, Query: {analysis.query}")
+
+        # Route to appropriate search flow
+        if analysis.flow == "1":
+            logger.info("🏠 Using Flow 1: Property-specific hierarchical search")
+            results = self.search_hierarchical(query=analysis.query, level1_limit=level1_limit, level2_limit=level2_limit)
+        elif analysis.flow == "2":
+            logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
+            # For Flow 2, we want to find multiple properties, so use higher limits
+            flow2_level1_limit = max(level1_limit, 10)  # At least 10 properties for Flow 2
+            flow2_level2_limit = max(level2_limit, 20)  # At least 20 chunks for Flow 2
+            results = self.search_flow2(analysis.query, flow2_level1_limit, flow2_level2_limit)
+        else:
+            # Fallback to hierarchical search
+            logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
+            results = self.search_hierarchical(query=analysis.query, level1_limit=level1_limit, level2_limit=level2_limit)
 
         # Optionally show raw results
         if show_raw_results:
@@ -1147,19 +1316,33 @@ Provide a clear, professional answer that directly addresses the customer's ques
             query: User's question
             level1_limit: Number of documents to retrieve from Level 1 (for hierarchical search)
             level2_limit: Number of chunks to retrieve from Level 2 (for hierarchical search)
-            show_raw_results: Whether to print raw search results
 
         Returns:
             Tuple of (LLM response string, raw search results)
         """
-        # Detect query type and route to appropriate search strategy
-      
-        results = self.search_hierarchical(query, level1_limit, level2_limit)
-        
+        # Analyze query with router
+        analysis = self.query_router.analyze_query(query)
+        logger.info(f"🔍 Query Analysis: Flow {analysis.flow}, Address: {analysis.address}")
+
+        # Route to appropriate search flow
+        if analysis.flow == "1":
+            logger.info("🏠 Using Flow 1: Property-specific hierarchical search")
+            results = self.search_hierarchical(analysis.query, level1_limit, level2_limit)
+        elif analysis.flow == "2":
+            logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
+            # For Flow 2, we want to find multiple properties, so use higher limits
+            flow2_level1_limit = max(level1_limit, 10)  # At least 10 properties for Flow 2
+            flow2_level2_limit = max(level2_limit, 20)  # At least 20 chunks for Flow 2
+            results = self.search_flow2(analysis.query, flow2_level1_limit, flow2_level2_limit)
+        else:
+            # Fallback to hierarchical search
+            logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
+            results = self.search_hierarchical(query=analysis.query, level1_limit=level1_limit, level2_limit=level2_limit)
+
         self.print_search_results(query, results)
-          
+
         llm_response = self.generate_llm_response(query, results)
-       
+
         return llm_response, results
 
     def show_collection_status(self):
@@ -1322,7 +1505,7 @@ def main(query: str = None, build_index: bool = True, show_raw: bool = False, ra
         logger.info("🔍 Testing hierarchical search (raw results only)...")
         for test_query in test_queries:
             print(f"\n{'='*80}")
-            results = hierarchical_rag.search_hierarchical(test_query, level1_limit=1, level2_limit=5)
+            results = hierarchical_rag.search_hierarchical( query=test_query, level1_limit=1, level2_limit=5)
             hierarchical_rag.print_search_results(test_query, results)
             time.sleep(1)  # Small delay between queries
     else:
