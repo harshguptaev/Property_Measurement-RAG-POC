@@ -25,25 +25,65 @@ from llm_response_handlers import LLMResponseHandlers
 # Simple MilvusCollectionManager class
 class MilvusCollectionManager:
     """Simple collection manager for Milvus operations"""
-    
+
     def __init__(self, uri: str):
         self.client = MilvusClient(uri=uri)
-    
+
     def create_collection_safely(self, collection_name: str, embedding_dim: int, metric_type: str = "COSINE",
                                 clear_existing: bool = True, index_params: Dict = None):
         """Create a collection safely, optionally clearing existing data"""
+        from pymilvus import CollectionSchema, FieldSchema, DataType
+
         if clear_existing and self.client.has_collection(collection_name):
             logger.info(f"Dropping existing collection: {collection_name}")
             self.client.drop_collection(collection_name)
 
         if not self.client.has_collection(collection_name):
             logger.info(f"Creating collection: {collection_name} with dimension {embedding_dim}, metric {metric_type}")
+
+            # Define schema based on collection type
+            if "level1" in collection_name.lower():
+                # Level 1 Schema - Property level data
+                fields = [
+                    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=False),
+                    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=1536),
+                    FieldSchema(name="property_id", dtype=DataType.VARCHAR, max_length=64),
+                    FieldSchema(name="address", dtype=DataType.VARCHAR, max_length=512),
+                    FieldSchema(name="geometry", dtype=DataType.JSON),
+                    FieldSchema(name="metadata", dtype=DataType.JSON)
+                ]
+            elif "level2" in collection_name.lower():
+                # Level 2 Schema - Chunk level data
+                fields = [
+                    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=False),
+                    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=1536),
+                    FieldSchema(name="chunk_id", dtype=DataType.VARCHAR, max_length=64),
+                    FieldSchema(name="property_id", dtype=DataType.VARCHAR, max_length=64),
+                    FieldSchema(name="section", dtype=DataType.VARCHAR, max_length=128),
+                    FieldSchema(name="type", dtype=DataType.VARCHAR, max_length=32),
+                    FieldSchema(name="chunk_text", dtype=DataType.VARCHAR, max_length=65535),
+                    FieldSchema(name="metadata", dtype=DataType.JSON)
+                ]
+            else:
+                # Fallback to simple schema
+                fields = [
+                    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=False),
+                    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=embedding_dim)
+                ]
+
+            schema = CollectionSchema(
+                fields=fields,
+                description=f"Schema for {collection_name} collection"
+            )
+
+            # Create collection with schema (without index_params)
             self.client.create_collection(
                 collection_name=collection_name,
-                dimension=embedding_dim,
-                metric_type=metric_type,
-                index_params=index_params
+                schema=schema
             )
+
+            # Note: Index will be created after data insertion for better performance
+            # This is done in the build methods
     
     def get_collection_info(self, collection_name: str) -> Dict:
         """Get collection information"""
@@ -271,7 +311,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
             clear_existing=clear_existing,
             index_params=level2_index_params
         )
-        
+
+        # Note: Collections will be loaded after indexes are created in build methods
+
         logger.info(f"✅ Level 1 collection ready: {self.level1_collection_name}")
         logger.info(f"✅ Level 2 collection ready: {self.level2_collection_name}")
         
@@ -373,6 +415,32 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 collection_name=self.level1_collection_name,
                 data=level1_data
             )
+
+            # Create index after data insertion
+            try:
+                from pymilvus.milvus_client.index import IndexParams
+                index_params = IndexParams()
+                index_params.add_index(
+                    field_name="vector",
+                    index_type="HNSW",
+                    metric_type="COSINE",
+                    params={"M": 24, "efConstruction": 100}
+                )
+                self.milvus_client.create_index(
+                    collection_name=self.level1_collection_name,
+                    index_params=index_params
+                )
+                logger.info("✅ Created index for Level 1 collection")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to create index for Level 1: {str(e)}")
+
+            # Load collection after index creation
+            try:
+                self.milvus_client.load_collection(collection_name=self.level1_collection_name)
+                logger.info("✅ Level 1 collection loaded")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to load Level 1 collection: {str(e)}")
+
             logger.info(f"✅ Level 1 Index built with {len(level1_data)} parent chunks")
         else:
             logger.warning("No data to insert into Level 1 Index")
@@ -438,7 +506,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
                             "type": chunk_type,
                             "chunk_text": chunk_text,
                             "metadata": {
-                                "semantic_text": semantic_text
+                                "semantic_text": semantic_text,
+                                "data": data  # Store the original structured data
                             }
                         })
 
@@ -459,6 +528,32 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 collection_name=self.level2_collection_name,
                 data=level2_data
             )
+
+            # Create index after data insertion
+            try:
+                from pymilvus.milvus_client.index import IndexParams
+                index_params = IndexParams()
+                index_params.add_index(
+                    field_name="vector",
+                    index_type="HNSW",
+                    metric_type="COSINE",
+                    params={"M": 32, "efConstruction": 200}
+                )
+                self.milvus_client.create_index(
+                    collection_name=self.level2_collection_name,
+                    index_params=index_params
+                )
+                logger.info("✅ Created index for Level 2 collection")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to create index for Level 2: {str(e)}")
+
+            # Load collection after index creation
+            try:
+                self.milvus_client.load_collection(collection_name=self.level2_collection_name)
+                logger.info("✅ Level 2 collection loaded")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to load Level 2 collection: {str(e)}")
+
             logger.info(f"✅ Level 2 Index built with {len(level2_data)} children chunks")
         else:
             logger.warning("No data to insert into Level 2 Index")
@@ -526,7 +621,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         data=[query_vec_l2],
                         limit=level2_limit,
                         filter=f'property_id == "{property_id}"',
-                        output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "data"],
+                        output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "metadata"],
                         search_params=level2_search_params
                     )
 
@@ -543,7 +638,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                             "section": result.get("section"),
                             "chunk_type": result.get("type"),
                             "chunk_text": result.get("chunk_text"),
-                            "data": result.get("data"),
+                            "data": result.get("metadata", {}).get("data", {}),  # Get data from metadata
                             "distance": result.get("distance", 0),
                             "doc_address": address,
                             "report_id": metadata.get("report_id"),
@@ -710,7 +805,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         "section": result.get("section"),
                         "chunk_type": result.get("type"),  # Changed from chunk_type to type
                         "chunk_text": result.get("chunk_text"),
-                        "data": result.get("data"),  # Include the structured data
+                        "data": result.get("metadata", {}).get("data", {}),  # Get data from metadata
                         "distance": result.get("distance", 0)
                     }
 
@@ -1370,8 +1465,8 @@ def load_agentic_rag_output() -> List[Dict]:
             with open(chunk_file, 'r') as f:
                 file_data = json.load(f)
             
-            # Extract document ID from filename (e.g., RoofReport-44995431.json -> 44995431)
-            doc_id = chunk_file.stem.replace("RoofReport-", "")
+            # Extract document ID from filename (e.g., report_67668772.json -> 67668772)
+            doc_id = chunk_file.stem.replace("report_", "")
             source_file = chunk_file.name
             
             # Extract chunks from the file data
