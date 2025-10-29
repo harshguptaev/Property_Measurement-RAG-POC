@@ -117,8 +117,8 @@ class HierarchicalRAG:
         self.level1_collection_name = "hierarchical_level1"
         self.level2_collection_name = "hierarchical_level2"
 
-        # Embedding dimensions: L1 uses 384 (address/geometry), L2 uses 1536 (full semantic)
-        # Default Titan embedding dimension is 1536, reduced to 384 for L1 collections
+        # Embedding dimensions: Both L1 and L2 use 1536 (full semantic embeddings)
+        # Default Titan embedding dimension is 1536
         self.embedding_dim = 1536  # Default Titan embedding dimension
 
         logger.info(f"🔧 Initialized Hierarchical RAG with model: {model_id}")
@@ -131,7 +131,7 @@ class HierarchicalRAG:
 
         Args:
             text: Text to embed
-            target_dim: Target dimension for the embedding (384 for L1, 1536 for L2)
+            target_dim: Target dimension for the embedding (always 1536)
 
         Returns:
             List of embedding values
@@ -152,12 +152,7 @@ class HierarchicalRAG:
             embedding = result["embedding"]
 
             # Titan returns 1536 dimensions by default
-            # For L1 collections, we need to reduce to 384 dimensions
-            if target_dim == 384 and len(embedding) == 1536:
-                # Simple dimension reduction by taking every 4th element (1536 / 4 = 384)
-                embedding = embedding[::4]
-                logger.debug(f"Reduced embedding from 1536 to {len(embedding)} dimensions for L1")
-
+            # All collections now use full 1536 dimensions
             return embedding
 
         except Exception as e:
@@ -236,8 +231,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
             logger.info("🗑️  Clearing existing collections to prevent duplicates...")
         
         # Level 1 Collection Configuration (Addresses, Geometry, Filters)
-        # - Fast lookup by address/coordinates + limited semantic search
-        # - ~200K vectors, 384 dimensions, COSINE metric
+        # - Fast lookup by address/coordinates + full semantic search
+        # - ~200K vectors, 1536 dimensions, COSINE metric
         level1_index_params = {
             "index_type": "HNSW",
             "metric_type": "COSINE",
@@ -259,10 +254,10 @@ Provide a clear, structured summary in 2-3 sentences:"""
             }
         }
 
-        # Create Level 1 collection (Document summaries) - 384 dimensions
+        # Create Level 1 collection (Document summaries) - 1536 dimensions
         self.milvus_manager.create_collection_safely(
             collection_name=self.level1_collection_name,
-            embedding_dim=384,  # L1 uses smaller embeddings for address/geometry lookup
+            embedding_dim=1536,  # L1 uses full embeddings for address/geometry lookup
             metric_type="COSINE",
             clear_existing=clear_existing,
             index_params=level1_index_params
@@ -345,8 +340,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 print(f"child_chunk_ids ::: {child_chunk_ids}")
                 print("=" * 80)
 
-                # Generate embedding for the address (for vector search) - L1 uses 384 dimensions
-                address_embedding = self.titan_embed_text(address, target_dim=384)
+                # Generate embedding for the address (for vector search) - L1 uses 1536 dimensions
+                address_embedding = self.titan_embed_text(address, target_dim=1536)
 
                 level1_data.append({
                     "id": i,
@@ -431,7 +426,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         # Add section and type information to the chunk text
                         chunk_text = f"Section: {section}\nType: {chunk_type}\nContent: {chunk_text}"
                         semantic_text = self.generate_semantic_text(section, chunk_type, data)
-                        # Generate embedding for chunk text - L2 uses full 1536 dimensions
+                        # Generate embedding for chunk text - all collections use 1536 dimensions
                         chunk_embedding = self.titan_embed_text(semantic_text, target_dim=1536)
 
                         level2_data.append({
@@ -564,10 +559,10 @@ Provide a clear, structured summary in 2-3 sentences:"""
                     # Fall back to vector search for similar addresses
                     logger.info("🔄 Falling back to vector search for similar addresses")
 
-            # Step 1: Embed query for Level 1 (384 dimensions for address/geometry lookup)
-            query_vec_l1 = self.titan_embed_text(query, target_dim=384)
+            # Step 1: Embed query for Level 1 (1536 dimensions for address/geometry lookup)
+            query_vec_l1 = self.titan_embed_text(query, target_dim=1536)
 
-            # Step 2: Embed query for Level 2 (1536 dimensions for semantic search) - only if we continue to Level 2
+            # Step 2: Embed query for Level 2 (1536 dimensions for semantic search) - all collections use 1536 dimensions
             query_vec_l2 = self.titan_embed_text(query, target_dim=1536)
 
             # Level 1 search parameters (efSearch = 64)
@@ -799,7 +794,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         logger.info(f"🔍 Starting Flow 2 search for: '{query}'")
 
         try:
-            # Step 1: Embed query for Level 2 (1536 dimensions for semantic search)
+            # Step 1: Embed query for Level 2 (1536 dimensions for semantic search) - all collections use 1536 dimensions
             query_vec_l2 = self.titan_embed_text(query, target_dim=1536)
 
             # Level 2 search parameters
@@ -859,7 +854,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 property_filter = f'property_id in [{",".join(property_ids_quoted)}]'
 
                 # Use a simple vector for the search (we're filtering by property_id anyway)
-                level1_query_vec = self.titan_embed_text("property", target_dim=384)
+                level1_query_vec = self.titan_embed_text("property", target_dim=1536)
 
                 
 
