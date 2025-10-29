@@ -21,6 +21,7 @@ class QueryAnalysis(BaseModel):
     address: Optional[str] = None  # Extracted address if present
     query: str  # Cleaned user intention/query
     complete_query: str  # Full original query
+    relevant_sections: list[str]  # List of relevant data sections for the query
 
 
 class QueryRouter:
@@ -50,7 +51,7 @@ class QueryRouter:
             query: The user's query string
 
         Returns:
-            QueryAnalysis object with flow, address, query, and complete_query
+            QueryAnalysis object with flow, address, query, complete_query, and relevant_sections
         """
         prompt = f"""You are a query analysis expert for a property measurement and roofing analysis system.
 
@@ -66,6 +67,16 @@ Your task is to analyze the user's query and extract the following information:
 
 4. **complete_query**: The full original query as provided.
 
+5. **relevant_sections**: Based on the query intent, identify which data sections would be most relevant. Available sections include:
+   - "House Measurements": Basic property info (stories, facets, complexity, attic area (Not the actual area it is a estimate), obstructions)
+   - "Roof Measurements - All Structures": Detailed roof measurements (actual area value, pitch, ridges, hips, valleys, rakes, eaves, etc.) whenver any area or measurements related information is needed, include this section.
+   - "Pitch Breakdown": Roof pitch percentages and areas by pitch type
+   - "Waste Calculation": Waste factor calculations for different percentages
+   - "Diagrams": Technical diagrams (lengths, pitch degrees, pitch on 12, rafters, azimuth, area, roof penetrations)
+   - "Imagery": Property photos (top view, north/south/east/west sides)
+
+   Return an array of the most relevant section names based on what information would help answer the query.
+
 EXAMPLES:
 
 Query: "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128"
@@ -74,7 +85,8 @@ Analysis:
     "flow": "1",
     "address": "2455 New Holland Cir, Murfreesboro, TN 37128",
     "query": "What is the roof area",
-    "complete_query": "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128"
+    "complete_query": "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128",
+    "relevant_sections": ["Roof Measurements - All Structures"]
 }}
 
 Query: "Find all properties with roof area greater than 2000 square feet"
@@ -83,7 +95,8 @@ Analysis:
     "flow": "2",
     "address": null,
     "query": "Find all properties with roof area greater than 2000 square feet",
-    "complete_query": "Find all properties with roof area greater than 2000 square feet"
+    "complete_query": "Find all properties with roof area greater than 2000 square feet",
+    "relevant_sections": ["Roof Measurements - All Structures"]
 }}
 
 Query: "Show me the pitch information for the property at 123 Main St, Anytown, USA"
@@ -92,7 +105,8 @@ Analysis:
     "flow": "1",
     "address": "123 Main St, Anytown, USA",
     "query": "Show me the pitch information",
-    "complete_query": "Show me the pitch information for the property at 123 Main St, Anytown, USA"
+    "complete_query": "Show me the pitch information for the property at 123 Main St, Anytown, USA",
+    "relevant_sections": ["Pitch Breakdown", "Roof Measurements - All Structures"]
 }}
 
 Query: "Which properties have more than 3 roof facets"
@@ -101,13 +115,34 @@ Analysis:
     "flow": "2",
     "address": null,
     "query": "Which properties have more than 3 roof facets",
-    "complete_query": "Which properties have more than 3 roof facets"
+    "complete_query": "Which properties have more than 3 roof facets",
+    "relevant_sections": ["House Measurements", "Roof Measurements - All Structures"]
+}}
+
+Query: "Show me pictures of the roof at 456 Oak St"
+Analysis:
+{{
+    "flow": "1",
+    "address": "456 Oak St",
+    "query": "Show me pictures of the roof",
+    "complete_query": "Show me pictures of the roof at 456 Oak St",
+    "relevant_sections": ["Diagrams", "Imagery"]
+}}
+
+Query: "What is the waste factor for this property"
+Analysis:
+{{
+    "flow": "1",
+    "address": null,
+    "query": "What is the waste factor",
+    "complete_query": "What is the waste factor for this property",
+    "relevant_sections": ["Waste Calculation"]
 }}
 
 Now analyze this query:
 {query}
 
-Return ONLY a valid JSON object with the four fields: flow, address, query, complete_query."""
+Return ONLY a valid JSON object with the five fields: flow, address, query, complete_query, relevant_sections."""
 
         try:
             body = {
@@ -153,7 +188,7 @@ def analyze_query(query: str, region_name: str = "us-east-1") -> QueryAnalysis:
         region_name: AWS region
 
     Returns:
-        QueryAnalysis object
+        QueryAnalysis object with flow, address, query, complete_query, and relevant_sections
     """
     router = QueryRouter(region_name=region_name)
     return router.analyze_query(query)

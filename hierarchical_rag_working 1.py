@@ -571,7 +571,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         # All queries are treated as property-specific
         return "property_specific"
 
-    def search_hierarchical(self, query: str, address: Optional[str] = None, level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
+    def search_hierarchical(self, query: str, address: Optional[str] = None, relevant_sections: List[str] = [], level1_limit: int = 1, level2_limit: int = 5) -> List[Dict]:
         """
         Perform hierarchical search: Level 1 → Level 2
 
@@ -616,11 +616,16 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         "params": {"ef": 96}
                     }
 
+                    # Build filter for relevant sections if specified
+                    section_filter = ""
+                    if relevant_sections:
+                        section_filter = f' && section in {relevant_sections}'
+
                     res2 = self.milvus_client.search(
                         collection_name=self.level2_collection_name,
                         data=[query_vec_l2],
                         limit=level2_limit,
-                        filter=f'property_id == "{property_id}"',
+                        filter=f'property_id == "{property_id}"{section_filter}',
                         output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "metadata"],
                         search_params=level2_search_params
                     )
@@ -769,12 +774,17 @@ Provide a clear, structured summary in 2-3 sentences:"""
             # Safer way: use repr() to auto-quote strings, then replace single quotes with double quotes
             property_ids_quoted = [f'"{pid}"' for pid in relevant_property_ids]
 
+            # Build filter for relevant sections if specified
+            section_filter = ""
+            if relevant_sections:
+                section_filter = f' && section in {relevant_sections}'
+
             # Search Level 2 chunks filtered by property_id from Level 1 results
             res2 = self.milvus_client.search(
                 collection_name=self.level2_collection_name,
                 data=[query_vec_l2],
                 limit=5,  # Use the level2_limit parameter
-                filter=f'property_id in [{",".join(property_ids_quoted)}]',
+                filter=f'property_id in [{",".join(property_ids_quoted)}]{section_filter}',
                 output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "data"],
                 search_params=level2_search_params
             )
@@ -871,7 +881,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             logger.error(f"Error during hierarchical search: {str(e)}")
             return []
 
-    def search_flow2(self, query: str, level1_limit: int = 10, level2_limit: int = 10) -> List[Dict]:
+    def search_flow2(self, query: str, relevant_sections: List[str] = [], level1_limit: int = 10, level2_limit: int = 10) -> List[Dict]:
         """
         Perform Flow 2 search: Level 2 first (find relevant chunks) → Level 1 (get property details)
 
@@ -898,12 +908,18 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 "params": {"ef": 96}
             }
 
+            # Build filter for relevant sections if specified
+            section_filter = ""
+            if relevant_sections:
+                section_filter = f' && section in {relevant_sections}'
+
             # Step 2: Search Level 2 (Chunks) - find chunks that match the criteria
             logger.info("📊 Searching Level 2 (Chunk Index) for property criteria...")
             res2 = self.milvus_client.search(
                 collection_name=self.level2_collection_name,
                 data=[query_vec_l2],
                 limit=20,
+                filter=section_filter.lstrip(' && ') if section_filter else "",  # Remove leading '&&' if present
                 output_fields=["chunk_text", "section", "property_id", "type", "chunk_id", "metadata"],
                 search_params=level2_search_params
             )
@@ -1321,22 +1337,22 @@ Provide a clear, structured summary in 2-3 sentences:"""
         # Analyze query with router
         analysis = self.query_router.analyze_query(query)
         
-        logger.info(f"🔍 Query Analysis: Flow {analysis.flow}, Address: {analysis.address}, Query: {analysis.query}")
+        logger.info(f"🔍 Query Analysis: Flow {analysis.flow}, Address: {analysis.address}, Query: {analysis.query}, Relevant Sections: {analysis.relevant_sections}")
 
         # Route to appropriate search flow
         if analysis.flow == "1":
             logger.info("🏠 Using Flow 1: Property-specific hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, address=analysis.address, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_hierarchical(query=analysis.query, address=analysis.address, relevant_sections=analysis.relevant_sections, level1_limit=level1_limit, level2_limit=level2_limit)
         elif analysis.flow == "2":
             logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
             # For Flow 2, we want to find multiple properties, so use higher limits
             flow2_level1_limit = max(level1_limit, 10)  # At least 10 properties for Flow 2
             flow2_level2_limit = max(level2_limit, 20)  # At least 20 chunks for Flow 2
-            results = self.search_flow2(analysis.query, flow2_level1_limit, flow2_level2_limit)
+            results = self.search_flow2(query=analysis.query, relevant_sections=analysis.relevant_sections, level1_limit=flow2_level1_limit, level2_limit=flow2_level2_limit)
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, address=analysis.address, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_hierarchical(query=analysis.query, address=analysis.address, relevant_sections=analysis.relevant_sections, level1_limit=level1_limit, level2_limit=level2_limit)
 
         # Optionally show raw results
         if show_raw_results:
@@ -1361,22 +1377,22 @@ Provide a clear, structured summary in 2-3 sentences:"""
         """
         # Analyze query with router
         analysis = self.query_router.analyze_query(query)
-        logger.info(f"🔍 Query Analysis: Flow {analysis.flow}, Address: {analysis.address}")
+        logger.info(f"🔍 Query Analysis: Flow {analysis.flow}, Address: {analysis.address} Relevant Sections: {analysis.relevant_sections}")
 
         # Route to appropriate search flow
         if analysis.flow == "1":
             logger.info("🏠 Using Flow 1: Property-specific hierarchical search")
-            results = self.search_hierarchical(analysis.query, analysis.address, level1_limit, level2_limit)
+            results = self.search_hierarchical(analysis.query, analysis.address, analysis.relevant_sections, level1_limit, level2_limit)
         elif analysis.flow == "2":
             logger.info("🔍 Using Flow 2: Non-property-specific criteria search")
             # For Flow 2, we want to find multiple properties, so use higher limits
             flow2_level1_limit = max(level1_limit, 10)  # At least 10 properties for Flow 2
             flow2_level2_limit = max(level2_limit, 10)  # At least 20 chunks for Flow 2
-            results = self.search_flow2(analysis.query, flow2_level1_limit, flow2_level2_limit)
+            results = self.search_flow2(query=analysis.query, relevant_sections=analysis.relevant_sections, level1_limit=flow2_level1_limit, level2_limit=flow2_level2_limit)
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, address=analysis.address, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_hierarchical(query=analysis.query, address=analysis.address, relevant_sections=analysis.relevant_sections, level1_limit=level1_limit, level2_limit=level2_limit)
 
         self.print_search_results(query, results)
 

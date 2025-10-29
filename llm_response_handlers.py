@@ -243,7 +243,7 @@ Provide a clear, professional answer that directly addresses the customer's ques
             return self._create_fallback_response(query, results)
 
     def generate_flow2_response(self, query: str, results: List[Dict]) -> str:
-        f"""
+        """
         Generate LLM response for Flow 2: Non-property-specific criteria search
 
         Args:
@@ -251,14 +251,15 @@ Provide a clear, professional answer that directly addresses the customer's ques
             results: Retrieved chunks from criteria-based search across multiple properties
 
         Returns:
-            1. Mention Address importantly imstead of mentioning the property id or any other details
-            2. Dont any comapritive analysis only give analysis of the measurement characteristics that are asked in the query
-            2. So dont give chunks that are not related to the query if asked to comapare quatities like area, pitch, facets, etc. that is asked
-            2. Dont specify the internal document and chunks you are retreiving, just the information you are providing to the user
-            3. Dont sound like a robot, sound like a human
-            4. Mentioning that you have many properties in database but you are only providing {len(results)} properties to the user
-            5. Be clear and concise in your response
-        """
+            1. You will query and chunks which include the data teh user has asked for, so dont give any other information that is not asked for
+            2. Dont sound like a robot, sound like a human
+            3. Be clear and concise in your response
+            4. Dont mention the internal document and chunks you are retreiving, just the information you are providing to the user
+            5. Dnt mention property number only mention about the address of the property and relvent feild asked by user in the response
+            6. Dont mention the internal document and chunks you are retreiving, just the information you are providing to the user
+            4. Dont mention property number like 1,2,3 just simply write addresses in it
+           
+           """
         if not results:
             return "I couldn't find any properties matching your criteria."
 
