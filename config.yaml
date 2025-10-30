@@ -29,6 +29,15 @@ database:
   milvus_uri: "http://localhost:19530"  # Full Milvus database URI
   embedding_dim: 1536  # Dimension for text embeddings (Titan Text v1)
 
+  # PostgreSQL Configuration
+  postgresql:
+    host: "test-solar-cluster.cluster-cz3ofpcbbdm1.us-east-2.rds.amazonaws.com"
+    port: 5432
+    dbname: "truedesign-demo_db"
+    user: "truedesign-demo_owner_clone"
+    password_env: "PG_DB_PASSWORD"  # Environment variable for password
+    schema: "truedesigndemo"  # Use truedesigndemo schema
+
 # Retrieval Configuration
 retrieval:
   k: 10  # Number of documents to retrieve

@@ -173,6 +173,17 @@ class ConfigLoader:
             "max_tokens": self.get("gemini", "max_tokens"),
             "enable_image_captioning": self.get("gemini", "enable_image_captioning")
         }
+
+    def get_postgresql_config(self) -> Dict[str, Any]:
+        """Get PostgreSQL database configuration."""
+        return {
+            "host": self.get("database", "postgresql", {}).get("host"),
+            "port": self.get("database", "postgresql", {}).get("port"),
+            "dbname": self.get("database", "postgresql", {}).get("dbname"),
+            "user": self.get("database", "postgresql", {}).get("user"),
+            "password": os.getenv(self.get("database", "postgresql", {}).get("password_env", "PG_DB_PASSWORD")),
+            "schema": self.get("database", "postgresql", {}).get("schema", "truedesigndemo")
+        }
     
     def save_config(self):
         """Save current configuration to file."""
