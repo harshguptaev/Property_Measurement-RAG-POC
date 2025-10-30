@@ -30,7 +30,7 @@ class MilvusCollectionManager:
         self.client = MilvusClient(uri=uri)
 
     def create_collection_safely(self, collection_name: str, embedding_dim: int, metric_type: str = "COSINE",
-                                clear_existing: bool = True, index_params: Dict = None):
+                                clear_existing: bool = False, index_params: Dict = None):
         """Create a collection safely, optionally clearing existing data"""
         from pymilvus import CollectionSchema, FieldSchema, DataType
 
@@ -258,7 +258,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             # Fallback to simple concatenation
             return f"Roofing report with {len(chunks_data)} sections covering measurements, images, and property details."
     
-    def create_milvus_collections(self, clear_existing: bool = True):
+    def create_milvus_collections(self, clear_existing: bool = False):
         """
         Create Milvus collections using the collection manager for safe handling
         
@@ -323,7 +323,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         logger.info(f"📊 Level 1 entities: {level1_info.get('entity_count', 0)}")
         logger.info(f"📊 Level 2 entities: {level2_info.get('entity_count', 0)}")
     
-    def build_level1_index(self, documents_data: List[Dict], clear_existing: bool = True) -> None:
+    def build_level1_index(self, documents_data: List[Dict], clear_existing: bool = False) -> None:
         """
         Build Level 1 Index (Parent Chunk Index)
 
