@@ -4,6 +4,7 @@ Query Router for Property Measurement RAG System
 This module analyzes user queries and determines the appropriate search flow:
 - Flow 1: Property-specific queries (address given, find specific information)
 - Flow 2: Non-property-specific queries (find properties matching criteria)
+- Flow 3: Address not found queries (when user searches for address but no exact match or similar addresses found)
 """
 
 import json
@@ -17,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 class QueryAnalysis(BaseModel):
     """Structured analysis of a user query."""
-    flow: str  # "1" or "2"
+    flow: str  # "1", "2", or "3"
     address: Optional[str] = None  # Extracted address if present
     query: str  # Cleaned user intention/query
     complete_query: str  # Full original query
@@ -60,6 +61,7 @@ Your task is to analyze the user's query and extract the following information:
 1. **flow**: Determine if this is:
    - "1": Property-specific query (user mentions a specific address/property and wants information about it)
    - "2": Non-property-specific query (user wants to find properties that match certain criteria, like "find properties with area > 2000 sq ft")
+   - "3": Address not found query (when user searches for an address but indicates no exact match found and even suggested addresses are not found in similar address list)
 
 2. **address**: If the query mentions a specific address, extract it exactly as written. If no address is mentioned, set to null.
 
@@ -139,6 +141,16 @@ Analysis:
     "relevant_sections": ["Waste Calculation"]
 }}
 
+Query: "When I searched for address no exact match found, even suggested address is not found in the similar address list"
+Analysis:
+{{
+    "flow": "3",
+    "address": null,
+    "query": "When I searched for address no exact match found, even suggested address is not found in the similar address list",
+    "complete_query": "When I searched for address no exact match found, even suggested address is not found in the similar address list",
+    "relevant_sections": []
+}}
+
 Now analyze this query:
 {query}
 
@@ -200,7 +212,8 @@ if __name__ == "__main__":
         "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128",
         "Find all properties with roof area greater than 2000 square feet",
         "Show me the pitch information for the property at 123 Main St, Anytown, USA",
-        "Which properties have more than 3 roof facets"
+        "Which properties have more than 3 roof facets",
+        "When I searched for address no exact match found, even suggested address is not found in the similar address list"
     ]
 
     router = QueryRouter()

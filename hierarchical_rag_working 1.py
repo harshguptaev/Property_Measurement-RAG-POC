@@ -1389,6 +1389,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
             flow2_level1_limit = max(level1_limit, 10)  # At least 10 properties for Flow 2
             flow2_level2_limit = max(level2_limit, 10)  # At least 20 chunks for Flow 2
             results = self.search_flow2(query=analysis.query, relevant_sections=analysis.relevant_sections, level1_limit=flow2_level1_limit, level2_limit=flow2_level2_limit)
+        elif analysis.flow == "3":
+            logger.info("🔍 Using Flow 3: Address not found query")
+            print("currrently not implemented for flow 3")
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
@@ -1401,6 +1404,8 @@ Provide a clear, structured summary in 2-3 sentences:"""
             llm_response = self.llm_handlers.generate_flow1_response(query, results)
         elif analysis.flow == "2":
             llm_response = self.llm_handlers.generate_flow2_response(query, results)
+        elif analysis.flow == "3":
+           llm_response = "I'm sorry, I currently don't have the ability to search for addresses that don't exist. Please try again with a different address or query."
         else:
             # Fallback to generic response
             llm_response = self.llm_handlers.generate_flow1_response(query, results)
