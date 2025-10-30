@@ -635,6 +635,14 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         if "total_roof_obstructions" in summary_measurements:
             house_data["total_roof_obstructions"] = int(summary_measurements["total_roof_obstructions"])
 
+        # Add number of structures
+        num_structures = len([k for k in detailed_measurements.keys() if k.startswith('structure_')])
+        if num_structures == 0:
+            # Check if we have 'all' or 'all_structures' which indicates single structure
+            if 'all' in detailed_measurements or 'all_structures' in detailed_measurements:
+                num_structures = 1
+        house_data["number_of_structures"] = num_structures
+
         if house_data:
             _add("C001", property_id, "House Measurements", "text", house_data)
 

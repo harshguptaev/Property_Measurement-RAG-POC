@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67595127",
-    "address": "1716 Sheridan Ave, Whiting, IN 46394",
+    "address": "1716 Sheridan Ave Whiting IN 46394",
     "latitude": 41.6823388,
     "longitude": -87.4958515,
     "owner": "Pedro Chavez Tron Solar 950 Corporate Woods Pkwy Vernon Hills, IL 60061-3155 800-484-8766"
@@ -15,7 +15,8 @@
       "total_roof_facets": 8,
       "structure_complexity": "Normal",
       "estimated_attic": "1938.6 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 2
     }
   },
   {

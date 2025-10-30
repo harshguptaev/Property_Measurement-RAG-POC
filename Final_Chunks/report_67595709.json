@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67595709",
-    "address": "8351 Northwest 15th Court, Coral Springs, FL 33071",
+    "address": "8351 Northwest 15th Court Coral Springs FL 33071",
     "latitude": 26.2500301,
     "longitude": -80.2375914,
     "owner": "ABC Supply ABC Supply 1 ABC Parkway Beloit, WI 53511 (800) 226-1280"
@@ -16,7 +16,8 @@
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "2868.3 sq ft",
-      "total_roof_obstructions": 27
+      "total_roof_obstructions": 27,
+      "number_of_structures": 1
     }
   },
   {

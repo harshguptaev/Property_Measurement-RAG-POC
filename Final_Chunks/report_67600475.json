@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67600475",
-    "address": "445 Budding Ridge Road, Cheshire, CT 06410",
+    "address": "445 Budding Ridge Road Cheshire CT 06410",
     "latitude": 41.5112953,
     "longitude": -72.8890248,
     "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
@@ -16,7 +16,8 @@
       "total_roof_facets": 5,
       "structure_complexity": "Simple",
       "estimated_attic": "1,726 sq ft",
-      "total_roof_obstructions": 4
+      "total_roof_obstructions": 4,
+      "number_of_structures": 2
     }
   },
   {
