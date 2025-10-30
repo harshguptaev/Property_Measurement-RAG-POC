@@ -44,8 +44,12 @@ def _extract_premium_header(text: str) -> Dict[str, Any]:
         # Remove any remaining date/property prefixes if they exist
         address = re.sub(r'^\d{1,2}/\d{1,2}/\d{4}\s+PROPERTY\s+', '', address, flags=re.IGNORECASE)
         address = re.sub(r'^\d{1,2},\s+\d{4}\s+PROPERTY\s+', '', address, flags=re.IGNORECASE)
-        # Normalize spacing: single space after commas, single spaces between words
-        address = re.sub(r',\s+', ', ', address)  # Normalize comma spacing
+        # Split on new address pattern (digit followed by space and letter) and take first address
+        address_parts = re.split(r'\s+(?=\d+\s+[A-Za-z])', address)
+        if address_parts:
+            address = address_parts[0].strip()
+        # Remove delimiter commas and normalize spacing
+        address = re.sub(r',\s+', ' ', address)  # Remove commas used as delimiters
         address = re.sub(r'\s+', ' ', address)     # Normalize multiple spaces to single space
         data['property_address'] = address
 

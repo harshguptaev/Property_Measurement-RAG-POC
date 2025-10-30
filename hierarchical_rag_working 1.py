@@ -1392,6 +1392,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         elif analysis.flow == "3":
             logger.info("🔍 Using Flow 3: Address not found query")
             print("currrently not implemented for flow 3")
+            results = []
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
