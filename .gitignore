@@ -76,3 +76,6 @@ volumes/
 __pypackages__/
 *.sqlite3
 
+premium_reports/
+extracted_images/
+docling_exports/

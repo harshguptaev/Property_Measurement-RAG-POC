@@ -1,0 +1,150 @@
+[
+  {
+    "property_id": "PROP_67608694",
+    "address": "10030 10th Ave S, Minneapolis, MN 55420",
+    "latitude": 44.8215049,
+    "longitude": -93.2611293,
+    "owner": "Bill Dack Krech Exteriors 5866 Blackshire Path Inver Grove Heights, MN 55076 612 408 9968"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67608694",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 9,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3024.2 sq ft",
+      "total_roof_obstructions": 13
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67608694",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3261.3 sq ft",
+      "total_roof_facets": 9,
+      "predominant_pitch": "5/12",
+      "ridges": "57.4 ft (3 Ridges)",
+      "hips": "157 ft (8 Hips)",
+      "valleys": "51.1 ft (3 Valleys)",
+      "rakes": "0 ft (0 Rakes)",
+      "eaves_starter": "259.2 ft (10 Eaves)",
+      "drip_edge": "259.2 ft (10 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "62 ft",
+      "roof_obstructions_area": "22 sq ft",
+      "net_roof_area": "3239.3 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67608694",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "372.2",
+          "percentage": "11.4%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "2889.1",
+          "percentage": "88.6%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67608694",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "1%",
+          "area_sq_ft": "3262",
+          "squares": "32.66"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "3295",
+          "squares": "33.00"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "3458",
+          "squares": "34.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "3621",
+          "squares": "36.33"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "3719",
+          "squares": "37.33"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "3784",
+          "squares": "38.00"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "3850",
+          "squares": "38.66"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "3948",
+          "squares": "39.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4111",
+          "squares": "41.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67608694",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67608694/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "extracted_images/report_67608694/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67608694/Rafters.png",
+      "Azimuth": "extracted_images/report_67608694/Azimuth.png",
+      "Area": "extracted_images/report_67608694/Area.png",
+      "Roof Obstructions": "extracted_images/report_67608694/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67608694",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "",
+      "South": "extracted_images/report_67608694/South_Side.png",
+      "East": "extracted_images/report_67608694/East_Side.png",
+      "West": "extracted_images/report_67608694/West_Side.png",
+      "Top": ""
+    }
+  }
+]

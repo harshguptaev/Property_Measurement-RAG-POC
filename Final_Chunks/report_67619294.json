@@ -1,0 +1,161 @@
+[
+  {
+    "property_id": "PROP_67619294",
+    "address": "1 Butterfly Ct, Manahawkin, NJ 08050",
+    "latitude": 39.7247313,
+    "longitude": -74.2509389,
+    "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67619294",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 31,
+      "structure_complexity": "Normal",
+      "estimated_attic": "4916.1 sq ft",
+      "total_roof_obstructions": 13
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67619294",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "5925.9 sq ft",
+      "total_roof_facets": 31,
+      "predominant_pitch": "7/12",
+      "ridges": "136.9 ft (8 Ridges)",
+      "hips": "263.2 ft (19 Hips)",
+      "valleys": "184.9 ft (11 Valleys)",
+      "rakes": "83.1 ft (10 Rakes)",
+      "eaves_starter": "424.4 ft (35 Eaves)",
+      "drip_edge": "507.5 ft (45 Lengths)",
+      "flashing": "50.1 ft (11 Lengths)",
+      "step_flashing": "75.3 ft (13 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "93.4 ft",
+      "roof_obstructions_area": "49 sq ft",
+      "net_roof_area": "5876.9 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67619294",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "2933.6",
+          "percentage": "49.5%"
+        },
+        {
+          "pitch": "9/12",
+          "area_sq_ft": "2868.3",
+          "percentage": "48.4%"
+        },
+        {
+          "pitch": "12/12",
+          "area_sq_ft": "96.4",
+          "percentage": "1.6%"
+        },
+        {
+          "pitch": "13/12",
+          "area_sq_ft": "27.6",
+          "percentage": "0.5%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67619294",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "5926",
+          "squares": "59.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "6045",
+          "squares": "60.66"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "6341",
+          "squares": "63.66"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "6638",
+          "squares": "66.66"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "6815",
+          "squares": "68.33"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "6934",
+          "squares": "69.66"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "7052",
+          "squares": "70.66"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "7230",
+          "squares": "72.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "7527",
+          "squares": "75.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67619294",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67619294/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67619294/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67619294/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67619294/Rafters.png",
+      "Azimuth": "extracted_images/report_67619294/Azimuth.png",
+      "Area": "extracted_images/report_67619294/Area.png",
+      "Roof Obstructions": "extracted_images/report_67619294/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67619294",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67619294/North_Side.png",
+      "South": "extracted_images/report_67619294/South_Side.png",
+      "East": "extracted_images/report_67619294/East_Side.png",
+      "West": "extracted_images/report_67619294/West_Side.png",
+      "Top": "extracted_images/report_67619294/Top_View.png"
+    }
+  }
+]

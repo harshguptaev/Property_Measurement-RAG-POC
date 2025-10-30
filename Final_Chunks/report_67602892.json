@@ -1,0 +1,150 @@
+[
+  {
+    "property_id": "PROP_67602892",
+    "address": "40243 178th St E, Palmdale, CA 93591",
+    "latitude": 34.614414,
+    "longitude": -117.8123834,
+    "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67602892",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 13,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3217.8 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67602892",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3378.8 sq ft",
+      "total_roof_facets": 13,
+      "predominant_pitch": "4/12",
+      "ridges": "76.2 ft (4 Ridges)",
+      "hips": "87 ft (10 Hips)",
+      "valleys": "84 ft (4 Valleys)",
+      "rakes": "134.9 ft (13 Rakes)",
+      "eaves_starter": "168.2 ft (11 Eaves)",
+      "drip_edge": "303.1 ft (24 Lengths)",
+      "flashing": "8 ft (3 Lengths)",
+      "step_flashing": "27.9 ft (8 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "47 ft",
+      "roof_obstructions_area": "28 sq ft",
+      "net_roof_area": "3350.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67602892",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "1/12",
+          "area_sq_ft": "260.9",
+          "percentage": "7.7%"
+        },
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "3117.9",
+          "percentage": "92.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67602892",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "3118",
+          "squares": "31.33"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "3243",
+          "squares": "32.66"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "3399",
+          "squares": "34.00"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "3493",
+          "squares": "35.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "3555",
+          "squares": "35.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "3617",
+          "squares": "36.33"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "3711",
+          "squares": "37.33"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "3867",
+          "squares": "39.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4023",
+          "squares": "40.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67602892",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67602892/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67602892/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67602892/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67602892/Rafters.png",
+      "Azimuth": "extracted_images/report_67602892/Azimuth.png",
+      "Area": "extracted_images/report_67602892/Area.png",
+      "Roof Obstructions": "extracted_images/report_67602892/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67602892",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67602892/North_Side.png",
+      "South": "extracted_images/report_67602892/South_Side.png",
+      "East": "extracted_images/report_67602892/East_Side.png",
+      "West": "extracted_images/report_67602892/West_Side.png",
+      "Top": "extracted_images/report_67602892/Top_View.png"
+    }
+  }
+]

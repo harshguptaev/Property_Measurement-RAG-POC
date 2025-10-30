@@ -707,7 +707,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                         "chunk_id": f"addr_{hit.get('property_id')}",  # Create a chunk-like ID
                         "section": "Address Information",
                         "chunk_type": "address",  # Special type for addresses
-                        "chunk_text": f"Similar Property Address: {hit.get('address', 'Unknown Address')}\nSimilarity Score: {(1 - hit.get('distance', 0)):.4f}",
+                        "chunk_text": f"Similar Property Address: {hit.get('address', 'Unknown Address')}\nSimilarity Score: {(hit.get('distance', 0)):.4f}",
                         "data": {
                             "address": hit.get("address", "Unknown Address"),
                             "report_id": hit.get("metadata", {}).get("report_id"),

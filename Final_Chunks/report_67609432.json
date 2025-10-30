@@ -1,0 +1,150 @@
+[
+  {
+    "property_id": "PROP_67609432",
+    "address": "11550 Cortina Pl, San Diego, CA 92131",
+    "latitude": 32.9292846,
+    "longitude": -117.1109595,
+    "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67609432",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 14,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1827.7 sq ft",
+      "total_roof_obstructions": 22
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67609432",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,980 sq ft",
+      "total_roof_facets": 14,
+      "predominant_pitch": "5/12",
+      "ridges": "36.4 ft (6 Ridges)",
+      "hips": "91.1 ft (6 Hips)",
+      "valleys": "39.3 ft (4 Valleys)",
+      "rakes": "77.6 ft (12 Rakes)",
+      "eaves_starter": "158.7 ft (14 Eaves)",
+      "drip_edge": "236.3 ft (26 Lengths)",
+      "flashing": "13.8 ft (5 Lengths)",
+      "step_flashing": "34 ft (8 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "77 ft",
+      "roof_obstructions_area": "26 sq ft",
+      "net_roof_area": "1,954 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67609432",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "1966.8",
+          "percentage": "99.3%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "13.2",
+          "percentage": "0.7%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67609432",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "1980",
+          "squares": "20.00"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "2040",
+          "squares": "20.66"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "2139",
+          "squares": "21.66"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "2238",
+          "squares": "22.66"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "2297",
+          "squares": "23.00"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "2337",
+          "squares": "23.66"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "2376",
+          "squares": "24.00"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "2436",
+          "squares": "24.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2535",
+          "squares": "25.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67609432",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67609432/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67609432/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67609432/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67609432/Rafters.png",
+      "Azimuth": "extracted_images/report_67609432/Azimuth.png",
+      "Area": "extracted_images/report_67609432/Area.png",
+      "Roof Obstructions": "extracted_images/report_67609432/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67609432",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67609432/North_Side.png",
+      "South": "extracted_images/report_67609432/South_Side.png",
+      "East": "extracted_images/report_67609432/East_Side.png",
+      "West": "extracted_images/report_67609432/West_Side.png",
+      "Top": "extracted_images/report_67609432/Top_View.png"
+    }
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "property_id": "PROP_67635682",
+    "address": "5308 41st Pl, Hyattsville, MD 20781",
+    "latitude": 38.9543093,
+    "longitude": -76.9466394,
+    "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67635682",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 13,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2033.6 sq ft",
+      "total_roof_obstructions": 5
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67635682",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2202.8 sq ft",
+      "total_roof_facets": 13,
+      "predominant_pitch": "4/12",
+      "ridges": "91.1 ft (7 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "63.8 ft (7 Valleys)",
+      "rakes": "194.2 ft (23 Rakes)",
+      "eaves_starter": "145 ft (14 Eaves)",
+      "drip_edge": "339.2 ft (37 Lengths)",
+      "flashing": "44.9 ft (9 Lengths)",
+      "step_flashing": "65.1 ft (10 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "43 ft",
+      "roof_obstructions_area": "26 sq ft",
+      "net_roof_area": "2176.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67635682",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "579.2",
+          "percentage": "26.3%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "844.6",
+          "percentage": "38.3%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "779.0",
+          "percentage": "35.4%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67635682",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "1624",
+          "squares": "16.33"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "1706",
+          "squares": "17.33"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "1787",
+          "squares": "18"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "1836",
+          "squares": "18.66"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "1868",
+          "squares": "19"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "1901",
+          "squares": "19.33"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "1949",
+          "squares": "19.66"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "2030",
+          "squares": "20.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2112",
+          "squares": "21.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67635682",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67635682/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67635682/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67635682/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67635682/Rafters.png",
+      "Azimuth": "extracted_images/report_67635682/Azimuth.png",
+      "Area": "extracted_images/report_67635682/Area.png",
+      "Roof Obstructions": "extracted_images/report_67635682/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67635682",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67635682/North_Side.png",
+      "South": "extracted_images/report_67635682/South_Side.png",
+      "East": "extracted_images/report_67635682/East_Side.png",
+      "West": "extracted_images/report_67635682/West_Side.png",
+      "Top": "extracted_images/report_67635682/Top_View.png"
+    }
+  }
+]

@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67647761",
+    "address": "7384 W Quail Track Dr, Peoria, AZ 85383",
+    "latitude": 33.7310897,
+    "longitude": -112.2186348,
+    "owner": "Jonathan Sutula JSE Group 5S680 Cloverdale Ct Naperville, IL 60540-3734 630-399-7805"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67647761",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 10,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2,789 sq ft",
+      "total_roof_obstructions": 20
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67647761",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,925 sq ft",
+      "total_roof_facets": 10,
+      "predominant_pitch": "4/12",
+      "ridges": "72 ft (4 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "54 ft (5 Valleys)",
+      "rakes": "188 ft (15 Rakes)",
+      "eaves_starter": "136 ft (9 Eaves)",
+      "drip_edge": "324 ft (24 Lengths)",
+      "flashing": "66 ft (7 Lengths)",
+      "step_flashing": "16 ft (6 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "52 ft",
+      "roof_obstructions_area": "11 sq ft",
+      "net_roof_area": "2,914 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67647761",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "3/12",
+          "area_sq_ft": "654.0",
+          "percentage": "22.4%"
+        },
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "2270.7",
+          "percentage": "77.6%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67647761",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "2925",
+          "squares": "29.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "3042",
+          "squares": "30.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "3130",
+          "squares": "31.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "3189",
+          "squares": "32"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "3247",
+          "squares": "32.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "3335",
+          "squares": "33.66"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "3481",
+          "squares": "35"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "3627",
+          "squares": "36.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3774",
+          "squares": "38"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67647761",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67647761/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67647761/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67647761/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67647761/Rafters.png",
+      "Azimuth": "extracted_images/report_67647761/Azimuth.png",
+      "Area": "extracted_images/report_67647761/Area.png",
+      "Roof Obstructions": "extracted_images/report_67647761/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67647761",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67647761/North_Side.png",
+      "South": "extracted_images/report_67647761/South_Side.png",
+      "East": "extracted_images/report_67647761/East_Side.png",
+      "West": "extracted_images/report_67647761/West_Side.png",
+      "Top": "extracted_images/report_67647761/Top_View.png"
+    }
+  }
+]

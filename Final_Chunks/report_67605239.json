@@ -1,0 +1,150 @@
+[
+  {
+    "property_id": "PROP_67605239",
+    "address": "2719 Alvar Dr Houston, TX 77014",
+    "latitude": 29.9664855,
+    "longitude": -95.4634328,
+    "owner": "Ricky Gonzales LGCY Power 338 Grace Circle Hurst, TX 76123 8172284599"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67605239",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 15,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2171.5 sq ft",
+      "total_roof_obstructions": 14
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67605239",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2353.8 sq ft",
+      "total_roof_facets": 15,
+      "predominant_pitch": "5/12",
+      "ridges": "25.8 ft (3 Ridges)",
+      "hips": "129.2 ft (8 Hips)",
+      "valleys": "38.4 ft (4 Valleys)",
+      "rakes": "49 ft (10 Rakes)",
+      "eaves_starter": "214.2 ft (13 Eaves)",
+      "drip_edge": "263.2 ft (23 Lengths)",
+      "flashing": "33.7 ft (7 Lengths)",
+      "step_flashing": "21.7 ft (8 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "50 ft",
+      "roof_obstructions_area": "18 sq ft",
+      "net_roof_area": "2335.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67605239",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "2322.2",
+          "percentage": "98.7%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "31.6",
+          "percentage": "1.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67605239",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "2354",
+          "squares": "23.66"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "2425",
+          "squares": "24.33"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "2543",
+          "squares": "25.66"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "2661",
+          "squares": "26.66"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "2731",
+          "squares": "27.33"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "2778",
+          "squares": "28.00"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "2825",
+          "squares": "28.33"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "2896",
+          "squares": "29.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3014",
+          "squares": "30.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67605239",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67605239/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67605239/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67605239/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67605239/Rafters.png",
+      "Azimuth": "extracted_images/report_67605239/Azimuth.png",
+      "Area": "extracted_images/report_67605239/Area.png",
+      "Roof Obstructions": "extracted_images/report_67605239/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67605239",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67605239/North_Side.png",
+      "South": "extracted_images/report_67605239/South_Side.png",
+      "East": "extracted_images/report_67605239/East_Side.png",
+      "West": "extracted_images/report_67605239/West_Side.png",
+      "Top": "extracted_images/report_67605239/Top_View.png"
+    }
+  }
+]

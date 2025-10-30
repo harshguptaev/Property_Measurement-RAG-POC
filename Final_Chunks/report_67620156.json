@@ -1,0 +1,166 @@
+[
+  {
+    "property_id": "PROP_67620156",
+    "address": "933 Creekbend, Vernon Hills, IL 60061",
+    "latitude": 42.2060388,
+    "longitude": -87.9635971,
+    "owner": "Ryan Pettit Shake Guys 4860 Duff Drive Cincinnati, OH 45246 847-707-3713"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67620156",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 11,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2701.9 sq ft",
+      "total_roof_obstructions": 12
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67620156",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3019.1 sq ft",
+      "total_roof_facets": 11,
+      "predominant_pitch": "6/12",
+      "ridges": "101.1 ft (4 Ridges)",
+      "hips": "5.2 ft (2 Hips)",
+      "valleys": "63.4 ft (4 Valleys)",
+      "rakes": "158.5 ft (12 Rakes)",
+      "eaves_starter": "161.2 ft (11 Eaves)",
+      "drip_edge": "319.7 ft (23 Lengths)",
+      "flashing": "33.3 ft (3 Lengths)",
+      "step_flashing": "48.9 ft (5 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "61 ft",
+      "roof_obstructions_area": "24 sq ft",
+      "net_roof_area": "2995.1 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67620156",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "1027.7",
+          "percentage": "34%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "1508.2",
+          "percentage": "50%"
+        },
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "180.1",
+          "percentage": "6%"
+        },
+        {
+          "pitch": "10/12",
+          "area_sq_ft": "294.3",
+          "percentage": "9.7%"
+        },
+        {
+          "pitch": "12/12",
+          "area_sq_ft": "8.8",
+          "percentage": "0.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67620156",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "3020",
+          "squares": "30.33"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "3171",
+          "squares": "32.00"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "3262",
+          "squares": "32.66"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "3323",
+          "squares": "33.33"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "3383",
+          "squares": "34.00"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "3473",
+          "squares": "35.00"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "3624",
+          "squares": "36.33"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "3775",
+          "squares": "38.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3926",
+          "squares": "39.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67620156",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67620156/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "extracted_images/report_67620156/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67620156/Rafters.png",
+      "Azimuth": "extracted_images/report_67620156/Azimuth.png",
+      "Area": "extracted_images/report_67620156/Area.png",
+      "Roof Obstructions": "extracted_images/report_67620156/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67620156",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "",
+      "South": "extracted_images/report_67620156/South_Side.png",
+      "East": "extracted_images/report_67620156/East_Side.png",
+      "West": "extracted_images/report_67620156/West_Side.png",
+      "Top": ""
+    }
+  }
+]

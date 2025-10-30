@@ -1,0 +1,161 @@
+[
+  {
+    "property_id": "PROP_67650832",
+    "address": "6350 Johnson Rd, Indianapolis, IN 46220",
+    "latitude": 39.8730533,
+    "longitude": -86.0532665,
+    "owner": "Chad Carlton Carlton Construction 3909 N Mohr Rd Greenfield, IN 46140 317-443-6384"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67650832",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 31,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2532.8 sq ft",
+      "total_roof_obstructions": 7
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67650832",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3481.2 sq ft",
+      "total_roof_facets": 31,
+      "predominant_pitch": "6/12",
+      "ridges": "59.2 ft (3 Ridges)",
+      "hips": "112 ft (8 Hips)",
+      "valleys": "90.5 ft (22 Valleys)",
+      "rakes": "98.4 ft (22 Rakes)",
+      "eaves_starter": "195.7 ft (22 Eaves)",
+      "drip_edge": "294.1 ft (44 Lengths)",
+      "flashing": "42.3 ft (23 Lengths)",
+      "step_flashing": "86.4 ft (18 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "40.2 ft",
+      "roof_obstructions_area": "22 sq ft",
+      "net_roof_area": "3459.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67650832",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "0/12",
+          "area_sq_ft": "12.8",
+          "percentage": "0.4%"
+        },
+        {
+          "pitch": "3/12",
+          "area_sq_ft": "1128.0",
+          "percentage": "32.4%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "1436.6",
+          "percentage": "41.3%"
+        },
+        {
+          "pitch": "70/12",
+          "area_sq_ft": "903.8",
+          "percentage": "26%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67650832",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "3469",
+          "squares": "35.00"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "3643",
+          "squares": "36.66"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "3816",
+          "squares": "38.33"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "3920",
+          "squares": "39.33"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "3990",
+          "squares": "40.00"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "4059",
+          "squares": "40.66"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "4163",
+          "squares": "41.66"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "4337",
+          "squares": "43.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4510",
+          "squares": "45.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67650832",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67650832/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67650832/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67650832/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67650832/Rafters.png",
+      "Azimuth": "extracted_images/report_67650832/Azimuth.png",
+      "Area": "extracted_images/report_67650832/Area.png",
+      "Roof Obstructions": "extracted_images/report_67650832/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67650832",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67650832/North_Side.png",
+      "South": "extracted_images/report_67650832/South_Side.png",
+      "East": "extracted_images/report_67650832/East_Side.png",
+      "West": "extracted_images/report_67650832/West_Side.png",
+      "Top": "extracted_images/report_67650832/Top_View.png"
+    }
+  }
+]

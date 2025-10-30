@@ -1,0 +1,155 @@
+[
+  {
+    "property_id": "PROP_67649473",
+    "address": "413 Curie Dr, San Jose, CA 95123",
+    "latitude": 37.2281288,
+    "longitude": -121.8082837,
+    "owner": "Jeff Long Infinium Solar 1190 Dell Ave Campbell, CA 95008 408-583-8101"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67649473",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 7,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1934.9 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67649473",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2334.4 sq ft",
+      "total_roof_facets": 7,
+      "predominant_pitch": "11/12",
+      "ridges": "56.8 ft (5 Ridges)",
+      "hips": "17.4 ft (2 Hips)",
+      "valleys": "34.2 ft (2 Valleys)",
+      "rakes": "165.8 ft (11 Rakes)",
+      "eaves_starter": "158 ft (7 Eaves)",
+      "drip_edge": "323.8 ft (18 Lengths)",
+      "flashing": "49.4 ft (4 Lengths)",
+      "step_flashing": "75.8 ft (11 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "45.8 ft",
+      "roof_obstructions_area": "18 sq ft",
+      "net_roof_area": "2316.4 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67649473",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "830.9",
+          "percentage": "35.6%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "1259.2",
+          "percentage": "10.5%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "244.3",
+          "percentage": "53.9%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67649473",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "2335",
+          "squares": "23.66"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "2382",
+          "squares": "24"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "2499",
+          "squares": "25"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "2569",
+          "squares": "26"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "2616",
+          "squares": "26.33"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "2662",
+          "squares": "26.66"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "2732",
+          "squares": "27.33"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "2849",
+          "squares": "28.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2966",
+          "squares": "29.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67649473",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67649473/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67649473/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67649473/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67649473/Rafters.png",
+      "Azimuth": "extracted_images/report_67649473/Azimuth.png",
+      "Area": "extracted_images/report_67649473/Area.png",
+      "Roof Obstructions": "extracted_images/report_67649473/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67649473",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67649473/North_Side.png",
+      "South": "extracted_images/report_67649473/South_Side.png",
+      "East": "extracted_images/report_67649473/East_Side.png",
+      "West": "extracted_images/report_67649473/West_Side.png",
+      "Top": "extracted_images/report_67649473/Top_View.png"
+    }
+  }
+]

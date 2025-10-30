@@ -1,0 +1,150 @@
+[
+  {
+    "property_id": "PROP_67598050",
+    "address": "2300 Meadow Gate Dr Greensboro, NC 27455",
+    "latitude": 36.1373066,
+    "longitude": -79.8200002,
+    "owner": "Brenden Schmidt Local Restoration Group LLC 5540 Centerview Dr Ste 204 PMB 65727 Raleigh, NC 27606 252-580-1392"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67598050",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 7,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2394.5 sq ft",
+      "total_roof_obstructions": 12
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67598050",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,832 sq ft",
+      "total_roof_facets": 7,
+      "predominant_pitch": "8/12",
+      "ridges": "87.4 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "56 ft (4 Valleys)",
+      "rakes": "171.1 ft (13 Rakes)",
+      "eaves_starter": "118.3 ft (9 Eaves)",
+      "drip_edge": "289.4 ft (22 Lengths)",
+      "flashing": "9.1 ft (2 Lengths)",
+      "step_flashing": "29.6 ft (7 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "91.8 ft",
+      "roof_obstructions_area": "57 sq ft",
+      "net_roof_area": "2,775 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67598050",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "328.4",
+          "percentage": "11.6%"
+        },
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "2503.6",
+          "percentage": "88.4%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67598050",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "2832",
+          "squares": "28.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "2946",
+          "squares": "29.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "3031",
+          "squares": "30.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "3087",
+          "squares": "31"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "3144",
+          "squares": "31.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "3229",
+          "squares": "32.33"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "3371",
+          "squares": "34"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "3512",
+          "squares": "35.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3654",
+          "squares": "36.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67598050",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67598050/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67598050/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67598050/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67598050/Rafters.png",
+      "Azimuth": "extracted_images/report_67598050/Azimuth.png",
+      "Area": "extracted_images/report_67598050/Area.png",
+      "Roof Obstructions": "extracted_images/report_67598050/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67598050",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67598050/North_Side.png",
+      "South": "extracted_images/report_67598050/South_Side.png",
+      "East": "extracted_images/report_67598050/East_Side.png",
+      "West": "extracted_images/report_67598050/West_Side.png",
+      "Top": "extracted_images/report_67598050/Top_View.png"
+    }
+  }
+]

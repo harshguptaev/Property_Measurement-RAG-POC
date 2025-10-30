@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67595709",
+    "address": "8351 Northwest 15th Court, Coral Springs, FL 33071",
+    "latitude": 26.2500301,
+    "longitude": -80.2375914,
+    "owner": "ABC Supply ABC Supply 1 ABC Parkway Beloit, WI 53511 (800) 226-1280"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67595709",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 6,
+      "structure_complexity": "Simple",
+      "estimated_attic": "2868.3 sq ft",
+      "total_roof_obstructions": 27
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67595709",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3581.7 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "5/12",
+      "ridges": "50.9 ft (2 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "163.1 ft (11 Rakes)",
+      "eaves_starter": "236.5 ft (10 Eaves)",
+      "drip_edge": "399.6 ft (21 Lengths)",
+      "flashing": "108.7 ft (3 Lengths)",
+      "step_flashing": "15.8 ft (3 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "88.8 ft",
+      "roof_obstructions_area": "35 sq ft",
+      "net_roof_area": "3546.7 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67595709",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "0/12",
+          "area_sq_ft": "474.4",
+          "percentage": "13.2%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "3107.3",
+          "percentage": "86.8%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67595709",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "0%",
+          "area_sq_ft": "3108",
+          "squares": "31.33"
+        },
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "3108",
+          "squares": "31.33"
+        },
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "3202",
+          "squares": "32.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "3264",
+          "squares": "32.66"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "3326",
+          "squares": "33.33"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "3419",
+          "squares": "34.33"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "3575",
+          "squares": "36.00"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "3730",
+          "squares": "37.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3885",
+          "squares": "39.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67595709",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67595709/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67595709/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67595709/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67595709/Rafters.png",
+      "Azimuth": "extracted_images/report_67595709/Azimuth.png",
+      "Area": "extracted_images/report_67595709/Area.png",
+      "Roof Obstructions": "extracted_images/report_67595709/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67595709",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67595709/North_Side.png",
+      "South": "extracted_images/report_67595709/South_Side.png",
+      "East": "extracted_images/report_67595709/East_Side.png",
+      "West": "extracted_images/report_67595709/West_Side.png",
+      "Top": "extracted_images/report_67595709/Top_View.png"
+    }
+  }
+]

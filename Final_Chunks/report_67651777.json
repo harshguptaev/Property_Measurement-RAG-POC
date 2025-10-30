@@ -1,0 +1,150 @@
+[
+  {
+    "property_id": "PROP_67651777",
+    "address": "705 Connecticut St, Lawrence, KS 66044",
+    "latitude": 38.970976,
+    "longitude": -95.2327147,
+    "owner": "Jesse Pacheco Cromwell Solar 615 Vermont St Lawrence, KS 66044 785-841-4612"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67651777",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 6,
+      "structure_complexity": "Simple",
+      "estimated_attic": "1444.4 sq ft",
+      "total_roof_obstructions": 3
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67651777",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1791.3 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "10/12",
+      "ridges": "49.7 ft (1 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "127 ft (12 Rakes)",
+      "eaves_starter": "106.5 ft (10 Eaves)",
+      "drip_edge": "233.5 ft (22 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "61.4 ft (16 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "12 ft",
+      "roof_obstructions_area": "3 sq ft",
+      "net_roof_area": "1788.3 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67651777",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "407.0",
+          "percentage": "22.7%"
+        },
+        {
+          "pitch": "10/12",
+          "area_sq_ft": "1384.3",
+          "percentage": "77.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67651777",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "1792",
+          "squares": "18"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "1846",
+          "squares": "18.66"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "1900",
+          "squares": "19"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "1936",
+          "squares": "19.66"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "1972",
+          "squares": "20"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "2025",
+          "squares": "20.33"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "2115",
+          "squares": "21.33"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "2205",
+          "squares": "22.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2294",
+          "squares": "23"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67651777",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67651777/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "",
+      "Rafters": "",
+      "Azimuth": "",
+      "Area": "",
+      "Roof Obstructions": "extracted_images/report_67651777/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67651777",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67651777/North_Side.png",
+      "South": "extracted_images/report_67651777/South_Side.png",
+      "East": "extracted_images/report_67651777/East_Side.png",
+      "West": "extracted_images/report_67651777/West_Side.png",
+      "Top": "extracted_images/report_67651777/Top_View.png"
+    }
+  }
+]

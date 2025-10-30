@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67614995",
+    "address": "563 Ne Tohomish St, White Salmon, WA 98672",
+    "latitude": 45.7278814,
+    "longitude": -121.4797601,
+    "owner": "Jose Castro Soto &amp; Brothers Roofing 322 East 27th St Vancouver, WA 98663 3605837870"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67614995",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 5,
+      "structure_complexity": "Simple",
+      "estimated_attic": "2106.5 sq ft",
+      "total_roof_obstructions": 23
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67614995",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2162.3 sq ft",
+      "total_roof_facets": 5,
+      "predominant_pitch": "3/12",
+      "ridges": "82.3 ft (2 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "38 ft (2 Valleys)",
+      "rakes": "104.2 ft (10 Rakes)",
+      "eaves_starter": "121.3 ft (4 Eaves)",
+      "drip_edge": "225.5 ft (14 Lengths)",
+      "flashing": "9.6 ft (1 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "92 ft",
+      "roof_obstructions_area": "24 sq ft",
+      "net_roof_area": "2138.3 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67614995",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "2/12",
+          "area_sq_ft": "76.3",
+          "percentage": "3.5%"
+        },
+        {
+          "pitch": "3/12",
+          "area_sq_ft": "2086.0",
+          "percentage": "96.5%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67614995",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "2086",
+          "squares": "21.00"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "2170",
+          "squares": "22.00"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "2233",
+          "squares": "22.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "2274",
+          "squares": "23.00"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "2316",
+          "squares": "23.33"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "2379",
+          "squares": "24.00"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "2483",
+          "squares": "25.00"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "2587",
+          "squares": "26.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2691",
+          "squares": "27.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67614995",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67614995/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67614995/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67614995/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67614995/Rafters.png",
+      "Azimuth": "extracted_images/report_67614995/Azimuth.png",
+      "Area": "extracted_images/report_67614995/Area.png",
+      "Roof Obstructions": "extracted_images/report_67614995/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67614995",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67614995/North_Side.png",
+      "South": "extracted_images/report_67614995/South_Side.png",
+      "East": "extracted_images/report_67614995/East_Side.png",
+      "West": "extracted_images/report_67614995/West_Side.png",
+      "Top": "extracted_images/report_67614995/Top_View.png"
+    }
+  }
+]

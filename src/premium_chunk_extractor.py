@@ -29,10 +29,21 @@ def _extract_premium_header(text: str) -> Dict[str, Any]:
     if date_match:
         data['date'] = date_match.group(1)
 
-    address_match = re.search(r'(\d+[^,\n]+(?:,\s*[^,\n]+)?,\s*[A-Z]{2}\s+\d{5})', text)
+    # Try to find address after "Property Address:" to get the clean address
+    address_match = re.search(r'Property Address:\s*([^,\n]+,\s*[^,\n]+,\s*[A-Z]{2}\s+\d{5})', text, re.IGNORECASE)
+    if not address_match:
+        # Fallback: try "PROPERTY" keyword to avoid date prefixes
+        address_match = re.search(r'PROPERTY\s+([^,\n]+,\s*[^,\n]+,\s*[A-Z]{2}\s+\d{5})', text, re.IGNORECASE)
+    if not address_match:
+        # Final fallback: look for any address pattern (original regex)
+        address_match = re.search(r'(\d+[^,\n]+(?:,\s*[^,\n]+)?,\s*[A-Z]{2}\s+\d{5})', text)
+
     if address_match:
         # Clean up extra spaces in the address
         address = address_match.group(1).strip()
+        # Remove any remaining date/property prefixes if they exist
+        address = re.sub(r'^\d{1,2}/\d{1,2}/\d{4}\s+PROPERTY\s+', '', address, flags=re.IGNORECASE)
+        address = re.sub(r'^\d{1,2},\s+\d{4}\s+PROPERTY\s+', '', address, flags=re.IGNORECASE)
         # Normalize spacing: single space after commas, single spaces between words
         address = re.sub(r',\s+', ', ', address)  # Normalize comma spacing
         address = re.sub(r'\s+', ' ', address)     # Normalize multiple spaces to single space

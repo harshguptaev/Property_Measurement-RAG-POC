@@ -1,0 +1,156 @@
+[
+  {
+    "property_id": "PROP_67615536",
+    "address": "7304 Iris Rd Aubrey, TX 76227",
+    "latitude": 33.2392612,
+    "longitude": -96.9153702,
+    "owner": "Martyna Kowalczyk Solartime USA 1758 Firman Dr. Suite 100 NA Richardson, TX 75081 972-675-7725"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67615536",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 21,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2647.1 sq ft",
+      "total_roof_obstructions": 18
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67615536",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3334.6 sq ft",
+      "total_roof_facets": 21,
+      "predominant_pitch": "8/12",
+      "ridges": "59 ft (7 Ridges)",
+      "hips": "178.5 ft (15 Hips)",
+      "valleys": "147.7 ft (8 Valleys)",
+      "rakes": "128.6 ft (17 Rakes)",
+      "eaves_starter": "218.2 ft (16 Eaves)",
+      "drip_edge": "346.8 ft (33 Lengths)",
+      "flashing": "55.8 ft (12 Lengths)",
+      "step_flashing": "48 ft (13 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "86 ft",
+      "roof_obstructions_area": "27 sq ft",
+      "net_roof_area": "3307.6 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67615536",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "114.8",
+          "percentage": "3.4%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "1024.2",
+          "percentage": "65.8%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "2195.6",
+          "percentage": "30.7%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67615536",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "3335",
+          "squares": "33.66"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "3536",
+          "squares": "35.66"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "3702",
+          "squares": "37.33"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "3869",
+          "squares": "39.00"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "3969",
+          "squares": "40.00"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "4036",
+          "squares": "40.66"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "4103",
+          "squares": "41.33"
+        },
+        {
+          "waste_percentage": "31%",
+          "area_sq_ft": "4203",
+          "squares": "42.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4369",
+          "squares": "44.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67615536",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67615536/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67615536/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67615536/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67615536/Rafters.png",
+      "Azimuth": "extracted_images/report_67615536/Azimuth.png",
+      "Area": "extracted_images/report_67615536/Area.png",
+      "Roof Obstructions": "extracted_images/report_67615536/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67615536",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67615536/North_Side.png",
+      "South": "extracted_images/report_67615536/South_Side.png",
+      "East": "extracted_images/report_67615536/East_Side.png",
+      "West": "extracted_images/report_67615536/West_Side.png",
+      "Top": "extracted_images/report_67615536/Top_View.png"
+    }
+  }
+]

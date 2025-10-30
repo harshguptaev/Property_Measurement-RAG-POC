@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67627419",
+    "address": "12121 N 129th Dr, El Mirage, AZ 85335",
+    "latitude": 33.5939411,
+    "longitude": -112.3378898,
+    "owner": "OPS Team Inty Power 819 W 22nd St Tempe, AZ 85282-1926 480-439-8965"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67627419",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 10,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1974.6 sq ft",
+      "total_roof_obstructions": 10
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67627419",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2125.5 sq ft",
+      "total_roof_facets": 10,
+      "predominant_pitch": "5/12",
+      "ridges": "25.2 ft (3 Ridges)",
+      "hips": "113.8 ft (6 Hips)",
+      "valleys": "22.2 ft (2 Valleys)",
+      "rakes": "51 ft (5 Rakes)",
+      "eaves_starter": "210.5 ft (10 Eaves)",
+      "drip_edge": "261.5 ft (15 Lengths)",
+      "flashing": "35.6 ft (3 Lengths)",
+      "step_flashing": "21.4 ft (3 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "51 ft",
+      "roof_obstructions_area": "19 sq ft",
+      "net_roof_area": "2106.5 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67627419",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "1/12",
+          "area_sq_ft": "169.3",
+          "percentage": "8%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "1956.2",
+          "percentage": "92%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67627419",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "1957",
+          "squares": "19.66"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "2016",
+          "squares": "20.33"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "2114",
+          "squares": "21.33"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "2212",
+          "squares": "22.33"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "2271",
+          "squares": "23.00"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "2310",
+          "squares": "23.33"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "2349",
+          "squares": "23.66"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "2408",
+          "squares": "24.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2505",
+          "squares": "25.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67627419",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67627419/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67627419/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67627419/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67627419/Rafters.png",
+      "Azimuth": "extracted_images/report_67627419/Azimuth.png",
+      "Area": "extracted_images/report_67627419/Area.png",
+      "Roof Obstructions": "extracted_images/report_67627419/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67627419",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67627419/North_Side.png",
+      "South": "extracted_images/report_67627419/South_Side.png",
+      "East": "extracted_images/report_67627419/East_Side.png",
+      "West": "extracted_images/report_67627419/West_Side.png",
+      "Top": "extracted_images/report_67627419/Top_View.png"
+    }
+  }
+]

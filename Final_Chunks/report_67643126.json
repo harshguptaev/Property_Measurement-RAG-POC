@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67643126",
+    "address": "14512 Settlers Landing Way, North Potomac, MD 20878",
+    "latitude": 39.0912608,
+    "longitude": -77.2254695,
+    "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67643126",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 9,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2022.2 sq ft",
+      "total_roof_obstructions": 6
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67643126",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,300 sq ft",
+      "total_roof_facets": 9,
+      "predominant_pitch": "6/12",
+      "ridges": "41.5 ft (3 Ridges)",
+      "hips": "130.8 ft (8 Hips)",
+      "valleys": "14.8 ft (1 Valleys)",
+      "rakes": "0 ft (0 Rakes)",
+      "eaves_starter": "234.1 ft (9 Eaves)",
+      "drip_edge": "234.1 ft (9 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "24.6 ft (2 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "26.2 ft",
+      "roof_obstructions_area": "8 sq ft",
+      "net_roof_area": "2,292 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67643126",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "1740.2",
+          "percentage": "75.7%"
+        },
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "559.8",
+          "percentage": "24.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67643126",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "2300",
+          "squares": "23.00"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "2371",
+          "squares": "24.00"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "2486",
+          "squares": "25.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "2601",
+          "squares": "26.33"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "2670",
+          "squares": "27.00"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "2716",
+          "squares": "27.33"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "2762",
+          "squares": "27.66"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "2831",
+          "squares": "28.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2946",
+          "squares": "29.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67643126",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67643126/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67643126/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67643126/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67643126/Rafters.png",
+      "Azimuth": "extracted_images/report_67643126/Azimuth.png",
+      "Area": "extracted_images/report_67643126/Area.png",
+      "Roof Obstructions": "extracted_images/report_67643126/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67643126",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67643126/North_Side.png",
+      "South": "extracted_images/report_67643126/South_Side.png",
+      "East": "extracted_images/report_67643126/East_Side.png",
+      "West": "extracted_images/report_67643126/West_Side.png",
+      "Top": "extracted_images/report_67643126/Top_View.png"
+    }
+  }
+]

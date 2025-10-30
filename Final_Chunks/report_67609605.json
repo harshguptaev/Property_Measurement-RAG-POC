@@ -1,0 +1,166 @@
+[
+  {
+    "property_id": "PROP_67609605",
+    "address": "12710 Gladiolus Way, San Antonio, TX 78253",
+    "latitude": 29.4849578,
+    "longitude": -98.745658,
+    "owner": "Cheryl Schofield Absolute Construction 605 18th St Plano, TX 75074 972-596-0159"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67609605",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 22,
+      "structure_complexity": "Normal",
+      "estimated_attic": "4592.1 sq ft",
+      "total_roof_obstructions": 27
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67609605",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "5638.7 sq ft",
+      "total_roof_facets": 22,
+      "predominant_pitch": "10/12",
+      "ridges": "82.2 ft (8 Ridges)",
+      "hips": "323.2 ft (15 Hips)",
+      "valleys": "204.1 ft (12 Valleys)",
+      "rakes": "77.4 ft (8 Rakes)",
+      "eaves_starter": "271.7 ft (23 Eaves)",
+      "drip_edge": "349.1 ft (31 Lengths)",
+      "flashing": "7.5 ft (8 Lengths)",
+      "step_flashing": "39.2 ft (10 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "539.8 ft",
+      "roof_obstructions_area": "1,266 sq ft",
+      "net_roof_area": "4372.7 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67609605",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "2155.3",
+          "percentage": "38.2%"
+        },
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "2.6",
+          "percentage": "0%"
+        },
+        {
+          "pitch": "9/12",
+          "area_sq_ft": "73.6",
+          "percentage": "1.3%"
+        },
+        {
+          "pitch": "10/12",
+          "area_sq_ft": "3154.2",
+          "percentage": "55.9%"
+        },
+        {
+          "pitch": "12/12",
+          "area_sq_ft": "253.0",
+          "percentage": "4.5%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67609605",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "5639",
+          "squares": "56.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "5865",
+          "squares": "58.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "6147",
+          "squares": "61.66"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "6429",
+          "squares": "64.33"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "6598",
+          "squares": "66"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "6711",
+          "squares": "67.33"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "6824",
+          "squares": "68.33"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "6993",
+          "squares": "70"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "7275",
+          "squares": "73"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67609605",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67609605/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67609605/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67609605/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67609605/Rafters.png",
+      "Azimuth": "extracted_images/report_67609605/Azimuth.png",
+      "Area": "extracted_images/report_67609605/Area.png",
+      "Roof Obstructions": "extracted_images/report_67609605/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67609605",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67609605/North_Side.png",
+      "South": "extracted_images/report_67609605/South_Side.png",
+      "East": "extracted_images/report_67609605/East_Side.png",
+      "West": "extracted_images/report_67609605/West_Side.png",
+      "Top": "extracted_images/report_67609605/Top_View.png"
+    }
+  }
+]

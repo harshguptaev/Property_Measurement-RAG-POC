@@ -1,0 +1,161 @@
+[
+  {
+    "property_id": "PROP_67661207",
+    "address": "7 Cathy Dr, Robbinsville, NJ 08691",
+    "latitude": 40.2350603,
+    "longitude": -74.6124492,
+    "owner": "Sal Pistorio Integrity Solar &amp; Home Solutions 123 Egg Harbor Rd Ste 600 Sewell, NJ 08080 856-270-5614"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67661207",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 22,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2676.5 sq ft",
+      "total_roof_obstructions": 13
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67661207",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3386.2 sq ft",
+      "total_roof_facets": 22,
+      "predominant_pitch": "10/12",
+      "ridges": "98.4 ft (6 Ridges)",
+      "hips": "65.5 ft (9 Hips)",
+      "valleys": "87.1 ft (7 Valleys)",
+      "rakes": "208.4 ft (17 Rakes)",
+      "eaves_starter": "184.2 ft (21 Eaves)",
+      "drip_edge": "392.6 ft (38 Lengths)",
+      "flashing": "49.1 ft (10 Lengths)",
+      "step_flashing": "78.2 ft (14 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "79.6 ft",
+      "roof_obstructions_area": "40 sq ft",
+      "net_roof_area": "3346.2 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67661207",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "165.7",
+          "percentage": "4.9%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "367.5",
+          "percentage": "10.9%"
+        },
+        {
+          "pitch": "10/12",
+          "area_sq_ft": "2826.1",
+          "percentage": "83.5%"
+        },
+        {
+          "pitch": "14/12",
+          "area_sq_ft": "26.9",
+          "percentage": "0.8%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67661207",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "3387",
+          "squares": "34.00"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "3523",
+          "squares": "35.33"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "3692",
+          "squares": "37.00"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "3794",
+          "squares": "38.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "3862",
+          "squares": "38.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "3929",
+          "squares": "39.33"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "4031",
+          "squares": "40.33"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "4200",
+          "squares": "42.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4370",
+          "squares": "44.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67661207",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67661207/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "extracted_images/report_67661207/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67661207/Rafters.png",
+      "Azimuth": "extracted_images/report_67661207/Azimuth.png",
+      "Area": "extracted_images/report_67661207/Area.png",
+      "Roof Obstructions": "extracted_images/report_67661207/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67661207",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "",
+      "South": "extracted_images/report_67661207/South_Side.png",
+      "East": "extracted_images/report_67661207/East_Side.png",
+      "West": "extracted_images/report_67661207/West_Side.png",
+      "Top": ""
+    }
+  }
+]

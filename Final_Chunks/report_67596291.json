@@ -1,0 +1,176 @@
+[
+  {
+    "property_id": "PROP_67596291",
+    "address": "98 Avenue Of The Oaks, Clifton Park, NY 12065",
+    "latitude": 42.8441919,
+    "longitude": -73.830173,
+    "owner": "Paul Melnik Roofing Rochester NY 1411 Chili Ave Ste 3 Rochester, NY 14624-3262 (585) 727-8619"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67596291",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 18,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2469.9 sq ft",
+      "total_roof_obstructions": 2
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67596291",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3059.1 sq ft",
+      "total_roof_facets": 18,
+      "predominant_pitch": "8/12",
+      "ridges": "84 ft (4 Ridges)",
+      "hips": "38.3 ft (8 Hips)",
+      "valleys": "67.4 ft (5 Valleys)",
+      "rakes": "184.5 ft (14 Rakes)",
+      "eaves_starter": "165.5 ft (18 Eaves)",
+      "drip_edge": "350 ft (32 Lengths)",
+      "flashing": "44.1 ft (9 Lengths)",
+      "step_flashing": "50.6 ft (13 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "8 ft",
+      "roof_obstructions_area": "2 sq ft",
+      "net_roof_area": "3057.1 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67596291",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "160.7",
+          "percentage": "5.3%"
+        },
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "15.7",
+          "percentage": "0.5%"
+        },
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "2085.7",
+          "percentage": "68.2%"
+        },
+        {
+          "pitch": "9/12",
+          "area_sq_ft": "12.8",
+          "percentage": "0.4%"
+        },
+        {
+          "pitch": "10/12",
+          "area_sq_ft": "53.9",
+          "percentage": "1.8%"
+        },
+        {
+          "pitch": "12/12",
+          "area_sq_ft": "707.4",
+          "percentage": "23.1%"
+        },
+        {
+          "pitch": "13/12",
+          "area_sq_ft": "22.9",
+          "percentage": "0.7%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67596291",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "1%",
+          "area_sq_ft": "3060",
+          "squares": "30.66"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "3091",
+          "squares": "31"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "3244",
+          "squares": "32.66"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "3336",
+          "squares": "33.66"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "3397",
+          "squares": "34"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "3458",
+          "squares": "34.66"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "3550",
+          "squares": "35.66"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "3703",
+          "squares": "37.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3856",
+          "squares": "38.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67596291",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67596291/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "extracted_images/report_67596291/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67596291/Rafters.png",
+      "Azimuth": "extracted_images/report_67596291/Azimuth.png",
+      "Area": "extracted_images/report_67596291/Area.png",
+      "Roof Obstructions": "extracted_images/report_67596291/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67596291",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "",
+      "South": "extracted_images/report_67596291/South_Side.png",
+      "East": "extracted_images/report_67596291/East_Side.png",
+      "West": "extracted_images/report_67596291/West_Side.png",
+      "Top": ""
+    }
+  }
+]

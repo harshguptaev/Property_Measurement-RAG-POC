@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67620684",
+    "address": "15660 Chipmunk Ln, Middlefield, OH 44062",
+    "latitude": 41.443566,
+    "longitude": -81.1003939,
+    "owner": "Alex Ciarlillo Sandhill Homestead LLC 15660 Chipmunk Ln Middlefield, OH 44062 7402742863"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67620684",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 5,
+      "structure_complexity": "Simple",
+      "estimated_attic": "3330.5 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67620684",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3828.6 sq ft",
+      "total_roof_facets": 5,
+      "predominant_pitch": "8/12",
+      "ridges": "71.5 ft (2 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "131 ft (8 Rakes)",
+      "eaves_starter": "144.3 ft (5 Eaves)",
+      "drip_edge": "275.3 ft (13 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "16 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "79.6 ft",
+      "roof_obstructions_area": "54 sq ft",
+      "net_roof_area": "3774.6 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67620684",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "1133.4",
+          "percentage": "29.6%"
+        },
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "2695.2",
+          "percentage": "70.4%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67620684",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "0%",
+          "area_sq_ft": "3829",
+          "squares": "38.33"
+        },
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "3829",
+          "squares": "38.33"
+        },
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "3944",
+          "squares": "39.66"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "4021",
+          "squares": "40.33"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "4098",
+          "squares": "41.00"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "4212",
+          "squares": "42.33"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "4404",
+          "squares": "44.33"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "4595",
+          "squares": "46.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4787",
+          "squares": "48.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67620684",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67620684/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67620684/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67620684/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67620684/Rafters.png",
+      "Azimuth": "extracted_images/report_67620684/Azimuth.png",
+      "Area": "extracted_images/report_67620684/Area.png",
+      "Roof Obstructions": "extracted_images/report_67620684/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67620684",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67620684/North_Side.png",
+      "South": "extracted_images/report_67620684/South_Side.png",
+      "East": "extracted_images/report_67620684/East_Side.png",
+      "West": "extracted_images/report_67620684/West_Side.png",
+      "Top": "extracted_images/report_67620684/Top_View.png"
+    }
+  }
+]

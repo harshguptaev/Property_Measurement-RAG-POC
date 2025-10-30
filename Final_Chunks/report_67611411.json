@@ -1,0 +1,154 @@
+[
+  {
+    "property_id": "PROP_67611411",
+    "address": "12480 Harbour Ridge Boulevard, Palm City, FL 34990",
+    "latitude": 27.2340378,
+    "longitude": -80.3092892,
+    "owner": "Koh Knox Knox Services 21301  S Tamiami Trl Ste 320 #132 Estero, FL 33928 239-451-3202"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67611411",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 57,
+      "structure_complexity": "Complex",
+      "estimated_attic": "21193.2 sq ft",
+      "total_roof_obstructions": 30
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67611411",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "25082.8 sq ft",
+      "total_roof_facets": 57,
+      "predominant_pitch": "6/12",
+      "ridges": "225.2 ft (18 Ridges)",
+      "valleys": "470.2 ft (26 Valleys)",
+      "rakes": "18.4 ft (8 Rakes)",
+      "eaves_starter": "1431.7 ft (66 Eaves)",
+      "drip_edge": "1450.1 ft (74 Lengths)",
+      "flashing": "101.6 ft (4 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "246 ft",
+      "roof_obstructions_area": "321 sq ft",
+      "net_roof_area": "24761.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67611411",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "36.5",
+          "percentage": "5.6%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "23654.1",
+          "percentage": "0.1%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "94.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67611411",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "23655",
+          "squares": "236.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "24602",
+          "squares": "246.33"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "25784",
+          "squares": "258.00"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "26494",
+          "squares": "265.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "26967",
+          "squares": "270.00"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "27440",
+          "squares": "274.66"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "28150",
+          "squares": "281.66"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "29333",
+          "squares": "293.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "30515",
+          "squares": "305.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67611411",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67611411/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "extracted_images/report_67611411/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67611411/Rafters.png",
+      "Azimuth": "extracted_images/report_67611411/Azimuth.png",
+      "Area": "extracted_images/report_67611411/Area.png",
+      "Roof Obstructions": "extracted_images/report_67611411/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67611411",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "",
+      "South": "extracted_images/report_67611411/South_Side.png",
+      "East": "extracted_images/report_67611411/East_Side.png",
+      "West": "extracted_images/report_67611411/West_Side.png",
+      "Top": ""
+    }
+  }
+]

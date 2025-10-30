@@ -1,0 +1,145 @@
+[
+  {
+    "property_id": "PROP_67629909",
+    "address": "12154 White River Drive, San Antonio, TX 78254",
+    "latitude": 29.5095719,
+    "longitude": -98.7345796,
+    "owner": "Cheryl Schofield Absolute Construction 605 18th St Plano, TX 75074 972-596-0159"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67629909",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 10,
+      "structure_complexity": "Normal",
+      "estimated_attic": "4066.7 sq ft",
+      "total_roof_obstructions": 18
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67629909",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4887.7 sq ft",
+      "total_roof_facets": 10,
+      "predominant_pitch": "8/12",
+      "ridges": "49.3 ft (5 Ridges)",
+      "hips": "161 ft (8 Hips)",
+      "valleys": "54 ft (4 Valleys)",
+      "rakes": "51.6 ft (6 Rakes)",
+      "eaves_starter": "237.8 ft (10 Eaves)",
+      "drip_edge": "289.4 ft (16 Lengths)",
+      "flashing": "2.2 ft (2 Lengths)",
+      "step_flashing": "11.8 ft (2 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "62.2 ft",
+      "roof_obstructions_area": "22 sq ft",
+      "net_roof_area": "4865.7 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67629909",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "4887.7",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67629909",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "1%",
+          "area_sq_ft": "4888",
+          "squares": "49.00"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "4937",
+          "squares": "49.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "5182",
+          "squares": "52.00"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "5328",
+          "squares": "53.33"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "5426",
+          "squares": "54.33"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "5524",
+          "squares": "55.33"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "5671",
+          "squares": "57.00"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "5915",
+          "squares": "59.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "6159",
+          "squares": "61.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67629909",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67629909/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67629909/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67629909/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67629909/Rafters.png",
+      "Azimuth": "extracted_images/report_67629909/Azimuth.png",
+      "Area": "extracted_images/report_67629909/Area.png",
+      "Roof Obstructions": "extracted_images/report_67629909/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67629909",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67629909/North_Side.png",
+      "South": "extracted_images/report_67629909/South_Side.png",
+      "East": "extracted_images/report_67629909/East_Side.png",
+      "West": "extracted_images/report_67629909/West_Side.png",
+      "Top": "extracted_images/report_67629909/Top_View.png"
+    }
+  }
+]

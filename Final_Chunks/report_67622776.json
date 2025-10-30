@@ -1,0 +1,149 @@
+[
+  {
+    "property_id": "PROP_67622776",
+    "address": "11 Boss Rd, Ringoes, NJ 08551",
+    "latitude": 40.4248417,
+    "longitude": -74.8730968,
+    "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67622776",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "estimated_attic": "3490.4 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67622776",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3805.7 sq ft",
+      "predominant_pitch": "6/12",
+      "ridges": "71.8 ft (2 Ridges)",
+      "hips": "9.6 ft (4 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "102 ft (4 Rakes)",
+      "eaves_starter": "161.2 ft (6 Eaves)",
+      "drip_edge": "263.2 ft (10 Lengths)",
+      "flashing": "5.6 ft (2 Lengths)",
+      "step_flashing": "6.2 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "net_roof_area": "3805.7 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67622776",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "1608.2",
+          "percentage": "42.3%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "2186.3",
+          "percentage": "57.4%"
+        },
+        {
+          "pitch": "9/12",
+          "area_sq_ft": "11.2",
+          "percentage": "0.3%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67622776",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "0%",
+          "area_sq_ft": "3806",
+          "squares": "38.33"
+        },
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "3806",
+          "squares": "38.33"
+        },
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "3921",
+          "squares": "39.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "3997",
+          "squares": "40.00"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "4073",
+          "squares": "41.00"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "4187",
+          "squares": "42.00"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "4377",
+          "squares": "44.00"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "4568",
+          "squares": "46.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "4758",
+          "squares": "47.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67622776",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67622776/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67622776/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67622776/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67622776/Rafters.png",
+      "Azimuth": "extracted_images/report_67622776/Azimuth.png",
+      "Area": "extracted_images/report_67622776/Area.png",
+      "Roof Obstructions": "extracted_images/report_67622776/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67622776",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67622776/North_Side.png",
+      "South": "extracted_images/report_67622776/South_Side.png",
+      "East": "",
+      "West": "extracted_images/report_67622776/West_Side.png",
+      "Top": "extracted_images/report_67622776/Top_View.png"
+    }
+  }
+]

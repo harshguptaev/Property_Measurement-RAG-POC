@@ -1,0 +1,145 @@
+[
+  {
+    "property_id": "PROP_67661966",
+    "address": "143 Belvidere Ave, Oxford, NJ 07863",
+    "latitude": 40.8068352,
+    "longitude": -75.0072748,
+    "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67661966",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 7,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2,172 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67661966",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,432 sq ft",
+      "total_roof_facets": 7,
+      "predominant_pitch": "6/12",
+      "ridges": "86 ft (4 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "41 ft (2 Valleys)",
+      "rakes": "138 ft (10 Rakes)",
+      "eaves_starter": "122 ft (5 Eaves)",
+      "drip_edge": "260 ft (15 Lengths)",
+      "flashing": "3 ft (2 Lengths)",
+      "step_flashing": "34 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "42 ft",
+      "roof_obstructions_area": "14 sq ft",
+      "net_roof_area": "2,418 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67661966",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "2431.9",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67661966",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "2432",
+          "squares": "24.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "2530",
+          "squares": "25.33"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "2603",
+          "squares": "26.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "2651",
+          "squares": "26.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "2700",
+          "squares": "27.00"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "2773",
+          "squares": "28.00"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "2895",
+          "squares": "29.00"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "3016",
+          "squares": "30.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3138",
+          "squares": "31.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67661966",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67661966/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67661966/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67661966/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67661966/Rafters.png",
+      "Azimuth": "extracted_images/report_67661966/Azimuth.png",
+      "Area": "extracted_images/report_67661966/Area.png",
+      "Roof Obstructions": "extracted_images/report_67661966/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67661966",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67661966/North_Side.png",
+      "South": "extracted_images/report_67661966/South_Side.png",
+      "East": "extracted_images/report_67661966/East_Side.png",
+      "West": "extracted_images/report_67661966/West_Side.png",
+      "Top": "extracted_images/report_67661966/Top_View.png"
+    }
+  }
+]

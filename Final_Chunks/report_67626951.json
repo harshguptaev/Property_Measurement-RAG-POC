@@ -1,0 +1,145 @@
+[
+  {
+    "property_id": "PROP_67626951",
+    "address": "5507 W 100th Ter, Overland Park, KS 66207",
+    "latitude": 38.9461615,
+    "longitude": -94.6500015,
+    "owner": "Jrm Roofing Llc Jrm Roofing &amp; Gutters LLC 1637 Kensington Ave Kansas City, MO 64128 8162146314"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67626951",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 8,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2314.7 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67626951",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2507.5 sq ft",
+      "total_roof_facets": 8,
+      "predominant_pitch": "5/12",
+      "ridges": "34.3 ft (3 Ridges)",
+      "hips": "143.6 ft (8 Hips)",
+      "valleys": "27.6 ft (2 Valleys)",
+      "rakes": "0 ft (0 Rakes)",
+      "eaves_starter": "226 ft (8 Eaves)",
+      "drip_edge": "226 ft (8 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "46 ft",
+      "roof_obstructions_area": "20 sq ft",
+      "net_roof_area": "2487.5 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67626951",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "2507.5",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67626951",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "2508",
+          "squares": "25.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "2559",
+          "squares": "25.66"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "2684",
+          "squares": "27"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "2809",
+          "squares": "28.33"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "2885",
+          "squares": "29"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "2935",
+          "squares": "29.66"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "2985",
+          "squares": "30"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "3060",
+          "squares": "30.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3186",
+          "squares": "32"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67626951",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67626951/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67626951/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67626951/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67626951/Rafters.png",
+      "Azimuth": "extracted_images/report_67626951/Azimuth.png",
+      "Area": "extracted_images/report_67626951/Area.png",
+      "Roof Obstructions": "extracted_images/report_67626951/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67626951",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67626951/North_Side.png",
+      "South": "extracted_images/report_67626951/South_Side.png",
+      "East": "extracted_images/report_67626951/East_Side.png",
+      "West": "extracted_images/report_67626951/West_Side.png",
+      "Top": "extracted_images/report_67626951/Top_View.png"
+    }
+  }
+]

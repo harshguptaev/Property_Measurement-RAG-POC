@@ -1,0 +1,363 @@
+[
+  {
+    "property_id": "PROP_67658549",
+    "address": "18 New York Road, Oakdale, CT 06370",
+    "latitude": 41.4739524,
+    "longitude": -72.2013478,
+    "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67658549",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 10,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1,256 sq ft",
+      "total_roof_obstructions": 3
+    }
+  },
+  {
+    "chunk_id": "C002_S1",
+    "property_id": "PROP_67658549",
+    "section": "Roof Measurements - Structure 1",
+    "type": "text",
+    "data": {
+      "structure": "Structure 1",
+      "total_area": "1094 sq ft",
+      "predominant_pitch": "2/12",
+      "ridges": "57 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "24 ft (4 Valleys)",
+      "rakes": "81 ft (8 Rakes)",
+      "eaves_starter": "99 ft (6 Eaves)",
+      "drip_edge": "180 ft (14 Lengths)",
+      "flashing": "16 ft (6 Lengths)",
+      "step_flashing": "36 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "net_roof_area": "1094.0 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C002_S2",
+    "property_id": "PROP_67658549",
+    "section": "Roof Measurements - Structure 2",
+    "type": "text",
+    "data": {
+      "structure": "Structure 2",
+      "total_area": "262 sq ft",
+      "predominant_pitch": "8/12",
+      "ridges": "17 ft (1 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "32 ft (4 Rakes)",
+      "eaves_starter": "33 ft (2 Eaves)",
+      "drip_edge": "65 ft (6 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "net_roof_area": "262.0 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C002_S3",
+    "property_id": "PROP_67658549",
+    "section": "Roof Measurements - Structure 3",
+    "type": "text",
+    "data": {
+      "structure": "Structure 3",
+      "total_area": "90 sq ft",
+      "predominant_pitch": "4/12",
+      "ridges": "9 ft (1 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "21 ft (4 Rakes)",
+      "eaves_starter": "17 ft (2 Eaves)",
+      "drip_edge": "38 ft (6 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "net_roof_area": "90.0 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67658549",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,445 sq ft",
+      "total_roof_facets": 10,
+      "predominant_pitch": "2/12",
+      "ridges": "82 ft (5 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "25 ft (4 Valleys)",
+      "rakes": "135 ft (16 Rakes)",
+      "eaves_starter": "150 ft (10 Eaves)",
+      "drip_edge": "285 ft (26 Lengths)",
+      "flashing": "17 ft (6 Lengths)",
+      "step_flashing": "36 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "16 ft",
+      "roof_obstructions_area": "6 sq ft",
+      "net_roof_area": "1,439 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005_S1",
+    "property_id": "PROP_67658549",
+    "section": "Pitch Breakdown - Structure 1",
+    "type": "text",
+    "data": {
+      "structure": "Structure 1",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "43.8%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "16%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "40.2%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C005_S2",
+    "property_id": "PROP_67658549",
+    "section": "Pitch Breakdown - Structure 2",
+    "type": "text",
+    "data": {
+      "structure": "Structure 2",
+      "pitch_breakdown": [
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "262.4",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C005_S3",
+    "property_id": "PROP_67658549",
+    "section": "Pitch Breakdown - Structure 3",
+    "type": "text",
+    "data": {
+      "structure": "Structure 3",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "89.6",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006_S1",
+    "property_id": "PROP_67658549",
+    "section": "Waste Calculation - Structure 1",
+    "type": "text",
+    "data": {
+      "structure": "Structure 1",
+      "waste_calculation": [
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "614",
+          "squares": "6.33"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "676",
+          "squares": "7"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "707",
+          "squares": "7.33"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "737",
+          "squares": "7.66"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "756",
+          "squares": "7.66"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "768",
+          "squares": "8"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "780",
+          "squares": "8"
+        },
+        {
+          "waste_percentage": "35%",
+          "area_sq_ft": "799",
+          "squares": "8"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "829",
+          "squares": "8.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006_S2",
+    "property_id": "PROP_67658549",
+    "section": "Waste Calculation - Structure 2",
+    "type": "text",
+    "data": {
+      "structure": "Structure 2",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "263",
+          "squares": "2.66"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "277",
+          "squares": "3"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "290",
+          "squares": "3"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "298",
+          "squares": "3"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "303",
+          "squares": "3.33"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "308",
+          "squares": "3.33"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "316",
+          "squares": "3.33"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "329",
+          "squares": "3.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "342",
+          "squares": "3.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006_S3",
+    "property_id": "PROP_67658549",
+    "section": "Waste Calculation - Structure 3",
+    "type": "text",
+    "data": {
+      "structure": "Structure 3",
+      "waste_calculation": [
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "90",
+          "squares": "1"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "112",
+          "squares": "1.33"
+        },
+        {
+          "waste_percentage": "34%",
+          "area_sq_ft": "117",
+          "squares": "1.33"
+        },
+        {
+          "waste_percentage": "39%",
+          "area_sq_ft": "121",
+          "squares": "1.33"
+        },
+        {
+          "waste_percentage": "44%",
+          "area_sq_ft": "126",
+          "squares": "1.33"
+        },
+        {
+          "waste_percentage": "47%",
+          "area_sq_ft": "130",
+          "squares": "1.33"
+        },
+        {
+          "waste_percentage": "49%",
+          "area_sq_ft": "133",
+          "squares": "1.33"
+        },
+        {
+          "waste_percentage": "51%",
+          "area_sq_ft": "135",
+          "squares": "1.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "136",
+          "squares": "1.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67658549",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67658549/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67658549/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67658549/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67658549/Rafters.png",
+      "Azimuth": "extracted_images/report_67658549/Azimuth.png",
+      "Area": "extracted_images/report_67658549/Area.png",
+      "Roof Obstructions": "extracted_images/report_67658549/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67658549",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67658549/North_Side.png",
+      "South": "extracted_images/report_67658549/South_Side.png",
+      "East": "extracted_images/report_67658549/East_Side.png",
+      "West": "extracted_images/report_67658549/West_Side.png",
+      "Top": "extracted_images/report_67658549/Top_View.png"
+    }
+  }
+]

@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67619543",
+    "address": "926 Pauline avenue, Charleston, SC 29412",
+    "latitude": 32.7311633,
+    "longitude": -79.9627366,
+    "owner": "Caitlin Hooper Elite Residential Roofing Po Box 12117 Charleston, SC 29412 843-460-4411"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67619543",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 3,
+      "structure_complexity": "Simple",
+      "estimated_attic": "1552.7 sq ft",
+      "total_roof_obstructions": 8
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67619543",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1637.3 sq ft",
+      "total_roof_facets": 3,
+      "predominant_pitch": "5/12",
+      "ridges": "39.8 ft (2 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "107.6 ft (6 Rakes)",
+      "eaves_starter": "80.5 ft (4 Eaves)",
+      "drip_edge": "188.1 ft (10 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "21.3 ft (2 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "28 ft",
+      "roof_obstructions_area": "7 sq ft",
+      "net_roof_area": "1630.3 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67619543",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "3/12",
+          "area_sq_ft": "739.2",
+          "percentage": "45.1%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "898.1",
+          "percentage": "54.9%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67619543",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "1%",
+          "area_sq_ft": "1638",
+          "squares": "16.66"
+        },
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "1655",
+          "squares": "16.66"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "1704",
+          "squares": "17.33"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "1737",
+          "squares": "17.66"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "1770",
+          "squares": "18.00"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "1819",
+          "squares": "18.33"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "1901",
+          "squares": "19.33"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "1982",
+          "squares": "20.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2064",
+          "squares": "20.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67619543",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67619543/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "extracted_images/report_67619543/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67619543/Rafters.png",
+      "Azimuth": "extracted_images/report_67619543/Azimuth.png",
+      "Area": "extracted_images/report_67619543/Area.png",
+      "Roof Obstructions": "extracted_images/report_67619543/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67619543",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "",
+      "South": "extracted_images/report_67619543/South_Side.png",
+      "East": "extracted_images/report_67619543/East_Side.png",
+      "West": "extracted_images/report_67619543/West_Side.png",
+      "Top": ""
+    }
+  }
+]

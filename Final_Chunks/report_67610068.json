@@ -1,0 +1,161 @@
+[
+  {
+    "property_id": "PROP_67610068",
+    "address": "44496 Neponset St, Ashburn, VA 20147",
+    "latitude": 39.0518133,
+    "longitude": -77.4604462,
+    "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67610068",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 7,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1482.9 sq ft",
+      "total_roof_obstructions": 7
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67610068",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1566.9 sq ft",
+      "total_roof_facets": 7,
+      "predominant_pitch": "4/12",
+      "ridges": "36.8 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "29 ft (2 Valleys)",
+      "rakes": "109 ft (8 Rakes)",
+      "eaves_starter": "52.9 ft (6 Eaves)",
+      "drip_edge": "161.9 ft (14 Lengths)",
+      "flashing": "18 ft (1 Lengths)",
+      "step_flashing": "20.6 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "28 ft",
+      "roof_obstructions_area": "7 sq ft",
+      "net_roof_area": "1559.9 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67610068",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "1/12",
+          "area_sq_ft": "63.2",
+          "percentage": "4%"
+        },
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "1364.9",
+          "percentage": "87.1%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "38.0",
+          "percentage": "2.4%"
+        },
+        {
+          "pitch": "6/12",
+          "area_sq_ft": "100.8",
+          "percentage": "6.4%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67610068",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "1504",
+          "squares": "15.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "1565",
+          "squares": "15.66"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "1610",
+          "squares": "16.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "1640",
+          "squares": "16.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "1670",
+          "squares": "17.00"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "1715",
+          "squares": "17.33"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "1790",
+          "squares": "18.00"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "1865",
+          "squares": "18.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "1941",
+          "squares": "19.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67610068",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67610068/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67610068/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67610068/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67610068/Rafters.png",
+      "Azimuth": "extracted_images/report_67610068/Azimuth.png",
+      "Area": "extracted_images/report_67610068/Area.png",
+      "Roof Obstructions": "extracted_images/report_67610068/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67610068",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67610068/North_Side.png",
+      "South": "extracted_images/report_67610068/South_Side.png",
+      "East": "extracted_images/report_67610068/East_Side.png",
+      "West": "extracted_images/report_67610068/West_Side.png",
+      "Top": "extracted_images/report_67610068/Top_View.png"
+    }
+  }
+]

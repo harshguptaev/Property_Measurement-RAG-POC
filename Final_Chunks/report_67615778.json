@@ -1,0 +1,161 @@
+[
+  {
+    "property_id": "PROP_67615778",
+    "address": "265 Mermaid Bright, Naples, FL 34142",
+    "latitude": 26.1904713,
+    "longitude": -81.8090268,
+    "owner": "adrian soto A Soto Spray Foam 14045 S State Road 29 Felda, FL 33930 239-825-6731"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67615778",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 59,
+      "structure_complexity": "Complex",
+      "estimated_attic": "5744.1 sq ft",
+      "total_roof_obstructions": 4
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67615778",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "6540.3 sq ft",
+      "total_roof_facets": 59,
+      "predominant_pitch": "4/12",
+      "ridges": "15.5 ft (3 Ridges)",
+      "hips": "548.8 ft (46 Hips)",
+      "valleys": "93.7 ft (20 Valleys)",
+      "rakes": "38.4 ft (5 Rakes)",
+      "eaves_starter": "661.3 ft (50 Eaves)",
+      "drip_edge": "699.7 ft (55 Lengths)",
+      "flashing": "114.8 ft (24 Lengths)",
+      "step_flashing": "124.2 ft (27 Lengths)",
+      "parapet_walls": "98 ft (10 Lengths)",
+      "roof_obstructions_perimeter": "8 ft",
+      "roof_obstructions_area": "2 sq ft",
+      "net_roof_area": "6538.3 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67615778",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "0/12",
+          "area_sq_ft": "487.0",
+          "percentage": "7.4%"
+        },
+        {
+          "pitch": "1/12",
+          "area_sq_ft": "24.4",
+          "percentage": "0.4%"
+        },
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "6001.2",
+          "percentage": "91.8%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "27.7",
+          "percentage": "0.4%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67615778",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "6029",
+          "squares": "60.33"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "6572",
+          "squares": "66.00"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "6874",
+          "squares": "69.00"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "7175",
+          "squares": "72.00"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "7356",
+          "squares": "73.66"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "7476",
+          "squares": "75.00"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "7597",
+          "squares": "76.00"
+        },
+        {
+          "waste_percentage": "34%",
+          "area_sq_ft": "7778",
+          "squares": "78.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "8079",
+          "squares": "81.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67615778",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67615778/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67615778/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67615778/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67615778/Rafters.png",
+      "Azimuth": "extracted_images/report_67615778/Azimuth.png",
+      "Area": "extracted_images/report_67615778/Area.png",
+      "Roof Obstructions": "extracted_images/report_67615778/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67615778",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67615778/North_Side.png",
+      "South": "extracted_images/report_67615778/South_Side.png",
+      "East": "extracted_images/report_67615778/East_Side.png",
+      "West": "extracted_images/report_67615778/West_Side.png",
+      "Top": "extracted_images/report_67615778/Top_View.png"
+    }
+  }
+]

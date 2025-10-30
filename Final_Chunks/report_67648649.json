@@ -1,0 +1,146 @@
+[
+  {
+    "property_id": "PROP_67648649",
+    "address": "",
+    "latitude": 49.6083916,
+    "longitude": -115.8092412,
+    "owner": "Dan Meyer Infinity Solar Group Ltd. 103 Hanson Dr NE Rocky View County, AB T0J1X1 587-578-4367"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67648649",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 4,
+      "structure_complexity": "Simple",
+      "estimated_attic": "1698.8 sq ft",
+      "total_roof_obstructions": 10
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67648649",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1790.8 sq ft",
+      "total_roof_facets": 4,
+      "predominant_pitch": "4/12",
+      "ridges": "60.3 ft (2 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "89.4 ft (6 Rakes)",
+      "eaves_starter": "120.6 ft (4 Eaves)",
+      "drip_edge": "210 ft (10 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "29.8 ft (2 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "41 ft",
+      "roof_obstructions_area": "14 sq ft",
+      "net_roof_area": "1776.8 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67648649",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "1790.8",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67648649",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "1791",
+          "squares": "18.00"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "1845",
+          "squares": "18.66"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "1899",
+          "squares": "19.00"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "1935",
+          "squares": "19.66"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "1971",
+          "squares": "20.00"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "2024",
+          "squares": "20.33"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "2114",
+          "squares": "21.33"
+        },
+        {
+          "waste_percentage": "28%",
+          "area_sq_ft": "2203",
+          "squares": "22.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2293",
+          "squares": "23.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67648649",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67648649/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67648649/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67648649/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67648649/Rafters.png",
+      "Azimuth": "extracted_images/report_67648649/Azimuth.png",
+      "Area": "extracted_images/report_67648649/Area.png",
+      "Roof Obstructions": "extracted_images/report_67648649/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67648649",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67648649/North_Side.png",
+      "South": "extracted_images/report_67648649/South_Side.png",
+      "East": "extracted_images/report_67648649/East_Side.png",
+      "West": "extracted_images/report_67648649/West_Side.png",
+      "Top": "extracted_images/report_67648649/Top_View.png"
+    }
+  }
+]

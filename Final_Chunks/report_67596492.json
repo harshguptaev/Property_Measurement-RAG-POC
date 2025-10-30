@@ -1,0 +1,151 @@
+[
+  {
+    "property_id": "PROP_67596492",
+    "address": "44 Martinique Ave, Tampa, FL 33606",
+    "latitude": 27.9130696,
+    "longitude": -82.4592705,
+    "owner": "Hunter Potalivo SunVena Solar 4005 Church St Sanford, FL 32771-6945 (407) 553-9584"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67596492",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 28,
+      "structure_complexity": "Normal",
+      "estimated_attic": "6089.4 sq ft",
+      "total_roof_obstructions": 3
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67596492",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "6467.5 sq ft",
+      "total_roof_facets": 28,
+      "predominant_pitch": "4/12",
+      "ridges": "61 ft (7 Ridges)",
+      "hips": "399.8 ft (20 Hips)",
+      "valleys": "151.1 ft (10 Valleys)",
+      "rakes": "0 ft (0 Rakes)",
+      "eaves_starter": "535.3 ft (27 Eaves)",
+      "drip_edge": "535.3 ft (27 Lengths)",
+      "flashing": "71 ft (13 Lengths)",
+      "step_flashing": "126.6 ft (19 Lengths)",
+      "parapet_walls": "28 ft (4 Lengths)",
+      "roof_obstructions_perimeter": "33 ft",
+      "roof_obstructions_area": "18 sq ft",
+      "net_roof_area": "6449.5 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67596492",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "0/12",
+          "area_sq_ft": "48.8",
+          "percentage": "0.8%"
+        },
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "6418.7",
+          "percentage": "99.2%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67596492",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "4%",
+          "area_sq_ft": "6419",
+          "squares": "64.33"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "6676",
+          "squares": "67.00"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "6997",
+          "squares": "70.00"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "7318",
+          "squares": "73.33"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "7511",
+          "squares": "75.33"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "7639",
+          "squares": "76.66"
+        },
+        {
+          "waste_percentage": "24%",
+          "area_sq_ft": "7767",
+          "squares": "78.00"
+        },
+        {
+          "waste_percentage": "29%",
+          "area_sq_ft": "7960",
+          "squares": "79.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "8281",
+          "squares": "83.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67596492",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67596492/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67596492/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67596492/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67596492/Rafters.png",
+      "Azimuth": "extracted_images/report_67596492/Azimuth.png",
+      "Area": "extracted_images/report_67596492/Area.png",
+      "Roof Obstructions": "extracted_images/report_67596492/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67596492",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67596492/North_Side.png",
+      "South": "extracted_images/report_67596492/South_Side.png",
+      "East": "extracted_images/report_67596492/East_Side.png",
+      "West": "extracted_images/report_67596492/West_Side.png",
+      "Top": "extracted_images/report_67596492/Top_View.png"
+    }
+  }
+]

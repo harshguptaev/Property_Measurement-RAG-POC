@@ -1,0 +1,166 @@
+[
+  {
+    "property_id": "PROP_67661201",
+    "address": "21 Hayduk Dr Edison, NJ 08820",
+    "latitude": 40.5866007,
+    "longitude": -74.3833301,
+    "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67661201",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 34,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3198.2 sq ft",
+      "total_roof_obstructions": 8
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67661201",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4097.7 sq ft",
+      "total_roof_facets": 34,
+      "predominant_pitch": "12/12",
+      "ridges": "113.1 ft (8 Ridges)",
+      "hips": "203.9 ft (18 Hips)",
+      "valleys": "185.8 ft (19 Valleys)",
+      "rakes": "122.1 ft (14 Rakes)",
+      "eaves_starter": "250.3 ft (31 Eaves)",
+      "drip_edge": "372.4 ft (45 Lengths)",
+      "flashing": "39.7 ft (11 Lengths)",
+      "step_flashing": "40.9 ft (9 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "66 ft",
+      "roof_obstructions_area": "40 sq ft",
+      "net_roof_area": "4057.7 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67661201",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "249.4",
+          "percentage": "6.1%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "10.4",
+          "percentage": "0.3%"
+        },
+        {
+          "pitch": "7/12",
+          "area_sq_ft": "43.6",
+          "percentage": "1.1%"
+        },
+        {
+          "pitch": "8/12",
+          "area_sq_ft": "1845.8",
+          "percentage": "45%"
+        },
+        {
+          "pitch": "12/12",
+          "area_sq_ft": "1948.5",
+          "percentage": "47.6%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67661201",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "4098",
+          "squares": "41.00"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "4344",
+          "squares": "43.66"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "4549",
+          "squares": "45.66"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "4754",
+          "squares": "47.66"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "4877",
+          "squares": "49.00"
+        },
+        {
+          "waste_percentage": "23%",
+          "area_sq_ft": "4959",
+          "squares": "49.66"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "5041",
+          "squares": "50.66"
+        },
+        {
+          "waste_percentage": "31%",
+          "area_sq_ft": "5164",
+          "squares": "51.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "5369",
+          "squares": "54.00"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67661201",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67661201/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67661201/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67661201/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67661201/Rafters.png",
+      "Azimuth": "extracted_images/report_67661201/Azimuth.png",
+      "Area": "extracted_images/report_67661201/Area.png",
+      "Roof Obstructions": "extracted_images/report_67661201/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67661201",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67661201/North_Side.png",
+      "South": "extracted_images/report_67661201/South_Side.png",
+      "East": "extracted_images/report_67661201/East_Side.png",
+      "West": "extracted_images/report_67661201/West_Side.png",
+      "Top": "extracted_images/report_67661201/Top_View.png"
+    }
+  }
+]

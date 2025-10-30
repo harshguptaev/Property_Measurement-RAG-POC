@@ -1,0 +1,156 @@
+[
+  {
+    "property_id": "PROP_67619579",
+    "address": "23 Angelo Ct, Monroe Township, NJ 08831",
+    "latitude": 40.301283,
+    "longitude": -74.4652154,
+    "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67619579",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 18,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3666.1 sq ft",
+      "total_roof_obstructions": 9
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67619579",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4668.6 sq ft",
+      "total_roof_facets": 18,
+      "predominant_pitch": "10/12",
+      "ridges": "117.8 ft (6 Ridges)",
+      "hips": "187.3 ft (9 Hips)",
+      "valleys": "136.9 ft (6 Valleys)",
+      "rakes": "122.9 ft (10 Rakes)",
+      "eaves_starter": "289.1 ft (21 Eaves)",
+      "drip_edge": "412 ft (31 Lengths)",
+      "flashing": "27.9 ft (5 Lengths)",
+      "step_flashing": "36 ft (5 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "44.4 ft",
+      "roof_obstructions_area": "14 sq ft",
+      "net_roof_area": "4654.6 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67619579",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "63.0",
+          "percentage": "1.3%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "2002.7",
+          "percentage": "42.9%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "2602.9",
+          "percentage": "55.8%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67619579",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "2%",
+          "area_sq_ft": "4606",
+          "squares": "46.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "4699",
+          "squares": "47"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "4929",
+          "squares": "49.33"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "5159",
+          "squares": "51.66"
+        },
+        {
+          "waste_percentage": "17%",
+          "area_sq_ft": "5297",
+          "squares": "53"
+        },
+        {
+          "waste_percentage": "19%",
+          "area_sq_ft": "5390",
+          "squares": "54"
+        },
+        {
+          "waste_percentage": "22%",
+          "area_sq_ft": "5482",
+          "squares": "55"
+        },
+        {
+          "waste_percentage": "27%",
+          "area_sq_ft": "5620",
+          "squares": "56.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "5850",
+          "squares": "58.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67619579",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67619579/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67619579/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67619579/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67619579/Rafters.png",
+      "Azimuth": "extracted_images/report_67619579/Azimuth.png",
+      "Area": "extracted_images/report_67619579/Area.png",
+      "Roof Obstructions": "extracted_images/report_67619579/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67619579",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67619579/North_Side.png",
+      "South": "extracted_images/report_67619579/South_Side.png",
+      "East": "extracted_images/report_67619579/East_Side.png",
+      "West": "extracted_images/report_67619579/West_Side.png",
+      "Top": "extracted_images/report_67619579/Top_View.png"
+    }
+  }
+]

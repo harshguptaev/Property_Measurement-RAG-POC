@@ -1,0 +1,146 @@
+[
+  {
+    "property_id": "PROP_67642103",
+    "address": "2082 Stratton Rd, Walnut Creek, CA 94598",
+    "latitude": 37.9244354,
+    "longitude": -122.0327654,
+    "owner": "Jeff Long Infinium Solar 1190 Dell Ave Campbell, CA 95008 408-583-8101"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67642103",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "<=1",
+      "total_roof_facets": 9,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3755.7 sq ft",
+      "total_roof_obstructions": 15
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67642103",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "3,959 sq ft",
+      "total_roof_facets": 9,
+      "predominant_pitch": "4/12",
+      "ridges": "139.6 ft (4 Ridges)",
+      "hips": "8 ft (2 Hips)",
+      "valleys": "101.9 ft (6 Valleys)",
+      "rakes": "162.4 ft (13 Rakes)",
+      "eaves_starter": "199.1 ft (9 Eaves)",
+      "drip_edge": "361.5 ft (22 Lengths)",
+      "flashing": "36.8 ft (4 Lengths)",
+      "step_flashing": "14 ft (5 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "72.6 ft",
+      "roof_obstructions_area": "23 sq ft",
+      "net_roof_area": "3,936 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67642103",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "4/12",
+          "area_sq_ft": "3959.0",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67642103",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "3959",
+          "squares": "39.66"
+        },
+        {
+          "waste_percentage": "8%",
+          "area_sq_ft": "4157",
+          "squares": "41.66"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "4276",
+          "squares": "43.00"
+        },
+        {
+          "waste_percentage": "12%",
+          "area_sq_ft": "4355",
+          "squares": "43.66"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "4435",
+          "squares": "44.66"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "4553",
+          "squares": "45.66"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "4751",
+          "squares": "47.66"
+        },
+        {
+          "waste_percentage": "30%",
+          "area_sq_ft": "4949",
+          "squares": "49.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "5147",
+          "squares": "51.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67642103",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67642103/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67642103/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67642103/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67642103/Rafters.png",
+      "Azimuth": "extracted_images/report_67642103/Azimuth.png",
+      "Area": "extracted_images/report_67642103/Area.png",
+      "Roof Obstructions": "extracted_images/report_67642103/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67642103",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67642103/North_Side.png",
+      "South": "extracted_images/report_67642103/South_Side.png",
+      "East": "extracted_images/report_67642103/East_Side.png",
+      "West": "extracted_images/report_67642103/West_Side.png",
+      "Top": "extracted_images/report_67642103/Top_View.png"
+    }
+  }
+]

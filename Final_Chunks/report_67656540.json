@@ -1,0 +1,165 @@
+[
+  {
+    "property_id": "PROP_67656540",
+    "address": "606 High Field Road, Tuscaloosa, AL 35405",
+    "latitude": 33.1180173,
+    "longitude": -87.5449353,
+    "owner": "Chris Cole Craftsman Roofing LLC 2919 8th St Tuscaloosa, AL 35401-2109 205-826-2759"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67656540",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 6,
+      "structure_complexity": "Simple",
+      "estimated_attic": "5041.7 sq ft",
+      "total_roof_obstructions": 8
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67656540",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "6218.9 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "12/12",
+      "ridges": "148.1 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "50.3 ft (3 Valleys)",
+      "rakes": "163.5 ft (9 Rakes)",
+      "eaves_starter": "239 ft (6 Eaves)",
+      "drip_edge": "402.5 ft (15 Lengths)",
+      "flashing": "1.5 ft (1 Lengths)",
+      "step_flashing": "20.6 ft (3 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "34 ft",
+      "roof_obstructions_area": "10 sq ft",
+      "net_roof_area": "6208.9 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67656540",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "1390.9",
+          "percentage": "36.5%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "2272.4",
+          "percentage": ""
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "2555.6",
+          "percentage": ""
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "22.4%",
+          "percentage": ""
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "41.1%",
+          "percentage": ""
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67656540",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "0%",
+          "area_sq_ft": "6219",
+          "squares": "62.33"
+        },
+        {
+          "waste_percentage": "3%",
+          "area_sq_ft": "6219",
+          "squares": "62.33"
+        },
+        {
+          "waste_percentage": "5%",
+          "area_sq_ft": "6406",
+          "squares": "64.33"
+        },
+        {
+          "waste_percentage": "7%",
+          "area_sq_ft": "6530",
+          "squares": "65.33"
+        },
+        {
+          "waste_percentage": "10%",
+          "area_sq_ft": "6655",
+          "squares": "66.66"
+        },
+        {
+          "waste_percentage": "15%",
+          "area_sq_ft": "6841",
+          "squares": "68.66"
+        },
+        {
+          "waste_percentage": "20%",
+          "area_sq_ft": "7152",
+          "squares": "71.66"
+        },
+        {
+          "waste_percentage": "25%",
+          "area_sq_ft": "7463",
+          "squares": "74.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "7774",
+          "squares": "78"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67656540",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67656540/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67656540/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67656540/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67656540/Rafters.png",
+      "Azimuth": "extracted_images/report_67656540/Azimuth.png",
+      "Area": "extracted_images/report_67656540/Area.png",
+      "Roof Obstructions": "extracted_images/report_67656540/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67656540",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67656540/North_Side.png",
+      "South": "extracted_images/report_67656540/South_Side.png",
+      "East": "extracted_images/report_67656540/East_Side.png",
+      "West": "extracted_images/report_67656540/West_Side.png",
+      "Top": "extracted_images/report_67656540/Top_View.png"
+    }
+  }
+]

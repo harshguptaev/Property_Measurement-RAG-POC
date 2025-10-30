@@ -1,0 +1,156 @@
+[
+  {
+    "property_id": "PROP_67624797",
+    "address": "1630 Westwood Dr, Las Vegas, NV 89102",
+    "latitude": 36.1518444,
+    "longitude": -115.1673075,
+    "owner": "Juan Ortiz SunSolar Solutions 8932 W Cactus Rd Peoria, AZ 85381 6027736675"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67624797",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 26,
+      "structure_complexity": "Normal",
+      "estimated_attic": "3804.8 sq ft",
+      "total_roof_obstructions": 23
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67624797",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "6423.9 sq ft",
+      "total_roof_facets": 26,
+      "predominant_pitch": "5/12",
+      "ridges": "0 ft (0 Ridges)",
+      "hips": "197.9 ft (14 Hips)",
+      "valleys": "97 ft (7 Valleys)",
+      "rakes": "11 ft (2 Rakes)",
+      "eaves_starter": "514.5 ft (27 Eaves)",
+      "drip_edge": "525.5 ft (29 Lengths)",
+      "flashing": "83.2 ft (7 Lengths)",
+      "step_flashing": "30.2 ft (5 Lengths)",
+      "parapet_walls": "76 ft (7 Lengths)",
+      "roof_obstructions_perimeter": "162 ft",
+      "roof_obstructions_area": "116 sq ft",
+      "net_roof_area": "6307.9 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67624797",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "0/12",
+          "area_sq_ft": "2312.4",
+          "percentage": "36%"
+        },
+        {
+          "pitch": "2/12",
+          "area_sq_ft": "22.4",
+          "percentage": "0.3%"
+        },
+        {
+          "pitch": "5/12",
+          "area_sq_ft": "4089.1",
+          "percentage": "63.7%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67624797",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "1%",
+          "area_sq_ft": "4090",
+          "squares": "41.00"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "4131",
+          "squares": "41.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "4336",
+          "squares": "43.66"
+        },
+        {
+          "waste_percentage": "14%",
+          "area_sq_ft": "4540",
+          "squares": "45.66"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "4663",
+          "squares": "46.66"
+        },
+        {
+          "waste_percentage": "18%",
+          "area_sq_ft": "4745",
+          "squares": "47.66"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "4827",
+          "squares": "48.33"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "4949",
+          "squares": "49.66"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "5154",
+          "squares": "51.66"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67624797",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67624797/Lengths.png",
+      "Pitch (Degrees)": "",
+      "Pitch (on 12)": "",
+      "Rafters": "",
+      "Azimuth": "",
+      "Area": "",
+      "Roof Obstructions": "extracted_images/report_67624797/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67624797",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67624797/North_Side.png",
+      "South": "extracted_images/report_67624797/South_Side.png",
+      "East": "extracted_images/report_67624797/East_Side.png",
+      "West": "extracted_images/report_67624797/West_Side.png",
+      "Top": "extracted_images/report_67624797/Top_View.png"
+    }
+  }
+]

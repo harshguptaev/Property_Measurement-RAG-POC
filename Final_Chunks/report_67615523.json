@@ -1,0 +1,145 @@
+[
+  {
+    "property_id": "PROP_67615523",
+    "address": "42 Brownell Road, Little Compton, RI 02837",
+    "latitude": 41.49574,
+    "longitude": -71.1579745,
+    "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67615523",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "total_roof_facets": 2,
+      "structure_complexity": "Simple",
+      "estimated_attic": "2,292 sq ft",
+      "total_roof_obstructions": 4
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67615523",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,324 sq ft",
+      "total_roof_facets": 2,
+      "predominant_pitch": "2/12",
+      "ridges": "61 ft (1 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "0 ft (0 Valleys)",
+      "rakes": "77 ft (4 Rakes)",
+      "eaves_starter": "122 ft (2 Eaves)",
+      "drip_edge": "199 ft (6 Lengths)",
+      "flashing": "0 ft (0 Lengths)",
+      "step_flashing": "0 ft (0 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "84 ft",
+      "roof_obstructions_area": "20 sq ft",
+      "net_roof_area": "2,304 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67615523",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "2/12",
+          "area_sq_ft": "2323.4",
+          "percentage": "100%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67615523",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "2324",
+          "squares": "23.33"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "",
+          "squares": "-"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67615523",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67615523/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67615523/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67615523/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67615523/Rafters.png",
+      "Azimuth": "extracted_images/report_67615523/Azimuth.png",
+      "Area": "extracted_images/report_67615523/Area.png",
+      "Roof Obstructions": "extracted_images/report_67615523/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67615523",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67615523/North_Side.png",
+      "South": "extracted_images/report_67615523/South_Side.png",
+      "East": "extracted_images/report_67615523/East_Side.png",
+      "West": "extracted_images/report_67615523/West_Side.png",
+      "Top": "extracted_images/report_67615523/Top_View.png"
+    }
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "property_id": "PROP_67647079",
+    "address": "7848 Godolphin Dr, Springfield, VA 22153",
+    "latitude": 38.7312586,
+    "longitude": -77.216072,
+    "owner": "Jessica Clinton Lumina Solar Inc 3701 Commerce Dr Baltimore, MD 21227 443-814-7246"
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_67647079",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 8,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2382.6 sq ft",
+      "total_roof_obstructions": 7
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_67647079",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2604.7 sq ft",
+      "total_roof_facets": 8,
+      "predominant_pitch": "6/12",
+      "ridges": "88.2 ft (3 Ridges)",
+      "hips": "0 ft (0 Hips)",
+      "valleys": "45 ft (4 Valleys)",
+      "rakes": "137.9 ft (12 Rakes)",
+      "eaves_starter": "170.4 ft (6 Eaves)",
+      "drip_edge": "308.3 ft (18 Lengths)",
+      "flashing": "52.8 ft (2 Lengths)",
+      "step_flashing": "36.5 ft (4 Lengths)",
+      "parapet_walls": "0 ft (0 Lengths)",
+      "roof_obstructions_perimeter": "28.2 ft",
+      "roof_obstructions_area": "7 sq ft",
+      "net_roof_area": "2597.7 sq ft"
+    }
+  },
+  {
+    "chunk_id": "C005",
+    "property_id": "PROP_67647079",
+    "section": "Pitch Breakdown",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "pitch_breakdown": [
+        {
+          "pitch": "",
+          "area_sq_ft": "741.4",
+          "percentage": "4.9%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "1735.7",
+          "percentage": "28.5%"
+        },
+        {
+          "pitch": "",
+          "area_sq_ft": "",
+          "percentage": "66.6%"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C006",
+    "property_id": "PROP_67647079",
+    "section": "Waste Calculation",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "waste_calculation": [
+        {
+          "waste_percentage": "1%",
+          "area_sq_ft": "2478",
+          "squares": "25.00"
+        },
+        {
+          "waste_percentage": "6%",
+          "area_sq_ft": "2503",
+          "squares": "25.33"
+        },
+        {
+          "waste_percentage": "9%",
+          "area_sq_ft": "2627",
+          "squares": "26.33"
+        },
+        {
+          "waste_percentage": "11%",
+          "area_sq_ft": "2702",
+          "squares": "27.33"
+        },
+        {
+          "waste_percentage": "13%",
+          "area_sq_ft": "2751",
+          "squares": "27.66"
+        },
+        {
+          "waste_percentage": "16%",
+          "area_sq_ft": "2801",
+          "squares": "28.33"
+        },
+        {
+          "waste_percentage": "21%",
+          "area_sq_ft": "2875",
+          "squares": "29.00"
+        },
+        {
+          "waste_percentage": "26%",
+          "area_sq_ft": "2999",
+          "squares": "30.00"
+        },
+        {
+          "waste_percentage": "",
+          "area_sq_ft": "3123",
+          "squares": "31.33"
+        }
+      ]
+    }
+  },
+  {
+    "chunk_id": "C003",
+    "property_id": "PROP_67647079",
+    "section": "Diagrams",
+    "type": "image",
+    "data": {
+      "Lengths": "extracted_images/report_67647079/Lengths.png",
+      "Pitch (Degrees)": "extracted_images/report_67647079/Pitch_Degrees.png",
+      "Pitch (on 12)": "extracted_images/report_67647079/Pitch_on_12.png",
+      "Rafters": "extracted_images/report_67647079/Rafters.png",
+      "Azimuth": "extracted_images/report_67647079/Azimuth.png",
+      "Area": "extracted_images/report_67647079/Area.png",
+      "Roof Obstructions": "extracted_images/report_67647079/Roof_Penetrations.png"
+    }
+  },
+  {
+    "chunk_id": "C004",
+    "property_id": "PROP_67647079",
+    "section": "Imagery",
+    "type": "image",
+    "data": {
+      "North": "extracted_images/report_67647079/North_Side.png",
+      "South": "extracted_images/report_67647079/South_Side.png",
+      "East": "extracted_images/report_67647079/East_Side.png",
+      "West": "extracted_images/report_67647079/West_Side.png",
+      "Top": "extracted_images/report_67647079/Top_View.png"
+    }
+  }
+]
