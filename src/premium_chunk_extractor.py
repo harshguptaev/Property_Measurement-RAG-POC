@@ -5,6 +5,8 @@ import re
 import uuid
 from pathlib import Path
 from typing import List, Tuple, Optional, Dict, Any
+from .property_rag_status_dao import PropertyRAGStatusDAO
+from .db_connector import db_connector
 
 
 def read_pdf_text_by_page(pdf_path: str) -> List[str]:
@@ -560,6 +562,26 @@ def _extract_business_links(text: str) -> Dict[str, str]:
     return business_links
 
 
+def _addresses_similar(address1: str, address2: str) -> bool:
+    """
+    Check if two addresses are similar (case-insensitive exact match for now).
+    Can be enhanced with fuzzy matching later.
+    """
+    if not address1 or not address2:
+        return False
+
+    # Normalize addresses for comparison
+    addr1_normalized = address1.lower().strip()
+    addr2_normalized = address2.lower().strip()
+
+    # Remove common separators and extra spaces
+    addr1_normalized = re.sub(r'[,\s]+', ' ', addr1_normalized)
+    addr2_normalized = re.sub(r'[,\s]+', ' ', addr2_normalized)
+
+    # Exact match for now - can be enhanced with fuzzy matching
+    return addr1_normalized == addr2_normalized
+
+
 def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
     """Extract important text chunks from premium PDF format."""
 
@@ -572,6 +594,58 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         report_id = report_id_match.group(1)
 
     property_id = f"PROP_{report_id}"
+
+    # Extract address first to check for duplicates
+    # Try to read from docling export first, fall back to PDF text
+    temp_pages = []
+    temp_text = ""
+    if report_id_match:
+        temp_report_id = report_id_match.group(1)
+        docling_md_path = Path("docling_exports") / f"report_{temp_report_id}" / f"report_{temp_report_id}.md"
+        if docling_md_path.exists():
+            with open(docling_md_path, 'r', encoding='utf-8') as f:
+                temp_text = f.read()
+        else:
+            temp_pages = read_pdf_text_by_page(pdf_path)
+            temp_text = "\n".join(temp_pages)
+
+    # Extract address to check for duplicates
+    temp_header_data = _extract_premium_header(temp_text)
+    extracted_address = temp_header_data.get('property_address', '').strip()
+
+    if extracted_address:
+        # Check if similar address already exists in database
+        if db_connector.db_available:
+            try:
+                # Get all existing records to check for address similarity
+                all_records = db_connector.execute_query("SELECT id, address FROM truedesigndemo.property_rag_status WHERE address IS NOT NULL")
+                if all_records:
+                    for record in all_records:
+                        existing_address = record.get('address', '').strip()
+                        if existing_address and _addresses_similar(extracted_address, existing_address):
+                            print(f"Similar address already exists in database: '{existing_address}' matches '{extracted_address}'. Skipping processing.")
+                            return []  # Return empty chunks to skip processing
+            except Exception as db_error:
+                print(f"Error checking for duplicate addresses: {db_error}")
+                # Continue with processing if database check fails
+
+    # If we get here, no duplicate address was found - proceed with processing
+    # Create database record if address was extracted
+    if extracted_address and db_connector.db_available:
+        try:
+            record_id = PropertyRAGStatusDAO.insert_record(
+                address=extracted_address,
+                report_id=report_id,
+                product_id="13",
+                lat=None,  # Will be updated later with coordinates
+                lng=None   # Will be updated later with coordinates
+            )
+            if record_id != -1:
+                print(f"Created database record with ID {record_id} for address: {extracted_address}")
+            else:
+                print("Database not available - proceeding without database tracking")
+        except Exception as db_error:
+            print(f"Error creating database record: {db_error}")
 
     # Try to read from docling export first, fall back to PDF text
     report_id_match = re.search(r'report_(\d+)', Path(pdf_path).stem)
@@ -768,6 +842,78 @@ def extract_premium_chunks(pdf_path: str) -> List[Dict[str, Any]]:
         }
 
         _add(chunk_id, property_id, section_name, "text", waste_chunk_data)
+
+    # Update database with extracted information
+    try:
+        # Extract report_id for database update
+        report_id = Path(pdf_path).stem
+        if '_Premium' in report_id:
+            report_id = report_id.replace('_Premium', '')
+        report_id_match = re.search(r'report_(\d+)', report_id)
+        if report_id_match:
+            report_id = report_id_match.group(1)
+
+            # Prepare update data
+            update_data = {}
+
+            # Add address if found
+            if header_data.get('property_address'):
+                update_data['address'] = header_data['property_address']
+
+            # Add coordinates if found
+            if coordinates.get('latitude'):
+                update_data['lat'] = float(coordinates['latitude'])
+            if coordinates.get('longitude'):
+                update_data['lng'] = float(coordinates['longitude'])
+
+            # Add roof facets if found
+            if summary_measurements.get('total_roof_facets'):
+                try:
+                    update_data['no_of_facets'] = int(summary_measurements['total_roof_facets'])
+                except (ValueError, TypeError):
+                    pass
+
+            # Add predominant pitch if found (prefer from detailed measurements, fallback to summary)
+            predominant_pitch = None
+            if detailed_measurements:
+                # Check if we have any structure measurements
+                for structure_key, measurements in detailed_measurements.items():
+                    if measurements.get('predominant_pitch'):
+                        predominant_pitch = measurements['predominant_pitch']
+                        break
+
+            if not predominant_pitch and summary_measurements.get('predominant_pitch'):
+                predominant_pitch = summary_measurements['predominant_pitch']
+
+            if predominant_pitch:
+                update_data['predominant_pitch'] = predominant_pitch
+
+            # Update database if we have data to update
+            if update_data:
+                # Filter out 'address' since update_processing_details doesn't accept it
+                # Address can only be set during insert_record
+                update_params = {k: v for k, v in update_data.items() if k != 'address'}
+                if update_params:
+                    # Get the database record ID by report_id first
+                    existing_records = PropertyRAGStatusDAO.get_records_by_report_id(report_id)
+                    if existing_records and len(existing_records) > 0:
+                        record_id = existing_records[0]['id']  # Get the actual database record ID
+                        success = PropertyRAGStatusDAO.update_processing_details(
+                            record_id=record_id,
+                            **update_params
+                        )
+                        if success:
+                            print(f"Updated database record for report {report_id} with extracted data: {list(update_data.keys())}")
+                        else:
+                            print(f"Failed to update database record for report {report_id}")
+                    else:
+                        print(f"No database record found for report {report_id} - skipping database update")
+                else:
+                    print(f"No updatable fields for report {report_id}")
+
+    except Exception as db_error:
+        print(f"Error updating database for report extraction: {db_error}")
+        # Don't fail the extraction if database update fails
 
     return chunks
 

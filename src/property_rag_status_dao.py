@@ -31,6 +31,10 @@ class PropertyRAGStatusDAO:
         Returns:
             The ID of the inserted record
         """
+        if not db_connector.db_available:
+            logger.warning("Database not available - skipping insert_record operation")
+            return -1  # Return dummy ID when DB is not available
+
         try:
             insert_query = """
             INSERT INTO truedesigndemo.property_rag_status
@@ -83,6 +87,10 @@ class PropertyRAGStatusDAO:
         Returns:
             List of record dictionaries
         """
+        if not db_connector.db_available:
+            logger.warning("Database not available - returning empty list for get_records_by_report_id")
+            return []
+
         try:
             query = "SELECT * FROM truedesigndemo.property_rag_status WHERE reportId = %s ORDER BY id;"
             result = db_connector.execute_query(query, (report_id,))
@@ -103,6 +111,10 @@ class PropertyRAGStatusDAO:
         Returns:
             True if update successful
         """
+        if not db_connector.db_available:
+            logger.warning("Database not available - skipping update_chunking_status operation")
+            return False
+
         try:
             query = "UPDATE truedesigndemo.property_rag_status SET chunking_status = %s WHERE id = %s;"
             affected_rows = db_connector.execute_update(query, (status, record_id))
@@ -123,6 +135,10 @@ class PropertyRAGStatusDAO:
         Returns:
             True if update successful
         """
+        if not db_connector.db_available:
+            logger.warning("Database not available - skipping update_vector_save_status operation")
+            return False
+
         try:
             query = "UPDATE truedesigndemo.property_rag_status SET vector_save_status = %s WHERE id = %s;"
             affected_rows = db_connector.execute_update(query, (status, record_id))
@@ -144,6 +160,10 @@ class PropertyRAGStatusDAO:
         Returns:
             True if update successful
         """
+        if not db_connector.db_available:
+            logger.warning("Database not available - skipping update_final_status operation")
+            return False
+
         try:
             if status == 'failure' and not reason:
                 raise ValueError("Reason is required when status is 'failure'")
@@ -172,6 +192,10 @@ class PropertyRAGStatusDAO:
         Returns:
             True if update successful
         """
+        if not db_connector.db_available:
+            logger.warning("Database not available - skipping update_processing_details operation")
+            return False
+
         try:
             query = """
             UPDATE truedesigndemo.property_rag_status

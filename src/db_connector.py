@@ -26,6 +26,7 @@ class PostgreSQLConnector:
         self.config_instance = config_instance or config
         self.pg_config = self.config_instance.get_postgresql_config()
         self.connection_pool = None
+        self.db_available = False
         self._initialize_pool()
 
     def _initialize_pool(self):
@@ -40,10 +41,12 @@ class PostgreSQLConnector:
                 user=self.pg_config['user'],
                 password=self.pg_config['password']
             )
+            self.db_available = True
             logger.info("PostgreSQL connection pool initialized successfully")
         except Exception as e:
-            logger.error(f"Failed to initialize PostgreSQL connection pool: {e}")
-            raise
+            self.db_available = False
+            logger.warning(f"PostgreSQL connection failed - database operations will be skipped: {e}")
+            logger.info("System will continue without database integration")
 
     @contextmanager
     def get_connection(self):
@@ -53,6 +56,9 @@ class PostgreSQLConnector:
         Yields:
             psycopg2 connection object
         """
+        if not self.db_available:
+            raise Exception("Database not available - operations will be skipped")
+
         conn = None
         try:
             conn = self.connection_pool.getconn()

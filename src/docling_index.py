@@ -119,23 +119,23 @@ class DoclingProcessor:
     def process_file(self, file_path: str, extract_images: bool = True) -> List[Document]:
         """
         Process a single file using Docling and return documents.
-        
+
         Args:
             file_path: Path to the file
             extract_images: Whether to extract images from the document
-            
+
         Returns:
             List of processed documents
         """
         file_path = Path(file_path)
-        
+
         if not file_path.exists():
             raise FileNotFoundError(f"File not found: {file_path}")
-        
+
         if file_path.suffix.lower() not in self.supported_extensions:
             logging.warning(f"Unsupported file type: {file_path.suffix}")
             return []
-        
+
         try:
             documents = []
             
@@ -159,6 +159,20 @@ class DoclingProcessor:
                     except:
                         pass
                 
+                # Extract report ID from filename for metadata
+                report_id = None
+                filename = file_path.name
+                if 'RoofReport-' in filename:
+                    try:
+                        report_id = filename.split('RoofReport-')[1].split('.')[0]
+                    except:
+                        pass
+                elif 'report_' in filename:
+                    try:
+                        report_id = filename.split('report_')[1].split('.')[0]
+                    except:
+                        pass
+
                 doc.metadata.update({
                     'source': str(file_path),
                     'file_name': file_path.name,
@@ -172,8 +186,9 @@ class DoclingProcessor:
                 })
             
             logging.info(f"Processed {len(documents)} documents from {file_path.name}")
+
             return documents
-            
+
         except Exception as e:
             logging.error(f"Error processing file {file_path}: {e}")
             raise
@@ -244,9 +259,6 @@ class DoclingProcessor:
                 documents.extend(page_documents)
             
 
-            # Add image chunks to the existing final chunks structure
-            self._add_image_chunks_to_final(final_chunks_file, file_path)
-            
             
 
             logging.info(f"Docling extracted {len(documents)} elements from {file_path.name}")

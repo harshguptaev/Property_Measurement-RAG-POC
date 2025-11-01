@@ -17,6 +17,7 @@ from tqdm import tqdm
 
 # Import query router
 from src.query_router import QueryRouter, QueryAnalysis
+from src.property_rag_status_dao import PropertyRAGStatusDAO
 
 # Import LLM response handlers
 from llm_response_handlers import LLMResponseHandlers
@@ -1525,7 +1526,49 @@ def load_agentic_rag_output() -> List[Dict]:
         except Exception as e:
             logger.error(f"Error loading {chunk_file}: {str(e)}")
             continue
-    
+
+    # Update database status for processed reports after loading all documents
+    logger.info("Updating database status for processed reports...")
+    updated_reports = set()
+
+    # Extract unique report IDs from the processed files
+    for doc in documents:
+        source_file = doc.get('source_file', '')
+        if 'report_' in source_file:
+            try:
+                report_id_match = re.search(r'report_(\d+)', source_file)
+                if report_id_match:
+                    report_id = report_id_match.group(1)
+                    if report_id not in updated_reports:
+                        # Get the database record ID by report_id first
+                        existing_records = PropertyRAGStatusDAO.get_records_by_report_id(report_id)
+                        if existing_records and len(existing_records) > 0:
+                            record_id = existing_records[0]['id']  # Get the actual database record ID
+
+                            # Update vector save status to completed
+                            success_vector = PropertyRAGStatusDAO.update_vector_save_status(record_id, "completed")
+                            # Update final status to success
+                            success_final = PropertyRAGStatusDAO.update_final_status(record_id, "success")
+                        else:
+                            # No database record found
+                            success_vector = False
+                            success_final = False
+                            logger.warning(f"No database record found for report {report_id}")
+
+                        if success_vector and success_final:
+                            logger.info(f"Updated database status for report {report_id}")
+                            updated_reports.add(report_id)
+                        elif success_vector is False and success_final is False:
+                            # Either database not available or no record found - mark as processed
+                            logger.info(f"Database not available or no record found - marking report {report_id} as processed")
+                            updated_reports.add(report_id)
+                        else:
+                            logger.warning(f"Failed to update database status for report {report_id}")
+            except Exception as db_error:
+                logger.warning(f"Error updating database for report {source_file}: {db_error}")
+
+    logger.info(f"Updated database status for {len(updated_reports)} reports")
+
     logger.info(f"📊 Loaded {len(documents)} documents with total chunks")
     return documents
 
