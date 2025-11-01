@@ -69,13 +69,13 @@ Your task is to analyze the user's query and extract the following information:
 
 4. **complete_query**: The full original query as provided.
 
-5. **relevant_sections**: Based on the query intent, identify which data section PREFIXES would be most relevant. Return section prefixes that will be matched using LIKE queries (e.g., "Roof Measurements" will match "Roof Measurements - All Structures", "Roof Measurements - Structure 1", etc.). Available section prefixes include:
+5. **relevant_sections**: Based on the query intent, identify which data section PREFIXES would be most relevant. Return section prefixes that will be matched using LIKE queries. Available section prefixes include:
    - "House Measurements": Basic property info (stories, facets, complexity, attic area (Not the actual area it is a estimate), obstructions)
    - "Roof Measurements": Detailed roof measurements (actual area value, pitch, ridges, hips, valleys, rakes, eaves, etc.) - matches all roof measurement sections including per-structure ones
    - "Pitch Breakdown": Roof pitch percentages and areas by pitch type - matches all pitch breakdown sections including per-structure ones
    - "Waste Calculation": Waste factor calculations for different percentages - matches all waste calculation sections including per-structure ones
-   - "Diagrams": Technical diagrams (lengths, pitch degrees, pitch on 12, rafters, azimuth, area, roof penetrations)
-   - "Imagery": Property photos (top view, north/south/east/west sides)
+   - "Diagrams": Technical diagrams (lengths, pitch degrees, pitch on 12, rafters, azimuth, area, roof penetrations) - include for queries about measurements, pitch, area, or technical details
+   - "Imagery": Property photos (top view, north/south/east/west sides) - include for visual inspection queries
 
    Return an array of the most relevant section names based on what information would help answer the query.
 
@@ -88,7 +88,7 @@ Analysis:
     "address": "2455 New Holland Cir, Murfreesboro, TN 37128",
     "query": "What is the roof area",
     "complete_query": "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128",
-    "relevant_sections": ["Roof Measurements"]
+    "relevant_sections": ["Roof Measurements", "Diagrams", "Imagery"]
 }}
 
 Query: "Find all properties with roof area greater than 2000 square feet"
@@ -98,7 +98,7 @@ Analysis:
     "address": null,
     "query": "Find all properties with roof area greater than 2000 square feet",
     "complete_query": "Find all properties with roof area greater than 2000 square feet",
-    "relevant_sections": ["Roof Measurements - All Structures"]
+    "relevant_sections": ["Roof Measurements"]
 }}
 
 Query: "Show me the pitch information for the property at 123 Main St, Anytown, USA"
@@ -108,7 +108,7 @@ Analysis:
     "address": "123 Main St, Anytown, USA",
     "query": "Show me the pitch information",
     "complete_query": "Show me the pitch information for the property at 123 Main St, Anytown, USA",
-    "relevant_sections": ["Pitch Breakdown", "Roof Measurements"]
+    "relevant_sections": ["Pitch Breakdown", "Roof Measurements", "Diagrams", "Imagery"]
 }}
 
 Query: "Which properties have more than 3 roof facets"
@@ -128,7 +128,17 @@ Analysis:
     "address": "456 Oak St",
     "query": "Show me pictures of the roof",
     "complete_query": "Show me pictures of the roof at 456 Oak St",
-    "relevant_sections": ["Diagrams", "Imagery"]
+    "relevant_sections": ["Imagery", "Diagrams"]
+}}
+
+Query: "What is the area per pitch for this roof"
+Analysis:
+{{
+    "flow": "1",
+    "address": null,
+    "query": "What is the area per pitch",
+    "complete_query": "What is the area per pitch for this roof",
+    "relevant_sections": ["Pitch Breakdown", "Roof Measurements", "Diagrams", "Imagery"]
 }}
 
 Query: "What is the waste factor for this property"

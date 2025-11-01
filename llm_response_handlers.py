@@ -195,12 +195,13 @@ INSTRUCTIONS:
 1. Answer ONLY using the information from the provided chunks
 2. Provide complete, accurate measurements and technical details when available
 3. If exact information is not available, infer reasonable estimates from related chunk data
-4. Be concise but comprehensive - include all relevant measurements and specifications
-5. Use professional, clear language appropriate for roofing industry customers
+4. Be concise  include all relevant measurements and specifications
+5. For Area per pitch and Waste Calculation always use table data to answer the question
 6. Include specific numbers, units, and technical terms as they appear in the chunks
 7. Reference image data when relevant to the question
 8. You will receive text chunks, image chunks, and table chunks containing comprehensive property data
 9. Highlight the most relevant information in the response
+10. Use professional, clear language appropriate for roofing industry customers
 QUESTION: {query}
 
 RETRIEVED INFORMATION:
