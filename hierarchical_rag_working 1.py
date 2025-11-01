@@ -5,6 +5,7 @@ Simplified version that works with MilvusClient without complex index creation
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 import time
@@ -1545,20 +1546,23 @@ def load_agentic_rag_output() -> List[Dict]:
                         if existing_records and len(existing_records) > 0:
                             record_id = existing_records[0]['id']  # Get the actual database record ID
 
+                            # Update chunking status to completed
+                            success_chunking = PropertyRAGStatusDAO.update_chunking_status(record_id, "completed")
                             # Update vector save status to completed
                             success_vector = PropertyRAGStatusDAO.update_vector_save_status(record_id, "completed")
                             # Update final status to success
                             success_final = PropertyRAGStatusDAO.update_final_status(record_id, "success")
                         else:
                             # No database record found
+                            success_chunking = False
                             success_vector = False
                             success_final = False
                             logger.warning(f"No database record found for report {report_id}")
 
-                        if success_vector and success_final:
+                        if success_chunking and success_vector and success_final:
                             logger.info(f"Updated database status for report {report_id}")
                             updated_reports.add(report_id)
-                        elif success_vector is False and success_final is False:
+                        elif success_chunking is False and success_vector is False and success_final is False:
                             # Either database not available or no record found - mark as processed
                             logger.info(f"Database not available or no record found - marking report {report_id} as processed")
                             updated_reports.add(report_id)
