@@ -39,6 +39,7 @@ spec.loader.exec_module(hierarchical_rag_module)
 
 HierarchicalRAG = hierarchical_rag_module.HierarchicalRAG
 load_agentic_rag_output = hierarchical_rag_module.load_agentic_rag_output
+QueryAnalysis = hierarchical_rag_module.QueryAnalysis
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -259,7 +260,7 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
 
         # Use the intelligent query routing system (detects property-specific vs general queries)
         # This handles both search and LLM response generation, and returns raw results for source extraction
-        llm_response, search_results = hierarchical_rag.answer_query_with_raw_results(prompt, level1_limit, level2_limit)
+        llm_response, search_results, query_analysis = hierarchical_rag.answer_query_with_raw_results(prompt, level1_limit, level2_limit)
         
         # Format response
         try:
@@ -350,6 +351,32 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                     }
 
                     display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))
+
+                    # Filter images based on important_imagery if specified
+                    if hasattr(query_analysis, 'important_imagery') and query_analysis.important_imagery:
+                        # Map filename to the image type names used by the LLM
+                        filename_to_type = {
+                            'Lengthsimage': 'Lengths',
+                            'Pitch_Degrees': 'Pitch_Degrees',
+                            'Pitch_on_12': 'Pitch_on_12',
+                            'Rafters': 'Rafters',
+                            'Azimuth': 'Azimuth',
+                            'Area': 'Area',
+                            'Roof_Penetrations': 'Roof_Penetrations',
+                            'Top_View': 'Top_View',
+                            'North_Side': 'North_Side',
+                            'South_Side': 'South_Side',
+                            'East_Side': 'East_Side',
+                            'West_Side': 'West_Side',
+                            'Cover_Image': 'Cover_Image',
+                            'Structure_Summary': 'Structure_Summary'
+                        }
+
+                        # Get the image type from filename
+                        image_type = filename_to_type.get(filename, filename)
+                        if image_type not in query_analysis.important_imagery:
+                            # Skip this image if it's not in the important imagery list
+                            continue
 
                     # Level 2 chunk info for images
                     chunk_info = {

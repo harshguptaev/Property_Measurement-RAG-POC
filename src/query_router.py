@@ -23,6 +23,7 @@ class QueryAnalysis(BaseModel):
     query: str  # Cleaned user intention/query
     complete_query: str  # Full original query
     relevant_sections: list[str]  # List of relevant data sections for the query
+    important_imagery: list[str]  # List of specific image types that are most relevant for this query
 
 
 class QueryRouter:
@@ -79,6 +80,23 @@ Your task is to analyze the user's query and extract the following information:
 
    Return an array of the most relevant section names based on what information would help answer the query.
 
+6. **important_imagery**: Based on the query intent, identify which SPECIFIC image types would be most valuable to include in the response. Only include images that directly help answer the query. Available image types include:
+   - "Cover_Image": Property overview/cover image - useful for general property queries
+   - "Top_View": Aerial/top view - useful for roof structure, layout, and general property overview
+   - "North_Side": North side view - useful for queries about north-facing aspects
+   - "South_Side": South side view - useful for queries about south-facing aspects
+   - "East_Side": East side view - useful for queries about east-facing aspects
+   - "West_Side": West side view - useful for queries about west-facing aspects
+   - "Area": Roof area measurements diagram - useful for area-related queries
+   - "Azimuth": Roof direction/azimuth diagram - useful for orientation/direction queries
+   - "Pitch_Degrees": Roof pitch in degrees diagram - useful for pitch-related queries
+   - "Pitch_on_12": Roof pitch (rise over 12) diagram - useful for pitch-related queries
+   - "Rafters": Rafter structure diagram - useful for structural queries
+   - "Roof_Penetrations": Roof penetrations diagram - useful for penetration/ventilation queries
+   - "Lengths": Length measurements diagram - useful for dimension queries
+
+   Return an array of the most relevant image type names. Return empty array [] if no images are needed for this query.
+
 EXAMPLES:
 
 Query: "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128"
@@ -88,7 +106,8 @@ Analysis:
     "address": "2455 New Holland Cir, Murfreesboro, TN 37128",
     "query": "What is the roof area",
     "complete_query": "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128",
-    "relevant_sections": ["Roof Measurements", "Diagrams", "Imagery"]
+    "relevant_sections": ["Roof Measurements", "Diagrams"],
+    "important_imagery": ["Area", "Top_View"]
 }}
 
 Query: "Find all properties with roof area greater than 2000 square feet"
@@ -98,7 +117,8 @@ Analysis:
     "address": null,
     "query": "Find all properties with roof area greater than 2000 square feet",
     "complete_query": "Find all properties with roof area greater than 2000 square feet",
-    "relevant_sections": ["Roof Measurements"]
+    "relevant_sections": ["Roof Measurements"],
+    "important_imagery": []
 }}
 
 Query: "Show me the pitch information for the property at 123 Main St, Anytown, USA"
@@ -108,7 +128,8 @@ Analysis:
     "address": "123 Main St, Anytown, USA",
     "query": "Show me the pitch information",
     "complete_query": "Show me the pitch information for the property at 123 Main St, Anytown, USA",
-    "relevant_sections": ["Pitch Breakdown", "Roof Measurements", "Diagrams", "Imagery"]
+    "relevant_sections": ["Pitch Breakdown", "Roof Measurements", "Diagrams"],
+    "important_imagery": ["Pitch_Degrees", "Pitch_on_12", "Top_View"]
 }}
 
 Query: "Which properties have more than 3 roof facets"
@@ -118,7 +139,8 @@ Analysis:
     "address": null,
     "query": "Which properties have more than 3 roof facets",
     "complete_query": "Which properties have more than 3 roof facets",
-    "relevant_sections": ["House Measurements", "Roof Measurements"]
+    "relevant_sections": ["House Measurements", "Roof Measurements"],
+    "important_imagery": []
 }}
 
 Query: "Show me pictures of the roof at 456 Oak St"
@@ -128,7 +150,8 @@ Analysis:
     "address": "456 Oak St",
     "query": "Show me pictures of the roof",
     "complete_query": "Show me pictures of the roof at 456 Oak St",
-    "relevant_sections": ["Imagery", "Diagrams"]
+    "relevant_sections": ["Imagery", "Diagrams"],
+    "important_imagery": ["Top_View", "North_Side", "South_Side", "East_Side", "West_Side"]
 }}
 
 Query: "What is the area per pitch for this roof"
@@ -138,7 +161,8 @@ Analysis:
     "address": null,
     "query": "What is the area per pitch",
     "complete_query": "What is the area per pitch for this roof",
-    "relevant_sections": ["Pitch Breakdown", "Roof Measurements", "Diagrams", "Imagery"]
+    "relevant_sections": ["Pitch Breakdown", "Roof Measurements", "Diagrams"],
+    "important_imagery": ["Pitch_Degrees", "Pitch_on_12", "Area"]
 }}
 
 Query: "What is the waste factor for this property"
@@ -148,7 +172,8 @@ Analysis:
     "address": null,
     "query": "What is the waste factor",
     "complete_query": "What is the waste factor for this property",
-    "relevant_sections": ["Waste Calculation"]
+    "relevant_sections": ["Waste Calculation"],
+    "important_imagery": []
 }}
 
 Query: "When I searched for address no exact match found, even suggested address is not found in the similar address list"
@@ -158,13 +183,14 @@ Analysis:
     "address": null,
     "query": "When I searched for address no exact match found, even suggested address is not found in the similar address list",
     "complete_query": "When I searched for address no exact match found, even suggested address is not found in the similar address list",
-    "relevant_sections": []
+    "relevant_sections": [],
+    "important_imagery": []
 }}
 
 Now analyze this query:
 {query}
 
-Return ONLY a valid JSON object with the five fields: flow, address, query, complete_query, relevant_sections."""
+Return ONLY a valid JSON object with the six fields: flow, address, query, complete_query, relevant_sections, important_imagery."""
 
         try:
             body = {
