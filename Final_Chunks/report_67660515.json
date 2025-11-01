@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67660515",
-    "address": "16 Orchard Dr, Randolph, NJ 07869",
+    "address": "16 Orchard Dr Randolph NJ 07869",
     "latitude": 40.8371179,
     "longitude": -74.6202723,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 15,
       "structure_complexity": "Normal",
       "estimated_attic": "2511.2 sq ft",
-      "total_roof_obstructions": 8
+      "total_roof_obstructions": 8,
+      "number_of_structures": 2
     }
   },
   {

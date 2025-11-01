@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67647079",
-    "address": "7848 Godolphin Dr, Springfield, VA 22153",
+    "address": "7848 Godolphin Dr Springfield VA 22153",
     "latitude": 38.7312586,
     "longitude": -77.216072,
     "owner": "Jessica Clinton Lumina Solar Inc 3701 Commerce Dr Baltimore, MD 21227 443-814-7246"
@@ -16,7 +16,8 @@
       "total_roof_facets": 8,
       "structure_complexity": "Normal",
       "estimated_attic": "2382.6 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

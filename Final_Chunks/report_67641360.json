@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67641360",
-    "address": "12 Stone Ridge Rd, Sussex, NJ 07461",
+    "address": "12 Stone Ridge Rd Sussex NJ 07461",
     "latitude": 41.2368743,
     "longitude": -74.5229808,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801"
@@ -15,7 +15,8 @@
       "total_roof_facets": 41,
       "structure_complexity": "Normal",
       "estimated_attic": "4602.8 sq ft",
-      "total_roof_obstructions": 11
+      "total_roof_obstructions": 11,
+      "number_of_structures": 1
     }
   },
   {

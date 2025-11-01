@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67643082",
-    "address": "49 Falcon Point Dr, Caldwell, NJ 07006",
+    "address": "49 Falcon Point Dr Caldwell NJ 07006",
     "latitude": 40.8724878,
     "longitude": -74.2442978,
     "owner": "Bill Hoey NJ Solar Power 325 W Water St Toms River, NJ 08753 732-269-0308"
@@ -16,7 +16,8 @@
       "total_roof_facets": 47,
       "structure_complexity": "Normal",
       "estimated_attic": "4,461 sq ft",
-      "total_roof_obstructions": 10
+      "total_roof_obstructions": 10,
+      "number_of_structures": 1
     }
   },
   {

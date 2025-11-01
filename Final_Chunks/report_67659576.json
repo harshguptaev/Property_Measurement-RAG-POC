@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67659576",
-    "address": "2557 Dundee Gln, Escondido, CA 92026",
+    "address": "2557 Dundee Gln Escondido CA 92026",
     "latitude": 33.1711676,
     "longitude": -117.0872747,
     "owner": "Dan Wert ALIVE Solar &amp; Roofing 335 E Valley Pkwy Escondido, CA 92025-2814 760-802-1953"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "4505.5 sq ft",
-      "total_roof_obstructions": 31
+      "total_roof_obstructions": 31,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67661955",
-    "address": "6808 Pineway, University Park, MD 20782",
+    "address": "6808 Pineway University Park MD 20782",
     "latitude": 38.973076,
     "longitude": -76.9396176,
     "owner": "Garrett Heath Crystal Exteriors LLC 7232 Mainstream Way Columbia, MD 21044 301-681-8186"
@@ -16,7 +16,8 @@
       "total_roof_facets": 16,
       "structure_complexity": "Normal",
       "estimated_attic": "1593.4 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 1
     }
   },
   {

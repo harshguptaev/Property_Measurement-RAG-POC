@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67641627",
-    "address": "1101 River Rd Hillsborough, NJ 08844",
+    "address": "1101 River Rd Hillsborough NJ 08844",
     "latitude": 40.517468,
     "longitude": -74.7223199,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 27,
       "structure_complexity": "Normal",
       "estimated_attic": "3674.6 sq ft",
-      "total_roof_obstructions": 11
+      "total_roof_obstructions": 11,
+      "number_of_structures": 3
     }
   },
   {

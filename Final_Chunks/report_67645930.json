@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67645930",
-    "address": "313 Moore Road, Lebanon, TN 37087",
+    "address": "313 Moore Road Lebanon TN 37087",
     "latitude": 36.2693717,
     "longitude": -86.2013908,
     "owner": "Justin Rogers Bluebird Construction 2176 N Mt Juliet Rd #203 Mt Juliet, TN 37122 615-758-9101"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "3948.7 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 1
     }
   },
   {

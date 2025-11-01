@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67615308",
-    "address": "42 Brownell Road, Little Compton, RI 02837",
+    "address": "42 Brownell Road Little Compton RI 02837",
     "latitude": 41.4964891,
     "longitude": -71.158221,
     "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
@@ -16,7 +16,8 @@
       "total_roof_facets": 19,
       "structure_complexity": "Normal",
       "estimated_attic": "1,454 sq ft",
-      "total_roof_obstructions": 6
+      "total_roof_obstructions": 6,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67618066",
-    "address": "2305 Raymond Drive, Northfield, NJ 08225",
+    "address": "2305 Raymond Drive Northfield NJ 08225",
     "latitude": 39.3681364,
     "longitude": -74.5707567,
     "owner": "ABC Supply ABC Supply 1 ABC Parkway Beloit, WI 53511 (800) 226-1280"
@@ -16,7 +16,8 @@
       "total_roof_facets": 14,
       "structure_complexity": "Normal",
       "estimated_attic": "2437.4 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 2
     }
   },
   {

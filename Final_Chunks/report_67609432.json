@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67609432",
-    "address": "11550 Cortina Pl, San Diego, CA 92131",
+    "address": "11550 Cortina Pl San Diego CA 92131",
     "latitude": 32.9292846,
     "longitude": -117.1109595,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -15,7 +15,8 @@
       "total_roof_facets": 14,
       "structure_complexity": "Normal",
       "estimated_attic": "1827.7 sq ft",
-      "total_roof_obstructions": 22
+      "total_roof_obstructions": 22,
+      "number_of_structures": 1
     }
   },
   {

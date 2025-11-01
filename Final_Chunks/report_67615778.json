@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67615778",
-    "address": "265 Mermaid Bright, Naples, FL 34142",
+    "address": "265 Mermaid Bright Naples FL 34142",
     "latitude": 26.1904713,
     "longitude": -81.8090268,
     "owner": "adrian soto A Soto Spray Foam 14045 S State Road 29 Felda, FL 33930 239-825-6731"
@@ -16,7 +16,8 @@
       "total_roof_facets": 59,
       "structure_complexity": "Complex",
       "estimated_attic": "5744.1 sq ft",
-      "total_roof_obstructions": 4
+      "total_roof_obstructions": 4,
+      "number_of_structures": 1
     }
   },
   {

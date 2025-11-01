@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67635370",
-    "address": "326 E Mitchell Dr Phoenix, AZ 85012",
+    "address": "326 E Mitchell Dr Phoenix AZ 85012",
     "latitude": 33.4886616,
     "longitude": -112.0681782,
     "owner": "Jonathan Sutula JSE Group 5S680 Cloverdale Ct Naperville, IL 60540-3734 630-399-7805"
@@ -16,7 +16,8 @@
       "total_roof_facets": 5,
       "structure_complexity": "Simple",
       "estimated_attic": "2,382 sq ft",
-      "total_roof_obstructions": 6
+      "total_roof_obstructions": 6,
+      "number_of_structures": 1
     }
   },
   {

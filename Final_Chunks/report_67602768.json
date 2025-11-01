@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67602768",
-    "address": "2 Lakeside Ave, Stockholm, NJ 07460",
+    "address": "2 Lakeside Ave Stockholm NJ 07460",
     "latitude": 41.0701894,
     "longitude": -74.5274073,
     "owner": "Sal Pistorio Integrity Solar &amp; Home Solutions 123 Egg Harbor Rd Ste 600 Sewell, NJ 08080 856-270-5614"
@@ -16,7 +16,8 @@
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "1326.9 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

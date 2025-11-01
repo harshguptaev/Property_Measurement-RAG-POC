@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67646248",
-    "address": "16944 Oak View Dr, Encino, CA 91436",
+    "address": "16944 Oak View Dr Encino CA 91436",
     "latitude": 34.1522182,
     "longitude": -118.5013046,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -15,7 +15,8 @@
       "total_roof_facets": 4,
       "structure_complexity": "Simple",
       "estimated_attic": "3978.4 sq ft",
-      "total_roof_obstructions": 26
+      "total_roof_obstructions": 26,
+      "number_of_structures": 1
     }
   },
   {

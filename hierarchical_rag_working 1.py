@@ -619,7 +619,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
                     # Build filter for relevant sections if specified
                     section_filter = ""
                     if relevant_sections:
-                        section_filter = f' && section in {relevant_sections}'
+                        # Use LIKE queries for prefix matching
+                        like_conditions = [f'section like "{prefix}%"' for prefix in relevant_sections]
+                        section_filter = f' && ({ " || ".join(like_conditions) })'
 
                     res2 = self.milvus_client.search(
                         collection_name=self.level2_collection_name,
@@ -777,7 +779,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
             # Build filter for relevant sections if specified
             section_filter = ""
             if relevant_sections:
-                section_filter = f' && section in {relevant_sections}'
+                # Use LIKE queries for prefix matching
+                like_conditions = [f'section like "{prefix}%"' for prefix in relevant_sections]
+                section_filter = f' && ({ " || ".join(like_conditions) })'
 
             # Search Level 2 chunks filtered by property_id from Level 1 results
             res2 = self.milvus_client.search(
@@ -911,7 +915,9 @@ Provide a clear, structured summary in 2-3 sentences:"""
             # Build filter for relevant sections if specified
             section_filter = ""
             if relevant_sections:
-                section_filter = f' && section in {relevant_sections}'
+                # Use LIKE queries for prefix matching
+                like_conditions = [f'section like "{prefix}%"' for prefix in relevant_sections]
+                section_filter = f' && ({ " || ".join(like_conditions) })'
 
             # Step 2: Search Level 2 (Chunks) - find chunks that match the criteria
             logger.info("📊 Searching Level 2 (Chunk Index) for property criteria...")

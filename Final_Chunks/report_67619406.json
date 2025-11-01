@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67619406",
-    "address": "24 Breckenridge Ct, Belle Mead, NJ 08502",
+    "address": "24 Breckenridge Ct Belle Mead NJ 08502",
     "latitude": 40.4388021,
     "longitude": -74.6607096,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 14,
       "structure_complexity": "Normal",
       "estimated_attic": "2605.6 sq ft",
-      "total_roof_obstructions": 18
+      "total_roof_obstructions": 18,
+      "number_of_structures": 1
     }
   },
   {

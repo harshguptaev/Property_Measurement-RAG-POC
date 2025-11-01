@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67624522",
-    "address": "1122 Camelot Ct, Johnstown, PA 15904",
+    "address": "1122 Camelot Ct Johnstown PA 15904",
     "latitude": 40.2766181,
     "longitude": -78.8700556,
     "owner": "Ricky Gonzales LGCY Power 338 Grace Circle Hurst, TX 76123 8172284599"
@@ -16,7 +16,8 @@
       "total_roof_facets": 7,
       "structure_complexity": "Normal",
       "estimated_attic": "2,717 sq ft",
-      "total_roof_obstructions": 12
+      "total_roof_obstructions": 12,
+      "number_of_structures": 1
     }
   },
   {

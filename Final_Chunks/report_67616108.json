@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67616108",
-    "address": "4692 Druids Gln, Manlius, NY 13104",
+    "address": "4692 Druids Gln Manlius NY 13104",
     "latitude": 42.9988081,
     "longitude": -75.9449129,
     "owner": "Paul Melnik Roofing Rochester NY 1411 Chili Ave Ste 3 Rochester, NY 14624-3262 (585) 727-8619"
@@ -16,7 +16,8 @@
       "total_roof_facets": 21,
       "structure_complexity": "Normal",
       "estimated_attic": "3233.3 sq ft",
-      "total_roof_obstructions": 2
+      "total_roof_obstructions": 2,
+      "number_of_structures": 1
     }
   },
   {

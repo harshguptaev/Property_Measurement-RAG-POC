@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67610068",
-    "address": "44496 Neponset St, Ashburn, VA 20147",
+    "address": "44496 Neponset St Ashburn VA 20147",
     "latitude": 39.0518133,
     "longitude": -77.4604462,
     "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
@@ -16,7 +16,8 @@
       "total_roof_facets": 7,
       "structure_complexity": "Normal",
       "estimated_attic": "1482.9 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

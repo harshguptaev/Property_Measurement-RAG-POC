@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67633929",
-    "address": "604 Malcolm Pl Alexandria, VA 22302",
+    "address": "604 Malcolm Pl Alexandria VA 22302",
     "latitude": 38.8229169,
     "longitude": -77.0711562,
     "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
@@ -16,7 +16,8 @@
       "total_roof_facets": 13,
       "structure_complexity": "Normal",
       "estimated_attic": "1483.8 sq ft",
-      "total_roof_obstructions": 8
+      "total_roof_obstructions": 8,
+      "number_of_structures": 1
     }
   },
   {

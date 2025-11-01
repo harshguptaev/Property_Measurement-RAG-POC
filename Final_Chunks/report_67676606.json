@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67676606",
-    "address": "111 Thomas Park Dr, Hutto, TX 78634",
+    "address": "111 Thomas Park Dr Hutto TX 78634",
     "latitude": 30.5863054,
     "longitude": -97.5535928,
     "owner": "Carlos Hernandez Kstylez Roofing &amp; Construction 16801 Radholme Court Suite D Round Rock, TX 78664 512-910-8009"
@@ -15,7 +15,8 @@
       "total_roof_facets": 12,
       "structure_complexity": "Normal",
       "estimated_attic": "3031.2 sq ft",
-      "total_roof_obstructions": 28
+      "total_roof_obstructions": 28,
+      "number_of_structures": 2
     }
   },
   {

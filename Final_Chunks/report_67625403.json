@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67625403",
-    "address": "38555 Hungry Hill Rd, Scio, OR 97374",
+    "address": "38555 Hungry Hill Rd Scio OR 97374",
     "latitude": 44.6614445,
     "longitude": -122.8633192,
     "owner": "Jesse Callahan ironhead roofing 2710 NW Bryant Corvallis, OR 97330 5416029515"
@@ -16,7 +16,8 @@
       "total_roof_facets": 18,
       "structure_complexity": "Normal",
       "estimated_attic": "9748.5 sq ft",
-      "total_roof_obstructions": 21
+      "total_roof_obstructions": 21,
+      "number_of_structures": 2
     }
   },
   {

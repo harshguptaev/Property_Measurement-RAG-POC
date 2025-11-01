@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67615342",
-    "address": "7232 Old Route 422, Portersville, PA 16051",
+    "address": "7232 Old Route 422 Portersville PA 16051",
     "latitude": 40.9649217,
     "longitude": -80.2093403,
     "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
@@ -16,7 +16,8 @@
       "total_roof_facets": 16,
       "structure_complexity": "Normal",
       "estimated_attic": "2,943 sq ft",
-      "total_roof_obstructions": 13
+      "total_roof_obstructions": 13,
+      "number_of_structures": 5
     }
   },
   {

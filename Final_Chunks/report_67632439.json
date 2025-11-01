@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67632439",
-    "address": "22600 28 Mile Rd # RAY, Ray, MI 48096",
+    "address": "22600",
     "latitude": 42.7456534,
     "longitude": -82.8872339,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "2194.2 sq ft",
-      "total_roof_obstructions": 13
+      "total_roof_obstructions": 13,
+      "number_of_structures": 1
     }
   },
   {

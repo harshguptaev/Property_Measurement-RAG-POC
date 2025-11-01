@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67624797",
-    "address": "1630 Westwood Dr, Las Vegas, NV 89102",
+    "address": "1630 Westwood Dr Las Vegas NV 89102",
     "latitude": 36.1518444,
     "longitude": -115.1673075,
     "owner": "Juan Ortiz SunSolar Solutions 8932 W Cactus Rd Peoria, AZ 85381 6027736675"
@@ -16,7 +16,8 @@
       "total_roof_facets": 26,
       "structure_complexity": "Normal",
       "estimated_attic": "3804.8 sq ft",
-      "total_roof_obstructions": 23
+      "total_roof_obstructions": 23,
+      "number_of_structures": 1
     }
   },
   {

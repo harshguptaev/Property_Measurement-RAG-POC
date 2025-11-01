@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67635682",
-    "address": "5308 41st Pl, Hyattsville, MD 20781",
+    "address": "5308 41st Pl Hyattsville MD 20781",
     "latitude": 38.9543093,
     "longitude": -76.9466394,
     "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
@@ -16,7 +16,8 @@
       "total_roof_facets": 13,
       "structure_complexity": "Normal",
       "estimated_attic": "2033.6 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 1
     }
   },
   {

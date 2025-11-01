@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67620156",
-    "address": "933 Creekbend, Vernon Hills, IL 60061",
+    "address": "933 Creekbend Vernon Hills IL 60061",
     "latitude": 42.2060388,
     "longitude": -87.9635971,
     "owner": "Ryan Pettit Shake Guys 4860 Duff Drive Cincinnati, OH 45246 847-707-3713"
@@ -16,7 +16,8 @@
       "total_roof_facets": 11,
       "structure_complexity": "Normal",
       "estimated_attic": "2701.9 sq ft",
-      "total_roof_obstructions": 12
+      "total_roof_obstructions": 12,
+      "number_of_structures": 1
     }
   },
   {

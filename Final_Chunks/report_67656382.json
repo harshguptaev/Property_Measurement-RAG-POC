@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67656382",
-    "address": "9327 W Huisache Trl, Marana, AZ 85653",
+    "address": "9327 W Huisache Trl Marana AZ 85653",
     "latitude": 32.3900868,
     "longitude": -111.1639847,
     "owner": "OPS Team Inty Power 819 W 22nd St Tempe, AZ 85282-1926 480-439-8965"
@@ -16,7 +16,8 @@
       "total_roof_facets": 12,
       "structure_complexity": "Normal",
       "estimated_attic": "1704.5 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

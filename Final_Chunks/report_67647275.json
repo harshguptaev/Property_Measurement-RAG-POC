@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67647275",
-    "address": "318 Wyckoff Ave, Ramsey, NJ 07446",
+    "address": "318 Wyckoff Ave Ramsey NJ 07446",
     "latitude": 41.0485574,
     "longitude": -74.1550449,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -15,7 +15,8 @@
       "total_roof_facets": 13,
       "structure_complexity": "Normal",
       "estimated_attic": "1667.9 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 2
     }
   },
   {

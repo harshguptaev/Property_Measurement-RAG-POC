@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67674385",
-    "address": "902 Cottonwood Hill Pl, Henderson, NV 89011",
+    "address": "902 Cottonwood Hill Pl Henderson NV 89011",
     "latitude": 36.0665573,
     "longitude": -114.9868346,
     "owner": "Juan Ortiz SunSolar Solutions 8932 W Cactus Rd Peoria, AZ 85381 6027736675"
@@ -16,7 +16,8 @@
       "total_roof_facets": 26,
       "structure_complexity": "Normal",
       "estimated_attic": "3424.7 sq ft",
-      "total_roof_obstructions": 13
+      "total_roof_obstructions": 13,
+      "number_of_structures": 1
     }
   },
   {

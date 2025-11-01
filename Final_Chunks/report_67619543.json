@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67619543",
-    "address": "926 Pauline avenue, Charleston, SC 29412",
+    "address": "926 Pauline avenue Charleston SC 29412",
     "latitude": 32.7311633,
     "longitude": -79.9627366,
     "owner": "Caitlin Hooper Elite Residential Roofing Po Box 12117 Charleston, SC 29412 843-460-4411"
@@ -16,7 +16,8 @@
       "total_roof_facets": 3,
       "structure_complexity": "Simple",
       "estimated_attic": "1552.7 sq ft",
-      "total_roof_obstructions": 8
+      "total_roof_obstructions": 8,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67602394",
-    "address": "114 Dolphin Ave, Northfield, NJ 08225",
+    "address": "114 Dolphin Ave Northfield NJ 08225",
     "latitude": 39.3773726,
     "longitude": -74.5407913,
     "owner": "Sal Pistorio Integrity Solar &amp; Home Solutions 123 Egg Harbor Rd Ste 600 Sewell, NJ 08080 856-270-5614"
@@ -16,7 +16,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "2763.4 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

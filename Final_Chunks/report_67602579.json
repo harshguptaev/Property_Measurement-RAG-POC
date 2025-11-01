@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67602579",
-    "address": "144 13th Ave, San Mateo, CA 94402",
+    "address": "144 13th Ave San Mateo CA 94402",
     "latitude": 37.5571019,
     "longitude": -122.3145667,
     "owner": "Jeff Long Infinium Solar 1190 Dell Ave Campbell, CA 95008 408-583-8101"
@@ -15,7 +15,8 @@
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "2763.2 sq ft",
-      "total_roof_obstructions": 12
+      "total_roof_obstructions": 12,
+      "number_of_structures": 2
     }
   },
   {

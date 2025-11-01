@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67641380",
-    "address": "66 Cartwright Dr, Princeton Junction, NJ 08550",
+    "address": "66 Cartwright Dr Princeton Junction NJ 08550",
     "latitude": 40.2952769,
     "longitude": -74.5999354,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 18,
       "structure_complexity": "Normal",
       "estimated_attic": "2331.6 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 2
     }
   },
   {

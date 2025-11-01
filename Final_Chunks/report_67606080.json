@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67606080",
-    "address": "12133 Everton Avenue North, Hugo, MN 55038",
+    "address": "12133 Everton Avenue North Hugo MN 55038",
     "latitude": 45.1261188,
     "longitude": -93.009294,
     "owner": "Jeff Granowski All Craftsmen Exteriors LLC 1020 E 146th St. Suite #226 Burnsville, MN 55337 952-484-4680"
@@ -16,7 +16,8 @@
       "total_roof_facets": 4,
       "structure_complexity": "Simple",
       "estimated_attic": "2129.3 sq ft",
-      "total_roof_obstructions": 10
+      "total_roof_obstructions": 10,
+      "number_of_structures": 2
     }
   },
   {

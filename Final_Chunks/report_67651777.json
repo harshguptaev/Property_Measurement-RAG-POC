@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67651777",
-    "address": "705 Connecticut St, Lawrence, KS 66044",
+    "address": "705 Connecticut St Lawrence KS 66044",
     "latitude": 38.970976,
     "longitude": -95.2327147,
     "owner": "Jesse Pacheco Cromwell Solar 615 Vermont St Lawrence, KS 66044 785-841-4612"
@@ -15,7 +15,8 @@
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "1444.4 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 1
     }
   },
   {

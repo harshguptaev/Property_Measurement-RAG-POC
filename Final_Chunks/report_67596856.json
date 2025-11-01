@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67596856",
-    "address": "744 Scheel, Kyle, TX 78640",
+    "address": "744 Scheel Kyle TX 78640",
     "latitude": 30.0123001,
     "longitude": -97.8787911,
     "owner": "Shane Swan Now Energy LLC PO Box 2638 WIMBERLEY, TX 78676 512-744-8824"
@@ -16,7 +16,8 @@
       "total_roof_facets": 11,
       "structure_complexity": "Normal",
       "estimated_attic": "2967.8 sq ft",
-      "total_roof_obstructions": 14
+      "total_roof_obstructions": 14,
+      "number_of_structures": 1
     }
   },
   {

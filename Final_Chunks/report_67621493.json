@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67621493",
-    "address": "4 Nantucket Way, Middlebury, CT 06762",
+    "address": "4 Nantucket Way Middlebury CT 06762",
     "latitude": 41.5041399,
     "longitude": -73.1438002,
     "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
@@ -16,7 +16,8 @@
       "total_roof_facets": 17,
       "structure_complexity": "Normal",
       "estimated_attic": "2,354 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 1
     }
   },
   {

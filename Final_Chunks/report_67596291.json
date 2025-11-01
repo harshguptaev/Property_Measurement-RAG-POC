@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67596291",
-    "address": "98 Avenue Of The Oaks, Clifton Park, NY 12065",
+    "address": "98 Avenue Of The Oaks Clifton Park NY 12065",
     "latitude": 42.8441919,
     "longitude": -73.830173,
     "owner": "Paul Melnik Roofing Rochester NY 1411 Chili Ave Ste 3 Rochester, NY 14624-3262 (585) 727-8619"
@@ -16,7 +16,8 @@
       "total_roof_facets": 18,
       "structure_complexity": "Normal",
       "estimated_attic": "2469.9 sq ft",
-      "total_roof_obstructions": 2
+      "total_roof_obstructions": 2,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67643126",
-    "address": "14512 Settlers Landing Way, North Potomac, MD 20878",
+    "address": "14512 Settlers Landing Way North Potomac MD 20878",
     "latitude": 39.0912608,
     "longitude": -77.2254695,
     "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
@@ -16,7 +16,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "2022.2 sq ft",
-      "total_roof_obstructions": 6
+      "total_roof_obstructions": 6,
+      "number_of_structures": 1
     }
   },
   {

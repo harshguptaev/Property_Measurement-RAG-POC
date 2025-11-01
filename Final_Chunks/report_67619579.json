@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67619579",
-    "address": "23 Angelo Ct, Monroe Township, NJ 08831",
+    "address": "23 Angelo Ct Monroe Township NJ 08831",
     "latitude": 40.301283,
     "longitude": -74.4652154,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 18,
       "structure_complexity": "Normal",
       "estimated_attic": "3666.1 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

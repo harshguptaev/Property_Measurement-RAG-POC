@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67642099",
-    "address": "13 Euclid Ave, Maplewood, NJ 07040",
+    "address": "13 Euclid Ave Maplewood NJ 07040",
     "latitude": 40.7363646,
     "longitude": -74.2793413,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 16,
       "structure_complexity": "Normal",
       "estimated_attic": "1750.1 sq ft",
-      "total_roof_obstructions": 10
+      "total_roof_obstructions": 10,
+      "number_of_structures": 1
     }
   },
   {

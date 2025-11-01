@@ -69,11 +69,11 @@ Your task is to analyze the user's query and extract the following information:
 
 4. **complete_query**: The full original query as provided.
 
-5. **relevant_sections**: Based on the query intent, identify which data sections would be most relevant. Available sections include:
+5. **relevant_sections**: Based on the query intent, identify which data section PREFIXES would be most relevant. Return section prefixes that will be matched using LIKE queries (e.g., "Roof Measurements" will match "Roof Measurements - All Structures", "Roof Measurements - Structure 1", etc.). Available section prefixes include:
    - "House Measurements": Basic property info (stories, facets, complexity, attic area (Not the actual area it is a estimate), obstructions)
-   - "Roof Measurements - All Structures": Detailed roof measurements (actual area value, pitch, ridges, hips, valleys, rakes, eaves, etc.) whenver any area or measurements related information is needed, include this section.
-   - "Pitch Breakdown": Roof pitch percentages and areas by pitch type
-   - "Waste Calculation": Waste factor calculations for different percentages
+   - "Roof Measurements": Detailed roof measurements (actual area value, pitch, ridges, hips, valleys, rakes, eaves, etc.) - matches all roof measurement sections including per-structure ones
+   - "Pitch Breakdown": Roof pitch percentages and areas by pitch type - matches all pitch breakdown sections including per-structure ones
+   - "Waste Calculation": Waste factor calculations for different percentages - matches all waste calculation sections including per-structure ones
    - "Diagrams": Technical diagrams (lengths, pitch degrees, pitch on 12, rafters, azimuth, area, roof penetrations)
    - "Imagery": Property photos (top view, north/south/east/west sides)
 
@@ -88,7 +88,7 @@ Analysis:
     "address": "2455 New Holland Cir, Murfreesboro, TN 37128",
     "query": "What is the roof area",
     "complete_query": "What is the roof area at 2455 New Holland Cir, Murfreesboro, TN 37128",
-    "relevant_sections": ["Roof Measurements - All Structures"]
+    "relevant_sections": ["Roof Measurements"]
 }}
 
 Query: "Find all properties with roof area greater than 2000 square feet"
@@ -108,7 +108,7 @@ Analysis:
     "address": "123 Main St, Anytown, USA",
     "query": "Show me the pitch information",
     "complete_query": "Show me the pitch information for the property at 123 Main St, Anytown, USA",
-    "relevant_sections": ["Pitch Breakdown", "Roof Measurements - All Structures"]
+    "relevant_sections": ["Pitch Breakdown", "Roof Measurements"]
 }}
 
 Query: "Which properties have more than 3 roof facets"
@@ -118,7 +118,7 @@ Analysis:
     "address": null,
     "query": "Which properties have more than 3 roof facets",
     "complete_query": "Which properties have more than 3 roof facets",
-    "relevant_sections": ["House Measurements", "Roof Measurements - All Structures"]
+    "relevant_sections": ["House Measurements", "Roof Measurements"]
 }}
 
 Query: "Show me pictures of the roof at 456 Oak St"

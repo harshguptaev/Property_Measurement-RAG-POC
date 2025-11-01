@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67661503",
-    "address": "265 Carteret Ave, Carteret, NJ 07008",
+    "address": "265 Carteret Ave Carteret NJ 07008",
     "latitude": 40.5800154,
     "longitude": -74.2327979,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "1529.8 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 2
     }
   },
   {

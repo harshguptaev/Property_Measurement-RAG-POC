@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67595727",
-    "address": "7108 Masonry Aly, Beltsville, MD 20705",
+    "address": "7108 Masonry Aly Beltsville MD 20705",
     "latitude": 39.0636314,
     "longitude": -76.8825215,
     "owner": "Jessica Clinton Lumina Solar Inc 3701 Commerce Dr Baltimore, MD 21227 443-814-7246"
@@ -16,7 +16,8 @@
       "total_roof_facets": 2,
       "structure_complexity": "Simple",
       "estimated_attic": "697 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 1
     }
   },
   {

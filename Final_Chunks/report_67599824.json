@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67599824",
-    "address": "38025 Paradise Way, Cathedral City, CA 92234",
+    "address": "38025 Paradise Way Cathedral City CA 92234",
     "latitude": 33.7721813,
     "longitude": -116.4753849,
     "owner": "Alan Truex Vibe Solar 1206 Commerce Center Dr Suite 103 Lancaster, CA 93534 661-485-5000"
@@ -15,7 +15,8 @@
       "total_roof_facets": 3,
       "structure_complexity": "Simple",
       "estimated_attic": "1,452 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

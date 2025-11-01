@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67630809",
-    "address": "27121 Lobelia Dell, FAIR OAKS, TX 78015",
+    "address": "27121 Lobelia Dell FAIR OAKS TX 78015",
     "latitude": 29.7032157,
     "longitude": -98.6471539,
     "owner": "Cheryl Schofield Absolute Construction 605 18th St Plano, TX 75074 972-596-0159"
@@ -16,7 +16,8 @@
       "total_roof_facets": 27,
       "structure_complexity": "Normal",
       "estimated_attic": "3649.6 sq ft",
-      "total_roof_obstructions": 21
+      "total_roof_obstructions": 21,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67626951",
-    "address": "5507 W 100th Ter, Overland Park, KS 66207",
+    "address": "5507 W 100th Ter Overland Park KS 66207",
     "latitude": 38.9461615,
     "longitude": -94.6500015,
     "owner": "Jrm Roofing Llc Jrm Roofing &amp; Gutters LLC 1637 Kensington Ave Kansas City, MO 64128 8162146314"
@@ -15,7 +15,8 @@
       "total_roof_facets": 8,
       "structure_complexity": "Normal",
       "estimated_attic": "2314.7 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

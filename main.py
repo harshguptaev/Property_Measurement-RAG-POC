@@ -62,7 +62,7 @@ def main():
 
     try:
         # Check if input directory exists
-        input_dir = Path("input_files")
+        input_dir = Path("premium_reports")
         if not input_dir.exists():
             logger.error(f"Input directory not found: {input_dir}")
             print(f"\n❌ Error: Input directory '{input_dir}' not found.")

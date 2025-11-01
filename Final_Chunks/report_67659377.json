@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67659377",
-    "address": "25 Rosemary Way, Mount Laurel, NJ 08054",
+    "address": "25 Rosemary Way Mount Laurel NJ 08054",
     "latitude": 39.973645,
     "longitude": -74.8637682,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "946.9 sq ft",
-      "total_roof_obstructions": 2
+      "total_roof_obstructions": 2,
+      "number_of_structures": 1
     }
   },
   {

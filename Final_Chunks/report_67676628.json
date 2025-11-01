@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67676628",
-    "address": "13105 Mill Stone Dr, Austin, TX 78729",
+    "address": "13105 Mill Stone Dr Austin TX 78729",
     "latitude": 30.4612403,
     "longitude": -97.782548,
     "owner": "Carlos Hernandez Kstylez Roofing &amp; Construction 16801 Radholme Court Suite D Round Rock, TX 78664 512-910-8009"
@@ -15,7 +15,8 @@
       "total_roof_facets": 4,
       "structure_complexity": "Simple",
       "estimated_attic": "1,601 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

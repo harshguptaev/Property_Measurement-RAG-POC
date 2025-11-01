@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67611374",
-    "address": "24461 Rutile Ln, Aldie, VA 20105",
+    "address": "24461 Rutile Ln Aldie VA 20105",
     "latitude": 38.9409664,
     "longitude": -77.5625939,
     "owner": "Barklie Estes Nova Solar 3305 Dye Dr Falls Church, VA 22042 703-679-8607"
@@ -16,7 +16,8 @@
       "total_roof_facets": 19,
       "structure_complexity": "Normal",
       "estimated_attic": "3840.6 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 2
     }
   },
   {

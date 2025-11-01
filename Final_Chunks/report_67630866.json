@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67630866",
-    "address": "2616 James Ave, Edinburg, TX 78539",
+    "address": "2616 James Ave Edinburg TX 78539",
     "latitude": 26.2816536,
     "longitude": -98.1996706,
     "owner": "Javier Sol\u00eds Brav-Co Energy Solutions 8908 Val Verde Vista St. Edinburg, TX 78542 (956)457-9393"
@@ -15,7 +15,8 @@
       "total_roof_facets": 37,
       "structure_complexity": "Normal",
       "estimated_attic": "4473.8 sq ft",
-      "total_roof_obstructions": 16
+      "total_roof_obstructions": 16,
+      "number_of_structures": 1
     }
   },
   {

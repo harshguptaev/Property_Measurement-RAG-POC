@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67614995",
-    "address": "563 Ne Tohomish St, White Salmon, WA 98672",
+    "address": "563 Ne Tohomish St White Salmon WA 98672",
     "latitude": 45.7278814,
     "longitude": -121.4797601,
     "owner": "Jose Castro Soto &amp; Brothers Roofing 322 East 27th St Vancouver, WA 98663 3605837870"
@@ -16,7 +16,8 @@
       "total_roof_facets": 5,
       "structure_complexity": "Simple",
       "estimated_attic": "2106.5 sq ft",
-      "total_roof_obstructions": 23
+      "total_roof_obstructions": 23,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67617202",
-    "address": "912 Dorothea Street, Baden, PA 15005",
+    "address": "912 Dorothea Street Baden PA 15005",
     "latitude": 40.6413582,
     "longitude": -80.2215153,
     "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
@@ -16,7 +16,8 @@
       "total_roof_facets": 8,
       "structure_complexity": "Normal",
       "estimated_attic": "2,815 sq ft",
-      "total_roof_obstructions": 6
+      "total_roof_obstructions": 6,
+      "number_of_structures": 2
     }
   },
   {

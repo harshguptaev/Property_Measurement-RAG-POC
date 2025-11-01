@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67642292",
-    "address": "265 S Brooksvale Rd, Cheshire, CT 06410",
+    "address": "265 S Brooksvale Rd Cheshire CT 06410",
     "latitude": 41.4657774,
     "longitude": -72.9166246,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 14,
       "structure_complexity": "Normal",
       "estimated_attic": "1951.4 sq ft",
-      "total_roof_obstructions": 2
+      "total_roof_obstructions": 2,
+      "number_of_structures": 1
     }
   },
   {

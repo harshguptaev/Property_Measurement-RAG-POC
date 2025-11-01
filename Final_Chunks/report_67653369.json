@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67653369",
-    "address": "1608 Polk Way, Sanford, FL 32773",
+    "address": "1608 Polk Way Sanford FL 32773",
     "latitude": 28.7371362,
     "longitude": -81.2898775,
     "owner": "Sam Steele Lazen Solar LLC 11495 Lake Underhill Rd Orlando, FL 32825 703-774-4558"
@@ -15,7 +15,8 @@
       "total_roof_facets": 18,
       "structure_complexity": "Normal",
       "estimated_attic": "3757.7 sq ft",
-      "total_roof_obstructions": 8
+      "total_roof_obstructions": 8,
+      "number_of_structures": 1
     }
   },
   {

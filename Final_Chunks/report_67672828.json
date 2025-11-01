@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67672828",
-    "address": "3021 Carrington Ln, Lawrence, KS 66049",
+    "address": "3021 Carrington Ln Lawrence KS 66049",
     "latitude": 38.9916658,
     "longitude": -95.2735747,
     "owner": "Jesse Pacheco Cromwell Solar 615 Vermont St Lawrence, KS 66044 785-841-4612"
@@ -16,7 +16,8 @@
       "total_roof_facets": 11,
       "structure_complexity": "Normal",
       "estimated_attic": "1769.3 sq ft",
-      "total_roof_obstructions": 10
+      "total_roof_obstructions": 10,
+      "number_of_structures": 1
     }
   },
   {

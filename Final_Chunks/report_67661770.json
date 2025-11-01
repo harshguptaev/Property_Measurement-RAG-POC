@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67661770",
-    "address": "3778 Interchange Rd, Lehighton, PA 18235",
+    "address": "3778 Interchange Rd Lehighton PA 18235",
     "latitude": 40.8404877,
     "longitude": -75.6351564,
     "owner": "Chandler Tomlinson Lumina Solar Inc 3701 Commerce Dr Baltimore, MD 21227 443-814-7246"
@@ -16,7 +16,8 @@
       "total_roof_facets": 22,
       "structure_complexity": "Normal",
       "estimated_attic": "4,637 sq ft",
-      "total_roof_obstructions": 10
+      "total_roof_obstructions": 10,
+      "number_of_structures": 3
     }
   },
   {

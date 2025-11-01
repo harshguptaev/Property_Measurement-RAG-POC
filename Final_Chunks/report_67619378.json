@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67619378",
-    "address": "11 Boss Rd, Ringoes, NJ 08551",
+    "address": "11 Boss Rd Ringoes NJ 08551",
     "latitude": 40.4246448,
     "longitude": -74.8739841,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 15,
       "structure_complexity": "Normal",
       "estimated_attic": "3062.1 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 2
     }
   },
   {

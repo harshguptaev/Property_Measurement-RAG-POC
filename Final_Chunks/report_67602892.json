@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67602892",
-    "address": "40243 178th St E, Palmdale, CA 93591",
+    "address": "40243 178th St E Palmdale CA 93591",
     "latitude": 34.614414,
     "longitude": -117.8123834,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -15,7 +15,8 @@
       "total_roof_facets": 13,
       "structure_complexity": "Normal",
       "estimated_attic": "3217.8 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

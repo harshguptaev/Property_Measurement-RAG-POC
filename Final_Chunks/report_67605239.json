@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67605239",
-    "address": "2719 Alvar Dr Houston, TX 77014",
+    "address": "2719 Alvar Dr Houston TX 77014",
     "latitude": 29.9664855,
     "longitude": -95.4634328,
     "owner": "Ricky Gonzales LGCY Power 338 Grace Circle Hurst, TX 76123 8172284599"
@@ -15,7 +15,8 @@
       "total_roof_facets": 15,
       "structure_complexity": "Normal",
       "estimated_attic": "2171.5 sq ft",
-      "total_roof_obstructions": 14
+      "total_roof_obstructions": 14,
+      "number_of_structures": 1
     }
   },
   {

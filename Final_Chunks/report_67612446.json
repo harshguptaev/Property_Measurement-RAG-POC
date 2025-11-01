@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67612446",
-    "address": "5630 Crane Road, Edinboro, PA 16412",
+    "address": "5630 Crane Road Edinboro PA 16412",
     "latitude": 41.9027916,
     "longitude": -80.155234,
     "owner": "ABC Supply ABC Supply 1 ABC Parkway Beloit, WI 53511 (800) 226-1280"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "2078.4 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 1
     }
   },
   {

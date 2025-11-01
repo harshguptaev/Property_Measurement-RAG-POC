@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67604182",
-    "address": "3467 Fox Pointe Ln, York, PA 17404",
+    "address": "3467 Fox Pointe Ln York PA 17404",
     "latitude": 40.030404,
     "longitude": -76.7550209,
     "owner": "Ricky Gonzales LGCY Power 338 Grace Circle Hurst, TX 76123 8172284599"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "2169.2 sq ft",
-      "total_roof_obstructions": 2
+      "total_roof_obstructions": 2,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67646576",
-    "address": "123 Egg Harbor Rd Suite 600 Sewell, NJ 08080",
+    "address": "123 Egg Harbor Rd Suite",
     "latitude": 39.7224789,
     "longitude": -74.8565133,
     "owner": "Sal Pistorio Integrity Solar &amp; Home Solutions 123 Egg Harbor Rd Ste 600 Sewell, NJ 08080 856-270-5614"
@@ -16,7 +16,8 @@
       "total_roof_facets": 12,
       "structure_complexity": "Normal",
       "estimated_attic": "1541.6 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 1
     }
   },
   {

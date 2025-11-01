@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67627639",
-    "address": "295 Hurst Rd NE, Palm Bay, FL 32907",
+    "address": "295 Hurst Rd NE Palm Bay FL 32907",
     "latitude": 28.0147494,
     "longitude": -80.6654285,
     "owner": "Cameron Stanger Axis Capital Holdings LLC dba HomeX 2431 Aloma Ave Winter Park, FL 32792 801-859-4446"
@@ -15,7 +15,8 @@
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "3124.5 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

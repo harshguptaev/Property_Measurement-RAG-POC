@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67661207",
-    "address": "7 Cathy Dr, Robbinsville, NJ 08691",
+    "address": "7 Cathy Dr Robbinsville NJ 08691",
     "latitude": 40.2350603,
     "longitude": -74.6124492,
     "owner": "Sal Pistorio Integrity Solar &amp; Home Solutions 123 Egg Harbor Rd Ste 600 Sewell, NJ 08080 856-270-5614"
@@ -16,7 +16,8 @@
       "total_roof_facets": 22,
       "structure_complexity": "Normal",
       "estimated_attic": "2676.5 sq ft",
-      "total_roof_obstructions": 13
+      "total_roof_obstructions": 13,
+      "number_of_structures": 1
     }
   },
   {

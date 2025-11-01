@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67650832",
-    "address": "6350 Johnson Rd, Indianapolis, IN 46220",
+    "address": "6350 Johnson Rd Indianapolis IN 46220",
     "latitude": 39.8730533,
     "longitude": -86.0532665,
     "owner": "Chad Carlton Carlton Construction 3909 N Mohr Rd Greenfield, IN 46140 317-443-6384"
@@ -16,7 +16,8 @@
       "total_roof_facets": 31,
       "structure_complexity": "Normal",
       "estimated_attic": "2532.8 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 1
     }
   },
   {

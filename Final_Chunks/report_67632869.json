@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67632869",
-    "address": "4378 Coble Hill Dr, Canal Winchester, OH 43110",
+    "address": "4378 Coble Hill Dr Canal Winchester OH 43110",
     "latitude": 39.8875738,
     "longitude": -82.8476472,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -16,7 +16,8 @@
       "total_roof_facets": 5,
       "structure_complexity": "Simple",
       "estimated_attic": "1251.6 sq ft",
-      "total_roof_obstructions": 2
+      "total_roof_obstructions": 2,
+      "number_of_structures": 1
     }
   },
   {

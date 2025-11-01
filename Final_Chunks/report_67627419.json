@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67627419",
-    "address": "12121 N 129th Dr, El Mirage, AZ 85335",
+    "address": "12121 N 129th Dr El Mirage AZ 85335",
     "latitude": 33.5939411,
     "longitude": -112.3378898,
     "owner": "OPS Team Inty Power 819 W 22nd St Tempe, AZ 85282-1926 480-439-8965"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "1974.6 sq ft",
-      "total_roof_obstructions": 10
+      "total_roof_obstructions": 10,
+      "number_of_structures": 1
     }
   },
   {

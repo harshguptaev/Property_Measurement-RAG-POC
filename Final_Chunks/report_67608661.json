@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67608661",
-    "address": "7405 Ridge Oak Ct, Springfield, VA 22153",
+    "address": "7405 Ridge Oak Ct Springfield VA 22153",
     "latitude": 38.7557221,
     "longitude": -77.2264948,
     "owner": "Ray Masavage CAVU Solar 17006 Gaines Rd Broad Run, VA 20137 571-276-0100"
@@ -16,7 +16,8 @@
       "total_roof_facets": 5,
       "structure_complexity": "Simple",
       "estimated_attic": "840.6 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 1
     }
   },
   {

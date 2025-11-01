@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67643088",
-    "address": "235 Tettemer Ave, Trenton, NJ 08610",
+    "address": "235 Tettemer Ave Trenton NJ 08610",
     "latitude": 40.1949217,
     "longitude": -74.6860719,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -15,7 +15,8 @@
       "total_roof_facets": 7,
       "structure_complexity": "Normal",
       "estimated_attic": "1566.9 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 1
     }
   },
   {

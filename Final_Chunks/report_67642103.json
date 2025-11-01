@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67642103",
-    "address": "2082 Stratton Rd, Walnut Creek, CA 94598",
+    "address": "2082 Stratton Rd Walnut Creek CA 94598",
     "latitude": 37.9244354,
     "longitude": -122.0327654,
     "owner": "Jeff Long Infinium Solar 1190 Dell Ave Campbell, CA 95008 408-583-8101"
@@ -16,7 +16,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "3755.7 sq ft",
-      "total_roof_obstructions": 15
+      "total_roof_obstructions": 15,
+      "number_of_structures": 1
     }
   },
   {

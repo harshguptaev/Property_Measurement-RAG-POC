@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67642126",
-    "address": "8 Osprey Ct, Marlboro, NJ 07746",
+    "address": "8 Osprey Ct Marlboro NJ 07746",
     "latitude": 40.3362122,
     "longitude": -74.2438815,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801"
@@ -15,7 +15,8 @@
       "total_roof_facets": 20,
       "structure_complexity": "Normal",
       "estimated_attic": "1868.4 sq ft",
-      "total_roof_obstructions": 17
+      "total_roof_obstructions": 17,
+      "number_of_structures": 2
     }
   },
   {

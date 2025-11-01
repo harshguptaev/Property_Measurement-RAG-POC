@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67658549",
-    "address": "18 New York Road, Oakdale, CT 06370",
+    "address": "18 New York Road Oakdale CT 06370",
     "latitude": 41.4739524,
     "longitude": -72.2013478,
     "owner": "Trinity Solar Manual Salesforce Trinity Solar 2211 Allenwood Rd Wall, NJ 07719 732-780-3779"
@@ -16,7 +16,8 @@
       "total_roof_facets": 10,
       "structure_complexity": "Normal",
       "estimated_attic": "1,256 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 3
     }
   },
   {

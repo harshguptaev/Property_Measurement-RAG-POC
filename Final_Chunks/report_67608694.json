@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67608694",
-    "address": "10030 10th Ave S, Minneapolis, MN 55420",
+    "address": "10030 10th Ave S Minneapolis MN 55420",
     "latitude": 44.8215049,
     "longitude": -93.2611293,
     "owner": "Bill Dack Krech Exteriors 5866 Blackshire Path Inver Grove Heights, MN 55076 612 408 9968"
@@ -15,7 +15,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "3024.2 sq ft",
-      "total_roof_obstructions": 13
+      "total_roof_obstructions": 13,
+      "number_of_structures": 1
     }
   },
   {

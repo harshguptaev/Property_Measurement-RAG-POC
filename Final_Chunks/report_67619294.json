@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67619294",
-    "address": "1 Butterfly Ct, Manahawkin, NJ 08050",
+    "address": "1 Butterfly Ct Manahawkin NJ 08050",
     "latitude": 39.7247313,
     "longitude": -74.2509389,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 31,
       "structure_complexity": "Normal",
       "estimated_attic": "4916.1 sq ft",
-      "total_roof_obstructions": 13
+      "total_roof_obstructions": 13,
+      "number_of_structures": 1
     }
   },
   {

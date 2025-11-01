@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67643221",
-    "address": "514 E Finley Ave, Ottumwa, IA 52501",
+    "address": "514 E Finley Ave Ottumwa IA 52501",
     "latitude": 41.0018533,
     "longitude": -92.4178553,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -16,7 +16,8 @@
       "total_roof_facets": 25,
       "structure_complexity": "Normal",
       "estimated_attic": "2684.3 sq ft",
-      "total_roof_obstructions": 7
+      "total_roof_obstructions": 7,
+      "number_of_structures": 2
     }
   },
   {

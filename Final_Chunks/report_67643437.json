@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67643437",
-    "address": "120 Dobbs Ave, Bellmawr, NJ 08031",
+    "address": "120 Dobbs Ave Bellmawr NJ 08031",
     "latitude": 39.864628,
     "longitude": -75.097914,
     "owner": "Sal Pistorio Integrity Solar &amp; Home Solutions 123 Egg Harbor Rd Ste 600 Sewell, NJ 08080 856-270-5614"
@@ -16,7 +16,8 @@
       "total_roof_facets": 20,
       "structure_complexity": "Normal",
       "estimated_attic": "1625.2 sq ft",
-      "total_roof_obstructions": 4
+      "total_roof_obstructions": 4,
+      "number_of_structures": 1
     }
   },
   {

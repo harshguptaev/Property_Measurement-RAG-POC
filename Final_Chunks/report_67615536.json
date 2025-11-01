@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67615536",
-    "address": "7304 Iris Rd Aubrey, TX 76227",
+    "address": "7304 Iris Rd Aubrey TX 76227",
     "latitude": 33.2392612,
     "longitude": -96.9153702,
     "owner": "Martyna Kowalczyk Solartime USA 1758 Firman Dr. Suite 100 NA Richardson, TX 75081 972-675-7725"
@@ -16,7 +16,8 @@
       "total_roof_facets": 21,
       "structure_complexity": "Normal",
       "estimated_attic": "2647.1 sq ft",
-      "total_roof_obstructions": 18
+      "total_roof_obstructions": 18,
+      "number_of_structures": 1
     }
   },
   {

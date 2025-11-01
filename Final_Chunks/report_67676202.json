@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67676202",
-    "address": "4865 Oakside Dr, Stone Mountain, GA 30088",
+    "address": "4865 Oakside Dr Stone Mountain GA 30088",
     "latitude": 33.7858221,
     "longitude": -84.1904709,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -16,7 +16,8 @@
       "total_roof_facets": 30,
       "structure_complexity": "Normal",
       "estimated_attic": "3227.8 sq ft",
-      "total_roof_obstructions": 16
+      "total_roof_obstructions": 16,
+      "number_of_structures": 1
     }
   },
   {

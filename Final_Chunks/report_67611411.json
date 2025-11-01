@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67611411",
-    "address": "12480 Harbour Ridge Boulevard, Palm City, FL 34990",
+    "address": "12480 Harbour Ridge Boulevard Palm City FL 34990",
     "latitude": 27.2340378,
     "longitude": -80.3092892,
     "owner": "Koh Knox Knox Services 21301  S Tamiami Trl Ste 320 #132 Estero, FL 33928 239-451-3202"
@@ -15,7 +15,8 @@
       "total_roof_facets": 57,
       "structure_complexity": "Complex",
       "estimated_attic": "21193.2 sq ft",
-      "total_roof_obstructions": 30
+      "total_roof_obstructions": 30,
+      "number_of_structures": 1
     }
   },
   {

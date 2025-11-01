@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67648788",
-    "address": "610 Middle Street, Aurora, NC 27806",
+    "address": "610 Middle Street Aurora NC 27806",
     "latitude": 35.3055873,
     "longitude": -76.7902467,
     "owner": "Bethany Rivera A-D's Metal Roofing 5087 Hwy 70 W Morehead City, NC 28557 252-269-7556"
@@ -16,7 +16,8 @@
       "total_roof_facets": 11,
       "structure_complexity": "Normal",
       "estimated_attic": "2238.1 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

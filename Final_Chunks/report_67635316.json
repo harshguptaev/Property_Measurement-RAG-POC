@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67635316",
-    "address": "28764 150th St, Le Mars, IA 51031",
+    "address": "28764 150th St Le Mars IA 51031",
     "latitude": 42.8351489,
     "longitude": -96.2580606,
     "owner": "Carlos Samuel S\u00e1nchez Escobar The Olam Llc 2821 S 36th St Omoha, NE 68105 4026690153"
@@ -15,7 +15,8 @@
       "total_roof_facets": 7,
       "structure_complexity": "Normal",
       "estimated_attic": "4,493 sq ft",
-      "total_roof_obstructions": 5
+      "total_roof_obstructions": 5,
+      "number_of_structures": 2
     }
   },
   {

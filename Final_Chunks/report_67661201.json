@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67661201",
-    "address": "21 Hayduk Dr Edison, NJ 08820",
+    "address": "21 Hayduk Dr Edison NJ 08820",
     "latitude": 40.5866007,
     "longitude": -74.3833301,
     "owner": "Taylor Allen Green Power Energy 9 Main St Annandale, NJ 08801 908-713-9055"
@@ -16,7 +16,8 @@
       "total_roof_facets": 34,
       "structure_complexity": "Normal",
       "estimated_attic": "3198.2 sq ft",
-      "total_roof_obstructions": 8
+      "total_roof_obstructions": 8,
+      "number_of_structures": 1
     }
   },
   {

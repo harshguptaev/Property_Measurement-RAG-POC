@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67598050",
-    "address": "2300 Meadow Gate Dr Greensboro, NC 27455",
+    "address": "2300 Meadow Gate Dr Greensboro NC 27455",
     "latitude": 36.1373066,
     "longitude": -79.8200002,
     "owner": "Brenden Schmidt Local Restoration Group LLC 5540 Centerview Dr Ste 204 PMB 65727 Raleigh, NC 27606 252-580-1392"
@@ -15,7 +15,8 @@
       "total_roof_facets": 7,
       "structure_complexity": "Normal",
       "estimated_attic": "2394.5 sq ft",
-      "total_roof_obstructions": 12
+      "total_roof_obstructions": 12,
+      "number_of_structures": 1
     }
   },
   {

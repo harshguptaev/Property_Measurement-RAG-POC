@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67656540",
-    "address": "606 High Field Road, Tuscaloosa, AL 35405",
+    "address": "606 High Field Road Tuscaloosa AL 35405",
     "latitude": 33.1180173,
     "longitude": -87.5449353,
     "owner": "Chris Cole Craftsman Roofing LLC 2919 8th St Tuscaloosa, AL 35401-2109 205-826-2759"
@@ -15,7 +15,8 @@
       "total_roof_facets": 6,
       "structure_complexity": "Simple",
       "estimated_attic": "5041.7 sq ft",
-      "total_roof_obstructions": 8
+      "total_roof_obstructions": 8,
+      "number_of_structures": 1
     }
   },
   {

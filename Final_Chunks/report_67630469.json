@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67630469",
-    "address": "2019 Downs Pl, Lithonia, GA 30058",
+    "address": "2019 Downs Pl Lithonia GA 30058",
     "latitude": 33.7304537,
     "longitude": -84.1669091,
     "owner": "Amandeep Singh Next Renewable Global Pte. Ltd 10800 NE 8th St Suite 300 Bellevue, WA 98004 9999816961"
@@ -15,7 +15,8 @@
       "total_roof_facets": 9,
       "structure_complexity": "Normal",
       "estimated_attic": "2015.4 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

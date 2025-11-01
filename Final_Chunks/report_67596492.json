@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67596492",
-    "address": "44 Martinique Ave, Tampa, FL 33606",
+    "address": "44 Martinique Ave Tampa FL 33606",
     "latitude": 27.9130696,
     "longitude": -82.4592705,
     "owner": "Hunter Potalivo SunVena Solar 4005 Church St Sanford, FL 32771-6945 (407) 553-9584"
@@ -16,7 +16,8 @@
       "total_roof_facets": 28,
       "structure_complexity": "Normal",
       "estimated_attic": "6089.4 sq ft",
-      "total_roof_obstructions": 3
+      "total_roof_obstructions": 3,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67649473",
-    "address": "413 Curie Dr, San Jose, CA 95123",
+    "address": "413 Curie Dr San Jose CA 95123",
     "latitude": 37.2281288,
     "longitude": -121.8082837,
     "owner": "Jeff Long Infinium Solar 1190 Dell Ave Campbell, CA 95008 408-583-8101"
@@ -15,7 +15,8 @@
       "total_roof_facets": 7,
       "structure_complexity": "Normal",
       "estimated_attic": "1934.9 sq ft",
-      "total_roof_obstructions": 9
+      "total_roof_obstructions": 9,
+      "number_of_structures": 1
     }
   },
   {

@@ -1,7 +1,7 @@
 [
   {
     "property_id": "PROP_67617591",
-    "address": "15660 Chipmunk Ln, Middlefield, OH 44062",
+    "address": "15660 Chipmunk Ln Middlefield OH 44062",
     "latitude": 41.4433395,
     "longitude": -81.099916,
     "owner": "Alex Ciarlillo Sandhill Homestead LLC 15660 Chipmunk Ln Middlefield, OH 44062 7402742863"
@@ -16,7 +16,8 @@
       "total_roof_facets": 16,
       "structure_complexity": "Normal",
       "estimated_attic": "3668.9 sq ft",
-      "total_roof_obstructions": 14
+      "total_roof_obstructions": 14,
+      "number_of_structures": 3
     }
   },
   {
