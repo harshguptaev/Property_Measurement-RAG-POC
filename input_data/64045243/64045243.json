@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64045243",
+    "address": "2120 Long Glen Lane, Arnold, MO 63010",
+    "latitude": 38.421101,
+    "longitude": -90.399746,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64045243",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 20,
+      "structure_complexity": "Normal",
+      "estimated_attic": "4,094 sq ft",
+      "total_roof_obstructions": 10,
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64045243",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4,742 sq ft",
+      "total_roof_facets": 20,
+      "predominant_pitch": "6/12",
+      "ridges": "175 ft",
+      "hips": "2 ft",
+      "valleys": "190 ft",
+      "rakes": "257 ft",
+      "eaves_starter": "155 ft",
+      "drip_edge": "412 ft",
+      "flashing": "33 ft",
+      "step_flashing": "54 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "20 ft",
+      "roof_obstructions_area": "2 sq ft",
+      "net_roof_area": "4,740 sq ft"
+    }
+  }
+]

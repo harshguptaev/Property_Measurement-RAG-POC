@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64046823",
+    "address": "144 Lamp Post Ln, Arnold, MO 63010-6209",
+    "latitude": 38.424537,
+    "longitude": -90.398267,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64046823",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 14,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64046823",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4,427 sq ft",
+      "total_roof_facets": 14,
+      "predominant_pitch": "7/12",
+      "ridges": "140 ft",
+      "hips": "7 ft",
+      "valleys": "115 ft",
+      "rakes": "232 ft",
+      "eaves_starter": "190 ft",
+      "drip_edge": "422 ft",
+      "flashing": "38 ft",
+      "step_flashing": "74 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

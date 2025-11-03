@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64024785",
+    "address": "2985 Melton drive, Arnold, MO 63010",
+    "latitude": 38.4232409,
+    "longitude": -90.4004132,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64024785",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 4,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1,671 sq ft",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64024785",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,741 sq ft",
+      "total_roof_facets": 4,
+      "predominant_pitch": "4/12",
+      "ridges": "70 ft",
+      "hips": "0 ft",
+      "valleys": "36 ft",
+      "rakes": "88 ft",
+      "eaves_starter": "91 ft",
+      "drip_edge": "179 ft",
+      "flashing": "0 ft",
+      "step_flashing": "0 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64023965",
+    "address": "2106 Chelsea Ct, Arnold, MO 63010",
+    "latitude": 38.4184276,
+    "longitude": -90.393673,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64023965",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 10,
+      "structure_complexity": "Normal",
+      "estimated_attic": "147 sq ft",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64023965",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,761 sq ft",
+      "total_roof_facets": 10,
+      "predominant_pitch": "6/12",
+      "ridges": "72 ft",
+      "hips": "11 ft",
+      "valleys": "47 ft",
+      "rakes": "111 ft",
+      "eaves_starter": "128 ft",
+      "drip_edge": "239 ft",
+      "flashing": "33 ft",
+      "step_flashing": "33 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

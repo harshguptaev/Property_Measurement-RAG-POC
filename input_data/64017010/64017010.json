@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64017010",
+    "address": "2118 CHELSEA CT, ARNOLD, MO 63010-3764",
+    "latitude": 38.4187533,
+    "longitude": -90.3943587,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64017010",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "",
+      "total_roof_facets": 6,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64017010",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,411 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "5/12",
+      "ridges": "81 ft",
+      "hips": "0 ft",
+      "valleys": "60 ft",
+      "rakes": "131 ft",
+      "eaves_starter": "85 ft",
+      "drip_edge": "216 ft",
+      "flashing": "3 ft",
+      "step_flashing": "2 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64020821",
+    "address": "3071 STRAWBERRY RIDGE DR, ARNOLD, MO 63010-2597",
+    "latitude": 38.4242135,
+    "longitude": -90.4050905,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64020821",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 13,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64020821",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,762 sq ft",
+      "total_roof_facets": 13,
+      "predominant_pitch": "6/12",
+      "ridges": "98 ft",
+      "hips": "0 ft",
+      "valleys": "51 ft",
+      "rakes": "189 ft",
+      "eaves_starter": "141 ft",
+      "drip_edge": "330 ft",
+      "flashing": "10 ft",
+      "step_flashing": "74 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

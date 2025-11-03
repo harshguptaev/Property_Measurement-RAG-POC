@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64043072",
+    "address": "2925 Katie Ct, Arnold, MO 63010",
+    "latitude": 38.4180525,
+    "longitude": -90.4070822,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64043072",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 8,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1,600 sq ft",
+      "total_roof_obstructions": [],
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64043072",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,925 sq ft",
+      "total_roof_facets": 8,
+      "predominant_pitch": "5/12",
+      "ridges": "54 ft",
+      "hips": "28 ft",
+      "valleys": "23 ft",
+      "rakes": "75 ft",
+      "eaves_starter": "149 ft",
+      "drip_edge": "224 ft",
+      "flashing": "21 ft",
+      "step_flashing": "9 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

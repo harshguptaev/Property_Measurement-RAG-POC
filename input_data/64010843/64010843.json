@@ -1,0 +1,49 @@
+[
+  {
+    "property_id": "PROP_64010843",
+    "address": "117 LAMP POST LN, ARNOLD, MO 63010",
+    "latitude": 38.4231781,
+    "longitude": -90.398006,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64010843",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 15,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64010843",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4,386 sq ft",
+      "total_roof_facets": 15,
+      "predominant_pitch": "7/12",
+      "ridges": "131 ft",
+      "hips": "72 ft",
+      "valleys": "114 ft",
+      "rakes": "167 ft",
+      "eaves_starter": "230 ft",
+      "drip_edge": "397 ft",
+      "flashing": "28 ft",
+      "step_flashing": "67 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]
+
+

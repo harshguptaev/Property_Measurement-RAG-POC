@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_66758308",
+    "address": "2833 Pinebrook Ct, Arnold, MO 63010",
+    "latitude": 38.4164282,
+    "longitude": -90.4042564,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_66758308",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 4,
+      "structure_complexity": "Normal",
+      "estimated_attic": "1,384 sq ft",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_66758308",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,459 sq ft",
+      "total_roof_facets": 4,
+      "predominant_pitch": "4/12",
+      "ridges": "61 ft",
+      "hips": "0 ft",
+      "valleys": "32 ft",
+      "rakes": "83 ft",
+      "eaves_starter": "77 ft",
+      "drip_edge": "160 ft",
+      "flashing": "0 ft",
+      "step_flashing": "0 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

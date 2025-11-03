@@ -1,0 +1,49 @@
+[
+  {
+    "property_id": "PROP_64895822",
+    "address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
+    "latitude": 38.4250734,
+    "longitude": -90.4063569,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64895822",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 6,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64895822",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,780 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "6/12",
+      "ridges": "95 ft",
+      "hips": "0 ft",
+      "valleys": "68 ft",
+      "rakes": "134 ft",
+      "eaves_starter": "102 ft",
+      "drip_edge": "236 ft",
+      "flashing": "0 ft",
+      "step_flashing": "0 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]
+
+

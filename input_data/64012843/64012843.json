@@ -1,0 +1,49 @@
+[
+  {
+    "property_id": "PROP_64012843",
+    "address": "3174 ROSEDALE DR, ARNOLD, MO 63010",
+    "latitude": 38.4225351,
+    "longitude": -90.3882917,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64012843",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "2",
+      "total_roof_facets": 5,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64012843",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,413 sq ft",
+      "total_roof_facets": 5,
+      "predominant_pitch": "6/12",
+      "ridges": "79 ft",
+      "hips": "0 ft",
+      "valleys": "41 ft",
+      "rakes": "114 ft",
+      "eaves_starter": "105 ft",
+      "drip_edge": "219 ft",
+      "flashing": "0 ft",
+      "step_flashing": "10 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]
+
+

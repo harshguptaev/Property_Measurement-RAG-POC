@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64010425",
+    "address": "3025 BRENTMOOR DR, ARNOLD, MO 63010",
+    "latitude": 38.4204449,
+    "longitude": -90.4020177,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64010425",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 4,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64010425",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,518 sq ft",
+      "total_roof_facets": 4,
+      "predominant_pitch": "4/12",
+      "ridges": "39 ft",
+      "hips": "0 ft",
+      "valleys": "0 ft",
+      "rakes": "109 ft",
+      "eaves_starter": "78 ft",
+      "drip_edge": "187 ft",
+      "flashing": "1 ft",
+      "step_flashing": "18 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

@@ -51,19 +51,20 @@
 from reportExtractor import export_data_for_report
 from chunking import export_chunk_data_for_report
 from image_processing import preprocess_image
-from run_create_embeddings import create_embeddings_for_report
+from run_create_embeddings import create_embeddings_for_report, create_hierarchical_embeddings_for_report
 from s3_utils import upload_ddd_to_s3
 
 def start_chunking():
-    report_ids = [64053749,64048796,64046823,64045243,64043072,64024785, 64023965, 64020821, 64019882, 64017010, 64016168, 64012843, 64010843, 64010574, 64010425, 64008455, 64007311]
+    report_ids = [64053749,64048796,64046823,64045243,64043072,64024785, 64023965, 64020821, 64019882, 64017010, 64016168, 64010425, 64008455, 64007311]
     # report_ids = [64024785, 64023965, 64020821, 64019882, 64017010, 64016168, 64012843, 64010843, 64010574, 64010425, 64008455, 64007311]
+    # report_ids = [66758308, 64895822, 64892357, 64010574, 64010843, 64012843]
     print(f"Starting to process {len(report_ids)} reports: {report_ids}")
 
     for i, report_id in enumerate(report_ids, 1):
         print(f"Processing report {i}/{len(report_ids)}: {report_id}")
         try:
             # export_data_for_report(str(report_id))
-            export_chunk_data_for_report(str(report_id))
+            # export_chunk_data_for_report(str(report_id))
             # print(f"✅ Completed report {report_id}")
 
             # Preprocess image (dd.png or similar)
@@ -78,6 +79,9 @@ def start_chunking():
 
             # Create embeddings for the processed image
             create_embeddings_for_report(str(report_id))
+
+            # Create hierarchical embeddings for the chunks (Level 2)
+            create_hierarchical_embeddings_for_report(str(report_id))
 
         except Exception as e:
             print(f"❌ Error processing report {report_id}: {e}")

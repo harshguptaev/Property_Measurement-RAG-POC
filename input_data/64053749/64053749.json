@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64053749",
+    "address": "2372 TRIBUTE DR, Arnold, MO 63010",
+    "latitude": 38.4236885,
+    "longitude": -90.4044506,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64053749",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": ">1",
+      "total_roof_facets": 18,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64053749",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "4,422 sq ft",
+      "total_roof_facets": 18,
+      "predominant_pitch": "7/12",
+      "ridges": "119 ft",
+      "hips": "14 ft",
+      "valleys": "108 ft",
+      "rakes": "257 ft",
+      "eaves_starter": "189 ft",
+      "drip_edge": "446 ft",
+      "flashing": "60 ft",
+      "step_flashing": "89 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

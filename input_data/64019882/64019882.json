@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64019882",
+    "address": "2301 Deer Run Ct, Arnold, MO 63010-2605",
+    "latitude": 38.42642,
+    "longitude": -90.391762,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64019882",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 4,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64019882",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,321 sq ft",
+      "total_roof_facets": 4,
+      "predominant_pitch": "4/12",
+      "ridges": "71 ft",
+      "hips": "0 ft",
+      "valleys": "0 ft",
+      "rakes": "100 ft",
+      "eaves_starter": "142 ft",
+      "drip_edge": "242 ft",
+      "flashing": "0 ft",
+      "step_flashing": "31 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

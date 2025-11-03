@@ -1,0 +1,49 @@
+[
+  {
+    "property_id": "PROP_64010574",
+    "address": "3369 BRIARWOOD MANOR DR, ARNOLD, MO 63010",
+    "latitude": 38.4179726,
+    "longitude": -90.3953058,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64010574",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "2",
+      "total_roof_facets": 10,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64010574",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "1,811 sq ft",
+      "total_roof_facets": 10,
+      "predominant_pitch": "6/12",
+      "ridges": "73 ft",
+      "hips": "13 ft",
+      "valleys": "48 ft",
+      "rakes": "111 ft",
+      "eaves_starter": "129 ft",
+      "drip_edge": "240 ft",
+      "flashing": "26 ft",
+      "step_flashing": "36 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]
+
+
