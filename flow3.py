@@ -119,6 +119,7 @@ def run_flow_for_address(address: str) -> dict:
         try:
             with open(area_json_path, 'r') as f:
                 area_data = json.load(f)
+            final_data["area_json"] = area_data
             if isinstance(area_data, dict) and "total_sqft" in area_data:
                 final_data["area"] = area_data["total_sqft"]
             elif isinstance(area_data, (int, float)):

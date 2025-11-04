@@ -1,5 +1,5 @@
 {
-  "jobId": "715d0f31-adc3-4463-85ba-cd1e153cf61b",
+  "jobId": "7c24fa5f-7dc0-4608-a3f9-452374c7bc3d",
   "status": "success",
   "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/East_cropped.png",
   "model_name": "LETR",
@@ -7,145 +7,125 @@
   "predictions": [
     {
       "line": [
-        122,
-        87,
-        264,
-        81
+        145,
+        113,
+        289,
+        105
       ],
       "class": "eave",
-      "score": 0.967272
+      "score": 0.962361
     },
     {
       "line": [
-        84,
-        221,
-        230,
-        217
+        109,
+        246,
+        257,
+        240
       ],
       "class": "eave",
-      "score": 0.964006
+      "score": 0.953105
     },
     {
       "line": [
-        186,
-        130,
-        263,
-        81
+        208,
+        152,
+        288,
+        104
       ],
       "class": "hip",
-      "score": 0.954212
-    },
-    {
-      "line": [
-        176,
-        126,
-        185,
-        127
-      ],
-      "class": "ridge",
-      "score": 0.936635
-    },
-    {
-      "line": [
-        122,
-        89,
-        175,
-        124
-      ],
-      "class": "hip",
-      "score": 0.929063
-    },
-    {
-      "line": [
-        84,
-        221,
-        123,
-        88
-      ],
-      "class": "eave",
-      "score": 0.928558
+      "score": 0.944167
     },
     {
       "line": [
         199,
-        226,
-        240,
-        236
-      ],
-      "class": "step",
-      "score": 0.923046
-    },
-    {
-      "line": [
-        161,
-        249,
-        200,
-        226
-      ],
-      "class": "step",
-      "score": 0.914533
-    },
-    {
-      "line": [
-        85,
-        221,
-        176,
-        125
-      ],
-      "class": "hip",
-      "score": 0.913362
-    },
-    {
-      "line": [
-        264,
-        80,
-        228,
-        219
-      ],
-      "class": "eave",
-      "score": 0.911736
-    },
-    {
-      "line": [
-        160,
-        248,
-        127,
-        351
-      ],
-      "class": "eave",
-      "score": 0.909391
-    },
-    {
-      "line": [
-        179,
-        128,
-        230,
-        218
-      ],
-      "class": "hip",
-      "score": 0.832881
-    },
-    {
-      "line": [
-        212,
-        231,
-        198,
-        308
+        152,
+        201,
+        149
       ],
       "class": "ridge",
-      "score": 0.818673
+      "score": 0.941883
     },
     {
       "line": [
-        127,
-        347,
-        208,
-        269
+        146,
+        114,
+        199,
+        148
       ],
       "class": "hip",
-      "score": 0.810242
+      "score": 0.928976
+    },
+    {
+      "line": [
+        110,
+        246,
+        147,
+        114
+      ],
+      "class": "eave",
+      "score": 0.928621
+    },
+    {
+      "line": [
+        110,
+        246,
+        197,
+        153
+      ],
+      "class": "hip",
+      "score": 0.918809
+    },
+    {
+      "line": [
+        256,
+        242,
+        289,
+        103
+      ],
+      "class": "eave",
+      "score": 0.906668
+    },
+    {
+      "line": [
+        223,
+        250,
+        263,
+        261
+      ],
+      "class": "step",
+      "score": 0.903839
+    },
+    {
+      "line": [
+        184,
+        273,
+        155,
+        395
+      ],
+      "class": "eave",
+      "score": 0.885003
+    },
+    {
+      "line": [
+        185,
+        274,
+        224,
+        249
+      ],
+      "class": "step",
+      "score": 0.884024
+    },
+    {
+      "line": [
+        126,
+        275,
+        184,
+        273
+      ],
+      "class": "eave",
+      "score": 0.855384
     }
   ],
-  "image_height": 500,
-  "image_width": 500
+  "image_height": 550,
+  "image_width": 550
 }

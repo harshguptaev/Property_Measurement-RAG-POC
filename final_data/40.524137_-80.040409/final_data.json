@@ -2,13 +2,23 @@
   "address": "129 HIDDEN VALLEY DR, PITTSBURGH, PA 15237-1701",
   "latitude": 40.524137,
   "longitude": -80.040409,
-  "predominant_pitch": 6.119140625,
-  "num_of_facets": 6,
-  "area": 1291.7009169543355,
+  "predominant_pitch": 6.15625,
+  "num_of_facets": 7,
+  "area": 1288.9859690701498,
   "num_of_ridges": 2,
   "num_of_eaves": 6,
   "num_of_rakes": 4,
   "num_of_valleys": 0,
   "num_of_hips": 4,
-  "num_of_flashing": 0
+  "num_of_flashing": 0,
+  "area_json": {
+    "facet1": 236.99674952144954,
+    "facet2": 216.1644538849764,
+    "facet3": 170.74595422467877,
+    "facet4": 169.94208697405404,
+    "facet5": 249.03200732089726,
+    "facet6": 186.21660697255106,
+    "facet7": 59.8881101715429,
+    "total_sqft": 1288.9859690701498
+  }
 }
