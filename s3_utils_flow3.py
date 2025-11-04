@@ -6,15 +6,11 @@ from urllib.parse import urlparse
 from botocore.exceptions import ClientError
 
 class S3Client:
-    def __init__(self, region="us-east-2", session=None):
+    def __init__(self, region="us-east-2"):
         """
-        Initialize S3 client with AWS credentials.
-        If session is provided, use it; otherwise use default boto3 session.
+        Initialize S3 client with AWS credentials from environment variables
         """
-        if session:
-            self.client = session.client('s3', region_name=region)
-        else:
-            self.client = boto3.client('s3', region_name=region)
+        self.client = boto3.client('s3', region_name=region)
         self.region = region
 
     def parse_s3_url(self, s3_url):
@@ -151,24 +147,3 @@ class S3Client:
             s3_url = f"s3://{bucket}/{key}"
             print(f"Uploading {local_path} -> {s3_url}")
             self.upload_file(local_path, s3_url)
-
-
-
-def upload_ddd_to_s3(report_id: str):
-    """
-    Upload DDD to s3 bucket
-    """
-    local_path = os.path.join(os.getcwd(), "input_data", report_id, "DDD.png")
-    processed_path = os.path.join(os.getcwd(), "input_data", report_id, "processed_DDD.png")
-    if not os.path.exists(processed_path):
-        print(f"Processed DDD file not found for report {report_id}")
-        return
-    if not os.path.exists(local_path):
-        print(f"DDD file not found for report {report_id}")
-        return
-    s3_url = f"s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/Level3Data/{report_id}/DDD.png"
-    s3_processed_url = f"s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/Level3Data/{report_id}/processed_DDD.png"
-    s3_client = S3Client()
-    s3_client.upload_file(local_path, s3_url)
-    s3_client.upload_file(processed_path, s3_processed_url)
-    return s3_processed_url

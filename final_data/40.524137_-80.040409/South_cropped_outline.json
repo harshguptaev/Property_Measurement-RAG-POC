@@ -1,0 +1,181 @@
+{
+  "jobId": "4f9861d0-7183-4ab4-9748-b5542f4d863f",
+  "status": "success",
+  "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/South_cropped.png",
+  "model_name": "LETR",
+  "version": "LETR_v2025.01.26_2025.10.6",
+  "predictions": [
+    {
+      "line": [
+        206,
+        198,
+        232,
+        201
+      ],
+      "class": "ridge",
+      "score": 0.998004
+    },
+    {
+      "line": [
+        232,
+        202,
+        326,
+        178
+      ],
+      "class": "hip",
+      "score": 0.981923
+    },
+    {
+      "line": [
+        232,
+        202,
+        301,
+        302
+      ],
+      "class": "hip",
+      "score": 0.972526
+    },
+    {
+      "line": [
+        328,
+        175,
+        328,
+        167
+      ],
+      "class": "rake",
+      "score": 0.969875
+    },
+    {
+      "line": [
+        109,
+        277,
+        302,
+        302
+      ],
+      "class": "eave",
+      "score": 0.965649
+    },
+    {
+      "line": [
+        308,
+        297,
+        420,
+        310
+      ],
+      "class": "eave",
+      "score": 0.962969
+    },
+    {
+      "line": [
+        131,
+        153,
+        325,
+        178
+      ],
+      "class": "eave",
+      "score": 0.958968
+    },
+    {
+      "line": [
+        318,
+        233,
+        435,
+        248
+      ],
+      "class": "ridge",
+      "score": 0.958317
+    },
+    {
+      "line": [
+        328,
+        165,
+        431,
+        176
+      ],
+      "class": "eave",
+      "score": 0.958074
+    },
+    {
+      "line": [
+        108,
+        277,
+        205,
+        199
+      ],
+      "class": "hip",
+      "score": 0.945907
+    },
+    {
+      "line": [
+        431,
+        177,
+        427,
+        241
+      ],
+      "class": "rake",
+      "score": 0.933228
+    },
+    {
+      "line": [
+        109,
+        277,
+        131,
+        154
+      ],
+      "class": "eave",
+      "score": 0.931441
+    },
+    {
+      "line": [
+        131,
+        153,
+        205,
+        199
+      ],
+      "class": "hip",
+      "score": 0.930327
+    },
+    {
+      "line": [
+        302,
+        302,
+        325,
+        178
+      ],
+      "class": "eave",
+      "score": 0.92883
+    },
+    {
+      "line": [
+        422,
+        310,
+        433,
+        247
+      ],
+      "class": "rake",
+      "score": 0.92701
+    },
+    {
+      "line": [
+        430,
+        240,
+        319,
+        225
+      ],
+      "class": "other",
+      "score": 0.838732
+    },
+    {
+      "line": [
+        435,
+        250,
+        440,
+        234
+      ],
+      "class": "rake",
+      "score": 0.829852
+    }
+  ],
+  "image_height": 500,
+  "image_width": 500
+}

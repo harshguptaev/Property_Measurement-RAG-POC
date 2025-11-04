@@ -1,0 +1,77 @@
+{
+  "East": {
+    "imageId": "urn:eagleview.com:v4:spatial-data:raster:visual:ated:E1YaAInoyUWhqynpUN7AHQ:2312605552760865837:5",
+    "date": "2025/05/10",
+    "orientation": "East",
+    "heading": 91,
+    "imageResource": "https://pol.pictometry.com/Gateway/v1/image/4347F3EE-ADF7-F449-3107-6FE918558FEA/E/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "metadataResource": "https://pol.pictometry.com/Gateway/v1/metadata/4347F3EE-ADF7-F449-3107-6FE918558FEA/E/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "imageWidth": 8183,
+    "imageHeight": 4305,
+    "resolution": 3,
+    "searchPoint": {
+      "x": 2085,
+      "y": 1612
+    }
+  },
+  "North": {
+    "imageId": "urn:eagleview.com:v4:spatial-data:raster:visual:ated:E1YaAInoyUWhqynpUN7AHQ:5769115552348390445:5",
+    "date": "2025/05/10",
+    "orientation": "North",
+    "heading": 7,
+    "imageResource": "https://pol.pictometry.com/Gateway/v1/image/4347F3EE-ADF7-F449-3107-6FE918558FEA/N/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "metadataResource": "https://pol.pictometry.com/Gateway/v1/metadata/4347F3EE-ADF7-F449-3107-6FE918558FEA/N/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "imageWidth": 4306,
+    "imageHeight": 8176,
+    "resolution": 3,
+    "searchPoint": {
+      "x": 3418,
+      "y": 1487
+    }
+  },
+  "South": {
+    "imageId": "urn:eagleview.com:v4:spatial-data:raster:visual:ated:E1YaAInoyUWhqynpUN7AHQ:1157431187483411501:5",
+    "date": "2025/05/10",
+    "orientation": "South",
+    "heading": 186,
+    "imageResource": "https://pol.pictometry.com/Gateway/v1/image/4347F3EE-ADF7-F449-3107-6FE918558FEA/S/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "metadataResource": "https://pol.pictometry.com/Gateway/v1/metadata/4347F3EE-ADF7-F449-3107-6FE918558FEA/S/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "imageWidth": 4316,
+    "imageHeight": 8175,
+    "resolution": 3,
+    "searchPoint": {
+      "x": 1531,
+      "y": 4021
+    }
+  },
+  "Top": {
+    "imageId": "urn:eagleview.com:v4:spatial-data:raster:visual:ated:cVAqrJnHt06-hyxgtfUKCA:2310354942653121581:6:-10064269.920926677:4639222.968003714:-10063936.788484659:4638680.412604935:8494:5220",
+    "date": "2025/05/10",
+    "orientation": "Top",
+    "heading": 0,
+    "imageResource": "https://pol.pictometry.com/Gateway/v1/image/4347F3EE-ADF7-F449-3107-6FE918558FEA/D/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "metadataResource": "https://pol.pictometry.com/Gateway/v1/metadata/4347F3EE-ADF7-F449-3107-6FE918558FEA/D/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "imageWidth": 5220,
+    "imageHeight": 8494,
+    "resolution": 2,
+    "searchPoint": {
+      "x": 2569,
+      "y": 4935
+    }
+  },
+  "West": {
+    "imageId": "urn:eagleview.com:v4:spatial-data:raster:visual:ated:E1YaAInoyUWhqynpUN7AHQ:4613946225067574317:5",
+    "date": "2025/05/10",
+    "orientation": "West",
+    "heading": 271,
+    "imageResource": "https://pol.pictometry.com/Gateway/v1/image/4347F3EE-ADF7-F449-3107-6FE918558FEA/W/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "metadataResource": "https://pol.pictometry.com/Gateway/v1/metadata/4347F3EE-ADF7-F449-3107-6FE918558FEA/W/0/4A066C4B-32DC-9F5C-90AA-320D142B0170",
+    "imageWidth": 8190,
+    "imageHeight": 4320,
+    "resolution": 2,
+    "searchPoint": {
+      "x": 4160,
+      "y": 1348
+    }
+  }
+}

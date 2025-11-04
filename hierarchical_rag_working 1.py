@@ -1358,9 +1358,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             flow2_level2_limit = max(level2_limit, 20)  # At least 20 chunks for Flow 2
             results = self.search_flow2(query=analysis.query, relevant_sections=analysis.relevant_sections, level1_limit=flow2_level1_limit, level2_limit=flow2_level2_limit)
         else:
-            # Fallback to hierarchical search
-            logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
-            results = self.search_hierarchical(query=analysis.query, address=analysis.address, relevant_sections=analysis.relevant_sections, level1_limit=level1_limit, level2_limit=level2_limit)
+            results = self.search_flow3(query=analysis.query, address = analysis.address, relevant_sections=analysis.relevant_sections)
 
         # Optionally show raw results
         if show_raw_results:
@@ -1399,7 +1397,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
             results = self.search_flow2(query=analysis.query, relevant_sections=analysis.relevant_sections, level1_limit=flow2_level1_limit, level2_limit=flow2_level2_limit)
         elif analysis.flow == "3":
             logger.info("🔍 Using Flow 3: Address not found query")
-            print("currrently not implemented for flow 3")
+            results = self.search_flow3(query=analysis.query, address=analysis.address, relevant_sections=analysis.relevant_sections)
             results = []
         else:
             # Fallback to hierarchical search
@@ -1468,7 +1466,32 @@ Provide a clear, structured summary in 2-3 sentences:"""
         self.milvus_manager.clear_collection(self.level1_collection_name)
         self.milvus_manager.clear_collection(self.level2_collection_name)
         logger.info("✅ All hierarchical collections cleared")
+    
 
+    def search_flow3(self, query: str, address: Optional[str] = None, relevant_sections: List[str] = []) -> List[Dict]:
+        """
+        Perform Flow 3 search: Search for properties that match the query and address
+        """
+        logger.info(f"🔍 Starting Flow 3 search for: '{query}' (Address: {address})")
+        
+        # For Flow 3, we trigger the image + outline generation pipeline for the given address
+        if not address:
+            logger.warning("Flow 3 requires an address. None provided.")
+            return []
+
+        try:
+            from flow3 import run_flow_for_address
+        except Exception as e:
+            logger.error(f"Failed to import flow3 runner: {e}")
+            return []
+
+        try:
+            summary = run_flow_for_address(address)
+            # Return as a single-result list to match expected return type
+            return [summary]
+        except Exception as e:
+            logger.error(f"Error running flow3 for address '{address}': {e}")
+            return []
 
 def load_agentic_rag_output() -> List[Dict]:
     """

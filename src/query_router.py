@@ -62,9 +62,9 @@ Your task is to analyze the user's query and extract the following information:
 1. **flow**: Determine if this is:
    - "1": Property-specific query (user mentions a specific address/property and wants information about it)
    - "2": Non-property-specific query (user wants to find properties that match certain criteria, like "find properties with area > 2000 sq ft")
-   - "3": Address not found query (when user searches for an address but indicates no exact match found and even suggested addresses are not found in similar address list)
+   - "3": Generate new report query (user requests to create/generate a new property report for an address that may not exist in the current database; also includes cases where address not found and suggested addresses don't work)
 
-2. **address**: If the query mentions a specific address, extract it exactly as written. If no address is mentioned, set to null.
+2. **address**: If the query mentions a specific address, extract it exactly as written. If no address is mentioned, set to null. For flow "3", if the user provides an address that could not be found (including when suggested/similar addresses are not suitable), still return that address here.
 
 3. **query**: The user's actual intent/question, cleaned of address information if present.
 
@@ -176,13 +176,13 @@ Analysis:
     "important_imagery": []
 }}
 
-Query: "When I searched for address no exact match found, even suggested address is not found in the similar address list"
+Query: "Can you please create a report for address: 129 HIDDEN VALLEY DR, PITTSBURGH, PA 15237-1701"
 Analysis:
 {{
     "flow": "3",
-    "address": null,
-    "query": "When I searched for address no exact match found, even suggested address is not found in the similar address list",
-    "complete_query": "When I searched for address no exact match found, even suggested address is not found in the similar address list",
+    "address": "129 HIDDEN VALLEY DR, PITTSBURGH, PA 15237-1701",
+    "query": "Can you please create a report",
+    "complete_query": "Can you please create a report for address: 129 HIDDEN VALLEY DR, PITTSBURGH, PA 15237-1701",
     "relevant_sections": [],
     "important_imagery": []
 }}

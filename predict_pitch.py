@@ -3,12 +3,12 @@
 import json
 import os
 import uuid
-from typing import Dict, Tuple
+from typing import Dict
 
 import boto3
 
 
-def _letr_endpoint_client(region: str = "us-east-2"):
+def _pitch_endpoint_client(region: str = "us-east-2"):
     # Use S3-specific AWS credentials for SageMaker runtime
     s3_session = boto3.Session(
         aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID_S3"),
@@ -19,8 +19,9 @@ def _letr_endpoint_client(region: str = "us-east-2"):
     return s3_session.client("sagemaker-runtime")
 
 
-def save_letr_data(latitude: float, longitude: float) -> Tuple[str, str]:
-    print("Saving LETR data for latitude: ", latitude, " and longitude: ", longitude)
+def save_pitch_data(latitude: float, longitude: float) -> Dict[str, dict]:
+    print("Saving pitch data for latitude: ", latitude, " and longitude: ", longitude)
+    predominant_pitch = 0.0
     # Output directory
     lat_lon_folder = f"{latitude}_{longitude}"
     base_dir = os.path.join(os.getcwd(), "final_data", lat_lon_folder)
@@ -32,16 +33,15 @@ def save_letr_data(latitude: float, longitude: float) -> Tuple[str, str]:
 
     # Files to process
     files = [
-        "Top_cropped.png",
+        "East_cropped.png",
+        "West_cropped.png",
         "North_cropped.png",
         "South_cropped.png",
-        "East_cropped.png",
-        "West_cropped.png"
     ]
 
     # SageMaker endpoint configuration
-    endpoint_name = "app-test-2x0-ep-letr-inference-container"
-    client = _letr_endpoint_client(region="us-east-2")
+    endpoint_name = "app-test-2x0-ep-pitch"
+    client = _pitch_endpoint_client(region="us-east-2")
 
     aggregated: Dict[str, dict] = {}
 
@@ -57,13 +57,21 @@ def save_letr_data(latitude: float, longitude: float) -> Tuple[str, str]:
                 Body=json.dumps(payload),
                 ContentType="application/json",
             )
-            outline_result = json.loads(response["Body"].read().decode("utf-8"))
-            # save the outline_result to the base_dir
-            with open(os.path.join(base_dir, f"{filename.split('.')[0]}_outline.json"), "w") as f:
-                json.dump(outline_result, f, indent=2)
+            result = json.loads(response["Body"].read().decode("utf-8"))
+            pitch = result["predictions"][0]["value"]
+            predominant_pitch += pitch
+            print(result)
         except Exception as exc:  # keep going for other images
             result = {"error": str(exc), "image_uri": s3_uri}
             print(result)
 
+        key = filename.split("_")[0].lower()  # east/west/north/south
+        aggregated[key] = result
 
-    return bucket, prefix
+    # Save one combined JSON
+    out_path = os.path.join(base_dir, "pitch_response.json")
+    with open(out_path, "w") as f:
+        json.dump(aggregated, f, indent=2)
+    print("Pitch response saved to:", out_path)
+
+    return predominant_pitch/4
