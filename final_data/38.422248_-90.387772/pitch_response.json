@@ -1,0 +1,62 @@
+{
+  "east": {
+    "jobId": "f3ae0a4b-878c-4468-ba40-8fef2eb56f5d",
+    "status": "success",
+    "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.422248_-90.387772/East_cropped.png",
+    "model_name": "Pitch",
+    "version": "Pitch_v2024.12.16_2025.10.6",
+    "predictions": [
+      {
+        "label": "pitch",
+        "value": 6.09375
+      }
+    ],
+    "image_height": 350,
+    "image_width": 450
+  },
+  "west": {
+    "jobId": "0136e955-ea2d-4d45-8dc8-a4e69215c4ce",
+    "status": "success",
+    "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.422248_-90.387772/West_cropped.png",
+    "model_name": "Pitch",
+    "version": "Pitch_v2024.12.16_2025.10.6",
+    "predictions": [
+      {
+        "label": "pitch",
+        "value": 4.73046875
+      }
+    ],
+    "image_height": 350,
+    "image_width": 450
+  },
+  "north": {
+    "jobId": "8b0b30a5-371e-410f-9b56-df4360b54889",
+    "status": "success",
+    "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.422248_-90.387772/North_cropped.png",
+    "model_name": "Pitch",
+    "version": "Pitch_v2024.12.16_2025.10.6",
+    "predictions": [
+      {
+        "label": "pitch",
+        "value": 5.5625
+      }
+    ],
+    "image_height": 350,
+    "image_width": 450
+  },
+  "south": {
+    "jobId": "936b7fe4-f972-4d30-ba1c-3bfe8eea0376",
+    "status": "success",
+    "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.422248_-90.387772/South_cropped.png",
+    "model_name": "Pitch",
+    "version": "Pitch_v2024.12.16_2025.10.6",
+    "predictions": [
+      {
+        "label": "pitch",
+        "value": 6.484375
+      }
+    ],
+    "image_height": 350,
+    "image_width": 450
+  }
+}

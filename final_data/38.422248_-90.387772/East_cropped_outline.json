@@ -1,0 +1,301 @@
+{
+  "jobId": "cd8f10f1-4471-4352-a69d-352a01cbdaf6",
+  "status": "success",
+  "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.422248_-90.387772/East_cropped.png",
+  "model_name": "LETR",
+  "version": "LETR_v2025.01.26_2025.10.6",
+  "predictions": [
+    {
+      "line": [
+        280,
+        138,
+        281,
+        136
+      ],
+      "class": "eave",
+      "score": 0.997324
+    },
+    {
+      "line": [
+        120,
+        121,
+        295,
+        169
+      ],
+      "class": "ridge",
+      "score": 0.970342
+    },
+    {
+      "line": [
+        176,
+        125,
+        235,
+        127
+      ],
+      "class": "valley",
+      "score": 0.967232
+    },
+    {
+      "line": [
+        213,
+        72,
+        256,
+        101
+      ],
+      "class": "rake",
+      "score": 0.964304
+    },
+    {
+      "line": [
+        330,
+        157,
+        335,
+        150
+      ],
+      "class": "eave",
+      "score": 0.962885
+    },
+    {
+      "line": [
+        294,
+        151,
+        329,
+        153
+      ],
+      "class": "valley",
+      "score": 0.960986
+    },
+    {
+      "line": [
+        120,
+        120,
+        150,
+        105
+      ],
+      "class": "rake",
+      "score": 0.958582
+    },
+    {
+      "line": [
+        309,
+        133,
+        333,
+        150
+      ],
+      "class": "rake",
+      "score": 0.954311
+    },
+    {
+      "line": [
+        171,
+        77,
+        213,
+        73
+      ],
+      "class": "rake",
+      "score": 0.953401
+    },
+    {
+      "line": [
+        237,
+        128,
+        279,
+        140
+      ],
+      "class": "eave",
+      "score": 0.953224
+    },
+    {
+      "line": [
+        295,
+        169,
+        328,
+        154
+      ],
+      "class": "rake",
+      "score": 0.953005
+    },
+    {
+      "line": [
+        283,
+        136,
+        308,
+        132
+      ],
+      "class": "rake",
+      "score": 0.949582
+    },
+    {
+      "line": [
+        279,
+        139,
+        293,
+        152
+      ],
+      "class": "valley",
+      "score": 0.945559
+    },
+    {
+      "line": [
+        47,
+        15,
+        61,
+        17
+      ],
+      "class": "eave",
+      "score": 0.943931
+    },
+    {
+      "line": [
+        151,
+        106,
+        175,
+        124
+      ],
+      "class": "valley",
+      "score": 0.940773
+    },
+    {
+      "line": [
+        38,
+        16,
+        40,
+        15
+      ],
+      "class": "rake",
+      "score": 0.939409
+    },
+    {
+      "line": [
+        151,
+        105,
+        170,
+        77
+      ],
+      "class": "eave",
+      "score": 0.939255
+    },
+    {
+      "line": [
+        265,
+        242,
+        295,
+        169
+      ],
+      "class": "rake",
+      "score": 0.929851
+    },
+    {
+      "line": [
+        175,
+        125,
+        212,
+        72
+      ],
+      "class": "ridge",
+      "score": 0.927929
+    },
+    {
+      "line": [
+        31,
+        30,
+        36,
+        31
+      ],
+      "class": "eave",
+      "score": 0.924619
+    },
+    {
+      "line": [
+        237,
+        128,
+        255,
+        101
+      ],
+      "class": "eave",
+      "score": 0.92338
+    },
+    {
+      "line": [
+        294,
+        152,
+        308,
+        132
+      ],
+      "class": "ridge",
+      "score": 0.918899
+    },
+    {
+      "line": [
+        327,
+        157,
+        326,
+        156
+      ],
+      "class": "rake",
+      "score": 0.917565
+    },
+    {
+      "line": [
+        87,
+        195,
+        120,
+        120
+      ],
+      "class": "rake",
+      "score": 0.913551
+    },
+    {
+      "line": [
+        265,
+        243,
+        86,
+        193
+      ],
+      "class": "eave",
+      "score": 0.900897
+    },
+    {
+      "line": [
+        23,
+        29,
+        25,
+        29
+      ],
+      "class": "rake",
+      "score": 0.900639
+    },
+    {
+      "line": [
+        52,
+        26,
+        53,
+        20
+      ],
+      "class": "eave",
+      "score": 0.851389
+    },
+    {
+      "line": [
+        139,
+        99,
+        148,
+        101
+      ],
+      "class": "eave",
+      "score": 0.821001
+    },
+    {
+      "line": [
+        91,
+        156,
+        100,
+        157
+      ],
+      "class": "rake",
+      "score": 0.820206
+    }
+  ],
+  "image_height": 350,
+  "image_width": 450
+}

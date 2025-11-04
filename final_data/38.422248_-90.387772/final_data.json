@@ -1,0 +1,23 @@
+{
+  "address": "2019 ROSEDALE CT, ARNOLD, MO 63010",
+  "latitude": 38.422248,
+  "longitude": -90.387772,
+  "predominant_pitch": 5.7177734375,
+  "num_of_facets": 6,
+  "area": 1998.312070123841,
+  "num_of_ridges": 3,
+  "num_of_eaves": 6,
+  "num_of_rakes": 9,
+  "num_of_valleys": 4,
+  "num_of_hips": 0,
+  "num_of_flashing": 0,
+  "area_json": {
+    "facet1": 901.1313318569579,
+    "facet2": 636.6210842983825,
+    "facet3": 195.13227930233884,
+    "facet4": 192.17859052937698,
+    "facet5": 34.71595845481201,
+    "facet6": 38.532825681972774,
+    "total_sqft": 1998.312070123841
+  }
+}

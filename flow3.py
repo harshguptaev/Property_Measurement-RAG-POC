@@ -38,10 +38,10 @@ def run_flow_for_address(address: str) -> dict:
         region_name=os.getenv("AWS_REGION_S3", "us-east-2"),
     )
     s3_client = S3Client(region="us-east-2", session=s3_session)
-    # s3_client.upload_cropped_images_to_s3(lat, lon)
+    s3_client.upload_cropped_images_to_s3(lat, lon)
 
     # # Run LETR model on top cropped image
-    # save_letr_data(lat, lon)
+    save_letr_data(lat, lon)
 
     # Create detailed roof outline diagrams for all orientations
     lat_lon_folder = f"{lat}_{lon}"
@@ -198,7 +198,7 @@ def run_flow_for_address(address: str) -> dict:
     print(f"✅ Created outline folders and copied files")
     
     #  here upload all files to s3
-    # s3_client.upload_all_files_to_s3(final_data_dir)
+    s3_client.upload_all_files_to_s3(final_data_dir)
     
     # Run similarity search on the generated roof outline
     try:

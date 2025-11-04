@@ -1,0 +1,231 @@
+{
+  "jobId": "d8701aa8-64ce-4bbd-ba2e-ef63a6b0397d",
+  "status": "success",
+  "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.422248_-90.387772/South_cropped.png",
+  "model_name": "LETR",
+  "version": "LETR_v2025.01.26_2025.10.6",
+  "predictions": [
+    {
+      "line": [
+        202,
+        94,
+        205,
+        95
+      ],
+      "class": "eave",
+      "score": 0.998775
+    },
+    {
+      "line": [
+        224,
+        55,
+        232,
+        56
+      ],
+      "class": "eave",
+      "score": 0.998288
+    },
+    {
+      "line": [
+        126,
+        135,
+        211,
+        155
+      ],
+      "class": "ridge",
+      "score": 0.970989
+    },
+    {
+      "line": [
+        211,
+        64,
+        244,
+        72
+      ],
+      "class": "ridge",
+      "score": 0.968781
+    },
+    {
+      "line": [
+        111,
+        186,
+        155,
+        195
+      ],
+      "class": "eave",
+      "score": 0.960877
+    },
+    {
+      "line": [
+        126,
+        134,
+        146,
+        119
+      ],
+      "class": "rake",
+      "score": 0.957988
+    },
+    {
+      "line": [
+        295,
+        47,
+        371,
+        93
+      ],
+      "class": "rake",
+      "score": 0.956455
+    },
+    {
+      "line": [
+        219,
+        182,
+        290,
+        227
+      ],
+      "class": "rake",
+      "score": 0.95425
+    },
+    {
+      "line": [
+        147,
+        120,
+        187,
+        129
+      ],
+      "class": "eave",
+      "score": 0.953197
+    },
+    {
+      "line": [
+        233,
+        57,
+        296,
+        48
+      ],
+      "class": "rake",
+      "score": 0.95138
+    },
+    {
+      "line": [
+        210,
+        65,
+        223,
+        54
+      ],
+      "class": "rake",
+      "score": 0.949445
+    },
+    {
+      "line": [
+        292,
+        227,
+        371,
+        91
+      ],
+      "class": "eave",
+      "score": 0.946578
+    },
+    {
+      "line": [
+        219,
+        182,
+        295,
+        47
+      ],
+      "class": "ridge",
+      "score": 0.946526
+    },
+    {
+      "line": [
+        207,
+        95,
+        243,
+        72
+      ],
+      "class": "valley",
+      "score": 0.943209
+    },
+    {
+      "line": [
+        153,
+        191,
+        219,
+        181
+      ],
+      "class": "rake",
+      "score": 0.939156
+    },
+    {
+      "line": [
+        187,
+        130,
+        206,
+        95
+      ],
+      "class": "eave",
+      "score": 0.938174
+    },
+    {
+      "line": [
+        245,
+        73,
+        231,
+        57
+      ],
+      "class": "valley",
+      "score": 0.930685
+    },
+    {
+      "line": [
+        111,
+        185,
+        127,
+        134
+      ],
+      "class": "rake",
+      "score": 0.930432
+    },
+    {
+      "line": [
+        155,
+        191,
+        211,
+        154
+      ],
+      "class": "valley",
+      "score": 0.924494
+    },
+    {
+      "line": [
+        202,
+        95,
+        211,
+        65
+      ],
+      "class": "rake",
+      "score": 0.923926
+    },
+    {
+      "line": [
+        211,
+        155,
+        188,
+        129
+      ],
+      "class": "valley",
+      "score": 0.90992
+    },
+    {
+      "line": [
+        158,
+        194,
+        159,
+        191
+      ],
+      "class": "rake",
+      "score": 0.890229
+    }
+  ],
+  "image_height": 350,
+  "image_width": 450
+}
