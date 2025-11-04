@@ -1,5 +1,5 @@
 {
-  "jobId": "d1a13982-893b-4080-8616-5d1b115734f7",
+  "jobId": "2f42bb24-267e-4ae9-a92b-386d2bfb0fe7",
   "status": "success",
   "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.416443_-90.40424/Top_cropped.png",
   "model_name": "LETR",

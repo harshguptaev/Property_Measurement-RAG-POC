@@ -535,12 +535,6 @@ PROPERTY 1 MEASUREMENTS:
 - Total Area: {property1.get('total_area_sqft', 'N/A')} sq ft ({property1.get('total_area', 'N/A')})
 - Predominant Pitch: {property1.get('predominant_pitch', 'N/A')} ({property1.get('predominant_pitch_degrees', 'N/A')} degrees)
 - Number of Facets: {property1.get('num_of_facets', 'N/A')}
-- Estimated Ridge Segments: {property1.get('num_of_ridges', 'N/A')} (estimated from total length)
-- Estimated Eave Segments: {property1.get('num_of_eaves', 'N/A')} (estimated from total length)
-- Estimated Rake Segments: {property1.get('num_of_rakes', 'N/A')} (estimated from total length)
-- Estimated Valley Segments: {property1.get('num_of_valleys', 'N/A')} (estimated from total length)
-- Estimated Hip Segments: {property1.get('num_of_hips', 'N/A')} (estimated from total length)
-- Estimated Flashing Segments: {property1.get('num_of_flashing', 'N/A')} (estimated from total length)
 - Number of Stories: {property1.get('number_of_stories', 'N/A')}
 - Structure Complexity: {property1.get('structure_complexity', 'N/A')}
 
@@ -548,12 +542,6 @@ PROPERTY 2 MEASUREMENTS:
 - Total Area: {property2.get('total_area_sqft', 'N/A')} sq ft
 - Predominant Pitch: {property2.get('predominant_pitch_degrees', 'N/A')} degrees
 - Number of Facets: {property2.get('num_of_facets', 'N/A')}
-- Ridge Segments: {property2.get('num_of_ridges', 'N/A')} (actual count)
-- Eave Segments: {property2.get('num_of_eaves', 'N/A')} (actual count)
-- Rake Segments: {property2.get('num_of_rakes', 'N/A')} (actual count)
-- Valley Segments: {property2.get('num_of_valleys', 'N/A')} (actual count)
-- Hip Segments: {property2.get('num_of_hips', 'N/A')} (actual count)
-- Flashing Segments: {property2.get('num_of_flashing', 'N/A')} (actual count)
 
 KEY DIFFERENCES:
 """
@@ -588,47 +576,15 @@ KEY DIFFERENCES:
             prompt += f"- Facets: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
             prompt += f"Difference: {format_diff(diff['difference'])}\n"
         
-        if differences.get('ridges'):
-            diff = differences['ridges']
-            prompt += f"- Ridges: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
-            prompt += f"Difference: {format_diff(diff['difference'])}\n"
-        
-        if differences.get('eaves'):
-            diff = differences['eaves']
-            prompt += f"- Eaves: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
-            prompt += f"Difference: {format_diff(diff['difference'])}\n"
-        
-        if differences.get('rakes'):
-            diff = differences['rakes']
-            prompt += f"- Rakes: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
-            prompt += f"Difference: {format_diff(diff['difference'])}\n"
-        
-        if differences.get('valleys'):
-            diff = differences['valleys']
-            prompt += f"- Valleys: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
-            prompt += f"Difference: {format_diff(diff['difference'])}\n"
-        
-        if differences.get('hips'):
-            diff = differences['hips']
-            prompt += f"- Hips: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
-            prompt += f"Difference: {format_diff(diff['difference'])}\n"
-        
-        if differences.get('flashing'):
-            diff = differences['flashing']
-            prompt += f"- Flashing: Property 1 has {diff['property1']}, Property 2 has {diff['property2']}. "
-            prompt += f"Difference: {format_diff(diff['difference'])}\n"
-        
         prompt += f"""
 TASK:
-Please provide a comprehensive summary comparing these two properties. Note that Property 1 segment counts are ESTIMATES derived from total linear measurements, while Property 2 segment counts are ACTUAL measured values. Include:
+Please provide a comprehensive summary comparing these two properties. Include:
 
 1. Overall similarity assessment (based on similarity score of {property1.get('similarity_score', 0):.4f})
-2. Key structural similarities and differences (focusing on estimated vs actual segment counts)
-3. Roofing complexity comparison
-4. Material estimation implications based on the segment count differences
-5. Any notable observations about the roof structures and the estimation methodology
-
-IMPORTANT: Treat Property 1 segment counts as rough estimates and Property 2 counts as precise measurements. Adjust material estimates accordingly.
+2. Key structural similarities and differences in area, pitch, and facets
+3. Roofing complexity comparison based on available measurements
+4. Material estimation implications based on the differences
+5. Any notable observations about the roof structures
 
 Provide the summary in a clear, professional format suitable for roofing contractors and material estimators.
 """

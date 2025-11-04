@@ -5,6 +5,7 @@ Simplified version that works with MilvusClient without complex index creation
 
 import json
 import logging
+import os
 import re
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
@@ -1398,7 +1399,6 @@ Provide a clear, structured summary in 2-3 sentences:"""
         elif analysis.flow == "3":
             logger.info("🔍 Using Flow 3: Address not found query")
             results = self.search_flow3(query=analysis.query, address=analysis.address, relevant_sections=analysis.relevant_sections)
-            results = []
         else:
             # Fallback to hierarchical search
             logger.warning(f"Unknown flow {analysis.flow}, falling back to hierarchical search")
@@ -1412,7 +1412,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         elif analysis.flow == "2":
             llm_response = self.llm_handlers.generate_flow2_response(query, results)
         elif analysis.flow == "3":
-           llm_response = "I'm sorry, I currently don't have the ability to search for addresses that don't exist. Please try again with a different address or query."
+            llm_response = self.llm_handlers.generate_flow3_response(query, results)
         else:
             # Fallback to generic response
             llm_response = self.llm_handlers.generate_flow1_response(query, results)
@@ -1487,9 +1487,26 @@ Provide a clear, structured summary in 2-3 sentences:"""
 
         try:
             summary = run_flow_for_address(address)
-            # Return as a single-result list to match expected return type
-            
-            return [summary]
+
+            # Format as a basic chunk for UI display (LLM content will be added by generate_flow3_response)
+            flow3_chunk = {
+                "chunk_id": f"flow3_analysis_{summary.get('latitude', 0)}_{summary.get('longitude', 0)}",
+                "property_id": f"FLOW3_{summary.get('latitude', 0)}_{summary.get('longitude', 0)}",
+                "section": "Flow 3 Analysis",
+                "chunk_type": "analysis",
+                "chunk_text": f"Flow 3 analysis completed for address: {summary.get('address', 'Unknown')}. Analysis summary will be displayed below.",
+                "data": {
+                    "flow3_summary": summary,
+                    "analysis_type": "llm_comparison"
+                },
+                "distance": 0.0,
+                "doc_address": summary.get('address', 'Unknown'),
+                "report_id": f"FLOW3_{summary.get('latitude', 0)}_{summary.get('longitude', 0)}",
+                "pdf_filename": "flow3_generated_report"
+            }
+
+            return [flow3_chunk]
+
         except Exception as e:
             logger.error(f"Error running flow3 for address '{address}': {e}")
             return []

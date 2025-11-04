@@ -1,6 +1,6 @@
 {
   "east": {
-    "jobId": "73b7767e-806d-4fb6-85bb-80260fcc5b34",
+    "jobId": "8feb41dd-52d0-4114-961a-2a5cb70dbc0f",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.416443_-90.40424/East_cropped.png",
     "model_name": "Pitch",
@@ -15,7 +15,7 @@
     "image_width": 400
   },
   "west": {
-    "jobId": "2a8e4f9c-456c-4357-9247-76e4963dd27c",
+    "jobId": "5d4472b1-4b5c-4969-a295-09049bb4a3e4",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.416443_-90.40424/West_cropped.png",
     "model_name": "Pitch",
@@ -30,7 +30,7 @@
     "image_width": 400
   },
   "north": {
-    "jobId": "49c2113b-353f-4eed-879f-cf473374d1a9",
+    "jobId": "a7a161a9-d51b-4f82-bf75-24ab160659e9",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.416443_-90.40424/North_cropped.png",
     "model_name": "Pitch",
@@ -45,7 +45,7 @@
     "image_width": 400
   },
   "south": {
-    "jobId": "2ae9da23-52f7-4c08-ac69-86c32e6315f6",
+    "jobId": "e5922335-4bd5-457f-8e8a-fe3571b6b742",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/38.416443_-90.40424/South_cropped.png",
     "model_name": "Pitch",

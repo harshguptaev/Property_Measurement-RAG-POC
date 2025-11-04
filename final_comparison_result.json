@@ -29,31 +29,19 @@
     "latitude": 38.416443,
     "longitude": -90.40424,
     "measurements": {
-      "total_area_sqft": 1529.1285795732829,
+      "total_area_sqft": null,
       "predominant_pitch_degrees": 4.21044921875,
       "num_of_facets": 4,
-      "num_of_ridges": 2,
-      "num_of_eaves": 5,
-      "num_of_rakes": 6,
-      "num_of_valleys": 2,
+      "num_of_ridges": 0,
+      "num_of_eaves": 0,
+      "num_of_rakes": 0,
+      "num_of_valleys": 0,
       "num_of_hips": 0,
       "num_of_flashing": 0,
-      "area_json": {
-        "facet1": 610.4314725577321,
-        "facet2": 718.8158171023555,
-        "facet3": 100.7878388951955,
-        "facet4": 99.09345101799974,
-        "total_sqft": 1529.1285795732829
-      }
+      "area_json": {}
     }
   },
   "differences": {
-    "area": {
-      "property1": 1741.0,
-      "property2": 1529.1285795732829,
-      "difference": -211.87142042671712,
-      "difference_percent": -12.17
-    },
     "pitch": {
       "property1": 18.4349,
       "property2": 4.2104,
@@ -66,29 +54,29 @@
     },
     "ridges": {
       "property1": 3,
-      "property2": 2,
-      "difference": -1
+      "property2": 0,
+      "difference": -3
     },
     "eaves": {
       "property1": 8,
-      "property2": 5,
-      "difference": -3
+      "property2": 0,
+      "difference": -8
     },
     "rakes": {
       "property1": 7,
-      "property2": 6,
-      "difference": -1
+      "property2": 0,
+      "difference": -7
     },
     "valleys": {
       "property1": 1,
-      "property2": 2,
-      "difference": 1
+      "property2": 0,
+      "difference": -1
     }
   },
   "summary": {
     "property1_address": "2985 Melton drive, Arnold, MO 63010",
     "property2_address": "2833 Pinebrook Ct, Arnold, MO 63010",
     "similarity_score": 0.86480313539505,
-    "total_comparisons": 7
+    "total_comparisons": 6
   }
 }

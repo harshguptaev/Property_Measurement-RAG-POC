@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Roof Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+        }
+
+        /* Header Design - EagleView Style */
+        .header {
+            background: #4a5568;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-section {
+            margin-right: 30px;
+        }
+
+        .logo-placeholder {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roof-title {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        .report-id-section {
+            margin-bottom: 15px;
+        }
+
+        .report-id-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .report-id-value {
+            font-size: 16px;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .property-section-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .property-address {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            padding: 30px;
+            gap: 30px;
+        }
+
+        .left-column {
+            flex: 1;
+        }
+
+        .right-column {
+            flex: 1;
+        }
+
+        /* Property Address Section */
+        .property-address-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d5a87;
+            margin-bottom: 10px;
+        }
+
+        .address-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Measurements Section */
+        .measurements-section {
+            margin-bottom: 30px;
+        }
+
+        .measurement-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .measurement-item:last-child {
+            border-bottom: none;
+        }
+
+        .measurement-label {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .measurement-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Contents Section */
+        .contents-section {
+            margin-bottom: 30px;
+        }
+
+        .contents-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .contents-item:hover {
+            color: #2d5a87;
+        }
+
+        /* Report Details */
+        .report-details-section {
+            margin-bottom: 30px;
+        }
+
+        .report-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .report-detail-label {
+            color: #666;
+        }
+
+        .report-detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Roof Diagram */
+        .roof-diagram {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 0;
+        }
+
+        .roof-svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Satisfaction Badge */
+        .satisfaction-badge {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .badge-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .badge-circle::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #48bb78, #38a169, #2f855a, #276749, #48bb78);
+            z-index: -1;
+        }
+
+        .badge-text {
+            text-align: center;
+        }
+
+        .badge-percentage {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .badge-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .satisfaction-text {
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Metrics Dashboard */
+        .metrics-section {
+            margin: 30px 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-right: 15px;
+        }
+
+        .section-divider {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6 0%, transparent 100%);
+        }
+
+        .full-bleed-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .metrics-grid {
+            display: block;
+            width: 100%;
+            margin-bottom: 30px;
+            font-size: 0; /* remove inline-block gaps */
+            white-space: normal;
+        }
+
+        .metrics-grid.secondary { margin-bottom: 30px; }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            min-width: 0;
+            display: inline-block;
+            vertical-align: top;
+            width: 33.333%;
+            margin-right: 0;
+            margin-bottom: 18px;
+            font-size: 11px; /* restore text size */
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .metric-card:last-child {
+            border-right: none;
+        }
+
+        /* 6 cards per row for line types - force full width */
+        .metrics-grid.six-per-row .metric-card {
+            width: 16.666%;
+            margin-right: 0;
+            padding: 12px 4px;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .metrics-grid.six-per-row .metric-card:last-child {
+            border-right: none;
+        }
+
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color, #3b82f6);
+        }
+
+        .metric-card.primary::before { background: #3b82f6; }
+        .metric-card.secondary::before { background: #8b5cf6; }
+        .metric-card.tertiary::before { background: #06b6d4; }
+        .metric-card.ridges::before { background: #3b82f6; }
+        .metric-card.eaves::before { background: #8b5cf6; }
+        .metric-card.rakes::before { background: #06b6d4; }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-unit {
+            font-size: 14px;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        /* Data Tables */
+        .data-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 30px;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .table-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+        }
+
+        .table-title::before {
+            content: '📊';
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 12px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .facet-number {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .confidence-bar {
+            width: 60px;
+            height: 6px;
+            background: #f1f5f9;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #10b981 100%);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Pitch Analysis */
+        .pitch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .pitch-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+        }
+
+        .pitch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--direction-color);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .pitch-card.north::before { background: #ef4444; }
+        .pitch-card.south::before { background: #f59e0b; }
+        .pitch-card.east::before { background: #10b981; }
+        .pitch-card.west::before { background: #3b82f6; }
+
+        .pitch-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .direction-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 600;
+            font-size: 12px;
+            color: white;
+        }
+
+        .direction-icon.north { background: #ef4444; }
+        .direction-icon.south { background: #f59e0b; }
+        .direction-icon.east { background: #10b981; }
+        .direction-icon.west { background: #3b82f6; }
+
+        .direction-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+            text-transform: capitalize;
+        }
+
+        .pitch-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .pitch-metric {
+            text-align: center;
+        }
+
+        .pitch-metric-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1;
+        }
+
+        .pitch-metric-label {
+            font-size: 9px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Images Section */
+        .images-section {
+            margin: 30px 40px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .image-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 16px;
+            background: #f8fafc;
+            font-size: 12px;
+            font-weight: 500;
+            color: #475569;
+            text-align: center;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .main-image {
+            grid-column: 1 / -1;
+            margin-bottom: 20px;
+        }
+
+        .main-image img {
+            height: 300px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .footer-content {
+            font-size: 10px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .footer-logo {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        /* Page Break */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* Print Styles */
+        @media print {
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            .metric-card:hover,
+            tr:hover {
+                background: inherit;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: 600; }
+        .text-sm { font-size: 10px; }
+        .text-xs { font-size: 9px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mt-4 { margin-top: 16px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Modern Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-placeholder">
+                        <img alt="logo" style="width: 170px; height: 21.6px;margin-left: 790px;"
+                            src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjM2IiBoZWlnaHQ9IjMwIiB2aWV3Qm94PSIwIDAgMjM2IDMwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMzIuNTc3IDE5LjIwMzhWMTkuNTU0OUgyMzEuNTg2VjIyLjE0NjlIMjMxLjE4MlYxOS41NTQ5SDIzMC4xOVYxOS4yMDM4SDIzMi41NzdaIiBmaWxsPSIjM0U2NDlCIi8+PHBhdGggZD0iTTIzMi45MzQgMTkuMjAzOEgyMzMuNTA2TDIzNC4zNTIgMjEuNjkwMUwyMzUuMTkxIDE5LjIwMzhIMjM1Ljc1NlYyMi4xNDY5SDIzNS4zNzRWMjAuNDA5NkMyMzUuMzc0IDIwLjM1MDYgMjM1LjM3NCAyMC4yNTExIDIzNS4zNzcgMjAuMTExM0MyMzUuMzc3IDE5Ljk3MTQgMjM1LjM4IDE5LjgyMjIgMjM1LjM4IDE5LjY2MzdMMjM0LjU0MSAyMi4xNDM4SDIzNC4xNDdMMjMzLjI5OCAxOS42NjM3VjE5Ljc1MzlDMjMzLjI5OCAxOS44MjUzIDIzMy4yOTggMTkuOTM0MSAyMzMuMzA0IDIwLjA4MzNDMjMzLjMwNyAyMC4yMzI1IDIzMy4zMTEgMjAuMzM4MSAyMzMuMzExIDIwLjQwOTZWMjIuMTQ2OUgyMzIuOTMxVjE5LjIwMzhIMjMyLjkzNFoiIGZpbGw9IiMzRTY0OUIiLz48cGF0aCBkPSJNODEuNTYwOCA4LjcyN0M4MS44MjgxIDguNzI3IDgxLjk2MTcgOC44NzkyOSA4MS45MDU4IDkuMTI3OTJMODEuNjE5OCAxMC44MzQyQzgxLjU2MDggMTEuMDgyOCA4MS4zODk5IDExLjIzNTEgODEuMTIyNiAxMS4yMzUxSDcxLjYxODZMNzEuMDgwOSAxNC4xNDcySDc5LjA5Qzc5LjM1NzMgMTQuMTQ3MiA3OS41MTI3IDE0LjI4MDggNzkuNDUzNiAxNC41NDgxTDc5LjE2NDYgMTYuMTk1M0M3OS4xMjczIDE2LjQ0MzkgNzguOTM0NiAxNi41OTYyIDc4LjY2NzMgMTYuNTk2Mkg3MC42NTgzTDcwLjEyMDYgMTkuNjIzM0g3OS42MjQ2Qzc5LjkxMzYgMTkuNjIzMyA4MC4wMjU1IDE5Ljc3NTYgNzkuOTg4MiAyMC4wMjQyTDc5LjY4MzYgMjEuNzMwNUM3OS42NDYzIDIxLjk3OTEgNzkuNDcyMyAyMi4xMzE0IDc5LjIwNSAyMi4xMzE0SDY3LjAxODlDNjYuNzI5OSAyMi4xMzE0IDY2LjYxOCAyMS45NzkxIDY2LjY1NTMgMjEuNzMwNUw2OC44Nzc0IDkuMTIxNzFDNjguOTMzNCA4Ljg3MzA3IDY5LjA4ODggOC43MjA3OSA2OS4zNzQ3IDguNzIwNzlIODEuNTYwOFY4LjcyN1oiIGZpbGw9IiMyMzFGMjAiLz48cGF0aCBkPSJNOTYuODE0NCAxOS41NzM2SDg5LjU2OTlMODcuMjIzNCAyMy42NTQzQzg3LjA4OTcgMjMuOTI0NyA4Ni44OTcgMjQuMDM5NyA4Ni41ODk0IDI0LjAzOTdIODQuMDk5OUM4My44NTEzIDI0LjAzOTcgODMuNzczNiAyMy44NDcgODMuOTI1OSAyMy42MTdMOTIuNzg2NSA5LjExMjM4QzkyLjkzODggOC44NDUxIDkzLjEzMTUgOC43MzAxMSA5My40NTc4IDguNzMwMTFIOTYuNzE0OUM5Ny4wNDEzIDguNzMwMTEgOTcuMTc0OSA4Ljg0NTEgOTcuMjUyNiA5LjExMjM4TDEwMC42MjUgMjEuNzIxMkMxMDAuNjg0IDIxLjk1MTEgMTAwLjU2OSAyMi4xNDM4IDEwMC4zMzYgMjIuMTQzOEg5Ny45MDIyQzk3LjU3NTggMjIuMTQzOCA5Ny40MjM1IDIyLjAyODggOTcuMzY0NSAyMS43NjE2TDk2LjgwODIgMTkuNTc2N0w5Ni44MTQ0IDE5LjU3MzZaTTkxLjA0NjEgMTcuMTIxNUg5Ni4yMjA4TDk0LjcwNzIgMTEuMDQ1NUw5MS4wNDYxIDE3LjEyMTVaIiBmaWxsPSIjMjMxRjIwIi8+PHBhdGggZD0iTTExMS44NjMgMTEuMjM4MkMxMTAuNDQ2IDExLjIzODIgMTEwLjExOSAxMS40ODY4IDEwOS45MDggMTIuNjc3MkwxMDguOTMyIDE4LjE5NjhDMTA4Ljg5NSAxOC40NDU0IDEwOC44NTQgMTguNjM4MSAxMDguODU0IDE4LjgwOTFDMTA4Ljg1NCAxOS40ODA0IDEwOS4yMzcgMTkuNjMyNiAxMTAuMzY4IDE5LjYzMjZIMTE1LjQ0NkMxMTYuMDk5IDE5LjYzMjYgMTE2LjQyMiAxOS4zNDM2IDExNi41MTkgMTguNzVMMTE2LjgyNiAxNy4xMDI4SDExMy41MjlDMTEzLjI0IDE3LjEwMjggMTEzLjEyOCAxNi45NTA1IDExMy4xNjUgMTYuNzAxOUwxMTMuNDU0IDE1LjA3MzNDMTEzLjUxIDE0LjgwMyAxMTMuNjg0IDE0LjY1MDcgMTEzLjk1MSAxNC42NTA3SDExOS44MzVDMTIwLjEyNCAxNC42NTA3IDEyMC4yMzYgMTQuODAzIDEyMC4xOTggMTUuMDczM0wxMTkuNDcxIDE5LjE1NEMxMTkuMDg5IDIxLjM1NzUgMTE4LjcwNiAyMi4xNDM4IDExNS44MjkgMjIuMTQzOEgxMDguMzU3QzEwNi40OTkgMjIuMTQzOCAxMDUuNTk3IDIxLjQ1MzkgMTA1LjU5NyAxOS45NDAzQzEwNS41OTcgMTkuNjczIDEwNS42MTYgMTkuMzg0IDEwNS42NzUgMTkuMDc2M0wxMDYuOTU5IDExLjc5NDVDMTA3LjMyMiA5LjY4NzM1IDEwNy45NTYgOC43MzAxMSAxMTAuNzEzIDguNzMwMTEIMTE4LjE4N0MxMjAuMDgzIDguNzMwMTEgMTIwLjg4OCA5LjI2Nzc4IDEyMC44ODggMTAuNzAzNkMxMjAuODg4IDExLjAxMTMgMTIwLjg3IDExLjMzNDUgMTIwLjc5MiAxMS43MTk5TDEyMC42MTggMTIuNTk5NUMxMjAuNTYyIDEyLjg2NjcgMTIwLjM4OCAxMy4wMjIxIDEyMC4xMjEgMTMuMDIyMUgxMTcuOTczQzExNy42ODQgMTMuMDIyMSAxMTcuNTUgMTIuODY5OCAxMTcuNjA5IDEyLjU5OTVMMTE3LjcwNiAxMi4xMjA4QzExNy43MjQgMTIuMDQzMSAxMTcuNzI0IDExLjk0NjggMTE3LjcyNCAxMS44OTA5QzExNy43MjQgMTEuNDQ5NSAxMTcuNDc2IDExLjIzODIgMTE2LjkzOCAxMS4yMzgySDExMS44NkgxMTEuODYzWiIgZmlsbD0iIzIzMUYyMCIvPjxwYXRoIGQ9Ik0xMjkuMjY0IDE5LjYyOTVIMTM4QzEzOC4yODkgMTkuNjI5NSAxMzguNDAxIDE5Ljc4MTggMTM4LjM2NCAyMC4wMzA1TDEzOC4wNTYgMjEuNzM2N0MxMzguMDE5IDIxLjk4NTMgMTM3Ljg0NSAyMi4xMzc2IDEzNy41NzggMjIuMTM3NkgxMjYuMTU2QzEyNS44NjcgMjIuMTM3NiAxMjUuNzU1IDIxLjk4NTMgMTI1Ljc5MyAyMS43MzY3TDEyOC4wMTUgOS4xMjc5MkMxMjguMDcxIDguODc5MjkgMTI4LjIyNiA4LjcyNyAxMjguNTEyIDguNzI3SDEzMC43NTNDMTMxLjAyIDguNzI3IDEzMS4xNzUgOC44NzkyOSAxMzEuMTE2IDkuMTI3OTJMMTI5LjI1OCAxOS42Mjk1SDEyOS4yNjRaIiBmaWxsPSIjMjMxRjIwIi8+PHBhdGggZD0iTTE1OC4xODMgOC43MjdDMTU4LjQ1IDguNzI3IDE1OC41ODQgOC44NzkyOSAxNTguNTI4IDkuMTI3OTJMMTU4LjIzOSAxMC44MzQyQzE1OC4xOCAxMS4wODI4IDE1OC4wMDkgMTEuMjM1MSAxNTcuNzQyIDExLjIzNTFIMTQ4LjIzOEwxNDcuNyAxNC4xNDcySDE1NS43MDlDMTU1Ljk3NyAxNC4xNDcyIDE1Ni4xMzIgMTQuMjgwOCAxNTYuMDczIDE0LjU0ODFMMTU1Ljc4NCAxNi4xOTUzQzE1NS43NDcgMTYuNDQzOSAxNTUuNTU0IDE2LjU5NjIgMTU1LjI4NyAxNi41OTYySDE0Ny4yNzdMMTQ2Ljc0IDE5LjYyMzNIMTU2LjI0NEMxNTYuNTMzIDE5LjYyMzMgMTU2LjY0NSAxOS43NzU2IDE1Ni42MDcgMjAuMDI0MkwxNTYuMyAyMS43MzA1QzE1Ni4yNjIgMjEuOTc5MSAxNTYuMDg4IDIyLjEzMTQgMTU1LjgyMSAyMi4xMzE0SDE0My42MzVDMTQzLjM0NiAyMi4xMzE0IDE0My4yMzQgMjEuOTc5MSAxNDMuMjcxIDIxLjczMDVMMTQ1LjQ5NCA5LjEyMTcxQzE0NS41NDkgOC44NzMwNyAxNDUuNzA1IDguNzIwNzkgMTQ1Ljk5MSA4LjcyMDc5SDE1OC4xNzdMMTU4LjE4MyA4LjcyN1oiIGZpbGw9IiMyMzFGMjAiLz48cGF0aCBkPSJNMTY3LjM4MyAyMi4xNDA3QzE2Ny4wNTYgMjIuMTQwNyAxNjYuOTA0IDIyLjAyNTcgMTY2Ljg0NSAyMS43NTg1TDE2My43OTkgOS4xNDk2OEMxNjMuNzQgOC45MTk2OSAxNjMuODc3IDguNzI3IDE2NC4xMjUgOC43MjdIMTY2LjUwM0MxNjYuODQ4IDguNzI3IDE2Ni45ODIgOC44NDE5OSAxNjcuMDQxIDkuMTA5MjdMMTY5LjM3OCAxOS42NjY4TDE3NS41MzUgOS4xMDkyN0MxNzUuNjg3IDguODQxOTkgMTc1Ljg2MSA4LjcyNyAxNzYuMTg3IDguNzI3SDE3OC42OThDMTc4Ljk0NyA4LjcyNyAxNzkuMDAzIDguOTE5NjkgMTc4Ljg2OSA5LjE0OTY4TDE3MS4yOTUgMjEuNzU4NUMxNzEuMTYyIDIyLjAyNTcgMTcwLjk4OCAyMi4xNDA3IDE3MC42NjQgMjIuMTQwN0gxNjcuMzg5SDE2Ny4zODNaIiBmaWxsPSIjM0U2NDlCIi8+PHBhdGggZD0iTTE4NS4xMDEgMjEuNzM5OEMxODUuMDYzIDIxLjk4ODQgMTg0Ljg3MSAyMi4xNDA3IDE4NC42MDMgMjIuMTQwN0gxODIuMzYzQzE4Mi4wNzQgMjIuMTQwNyAxODEuOTYyIDIxLjk4ODQgMTgxLjk5OSAyMS43Mzk4TDE4NC4yMjEgOS4xMzEwM0MxODQuMjggOC44ODI0IDE4NC40MzIgOC43MzAxMSAxODQuNzE4IDguNzMwMTFIMTg2Ljk1OUMxODcuMjI2IDguNzMwMTEgMTg3LjM4MiA4Ljg4MjQgMTg3LjMyMyA5LjEzMTAzTDE4NS4xMDEgMjEuNzM5OFoiIGZpbGw9IiMzRTY0OUIiLz48cGF0aCBkPSJNMjA3LjAwNSA4LjcyN0MyMDcuMjcyIDguNzI3IDIwNy40MDYgOC44NzkyOSAyMDcuMzUgOS4xMjc5MkwyMDcuMDYxIDEwLjgzNDJDMjA3LjAwMiAxMS4wODI4IDIwNi44MzEgMTEuMjM1MSAyMDYuNTY0IDExLjIzNTFIMTk3LjA2TDE5Ni41MjIgMTQuMTQ3MkgyMDQuNTMxQzIwNC43OTkgMTQuMTQ3MiAyMDQuOTU0IDE0LjI4MDggMjA0Ljg5NSAxNC41NDgxTDIwNC42MDYgMTYuMTk1M0MyMDQuNTY5IDE2LjQ0MzkgMjA0LjM3NiAxNi41OTYyIDIwNC4xMDkgMTYuNTk2MkgxOTYuMUwxOTUuNTYyIDE5LjYyMzNIMjA1LjA2NkMyMDUuMzU1IDE5LjYyMzMgMjA1LjQ2NyAxOS43NzU2IDIwNS40MjkgMjAuMDI0MkwyMDUuMTIyIDIxLjczMDVDMjA1LjA4NSAyMS45NzkxIDIwNC45MSAyMi4xMzE0IDIwNC42NDMgMjIuMTMxNEgxOTIuNDU3QzE5Mi4xNjggMjIuMTMxNCAxOTIuMDU2IDIxLjk3OTEgMTkyLjA5MyAyMS43MzA1TDE5NC4zMTYgOS4xMjE3MUMxOTQuMzcyIDguODczMDcgMTk0LjUyNyA4LjcyMDc5IDE5NC44MTMgOC43MjA3OUgyMDYuOTk5TDIwNy4wMDUgOC43MjdaIiBmaWxsPSIjM0U2NDlCIi8+PHBhdGggZD0iTTIyMi44IDIyLjE0MDdDMjIyLjQ5MiAyMi4xNDA3IDIyMi4zNTggMjIuMDA3MSAyMjIuMzIxIDIxLjczOThMMjIxLjU1NiAxMi4yOTE4TDIxNy40NTQgMjEuNzM5OEMyMTcuMzU4IDIyLjAwNzEgMjE3LjE2NSAyMi4xNDA3IDIxNi44NiAyMi4xNDA3SDIxMy4yOTZDMjEzLjAwNyAyMi4xNDA3IDIxMi44MzYgMjIuMDA3MSAyMTIuODE3IDIxLjczOThMMjExLjUxNSA5LjEzMTAzQzIxMS40OTYgOC44ODI0IDIxMS42MyA4LjczMDExIDIxMS44OTcgOC43MzAxMUgyMTQuMjE2QzIxNC41MjMgOC43MzAxMSAyMTQuNjc2IDguODYzNzUgMjE0LjY3NiA5LjEzMTAzTDIxNS41OTUgMTkuNjE0TDIyMC4wOTkgOS4xMzEwM0MyMjAuMjE0IDguODYzNzUgMjIwLjQwNiA4LjczMDExIDIyMC43MTEgOC43MzAxMUgyMjMuNjA1QzIyMy45MTIgOC43MzAxMSAyMjQuMDY1IDguODYzNzUgMjI0LjA4MyA5LjEzMTAzTDIyNC44NjkgMTkuNjMyNkwyMzAuNTIzIDYuNjg1MTFDMjMwLjYzOCA2LjQxNzgzIDIzMC44NDkgNi4yODQxOSAyMzEuMTU0IDYuMjg0MTlIMjMzLjUzMUMyMzMuNzggNi4yODQxOSAyMzMuODc2IDYuNDM2NDggMjMzLjc2MSA2LjY4NTExTDIyNi45NTggMjEuNzM5OEMyMjYuODYyIDIyLjAwNzEgMjI2LjY2OSAyMi4xNDA3IDIyNi4zNjQgMjIuMTQwN0gyMjIuOFoiIGZpbGw9IiMzRTY0OUIiLz48cGF0aCBkPSJNNjYuMDY0OCAwLjIxNzU1M0w1NS44OTI2IDMuMjYwMTlMMzYuNDg2OCA5LjMyMDYxQzM2LjM2MjUgOS45MDE3OSAzNi4yMzUxIDEwLjgxNTUgMzYuMjAwOSAxMi4xNzA2QzM2LjE0MTggMTQuNTQ4MSAzNC4yMzA1IDE2LjAwODggMzQuMjMwNSAxNi4wMDg4QzM0LjAwOTggMTguMjc3NiAzMy41Mzc0IDE4Ljc1MzEgMzMuMzQ3OCAxOS4wOTgxQzMzLjMwNDMgMTkuMTc1OCAzMy4xNDg5IDE5LjM4MDkgMzMuMDkzIDE5LjM4MDlDMzMuMDM3IDE5LjM4MDkgMzIuODgxNyAxOS4xNzU4IDMyLjg0MTIgMTkuMDk4MUMzMi42NTE3IDE4Ljc1MzEgMzIuMTc5MyAxOC4yNzc2IDMxLjk1ODYgMTYuMDA4OEMzMS45NTg2IDE2LjAwODggMzAuMDQ3MiAxNC41NDgxIDI5Ljk4ODIgMTIuMTcwNkMyOS45NTQgMTAuNzM3OCAyOS44MTQxIDkuODAyMzQgMjkuNjgwNSA5LjIyNDI3TDAgMEMwLjM1MTE5MyA1LjEzNDI2IDUuNjc4MTUgNy45NjI0NiAxNS45ODQgOC40ODc2OUgzLjE0ODMxQzQuNDg3ODIgMTIuNTMxMSA5LjM0MjM3IDEzLjk0ODMgMTcuNzE1MSAxMi43MzkzTDkuOTIwNDQgMTUuMDIzNkMxMS4wNzY2IDE3LjI4IDE3LjI3MDYgMTcuMzQ1MiAyMS4zNjM3IDE2Ljg3MjhDMTguMjgwNyAxOC4xODc1IDE2LjIzMjYgMTkuMTEzNiAxNS42NTE0IDE5LjUwMjFDMTUuNjYwNyAxOS40OTU5IDIxLjYwOTMgMjIuNjM4IDI3LjQ4OTQgMTkuMzQwNUwyMy42MzI1IDI1LjAwMzFIDIuNDYwMkwzOC42MDMzIDE5LjM0MDVDNDQuNDgzNSAyMi42MzggNTAuNDMyIDE5LjQ5NTkgNTAuNDQxMyAxOS41MDIxQzQ5Ljg2MDEgMTkuMTE2NyA0Ny44MTIgMTguMTg3NSA0NC43MjkgMTYuODcyOEM0OC44MjIxIDE3LjM0NTIgNTUuMDE5MyAxNy4yOCA1Ni4xNzIzIDE1LjAyMzZMNDguMzc3NyAxMi43MzkzQzU2Ljc1MDQgMTMuOTQ1MiA2MS42MDQ5IDEyLjUyOCA2Mi45NDQ0IDguNDg3NjlINDUuMTA4OEM2MC4yNjU0IDcuOTcxNzggNjUuNTgzIDUuMjExOTYgNjYuMDcxIDAuMjE3NTUzIiBmaWxsPSIjM0U2NDlCIi8+PC9zdmc+' />
+                    </div>
+                </div>
+                <div class="header-title">
+                    <h1>Roof Assessment Report</h1>
+                    <div class="subtitle">Professional Property Analysis & Measurements</div>
+                </div>
+                <div class="report-id">Report ID: {{ property_info.report_id }}</div>
+            </div>
+        </div>
+
+        <!-- Property Information Section -->
+        <div class="property-section">
+            <div class="property-title">Property Address</div>
+            <div class="property-details">
+                <div class="property-row">
+                    <span class="property-label">Address:</span>
+                    <span class="property-value">{{ property_info.address }}</span>
+                </div>
+                <div class="property-row">
+                    <span class="property-label">Report Date:</span>
+                    <span class="property-value">{{ property_info.report_date }}</span>
+                </div>
+                <div class="property-row">
+                    <span class="property-label">Coordinates:</span>
+                    <span class="property-value">{{ property_info.latitude }}, {{ property_info.longitude }}</span>
+                </div>
+                <div class="property-row">
+                    <span class="property-label">Assessment ID:</span>
+                    <span class="property-value">{{ property_info.report_id }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Section -->
+        <div class="disclaimer-section">
+            <div class="disclaimer-title">Important Disclaimer</div>
+            <div class="disclaimer-text">
+                This report provides measurements and analysis based on aerial imagery and automated processing. All measurements are estimates and should be verified by qualified professionals for construction, insurance, or legal purposes. The accuracy of measurements may vary based on image quality, weather conditions, and structural complexity. This report is intended for informational purposes only and does not constitute professional engineering or architectural advice.
+            </div>
+        </div>
+
+        <!-- Key Metrics Dashboard -->
+        <div class="metrics-section">
+            <div class="section-header">
+                <div class="section-title">Key Measurements</div>
+                <div class="section-divider"></div>
+            </div>
+            <div class="full-bleed-bar"></div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card primary">
+                    <div class="metric-value">{{ (measurements.total_area or 0)|round(0)|int }}<span class="metric-unit">sq ft</span></div>
+                    <div class="metric-label">Total Roof Area</div>
+                </div>
+                <div class="metric-card secondary">
+                    <div class="metric-value">{{ (measurements.predominant_pitch or 0)|round(1) }}</div>
+                    <div class="metric-label">Predominant Pitch</div>
+                </div>
+                <div class="metric-card tertiary">
+                    <div class="metric-value">{{ measurements.num_facets }}</div>
+                    <div class="metric-label">Roof Facets</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid six-per-row">
+                <div class="metric-card ridges">
+                    <div class="metric-value">{{ measurements.num_ridges }}</div>
+                    <div class="metric-label">Ridges</div>
+                </div>
+                <div class="metric-card eaves">
+                    <div class="metric-value">{{ measurements.num_eaves }}</div>
+                    <div class="metric-label">Eaves</div>
+                </div>
+                <div class="metric-card rakes">
+                    <div class="metric-value">{{ measurements.num_rakes }}</div>
+                    <div class="metric-label">Rakes</div>
+                </div>
+                <div class="metric-card ridges">
+                    <div class="metric-value">{{ measurements.num_valleys or 0 }}</div>
+                    <div class="metric-label">Valleys</div>
+                </div>
+                <div class="metric-card eaves">
+                    <div class="metric-value">{{ measurements.num_hips or 0 }}</div>
+                    <div class="metric-label">Hips</div>
+                </div>
+                <div class="metric-card rakes">
+                    <div class="metric-value">{{ measurements.num_flashing or 0 }}</div>
+                    <div class="metric-label">Flashing</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Images Page -->
+    {% if images.main_images %}
+    <div class="page page-break">
+        <div class="images-section">
+            <div class="section-header">
+                <div class="section-title">Visual Documentation</div>
+                <div class="section-divider"></div>
+            </div>
+
+            {% if images.main_images.top_view %}
+            <div class="image-container main-image">
+                <img src="{{ images.main_images.top_view }}" alt="Aerial Overview">
+                <div class="image-caption">📸 Aerial Property Overview</div>
+            </div>
+            {% endif %}
+
+            <div class="image-grid">
+                {% if images.main_images.response_top %}
+                <div class="image-container">
+                    <img src="{{ images.main_images.response_top }}" alt="Facet Analysis">
+                    <div class="image-caption">🔍 Roof Facet Detection</div>
+                </div>
+                {% endif %}
+
+                {% if images.main_images.response_top_lengths %}
+                <div class="image-container">
+                    <img src="{{ images.main_images.response_top_lengths }}" alt="Measurements">
+                    <div class="image-caption">📏 Dimensional Analysis</div>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if images.main_images.north_cropped or images.main_images.south_cropped or images.main_images.east_cropped or images.main_images.west_cropped %}
+            <div class="section-header mt-4">
+                <div class="section-title text-sm">Directional Views</div>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="image-grid">
+                {% if images.main_images.north_cropped %}
+                <div class="image-container">
+                    <img src="{{ images.main_images.north_cropped }}" alt="North View">
+                    <div class="image-caption">🧭 North Elevation</div>
+                </div>
+                {% endif %}
+
+                {% if images.main_images.south_cropped %}
+                <div class="image-container">
+                    <img src="{{ images.main_images.south_cropped }}" alt="South View">
+                    <div class="image-caption">🧭 South Elevation</div>
+                </div>
+                {% endif %}
+
+                {% if images.main_images.east_cropped %}
+                <div class="image-container">
+                    <img src="{{ images.main_images.east_cropped }}" alt="East View">
+                    <div class="image-caption">🧭 East Elevation</div>
+                </div>
+                {% endif %}
+
+                {% if images.main_images.west_cropped %}
+                <div class="image-container">
+                    <img src="{{ images.main_images.west_cropped }}" alt="West View">
+                    <div class="image-caption">🧭 West Elevation</div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Professional Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Professional Roof Assessment Report</div>
+            <div>Generated using advanced aerial imaging and AI-powered measurement technology</div>
+            <div>Report ID: {{ property_info.report_id }} | Generated: {{ property_info.report_date }}</div>
+            <div style="margin-top: 12px; font-size: 9px; color: #94a3b8;">
+                This report provides measurements and analysis based on aerial imagery. All measurements are estimates and should be verified for construction purposes.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

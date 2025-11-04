@@ -4,18 +4,11 @@
   "longitude": -90.40424,
   "predominant_pitch": 4.21044921875,
   "num_of_facets": 4,
-  "area": 1529.1285795732829,
-  "num_of_ridges": 2,
-  "num_of_eaves": 5,
-  "num_of_rakes": 6,
-  "num_of_valleys": 2,
+  "area": null,
+  "num_of_ridges": 0,
+  "num_of_eaves": 0,
+  "num_of_rakes": 0,
+  "num_of_valleys": 0,
   "num_of_hips": 0,
-  "num_of_flashing": 0,
-  "area_json": {
-    "facet1": 610.4314725577321,
-    "facet2": 718.8158171023555,
-    "facet3": 100.7878388951955,
-    "facet4": 99.09345101799974,
-    "total_sqft": 1529.1285795732829
-  }
+  "num_of_flashing": 0
 }

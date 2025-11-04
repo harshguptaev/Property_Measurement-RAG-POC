@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Roof Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+        }
+
+        /* Header Design - EagleView Style */
+        .header {
+            background: #2d3748; /* Darker header */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-section {
+            margin-right: 30px;
+        }
+
+        .logo-placeholder {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roof-title {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        .report-id-section {
+            margin-bottom: 15px;
+        }
+
+        .report-id-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .report-id-value {
+            font-size: 16px;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .property-section-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .property-address {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            padding: 30px;
+        }
+
+        .left-column, .right-column {
+            width: 100%;
+            float: none;
+        }
+
+        /* Property Address Section */
+        .property-address-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #2d5a87 0%, #3b82f6 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .address-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Measurements Section */
+        .measurements-section {
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .measurement-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 3px 0;
+            transition: all 0.2s ease;
+        }
+
+        .measurement-item:last-child {
+            border-bottom: none;
+        }
+
+        .measurement-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .measurement-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .measurement-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        /* Contents Section */
+        .contents-section {
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .contents-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 20px;
+            margin-top: 15px;
+        }
+
+        .contents-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            font-size: 12px;
+            color: #374151;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .contents-item:hover {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            color: #2d5a87;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .contents-item span:first-child {
+            font-weight: 600;
+        }
+
+        .contents-item span:last-child {
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        /* Report Details */
+        .report-details-section {
+            margin-bottom: 30px;
+        }
+
+        .report-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .report-detail-label {
+            color: #666;
+        }
+
+        .report-detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Roof Diagram */
+        .roof-diagram {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 0;
+        }
+
+        .roof-svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Satisfaction Badge */
+        .satisfaction-badge {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .badge-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .badge-circle::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #48bb78, #38a169, #2f855a, #276749, #48bb78);
+            z-index: -1;
+        }
+
+        .badge-text {
+            text-align: center;
+        }
+
+        .badge-percentage {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .badge-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .satisfaction-text {
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .date-text {
+            font-size: 16px;
+            font-weight: 400;
+            margin-left: 20px;
+        }
+
+
+        /* Enhanced Colors */
+        .measurement-item:nth-child(odd) {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-left: 3px solid #3b82f6;
+        }
+
+        .measurement-item:nth-child(even) {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-left: 3px solid #10b981;
+        }
+
+
+        /* Image sections */
+        .image-section {
+            margin-bottom: 30px;
+            page-break-before: always;
+            padding: 30px;
+        }
+
+        .page-header {
+            background: #2d3748;
+            color: white;
+            padding: 15px 20px;
+            margin: -30px -30px 30px -30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .page-header-info {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-row {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .image-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-item img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+        }
+
+        .direction-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d5a87;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .notes-section {
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 10px;
+            color: #4a5568;
+        }
+
+        .notes-section h4 {
+            font-size: 14px;
+            color: #2d5a87;
+            margin-bottom: 10px;
+        }
+
+        .notes-section ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .notes-section li {
+            margin-bottom: 5px;
+        }
+
+        .notes-section strong {
+            color: #374151;
+        }
+
+        /* Footer - Dark Background */
+        .footer {
+            background: #000000 !important; /* Pure black background */
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%) !important;
+            color: white !important;
+            padding: 40px 30px !important;
+            margin: 60px 0 20px 0 !important;
+            text-align: center !important;
+            position: relative !important;
+            overflow: visible !important;
+            border-top: 5px solid #3b82f6 !important;
+            border-bottom: 5px solid #3b82f6 !important;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5) !important;
+            page-break-inside: avoid !important;
+            min-height: 300px !important;
+            width: 100% !important;
+            display: block !important;
+        }
+
+
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            color: #ffffff !important;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            color: #ffffff !important;
+            opacity: 1 !important;
+        }
+
+        .footer-disclaimer {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.9 !important;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-disclaimer strong {
+            color: #3b82f6 !important;
+            font-weight: 700;
+        }
+
+        /* Ensure footer visibility and proper spacing */
+        .footer {
+            margin-bottom: 30px !important;
+            min-height: 200px;
+        }
+
+        /* Force footer to appear */
+        html {
+            height: auto;
+        }
+
+        body {
+            margin-bottom: 50px;
+        }
+
+        .measurements-section .section-title {
+            grid-column: 1 / -1;
+            margin-bottom: 10px;
+        }
+
+        .measurement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 25px;
+            align-items: start;
+        }
+
+        .measurement-grid .measurement-item {
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* Roof Outline Section */
+        .roof-outline-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .roof-outline-section .image-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- EagleView Style Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-section">
+                    <div class="logo-placeholder">
+                        <svg width="120" height="68" viewBox="0 0 60 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_4473_715)">
+                                <path d="M59.9994 0.552309L50.7869 3.30695L33.2133 8.79574C33.1002 9.32364 32.9851 10.1486 32.9551 11.3758C32.9025 13.5295 31.1711 14.8524 31.1711 14.8524C30.9708 16.9077 30.5428 17.3383 30.3719 17.6507C30.333 17.7216 30.1926 17.9067 30.1426 17.9067C30.0921 17.9067 29.9523 17.7216 29.9129 17.6507C29.7425 17.3383 29.3145 16.9077 29.1142 14.8524C29.1142 14.8524 27.3822 13.5295 27.3296 11.3758C27.2981 10.0776 27.1708 9.23004 27.052 8.70845L0.171738 0.357239C0.49037 5.0058 5.31455 7.56748 14.6453 8.04227H3.0226C4.23456 11.7029 8.63179 12.9863 16.2138 11.8932L9.15443 13.9606C10.2002 16.0049 15.81 16.0643 19.5179 15.6363C16.7248 16.8273 14.8698 17.667 14.344 18.0177C14.3525 18.0119 19.7382 20.8559 25.0634 17.8694L21.5706 22.998H38.62L35.1266 17.8694C40.4519 20.8559 45.8376 18.0119 45.846 18.0177C45.3202 17.667 43.4652 16.8273 40.6722 15.6363C44.3801 16.0643 49.9898 16.0049 51.0356 13.9606L43.9763 11.8932C51.5588 12.9863 55.9555 11.7029 57.168 8.04227H45.5453C54.743 7.57431 59.5593 5.07678 59.9994 0.552309Z" fill="white"/>
+                                <path d="M5.49333 27.9467C5.5891 27.9467 5.63699 28.0014 5.61643 28.0904L5.51389 28.6988C5.49333 28.7878 5.43192 28.8425 5.33614 28.8425H1.94458L1.75331 29.8817H4.61135C4.70713 29.8817 4.76178 29.9295 4.74121 30.0253L4.63868 30.6135C4.62487 30.7022 4.5567 30.7569 4.46093 30.7569H1.60289L1.41134 31.8372H4.80262C4.90516 31.8372 4.94628 31.8918 4.93276 31.9808L4.82318 32.5893C4.80966 32.6783 4.74797 32.7329 4.6522 32.7329H0.303728C0.201193 32.7329 0.160066 32.6783 0.173869 32.5893L0.96683 28.0904C0.987393 28.0014 1.04204 27.9467 1.14458 27.9467H5.49333Z" fill="white"/>
+                                <path d="M10.9365 31.8167H8.35193L7.51503 33.2728C7.46742 33.3685 7.39897 33.4097 7.2894 33.4097H6.40066C6.31165 33.4097 6.28432 33.3412 6.33925 33.2592L9.50067 28.0834C9.55532 27.9877 9.62377 27.9465 9.73983 27.9465H10.9024C11.0184 27.9465 11.0663 27.9877 11.0936 28.0834L12.2973 32.5826C12.3176 32.6646 12.2767 32.7328 12.1945 32.7328H11.3263C11.21 32.7328 11.1553 32.6919 11.1348 32.5961L10.9365 31.8167ZM8.87842 30.9415H10.7246L10.1843 28.7739L8.87842 30.9415Z" fill="white"/>
+                                <path d="M16.3057 28.8425C15.7998 28.8425 15.6835 28.9312 15.6083 29.3552L15.2595 31.3245C15.246 31.4135 15.2322 31.4817 15.2322 31.5434C15.2322 31.7825 15.3688 31.8372 15.7725 31.8372H17.5843C17.8167 31.8372 17.9331 31.7346 17.9671 31.5228L18.0767 30.9346H16.9007C16.7981 30.9346 16.757 30.88 16.7708 30.7912L16.8733 30.2101C16.8936 30.1143 16.9553 30.0594 17.0511 30.0594H19.1502C19.2525 30.0594 19.2936 30.1143 19.2801 30.2101L19.0201 31.6665C18.8835 32.4527 18.7466 32.7329 17.7209 32.7329H15.0545C14.3914 32.7329 14.0699 32.4867 14.0699 31.9467C14.0699 31.851 14.0767 31.7484 14.0973 31.6391L14.5553 29.0408C14.6852 28.2887 14.9108 27.9467 15.8956 27.9467H18.5621C19.239 27.9467 19.526 28.1383 19.526 28.6509C19.526 28.7605 19.5193 28.8766 19.4919 29.0135L19.4305 29.3278C19.41 29.4236 19.3483 29.4783 19.2525 29.4783H18.4869C18.3843 29.4783 18.3364 29.4236 18.357 29.3278L18.3911 29.1569C18.3979 29.1295 18.3979 29.0955 18.3979 29.0749C18.3979 28.9177 18.3091 28.8425 18.1176 28.8425H16.3057Z" fill="white"/>
+                                <path d="M22.5148 31.8373H25.6328C25.7353 31.8373 25.7762 31.8919 25.7627 31.9809L25.6531 32.5894C25.6396 32.6784 25.5779 32.7331 25.4821 32.7331H21.4072C21.3046 32.7331 21.2635 32.6784 21.277 32.5894L22.0703 28.0902C22.0908 28.0015 22.1455 27.9468 22.248 27.9468H23.048C23.1438 27.9468 23.1984 28.0015 23.1779 28.0902L22.5148 31.8373Z" fill="white"/>
+                                <path d="M32.8343 27.9467C32.93 27.9467 32.9779 28.0014 32.9574 28.0904L32.8548 28.6988C32.8343 28.7878 32.7729 28.8425 32.6771 28.8425H29.2855L29.0942 29.8817H31.9523C32.0481 29.8817 32.1027 29.9295 32.0821 30.0253L31.9796 30.6135C31.9658 30.7022 31.8976 30.7569 31.8019 30.7569H28.9438L28.7523 31.8372H32.1436C32.2464 31.8372 32.2872 31.8918 32.2734 31.9808L32.1641 32.5893C32.1506 32.6783 32.0889 32.7329 31.9931 32.7329H27.6447C27.5421 32.7329 27.501 32.6783 27.5145 32.5893L28.3078 28.0904C28.3283 28.0014 28.383 27.9467 28.4855 27.9467H32.8343Z" fill="white"/>
+                                <path d="M36.1169 32.7329C36.0005 32.7329 35.9459 32.6918 35.9253 32.5963L34.8383 28.0971C34.8177 28.0149 34.8656 27.9467 34.9546 27.9467H35.8022C35.9253 27.9467 35.9732 27.9878 35.9938 28.0833L36.8278 31.851L39.0248 28.0833C39.0794 27.9878 39.1411 27.9467 39.2571 27.9467H40.1529C40.2417 27.9467 40.2622 28.0149 40.2143 28.0971L37.5118 32.5963C37.4639 32.6918 37.4022 32.7329 37.2862 32.7329H36.1169Z" fill="white"/>
+                                <path d="M42.4394 32.5894C42.4256 32.6781 42.3574 32.7331 42.2616 32.7331H41.4616C41.3591 32.7331 41.318 32.6781 41.3318 32.5894L42.125 28.0902C42.1453 28.0015 42.1999 27.9468 42.3028 27.9468H43.1025C43.1983 27.9468 43.2532 28.0015 43.2326 28.0902L42.4394 32.5894Z" fill="white"/>
+                                <path d="M50.2548 27.9467C50.3505 27.9467 50.3984 28.0014 50.3779 28.0904L50.2753 28.6988C50.2548 28.7878 50.1934 28.8425 50.0976 28.8425H46.706L46.5147 29.8817H49.3728C49.4686 29.8817 49.5232 29.9295 49.5026 30.0253L49.4001 30.6135C49.3863 30.7022 49.3181 30.7569 49.2224 30.7569H46.3643L46.1728 31.8372H49.5641C49.6669 31.8372 49.7077 31.8918 49.6939 31.9808L49.5846 32.5893C49.5711 32.6783 49.5094 32.7329 49.4136 32.7329H45.0652C44.9626 32.7329 44.9215 32.6783 44.935 32.5893L45.7283 28.0904C45.7488 28.0014 45.8035 27.9467 45.906 27.9467H50.2548Z" fill="white"/>
+                                <path d="M55.8907 32.7328C55.7814 32.7328 55.7335 32.685 55.7197 32.5892L55.4462 29.2185L53.9831 32.5892C53.9487 32.685 53.8805 32.7328 53.771 32.7328H52.4994C52.3969 32.7328 52.3352 32.685 52.3284 32.5892L51.8633 28.0903C51.8566 28.0013 51.9045 27.9466 52.0002 27.9466H52.8276C52.9369 27.9466 52.9915 27.9945 52.9915 28.0903L53.3197 31.8303L54.9267 28.0903C54.9676 27.9945 55.036 27.9466 55.1453 27.9466H56.178C56.2873 27.9466 56.342 27.9945 56.3487 28.0903L56.629 31.8371L58.6459 27.2173C58.687 27.1216 58.7622 27.0737 58.8715 27.0737H59.7194C59.8085 27.0737 59.8425 27.1283 59.8014 27.2173L57.3744 32.5892C57.3403 32.685 57.2718 32.7328 57.1625 32.7328H55.8907Z" fill="white"/>
+                                <path d="M58.9951 31.7235V31.8342H58.6818V32.6528H58.5548V31.8342H58.2415V31.7235H58.9951Z" fill="white"/>
+                                <path d="M59.1079 31.7234H59.2882L59.5554 32.5092L59.8208 31.7234H59.9999V32.6528H59.8796V32.1043C59.8796 32.0852 59.88 32.0538 59.8809 32.0099C59.8817 31.9659 59.8822 31.919 59.8822 31.8689L59.6168 32.6527H59.492L59.2241 31.8689V31.8974C59.2241 31.92 59.2248 31.9547 59.2261 32.0013C59.2274 32.0479 59.2281 32.0821 59.2281 32.1041V32.6527H59.1078V31.7233L59.1079 31.7234Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_4473_715">
+                                    <rect width="60" height="33.8095" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                <div class="roof-title">Roof</div>
+            </div>
+            <div class="header-right">
+                <div class="report-id-section">
+                    <div class="report-id-label">Report ID</div>
+                    <div class="report-id-value">RR-20251104-38.42299</div>
+                </div>
+                <div class="date-text">November 04, 2025</div>
+                <div class="property-section-header">Property</div>
+                <div class="property-address">4 EARLIGLOW CT, ARNOLD, MO 63010</div>
+            </div>
+        </div>
+
+        <!-- Main Content - Single Column Layout -->
+        <div class="main-content">
+            <!-- Roof Outline Image -->
+            <div class="roof-outline-section">
+                <div class="image-container">
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/top/roof_outline_simplified.png" alt="Roof Outline Simplified">
+                        <div class="image-caption">Roof Outline - Simplified View</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- House Measurements Section -->
+            <div class="image-section">
+                <div class="page-header">
+                    <div class="page-header-title">House Measurements</div>
+                    <div class="page-header-info">4 EARLIGLOW CT, ARNOLD, MO 63010</div>
+                </div>
+                <div class="measurements-section measurement-grid">
+                    <div class="measurement-item">
+                    <span class="measurement-label">Total Area:</span>
+                        <span class="measurement-value">2671.6 SQ</span>
+                    </div>
+                    <div class="measurement-item">
+                        <span class="measurement-label">Predominant Pitch:</span>
+                        <span class="measurement-value">6/12</span>
+                    </div>
+                    <div class="measurement-item">
+                        <span class="measurement-label">Ridges/Hips:</span>
+                        <span class="measurement-value">7' 0"</span>
+                    </div>
+                    <div class="measurement-item">
+                        <span class="measurement-label">Valleys:</span>
+                        <span class="measurement-value">4'</span>
+                    </div>
+                    <div class="measurement-item">
+                        <span class="measurement-label">Rakes:</span>
+                        <span class="measurement-value">17' 0"</span>
+                    </div>
+                    <div class="measurement-item">
+                        <span class="measurement-label">Eaves:</span>
+                        <span class="measurement-value">12' 1"</span>
+                    </div>
+                    <div class="measurement-item">
+                        <span class="measurement-label">Roof Penetrations:</span>
+                        <span class="measurement-value">13</span>
+                    </div>
+                    <div class="measurement-item">
+                    <span class="measurement-label">Number of Roof Facets:</span>
+                    <span class="measurement-value">10</span>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top View Section -->
+        <div class="image-section">
+            <div class="page-header">
+                <div class="page-header-title">Top View</div>
+                <div class="page-header-info">4 EARLIGLOW CT, ARNOLD, MO 63010 | Page 8 of 12</div>
+            </div>
+            <div class="image-container">
+                <div class="image-row">
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/Top_cropped.png" alt="Top View - Original">
+                        <div class="image-caption">Original Top View</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/top/roof_overlay_without_lengths.png" alt="Top View - Roof Overlay">
+                        <div class="image-caption">Roof Overlay</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- North Side View Section -->
+        <div class="image-section">
+            <div class="page-header">
+                <div class="page-header-title">North Side View</div>
+                <div class="page-header-info">4 EARLIGLOW CT, ARNOLD, MO 63010 | Page 9 of 12</div>
+            </div>
+            <div class="image-container">
+                <div class="image-row">
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/North_cropped.png" alt="North Side - Original">
+                        <div class="image-caption">North Side Original</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/north/roof_overlay_without_lengths.png" alt="North Side - Roof Overlay">
+                        <div class="image-caption">North Side Roof Overlay</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- South Side View Section -->
+        <div class="image-section">
+            <div class="page-header">
+                <div class="page-header-title">South Side View</div>
+                <div class="page-header-info">4 EARLIGLOW CT, ARNOLD, MO 63010 | Page 10 of 12</div>
+            </div>
+            <div class="image-container">
+                <div class="image-row">
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/South_cropped.png" alt="South Side - Original">
+                        <div class="image-caption">South Side Original</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/south/roof_overlay_without_lengths.png" alt="South Side - Roof Overlay">
+                        <div class="image-caption">South Side Roof Overlay</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- East Side View Section -->
+        <div class="image-section">
+            <div class="page-header">
+                <div class="page-header-title">East Side View</div>
+                <div class="page-header-info">4 EARLIGLOW CT, ARNOLD, MO 63010 | Page 11 of 12</div>
+            </div>
+            <div class="image-container">
+                <div class="image-row">
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/East_cropped.png" alt="East Side - Original">
+                        <div class="image-caption">East Side Original</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/east/roof_overlay_without_lengths.png" alt="East Side - Roof Overlay">
+                        <div class="image-caption">East Side Roof Overlay</div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+
+        <!-- West Side View Section -->
+        <div class="image-section">
+            <div class="page-header">
+                <div class="page-header-title">West Side View</div>
+                <div class="page-header-info">4 EARLIGLOW CT, ARNOLD, MO 63010 | Page 12 of 12</div>
+            </div>
+            <div class="image-container">
+                <div class="image-row">
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/West_cropped.png" alt="West Side - Original">
+                        <div class="image-caption">West Side Original</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="file:////Users/harshg-blrm25/Documents/GitHub/Property_Measurement-RAG-POC/pdf_generation/38.422999_-90.403464/west/roof_overlay_without_lengths.png" alt="West Side - Roof Overlay">
+                        <div class="image-caption">West Side Roof Overlay</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

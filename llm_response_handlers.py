@@ -377,6 +377,24 @@ Provide a comparative analysis that helps the customer understand roofing specif
             logger.error(f"Error generating Flow 2 LLM response: {str(e)}")
             return self._create_fallback_response(query, results)
 
+    def generate_flow3_response(self, query: str, results: List[Dict]) -> str:
+        """
+        Generate response for Flow 3 by reading LLM summary text from file
+        """
+        try:
+            import os
+            # Read the LLM summary text from file
+            llm_summary_path = "llm_summary_result.txt"
+            if os.path.exists(llm_summary_path):
+                with open(llm_summary_path, 'r', encoding='utf-8') as f:
+                    llm_summary_text = f.read()
+                return llm_summary_text
+            else:
+                return "LLM analysis summary not available. Flow 3 completed successfully but analysis file not found."
+        except Exception as e:
+            logger.error(f"Could not read LLM summary for Flow 3: {e}")
+            return f"Flow 3 completed but LLM analysis could not be loaded: {e}"
+
     def generate_llm_response(self, query: str, results: List[Dict]) -> str:
         """
         Use LLM to generate a comprehensive response based on retrieved chunks
