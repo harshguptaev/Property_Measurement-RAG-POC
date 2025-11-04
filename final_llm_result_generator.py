@@ -196,24 +196,28 @@ class FinalLLMResultGenerator:
             
             property1['num_of_facets'] = roof_measurements.get('total_roof_facets')
             
-            # Extract lengths and convert to counts/values
-            ridges_str = roof_measurements.get('ridges', '')
-            property1['num_of_ridges'] = self.extract_length(ridges_str)
-            
-            eaves_str = roof_measurements.get('eaves_starter', '')
-            property1['num_of_eaves'] = self.extract_length(eaves_str)
-            
-            rakes_str = roof_measurements.get('rakes', '')
-            property1['num_of_rakes'] = self.extract_length(rakes_str)
-            
-            valleys_str = roof_measurements.get('valleys', '')
-            property1['num_of_valleys'] = self.extract_length(valleys_str)
-            
-            hips_str = roof_measurements.get('hips', '')
-            property1['num_of_hips'] = self.extract_length(hips_str)
-            
-            flashing_str = roof_measurements.get('flashing', '')
-            property1['num_of_flashing'] = self.extract_length(flashing_str)
+            # Extract lengths and estimate segment counts (divide by average segment length)
+            # This converts total linear measurements to estimated segment counts for comparison
+            # Typical segment lengths: ridges/hips/valleys ~20-30ft, eaves/rakes ~10-15ft, flashing ~5-10ft
+            # Note: Property 2 has actual measured segment counts, Property 1 gets estimates
+
+            ridges_length = self.extract_length(roof_measurements.get('ridges', ''))
+            property1['num_of_ridges'] = max(1, round(ridges_length / 25)) if ridges_length else None  # ~25ft per ridge segment
+
+            eaves_length = self.extract_length(roof_measurements.get('eaves_starter', ''))
+            property1['num_of_eaves'] = max(1, round(eaves_length / 12)) if eaves_length else None  # ~12ft per eave segment
+
+            rakes_length = self.extract_length(roof_measurements.get('rakes', ''))
+            property1['num_of_rakes'] = max(1, round(rakes_length / 12)) if rakes_length else None  # ~12ft per rake segment
+
+            valleys_length = self.extract_length(roof_measurements.get('valleys', ''))
+            property1['num_of_valleys'] = max(1, round(valleys_length / 25)) if valleys_length else None  # ~25ft per valley segment
+
+            hips_length = self.extract_length(roof_measurements.get('hips', ''))
+            property1['num_of_hips'] = max(1, round(hips_length / 25)) if hips_length else None  # ~25ft per hip segment
+
+            flashing_length = self.extract_length(roof_measurements.get('flashing', ''))
+            property1['num_of_flashing'] = max(1, round(flashing_length / 8)) if flashing_length else None  # ~8ft per flashing segment
         
         # Extract house measurements
         if house_measurements:
@@ -531,12 +535,12 @@ PROPERTY 1 MEASUREMENTS:
 - Total Area: {property1.get('total_area_sqft', 'N/A')} sq ft ({property1.get('total_area', 'N/A')})
 - Predominant Pitch: {property1.get('predominant_pitch', 'N/A')} ({property1.get('predominant_pitch_degrees', 'N/A')} degrees)
 - Number of Facets: {property1.get('num_of_facets', 'N/A')}
-- Number of Ridges: {property1.get('num_of_ridges', 'N/A')}
-- Number of Eaves: {property1.get('num_of_eaves', 'N/A')}
-- Number of Rakes: {property1.get('num_of_rakes', 'N/A')}
-- Number of Valleys: {property1.get('num_of_valleys', 'N/A')}
-- Number of Hips: {property1.get('num_of_hips', 'N/A')}
-- Number of Flashing: {property1.get('num_of_flashing', 'N/A')}
+- Estimated Ridge Segments: {property1.get('num_of_ridges', 'N/A')} (estimated from total length)
+- Estimated Eave Segments: {property1.get('num_of_eaves', 'N/A')} (estimated from total length)
+- Estimated Rake Segments: {property1.get('num_of_rakes', 'N/A')} (estimated from total length)
+- Estimated Valley Segments: {property1.get('num_of_valleys', 'N/A')} (estimated from total length)
+- Estimated Hip Segments: {property1.get('num_of_hips', 'N/A')} (estimated from total length)
+- Estimated Flashing Segments: {property1.get('num_of_flashing', 'N/A')} (estimated from total length)
 - Number of Stories: {property1.get('number_of_stories', 'N/A')}
 - Structure Complexity: {property1.get('structure_complexity', 'N/A')}
 
@@ -544,12 +548,12 @@ PROPERTY 2 MEASUREMENTS:
 - Total Area: {property2.get('total_area_sqft', 'N/A')} sq ft
 - Predominant Pitch: {property2.get('predominant_pitch_degrees', 'N/A')} degrees
 - Number of Facets: {property2.get('num_of_facets', 'N/A')}
-- Number of Ridges: {property2.get('num_of_ridges', 'N/A')}
-- Number of Eaves: {property2.get('num_of_eaves', 'N/A')}
-- Number of Rakes: {property2.get('num_of_rakes', 'N/A')}
-- Number of Valleys: {property2.get('num_of_valleys', 'N/A')}
-- Number of Hips: {property2.get('num_of_hips', 'N/A')}
-- Number of Flashing: {property2.get('num_of_flashing', 'N/A')}
+- Ridge Segments: {property2.get('num_of_ridges', 'N/A')} (actual count)
+- Eave Segments: {property2.get('num_of_eaves', 'N/A')} (actual count)
+- Rake Segments: {property2.get('num_of_rakes', 'N/A')} (actual count)
+- Valley Segments: {property2.get('num_of_valleys', 'N/A')} (actual count)
+- Hip Segments: {property2.get('num_of_hips', 'N/A')} (actual count)
+- Flashing Segments: {property2.get('num_of_flashing', 'N/A')} (actual count)
 
 KEY DIFFERENCES:
 """
@@ -616,12 +620,15 @@ KEY DIFFERENCES:
         
         prompt += f"""
 TASK:
-Please provide a comprehensive summary comparing these two properties. Include:
+Please provide a comprehensive summary comparing these two properties. Note that Property 1 segment counts are ESTIMATES derived from total linear measurements, while Property 2 segment counts are ACTUAL measured values. Include:
+
 1. Overall similarity assessment (based on similarity score of {property1.get('similarity_score', 0):.4f})
-2. Key structural similarities and differences
+2. Key structural similarities and differences (focusing on estimated vs actual segment counts)
 3. Roofing complexity comparison
-4. Material estimation implications based on the differences
-5. Any notable observations about the roof structures
+4. Material estimation implications based on the segment count differences
+5. Any notable observations about the roof structures and the estimation methodology
+
+IMPORTANT: Treat Property 1 segment counts as rough estimates and Property 2 counts as precise measurements. Adjust material estimates accordingly.
 
 Provide the summary in a clear, professional format suitable for roofing contractors and material estimators.
 """
