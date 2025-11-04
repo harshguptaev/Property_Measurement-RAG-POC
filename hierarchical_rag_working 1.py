@@ -1488,6 +1488,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
         try:
             summary = run_flow_for_address(address)
             # Return as a single-result list to match expected return type
+            
             return [summary]
         except Exception as e:
             logger.error(f"Error running flow3 for address '{address}': {e}")

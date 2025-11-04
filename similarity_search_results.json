@@ -1,0 +1,145 @@
+{
+  "success": true,
+  "level1": {
+    "success": true,
+    "s3_url": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/top/roof_outline_simplified.png",
+    "matches": [
+      {
+        "property_id": "PROP_64895822",
+        "address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
+        "report_id": "64895822",
+        "similarity_score": 0.8404666185379028
+      },
+      {
+        "property_id": "PROP_64016168",
+        "address": "3018 BRENTMOOR DR, ARNOLD, MO 63010",
+        "report_id": "64016168",
+        "similarity_score": 0.8173224925994873
+      }
+    ],
+    "total_found": 2,
+    "errors": []
+  },
+  "level2": {
+    "success": true,
+    "matches": [
+      {
+        "property_id": "PROP_64895822",
+        "chunk_id": "C001",
+        "section": "House Measurements",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 6 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+          "data": {
+            "number_of_stories": "1",
+            "total_roof_facets": 6,
+            "structure_complexity": "",
+            "estimated_attic": "",
+            "total_roof_obstructions": "",
+            "number_of_structures": 1
+          }
+        },
+        "similarity_score": 0.8404666185379028,
+        "closeness_score": 0.0,
+        "rank": 1
+      },
+      {
+        "property_id": "PROP_64016168",
+        "chunk_id": "C001",
+        "section": "House Measurements",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 5 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+          "data": {
+            "number_of_stories": "1",
+            "total_roof_facets": 5,
+            "structure_complexity": "",
+            "estimated_attic": "",
+            "total_roof_obstructions": "",
+            "number_of_structures": 1
+          }
+        },
+        "similarity_score": 0.8173224925994873,
+        "closeness_score": 0.0,
+        "rank": 2
+      }
+    ],
+    "total_found": 2,
+    "errors": []
+  },
+  "final_results": [
+    {
+      "property_id": "PROP_64895822",
+      "chunk_id": "C001",
+      "section": "House Measurements",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 6 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+        "data": {
+          "number_of_stories": "1",
+          "total_roof_facets": 6,
+          "structure_complexity": "",
+          "estimated_attic": "",
+          "total_roof_obstructions": "",
+          "number_of_structures": 1
+        }
+      },
+      "similarity_score": 0.8404666185379028,
+      "closeness_score": 0.0,
+      "rank": 1
+    },
+    {
+      "property_id": "PROP_64016168",
+      "chunk_id": "C001",
+      "section": "House Measurements",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 5 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+        "data": {
+          "number_of_stories": "1",
+          "total_roof_facets": 5,
+          "structure_complexity": "",
+          "estimated_attic": "",
+          "total_roof_obstructions": "",
+          "number_of_structures": 1
+        }
+      },
+      "similarity_score": 0.8173224925994873,
+      "closeness_score": 0.0,
+      "rank": 2
+    }
+  ],
+  "errors": [],
+  "top_result": {
+    "property_id": "PROP_64895822",
+    "rank": 1,
+    "level1_details": {
+      "property_id": "PROP_64895822",
+      "address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
+      "report_id": "64895822",
+      "similarity_score": 0.8404666185379028
+    },
+    "level2_details": [
+      {
+        "property_id": "PROP_64895822",
+        "chunk_id": "C001",
+        "section": "House Measurements",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 6 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+          "data": {
+            "number_of_stories": "1",
+            "total_roof_facets": 6,
+            "structure_complexity": "",
+            "estimated_attic": "",
+            "total_roof_obstructions": "",
+            "number_of_structures": 1
+          }
+        },
+        "similarity_score": 0.8404666185379028,
+        "closeness_score": 0.0,
+        "rank": 1
+      }
+    ]
+  }
+}

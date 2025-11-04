@@ -1,6 +1,6 @@
 {
   "east": {
-    "jobId": "ec7c5c96-99b8-4bac-87ed-96a9ac158e97",
+    "jobId": "9d0e9e1f-a3fb-4b3d-bf09-56de181fe18c",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/East_cropped.png",
     "model_name": "Pitch",
@@ -8,14 +8,14 @@
     "predictions": [
       {
         "label": "pitch",
-        "value": 8.1171875
+        "value": 8.265625
       }
     ],
-    "image_height": 550,
-    "image_width": 550
+    "image_height": 500,
+    "image_width": 500
   },
   "west": {
-    "jobId": "2a0927e9-9845-4bef-b9da-31868e69166c",
+    "jobId": "ed648f5e-cb01-4b71-ac62-9726f70d73cc",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/West_cropped.png",
     "model_name": "Pitch",
@@ -23,14 +23,14 @@
     "predictions": [
       {
         "label": "pitch",
-        "value": 4.6875
+        "value": 4.75
       }
     ],
-    "image_height": 550,
-    "image_width": 550
+    "image_height": 500,
+    "image_width": 500
   },
   "north": {
-    "jobId": "b233ddd4-b8cf-43cb-8c5d-cc8b35e5f10b",
+    "jobId": "81499b3c-8bd7-4b50-ae76-591861ba86aa",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/North_cropped.png",
     "model_name": "Pitch",
@@ -38,14 +38,14 @@
     "predictions": [
       {
         "label": "pitch",
-        "value": 7.3046875
+        "value": 7.015625
       }
     ],
-    "image_height": 550,
-    "image_width": 550
+    "image_height": 500,
+    "image_width": 500
   },
   "south": {
-    "jobId": "2c1a3412-8c1d-4839-8bd2-6a8082cb0064",
+    "jobId": "affcfc63-37a7-49fb-b848-d646dccc757e",
     "status": "success",
     "image_uri": "s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/40.524137_-80.040409/South_cropped.png",
     "model_name": "Pitch",
@@ -53,10 +53,10 @@
     "predictions": [
       {
         "label": "pitch",
-        "value": 4.515625
+        "value": 4.4453125
       }
     ],
-    "image_height": 550,
-    "image_width": 550
+    "image_height": 500,
+    "image_width": 500
   }
 }

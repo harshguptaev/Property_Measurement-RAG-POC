@@ -118,6 +118,83 @@ class S3Client:
         bucket, key = self.parse_s3_url(s3_url)
         self.client.upload_file(local_path, bucket, key)
 
+    def upload_all_files_to_s3(self, local_dir: str, bucket: str = None, s3_prefix: str = "", excluded_files: set = None, recursive: bool = True):
+        """
+        Upload all files from a local directory to S3, optionally recursively.
+
+        Args:
+            local_dir: Local directory path to upload files from
+            bucket: S3 bucket name (defaults to evtech-us-east-2-pg-test-sunsitecomplete)
+            s3_prefix: S3 prefix/key path (e.g., 'property-data/LatLongData/folder/')
+            excluded_files: Set of filenames to exclude from upload
+            recursive: Whether to upload files from subdirectories recursively
+        """
+        if bucket is None:
+            bucket = "evtech-us-east-2-pg-test-sunsitecomplete"
+
+        if not os.path.isdir(local_dir):
+            raise FileNotFoundError(f"Local folder not found: {local_dir}")
+
+        if excluded_files is None:
+            excluded_files = set()
+
+        # Ensure s3_prefix ends with '/'
+        if s3_prefix and not s3_prefix.endswith('/'):
+            s3_prefix += '/'
+
+        # Create a folder marker (optional in S3, but harmless)
+        try:
+            self.client.put_object(Bucket=bucket, Key=s3_prefix)
+        except Exception:
+            pass
+
+        uploaded_count = 0
+
+        if recursive:
+            # Walk through all files recursively
+            for root_dir, dirs, files in os.walk(local_dir):
+                # Calculate relative path from local_dir
+                rel_path = os.path.relpath(root_dir, local_dir)
+                if rel_path == '.':
+                    current_prefix = s3_prefix
+                else:
+                    current_prefix = s3_prefix + rel_path.replace(os.sep, '/') + '/'
+
+                # Create folder marker for subdirectories
+                if rel_path != '.':
+                    try:
+                        self.client.put_object(Bucket=bucket, Key=current_prefix)
+                    except Exception:
+                        pass
+
+                for filename in files:
+                    if filename in excluded_files or filename.startswith('.'):
+                        continue
+
+                    local_path = os.path.join(root_dir, filename)
+                    key = current_prefix + filename
+                    s3_url = f"s3://{bucket}/{key}"
+                    print(f"Uploading {local_path} -> {s3_url}")
+                    self.upload_file(local_path, s3_url)
+                    uploaded_count += 1
+        else:
+            # Original non-recursive behavior
+            for filename in os.listdir(local_dir):
+                local_path = os.path.join(local_dir, filename)
+                if not os.path.isfile(local_path):
+                    continue
+                if filename in excluded_files or filename.startswith('.'):
+                    continue
+
+                key = s3_prefix + filename
+                s3_url = f"s3://{bucket}/{key}"
+                print(f"Uploading {local_path} -> {s3_url}")
+                self.upload_file(local_path, s3_url)
+                uploaded_count += 1
+
+        print(f"✅ Uploaded {uploaded_count} files from {local_dir} to s3://{bucket}/{s3_prefix}")
+        return uploaded_count
+
     def upload_cropped_images_to_s3(self, latitude: float, longitude: float):
         """
         Upload all files from local final_data/<lat>_<lon>/ to
@@ -126,31 +203,11 @@ class S3Client:
         """
         lat_lon_folder = f"{latitude}_{longitude}"
         local_dir = os.path.join(os.getcwd(), "final_data", lat_lon_folder)
-        if not os.path.isdir(local_dir):
-            raise FileNotFoundError(f"Local folder not found: {local_dir}")
-
         bucket = "evtech-us-east-2-pg-test-sunsitecomplete"
         base_prefix = f"property-data/LatLongData/{lat_lon_folder}/"
 
-        # Create a folder marker (optional in S3, but harmless)
-        try:
-            self.client.put_object(Bucket=bucket, Key=base_prefix)
-        except Exception:
-            pass
-
-        excluded = {"pictometry_response.json"}
-
-        for filename in os.listdir(local_dir):
-            local_path = os.path.join(local_dir, filename)
-            if not os.path.isfile(local_path):
-                continue
-            if filename in excluded or filename.startswith('.'):
-                continue
-
-            key = base_prefix + filename
-            s3_url = f"s3://{bucket}/{key}"
-            print(f"Uploading {local_path} -> {s3_url}")
-            self.upload_file(local_path, s3_url)
+        excluded_files = {"pictometry_response.json"}
+        return self.upload_all_files_to_s3(local_dir, bucket, base_prefix, excluded_files)
 
 
 

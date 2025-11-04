@@ -112,7 +112,6 @@ def run_flow_for_address(address: str) -> dict:
         "num_of_hips": 0,
         "num_of_flashing": 0
     }
-
     # Try to get area from area.json
     area_json_path = os.path.join(final_data_dir, "area.json")
     if os.path.exists(area_json_path):
@@ -197,6 +196,49 @@ def run_flow_for_address(address: str) -> dict:
             print(f"Warning: {source_file} not found")
 
     print(f"✅ Created outline folders and copied files")
+    
+    #  here upload all files to s3
+    s3_client.upload_all_files_to_s3(final_data_dir)
+    
+    # Run similarity search on the generated roof outline
+    try:
+        print("\n🔍 Running similarity search on generated roof outline...")
+
+        # Construct S3 URL for the roof outline image
+        s3_url = f"s3://evtech-us-east-2-pg-test-sunsitecomplete/property-data/LatLongData/{lat}_{lon}/top/roof_outline_simplified.png"
+
+        # Build filter parameters from generated data
+        filter_params = {
+            "facet_count": num_facets,
+            "predominant_pitch": predominant_pitch
+        }
+
+        # Add area if available
+        if final_data.get("area"):
+            filter_params["area"] = final_data["area"]
+
+        # Import and run similarity search directly
+        from run_perform_similarity_search import SimilaritySearchRunner
+
+        # Create runner instance and run search
+        runner = SimilaritySearchRunner()
+        results = runner.run_search(
+            s3_url=s3_url,
+            filter_params=filter_params,
+            perform_level2=True,
+            lat_lon=f"{lat}_{lon}"
+        )
+
+        if results.get('success', False):
+            print("✅ Similarity search completed successfully")
+            print(f"📊 Found {len(results.get('final_results', []))} similar properties")
+        else:
+            print("⚠️ Similarity search completed but may have issues")
+            if results.get('errors'):
+                print(f"Errors: {results['errors']}")
+
+    except Exception as e:
+        print(f"⚠️ Error running similarity search: {str(e)}")
 
     # Return a compact summary for callers
     return {
@@ -209,6 +251,8 @@ def run_flow_for_address(address: str) -> dict:
         "final_data_dir": final_data_dir,
     }
 
+    
+    
 def main():
     # address = "1291 Broad St W, Lehigh Acres, FL 33936"
     
