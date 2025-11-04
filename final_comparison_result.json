@@ -6,17 +6,17 @@
     "report_id": "64895822",
     "similarity_score": 0.836295485496521,
     "measurements": {
-      "total_area_sqft": null,
-      "total_area": null,
-      "predominant_pitch": null,
-      "predominant_pitch_degrees": null,
-      "num_of_facets": null,
-      "num_of_ridges": null,
-      "num_of_eaves": null,
-      "num_of_rakes": null,
-      "num_of_valleys": null,
-      "num_of_hips": null,
-      "num_of_flashing": null,
+      "total_area_sqft": 2780.0,
+      "total_area": "2,780 sq ft",
+      "predominant_pitch": "6/12",
+      "predominant_pitch_degrees": 26.565051177077994,
+      "num_of_facets": 6,
+      "num_of_ridges": 95.0,
+      "num_of_eaves": 102.0,
+      "num_of_rakes": 134.0,
+      "num_of_valleys": 68.0,
+      "num_of_hips": 0.0,
+      "num_of_flashing": 0.0,
       "number_of_stories": "1",
       "structure_complexity": "",
       "estimated_attic": "",
@@ -49,11 +49,58 @@
       }
     }
   },
-  "differences": {},
+  "differences": {
+    "area": {
+      "property1": 2780.0,
+      "property2": 1291.7009169543355,
+      "difference": -1488.2990830456645,
+      "difference_percent": -53.54
+    },
+    "pitch": {
+      "property1": 26.5651,
+      "property2": 6.1191,
+      "difference_degrees": -20.4459
+    },
+    "facets": {
+      "property1": 6,
+      "property2": 6,
+      "difference": 0
+    },
+    "ridges": {
+      "property1": 95.0,
+      "property2": 2,
+      "difference": -93.0
+    },
+    "eaves": {
+      "property1": 102.0,
+      "property2": 6,
+      "difference": -96.0
+    },
+    "rakes": {
+      "property1": 134.0,
+      "property2": 4,
+      "difference": -130.0
+    },
+    "valleys": {
+      "property1": 68.0,
+      "property2": 0,
+      "difference": -68.0
+    },
+    "hips": {
+      "property1": 0.0,
+      "property2": 4,
+      "difference": 4.0
+    },
+    "flashing": {
+      "property1": 0.0,
+      "property2": 0,
+      "difference": 0.0
+    }
+  },
   "summary": {
     "property1_address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
     "property2_address": "129 HIDDEN VALLEY DR, PITTSBURGH, PA 15237-1701",
     "similarity_score": 0.836295485496521,
-    "total_comparisons": 0
+    "total_comparisons": 9
   }
 }

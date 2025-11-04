@@ -8,13 +8,13 @@
         "property_id": "PROP_64895822",
         "address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
         "report_id": "64895822",
-        "similarity_score": 0.8404666185379028
+        "similarity_score": 0.836295485496521
       },
       {
         "property_id": "PROP_64016168",
         "address": "3018 BRENTMOOR DR, ARNOLD, MO 63010",
         "report_id": "64016168",
-        "similarity_score": 0.8173224925994873
+        "similarity_score": 0.8106184601783752
       }
     ],
     "total_found": 2,
@@ -39,9 +39,39 @@
             "number_of_structures": 1
           }
         },
-        "similarity_score": 0.8404666185379028,
+        "similarity_score": 0.836295485496521,
         "closeness_score": 0.0,
         "rank": 1
+      },
+      {
+        "property_id": "PROP_64895822",
+        "chunk_id": "C002",
+        "section": "Roof Measurements - All Structures",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,780 sq sq ft. 6 roof facets. predominant pitch 6/12. ridge length 95 ft. valley length 68 ft. rake length 134 ft. eave length 102 ft. drip edge 236 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+          "data": {
+            "structure": "All Structures",
+            "total_area": "2,780 sq ft",
+            "total_roof_facets": 6,
+            "predominant_pitch": "6/12",
+            "ridges": "95 ft",
+            "hips": "0 ft",
+            "valleys": "68 ft",
+            "rakes": "134 ft",
+            "eaves_starter": "102 ft",
+            "drip_edge": "236 ft",
+            "flashing": "0 ft",
+            "step_flashing": "0 ft",
+            "parapet_walls": "0 ft",
+            "roof_obstructions_perimeter": "",
+            "roof_obstructions_area": "",
+            "net_roof_area": ""
+          }
+        },
+        "similarity_score": 0.836295485496521,
+        "closeness_score": 0.0,
+        "rank": 2
       },
       {
         "property_id": "PROP_64016168",
@@ -59,12 +89,42 @@
             "number_of_structures": 1
           }
         },
-        "similarity_score": 0.8173224925994873,
+        "similarity_score": 0.8106184601783752,
         "closeness_score": 0.0,
-        "rank": 2
+        "rank": 3
+      },
+      {
+        "property_id": "PROP_64016168",
+        "chunk_id": "C002",
+        "section": "Roof Measurements - All Structures",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 1,722 sq sq ft. 5 roof facets. predominant pitch 4/12. ridge length 68 ft. valley length 37 ft. rake length 106 ft. eave length 85 ft. drip edge 191 ft. step flashing 16 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+          "data": {
+            "structure": "All Structures",
+            "total_area": "1,722 sq ft",
+            "total_roof_facets": 5,
+            "predominant_pitch": "4/12",
+            "ridges": "68 ft",
+            "hips": "0 ft",
+            "valleys": "37 ft",
+            "rakes": "106 ft",
+            "eaves_starter": "85 ft",
+            "drip_edge": "191 ft",
+            "flashing": "0 ft",
+            "step_flashing": "16 ft",
+            "parapet_walls": "0 ft",
+            "roof_obstructions_perimeter": "",
+            "roof_obstructions_area": "",
+            "net_roof_area": ""
+          }
+        },
+        "similarity_score": 0.8106184601783752,
+        "closeness_score": 0.0,
+        "rank": 4
       }
     ],
-    "total_found": 2,
+    "total_found": 4,
     "errors": []
   },
   "final_results": [
@@ -84,9 +144,39 @@
           "number_of_structures": 1
         }
       },
-      "similarity_score": 0.8404666185379028,
+      "similarity_score": 0.836295485496521,
       "closeness_score": 0.0,
       "rank": 1
+    },
+    {
+      "property_id": "PROP_64895822",
+      "chunk_id": "C002",
+      "section": "Roof Measurements - All Structures",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,780 sq sq ft. 6 roof facets. predominant pitch 6/12. ridge length 95 ft. valley length 68 ft. rake length 134 ft. eave length 102 ft. drip edge 236 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+        "data": {
+          "structure": "All Structures",
+          "total_area": "2,780 sq ft",
+          "total_roof_facets": 6,
+          "predominant_pitch": "6/12",
+          "ridges": "95 ft",
+          "hips": "0 ft",
+          "valleys": "68 ft",
+          "rakes": "134 ft",
+          "eaves_starter": "102 ft",
+          "drip_edge": "236 ft",
+          "flashing": "0 ft",
+          "step_flashing": "0 ft",
+          "parapet_walls": "0 ft",
+          "roof_obstructions_perimeter": "",
+          "roof_obstructions_area": "",
+          "net_roof_area": ""
+        }
+      },
+      "similarity_score": 0.836295485496521,
+      "closeness_score": 0.0,
+      "rank": 2
     },
     {
       "property_id": "PROP_64016168",
@@ -104,9 +194,39 @@
           "number_of_structures": 1
         }
       },
-      "similarity_score": 0.8173224925994873,
+      "similarity_score": 0.8106184601783752,
       "closeness_score": 0.0,
-      "rank": 2
+      "rank": 3
+    },
+    {
+      "property_id": "PROP_64016168",
+      "chunk_id": "C002",
+      "section": "Roof Measurements - All Structures",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "Comprehensive roof measurements and specifications: total roof area 1,722 sq sq ft. 5 roof facets. predominant pitch 4/12. ridge length 68 ft. valley length 37 ft. rake length 106 ft. eave length 85 ft. drip edge 191 ft. step flashing 16 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+        "data": {
+          "structure": "All Structures",
+          "total_area": "1,722 sq ft",
+          "total_roof_facets": 5,
+          "predominant_pitch": "4/12",
+          "ridges": "68 ft",
+          "hips": "0 ft",
+          "valleys": "37 ft",
+          "rakes": "106 ft",
+          "eaves_starter": "85 ft",
+          "drip_edge": "191 ft",
+          "flashing": "0 ft",
+          "step_flashing": "16 ft",
+          "parapet_walls": "0 ft",
+          "roof_obstructions_perimeter": "",
+          "roof_obstructions_area": "",
+          "net_roof_area": ""
+        }
+      },
+      "similarity_score": 0.8106184601783752,
+      "closeness_score": 0.0,
+      "rank": 4
     }
   ],
   "errors": [],
@@ -117,7 +237,7 @@
       "property_id": "PROP_64895822",
       "address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
       "report_id": "64895822",
-      "similarity_score": 0.8404666185379028
+      "similarity_score": 0.836295485496521
     },
     "level2_details": [
       {
@@ -136,9 +256,39 @@
             "number_of_structures": 1
           }
         },
-        "similarity_score": 0.8404666185379028,
+        "similarity_score": 0.836295485496521,
         "closeness_score": 0.0,
         "rank": 1
+      },
+      {
+        "property_id": "PROP_64895822",
+        "chunk_id": "C002",
+        "section": "Roof Measurements - All Structures",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,780 sq sq ft. 6 roof facets. predominant pitch 6/12. ridge length 95 ft. valley length 68 ft. rake length 134 ft. eave length 102 ft. drip edge 236 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+          "data": {
+            "structure": "All Structures",
+            "total_area": "2,780 sq ft",
+            "total_roof_facets": 6,
+            "predominant_pitch": "6/12",
+            "ridges": "95 ft",
+            "hips": "0 ft",
+            "valleys": "68 ft",
+            "rakes": "134 ft",
+            "eaves_starter": "102 ft",
+            "drip_edge": "236 ft",
+            "flashing": "0 ft",
+            "step_flashing": "0 ft",
+            "parapet_walls": "0 ft",
+            "roof_obstructions_perimeter": "",
+            "roof_obstructions_area": "",
+            "net_roof_area": ""
+          }
+        },
+        "similarity_score": 0.836295485496521,
+        "closeness_score": 0.0,
+        "rank": 2
       }
     ]
   }

@@ -131,12 +131,15 @@ class Level2Searcher:
         Returns:
             Filtered list of rows
         """
+        return rows
         filtered_rows = []
         
         target_area = filter_params.get('area')
         target_pitch = filter_params.get('predominant_pitch')
-        
+        print(f"target_area: {target_area}")
+        print(f"target_pitch: {target_pitch}")
         for row in rows:
+            print(f"row: {row}")
             try:
                 # Get metadata
                 metadata = row.get('metadata', {})
@@ -154,8 +157,10 @@ class Level2Searcher:
                 # Check area if provided AND field exists in metadata
                 if target_area is not None:
                     area_str = data.get('total_area', '')
+                    print(f"area_str: {area_str}")
                     if area_str:  # Only filter if area field exists
                         area_value = self.extract_numeric_value(area_str)
+                        print(f"area_value: {area_value}")
                         if area_value is not None:
                             # Calculate +/- 20% range
                             min_area = target_area * 0.8
@@ -299,7 +304,7 @@ class Level2Searcher:
             # Filter by both "Roof Measurements - All Structures" and "House Measurements"
             # Use '||' for OR operator in Milvus filter expressions
             section_filter = '(section == "Roof Measurements - All Structures" || section == "House Measurements")'
-            filter_expr = f"({property_filter}) && {section_filter}"
+            filter_expr = f"{property_filter}"
             
             logger.info(f"🔍 Level 2: Filter expression: {filter_expr}")
             logger.info(f"🔍 Level 2: Including sections: 'Roof Measurements - All Structures' and 'House Measurements'")
@@ -313,6 +318,7 @@ class Level2Searcher:
                 limit=limit * 2  # Get more to filter
             )
             
+            print(f"query_results: {query_results}")
             logger.info(f"🔍 Level 2: Found {len(query_results)} rows matching filter")
             
             # Log which sections were found
@@ -340,8 +346,9 @@ class Level2Searcher:
             
             # Re-rank by similarity score first, then by closeness to target values
             logger.info(f"🔍 Level 2: Re-ranking by similarity score (from Level 1) and closeness")
+            print(f"filtered_results: {filtered_results}")
             ranked_results = self.rank_by_closeness(filtered_results, filter_params, property_id_scores)
-            
+            print(f"ranked_results: {ranked_results}")
             # Include ALL results from both sections - no limit to ensure both sections are included
             final_results = ranked_results
             

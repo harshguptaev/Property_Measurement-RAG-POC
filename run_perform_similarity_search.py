@@ -171,7 +171,17 @@ class SimilaritySearchRunner:
             top_result = self._collect_top_result_details(combined_results)
             if top_result:
                 combined_results['top_result'] = top_result
-        
+
+        # Save results to file (needed for LLM summary generation)
+        output_file = "similarity_search_results.json"
+        with open(output_file, 'w') as f:
+            json.dump(combined_results, f, indent=2, default=str)
+        print(f"\n💾 Results saved to: {output_file}")
+
+        # Generate LLM summary if final_data.json exists
+        if lat_lon:
+            self._generate_llm_summary(combined_results, lat_lon)
+
         return combined_results
     
     def _collect_top_result_details(self, combined_results: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -232,10 +242,69 @@ class SimilaritySearchRunner:
             logger.info(f"   Level2 entries: {len(level2_matches)}")
             
             return top_result
-            
+
         except Exception as e:
             logger.error(f"❌ Error collecting top result details: {str(e)}")
             return None
+
+    def _generate_llm_summary(self, combined_results: Dict[str, Any], lat_lon: str):
+        """
+        Generate LLM summary using final_data.json and similarity results
+        """
+        try:
+            # Use absolute paths based on where files are actually saved
+            similarity_results_path = os.path.abspath("similarity_search_results.json")
+
+            # Use final_data.json from the lat_lon folder
+            house2_summary_path = os.path.abspath(f"final_data/{lat_lon}/final_data.json")
+            print(f"Looking for final_data.json at: {house2_summary_path}")
+
+            if os.path.exists(house2_summary_path):
+                print("\n🤖 Generating LLM Summary...")
+                print("=" * 60)
+
+                # Import here to avoid circular imports
+                from final_llm_result_generator import FinalLLMResultGenerator
+
+                # Use absolute paths for files
+                generator = FinalLLMResultGenerator(
+                    similarity_results_file=similarity_results_path,
+                    house2_summary_file=house2_summary_path,
+                    bedrock_region="us-east-1",
+                    bedrock_model="anthropic.claude-3-5-sonnet-20240620-v1:0"
+                )
+
+                # Generate comparison
+                comparison_result = generator.generate_comparison()
+
+                # Save comparison JSON
+                comparison_output = os.path.abspath("final_comparison_result.json")
+                generator.save_comparison(comparison_result, comparison_output)
+
+                # Generate LLM prompt
+                prompt = generator.generate_llm_prompt(comparison_result)
+
+                # Call LLM
+                llm_summary = generator.call_llm(prompt)
+
+                # Save LLM summary
+                llm_output_path = os.path.abspath("llm_summary_result.txt")
+                generator.save_llm_summary(llm_summary, llm_output_path)
+
+                print(f"\n✅ LLM Summary Generated")
+                print(f"💾 Comparison JSON saved to: {comparison_output}")
+                print(f"💾 LLM summary saved to: {llm_output_path}")
+                print(f"\n📝 Summary Preview (first 500 characters):")
+                print("-" * 60)
+                print(llm_summary[:500] + "..." if len(llm_summary) > 500 else llm_summary)
+
+            else:
+                print(f"\n⚠️ {house2_summary_path} not found. Skipping LLM summary generation.")
+
+        except Exception as e:
+            logger.warning(f"⚠️ LLM summary generation failed: {str(e)}")
+            print(f"⚠️ LLM summary generation failed: {str(e)}")
+            print("   Continuing without LLM summary...")
 
 
 def main():
@@ -331,75 +400,6 @@ def main():
         perform_level2=not args.no_level2
     )
     
-    # Save results to JSON file
-    output_file = "similarity_search_results.json"
-    with open(output_file, 'w') as f:
-        json.dump(results, f, indent=2, default=str)  # default=str for any non-serializable types
-    print(f"\n💾 Results saved to: {output_file}")
-    
-    # Automatically generate LLM summary if final_data.json exists
-    # Use absolute paths based on where files are actually saved
-    similarity_results_path = os.path.abspath(output_file)  # Saved in current working directory
-
-    # Use final_data.json from the lat_lon folder if provided (from function call or args)
-    lat_lon_param = lat_lon or getattr(args, 'lat_lon', None)
-    if lat_lon_param:
-        house2_summary_path = os.path.abspath(f"final_data/{lat_lon_param}/final_data.json")
-        print(f"Looking for final_data.json at: {house2_summary_path}")
-    else:
-        # Fallback: look for final_data.json in current directory
-        house2_summary_file = "final_data.json"
-        house2_summary_path = os.path.abspath(house2_summary_file)
-        if not os.path.exists(house2_summary_path):
-            # Try parent directory (where the script is typically run from)
-            parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            house2_summary_path = os.path.join(parent_dir, house2_summary_file)
-
-    if os.path.exists(house2_summary_path):
-        print("\n🤖 Generating LLM Summary...")
-        print("=" * 60)
-        try:
-            # Use absolute paths for files
-            generator = FinalLLMResultGenerator(
-                similarity_results_file=similarity_results_path,
-                house2_summary_file=house2_summary_path,
-                bedrock_region="us-east-1",
-                bedrock_model="anthropic.claude-3-5-sonnet-20240620-v1:0"
-            )
-            
-            # Generate comparison
-            comparison_result = generator.generate_comparison()
-            
-            # Save comparison JSON (in current working directory)
-            comparison_output = os.path.abspath("final_comparison_result.json")
-            generator.save_comparison(comparison_result, comparison_output)
-            
-            # Generate LLM prompt
-            prompt = generator.generate_llm_prompt(comparison_result)
-            
-            # Call LLM
-            llm_summary = generator.call_llm(prompt)
-            
-            # Save LLM summary (in current working directory)
-            llm_output_path = os.path.abspath("llm_summary_result.txt")
-            generator.save_llm_summary(llm_summary, llm_output_path)
-            
-            print(f"\n✅ LLM Summary Generated")
-            print(f"💾 Comparison JSON saved to: {comparison_output}")
-            print(f"💾 LLM summary saved to: {llm_output_path}")
-            print(f"\n📝 Summary Preview (first 500 characters):")
-            print("-" * 60)
-            print(llm_summary[:500] + "..." if len(llm_summary) > 500 else llm_summary)
-            
-        except Exception as e:
-            logger.warning(f"⚠️ LLM summary generation failed: {str(e)}")
-            print(f"⚠️ LLM summary generation failed: {str(e)}")
-            print("   Continuing without LLM summary...")
-    else:
-        print(f"\n⚠️ {house2_summary_file} not found. Skipping LLM summary generation.")
-        print(f"   To generate LLM summary, ensure {house2_summary_file} exists in the current or parent directory.")
-
-
 if __name__ == "__main__":
     main()
 
