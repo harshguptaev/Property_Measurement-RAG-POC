@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_64360571",
+    "address": "3182 Rosedale Dr, Arnold, MO 63010",
+    "latitude": 38.4225434,
+    "longitude": -90.3888751,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_64360571",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "1",
+      "total_roof_facets": 6,
+      "structure_complexity": "Normal",
+      "estimated_attic": "2,106 sq ft",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_64360571",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,355 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "6/12",
+      "ridges": "77 ft",
+      "hips": "0 ft",
+      "valleys": "56 ft",
+      "rakes": "130 ft",
+      "eaves_starter": "81 ft",
+      "drip_edge": "211 ft",
+      "flashing": "2 ft",
+      "step_flashing": "2 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]

@@ -11,18 +11,6 @@
         "similarity_score": 0.892162561416626
       },
       {
-        "property_id": "PROP_66758308",
-        "address": "2833 Pinebrook Ct, Arnold, MO 63010",
-        "report_id": "66758308",
-        "similarity_score": 0.8841884136199951
-      },
-      {
-        "property_id": "PROP_64016168",
-        "address": "3018 BRENTMOOR DR, ARNOLD, MO 63010",
-        "report_id": "64016168",
-        "similarity_score": 0.8700529336929321
-      },
-      {
         "property_id": "PROP_64017010",
         "address": "2118 CHELSEA CT, ARNOLD, MO 63010-3764",
         "report_id": "64017010",
@@ -33,6 +21,18 @@
         "address": "2985 Melton drive, Arnold, MO 63010",
         "report_id": "64024785",
         "similarity_score": 0.8369435667991638
+      },
+      {
+        "property_id": "PROP_64012843",
+        "address": "3174 ROSEDALE DR, ARNOLD, MO 63010",
+        "report_id": "64012843",
+        "similarity_score": 0.8328589797019958
+      },
+      {
+        "property_id": "PROP_64360571",
+        "address": "3182 Rosedale Dr, Arnold, MO 63010",
+        "report_id": "64360571",
+        "similarity_score": 0.8267427086830139
       }
     ],
     "total_found": 5,
@@ -92,106 +92,6 @@
         "rank": 2
       },
       {
-        "property_id": "PROP_66758308",
-        "chunk_id": "C001",
-        "section": "House Measurements",
-        "type": "text",
-        "metadata": {
-          "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of 1,384 square feet. Roof consists of 4 separate facets with  obstructions. Building complexity rated as normal. Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
-          "data": {
-            "number_of_stories": "1",
-            "total_roof_facets": 4,
-            "structure_complexity": "Normal",
-            "estimated_attic": "1,384 sq ft",
-            "total_roof_obstructions": "",
-            "number_of_structures": 1
-          }
-        },
-        "similarity_score": 0.8841884136199951,
-        "closeness_score": 0.0,
-        "rank": 3
-      },
-      {
-        "property_id": "PROP_66758308",
-        "chunk_id": "C002",
-        "section": "Roof Measurements - All Structures",
-        "type": "text",
-        "metadata": {
-          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 1,459 sq sq ft. 4 roof facets. predominant pitch 4/12. ridge length 61 ft. valley length 32 ft. rake length 83 ft. eave length 77 ft. drip edge 160 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
-          "data": {
-            "structure": "All Structures",
-            "total_area": "1,459 sq ft",
-            "total_roof_facets": 4,
-            "predominant_pitch": "4/12",
-            "ridges": "61 ft",
-            "hips": "0 ft",
-            "valleys": "32 ft",
-            "rakes": "83 ft",
-            "eaves_starter": "77 ft",
-            "drip_edge": "160 ft",
-            "flashing": "0 ft",
-            "step_flashing": "0 ft",
-            "parapet_walls": "0 ft",
-            "roof_obstructions_perimeter": "",
-            "roof_obstructions_area": "",
-            "net_roof_area": ""
-          }
-        },
-        "similarity_score": 0.8841884136199951,
-        "closeness_score": 0.0,
-        "rank": 4
-      },
-      {
-        "property_id": "PROP_64016168",
-        "chunk_id": "C001",
-        "section": "House Measurements",
-        "type": "text",
-        "metadata": {
-          "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 5 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
-          "data": {
-            "number_of_stories": "1",
-            "total_roof_facets": 5,
-            "structure_complexity": "",
-            "estimated_attic": "",
-            "total_roof_obstructions": "",
-            "number_of_structures": 1
-          }
-        },
-        "similarity_score": 0.8700529336929321,
-        "closeness_score": 0.0,
-        "rank": 5
-      },
-      {
-        "property_id": "PROP_64016168",
-        "chunk_id": "C002",
-        "section": "Roof Measurements - All Structures",
-        "type": "text",
-        "metadata": {
-          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 1,722 sq sq ft. 5 roof facets. predominant pitch 4/12. ridge length 68 ft. valley length 37 ft. rake length 106 ft. eave length 85 ft. drip edge 191 ft. step flashing 16 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
-          "data": {
-            "structure": "All Structures",
-            "total_area": "1,722 sq ft",
-            "total_roof_facets": 5,
-            "predominant_pitch": "4/12",
-            "ridges": "68 ft",
-            "hips": "0 ft",
-            "valleys": "37 ft",
-            "rakes": "106 ft",
-            "eaves_starter": "85 ft",
-            "drip_edge": "191 ft",
-            "flashing": "0 ft",
-            "step_flashing": "16 ft",
-            "parapet_walls": "0 ft",
-            "roof_obstructions_perimeter": "",
-            "roof_obstructions_area": "",
-            "net_roof_area": ""
-          }
-        },
-        "similarity_score": 0.8700529336929321,
-        "closeness_score": 0.0,
-        "rank": 6
-      },
-      {
         "property_id": "PROP_64017010",
         "chunk_id": "C001",
         "section": "House Measurements",
@@ -209,7 +109,7 @@
         },
         "similarity_score": 0.8414420485496521,
         "closeness_score": 0.0,
-        "rank": 7
+        "rank": 3
       },
       {
         "property_id": "PROP_64017010",
@@ -239,7 +139,7 @@
         },
         "similarity_score": 0.8414420485496521,
         "closeness_score": 0.0,
-        "rank": 8
+        "rank": 4
       },
       {
         "property_id": "PROP_64024785",
@@ -259,7 +159,7 @@
         },
         "similarity_score": 0.8369435667991638,
         "closeness_score": 0.0,
-        "rank": 9
+        "rank": 5
       },
       {
         "property_id": "PROP_64024785",
@@ -288,6 +188,106 @@
           }
         },
         "similarity_score": 0.8369435667991638,
+        "closeness_score": 0.0,
+        "rank": 6
+      },
+      {
+        "property_id": "PROP_64012843",
+        "chunk_id": "C001",
+        "section": "House Measurements",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "House structural measurements and characteristics: 2 story building with estimated attic area of  square feet. Roof consists of 5 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+          "data": {
+            "number_of_stories": "2",
+            "total_roof_facets": 5,
+            "structure_complexity": "",
+            "estimated_attic": "",
+            "total_roof_obstructions": "",
+            "number_of_structures": 1
+          }
+        },
+        "similarity_score": 0.8328589797019958,
+        "closeness_score": 0.0,
+        "rank": 7
+      },
+      {
+        "property_id": "PROP_64012843",
+        "chunk_id": "C002",
+        "section": "Roof Measurements - All Structures",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,413 sq sq ft. 5 roof facets. predominant pitch 6/12. ridge length 79 ft. valley length 41 ft. rake length 114 ft. eave length 105 ft. drip edge 219 ft. step flashing 10 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+          "data": {
+            "structure": "All Structures",
+            "total_area": "2,413 sq ft",
+            "total_roof_facets": 5,
+            "predominant_pitch": "6/12",
+            "ridges": "79 ft",
+            "hips": "0 ft",
+            "valleys": "41 ft",
+            "rakes": "114 ft",
+            "eaves_starter": "105 ft",
+            "drip_edge": "219 ft",
+            "flashing": "0 ft",
+            "step_flashing": "10 ft",
+            "parapet_walls": "0 ft",
+            "roof_obstructions_perimeter": "",
+            "roof_obstructions_area": "",
+            "net_roof_area": ""
+          }
+        },
+        "similarity_score": 0.8328589797019958,
+        "closeness_score": 0.0,
+        "rank": 8
+      },
+      {
+        "property_id": "PROP_64360571",
+        "chunk_id": "C001",
+        "section": "House Measurements",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of 2,106 square feet. Roof consists of 6 separate facets with  obstructions. Building complexity rated as normal. Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+          "data": {
+            "number_of_stories": "1",
+            "total_roof_facets": 6,
+            "structure_complexity": "Normal",
+            "estimated_attic": "2,106 sq ft",
+            "total_roof_obstructions": "",
+            "number_of_structures": 1
+          }
+        },
+        "similarity_score": 0.8267427086830139,
+        "closeness_score": 0.0,
+        "rank": 9
+      },
+      {
+        "property_id": "PROP_64360571",
+        "chunk_id": "C002",
+        "section": "Roof Measurements - All Structures",
+        "type": "text",
+        "metadata": {
+          "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,355 sq sq ft. 6 roof facets. predominant pitch 6/12. ridge length 77 ft. valley length 56 ft. rake length 130 ft. eave length 81 ft. drip edge 211 ft. flashing 2 ft. step flashing 2 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+          "data": {
+            "structure": "All Structures",
+            "total_area": "2,355 sq ft",
+            "total_roof_facets": 6,
+            "predominant_pitch": "6/12",
+            "ridges": "77 ft",
+            "hips": "0 ft",
+            "valleys": "56 ft",
+            "rakes": "130 ft",
+            "eaves_starter": "81 ft",
+            "drip_edge": "211 ft",
+            "flashing": "2 ft",
+            "step_flashing": "2 ft",
+            "parapet_walls": "0 ft",
+            "roof_obstructions_perimeter": "",
+            "roof_obstructions_area": "",
+            "net_roof_area": ""
+          }
+        },
+        "similarity_score": 0.8267427086830139,
         "closeness_score": 0.0,
         "rank": 10
       }
@@ -347,106 +347,6 @@
       "rank": 2
     },
     {
-      "property_id": "PROP_66758308",
-      "chunk_id": "C001",
-      "section": "House Measurements",
-      "type": "text",
-      "metadata": {
-        "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of 1,384 square feet. Roof consists of 4 separate facets with  obstructions. Building complexity rated as normal. Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
-        "data": {
-          "number_of_stories": "1",
-          "total_roof_facets": 4,
-          "structure_complexity": "Normal",
-          "estimated_attic": "1,384 sq ft",
-          "total_roof_obstructions": "",
-          "number_of_structures": 1
-        }
-      },
-      "similarity_score": 0.8841884136199951,
-      "closeness_score": 0.0,
-      "rank": 3
-    },
-    {
-      "property_id": "PROP_66758308",
-      "chunk_id": "C002",
-      "section": "Roof Measurements - All Structures",
-      "type": "text",
-      "metadata": {
-        "semantic_text": "Comprehensive roof measurements and specifications: total roof area 1,459 sq sq ft. 4 roof facets. predominant pitch 4/12. ridge length 61 ft. valley length 32 ft. rake length 83 ft. eave length 77 ft. drip edge 160 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
-        "data": {
-          "structure": "All Structures",
-          "total_area": "1,459 sq ft",
-          "total_roof_facets": 4,
-          "predominant_pitch": "4/12",
-          "ridges": "61 ft",
-          "hips": "0 ft",
-          "valleys": "32 ft",
-          "rakes": "83 ft",
-          "eaves_starter": "77 ft",
-          "drip_edge": "160 ft",
-          "flashing": "0 ft",
-          "step_flashing": "0 ft",
-          "parapet_walls": "0 ft",
-          "roof_obstructions_perimeter": "",
-          "roof_obstructions_area": "",
-          "net_roof_area": ""
-        }
-      },
-      "similarity_score": 0.8841884136199951,
-      "closeness_score": 0.0,
-      "rank": 4
-    },
-    {
-      "property_id": "PROP_64016168",
-      "chunk_id": "C001",
-      "section": "House Measurements",
-      "type": "text",
-      "metadata": {
-        "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of  square feet. Roof consists of 5 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
-        "data": {
-          "number_of_stories": "1",
-          "total_roof_facets": 5,
-          "structure_complexity": "",
-          "estimated_attic": "",
-          "total_roof_obstructions": "",
-          "number_of_structures": 1
-        }
-      },
-      "similarity_score": 0.8700529336929321,
-      "closeness_score": 0.0,
-      "rank": 5
-    },
-    {
-      "property_id": "PROP_64016168",
-      "chunk_id": "C002",
-      "section": "Roof Measurements - All Structures",
-      "type": "text",
-      "metadata": {
-        "semantic_text": "Comprehensive roof measurements and specifications: total roof area 1,722 sq sq ft. 5 roof facets. predominant pitch 4/12. ridge length 68 ft. valley length 37 ft. rake length 106 ft. eave length 85 ft. drip edge 191 ft. step flashing 16 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
-        "data": {
-          "structure": "All Structures",
-          "total_area": "1,722 sq ft",
-          "total_roof_facets": 5,
-          "predominant_pitch": "4/12",
-          "ridges": "68 ft",
-          "hips": "0 ft",
-          "valleys": "37 ft",
-          "rakes": "106 ft",
-          "eaves_starter": "85 ft",
-          "drip_edge": "191 ft",
-          "flashing": "0 ft",
-          "step_flashing": "16 ft",
-          "parapet_walls": "0 ft",
-          "roof_obstructions_perimeter": "",
-          "roof_obstructions_area": "",
-          "net_roof_area": ""
-        }
-      },
-      "similarity_score": 0.8700529336929321,
-      "closeness_score": 0.0,
-      "rank": 6
-    },
-    {
       "property_id": "PROP_64017010",
       "chunk_id": "C001",
       "section": "House Measurements",
@@ -464,7 +364,7 @@
       },
       "similarity_score": 0.8414420485496521,
       "closeness_score": 0.0,
-      "rank": 7
+      "rank": 3
     },
     {
       "property_id": "PROP_64017010",
@@ -494,7 +394,7 @@
       },
       "similarity_score": 0.8414420485496521,
       "closeness_score": 0.0,
-      "rank": 8
+      "rank": 4
     },
     {
       "property_id": "PROP_64024785",
@@ -514,7 +414,7 @@
       },
       "similarity_score": 0.8369435667991638,
       "closeness_score": 0.0,
-      "rank": 9
+      "rank": 5
     },
     {
       "property_id": "PROP_64024785",
@@ -543,6 +443,106 @@
         }
       },
       "similarity_score": 0.8369435667991638,
+      "closeness_score": 0.0,
+      "rank": 6
+    },
+    {
+      "property_id": "PROP_64012843",
+      "chunk_id": "C001",
+      "section": "House Measurements",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "House structural measurements and characteristics: 2 story building with estimated attic area of  square feet. Roof consists of 5 separate facets with  obstructions. Building complexity rated as . Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+        "data": {
+          "number_of_stories": "2",
+          "total_roof_facets": 5,
+          "structure_complexity": "",
+          "estimated_attic": "",
+          "total_roof_obstructions": "",
+          "number_of_structures": 1
+        }
+      },
+      "similarity_score": 0.8328589797019958,
+      "closeness_score": 0.0,
+      "rank": 7
+    },
+    {
+      "property_id": "PROP_64012843",
+      "chunk_id": "C002",
+      "section": "Roof Measurements - All Structures",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,413 sq sq ft. 5 roof facets. predominant pitch 6/12. ridge length 79 ft. valley length 41 ft. rake length 114 ft. eave length 105 ft. drip edge 219 ft. step flashing 10 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+        "data": {
+          "structure": "All Structures",
+          "total_area": "2,413 sq ft",
+          "total_roof_facets": 5,
+          "predominant_pitch": "6/12",
+          "ridges": "79 ft",
+          "hips": "0 ft",
+          "valleys": "41 ft",
+          "rakes": "114 ft",
+          "eaves_starter": "105 ft",
+          "drip_edge": "219 ft",
+          "flashing": "0 ft",
+          "step_flashing": "10 ft",
+          "parapet_walls": "0 ft",
+          "roof_obstructions_perimeter": "",
+          "roof_obstructions_area": "",
+          "net_roof_area": ""
+        }
+      },
+      "similarity_score": 0.8328589797019958,
+      "closeness_score": 0.0,
+      "rank": 8
+    },
+    {
+      "property_id": "PROP_64360571",
+      "chunk_id": "C001",
+      "section": "House Measurements",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "House structural measurements and characteristics: 1 story building with estimated attic area of 2,106 square feet. Roof consists of 6 separate facets with  obstructions. Building complexity rated as normal. Key metrics include number of stories, attic space, roof complexity, and obstruction count for material estimation and structural assessment.",
+        "data": {
+          "number_of_stories": "1",
+          "total_roof_facets": 6,
+          "structure_complexity": "Normal",
+          "estimated_attic": "2,106 sq ft",
+          "total_roof_obstructions": "",
+          "number_of_structures": 1
+        }
+      },
+      "similarity_score": 0.8267427086830139,
+      "closeness_score": 0.0,
+      "rank": 9
+    },
+    {
+      "property_id": "PROP_64360571",
+      "chunk_id": "C002",
+      "section": "Roof Measurements - All Structures",
+      "type": "text",
+      "metadata": {
+        "semantic_text": "Comprehensive roof measurements and specifications: total roof area 2,355 sq sq ft. 6 roof facets. predominant pitch 6/12. ridge length 77 ft. valley length 56 ft. rake length 130 ft. eave length 81 ft. drip edge 211 ft. flashing 2 ft. step flashing 2 ft. Detailed breakdown includes total area, pitch information, ridge/hip/valley/rake measurements, eaves and drip edges, flashing details, obstruction calculations, and net area computations for accurate material estimation and roofing quotes.",
+        "data": {
+          "structure": "All Structures",
+          "total_area": "2,355 sq ft",
+          "total_roof_facets": 6,
+          "predominant_pitch": "6/12",
+          "ridges": "77 ft",
+          "hips": "0 ft",
+          "valleys": "56 ft",
+          "rakes": "130 ft",
+          "eaves_starter": "81 ft",
+          "drip_edge": "211 ft",
+          "flashing": "2 ft",
+          "step_flashing": "2 ft",
+          "parapet_walls": "0 ft",
+          "roof_obstructions_perimeter": "",
+          "roof_obstructions_area": "",
+          "net_roof_area": ""
+        }
+      },
+      "similarity_score": 0.8267427086830139,
       "closeness_score": 0.0,
       "rank": 10
     }
