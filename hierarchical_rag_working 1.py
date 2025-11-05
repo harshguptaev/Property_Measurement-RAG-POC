@@ -1512,7 +1512,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 lat = summary.get('latitude', 0)
                 lon = summary.get('longitude', 0)
                 lat_lon_str = f"{lat}_{lon}"
-                roof_overlay_path = f"final_data/{lat_lon_str}/top/roof_overlay_without_lengths.png"
+                roof_overlay_path = f"final_data/{lat_lon_str}/top/roof_outline_simplified.png"
                 
                 if os.path.exists(roof_overlay_path):
                     roof_overlay_chunk = {
