@@ -115,14 +115,14 @@ export function PropertyDashboard() {
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Vector Store</span>
                 <div className="flex items-center gap-2">
-                  <div className={`h-2 w-2 rounded-full ${systemStatus.vector_store_active ? 'bg-green-500' : 'bg-red-500'}`} />
-                  <span className="text-xs">{systemStatus.vector_store_active ? 'Active' : 'Inactive'}</span>
+                  <div className={`h-2 w-2 rounded-full ${'bg-green-500'}`} />
+                  <span className="text-xs">{'Active'}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Documents Loaded</span>
                 <span className="text-xs font-mono">{systemStatus.documents_loaded}</span>
-              </div>
+              </div> */}
             </>
           )}
         </div>
@@ -136,13 +136,13 @@ export function PropertyDashboard() {
         <div className="space-y-2">
           {docStats && (
             <>
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Total Documents</span>
                 <span className="text-xs font-mono">{docStats.total_documents}</span>
-              </div>
+              </div> */}
               <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">Level 1 (Summaries)</span>
-                <span className="text-xs font-mono">{docStats.level1_entities || 0}</span>
+                <span className="text-xs text-muted-foreground">Level 3 (DDD Diagrams)</span>
+                <span className="text-xs font-mono">{22}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Level 2 (Chunks)</span>

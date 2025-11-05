@@ -187,6 +187,34 @@ async def startup_event():
     else:
         logger.warning("⚠️  Hierarchical RAG system initialization failed, running in limited mode")
 
+@app.get("/pdf/{file_path:path}")
+async def serve_pdf(file_path: str):
+    """Serve PDF files from final_data directory."""
+    try:
+        # Construct the full path
+        full_path = Path("final_data") / file_path
+        
+        # Security check: ensure the path is within final_data directory
+        if not str(full_path.resolve()).startswith(str(Path("final_data").resolve())):
+            raise HTTPException(status_code=403, detail="Access denied")
+        
+        if not full_path.exists():
+            raise HTTPException(status_code=404, detail="PDF file not found")
+        
+        if not full_path.suffix.lower() == '.pdf':
+            raise HTTPException(status_code=400, detail="Not a PDF file")
+        
+        return FileResponse(
+            path=str(full_path),
+            media_type="application/pdf",
+            filename=full_path.name
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error serving PDF {file_path}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error serving PDF: {str(e)}")
+
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
     """Health check endpoint."""
@@ -311,6 +339,38 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                 }
             }
             sources.append(source_info)
+
+        # Process all PDF chunks
+        pdf_chunks = [r for r in search_results if r.get("chunk_type") == "pdf" or r.get("type") == "pdf"]
+        for result in pdf_chunks:
+            chunk_text = result.get("chunk_text", "")
+            pdf_path = result.get("pdf_path", "")
+            pdf_filename = result.get("pdf_filename", "")
+            
+            # Extract PDF path from chunk_text if not directly available
+            if not pdf_path and 'pdf_file:' in chunk_text:
+                lines = chunk_text.split('\n')
+                for line in lines:
+                    if line.startswith('pdf_file:'):
+                        pdf_path = line.split('pdf_file:')[1].strip()
+                        break
+            
+            if pdf_path:
+                # Level 2 chunk info for PDF
+                chunk_info = {
+                    "chunk_id": result.get("chunk_id"),
+                    "section": result.get("section", "PDF Report"),
+                    "chunk_type": "pdf",
+                    "content": result.get("chunk_text", "PDF Report available"),
+                    "distance": result.get("distance", 1.0),
+                    "pdf_path": pdf_path,
+                    "pdf_filename": pdf_filename or pdf_path.split('/')[-1],
+                    "doc_address": result.get("doc_address", "Unknown Address"),
+                    "description": result.get("data", {}).get("description", "Property analysis report")
+                }
+                level2_chunks.append(chunk_info)
+                sources.append(chunk_info)
+                logger.info(f"Added PDF chunk: {pdf_path}")
 
         # Process all image chunks (important for frontend display)
         for result in image_chunks:

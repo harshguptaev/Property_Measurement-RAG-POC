@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ImageIcon, FileTextIcon, MapPinIcon, RulerIcon, Maximize2 } from "lucide-react";
+import { ImageIcon, FileTextIcon, MapPinIcon, RulerIcon, Maximize2, Download, FileCheck } from "lucide-react";
 
 interface ImageData {
   section: string;
@@ -50,6 +50,23 @@ export function ShowResultsButton({
     return `/${p}`;
   };
 
+  const resolvePdfUrl = (p?: string) => {
+    if (!p) return '';
+    if (p.startsWith('http://') || p.startsWith('https://')) return p;
+    if (p.startsWith('final_data/')) {
+      return `http://localhost:8001/pdf/${p.replace('final_data/', '')}`;
+    }
+    return `http://localhost:8001/pdf/${p}`;
+  };
+
+  // Separate PDFs from images, excluding any PDFs with "Unknown Address"
+  const pdfResults = searchResults.filter(r => 
+    r.chunk_type === 'pdf' && 
+    r.doc_address !== 'Unknown Address' &&
+    r.pdf_path // Must have a valid pdf_path
+  );
+  const totalPdfs = pdfResults.length;
+
   const totalImages = imagesAvailable.length;
 
   const totalResults = searchResults.length;
@@ -58,6 +75,11 @@ export function ShowResultsButton({
     return null;
   }
   console.log("imagesAvailable", imagesAvailable)
+  console.log("pdfResults", pdfResults)
+  if (pdfResults.length > 0) {
+    console.log("First PDF path:", pdfResults[0].pdf_path)
+    console.log("Resolved PDF URL:", resolvePdfUrl(pdfResults[0].pdf_path))
+  }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -67,7 +89,7 @@ export function ShowResultsButton({
           size="sm"
         >
           <ImageIcon className="w-4 h-4 mr-2" />
-          Show Results ({totalImages} images, {totalResults} chunks)
+          Show Results ({totalImages} images{totalPdfs > 0 ? `, ${totalPdfs} PDFs` : ''}, {totalResults} chunks)
         </Button>
       </DialogTrigger>
       
@@ -79,8 +101,14 @@ export function ShowResultsButton({
           </DialogTitle>
         </DialogHeader>
         
-        <Tabs defaultValue="images" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue={totalPdfs > 0 ? "pdfs" : "images"} className="w-full">
+          <TabsList className={`grid w-full ${totalPdfs > 0 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+            {totalPdfs > 0 && (
+              <TabsTrigger value="pdfs" className="flex items-center gap-2">
+                <FileCheck className="w-4 h-4" />
+                PDFs ({totalPdfs})
+              </TabsTrigger>
+            )}
             <TabsTrigger value="images" className="flex items-center gap-2">
               <ImageIcon className="w-4 h-4" />
               Images ({totalImages})
@@ -90,6 +118,68 @@ export function ShowResultsButton({
               Search Results ({totalResults})
             </TabsTrigger>
           </TabsList>
+          
+          {totalPdfs > 0 && (
+            <TabsContent value="pdfs" className="mt-4 max-h-[70vh] overflow-y-auto">
+              <div className="space-y-4">
+                {pdfResults.map((pdf, index) => (
+                  <Card key={index}>
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <FileCheck className="w-5 h-5" />
+                        {pdf.section || 'Property Report (PDF)'}
+                      </CardTitle>
+                      <p className="text-sm text-muted-foreground">{pdf.doc_address || 'Unknown Address'}</p>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-sm">{pdf.description || 'Comprehensive property analysis report'}</p>
+                      
+                      <div className="flex gap-2">
+                        <Button 
+                          onClick={() => {
+                            const url = resolvePdfUrl(pdf.pdf_path);
+                            console.log('Opening PDF URL:', url);
+                            if (url && url !== '') {
+                              window.open(url, '_blank');
+                            } else {
+                              console.error('PDF URL is empty or undefined:', pdf);
+                              alert('PDF path is missing. Please check the console for details.');
+                            }
+                          }}
+                          className="flex items-center gap-2"
+                        >
+                          <FileCheck className="w-4 h-4" />
+                          View PDF
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          onClick={() => {
+                            const url = resolvePdfUrl(pdf.pdf_path);
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = pdf.pdf_filename || 'report.pdf';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
+                          className="flex items-center gap-2"
+                        >
+                          <Download className="w-4 h-4" />
+                          Download PDF
+                        </Button>
+                      </div>
+
+                      {pdf.pdf_filename && (
+                        <p className="text-xs text-muted-foreground">
+                          Filename: {pdf.pdf_filename}
+                        </p>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          )}
           
           <TabsContent value="images" className="mt-4 max-h-[70vh] overflow-y-auto">
             {imagesAvailable && imagesAvailable.length > 0 ? (

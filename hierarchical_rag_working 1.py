@@ -1501,8 +1501,7 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 },
                 "distance": 0.0,
                 "doc_address": summary.get('address', 'Unknown'),
-                "report_id": f"FLOW3_{summary.get('latitude', 0)}_{summary.get('longitude', 0)}",
-                "pdf_filename": "flow3_generated_report"
+                "report_id": f"FLOW3_{summary.get('latitude', 0)}_{summary.get('longitude', 0)}"
             }
 
             results = [flow3_chunk]
@@ -1539,6 +1538,50 @@ Provide a clear, structured summary in 2-3 sentences:"""
                     logger.warning(f"Generated roof overlay not found: {roof_overlay_path}")
             except Exception as e:
                 logger.error(f"Error adding roof overlay chunk: {e}")
+
+            # Add generated PDF report from Flow 3
+            try:
+                lat = summary.get('latitude', 0)
+                lon = summary.get('longitude', 0)
+                lat_lon_str = f"{lat}_{lon}"
+                final_data_folder = f"final_data/{lat_lon_str}"
+                
+                # Find the PDF file in the folder (there should be only one)
+                if os.path.exists(final_data_folder):
+                    pdf_files = [f for f in os.listdir(final_data_folder) if f.endswith('.pdf')]
+                    if pdf_files:
+                        pdf_filename = pdf_files[0]  # Take the first (and should be only) PDF
+                        pdf_path = f"{final_data_folder}/{pdf_filename}"
+                        
+                        pdf_chunk = {
+                            "chunk_id": f"flow3_pdf_report_{lat}_{lon}",
+                            "property_id": f"FLOW3_{lat}_{lon}",
+                            "section": "Generated Property Report (PDF)",
+                            "chunk_type": "pdf",
+                            "type": "pdf",
+                            "chunk_text": f"Property Report PDF\nProperty: {summary.get('address', 'Unknown')}\nComprehensive roof analysis report\npdf_file: {pdf_path}",
+                            "data": {
+                                "PDF Report": pdf_path,
+                                "description": f"Comprehensive roof analysis report for {summary.get('address', 'Unknown')}",
+                                "latitude": lat,
+                                "longitude": lon,
+                                "property_address": summary.get('address', 'Unknown'),
+                                "filename": pdf_filename
+                            },
+                            "distance": 0.0,
+                            "doc_address": summary.get('address', 'Unknown'),
+                            "report_id": f"FLOW3_{lat}_{lon}",
+                            "pdf_path": pdf_path,
+                            "pdf_filename": pdf_filename
+                        }
+                        results.append(pdf_chunk)
+                        logger.info(f"Added generated PDF report: {pdf_path}")
+                    else:
+                        logger.warning(f"No PDF files found in: {final_data_folder}")
+                else:
+                    logger.warning(f"Final data folder not found: {final_data_folder}")
+            except Exception as e:
+                logger.error(f"Error adding PDF report chunk: {e}")
 
             # Add DDD diagram image chunks from similarity search results
             try:
