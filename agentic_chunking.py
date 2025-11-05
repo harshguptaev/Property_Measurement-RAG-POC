@@ -58,25 +58,25 @@ def start_chunking():
     # report_ids = [64053749,64048796,64046823,64045243,64043072,64024785, 64023965, 64020821, 64019882, 64017010, 64016168, 64010425, 64008455, 64007311]
     # report_ids = [64024785, 64023965, 64020821, 64019882, 64017010, 64016168, 64012843, 64010843, 64010574, 64010425, 64008455, 64007311]
     # report_ids = [66758308, 64895822, 64892357, 64010574, 64010843, 64012843]
-    report_ids = [64895822]
+    report_ids = [58095818]
     print(f"Starting to process {len(report_ids)} reports: {report_ids}")
 
     for i, report_id in enumerate(report_ids, 1):
         print(f"Processing report {i}/{len(report_ids)}: {report_id}")
         try:
-            # export_data_for_report(str(report_id))
-            # export_chunk_data_for_report(str(report_id))
-            # print(f"✅ Completed report {report_id}")
+            export_data_for_report(str(report_id))
+            export_chunk_data_for_report(str(report_id))
+            print(f"✅ Completed report {report_id}")
 
             # Preprocess image (dd.png or similar)
             # Look for image to preprocess in the report directory
-            # print(f"Preprocessing image for report {report_id}")
-            # preprocess_image(str(report_id))
-            # print(f"✅ Image preprocessing completed for report {report_id}")
+            print(f"Preprocessing image for report {report_id}")
+            preprocess_image(str(report_id))
+            print(f"✅ Image preprocessing completed for report {report_id}")
 
             # upload DDD to s3 bucket (not required may be)
-            # s3_url = upload_ddd_to_s3(str(report_id))
-            # print(f"DDD uploaded to s3 bucket: {s3_url}")
+            s3_url = upload_ddd_to_s3(str(report_id))
+            print(f"DDD uploaded to s3 bucket: {s3_url}")
 
             # Create embeddings for the processed image
             create_embeddings_for_report(str(report_id))

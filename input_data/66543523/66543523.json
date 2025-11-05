@@ -1,0 +1,47 @@
+[
+  {
+    "property_id": "PROP_66543523",
+    "address": "2116 CHAUCER LN, ARNOLD, MO 63010-3738",
+    "latitude": 38.418115,
+    "longitude": -90.3965431,
+    "owner": ""
+  },
+  {
+    "chunk_id": "C001",
+    "property_id": "PROP_66543523",
+    "section": "House Measurements",
+    "type": "text",
+    "data": {
+      "number_of_stories": "",
+      "total_roof_facets": 6,
+      "structure_complexity": "",
+      "estimated_attic": "",
+      "total_roof_obstructions": "",
+      "number_of_structures": 1
+    }
+  },
+  {
+    "chunk_id": "C002",
+    "property_id": "PROP_66543523",
+    "section": "Roof Measurements - All Structures",
+    "type": "text",
+    "data": {
+      "structure": "All Structures",
+      "total_area": "2,527 sq ft",
+      "total_roof_facets": 6,
+      "predominant_pitch": "5/12",
+      "ridges": "80 ft",
+      "hips": "0 ft",
+      "valleys": "56 ft",
+      "rakes": "135 ft",
+      "eaves_starter": "89 ft",
+      "drip_edge": "224 ft",
+      "flashing": "2 ft",
+      "step_flashing": "3 ft",
+      "parapet_walls": "0 ft",
+      "roof_obstructions_perimeter": "",
+      "roof_obstructions_area": "",
+      "net_roof_area": ""
+    }
+  }
+]
