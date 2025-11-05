@@ -24,6 +24,7 @@ class LLMResponseHandlers:
         """
         self.bedrock_client = bedrock_client
         self.model_id = model_id
+        self.DDDImageFilesToShow = []  # Store DDD diagram paths for Flow 3
 
     def _create_fallback_response(self, query: str, results: List[Dict]) -> str:
         """
@@ -383,6 +384,32 @@ Provide a comparative analysis that helps the customer understand roofing specif
         """
         try:
             import os
+            import json
+
+            # Extract DDD diagram paths from similarity search results
+            self.DDDImageFilesToShow = []
+            similarity_file = "similarity_search_results.json"
+            if os.path.exists(similarity_file):
+                try:
+                    with open(similarity_file, 'r', encoding='utf-8') as f:
+                        similarity_data = json.load(f)
+
+                    # Get first min(3, number of matches) from matches array
+                    matches = similarity_data.get('level1', {}).get('matches', [])
+                    num_matches = min(3, len(matches))
+
+                    for i in range(num_matches):
+                        report_id = matches[i].get('report_id')
+                        if report_id:
+                            ddd_path = f"input_data/{report_id}/processed_DDD.png"
+                            self.DDDImageFilesToShow.append(ddd_path)
+                            print(f"📊 Added DDD diagram path: {ddd_path}")
+
+                    print(f"✅ Found {len(self.DDDImageFilesToShow)} DDD diagram paths for Flow 3")
+
+                except Exception as e:
+                    print(f"⚠️ Could not extract DDD paths from similarity results: {e}")
+
             # Read the LLM summary text from file
             llm_summary_path = "llm_summary_result.txt"
             if os.path.exists(llm_summary_path):

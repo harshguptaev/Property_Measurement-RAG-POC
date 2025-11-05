@@ -40,6 +40,12 @@ export function ShowResultsButton({
     if (p.startsWith('extracted_images/')) {
       return `http://localhost:8001/images/${p.replace('extracted_images/', '')}`;
     }
+    if (p.startsWith('input_data/')) {
+      return `http://localhost:8001/input_data_images/${p.replace('input_data/', '')}`;
+    }
+    if (p.startsWith('final_data/')) {
+      return `http://localhost:8001/final_data_images/${p.replace('final_data/', '')}`;
+    }
     if (p.startsWith('/')) return p;
     return `/${p}`;
   };

@@ -114,45 +114,45 @@ def run_flow_for_address(address: str) -> dict:
     }
     # Try to get area from area.json
     area_json_path = os.path.join(final_data_dir, "area.json")
-    # if os.path.exists(area_json_path):
-    #     try:
-    #         with open(area_json_path, 'r') as f:
-    #             area_data = json.load(f)
-    #         final_data["area_json"] = area_data
-    #         if isinstance(area_data, dict) and "total_sqft" in area_data:
-    #             final_data["area"] = area_data["total_sqft"]
-    #         elif isinstance(area_data, (int, float)):
-    #             final_data["area"] = area_data
-    #     except Exception as e:
-    #         print(f"Warning: Could not read area from {area_json_path}: {e}")
+    if os.path.exists(area_json_path):
+        try:
+            with open(area_json_path, 'r') as f:
+                area_data = json.load(f)
+            final_data["area_json"] = area_data
+            if isinstance(area_data, dict) and "total_sqft" in area_data:
+                final_data["area"] = area_data["total_sqft"] + area_data["total_sqft"] * 0.075
+            elif isinstance(area_data, (int, float)):
+                final_data["area"] = area_data + area_data * 0.075
+        except Exception as e:
+            print(f"Warning: Could not read area from {area_json_path}: {e}")
 
     # Count line types from top_outline.json
-    # if os.path.exists(top_outline_path):
-    #     try:
-    #         with open(top_outline_path, 'r') as f:
-    #             outline_data = json.load(f)
+    if os.path.exists(top_outline_path):
+        try:
+            with open(top_outline_path, 'r') as f:
+                outline_data = json.load(f)
 
-    #         predictions = outline_data.get("predictions", [])
-    #         for prediction in predictions:
-    #             line_class = prediction.get("class", "").lower()
-    #             if line_class == "ridge":
-    #                 final_data["num_of_ridges"] += 1
-    #             elif line_class == "eave":
-    #                 final_data["num_of_eaves"] += 1
-    #             elif line_class == "rake":
-    #                 final_data["num_of_rakes"] += 1
-    #             elif line_class == "valley":
-    #                 final_data["num_of_valleys"] += 1
-    #             elif line_class == "hip":
-    #                 final_data["num_of_hips"] += 1
-    #             elif line_class == "flashing":
-    #                 final_data["num_of_flashing"] += 1
+            predictions = outline_data.get("predictions", [])
+            for prediction in predictions:
+                line_class = prediction.get("class", "").lower()
+                if line_class == "ridge":
+                    final_data["num_of_ridges"] += 1
+                elif line_class == "eave":
+                    final_data["num_of_eaves"] += 1
+                elif line_class == "rake":
+                    final_data["num_of_rakes"] += 1
+                elif line_class == "valley":
+                    final_data["num_of_valleys"] += 1
+                elif line_class == "hip":
+                    final_data["num_of_hips"] += 1
+                elif line_class == "flashing":
+                    final_data["num_of_flashing"] += 1
 
-    #         print(f"Counted line types from {top_outline_path}")
-    #     except Exception as e:
-    #         print(f"Warning: Could not read line counts from {top_outline_path}: {e}")
-    # else:
-    #     print(f"Warning: {top_outline_path} not found, line counts will be 0")
+            print(f"Counted line types from {top_outline_path}")
+        except Exception as e:
+            print(f"Warning: Could not read line counts from {top_outline_path}: {e}")
+    else:
+        print(f"Warning: {top_outline_path} not found, line counts will be 0")
 
     # Save final_data.json
     final_json_path = os.path.join(final_data_dir, "final_data.json")
@@ -232,6 +232,8 @@ def run_flow_for_address(address: str) -> dict:
         if results.get('success', False):
             print("✅ Similarity search completed successfully")
             print(f"📊 Found {len(results.get('final_results', []))} similar properties")
+            similarity_file = "similarity_search_results.json"
+            
         else:
             print("⚠️ Similarity search completed but may have issues")
             if results.get('errors'):

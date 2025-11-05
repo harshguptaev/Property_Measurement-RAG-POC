@@ -61,6 +61,16 @@ extracted_images_path = Path("extracted_images")
 if extracted_images_path.exists():
     app.mount("/images", StaticFiles(directory=str(extracted_images_path)), name="images")
 
+# Mount input_data folder for DDD diagrams and other input images
+input_data_path = Path("input_data")
+if input_data_path.exists():
+    app.mount("/input_data_images", StaticFiles(directory=str(input_data_path)), name="input_data_images")
+
+# Mount final_data folder for generated roof overlays and analysis results
+final_data_path = Path("final_data")
+if final_data_path.exists():
+    app.mount("/final_data_images", StaticFiles(directory=str(final_data_path)), name="final_data_images")
+
 # Global variables
 hierarchical_rag = None
 documents_loaded = 0
@@ -324,6 +334,18 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                     import re
                     matches = re.findall(r'extracted_images/[^,\s\]]+\.png', line)
                     image_paths.extend(matches)
+                
+                # Also look for input_data/ paths (for DDD diagrams)
+                if 'input_data/' in line:
+                    import re
+                    matches = re.findall(r'input_data/[^,\s\]]+\.png', line)
+                    image_paths.extend(matches)
+                
+                # Also look for final_data/ paths (for generated roof overlays)
+                if 'final_data/' in line:
+                    import re
+                    matches = re.findall(r'final_data/[^,\s\]]+\.png', line)
+                    image_paths.extend(matches)
 
                 if line.startswith('description:'):
                     description = line.split('description:')[1].strip()
@@ -347,7 +369,9 @@ async def process_query(request: Request, request_data: Optional[QueryRequest] =
                         'East_Side': '➡️ East Side View',
                         'West_Side': '⬅️ West Side View',
                         'Cover_Image': '🏠 Cover/Overview Image',
-                        'Structure_Summary': '📋 Structure Summary'
+                        'Structure_Summary': '📋 Structure Summary',
+                        'processed_DDD': '📐 DDD Diagram (Similar Property)',
+                        'roof_overlay_without_lengths': '🏠 Generated Roof Overlay'
                     }
 
                     display_title = title_mappings.get(filename, result.get("section", "Unknown Image"))

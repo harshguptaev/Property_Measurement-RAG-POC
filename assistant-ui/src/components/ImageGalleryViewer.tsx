@@ -99,8 +99,20 @@ export function ImageGalleryViewer({ onClose }: ImageGalleryViewerProps) {
       process.env.RAG_BACKEND_URL ||
       "http://localhost:8001";
     
-    const cleanPath = imagePath.replace(/^extracted_images\//, '');
-    return `${backendUrl}/images/${cleanPath}`;
+    // Handle different image path formats
+    if (imagePath.startsWith('input_data/')) {
+      const cleanPath = imagePath.replace(/^input_data\//, '');
+      return `${backendUrl}/input_data_images/${cleanPath}`;
+    } else if (imagePath.startsWith('final_data/')) {
+      const cleanPath = imagePath.replace(/^final_data\//, '');
+      return `${backendUrl}/final_data_images/${cleanPath}`;
+    } else if (imagePath.startsWith('extracted_images/')) {
+      const cleanPath = imagePath.replace(/^extracted_images\//, '');
+      return `${backendUrl}/images/${cleanPath}`;
+    }
+    
+    // Fallback for other paths
+    return `${backendUrl}/images/${imagePath}`;
   };
 
   if (loading) {

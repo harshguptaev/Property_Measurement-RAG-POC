@@ -1,82 +1,96 @@
 {
   "property1": {
     "label": "Similar Property (Rank 1)",
-    "property_id": "PROP_64024785",
-    "address": "2985 Melton drive, Arnold, MO 63010",
-    "report_id": "64024785",
-    "similarity_score": 0.86480313539505,
+    "property_id": "PROP_64895822",
+    "address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
+    "report_id": "64895822",
+    "similarity_score": 0.892162561416626,
     "measurements": {
-      "total_area_sqft": 1741.0,
-      "total_area": "1,741 sq ft",
-      "predominant_pitch": "4/12",
-      "predominant_pitch_degrees": 18.43494882292201,
-      "num_of_facets": 4,
-      "num_of_ridges": 3,
+      "total_area_sqft": 2780.0,
+      "total_area": "2,780 sq ft",
+      "predominant_pitch": "6/12",
+      "predominant_pitch_degrees": 26.565051177077994,
+      "num_of_facets": 6,
+      "num_of_ridges": 4,
       "num_of_eaves": 8,
-      "num_of_rakes": 7,
-      "num_of_valleys": 1,
+      "num_of_rakes": 11,
+      "num_of_valleys": 3,
       "num_of_hips": null,
       "num_of_flashing": null,
       "number_of_stories": "1",
-      "structure_complexity": "Normal",
-      "estimated_attic": "1,671 sq ft",
+      "structure_complexity": "",
+      "estimated_attic": "",
       "total_roof_obstructions": ""
     }
   },
   "property2": {
     "label": "Query Property",
-    "address": "2833 Pinebrook Ct, Arnold, MO 63010",
-    "latitude": 38.416443,
-    "longitude": -90.40424,
+    "address": "2019 ROSEDALE CT, ARNOLD, MO 63010",
+    "latitude": 38.422248,
+    "longitude": -90.387772,
     "measurements": {
-      "total_area_sqft": null,
-      "predominant_pitch_degrees": 4.21044921875,
-      "num_of_facets": 4,
-      "num_of_ridges": 0,
-      "num_of_eaves": 0,
-      "num_of_rakes": 0,
-      "num_of_valleys": 0,
+      "total_area_sqft": 2148.185475383129,
+      "predominant_pitch_degrees": 5.7177734375,
+      "num_of_facets": 6,
+      "num_of_ridges": 3,
+      "num_of_eaves": 6,
+      "num_of_rakes": 9,
+      "num_of_valleys": 4,
       "num_of_hips": 0,
       "num_of_flashing": 0,
-      "area_json": {}
+      "area_json": {
+        "facet1": 901.1313318569579,
+        "facet2": 636.6210842983825,
+        "facet3": 195.13227930233884,
+        "facet4": 192.17859052937698,
+        "facet5": 34.71595845481201,
+        "facet6": 38.532825681972774,
+        "total_sqft": 1998.312070123841
+      }
     }
   },
   "differences": {
+    "area": {
+      "property1": 2780.0,
+      "property2": 2148.185475383129,
+      "difference": -631.814524616871,
+      "difference_percent": -22.73
+    },
     "pitch": {
-      "property1": 18.4349,
-      "property2": 4.2104,
-      "difference_degrees": -14.2245
+      "property1": 26.5651,
+      "property2": 5.7178,
+      "difference_degrees": -20.8473
     },
     "facets": {
-      "property1": 4,
-      "property2": 4,
+      "property1": 6,
+      "property2": 6,
       "difference": 0
     },
     "ridges": {
-      "property1": 3,
-      "property2": 0,
-      "difference": -3
+      "property1": 4,
+      "property2": 3,
+      "difference": -1
     },
     "eaves": {
       "property1": 8,
-      "property2": 0,
-      "difference": -8
+      "property2": 6,
+      "difference": -2
     },
     "rakes": {
-      "property1": 7,
-      "property2": 0,
-      "difference": -7
+      "property1": 11,
+      "property2": 9,
+      "difference": -2
     },
     "valleys": {
-      "property1": 1,
-      "property2": 0,
-      "difference": -1
+      "property1": 3,
+      "property2": 4,
+      "difference": 1
     }
   },
   "summary": {
-    "property1_address": "2985 Melton drive, Arnold, MO 63010",
-    "property2_address": "2833 Pinebrook Ct, Arnold, MO 63010",
-    "similarity_score": 0.86480313539505,
-    "total_comparisons": 6
+    "property1_address": "2439 TRIBUTE DR, ARNOLD, MO 63010-2585",
+    "property2_address": "2019 ROSEDALE CT, ARNOLD, MO 63010",
+    "similarity_score": 0.892162561416626,
+    "total_comparisons": 7
   }
 }

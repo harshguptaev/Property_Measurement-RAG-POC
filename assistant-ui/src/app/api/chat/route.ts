@@ -109,6 +109,10 @@ export async function POST(req: NextRequest) {
         const base = new URL(ragBackendUrl);
         if (p.startsWith('extracted_images/')) return `${base.origin}/images/${p.replace('extracted_images/', '')}`;
         if (p.startsWith('/extracted_images/')) return `${base.origin}/images/${p.replace('/extracted_images/', '')}`;
+        if (p.startsWith('input_data/')) return `${base.origin}/input_data_images/${p.replace('input_data/', '')}`;
+        if (p.startsWith('/input_data/')) return `${base.origin}/input_data_images/${p.replace('/input_data/', '')}`;
+        if (p.startsWith('final_data/')) return `${base.origin}/final_data_images/${p.replace('final_data/', '')}`;
+        if (p.startsWith('/final_data/')) return `${base.origin}/final_data_images/${p.replace('/final_data/', '')}`;
         if (p.startsWith('/')) return `${base.origin}${p}`;
         return `${base.origin}/${p}`;
       };
@@ -222,10 +226,24 @@ export async function POST(req: NextRequest) {
                             imagePaths.push(match[0]);
                           }
                         }
+                        // Also look for input_data/ paths (DDD diagrams)
+                        if (line.includes('input_data/')) {
+                          const match = line.match(/input_data\/[^,\s\]]+\.png/);
+                          if (match) {
+                            imagePaths.push(match[0]);
+                          }
+                        }
+                        // Also look for final_data/ paths (generated roof overlays)
+                        if (line.includes('final_data/')) {
+                          const match = line.match(/final_data\/[^,\s\]]+\.png/);
+                          if (match) {
+                            imagePaths.push(match[0]);
+                          }
+                        }
                         // Also check for image_file: format
                         if (line.includes('image_file:')) {
                           const pathMatch = line.split('image_file:')[1]?.trim();
-                          if (pathMatch && pathMatch.includes('extracted_images/')) {
+                          if (pathMatch && (pathMatch.includes('extracted_images/') || pathMatch.includes('input_data/') || pathMatch.includes('final_data/'))) {
                             imagePaths.push(pathMatch);
                           }
                         }

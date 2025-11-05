@@ -1505,7 +1505,94 @@ Provide a clear, structured summary in 2-3 sentences:"""
                 "pdf_filename": "flow3_generated_report"
             }
 
-            return [flow3_chunk]
+            results = [flow3_chunk]
+
+            # Add generated roof overlay image from Flow 3
+            try:
+                lat = summary.get('latitude', 0)
+                lon = summary.get('longitude', 0)
+                lat_lon_str = f"{lat}_{lon}"
+                roof_overlay_path = f"final_data/{lat_lon_str}/top/roof_overlay_without_lengths.png"
+                
+                if os.path.exists(roof_overlay_path):
+                    roof_overlay_chunk = {
+                        "chunk_id": f"flow3_roof_overlay_{lat}_{lon}",
+                        "property_id": f"FLOW3_{lat}_{lon}",
+                        "section": "Generated Roof Overlay",
+                        "chunk_type": "image",
+                        "type": "image",
+                        "chunk_text": f"Generated Roof Overlay\nProperty: {summary.get('address', 'Unknown')}\nGenerated from aerial imagery analysis\nimage_file: {roof_overlay_path}",
+                        "data": {
+                            "Roof Overlay": roof_overlay_path,
+                            "description": f"AI-generated roof overlay showing detected roof structure for {summary.get('address', 'Unknown')}",
+                            "latitude": lat,
+                            "longitude": lon,
+                            "property_address": summary.get('address', 'Unknown')
+                        },
+                        "distance": 0.0,
+                        "doc_address": summary.get('address', 'Unknown'),
+                        "report_id": f"FLOW3_{lat}_{lon}"
+                    }
+                    results.append(roof_overlay_chunk)
+                    logger.info(f"Added generated roof overlay: {roof_overlay_path}")
+                else:
+                    logger.warning(f"Generated roof overlay not found: {roof_overlay_path}")
+            except Exception as e:
+                logger.error(f"Error adding roof overlay chunk: {e}")
+
+            # Add DDD diagram image chunks from similarity search results
+            try:
+                import json
+                similarity_file = "similarity_search_results.json"
+                if os.path.exists(similarity_file):
+                    with open(similarity_file, 'r', encoding='utf-8') as f:
+                        similarity_data = json.load(f)
+
+                    # Get first min(3, number of matches) from matches array
+                    matches = similarity_data.get('level1', {}).get('matches', [])
+                    num_matches = min(3, len(matches))
+
+                    for i in range(num_matches):
+                        match = matches[i]
+                        report_id = match.get('report_id')
+                        address_match = match.get('address', 'Unknown Address')
+                        similarity_score = match.get('similarity_score', 0.0)
+                        
+                        if report_id:
+                            ddd_path = f"input_data/{report_id}/processed_DDD.png"
+                            
+                            # Check if file exists
+                            if os.path.exists(ddd_path):
+                                # Create image chunk similar to Flow 1 format
+                                ddd_chunk = {
+                                    "chunk_id": f"flow3_ddd_{report_id}",
+                                    "property_id": f"PROP_{report_id}",
+                                    "section": "Similar Property DDD Diagrams",
+                                    "chunk_type": "image",
+                                    "type": "image",
+                                    "chunk_text": f"DDD Diagram\nProperty: {address_match}\nSimilarity Score: {similarity_score:.2%}\nimage_file: {ddd_path}",
+                                    "data": {
+                                        "DDD Diagram": ddd_path,
+                                        "description": f"DDD (Dimensional Design Diagram) for similar property at {address_match} with {similarity_score:.2%} similarity score",
+                                        "report_id": report_id,
+                                        "similarity_score": similarity_score,
+                                        "property_address": address_match
+                                    },
+                                    "distance": 1.0 - similarity_score,
+                                    "doc_address": address_match,
+                                    "report_id": report_id
+                                }
+                                results.append(ddd_chunk)
+                                logger.info(f"Added DDD diagram chunk for report {report_id}: {ddd_path}")
+                            else:
+                                logger.warning(f"DDD diagram file not found: {ddd_path}")
+
+                    logger.info(f"✅ Added {len(results) - 1 - 1} DDD diagram chunks to Flow 3 results (plus 1 roof overlay)")
+
+            except Exception as e:
+                logger.error(f"Error adding DDD diagram chunks: {e}")
+
+            return results
 
         except Exception as e:
             logger.error(f"Error running flow3 for address '{address}': {e}")
