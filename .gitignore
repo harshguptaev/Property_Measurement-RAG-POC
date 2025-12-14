@@ -79,3 +79,33 @@ __pypackages__/
 premium_reports/
 extracted_images/
 docling_exports/
+IE_extracted_reports/
+IE_Final_reports/
+ReportId1_extracted_reports/
+reports/
+Final_Chunks/
+Final_Chunks.zip
+final_data/
+input_data/
+input_files/
+pictometry_images/
+vectorstore_faiss/
+Sample_chunks/
+volumes/
+pdf_generation/
+
+# Generated files and results
+final_comparison_result.json
+similarity_search_results.json
+llm_summary_result.txt
+
+# Report lists and shell scripts
+report_list_*.txt
+Report_Id_1.sh
+reports_download.sh
+start_milvus.sh
+
+# Assistant UI build artifacts
+assistant-ui/node_modules/
+assistant-ui/tsconfig.tsbuildinfo
+assistant-ui/public/extracted_images/
